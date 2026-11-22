@@ -1,0 +1,395 @@
+{
+  "area": "combinatorics",
+  "nodes": [
+    {
+      "id": "ramsey",
+      "name": "Ramsey's theorem",
+      "short": "Ramsey's theorem",
+      "statement": "For any r and s there is a number R(r, s) such that however the edges of a complete graph on R(r, s) vertices are coloured red and blue, there is a blue clique on r vertices or a red clique on s vertices.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Frank Ramsey, 1930",
+      "note": "The smallest case is R(3, 3) = 6: among any six people, three all know each other or three are all strangers.",
+      "url": "https://en.wikipedia.org/wiki/Ramsey%27s_theorem",
+      "area": "combinatorics",
+      "year": 1930
+    },
+    {
+      "id": "van-der-waerden",
+      "name": "Van der Waerden's theorem",
+      "short": "Van der Waerden's theorem",
+      "statement": "For any number of colours r and any length k there is an N such that however 1, 2, …, N are coloured with r colours, some k numbers of the same colour form an arithmetic progression.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "ramsey"
+      ],
+      "by": "B. L. van der Waerden, 1927 (conjectured by Pierre Baudet)",
+      "note": "One of the founding results of Ramsey theory. Szemerédi's theorem is a stronger version of it.",
+      "url": "https://en.wikipedia.org/wiki/Van_der_Waerden%27s_theorem",
+      "area": "combinatorics",
+      "year": 1927
+    },
+    {
+      "id": "szemeredi-regularity",
+      "name": "Szemerédi regularity lemma",
+      "short": "Regularity lemma",
+      "statement": "For every ε > 0 and every m there is a number M such that the vertices of any graph can be split into at least m and at most M parts so that between almost all pairs of parts the edges are spread out almost as evenly as in a random graph.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Endre Szemerédi, 1978 (a weaker version for bipartite graphs in 1975)",
+      "note": "Szemerédi introduced the weaker 1975 version in order to prove his theorem on arithmetic progressions.",
+      "url": "https://en.wikipedia.org/wiki/Szemer%C3%A9di_regularity_lemma",
+      "area": "combinatorics",
+      "year": 1975,
+      "settled": 1978
+    },
+    {
+      "id": "triangle-removal",
+      "name": "Triangle removal lemma",
+      "short": "Triangle removal lemma",
+      "statement": "For every ε > 0 there is a δ > 0 such that any graph on n vertices with fewer than δn³ triangles can be made triangle-free by deleting at most εn² edges.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "szemeredi-regularity"
+      ],
+      "by": "Imre Ruzsa and Endre Szemerédi, 1978 (in a slightly weaker form)",
+      "note": "The standard proof applies the regularity lemma. Jacob Fox gave a proof without it in 2011.",
+      "url": "https://en.wikipedia.org/wiki/Graph_removal_lemma",
+      "area": "combinatorics",
+      "year": 1978
+    },
+    {
+      "id": "roth",
+      "name": "Roth's theorem on arithmetic progressions",
+      "short": "Roth's theorem",
+      "statement": "Every set of natural numbers with positive upper density contains three numbers in arithmetic progression, such as 5, 8, 11.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "triangle-removal",
+          "url": "https://en.wikipedia.org/wiki/Graph_removal_lemma#Additive_combinatorics"
+        }
+      ],
+      "by": "Klaus Roth, 1953",
+      "note": "Roth's own proof used Fourier analysis. The link shown is the later proof by Ruzsa and Szemerédi, who obtained Roth's theorem as a short corollary of the triangle removal lemma.",
+      "url": "https://en.wikipedia.org/wiki/Roth%27s_theorem_on_arithmetic_progressions",
+      "area": "combinatorics",
+      "year": 1953
+    },
+    {
+      "id": "szemeredi",
+      "name": "Szemerédi's theorem",
+      "short": "Szemerédi's theorem",
+      "statement": "Every set of natural numbers with positive upper density contains arithmetic progressions of every finite length.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "szemeredi-regularity",
+          "url": "https://arxiv.org/abs/math/0405251"
+        },
+        {
+          "id": "van-der-waerden",
+          "url": "https://arxiv.org/abs/math/0405251"
+        }
+      ],
+      "related": [
+        "roth"
+      ],
+      "by": "Endre Szemerédi, 1975 (conjectured by Paul Erdős and Pál Turán, 1936)",
+      "note": "Szemerédi's original combinatorial proof used a form of his regularity lemma and van der Waerden's theorem. Roth's theorem is the case of length 3. Later proofs by Furstenberg (ergodic theory) and Gowers (Fourier analysis and combinatorics) use different methods.",
+      "url": "https://en.wikipedia.org/wiki/Szemer%C3%A9di%27s_theorem",
+      "area": "combinatorics",
+      "year": 1936,
+      "settled": 1975
+    },
+    {
+      "id": "green-tao",
+      "name": "Green–Tao theorem",
+      "short": "Green–Tao theorem",
+      "statement": "The prime numbers contain arithmetic progressions of every finite length, such as 3, 5, 7 or 5, 11, 17, 23, 29.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "szemeredi"
+      ],
+      "by": "Ben Green and Terence Tao, 2004",
+      "note": "Szemerédi's theorem does not apply to the primes directly, because they have density zero. Green and Tao proved a transference principle that carries Szemerédi's theorem over to dense subsets of suitable pseudorandom sets, and placed the primes inside such a set using a result of Goldston and Yıldırım.",
+      "url": "https://arxiv.org/abs/math/0404188",
+      "area": "combinatorics",
+      "related": [
+        "dirichlet-ap"
+      ],
+      "year": 2004
+    },
+    {
+      "id": "erdos-ap",
+      "name": "Erdős conjecture on arithmetic progressions",
+      "short": "Erdős conjecture on APs",
+      "statement": "If the sum of the reciprocals 1/a over a set A of positive integers diverges, then A contains arithmetic progressions of every finite length.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "szemeredi",
+        "green-tao"
+      ],
+      "by": "Paul Erdős, who offered a prize for it in 1976",
+      "note": "It would imply both Szemerédi's theorem and the Green–Tao theorem, since the reciprocals of the primes also sum to infinity.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s_conjecture_on_arithmetic_progressions",
+      "area": "combinatorics",
+      "claim": "In October 2026 OpenAI released a manuscript claiming a bound for Szemerédi's theorem strong enough to imply this conjecture, together with a Lean proof of the conjecture itself. Google DeepMind's formal-conjectures project lists it as solved on the strength of that Lean proof. As of November 2026 no independent human check has been published.",
+      "year": 1976
+    },
+    {
+      "id": "four-colour",
+      "name": "Four colour theorem",
+      "short": "Four colour theorem",
+      "statement": "The regions of any map drawn in the plane can be coloured with at most four colours so that no two regions sharing a stretch of border (not just a corner) have the same colour. Equivalently, every planar graph can be coloured with four colours.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Kenneth Appel and Wolfgang Haken, 1976; formalized in the Coq proof assistant by Georges Gonthier and Benjamin Werner, 2005",
+      "note": "The first major theorem proved with essential help from a computer, which checked a large set of reducible configurations. Robertson, Sanders, Seymour and Thomas gave a shorter proof in 1997 with 633 configurations.",
+      "url": "https://en.wikipedia.org/wiki/Four_color_theorem#Simplification_and_verification",
+      "area": "combinatorics",
+      "year": 1852,
+      "settled": 1976
+    },
+    {
+      "id": "wagner-planarity",
+      "name": "Wagner's theorem",
+      "short": "Wagner's theorem",
+      "statement": "A finite graph is planar exactly when neither the complete graph K₅ nor the complete bipartite graph K₃,₃ can be obtained from it by deleting and contracting edges (as a minor).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Klaus Wagner, 1937",
+      "note": "A minor version of Kuratowski's 1930 theorem, which uses subdivisions instead of minors. It is the forerunner of the Robertson–Seymour theorem.",
+      "url": "https://en.wikipedia.org/wiki/Wagner%27s_theorem",
+      "area": "combinatorics",
+      "year": 1937
+    },
+    {
+      "id": "graph-minor",
+      "name": "Robertson–Seymour theorem (graph minor theorem)",
+      "short": "Graph minor theorem",
+      "statement": "Every family of finite graphs that is closed under taking minors can be described by a finite list of forbidden minors. Equivalently, in any infinite list of finite graphs, one is a minor of a later one.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "wagner-planarity"
+      ],
+      "by": "Neil Robertson and Paul Seymour, in twenty papers from 1983 to 2004",
+      "note": "Known before its proof as Wagner's conjecture. For planar graphs the finite list is K₅ and K₃,₃, which is Wagner's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Robertson%E2%80%93Seymour_theorem",
+      "area": "combinatorics",
+      "year": 1983,
+      "settled": 2004
+    },
+    {
+      "id": "hadwiger",
+      "name": "Hadwiger's conjecture",
+      "short": "Hadwiger's conjecture",
+      "statement": "Every graph that does not contain the complete graph K_t as a minor can be properly coloured with t − 1 colours.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "four-colour",
+        "graph-minor",
+        "hadwiger-k5",
+        "hadwiger-k6"
+      ],
+      "by": "Hugo Hadwiger, 1943",
+      "note": "A far-reaching generalization of the four colour theorem, proven for t ≤ 6.",
+      "url": "https://en.wikipedia.org/wiki/Hadwiger_conjecture_(graph_theory)",
+      "area": "combinatorics",
+      "claim": "In October 2026 OpenAI released a claimed counterexample: arbitrarily large graphs with no three pairwise non-adjacent vertices whose chromatic number exceeds their Hadwiger number. OpenAI's repository contains a Lean proof of it, which an independent repository reports re-checking. As of November 2026 no independent human check has been published. If it holds, the conjecture is false.",
+      "year": 1943
+    },
+    {
+      "id": "hadwiger-k5",
+      "name": "Hadwiger's conjecture for t = 5",
+      "short": "Hadwiger for K₅",
+      "statement": "Every graph without a K₅ minor can be properly coloured with four colours.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "four-colour"
+      ],
+      "equivalent": true,
+      "by": "Klaus Wagner, 1937 (equivalence with the four colour problem); proven by the four colour theorem, 1976",
+      "note": "Wagner showed that a graph without a K₅ minor is glued together from pieces that are planar or an 8-vertex Möbius ladder, so the four colour theorem gives this case. Conversely, planar graphs have no K₅ minor, so this case implies the four colour theorem.",
+      "url": "https://en.wikipedia.org/wiki/Hadwiger_conjecture_(graph_theory)#Special_cases_and_partial_results",
+      "area": "combinatorics",
+      "year": 1937,
+      "settled": 1976
+    },
+    {
+      "id": "hadwiger-k6",
+      "name": "Hadwiger's conjecture for t = 6",
+      "short": "Hadwiger for K₆",
+      "statement": "Every graph without a K₆ minor can be properly coloured with five colours.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "four-colour"
+      ],
+      "by": "Neil Robertson, Paul Seymour and Robin Thomas, 1993 (equivalence with the four colour theorem, so proven by it)",
+      "note": "Their proof uses the four colour theorem and won the 1994 Fulkerson Prize. It also shows that graphs that can be drawn in space without linked cycles need at most five colours. Conversely, a planar graph plus one extra vertex has no K₆ minor, so this case implies the four colour theorem.",
+      "url": "https://en.wikipedia.org/wiki/Hadwiger_conjecture_(graph_theory)#Special_cases_and_partial_results",
+      "area": "combinatorics",
+      "equivalent": true,
+      "year": 1993
+    },
+    {
+      "id": "strong-perfect-graph",
+      "name": "Strong perfect graph theorem",
+      "short": "Strong perfect graph thm",
+      "statement": "A graph is perfect (in every induced subgraph the number of colours needed equals the size of the largest clique) exactly when it contains no odd cycle of length at least 5 and no complement of one as an induced subgraph.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Maria Chudnovsky, Neil Robertson, Paul Seymour and Robin Thomas, announced 2002, published 2006 (conjectured by Claude Berge, 1961)",
+      "url": "https://en.wikipedia.org/wiki/Strong_perfect_graph_theorem",
+      "area": "combinatorics",
+      "year": 1961,
+      "settled": 2002
+    },
+    {
+      "id": "weak-perfect-graph",
+      "name": "Perfect graph theorem (weak perfect graph theorem)",
+      "short": "Weak perfect graph thm",
+      "statement": "The complement of a perfect graph is perfect.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "strong-perfect-graph"
+      ],
+      "by": "László Lovász, 1972",
+      "note": "Lovász proved it 30 years before the strong perfect graph theorem. The strong theorem implies it immediately, because its list of forbidden subgraphs is unchanged by taking complements.",
+      "url": "https://en.wikipedia.org/wiki/Perfect_graph_theorem",
+      "area": "combinatorics",
+      "year": 1972
+    },
+    {
+      "id": "erdos-hajnal",
+      "name": "Erdős–Hajnal conjecture",
+      "short": "Erdős–Hajnal conjecture",
+      "statement": "For every graph H there is an ε > 0 such that every graph on n vertices that does not contain H as an induced subgraph has a clique or an independent set of at least n^ε vertices.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "ramsey"
+      ],
+      "by": "Paul Erdős and András Hajnal, 1977",
+      "note": "Ramsey's theorem only guarantees a clique or independent set of logarithmic size, and random graphs show that this cannot be improved in general. The conjecture is known for all graphs H with at most five vertices and some larger ones.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Hajnal_conjecture",
+      "area": "combinatorics",
+      "year": 1977
+    },
+    {
+      "id": "reconstruction",
+      "name": "Reconstruction conjecture",
+      "short": "Reconstruction conjecture",
+      "statement": "A graph with at least three vertices is determined, up to isomorphism, by the collection of graphs obtained from it by deleting one vertex at a time.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Paul J. Kelly and Stanisław Ulam (published by Kelly in 1957 and by Ulam in 1960)",
+      "note": "Brendan McKay verified it by computer for all graphs with at most 13 vertices.",
+      "url": "https://en.wikipedia.org/wiki/Reconstruction_conjecture",
+      "area": "combinatorics",
+      "year": 1957
+    },
+    {
+      "id": "edge-reconstruction",
+      "name": "Edge reconstruction conjecture",
+      "short": "Edge reconstruction",
+      "statement": "A graph with at least four edges is determined, up to isomorphism, by the collection of graphs obtained from it by deleting one edge at a time.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "reconstruction",
+          "url": "https://arxiv.org/abs/math/0503316"
+        }
+      ],
+      "by": "Frank Harary, 1964",
+      "note": "D. L. Greenwell proved in 1971 that a reconstructible graph with no isolated vertices is edge-reconstructible, so the reconstruction conjecture would give this one.",
+      "url": "https://en.wikipedia.org/wiki/Reconstruction_conjecture#Formal_statements",
+      "area": "combinatorics",
+      "year": 1964
+    },
+    {
+      "id": "union-closed",
+      "name": "Union-closed sets conjecture (Frankl's conjecture)",
+      "short": "Union-closed sets",
+      "statement": "In every finite family of sets that contains the union of any two of its members, other than the family containing only the empty set, some element belongs to at least half of the sets.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "gilmer-union-closed"
+      ],
+      "by": "Péter Frankl, 1979",
+      "url": "https://en.wikipedia.org/wiki/Union-closed_sets_conjecture",
+      "area": "combinatorics",
+      "year": 1979
+    },
+    {
+      "id": "gilmer-union-closed",
+      "name": "Gilmer's constant bound for union-closed families",
+      "short": "Gilmer's bound",
+      "statement": "In every finite union-closed family of sets other than the family containing only the empty set, some element belongs to at least 1% of the sets.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Justin Gilmer, 2022",
+      "note": "The first constant fraction ever proven, by an information-theoretic argument. Within a week others raised the fraction to (3 − √5)/2 ≈ 38%, still short of the conjectured 50%.",
+      "url": "https://arxiv.org/abs/2211.09055",
+      "area": "combinatorics",
+      "year": 2022
+    },
+    {
+      "id": "sunflower-lemma",
+      "name": "Erdős–Rado sunflower lemma",
+      "short": "Sunflower lemma",
+      "statement": "Any family of more than k!(r − 1)^k sets, each with k elements, contains r sets whose pairwise intersections are all the same set (a sunflower with r petals).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Paul Erdős and Richard Rado, 1960",
+      "url": "https://en.wikipedia.org/wiki/Sunflower_(mathematics)#Sunflower_lemma",
+      "area": "combinatorics",
+      "year": 1960
+    },
+    {
+      "id": "sunflower",
+      "name": "Erdős–Rado sunflower conjecture",
+      "short": "Sunflower conjecture",
+      "statement": "For each r ≥ 3 there is a constant C, depending only on r, such that any family of more than C^k sets, each with k elements, contains a sunflower with r petals.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "sunflower-lemma"
+      ],
+      "by": "Paul Erdős and Richard Rado, 1960",
+      "note": "The lemma gives a bound that grows like k!, much faster than C^k. Work starting with Alweiss, Lovett, Wu and Zhang (2019, published 2021) brought it down to (c · r · log k)^k for an absolute constant c, but the conjecture is open even for r = 3.",
+      "url": "https://en.wikipedia.org/wiki/Sunflower_(mathematics)#Erd%C5%91s-Rado_sunflower_conjecture",
+      "area": "combinatorics",
+      "year": 1960
+    }
+  ]
+}

@@ -1,0 +1,1383 @@
+{
+  "area": "number-theory",
+  "nodes": [
+    {
+      "id": "rh",
+      "name": "Riemann Hypothesis",
+      "short": "Riemann Hypothesis",
+      "statement": "Every non-trivial zero of the Riemann zeta function ζ(s) has real part 1/2.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "grh"
+      ],
+      "by": "Bernhard Riemann, 1859",
+      "note": "Levent Alpöge released a proof as a Lean library of about 17 million lines on 20 Nov 2026. The Lean FRO and Mathlib Initiative certified it on 21 Nov 2026. Human review of the ideas is still pending.",
+      "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis",
+      "area": "number-theory",
+      "year": 1859
+    },
+    {
+      "id": "grh",
+      "name": "Generalized Riemann Hypothesis (Dirichlet L-functions)",
+      "short": "GRH (Dirichlet)",
+      "statement": "Every zero of every Dirichlet L-function L(s, χ) inside the critical strip has real part 1/2.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "erh"
+      ],
+      "by": "Adolf Piltz, 1884",
+      "note": "Contains the Riemann Hypothesis as the special case of the trivial character.",
+      "url": "https://en.wikipedia.org/wiki/Generalized_Riemann_hypothesis",
+      "area": "number-theory",
+      "year": 1884
+    },
+    {
+      "id": "erh",
+      "name": "Extended Riemann Hypothesis (Dedekind zeta functions)",
+      "short": "ERH (number fields)",
+      "statement": "For every number field K, every zero of the Dedekind zeta function ζ_K(s) inside the critical strip has real part 1/2.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "The Riemann Hypothesis carried over to the zeta functions Dedekind defined for number fields",
+      "note": "Implies GRH for Dirichlet L-functions, because the zeta function of a cyclotomic field is a product of Dirichlet L-functions.",
+      "url": "https://en.wikipedia.org/wiki/Generalized_Riemann_hypothesis#Extended_Riemann_hypothesis",
+      "area": "number-theory"
+    },
+    {
+      "id": "rh-modular",
+      "name": "Riemann Hypothesis for modular-form L-functions",
+      "short": "RH for modular L-functions",
+      "statement": "Every zero of the L-function of a Hecke newform inside its critical strip lies on the central line.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Part of the Grand Riemann Hypothesis",
+      "url": "https://en.wikipedia.org/wiki/Grand_Riemann_hypothesis",
+      "area": "number-theory"
+    },
+    {
+      "id": "pair-correlation",
+      "name": "Montgomery's pair correlation conjecture",
+      "short": "Pair correlation conjecture",
+      "statement": "The spacings between zeros of ζ(s) on the critical line follow the pair correlation density 1 − (sin(πu)/(πu))², the same as eigenvalues of random Hermitian matrices.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "rh"
+      ],
+      "by": "Hugh Montgomery, 1973",
+      "note": "Describes how the zeros are spaced along the line. The Riemann Hypothesis only says they are on the line.",
+      "url": "https://en.wikipedia.org/wiki/Montgomery%27s_pair_correlation_conjecture",
+      "area": "number-theory",
+      "year": 1973
+    },
+    {
+      "id": "linear-independence",
+      "name": "Linear independence hypothesis",
+      "short": "Linear independence of zeros",
+      "statement": "The positive imaginary parts of the zeros of Dirichlet L-functions are linearly independent over the rational numbers.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "grh"
+      ],
+      "by": "Aurel Wintner, 1935 (for ζ); used for Dirichlet L-functions by Rubinstein and Sarnak, 1994",
+      "url": "https://arxiv.org/abs/2311.04860",
+      "area": "number-theory",
+      "year": 1935
+    },
+    {
+      "id": "legendre",
+      "name": "Legendre's conjecture",
+      "short": "Legendre's conjecture",
+      "statement": "There is a prime between n² and (n+1)² for every positive integer n.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "cramer-gap"
+      ],
+      "by": "Adrien-Marie Legendre, 1808",
+      "note": "The Riemann Hypothesis gives prime gaps of size O(√p · log p). Legendre's conjecture needs gaps below about 2√p, so the Riemann Hypothesis falls just short.",
+      "url": "https://en.wikipedia.org/wiki/Legendre%27s_conjecture",
+      "area": "number-theory",
+      "year": 1808
+    },
+    {
+      "id": "cramer-conjecture",
+      "name": "Cramér's conjecture",
+      "short": "Cramér's conjecture",
+      "statement": "p(n+1) − p(n) = O(log² p(n)): gaps between consecutive primes are at most of the order of the squared logarithm.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "cramer-gap"
+      ],
+      "by": "Harald Cramér, 1936",
+      "note": "Far stronger than what the Riemann Hypothesis gives.",
+      "url": "https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_conjecture",
+      "area": "number-theory",
+      "year": 1936
+    },
+    {
+      "id": "von-koch",
+      "name": "Von Koch's error term for the prime number theorem",
+      "short": "Von Koch's error term",
+      "statement": "π(x) = li(x) + O(√x · log x).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Helge von Koch, 1901",
+      "url": "https://en.wikipedia.org/wiki/Prime_number_theorem",
+      "area": "number-theory",
+      "year": 1901
+    },
+    {
+      "id": "mertens-bound",
+      "name": "Growth of the Mertens function",
+      "short": "Mertens function bound",
+      "statement": "M(x) = O(x^(1/2+ε)) for every ε > 0, where M(x) is the sum of the Möbius function μ(n) for n ≤ x.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "J. E. Littlewood, 1912",
+      "url": "https://en.wikipedia.org/wiki/Mertens_function",
+      "area": "number-theory",
+      "year": 1912
+    },
+    {
+      "id": "robin",
+      "name": "Robin's inequality",
+      "short": "Robin's inequality",
+      "statement": "σ(n) < e^γ · n · log log n for every n > 5040, where σ(n) is the sum of the divisors of n.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Guy Robin, 1984",
+      "url": "https://en.wikipedia.org/wiki/Divisor_function#Growth_rate",
+      "area": "number-theory",
+      "year": 1984
+    },
+    {
+      "id": "lagarias",
+      "name": "Lagarias's inequality",
+      "short": "Lagarias's inequality",
+      "statement": "σ(n) ≤ H(n) + e^H(n) · log H(n) for every n ≥ 1, where H(n) is the n-th harmonic number.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Jeffrey Lagarias, 2002",
+      "url": "https://en.wikipedia.org/wiki/Divisor_function#Growth_rate",
+      "area": "number-theory",
+      "year": 2002
+    },
+    {
+      "id": "li-criterion",
+      "name": "Li's criterion",
+      "short": "Li's criterion",
+      "statement": "λ(n) ≥ 0 for every n ≥ 1, where λ(n) is the sum of 1 − (1 − 1/ρ)^n over the non-trivial zeros ρ of ζ(s).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Xian-Jin Li, 1997",
+      "url": "https://en.wikipedia.org/wiki/Li%27s_criterion",
+      "area": "number-theory",
+      "year": 1997
+    },
+    {
+      "id": "nicolas",
+      "name": "Nicolas's criterion",
+      "short": "Nicolas's criterion",
+      "statement": "N / φ(N) > e^γ · log log N for every primorial N, where φ is Euler's totient function.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Jean-Louis Nicolas, 1983",
+      "url": "https://arxiv.org/abs/1202.0729",
+      "area": "number-theory",
+      "year": 1983
+    },
+    {
+      "id": "franel-landau",
+      "name": "Franel–Landau theorem on Farey sequences",
+      "short": "Farey sequence spacing",
+      "statement": "The Farey fractions of order n deviate from equally spaced points by a total of O(n^(1/2+ε)).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Jérôme Franel and Edmund Landau, 1924",
+      "url": "https://en.wikipedia.org/wiki/Farey_sequence#Riemann_hypothesis",
+      "area": "number-theory",
+      "year": 1924
+    },
+    {
+      "id": "de-bruijn-newman",
+      "name": "De Bruijn–Newman constant equals zero",
+      "short": "De Bruijn–Newman Λ = 0",
+      "statement": "The de Bruijn–Newman constant Λ equals 0.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "N. G. de Bruijn, 1950; Charles Newman, 1976",
+      "note": "The Riemann Hypothesis is equivalent to Λ ≤ 0. Rodgers and Tao proved Λ ≥ 0 in 2018, so together Λ = 0.",
+      "url": "https://en.wikipedia.org/wiki/De_Bruijn%E2%80%93Newman_constant",
+      "area": "number-theory",
+      "year": 1950
+    },
+    {
+      "id": "speiser",
+      "name": "Speiser's criterion",
+      "short": "Speiser's criterion",
+      "statement": "The derivative ζ′(s) has no zeros in the strip 0 < Re(s) < 1/2.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Andreas Speiser, 1934",
+      "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis#Analytic_criteria_equivalent_to_the_Riemann_hypothesis",
+      "area": "number-theory",
+      "year": 1934
+    },
+    {
+      "id": "schoenfeld",
+      "name": "Schoenfeld's explicit prime-counting bound",
+      "short": "Schoenfeld's explicit bound",
+      "statement": "|π(x) − li(x)| < √x · log x / (8π) for every x ≥ 2657.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "Lowell Schoenfeld, 1976",
+      "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis#Distribution_of_prime_numbers",
+      "area": "number-theory",
+      "year": 1976
+    },
+    {
+      "id": "cramer-gap",
+      "name": "Cramér's prime gap bound",
+      "short": "Cramér's prime gap bound",
+      "statement": "p(n+1) − p(n) = O(√p(n) · log p(n)).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "Harald Cramér, 1920",
+      "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis#Large_prime_gap_conjecture",
+      "area": "number-theory",
+      "year": 1920
+    },
+    {
+      "id": "dudek",
+      "name": "Explicit primes in short intervals",
+      "short": "Explicit primes in short intervals",
+      "statement": "For every x ≥ 2 there is a prime p with x − (4/π) · √x · log x < p ≤ x.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "Adrian Dudek, 2015",
+      "url": "https://arxiv.org/abs/1402.6417",
+      "area": "number-theory",
+      "year": 2015
+    },
+    {
+      "id": "littlewood-zeta-bound",
+      "name": "Littlewood's bound for ζ on the critical line",
+      "short": "Littlewood's ζ bound",
+      "statement": "|ζ(1/2 + it)| ≤ exp(C · log t / log log t) for some constant C and all large t.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "J. E. Littlewood, 1924",
+      "url": "https://arxiv.org/abs/0908.2008",
+      "area": "number-theory",
+      "year": 1924
+    },
+    {
+      "id": "lindelof",
+      "name": "Lindelöf hypothesis",
+      "short": "Lindelöf hypothesis",
+      "statement": "ζ(1/2 + it) = O(t^ε) for every ε > 0.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "littlewood-zeta-bound"
+      ],
+      "by": "Ernst Lindelöf, 1908",
+      "note": "Littlewood's bound grows more slowly than any power of t, so it gives the Lindelöf hypothesis at once.",
+      "url": "https://en.wikipedia.org/wiki/Lindel%C3%B6f_hypothesis",
+      "area": "number-theory",
+      "year": 1908
+    },
+    {
+      "id": "density",
+      "name": "Density hypothesis",
+      "short": "Density hypothesis",
+      "statement": "N(σ, T) = O(T^(2(1−σ)+ε)), where N(σ, T) counts zeros of ζ(s) with real part at least σ and imaginary part up to T.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "lindelof"
+      ],
+      "by": "A. E. Ingham, 1937 (showed it follows from the Lindelöf hypothesis)",
+      "url": "https://en.wikipedia.org/wiki/Lindel%C3%B6f_hypothesis#The_density_hypothesis",
+      "area": "number-theory",
+      "year": 1937
+    },
+    {
+      "id": "short-intervals",
+      "name": "Prime number theorem in short intervals",
+      "short": "Prime number theorem in short intervals",
+      "statement": "π(x + x^θ) − π(x) ~ x^θ / log x for every θ > 1/2.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "density"
+      ],
+      "by": "Follows from the density hypothesis (Ingham's method, 1937)",
+      "note": "Also follows from the Riemann Hypothesis directly. Shown here as the end of the chain through Lindelöf and the density hypothesis.",
+      "url": "https://en.wikipedia.org/wiki/Prime_gap#Upper_bounds",
+      "area": "number-theory",
+      "year": 1937
+    },
+    {
+      "id": "montgomery-simple",
+      "name": "Two thirds of the zeros are simple",
+      "short": "2/3 of zeros are simple",
+      "statement": "At least 2/3 of the non-trivial zeros of ζ(s) are simple.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "Hugh Montgomery, 1973",
+      "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis#Montgomery's_pair_correlation_conjecture",
+      "note": "An August 2026 preprint by Alpöge and Furman claims this without assuming the hypothesis.",
+      "area": "number-theory",
+      "year": 1973
+    },
+    {
+      "id": "selberg-short",
+      "name": "Selberg's primes in almost all short intervals",
+      "short": "Primes in almost all short intervals",
+      "statement": "If f(x) → ∞, then almost all intervals [x, x + f(x) · log² x] contain a prime.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "Atle Selberg, 1943",
+      "url": "https://arxiv.org/abs/2206.00433",
+      "area": "number-theory",
+      "year": 1943
+    },
+    {
+      "id": "goldston-heath-brown",
+      "name": "Goldston–Heath-Brown prime gap bound",
+      "short": "Sharper prime gap bound",
+      "statement": "p(n+1) − p(n) = o(√(p(n) · log p(n))).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh",
+        "pair-correlation"
+      ],
+      "by": "Roger Heath-Brown and Daniel Goldston, 1984",
+      "url": "https://doi.org/10.1007/BF01475582",
+      "area": "number-theory",
+      "year": 1984
+    },
+    {
+      "id": "almost-all-simple",
+      "name": "Almost all zeros are simple",
+      "short": "Almost all zeros simple",
+      "statement": "The simple zeros of ζ(s) make up 100% of all its non-trivial zeros.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "pair-correlation"
+      ],
+      "by": "P. X. Gallagher and Julia Mueller, 1978 (conjectured by Montgomery, 1973)",
+      "url": "https://arxiv.org/abs/2503.15449",
+      "note": "Follows from the pair correlation conjecture alone. The Riemann Hypothesis by itself only gives two thirds.",
+      "area": "number-theory",
+      "year": 1973,
+      "settled": 1978
+    },
+    {
+      "id": "ankeny",
+      "name": "Ankeny's bound for the least quadratic non-residue",
+      "short": "Least quadratic non-residue",
+      "statement": "The least quadratic non-residue modulo a prime p is O(log² p).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Nesmith Ankeny, 1952",
+      "url": "https://en.wikipedia.org/wiki/Quadratic_residue#Least_quadratic_non-residue",
+      "area": "number-theory",
+      "year": 1952
+    },
+    {
+      "id": "vinogradov-conjecture",
+      "name": "Vinogradov's conjecture on the least non-residue",
+      "short": "Vinogradov's conjecture",
+      "statement": "The least quadratic non-residue modulo p is O(p^ε) for every ε > 0.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "ankeny"
+      ],
+      "by": "I. M. Vinogradov",
+      "url": "https://terrytao.wordpress.com/2009/08/18/the-least-quadratic-nonresidue-and-the-square-root-barrier/",
+      "area": "number-theory"
+    },
+    {
+      "id": "miller",
+      "name": "Miller's deterministic primality test",
+      "short": "Miller's primality test",
+      "statement": "Miller's test decides whether n is prime, without randomness, in time polynomial in log n.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Gary Miller, 1976",
+      "note": "Miller's analysis needs a small witness for every composite n. The hypothesis for quadratic characters guarantees one of size O(log² n).",
+      "url": "https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Miller_test",
+      "area": "number-theory",
+      "year": 1976
+    },
+    {
+      "id": "sqrt-mod-p",
+      "name": "Deterministic square roots modulo a prime",
+      "short": "Square roots mod p",
+      "statement": "Square roots modulo a prime p can be computed without randomness in time polynomial in log p.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "ankeny"
+      ],
+      "by": "Tonelli–Shanks algorithm with Ankeny's bound",
+      "note": "The Tonelli–Shanks algorithm needs one quadratic non-residue. Ankeny's bound guarantees that trying 2, 3, 4, … finds one quickly.",
+      "url": "https://en.wikipedia.org/wiki/Tonelli%E2%80%93Shanks_algorithm",
+      "area": "number-theory",
+      "year": 1973
+    },
+    {
+      "id": "bach-witness",
+      "name": "Bach's explicit witness bound",
+      "short": "Bach's bound 2·ln² n",
+      "statement": "Every proper subgroup of the units modulo n misses some integer below 2 · ln² n. So n is prime exactly when it passes the strong pseudoprime test for every base up to 2 · ln² n.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Eric Bach, 1990",
+      "url": "https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Miller_test",
+      "area": "number-theory",
+      "year": 1990
+    },
+    {
+      "id": "least-prime-ap",
+      "name": "Least prime in an arithmetic progression",
+      "short": "Least prime in a progression",
+      "statement": "For coprime a and q with q > 3, the least prime p ≡ a (mod q) is at most (φ(q) · log q)².",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Youness Lamzouri, Xiannan Li and Kannan Soundararajan, 2015",
+      "url": "https://en.wikipedia.org/wiki/Linnik%27s_theorem",
+      "area": "number-theory",
+      "year": 2015
+    },
+    {
+      "id": "shoup-primitive-root",
+      "name": "Shoup's bound for the least primitive root",
+      "short": "Least primitive root",
+      "statement": "The least primitive root modulo a prime p is O(log⁶ p).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Victor Shoup, 1992",
+      "url": "https://en.wikipedia.org/wiki/Primitive_root_modulo_n#Order_of_magnitude_of_primitive_roots",
+      "area": "number-theory",
+      "year": 1992
+    },
+    {
+      "id": "littlewood-l1",
+      "name": "Littlewood's bounds for L(1, χ)",
+      "short": "Littlewood's L(1, χ) bound",
+      "statement": "L(1, χ) ≤ (2 + o(1)) · e^γ · log log q for every primitive real character χ modulo q.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "J. E. Littlewood, 1928",
+      "note": "Through the class number formula this bounds class numbers of quadratic fields.",
+      "url": "https://arxiv.org/abs/math/0206031",
+      "area": "number-theory",
+      "year": 1928
+    },
+    {
+      "id": "idoneal",
+      "name": "Euler's list of idoneal numbers is complete",
+      "short": "65 idoneal numbers",
+      "statement": "There are exactly 65 idoneal numbers, the ones Euler found, the largest being 1848.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Peter Weinberger, 1973",
+      "note": "Without the hypothesis, Weinberger's results imply that at most two more idoneal numbers can exist.",
+      "url": "https://en.wikipedia.org/wiki/Idoneal_number",
+      "area": "number-theory",
+      "year": 1973
+    },
+    {
+      "id": "chebyshev-bias",
+      "name": "Chebyshev's bias, quantified",
+      "short": "Chebyshev's bias",
+      "statement": "Primes of the form 4k+3 are ahead of primes of the form 4k+1 for a set of x of logarithmic density about 0.9959.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh",
+        "linear-independence"
+      ],
+      "by": "Michael Rubinstein and Peter Sarnak, 1994",
+      "url": "https://en.wikipedia.org/wiki/Chebyshev%27s_bias",
+      "area": "number-theory",
+      "year": 1994
+    },
+    {
+      "id": "ono-soundararajan",
+      "name": "Ramanujan's ternary quadratic form",
+      "short": "Ramanujan's ternary form",
+      "statement": "The form x² + y² + 10z² represents every odd integer greater than 2719.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh",
+        "rh-modular"
+      ],
+      "by": "Ken Ono and Kannan Soundararajan, 1997",
+      "url": "https://en.wikipedia.org/wiki/Ramanujan%27s_ternary_quadratic_form",
+      "area": "number-theory",
+      "year": 1997
+    },
+    {
+      "id": "artin-primitive-root",
+      "name": "Artin's conjecture on primitive roots",
+      "short": "Artin's primitive root conjecture",
+      "statement": "Every integer a that is neither −1 nor a perfect square is a primitive root modulo infinitely many primes, and these primes have a positive density that is a rational multiple of Artin's constant.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "erh"
+      ],
+      "by": "Christopher Hooley, 1967",
+      "url": "https://en.wikipedia.org/wiki/Artin%27s_conjecture_on_primitive_roots",
+      "note": "Preprints from October and November 2026 claim the \"infinitely many primes\" part without the hypothesis. The density is still only known through Hooley's conditional proof.",
+      "area": "number-theory",
+      "year": 1967
+    },
+    {
+      "id": "weinberger-euclidean",
+      "name": "Weinberger's theorem on Euclidean number rings",
+      "short": "Euclidean number rings",
+      "statement": "If the ring of integers of a number field has infinitely many units, it is Euclidean exactly when it has class number 1.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "erh"
+      ],
+      "by": "Peter Weinberger, 1973",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_domain",
+      "area": "number-theory",
+      "year": 1973
+    },
+    {
+      "id": "lagarias-odlyzko",
+      "name": "Effective Chebotarev density theorem",
+      "short": "Effective Chebotarev",
+      "statement": "In a Galois extension L of the rationals, every conjugacy class of the Galois group is the Frobenius class of a prime p = O((log |d_L|)²), where d_L is the discriminant of L.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "erh"
+      ],
+      "by": "Jeffrey Lagarias and Andrew Odlyzko, 1977",
+      "url": "https://en.wikipedia.org/wiki/Chebotarev_density_theorem#Effective_version",
+      "area": "number-theory",
+      "year": 1977
+    },
+    {
+      "id": "bach-class-group",
+      "name": "Bach's bound for class group generators",
+      "short": "Class group generators",
+      "statement": "The class group of a number field K is generated by the prime ideals of norm at most 12 · log² |Δ|, where Δ is the discriminant of K.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "erh"
+      ],
+      "by": "Eric Bach, 1990",
+      "note": "The unconditional Minkowski bound grows like √|Δ|, which is far too large for big fields.",
+      "url": "https://www.ams.org/mcom/2008-77-262/S0025-5718-07-02003-0/",
+      "area": "number-theory",
+      "year": 1990
+    },
+    {
+      "id": "class-group-tables",
+      "name": "Class groups computed assuming the hypothesis",
+      "short": "Computed class groups",
+      "statement": "Class groups and unit groups from PARI/GP's bnfinit, from SageMath with proof=False, from Magma with Proof := \"GRH\", and the LMFDB number-field entries flagged as conditional, are correct.",
+      "kind": "data",
+      "base": "conditional",
+      "needs": [
+        "bach-class-group"
+      ],
+      "by": "PARI/GP, LMFDB (SageMath and Magma on request)",
+      "note": "PARI/GP assumes the hypothesis by default and only searches prime ideals up to a bound it justifies, until the result is certified with bnfcertify. SageMath and Magma do so only when asked.",
+      "url": "https://www.lmfdb.org/NumberField/Reliability",
+      "area": "number-theory",
+      "year": 1990
+    },
+    {
+      "id": "ternary-goldbach",
+      "name": "Ternary Goldbach theorem",
+      "short": "Ternary Goldbach",
+      "statement": "Every odd integer greater than 5 is the sum of three primes.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "formerly": [
+        "grh"
+      ],
+      "by": "Harald Helfgott, 2013",
+      "note": "First proven assuming GRH (Deshouillers, Effinger, te Riele and Zinoviev, 1997). Helfgott's proof removed the hypothesis.",
+      "url": "https://en.wikipedia.org/wiki/Goldbach%27s_weak_conjecture",
+      "area": "number-theory",
+      "year": 2013,
+      "formerlyYear": 1997
+    },
+    {
+      "id": "primes-in-p",
+      "name": "Primality testing in polynomial time",
+      "short": "PRIMES is in P",
+      "statement": "Whether n is prime can be decided without randomness in time polynomial in log n.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "formerly": [
+        "miller"
+      ],
+      "by": "Manindra Agrawal, Neeraj Kayal and Nitin Saxena, 2002",
+      "note": "Known since 1976 assuming GRH, through Miller's test. The AKS test removed the hypothesis.",
+      "url": "https://en.wikipedia.org/wiki/AKS_primality_test",
+      "area": "number-theory",
+      "year": 2002,
+      "formerlyYear": 1976
+    },
+    {
+      "id": "pnt",
+      "name": "Prime number theorem",
+      "short": "Prime number theorem",
+      "statement": "The number π(x) of primes up to x is asymptotic to x / log x: the ratio of the two tends to 1 as x grows.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "von-koch",
+        "rh"
+      ],
+      "by": "Jacques Hadamard and Charles Jean de la Vallée Poussin, independently, 1896",
+      "note": "The proofs rest on the fact that ζ(s) has no zeros on the line Re(s) = 1. The Riemann Hypothesis would give the much sharper error term in von Koch's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Prime_number_theorem",
+      "area": "number-theory",
+      "year": 1896
+    },
+    {
+      "id": "dirichlet-ap",
+      "name": "Dirichlet's theorem on primes in arithmetic progressions",
+      "short": "Dirichlet's theorem",
+      "statement": "If a and d are coprime positive integers, the progression a, a + d, a + 2d, … contains infinitely many primes.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "least-prime-ap"
+      ],
+      "by": "Peter Gustav Lejeune Dirichlet, 1837",
+      "note": "The proof introduced Dirichlet L-functions. Its key step is that L(1, χ) is not zero for every non-trivial character χ.",
+      "url": "https://en.wikipedia.org/wiki/Dirichlet%27s_theorem_on_arithmetic_progressions",
+      "area": "number-theory",
+      "year": 1837
+    },
+    {
+      "id": "siegel-walfisz",
+      "name": "Siegel–Walfisz theorem",
+      "short": "Siegel–Walfisz theorem",
+      "statement": "For moduli q up to any fixed power (log x)^N, the primes up to x are shared out almost exactly evenly among the residue classes modulo q that are coprime to q, with an error of order x · exp(−c · √(log x)), where c > 0 depends only on N.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "dirichlet-ap",
+        "pnt"
+      ],
+      "by": "Arnold Walfisz, 1936, applying a theorem of Carl Ludwig Siegel",
+      "note": "A refinement of both the prime number theorem and Dirichlet's theorem. The constants cannot be computed, because Siegel's theorem is ineffective.",
+      "url": "https://en.wikipedia.org/wiki/Siegel%E2%80%93Walfisz_theorem",
+      "area": "number-theory",
+      "year": 1936
+    },
+    {
+      "id": "chebotarev",
+      "name": "Chebotarev density theorem",
+      "short": "Chebotarev density",
+      "statement": "Let L be a finite Galois extension of the rational numbers with Galois group G. For each conjugacy class C of G, the primes p not dividing the discriminant whose Frobenius element lies in C make up a proportion |C| / |G| of all primes.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "dirichlet-ap",
+        "lagarias-odlyzko"
+      ],
+      "by": "Nikolai Chebotaryov, 1922 (published 1926)",
+      "note": "Dirichlet's theorem is the special case of cyclotomic fields. A bound for the least prime in each class of order (log of the discriminant)² is known only under the extended Riemann hypothesis (Lagarias and Odlyzko).",
+      "url": "https://en.wikipedia.org/wiki/Chebotarev_density_theorem",
+      "area": "number-theory",
+      "year": 1922
+    },
+    {
+      "id": "bombieri-vinogradov",
+      "name": "Bombieri–Vinogradov theorem",
+      "short": "Bombieri–Vinogradov",
+      "statement": "On average over the moduli q up to about √x, the primes up to x are spread among the residue classes modulo q about as evenly as the Generalized Riemann Hypothesis would give for each single q.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "siegel-walfisz",
+          "url": "https://personal.science.psu.edu/rcv4/Bombieri.pdf"
+        }
+      ],
+      "related": [
+        "grh"
+      ],
+      "by": "Enrico Bombieri and A. I. Vinogradov, independently, 1965",
+      "note": "Often called GRH on average. The proof handles small moduli with the Siegel–Walfisz theorem and large moduli with the large sieve (R. C. Vaughan's notes, linked on the dependency).",
+      "url": "https://en.wikipedia.org/wiki/Bombieri%E2%80%93Vinogradov_theorem",
+      "area": "number-theory",
+      "year": 1965
+    },
+    {
+      "id": "vinogradov-three-primes",
+      "name": "Vinogradov's three primes theorem",
+      "short": "Vinogradov's 3 primes",
+      "statement": "Every sufficiently large odd integer is the sum of three primes.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "siegel-walfisz"
+      ],
+      "formerly": [
+        "grh"
+      ],
+      "related": [
+        "ternary-goldbach"
+      ],
+      "by": "I. M. Vinogradov, 1937",
+      "note": "Hardy and Littlewood proved it in 1923 assuming the Generalized Riemann Hypothesis. Vinogradov's proof used the ineffective Siegel–Walfisz theorem, so it gave no explicit threshold. Helfgott's 2013 ternary Goldbach theorem covers every odd number above 5.",
+      "url": "https://en.wikipedia.org/wiki/Goldbach%27s_weak_conjecture",
+      "area": "number-theory",
+      "year": 1937,
+      "formerlyYear": 1923
+    },
+    {
+      "id": "goldbach",
+      "name": "Goldbach's conjecture",
+      "short": "Goldbach's conjecture",
+      "statement": "Every even integer greater than 2 is the sum of two primes.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "ternary-goldbach",
+        "vinogradov-three-primes"
+      ],
+      "by": "Christian Goldbach, in a letter to Leonhard Euler, 1742",
+      "note": "It implies the ternary Goldbach theorem, but not the other way round. Checked by computer for all even numbers up to 4 × 10¹⁸ (2013).",
+      "url": "https://en.wikipedia.org/wiki/Goldbach%27s_conjecture",
+      "area": "number-theory",
+      "year": 1742
+    },
+    {
+      "id": "generalized-eh",
+      "name": "Generalized Elliott–Halberstam conjecture",
+      "short": "Generalized EH",
+      "statement": "The even spreading of primes among residue classes that the Elliott–Halberstam conjecture predicts, on average over moduli up to x^θ for every θ < 1, also holds for a wide class of products (Dirichlet convolutions) of two sequences.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Enrico Bombieri, John Friedlander and Henryk Iwaniec, 1986",
+      "note": "Motohashi proved the range θ < 1/2, a generalized Bombieri–Vinogradov theorem.",
+      "url": "https://arxiv.org/abs/1407.4897",
+      "area": "number-theory",
+      "year": 1986
+    },
+    {
+      "id": "elliott-halberstam",
+      "name": "Elliott–Halberstam conjecture",
+      "short": "Elliott–Halberstam",
+      "statement": "For every θ < 1, the primes up to x are spread evenly among residue classes, on average over all moduli q up to x^θ, with a total error smaller than x / (log x)^A for every A.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "generalized-eh",
+          "url": "https://arxiv.org/abs/1407.4897"
+        }
+      ],
+      "related": [
+        "bombieri-vinogradov"
+      ],
+      "by": "Peter Elliott and Heini Halberstam, 1968",
+      "note": "The Bombieri–Vinogradov theorem proves it for θ < 1/2. It is known to fail at θ = 1. The Polymath paper (Proposition 2.7) shows the generalized form implies it.",
+      "url": "https://en.wikipedia.org/wiki/Elliott%E2%80%93Halberstam_conjecture",
+      "area": "number-theory",
+      "year": 1968
+    },
+    {
+      "id": "bounded-gaps",
+      "name": "Zhang's theorem on bounded gaps between primes",
+      "short": "Bounded prime gaps",
+      "statement": "There are infinitely many pairs of consecutive primes that differ by less than 70 million.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "formerly": [
+        "elliott-halberstam"
+      ],
+      "related": [
+        "bombieri-vinogradov"
+      ],
+      "by": "Yitang Zhang, 2013 (published 2014)",
+      "note": "Goldston, Pintz and Yıldırım had shown in 2005 that the Elliott–Halberstam conjecture gives gaps of at most 16 infinitely often. Zhang proved a weaker version of that conjecture, for moduli without large prime factors slightly beyond √x, which was enough.",
+      "url": "https://annals.math.princeton.edu/2014/179-3/p07",
+      "area": "number-theory",
+      "year": 2013,
+      "formerlyYear": 2005
+    },
+    {
+      "id": "maynard-gaps",
+      "name": "Maynard's theorem on primes in bounded intervals",
+      "short": "Maynard: m primes close",
+      "statement": "For every m there is a bound H such that infinitely many intervals of length H contain at least m primes. For m = 2, consecutive primes differ by at most 600 infinitely often.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "bombieri-vinogradov",
+          "url": "https://arxiv.org/abs/1407.4897"
+        }
+      ],
+      "related": [
+        "bounded-gaps"
+      ],
+      "by": "James Maynard, 2013 (published 2015); related unpublished work by Terence Tao",
+      "note": "Maynard's multidimensional sieve needs no information on primes beyond the Bombieri–Vinogradov theorem, unlike Zhang's argument.",
+      "url": "https://arxiv.org/abs/1311.4600",
+      "area": "number-theory",
+      "year": 2013
+    },
+    {
+      "id": "polymath-246",
+      "name": "Prime gaps of at most 246",
+      "short": "Prime gaps ≤ 246",
+      "statement": "There are infinitely many pairs of consecutive primes that differ by at most 246.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "bombieri-vinogradov"
+      ],
+      "related": [
+        "maynard-gaps"
+      ],
+      "by": "D. H. J. Polymath, 2014",
+      "note": "246 is the smallest bound in a refereed paper. The paper refines Maynard's sieve and states that this bound uses only the Bombieri–Vinogradov theorem.",
+      "url": "https://arxiv.org/abs/1407.4897",
+      "area": "number-theory",
+      "claim": "Since August 2026 several unrefereed preprints have claimed smaller bounds, starting with Julia Stadlmann's 240. None had been independently verified by September 2026.",
+      "year": 2014
+    },
+    {
+      "id": "gaps-12-eh",
+      "name": "Prime gaps of at most 12, assuming Elliott–Halberstam",
+      "short": "Prime gaps ≤ 12 (EH)",
+      "statement": "There are infinitely many pairs of consecutive primes that differ by at most 12.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "elliott-halberstam"
+      ],
+      "related": [
+        "maynard-gaps"
+      ],
+      "by": "James Maynard, 2013",
+      "url": "https://arxiv.org/abs/1311.4600",
+      "area": "number-theory",
+      "year": 2013
+    },
+    {
+      "id": "gaps-6-geh",
+      "name": "Prime gaps of at most 6, assuming generalized Elliott–Halberstam",
+      "short": "Prime gaps ≤ 6 (GEH)",
+      "statement": "There are infinitely many pairs of consecutive primes that differ by at most 6.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "generalized-eh"
+      ],
+      "related": [
+        "twin-prime"
+      ],
+      "by": "D. H. J. Polymath, 2014",
+      "note": "The parity problem rules out any bound below 6 by purely sieve-theoretic methods, so these methods cannot reach the twin prime conjecture even with this hypothesis.",
+      "url": "https://arxiv.org/abs/1407.4897",
+      "area": "number-theory",
+      "year": 2014
+    },
+    {
+      "id": "schinzel-h",
+      "name": "Schinzel's hypothesis H",
+      "short": "Schinzel's hypothesis H",
+      "statement": "If finitely many irreducible integer polynomials with positive leading coefficients have no fixed prime dividing the product of their values, then infinitely many integers n make all of them prime at once.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "dirichlet-ap"
+      ],
+      "by": "Andrzej Schinzel and Wacław Sierpiński, 1958",
+      "note": "The only proven case is a single linear polynomial, which is Dirichlet's theorem. It also predicts infinitely many primes of the form n² + 1, one of Landau's problems.",
+      "url": "https://en.wikipedia.org/wiki/Schinzel%27s_hypothesis_H",
+      "area": "number-theory",
+      "year": 1958
+    },
+    {
+      "id": "twin-prime",
+      "name": "Twin prime conjecture",
+      "short": "Twin prime conjecture",
+      "statement": "There are infinitely many primes p such that p + 2 is also prime.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "schinzel-h",
+          "url": "https://en.wikipedia.org/wiki/Schinzel%27s_hypothesis_H"
+        }
+      ],
+      "related": [
+        "polymath-246"
+      ],
+      "by": "Stated for every even gap by Alphonse de Polignac, 1849",
+      "note": "Hypothesis H applied to n and n + 2 gives it at once. In terms of prime gaps it says that a gap of 2 occurs infinitely often. The smallest gap proven in a refereed paper to occur infinitely often is 246.",
+      "url": "https://en.wikipedia.org/wiki/Twin_prime",
+      "area": "number-theory",
+      "year": 1849
+    },
+    {
+      "id": "modularity-semistable",
+      "name": "Modularity theorem for semistable elliptic curves",
+      "short": "Semistable modularity",
+      "statement": "Every semistable elliptic curve over the rational numbers is modular: it can be parametrized by a modular curve, and its L-function comes from a modular form.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Andrew Wiles, with Richard Taylor, 1995",
+      "note": "Semistable means the curve has only the mildest kind of bad reduction at each prime. Wiles announced a proof in 1993; an error found that year was repaired in 1994, with one step justified in a joint paper with Taylor.",
+      "url": "https://en.wikipedia.org/wiki/Wiles%27s_proof_of_Fermat%27s_Last_Theorem",
+      "area": "number-theory",
+      "year": 1995
+    },
+    {
+      "id": "ribet",
+      "name": "Ribet's theorem (epsilon conjecture)",
+      "short": "Ribet's theorem",
+      "statement": "The elliptic curve that Gerhard Frey attached to a hypothetical solution of aᵖ + bᵖ = cᵖ, with p a prime of at least 5, cannot be modular.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Ken Ribet, 1986 (published 1990)",
+      "note": "This was the epsilon conjecture, the missing step in an argument Jean-Pierre Serre gave in 1985. After it, the modularity of semistable curves was all that Fermat's Last Theorem needed.",
+      "url": "https://en.wikipedia.org/wiki/Ribet%27s_theorem",
+      "area": "number-theory",
+      "year": 1986
+    },
+    {
+      "id": "flt",
+      "name": "Fermat's Last Theorem",
+      "short": "Fermat's Last Theorem",
+      "statement": "The equation aⁿ + bⁿ = cⁿ has no solution in positive integers a, b, c when n is greater than 2.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "modularity-semistable",
+        "ribet"
+      ],
+      "by": "Andrew Wiles, 1995 (with Richard Taylor)",
+      "note": "A counterexample with a prime exponent p ≥ 5 would give a semistable Frey curve (the exponents 3 and 4 were settled by Euler and Fermat). Ribet showed that curve is not modular, and Wiles showed every semistable curve is modular.",
+      "url": "https://en.wikipedia.org/wiki/Wiles%27s_proof_of_Fermat%27s_Last_Theorem",
+      "area": "number-theory",
+      "year": 1995
+    },
+    {
+      "id": "modularity-theorem",
+      "name": "Modularity theorem",
+      "short": "Modularity theorem",
+      "statement": "Every elliptic curve over the rational numbers is modular: it is the image of a classical modular curve under a rational map with integer coefficients.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "modularity-semistable",
+        "langlands-functoriality"
+      ],
+      "by": "Christophe Breuil, Brian Conrad, Fred Diamond and Richard Taylor, 2001",
+      "note": "Formerly the Taniyama–Shimura conjecture (1950s). The proof extended Wiles's techniques from semistable curves to all curves.",
+      "url": "https://en.wikipedia.org/wiki/Modularity_theorem",
+      "area": "number-theory",
+      "year": 2001
+    },
+    {
+      "id": "serre-modularity",
+      "name": "Serre's modularity conjecture (Khare–Wintenberger theorem)",
+      "short": "Serre's modularity",
+      "statement": "Every continuous, odd, absolutely irreducible two-dimensional representation of the absolute Galois group of the rational numbers, with coefficients in a finite field, comes from a modular form, of a level and weight that Serre specified.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "ribet",
+        "flt",
+        "modularity-theorem"
+      ],
+      "by": "Conjectured by Jean-Pierre Serre (1975, 1987); proved by Chandrashekhar Khare and Jean-Pierre Wintenberger, 2008 (published 2009)",
+      "note": "Serre showed his conjecture implies Fermat's Last Theorem and the modularity theorem. Khare proved the level 1 case first, in 2005.",
+      "url": "https://en.wikipedia.org/wiki/Serre%27s_modularity_conjecture",
+      "area": "number-theory",
+      "year": 1975,
+      "settled": 2008
+    },
+    {
+      "id": "faltings",
+      "name": "Faltings's theorem (Mordell conjecture)",
+      "short": "Faltings's theorem",
+      "statement": "A non-singular curve of genus greater than 1 defined over the rational numbers has only finitely many rational points.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "abc"
+      ],
+      "by": "Gerd Faltings, 1983 (conjectured by Louis Mordell, 1922)",
+      "note": "Known proofs bound the number of rational points but not their size, so they do not tell how to find them. Elkies showed in 1991 that the abc conjecture would also imply the theorem.",
+      "url": "https://en.wikipedia.org/wiki/Faltings%27s_theorem",
+      "area": "number-theory",
+      "year": 1922,
+      "settled": 1983
+    },
+    {
+      "id": "darmon-granville",
+      "name": "Darmon–Granville theorem",
+      "short": "Darmon–Granville",
+      "statement": "For fixed exponents m, n, k with 1/m + 1/n + 1/k < 1, the equation aᵐ + bⁿ = cᵏ has only finitely many solutions in coprime positive integers a, b, c.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "faltings"
+      ],
+      "related": [
+        "fermat-catalan"
+      ],
+      "by": "Henri Darmon and Andrew Granville, 1995",
+      "note": "The Fermat–Catalan conjecture asks for more: finitely many solutions even when the exponents may vary.",
+      "url": "https://en.wikipedia.org/wiki/Fermat%E2%80%93Catalan_conjecture",
+      "area": "number-theory",
+      "year": 1995
+    },
+    {
+      "id": "abc",
+      "name": "abc conjecture",
+      "short": "abc conjecture",
+      "statement": "For every ε > 0 there are only finitely many triples of coprime positive integers with a + b = c and c > rad(abc)^(1+ε), where rad(n) is the product of the distinct primes dividing n.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "effective-abc"
+      ],
+      "by": "Joseph Oesterlé and David Masser, 1985",
+      "note": "Shinichi Mochizuki claimed a proof in 2012, published in 2021. Peter Scholze and Jakob Stix reported a serious gap in 2018, and the mainstream community still regards the conjecture as unproven in November 2026.",
+      "url": "https://en.wikipedia.org/wiki/Abc_conjecture",
+      "area": "number-theory",
+      "year": 1985
+    },
+    {
+      "id": "effective-mordell",
+      "name": "Effective Mordell from the abc conjecture",
+      "short": "Effective Mordell (abc)",
+      "statement": "For every curve of genus at least 2 over the rational numbers, the size (height) of its rational points is bounded by an explicit constant, so all of them can be found by an algorithm.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        {
+          "id": "effective-abc",
+          "url": "https://pazuki.perso.math.cnrs.fr/index_fichiers/Elkies91.pdf"
+        }
+      ],
+      "related": [
+        "faltings"
+      ],
+      "by": "Noam Elkies, 1991",
+      "note": "Faltings's theorem shows the points are finitely many but gives no bound on their size. Elkies showed that a version of the abc conjecture with computable constants would give one.",
+      "url": "https://swc-math.github.io/aws/1998/98Frankenhuysen.pdf",
+      "area": "number-theory",
+      "year": 1991
+    },
+    {
+      "id": "szpiro",
+      "name": "Modified Szpiro conjecture",
+      "short": "Szpiro's conjecture",
+      "statement": "For every ε > 0 there is a constant C(ε) such that every elliptic curve over the rationals satisfies max(|c₄|³, |c₆|²) ≤ C(ε) · N^(6+ε), where c₄ and c₆ are the invariants of a minimal Weierstrass equation and N is the conductor.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "abc"
+      ],
+      "equivalent": true,
+      "by": "Lucien Szpiro, 1981; equivalence with abc shown by Joseph Oesterlé, 1988",
+      "note": "The conductor records the primes where the curve has bad reduction. Szpiro's original form, which bounds the discriminant, follows from this one.",
+      "url": "https://en.wikipedia.org/wiki/Szpiro%27s_conjecture",
+      "area": "number-theory",
+      "year": 1981
+    },
+    {
+      "id": "fermat-catalan",
+      "name": "Fermat–Catalan conjecture",
+      "short": "Fermat–Catalan",
+      "statement": "The equation aᵐ + bⁿ = cᵏ with coprime positive integers a, b, c and 1/m + 1/n + 1/k < 1 has only finitely many solutions, counting distinct triples of powers.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "abc",
+          "url": "https://arxiv.org/pdf/2412.11933"
+        }
+      ],
+      "by": "Henri Darmon and Andrew Granville, 1995, who also observed that it follows from the abc conjecture",
+      "note": "Ten solutions are known, for example 2⁵ + 7² = 3⁴.",
+      "url": "https://en.wikipedia.org/wiki/Fermat%E2%80%93Catalan_conjecture",
+      "area": "number-theory",
+      "year": 1995
+    },
+    {
+      "id": "non-wieferich",
+      "name": "Infinitely many non-Wieferich primes",
+      "short": "Non-Wieferich primes",
+      "statement": "For every base b > 1 there are infinitely many primes p for which p² does not divide b^(p−1) − 1.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "abc"
+      ],
+      "by": "Joseph Silverman, 1988",
+      "note": "Only two Wieferich primes to base 2 are known, 1093 and 3511, and any third one exceeds 2⁶⁴. Yet without the abc conjecture it is not even known that infinitely many primes are not Wieferich primes.",
+      "url": "https://en.wikipedia.org/wiki/Wieferich_prime",
+      "area": "number-theory",
+      "year": 1988
+    },
+    {
+      "id": "mihailescu",
+      "name": "Mihăilescu's theorem (Catalan's conjecture)",
+      "short": "Catalan's conjecture",
+      "statement": "The only two consecutive perfect powers are 8 and 9: the equation xᵃ − yᵇ = 1 with a, b > 1 has the single solution in positive integers 3² − 2³ = 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "fermat-catalan"
+      ],
+      "by": "Preda Mihăilescu, 2002 (published 2004); conjectured by Eugène Catalan, 1844",
+      "note": "Tijdeman had shown in 1976 that there are only finitely many solutions. Mihăilescu's proof uses cyclotomic fields and Galois modules.",
+      "url": "https://en.wikipedia.org/wiki/Catalan%27s_conjecture",
+      "area": "number-theory",
+      "year": 1844,
+      "settled": 2002
+    },
+    {
+      "id": "gross-zagier",
+      "name": "Gross–Zagier theorem",
+      "short": "Gross–Zagier theorem",
+      "statement": "For a modular elliptic curve E and a suitable imaginary quadratic field K, the height of a Heegner point equals, up to an explicit nonzero factor, the derivative at s = 1 of the L-function of E over K. Combined with the existence of a suitable K, this shows that if L(E, s) has a simple zero at s = 1, then E has a rational point of infinite order.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Benedict Gross and Don Zagier, 1986",
+      "url": "https://en.wikipedia.org/wiki/Gross%E2%80%93Zagier_theorem",
+      "area": "number-theory",
+      "year": 1986
+    },
+    {
+      "id": "bsd-rank-01",
+      "name": "Birch and Swinnerton-Dyer conjecture for analytic rank 0 and 1",
+      "short": "BSD for rank 0 and 1",
+      "statement": "For an elliptic curve over the rationals whose L-function does not vanish at s = 1, the group of rational points is finite. If the L-function has a simple zero there, the group has rank exactly 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "gross-zagier",
+        {
+          "id": "modularity-theorem",
+          "url": "https://en.wikipedia.org/wiki/Birch_and_Swinnerton-Dyer_conjecture"
+        }
+      ],
+      "related": [
+        "bsd"
+      ],
+      "by": "Victor Kolyvagin, 1989, building on Gross and Zagier, 1986; extended to all curves by the modularity theorem, 2001",
+      "note": "Kolyvagin built Euler systems from Heegner points. The results were stated for modular elliptic curves, so they covered every curve only once all curves were known to be modular.",
+      "url": "https://en.wikipedia.org/wiki/Birch_and_Swinnerton-Dyer_conjecture",
+      "area": "number-theory",
+      "year": 1989,
+      "settled": 2001
+    },
+    {
+      "id": "goldfeld-class-number",
+      "name": "Effective solution of Gauss's class number problem",
+      "short": "Class number problem",
+      "statement": "For each h, all imaginary quadratic fields with class number h can be listed by a finite calculation.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "gross-zagier"
+      ],
+      "by": "Dorian Goldfeld, 1976, completed by the Gross–Zagier theorem, 1986",
+      "note": "Goldfeld reduced the problem to finding an elliptic curve whose L-function has a zero of high order at s = 1. The Gross–Zagier theorem supplied one.",
+      "url": "https://en.wikipedia.org/wiki/Class_number_problem",
+      "area": "number-theory",
+      "year": 1976,
+      "settled": 1986
+    },
+    {
+      "id": "bsd",
+      "name": "Birch and Swinnerton-Dyer conjecture",
+      "short": "Birch–Swinnerton-Dyer",
+      "statement": "The rank of the group of rational points of an elliptic curve E over the rationals equals the order of the zero of its L-function L(E, s) at s = 1.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Bryan Birch and Peter Swinnerton-Dyer, 1960s",
+      "note": "One of the Clay Millennium Prize problems. No proof has been accepted as of November 2026.",
+      "url": "https://en.wikipedia.org/wiki/Birch_and_Swinnerton-Dyer_conjecture",
+      "area": "number-theory",
+      "year": 1960
+    },
+    {
+      "id": "tunnell",
+      "name": "Tunnell's criterion for congruent numbers",
+      "short": "Tunnell's criterion",
+      "statement": "For an odd squarefree integer n, write A for the number of integer solutions of 2x² + y² + 32z² = n and B for the number of 2x² + y² + 8z² = n (similar equations handle even n). If n is congruent, that is, the area of a right triangle with rational sides, then B = 2A. If the Birch and Swinnerton-Dyer conjecture holds, the converse is also true.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "bsd"
+      ],
+      "by": "Jerrold Tunnell, 1983",
+      "note": "One direction is proven: every congruent number passes the test. That every number passing the test is congruent needs the Birch and Swinnerton-Dyer conjecture for the curves y² = x³ − n²x.",
+      "url": "https://en.wikipedia.org/wiki/Tunnell%27s_theorem",
+      "area": "number-theory",
+      "year": 1983
+    },
+    {
+      "id": "sato-tate",
+      "name": "Sato–Tate theorem",
+      "short": "Sato–Tate theorem",
+      "statement": "For an elliptic curve over the rationals without complex multiplication, write its number of points modulo p as p + 1 − 2√p · cos θ_p. Then the angles θ_p are distributed over [0, π] with density proportional to sin² θ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "modularity-theorem",
+        "langlands-functoriality"
+      ],
+      "by": "Laurent Clozel, Michael Harris, Nick Shepherd-Barron and Richard Taylor, 2008 (curves with multiplicative reduction at some prime); Thomas Barnet-Lamb, David Geraghty, Michael Harris and Richard Taylor, 2011 (in general)",
+      "note": "Conjectured by Mikio Sato and John Tate around 1960. The proof rests on potential modularity results.",
+      "url": "https://en.wikipedia.org/wiki/Sato%E2%80%93Tate_conjecture",
+      "area": "number-theory",
+      "year": 2008,
+      "settled": 2011
+    },
+    {
+      "id": "effective-abc",
+      "name": "Effective abc conjecture",
+      "short": "Effective abc",
+      "statement": "For every ε > 0 the abc inequality c ≤ C(ε) · rad(abc)^(1+ε) holds for all coprime positive integers with a + b = c, with a constant C(ε) that can be computed.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Used by Noam Elkies, 1991",
+      "note": "Stronger than the abc conjecture, which only says that some constant exists. A proof of abc with constants nobody can compute would not give the results that rest on this version.",
+      "url": "https://pazuki.perso.math.cnrs.fr/index_fichiers/Elkies91.pdf",
+      "area": "number-theory",
+      "year": 1991
+    }
+  ]
+}

@@ -1,0 +1,617 @@
+{
+  "area": "complexity",
+  "nodes": [
+    {
+      "id": "cook-levin",
+      "name": "Cook–Levin theorem",
+      "short": "Cook–Levin theorem",
+      "statement": "The Boolean satisfiability problem (SAT) is NP-complete: it is in NP, and every problem in NP can be reduced to it in polynomial time.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Stephen Cook, 1971, and independently Leonid Levin, 1973",
+      "note": "SAT was the first problem shown to be NP-complete. Every later NP-completeness proof starts from it, directly or through a chain of reductions.",
+      "url": "https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem",
+      "area": "complexity",
+      "year": 1971
+    },
+    {
+      "id": "karp-21",
+      "name": "Karp's 21 NP-complete problems",
+      "short": "Karp's 21 problems",
+      "statement": "Twenty-one classic combinatorial problems, among them clique, vertex cover, Hamiltonian circuit, chromatic number and max cut, are NP-complete.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cook-levin"
+      ],
+      "by": "Richard Karp, 1972",
+      "note": "Karp gave polynomial-time reductions from SAT to each problem, directly or through a chain of his other reductions, so the list rests on Cook's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Karp%27s_21_NP-complete_problems",
+      "area": "complexity",
+      "year": 1972
+    },
+    {
+      "id": "time-hierarchy",
+      "name": "Deterministic time hierarchy theorem",
+      "short": "Time hierarchy theorem",
+      "statement": "For every time-constructible bound f(n) there is a problem that can be solved in time O(f(n) log f(n)) but not in time o(f(n)). More time lets a computer solve strictly more problems.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Juris Hartmanis and Richard E. Stearns, 1965; the log-factor form stated here uses the faster universal simulation of Fred Hennie and Stearns, 1966",
+      "url": "https://en.wikipedia.org/wiki/Time_hierarchy_theorem",
+      "area": "complexity",
+      "year": 1965
+    },
+    {
+      "id": "p-neq-exp",
+      "name": "P is strictly contained in EXPTIME",
+      "short": "P ≠ EXPTIME",
+      "statement": "Some problems that can be solved in exponential time cannot be solved in polynomial time.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "time-hierarchy"
+      ],
+      "related": [
+        "p-neq-np"
+      ],
+      "by": "Corollary of the time hierarchy theorem of Hartmanis and Stearns, 1965",
+      "note": "One of the few separations between natural complexity classes that is actually proven. It follows by applying the hierarchy theorem to two exponential time bounds.",
+      "url": "https://en.wikipedia.org/wiki/Time_hierarchy_theorem",
+      "area": "complexity",
+      "year": 1965
+    },
+    {
+      "id": "p-neq-np",
+      "name": "P ≠ NP",
+      "short": "P ≠ NP",
+      "statement": "Some problems whose solutions can be checked in polynomial time cannot be solved in polynomial time. Equivalently, no NP-complete problem, such as SAT, Hamiltonian circuit or the travelling salesman decision problem, has a polynomial-time algorithm.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "cook-levin",
+        "karp-21"
+      ],
+      "by": "Stated precisely by Stephen Cook, 1971, and independently by Leonid Levin, 1973",
+      "note": "A Clay Millennium Prize Problem. Each of NP ≠ co-NP and the existence of one-way functions would imply it. The converses are not known.",
+      "url": "https://en.wikipedia.org/wiki/P_versus_NP_problem",
+      "area": "complexity",
+      "anyOf": [
+        {
+          "id": "np-neq-conp",
+          "url": "https://en.wikipedia.org/wiki/Co-NP"
+        },
+        {
+          "id": "one-way-functions",
+          "url": "https://en.wikipedia.org/wiki/One-way_function"
+        }
+      ],
+      "year": 1971
+    },
+    {
+      "id": "np-neq-conp",
+      "name": "NP ≠ co-NP",
+      "short": "NP ≠ co-NP",
+      "statement": "The classes NP and co-NP are different. Equivalently, there is no system of certificates of polynomial length, checkable in polynomial time, that proves every tautology of propositional logic.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Implicit in Cook, 1971; the proof-system form is due to Stephen Cook and Robert Reckhow, 1979",
+      "note": "Because P is closed under complement, P = NP would force NP = co-NP. So NP ≠ co-NP implies P ≠ NP. Deciding whether a formula is a tautology is co-NP-complete.",
+      "url": "https://en.wikipedia.org/wiki/Co-NP",
+      "area": "complexity",
+      "year": 1971
+    },
+    {
+      "id": "ladner",
+      "name": "Ladner's theorem",
+      "short": "Ladner's theorem",
+      "statement": "There are problems in NP that are neither solvable in polynomial time nor NP-complete.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "p-neq-np"
+      ],
+      "related": [
+        "babai-gi"
+      ],
+      "by": "Richard E. Ladner, 1975",
+      "note": "Ladner proved that such NP-intermediate problems exist if P ≠ NP. Natural candidates are graph isomorphism and the decision versions of factoring and discrete logarithm.",
+      "url": "https://en.wikipedia.org/wiki/NP-intermediate",
+      "area": "complexity",
+      "year": 1975
+    },
+    {
+      "id": "pcp",
+      "name": "PCP theorem",
+      "short": "PCP theorem",
+      "statement": "Every problem in NP has proofs that a randomized checker can verify by reading only a constant number of bits of the proof, using O(log n) random bits: NP = PCP[O(log n), O(1)].",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "ip-pspace"
+      ],
+      "by": "Sanjeev Arora and Shmuel Safra; Sanjeev Arora, Carsten Lund, Rajeev Motwani, Madhu Sudan and Mario Szegedy, 1992 (journal versions 1998)",
+      "note": "Equivalent to saying that approximating the fraction of satisfiable constraints of a constraint problem within some constant factor is NP-hard. Irit Dinur found a much simpler proof in 2005.",
+      "url": "https://en.wikipedia.org/wiki/PCP_theorem",
+      "area": "complexity",
+      "year": 1992
+    },
+    {
+      "id": "parallel-repetition",
+      "name": "Raz's parallel repetition theorem",
+      "short": "Parallel repetition",
+      "statement": "Running a two-prover one-round proof system many times in parallel makes the probability that the verifier is fooled shrink exponentially in the number of repetitions, provided a single run fools the verifier with probability less than 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Ran Raz, 1998",
+      "note": "The rate depends only on the original error and, logarithmically, on the number of possible answers. Combined with the PCP theorem it gives the starting point for sharp hardness-of-approximation results.",
+      "url": "https://collaborate.princeton.edu/en/publications/a-parallel-repetition-theorem/",
+      "area": "complexity",
+      "year": 1998
+    },
+    {
+      "id": "hastad-max3sat",
+      "name": "Håstad's optimal inapproximability of MAX-3SAT",
+      "short": "Håstad: MAX-3SAT 7/8",
+      "statement": "No polynomial-time algorithm can guarantee to satisfy a fraction 7/8 + ε of the clauses that the best assignment satisfies in formulas with exactly three literals per clause, for any ε > 0. A random assignment already satisfies 7/8 on average.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "p-neq-np",
+        "pcp",
+        "parallel-repetition"
+      ],
+      "by": "Johan Håstad, 2001 (conference version 1997)",
+      "note": "What Håstad proved outright is that doing better than 7/8 + ε is NP-hard; that rules out an algorithm only if P ≠ NP. His proof starts from the PCP theorem combined with Raz's parallel repetition theorem.",
+      "url": "https://www.csc.kth.se/~johanh/optimalinap.pdf",
+      "area": "complexity",
+      "year": 1997
+    },
+    {
+      "id": "ip-pspace",
+      "name": "IP = PSPACE",
+      "short": "IP = PSPACE",
+      "statement": "The problems that have interactive proofs, in which a polynomial-time randomized verifier questions an all-powerful prover, are exactly the problems solvable with a polynomial amount of memory.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Adi Shamir, 1992, using the technique of Carsten Lund, Lance Fortnow, Howard Karloff and Noam Nisan, 1990",
+      "note": "Lund, Fortnow, Karloff and Nisan first gave interactive proofs for the permanent, and hence for co-NP and the whole polynomial hierarchy. Shamir extended their technique to all of PSPACE.",
+      "url": "https://en.wikipedia.org/wiki/IP_(complexity)",
+      "area": "complexity",
+      "year": 1990
+    },
+    {
+      "id": "seth",
+      "name": "Strong exponential time hypothesis",
+      "short": "SETH",
+      "statement": "For every ε > 0 there is a k such that k-SAT on n variables cannot be solved in time 2^((1 − ε)n). Brute force over all assignments cannot be beaten by a constant factor in the exponent.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Russell Impagliazzo and Ramamohan Paturi, 1999; stated in this form by Chris Calabro, Impagliazzo and Paturi, 2009",
+      "note": "SETH implies ETH. So if the October 2026 claimed refutations of ETH are correct, SETH is false too.",
+      "url": "https://en.wikipedia.org/wiki/Exponential_time_hypothesis",
+      "area": "complexity",
+      "year": 1999
+    },
+    {
+      "id": "eth",
+      "name": "Exponential time hypothesis",
+      "short": "ETH",
+      "statement": "3-SAT on n variables cannot be solved in subexponential time 2^o(n).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "seth",
+          "url": "https://www.imsc.res.in/~vraman/exact/ryan.pdf"
+        }
+      ],
+      "by": "Russell Impagliazzo and Ramamohan Paturi, 1999",
+      "note": "Many lower bounds for exact algorithms are proven assuming it.",
+      "url": "https://en.wikipedia.org/wiki/Exponential_time_hypothesis",
+      "area": "complexity",
+      "claim": "On 26 October 2026 OpenAI and Anthropic each released a claimed refutation: algorithms that count the satisfying assignments of 3-CNF formulas in time 2^O(n log log n / √log n), with Lean formalizations. OpenAI's Lean proof gives only the weaker 2^O(n (log log n)² / √log n). As of November 2026 neither has completed academic review. If either holds, this hypothesis and the strong form are false.",
+      "year": 1999
+    },
+    {
+      "id": "eth-lower-bounds",
+      "name": "ETH lower bounds for NP-hard graph problems",
+      "short": "ETH graph lower bounds",
+      "statement": "Graph k-colourability for each fixed k ≥ 3, Hamiltonian cycle, maximum clique, maximum independent set and vertex cover cannot be solved in time 2^o(n) on graphs with n vertices.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "eth"
+      ],
+      "by": "Russell Impagliazzo, Ramamohan Paturi and Francis Zane, 2001",
+      "note": "Proven assuming ETH, using the sparsification lemma. The October 2026 claims would refute ETH. The MIT Hardness Group (2026) shows that the same reductions still rule out 2^(n^(1−ε)) algorithms under the weaker Stearns–Hunt hypothesis.",
+      "url": "https://en.wikipedia.org/wiki/Exponential_time_hypothesis",
+      "area": "complexity",
+      "year": 2001
+    },
+    {
+      "id": "ov-conjecture",
+      "name": "Orthogonal vectors conjecture",
+      "short": "Orthogonal vectors (OV)",
+      "statement": "For no ε > 0 can an algorithm decide in time N^(2 − ε)·poly(D) whether a set of N binary vectors of dimension D contains two orthogonal vectors.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "seth",
+          "url": "https://www.imsc.res.in/~vraman/exact/ryan.pdf"
+        }
+      ],
+      "by": "Ryan Williams, 2005",
+      "note": "Williams showed that a faster algorithm for orthogonal vectors would give a faster algorithm for SAT, so SETH implies this conjecture. Many quadratic lower bounds in fine-grained complexity are reductions from it. If SETH falls, this conjecture is not known to be affected.",
+      "url": "https://arxiv.org/abs/1805.08554",
+      "area": "complexity",
+      "year": 2005
+    },
+    {
+      "id": "edit-distance-seth",
+      "name": "Quadratic lower bound for edit distance (Backurs–Indyk)",
+      "short": "Edit distance lower bound",
+      "statement": "No algorithm computes the edit distance between two strings of length n in time O(n^(2 − δ)) for any constant δ > 0.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        {
+          "id": "ov-conjecture",
+          "url": "https://arxiv.org/pdf/1412.0348v4"
+        }
+      ],
+      "by": "Arturs Backurs and Piotr Indyk, 2015",
+      "note": "They reduce orthogonal vectors to edit distance, so a faster algorithm would break the orthogonal vectors conjecture and hence SETH. The textbook dynamic program takes about n² steps, so it would be essentially optimal.",
+      "url": "https://arxiv.org/abs/1412.0348",
+      "area": "complexity",
+      "year": 2015
+    },
+    {
+      "id": "ugc",
+      "name": "Unique games conjecture",
+      "short": "Unique games conjecture",
+      "statement": "For all small ε, δ > 0 there is a number of colours k such that, for constraint problems where each constraint between two variables fixes one variable's colour given the other's, it is NP-hard to tell apart instances where a 1 − δ fraction of constraints can be satisfied from instances where at most an ε fraction can.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "two-to-two",
+        "pcp"
+      ],
+      "by": "Subhash Khot, 2002",
+      "note": "If true, it pins down exactly how well many optimisation problems can be approximated.",
+      "url": "https://en.wikipedia.org/wiki/Unique_games_conjecture",
+      "area": "complexity",
+      "claim": "On 6 October 2026 OpenAI released an AI-written manuscript claiming a proof. The same release included a Lean-verified proof of the related 2-to-1 conjecture, which is a different statement. As of November 2026 neither has been independently reviewed.",
+      "year": 2002
+    },
+    {
+      "id": "two-to-two",
+      "name": "2-to-2 games theorem",
+      "short": "2-to-2 games theorem",
+      "statement": "For 2-to-2 games, constraint problems in which each rule allows two choices for one variable for each choice of the other, it is NP-hard to tell apart instances where almost all rules can be satisfied from instances where only a small fraction can.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "khot-regev-vc",
+        "ugc"
+      ],
+      "by": "Subhash Khot, Dor Minzer and Muli Safra, with Irit Dinur and Guy Kindler on two of the four papers, 2018",
+      "note": "It gives the unique games hardness for instances where about half the rules can be satisfied. The full conjecture needs instances where nearly all can.",
+      "url": "https://www.quantamagazine.org/computer-scientists-close-in-on-unique-games-conjecture-proof-20180424/",
+      "area": "complexity",
+      "year": 2018
+    },
+    {
+      "id": "goemans-williamson",
+      "name": "Goemans–Williamson algorithm for MAX-CUT",
+      "short": "Goemans–Williamson 0.878",
+      "statement": "A randomized polynomial-time algorithm based on semidefinite programming finds, in any graph, a cut whose expected size is at least about 0.878 times the size of the largest cut.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "kkmo-maxcut"
+      ],
+      "by": "Michel Goemans and David P. Williamson, 1995",
+      "note": "Without the unique games conjecture, the best known hardness is that approximating max cut better than 16/17 ≈ 0.941 is NP-hard.",
+      "url": "https://en.wikipedia.org/wiki/Maximum_cut",
+      "area": "complexity",
+      "year": 1995
+    },
+    {
+      "id": "majority-is-stablest",
+      "name": "Majority is stablest theorem",
+      "short": "Majority is stablest",
+      "statement": "Among Boolean functions with mean zero in which no single input has much influence, majority is asymptotically the most noise-stable, for every fixed correlation between 0 and 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Elchanan Mossel, Ryan O'Donnell and Krzysztof Oleszkiewicz, 2005",
+      "note": "Conjectured by Khot, Kindler, Mossel and O'Donnell for their MAX-CUT result, then proven through an invariance principle for low-influence polynomials.",
+      "url": "https://arxiv.org/abs/math/0503503",
+      "area": "complexity",
+      "year": 2005
+    },
+    {
+      "id": "kkmo-maxcut",
+      "name": "Optimality of Goemans–Williamson under the unique games conjecture",
+      "short": "MAX-CUT 0.878 is optimal",
+      "statement": "No polynomial-time algorithm approximates MAX-CUT within any factor better than the Goemans–Williamson ratio of about 0.878.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "ugc",
+        "p-neq-np",
+        "majority-is-stablest"
+      ],
+      "by": "Subhash Khot, Guy Kindler, Elchanan Mossel and Ryan O'Donnell, 2004 (journal 2007)",
+      "note": "They reduce unique games to approximating MAX-CUT within 0.878 + ε, so the bound holds if the unique games conjecture holds and P ≠ NP. The reduction relies on the majority is stablest theorem.",
+      "url": "https://www.cs.cmu.edu/~odonnell/papers/maxcut.pdf",
+      "area": "complexity",
+      "year": 2004
+    },
+    {
+      "id": "khot-regev-vc",
+      "name": "Vertex cover is hard to approximate within 2 − ε",
+      "short": "Vertex cover 2 − ε",
+      "statement": "No polynomial-time algorithm approximates minimum vertex cover within any constant factor smaller than 2. A simple greedy matching algorithm achieves factor 2.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "ugc",
+        "p-neq-np"
+      ],
+      "by": "Subhash Khot and Oded Regev, 2003",
+      "note": "Proven assuming the unique games conjecture. Without it, the best known NP-hardness factor is √2 − ε, from the 2-to-2 games theorem (Khot, Minzer and Safra, 2018).",
+      "url": "https://cs.nyu.edu/~khot/papers/vc_hard.pdf",
+      "area": "complexity",
+      "year": 2003
+    },
+    {
+      "id": "one-way-functions",
+      "name": "Existence of one-way functions",
+      "short": "One-way functions exist",
+      "statement": "There is a function that is easy to compute but hard to invert: given f(x) for a random x, every polynomial-time algorithm finds a preimage only with negligible probability.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "factoring-hard",
+          "url": "https://en.wikipedia.org/wiki/One-way_function"
+        }
+      ],
+      "by": "Basic open conjecture of cryptography",
+      "note": "Their existence would prove P ≠ NP, but P ≠ NP is not known to imply it. Hard factoring gives one: the Rabin function is one-way if and only if factoring is hard.",
+      "url": "https://en.wikipedia.org/wiki/One-way_function",
+      "area": "complexity",
+      "year": 1976
+    },
+    {
+      "id": "goldreich-levin",
+      "name": "Goldreich–Levin theorem",
+      "short": "Goldreich–Levin theorem",
+      "statement": "If f is a one-way function, then from f(x) and a random string r nobody can efficiently predict the inner product of x and r modulo 2 noticeably better than by guessing.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Oded Goldreich and Leonid Levin, 1989",
+      "note": "This gives every one-way function, after a trivial change, a hard-core bit. Hard-core bits are how pseudorandom bits are extracted from one-way functions.",
+      "url": "https://en.wikipedia.org/wiki/Hard-core_predicate",
+      "area": "complexity",
+      "year": 1989
+    },
+    {
+      "id": "hill-prg",
+      "name": "Pseudorandom generators from any one-way function",
+      "short": "PRGs from OWFs (HILL)",
+      "statement": "Pseudorandom generators exist: efficient functions that stretch a short random seed into a longer string that no efficient algorithm can tell apart from a truly random one.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "one-way-functions",
+        "goldreich-levin"
+      ],
+      "by": "Johan Håstad, Russell Impagliazzo, Leonid Levin and Michael Luby, 1999",
+      "note": "They build a pseudorandom generator from any one-way function, using the Goldreich–Levin hidden bit. Since the converse is easy, pseudorandom generators exist if and only if one-way functions do.",
+      "url": "https://www.cs.bu.edu/fac/lnd/pdf/hill.pdf",
+      "area": "complexity",
+      "year": 1999
+    },
+    {
+      "id": "rompel-signatures",
+      "name": "Digital signatures from any one-way function",
+      "short": "Signatures from OWFs",
+      "statement": "Digital signature schemes secure against adaptive chosen-message attacks exist.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "one-way-functions"
+      ],
+      "by": "John Rompel, 1990",
+      "note": "Rompel built universal one-way hash functions from any one-way function; Naor and Yung had shown these give secure signatures. Katz and Koo found errors in the original paper and published a complete proof in 2005.",
+      "url": "https://eprint.iacr.org/2005/328",
+      "area": "complexity",
+      "year": 1990
+    },
+    {
+      "id": "factoring-hard",
+      "name": "Hardness of integer factoring",
+      "short": "Factoring is hard",
+      "statement": "No classical polynomial-time algorithm factors the product of two large random primes of similar size, except with negligible probability.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "rsa-assumption",
+          "url": "https://en.wikipedia.org/wiki/RSA_problem"
+        }
+      ],
+      "related": [
+        "shor",
+        "primes-in-p"
+      ],
+      "by": "Long-standing assumption of public-key cryptography",
+      "note": "No polynomial-time classical algorithm is known; the best is the general number field sieve. Factoring is in NP ∩ co-NP, so it is not expected to be NP-complete.",
+      "url": "https://en.wikipedia.org/wiki/Integer_factorization",
+      "area": "complexity",
+      "year": 1977
+    },
+    {
+      "id": "rsa-assumption",
+      "name": "RSA assumption",
+      "short": "RSA assumption",
+      "statement": "Given N = pq for random large primes p and q, a public exponent e coprime to (p−1)(q−1), and c = m^e mod N for a random m, no polynomial-time algorithm recovers m except with negligible probability.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "shor"
+      ],
+      "by": "Named after the cryptosystem of Ron Rivest, Adi Shamir and Leonard Adleman, 1977",
+      "note": "Factoring N breaks RSA, so this assumption implies that factoring is hard. The reverse is not proven: breaking RSA might be easier than factoring, and Boneh and Venkatesan (1998) gave evidence in that direction.",
+      "url": "https://en.wikipedia.org/wiki/RSA_problem",
+      "area": "complexity",
+      "year": 1977
+    },
+    {
+      "id": "rabin-security",
+      "name": "Security of the Rabin function",
+      "short": "Rabin function security",
+      "statement": "Extracting square roots modulo N = pq, that is, inverting x ↦ x² mod N for a random x, is infeasible.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "factoring-hard"
+      ],
+      "equivalent": true,
+      "by": "Michael O. Rabin, 1979",
+      "note": "Unlike RSA, Rabin's scheme is proven exactly as hard as factoring: anyone who can decrypt random ciphertexts can factor N.",
+      "url": "https://en.wikipedia.org/wiki/Rabin_cryptosystem",
+      "area": "complexity",
+      "year": 1979
+    },
+    {
+      "id": "shor",
+      "name": "Shor's algorithm",
+      "short": "Shor's algorithm",
+      "statement": "A quantum computer can find the prime factors of an integer in time polynomial in its number of digits.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Peter Shor, 1994",
+      "note": "The hardness of factoring is therefore an assumption about classical computers only. A large enough quantum computer would break RSA.",
+      "url": "https://en.wikipedia.org/wiki/Shor%27s_algorithm",
+      "area": "complexity",
+      "year": 1994
+    },
+    {
+      "id": "lattice-hardness",
+      "name": "Worst-case quantum hardness of lattice problems",
+      "short": "Lattice problems hard",
+      "statement": "No polynomial-time quantum algorithm solves the worst-case lattice problems GapSVP and SIVP within the polynomial approximation factors used in Regev's reduction.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Standard assumption of lattice-based cryptography",
+      "note": "Regev's paper bases the security of its cryptosystem on this worst-case quantum hardness, through the learning with errors problem.",
+      "url": "https://arxiv.org/abs/2401.03703",
+      "area": "complexity",
+      "year": 2005
+    },
+    {
+      "id": "lwe-hard",
+      "name": "Hardness of learning with errors",
+      "short": "LWE is hard",
+      "statement": "Given many random linear equations modulo q in a secret vector s, each off by a small random error, no polynomial-time algorithm can recover s, for suitable parameters (q polynomial in n, Gaussian errors of width at least 2√n).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "lattice-hardness",
+          "url": "https://arxiv.org/abs/2401.03703"
+        }
+      ],
+      "by": "Oded Regev, 2005 (journal 2009)",
+      "note": "Regev proved, by a quantum reduction, that an efficient algorithm for LWE would give a quantum algorithm for GapSVP and SIVP. Peikert gave a classical reduction in 2009 from a non-standard variant of GapSVP.",
+      "url": "https://en.wikipedia.org/wiki/Learning_with_errors",
+      "area": "complexity",
+      "year": 2005
+    },
+    {
+      "id": "regev-encryption",
+      "name": "Security of Regev's public-key encryption",
+      "short": "Regev encryption secure",
+      "statement": "Regev's public-key encryption scheme, in which ciphertexts are noisy linear equations, is secure against chosen-plaintext attacks: no polynomial-time algorithm can tell an encryption of 0 from one of 1.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "lwe-hard"
+      ],
+      "by": "Oded Regev, 2005",
+      "note": "The scheme is entirely classical. Its security proof assumes LWE is hard, and through Regev's reduction rests on the quantum hardness of worst-case lattice problems.",
+      "url": "https://arxiv.org/abs/2401.03703",
+      "area": "complexity",
+      "year": 2005
+    },
+    {
+      "id": "e-circuit-lb",
+      "name": "Exponential circuit lower bound for E",
+      "short": "E needs huge circuits",
+      "statement": "Some problem solvable in time 2^O(n) requires Boolean circuits of size 2^Ω(n).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Hypothesis used by Russell Impagliazzo and Avi Wigderson, 1997",
+      "url": "https://en.wikipedia.org/wiki/BPP_(complexity)",
+      "area": "complexity",
+      "year": 1997
+    },
+    {
+      "id": "bpp-equals-p",
+      "name": "BPP = P",
+      "short": "BPP = P",
+      "statement": "Every problem that a randomized polynomial-time algorithm solves with small error probability can also be solved by a deterministic polynomial-time algorithm.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "e-circuit-lb"
+      ],
+      "by": "Russell Impagliazzo and Avi Wigderson, 1997",
+      "note": "Proven assuming exponential circuit lower bounds for E, and widely conjectured on its own. Primality testing, long known to be in BPP, was shown to be in P unconditionally by Agrawal, Kayal and Saxena in 2002.",
+      "url": "https://en.wikipedia.org/wiki/BPP_(complexity)",
+      "area": "complexity",
+      "related": [
+        "primes-in-p"
+      ],
+      "year": 1997
+    },
+    {
+      "id": "babai-gi",
+      "name": "Babai's quasipolynomial algorithm for graph isomorphism",
+      "short": "Graph isomorphism (Babai)",
+      "statement": "Whether two graphs with n vertices are isomorphic can be decided in quasipolynomial time 2^O((log n)^c) for a fixed constant c.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "ladner"
+      ],
+      "by": "László Babai, 2015 (claim restored after a correction in January 2017)",
+      "note": "Graph isomorphism is a leading candidate for an NP-intermediate problem: it is not known to be in P, and Schöning showed in 1987 that it is not NP-complete unless the polynomial hierarchy collapses.",
+      "url": "https://en.wikipedia.org/wiki/Graph_isomorphism_problem",
+      "area": "complexity",
+      "year": 2015
+    }
+  ]
+}

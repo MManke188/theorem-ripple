@@ -1,11 +1,33 @@
 // Pure dependency logic: no DOM, shared by the page and the tests.
 //
 // A node is proven when it is proven outright (base "proven"), when it was
-// marked proven (an event such as the 2026 proof, or a what-if), or when it
-// lists requirements in `needs` and every one of them is proven.
+// marked proven (an event such as the 2026 proof, or a what-if), when it
+// lists requirements in `needs` and every one of them is proven, or when any
+// single statement in `anyOf` is proven (several independent routes to it).
 
 const index = (nodes) => new Map(nodes.map((n) => [n.id, n]));
-const needsOf = (n) => n.needs || [];
+// Everything a node is linked to upstream, whichever way it counts.
+const needsOf = (n) => [...(n.needs || []), ...(n.anyOf || [])];
+
+// Data files may write a requirement as "id" or as { id, url } when the link
+// has its own source. This turns every node into the plain form the rest of
+// the code uses: `needs` and `anyOf` are lists of ids, `needUrl` maps an id
+// to its source.
+export function normalize(raw) {
+  return raw.map((n) => {
+    const plain = (list) => (list || []).map((x) => (typeof x === 'string' ? { id: x } : x));
+    const needs = plain(n.needs);
+    const anyOf = plain(n.anyOf);
+    return {
+      ...n,
+      needs: needs.map((x) => x.id),
+      anyOf: anyOf.map((x) => x.id),
+      needUrl: Object.fromEntries([...needs, ...anyOf].filter((x) => x.url).map((x) => [x.id, x.url])),
+      related: n.related || [],
+      formerly: n.formerly || [],
+    };
+  });
+}
 
 export function validate(nodes) {
   const byId = new Map();
@@ -14,7 +36,7 @@ export function validate(nodes) {
     byId.set(n.id, n);
   }
   for (const n of nodes) {
-    for (const key of ['needs', 'related', 'formerly']) {
+    for (const key of ['needs', 'anyOf', 'related', 'formerly']) {
       for (const ref of n[key] || []) {
         if (!byId.has(ref)) throw new Error(`${n.id}.${key} refers to unknown id: ${ref}`);
       }
@@ -37,24 +59,60 @@ export function computeProven(nodes, marked) {
   const proven = (id) => {
     if (memo.has(id)) return memo.get(id);
     const n = byId.get(id);
-    const needs = needsOf(n);
-    const value = n.base === 'proven' || marked.has(id) || (needs.length > 0 && needs.every(proven));
+    const needs = n.needs || [];
+    const value = n.base === 'proven' || marked.has(id) || (needs.length > 0 && needs.every(proven)) || (n.anyOf || []).some(proven);
     memo.set(id, value);
     return value;
   };
   return new Set(nodes.filter((n) => proven(n.id)).map((n) => n.id));
 }
 
-// A root hypothesis is one that stands on its own (RH, GRH, Legendre, ...),
-// as opposed to a named hypothesis that is a consequence of a result
-// (Lindelöf follows from Littlewood's bound).
+// A root hypothesis is one that stands on its own (RH, GRH, Legendre, an
+// axiom, ...), as opposed to a named hypothesis that is a consequence of a
+// result (Lindelöf follows from Littlewood's bound).
 export function isRoot(nodes, id) {
   const byId = index(nodes);
   const root = (cur) => {
     const n = byId.get(cur);
-    return n.kind === 'hypothesis' && needsOf(n).every(root);
+    return (n.kind === 'hypothesis' || n.kind === 'axiom') && needsOf(n).every(root);
   };
   return root(id);
+}
+
+// Everything connected to a node in one direction, with its distance.
+// 'down': the statements that rest on it, directly or through others.
+// 'up': the statements it rests on. The number is the longest chain of links
+// between the two, so a node is always further out than what it follows from.
+export function reach(nodes, id, direction) {
+  const next = new Map(nodes.map((n) => [n.id, []]));
+  const prev = new Map(nodes.map((n) => [n.id, []]));
+  for (const n of nodes) {
+    for (const need of needsOf(n)) {
+      const [from, to] = direction === 'down' ? [need, n.id] : [n.id, need];
+      next.get(from).push(to);
+      prev.get(to).push(from);
+    }
+  }
+  const members = new Set();
+  const queue = [id];
+  while (queue.length) {
+    for (const to of next.get(queue.shift())) {
+      if (!members.has(to)) {
+        members.add(to);
+        queue.push(to);
+      }
+    }
+  }
+  const depth = new Map([[id, 0]]);
+  const measure = (cur) => {
+    if (depth.has(cur)) return depth.get(cur);
+    const value = 1 + Math.max(...prev.get(cur).filter((p) => p === id || members.has(p)).map(measure));
+    depth.set(cur, value);
+    return value;
+  };
+  members.forEach(measure);
+  depth.delete(id);
+  return depth;
 }
 
 // The unproven root hypotheses a node is still waiting on.

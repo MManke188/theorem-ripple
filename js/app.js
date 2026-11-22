@@ -1,28 +1,31 @@
-import { validate, computeProven, isRoot, missingFor, rippleOrder } from './propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach } from './propagate.js';
 
 const d3 = window.d3;
-const HUBS = ['rh', 'grh', 'erh'];
-const SVG_NS = 'http://www.w3.org/2000/svg';
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (id) => document.getElementById(id);
+const andList = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
 
 const state = {
-  data: null,
+  index: null, // data/index.json: areas, the "today" event, axioms assumed by default
   nodes: [],
   byId: new Map(),
   links: [],
   dependents: new Map(),
+  areas: [],
   mode: 'before',
-  whatIf: new Set(),
-  real: new Set(), // proven in the selected point in time, without what-ifs
-  shown: new Set(), // drawn as proven right now (lags behind during a ripple)
-  lit: new Set(), // keys of edges drawn as active
+  whatIf: new Set(), // statements the reader marked as proven or assumed
+  dropped: new Set(), // default axioms the reader stopped assuming
+  real: new Set(), // what holds at the selected point in time, without what-ifs
+  shown: new Set(), // drawn as holding right now (lags behind during a wave)
+  lit: new Set(), // keys of links drawn as active
   selected: null,
   focus: false, // dim everything but the selected node's surroundings
+  view: 'node', // what the panel shows: a node or the rankings
+  trace: null, // { origin, dir, seen, edges } while "what rests on this" is shown
   hover: null,
   t: d3.zoomIdentity,
-  ripple: null,
-  shape: null, // which hub arrangement is laid out: tall, wide or flat
+  wave: null,
+  shape: null, // which arrangement is laid out: tall, wide or flat
   touched: false,
 };
 
@@ -32,8 +35,9 @@ const gWaves = viewport.append('g');
 const gEdges = viewport.append('g');
 const gFlows = viewport.append('g');
 const gNodes = viewport.append('g');
+const gAreas = svg.append('g');
 const gLabels = svg.append('g');
-const zoom = d3.zoom().scaleExtent([0.2, 5]).on('zoom', onZoom);
+const zoom = d3.zoom().scaleExtent([0.12, 5]).on('zoom', onZoom);
 
 const el = (tag, props = {}, ...kids) => {
   const e = document.createElement(tag);
@@ -47,39 +51,48 @@ const el = (tag, props = {}, ...kids) => {
   return e;
 };
 
-const name = (id) => state.byId.get(id).short;
-const listNames = (ids) => ids.map(name).join(' and ');
+const node = (id) => state.byId.get(id);
+const listNames = (ids) => andList.format(ids.map((id) => node(id).short));
 const statusOf = (n) => (state.shown.has(n.id) ? 'proven' : n.base === 'conditional' ? 'conditional' : 'open');
 const isHypothetical = (id) => state.shown.has(id) && !state.real.has(id);
+const plural = (count, word) => `${count} ${word}${count === 1 ? '' : 's'}`;
 
 init();
 
 async function init() {
-  const data = await (await fetch('data/theorems.json')).json();
-  validate(data.nodes);
-  state.data = data;
-  state.nodes = data.nodes.map((n) => ({
-    ...n,
-    needs: n.needs || [],
-    related: n.related || [],
-    formerly: n.formerly || [],
-    r: n.id === 'rh' ? 22 : HUBS.includes(n.id) ? 17 : n.kind === 'hypothesis' ? 11 : 9,
-  }));
-  state.byId = new Map(state.nodes.map((n) => [n.id, n]));
-  for (const n of state.nodes) state.dependents.set(n.id, []);
-  for (const n of state.nodes) {
-    for (const [type, refs] of [['needs', n.needs], ['related', n.related], ['formerly', n.formerly]]) {
+  const index = await (await fetch('data/index.json')).json();
+  const files = await Promise.all(index.areas.map(async (a) => (await (await fetch(`data/${a.file}`)).json()).nodes));
+  const nodes = normalize(files.flat());
+  validate(nodes);
+  state.index = index;
+  state.nodes = nodes;
+  state.byId = new Map(nodes.map((n) => [n.id, n]));
+  for (const n of nodes) state.dependents.set(n.id, []);
+  for (const n of nodes) {
+    n.inputs = [...n.needs, ...n.anyOf]; // everything it is linked to upstream
+    for (const [type, refs] of [['needs', n.inputs], ['related', n.related], ['formerly', n.formerly]]) {
       for (const ref of refs) {
         state.links.push({ source: ref, target: n.id, type, key: `${ref}>${n.id}`, equivalent: type === 'needs' && !!n.equivalent });
       }
     }
-    for (const need of n.needs) state.dependents.get(need).push(n.id);
+    for (const need of n.inputs) state.dependents.get(need).push(n.id);
   }
+  for (const n of nodes) {
+    n.down = reach(nodes, n.id, 'down'); // what rests on it
+    n.up = reach(nodes, n.id, 'up'); // what it rests on
+    n.weight = n.down.size;
+    n.depth = Math.max(0, ...n.up.values());
+    n.r = Math.min(24, 8 + 2.3 * Math.sqrt(n.weight)) + (n.kind === 'theorem' ? 0 : 1.5);
+  }
+  // The most rested-on statements keep their label at every zoom level.
+  [...nodes].sort((a, b) => b.weight - a.weight).slice(0, 12).forEach((n) => (n.hub = n.weight >= 4));
+  state.areas = index.areas.map((a) => ({ ...a, nodes: nodes.filter((n) => n.area === a.id) })).filter((a) => a.nodes.length);
 
   buildGraph();
   svg.call(zoom).on('dblclick.zoom', null);
-  state.real = computeProven(state.nodes, new Set());
+  state.real = computeProven(nodes, baseMarks());
   state.shown = new Set(state.real);
+  state.lit = litFor(state.shown);
   relayout();
   applyStatus();
   renderStatusLine();
@@ -103,7 +116,7 @@ function buildGraph() {
   for (const n of state.nodes) {
     const g = gNodes
       .append('g')
-      .attr('class', `node kind-${n.kind}${HUBS.includes(n.id) ? ' hub' : ''}`)
+      .attr('class', `node kind-${n.kind}${n.hub ? ' hub' : ''}`)
       .attr('tabindex', 0)
       .attr('role', 'button')
       .attr('aria-label', n.name);
@@ -113,6 +126,10 @@ function buildGraph() {
     const pop = inner.append('g').attr('class', 'pop');
     if (n.kind === 'theorem') {
       pop.append('circle').attr('class', 'shape').attr('r', n.r);
+    } else if (n.kind === 'axiom') {
+      const points = d3.range(6).map((i) => [Math.cos((i * Math.PI) / 3) * n.r * 1.08, Math.sin((i * Math.PI) / 3) * n.r * 1.08].join(','));
+      pop.append('polygon').attr('class', 'shape').attr('points', points.join(' '));
+      pop.append('circle').attr('class', 'pip').attr('r', n.r * 0.32);
     } else {
       const s = n.r * (n.kind === 'hypothesis' ? 0.82 : 0.9);
       pop
@@ -127,6 +144,7 @@ function buildGraph() {
     }
     pop.append('path').attr('class', 'check').attr('d', `M${-0.4 * n.r},${0.03 * n.r} L${-0.1 * n.r},${0.32 * n.r} L${0.43 * n.r},${-0.3 * n.r}`);
     if (n.needs.length > 1) n.arc = inner.append('circle').attr('class', 'arc').attr('r', n.r + 4.5).attr('transform', 'rotate(-90)');
+    if (n.claim || state.index.today.claimed.includes(n.id)) inner.append('circle').attr('class', 'flag').attr('r', 3.6).attr('cx', n.r * 0.95).attr('cy', -n.r * 0.95);
     g.on('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -135,13 +153,24 @@ function buildGraph() {
     });
     n.el = g.node();
 
-    const hub = HUBS.includes(n.id);
-    n.lines = wrap(n.short, hub ? 22 : 19);
-    n.labelW = Math.max(...n.lines.map((s) => s.length)) * (hub ? 7.4 : 6.1);
-    const label = gLabels.append('g').attr('class', `label${hub ? ' hub' : ''}`);
+    n.lines = wrap(n.short, n.hub ? 22 : 19);
+    n.labelW = Math.max(...n.lines.map((s) => s.length)) * (n.hub ? 7.4 : 6.1);
+    const label = gLabels.append('g').attr('class', `label${n.hub ? ' hub' : ''}`);
     const text = label.append('text');
     n.lines.forEach((line, i) => text.append('tspan').attr('x', 0).attr('dy', i === 0 ? '0.9em' : '1.15em').text(line));
     n.labelEl = label.node();
+  }
+
+  for (const a of state.areas) {
+    const g = gAreas.append('g').attr('class', 'area-label').attr('role', 'button').attr('tabindex', 0).attr('aria-label', `Zoom to ${a.name}`);
+    g.append('text').text(a.name);
+    const go = (e) => {
+      e.stopPropagation();
+      state.touched = true;
+      fit(true, a.nodes);
+    };
+    g.on('click', go).on('keydown', (e) => (e.key === 'Enter' || e.key === ' ') && go(e));
+    a.labelEl = g.node();
   }
 }
 
@@ -177,14 +206,12 @@ function freeArea(ignorePanel = false) {
   const sheet = open && box.width > window.innerWidth * 0.9;
   const stripTop = strip.getBoundingClientRect().top || window.innerHeight;
   const right = open && !sheet ? box.left - 6 : window.innerWidth - 6;
-  // On small screens the panel leaves too little room to shrink the graph
-  // into, so the view pans to the selected node instead (`pan`).
-  return { left: 6, right, top, bottom: sheet ? box.top - 6 : stripTop - 10, pan: sheet || (open && right < 500) };
+  return { left: 6, right, top, bottom: sheet ? box.top - 6 : stripTop - 10 };
 }
 
 function relayout() {
   $('legend').open = wide();
-  const area = freeArea();
+  const area = freeArea(true);
   const aspect = (window.innerWidth - 12) / (area.bottom - area.top);
   const shape = aspect < 0.9 ? 'tall' : aspect > 2.2 ? 'flat' : 'wide';
   if (shape !== state.shape) {
@@ -195,45 +222,31 @@ function relayout() {
   fit();
 }
 
-// Where the three hubs sit, for tall, ordinary and very flat windows.
-const HUB_POS = {
-  tall: { rh: [0, -400], grh: [-150, 310], erh: [240, 540] },
-  wide: { rh: [-390, 0], grh: [330, -190], erh: [520, 290] },
-  flat: { rh: [-560, 0], grh: [300, -40], erh: [900, 60] },
-};
-
+// Two passes. First the areas are packed as circles sized by how many
+// statements they hold, pulled into a tall, wide or flat arrangement. Then
+// every statement is pulled towards its area's centre and along its links.
 function layout(shape) {
-  const portrait = shape === 'tall';
-  const hubPos = HUB_POS[shape];
-
-  // Each node joins the hub it reaches first through any kind of link.
-  const cluster = new Map(HUBS.map((id) => [id, id]));
-  const adj = new Map(state.nodes.map((n) => [n.id, []]));
-  for (const l of state.links) {
-    adj.get(l.source).push(l.target);
-    adj.get(l.target).push(l.source);
-  }
-  const queue = [...HUBS];
-  while (queue.length) {
-    const id = queue.shift();
-    for (const next of adj.get(id)) {
-      if (!cluster.has(next)) {
-        cluster.set(next, cluster.get(id));
-        queue.push(next);
-      }
-    }
-  }
+  const [gx, gy] = { tall: [0.12, 0.03], wide: [0.04, 0.1], flat: [0.015, 0.22] }[shape];
+  const blobs = [...state.areas]
+    .sort((a, b) => b.nodes.length - a.nodes.length)
+    .map((a, i) => ({ id: a.id, r: 46 * Math.sqrt(a.nodes.length) + 70, x: i ? Math.cos(i * 2.4) * 700 : 0, y: i ? Math.sin(i * 2.4) * 700 : 0 }));
+  d3.forceSimulation(blobs)
+    .force('collide', d3.forceCollide((d) => d.r + 10).strength(1).iterations(3))
+    .force('x', d3.forceX(0).strength(gx))
+    .force('y', d3.forceY(0).strength(gy))
+    .stop()
+    .tick(400);
+  const centre = new Map(blobs.map((b) => [b.id, b]));
 
   const sim = state.nodes.map((n, i) => {
-    const c = cluster.get(n.id) || 'rh';
-    const [hx, hy] = hubPos[c];
+    const c = centre.get(n.area);
     const a = i * 2.399963; // golden angle, so the start is spread and repeatable
-    const p = { id: n.id, cluster: c, x: hx + Math.cos(a) * 160, y: hy + Math.sin(a) * 160 };
-    if (HUBS.includes(n.id)) [p.fx, p.fy] = [hx, hy];
-    return p;
+    const d = c.r * 0.7 * Math.sqrt(((i * 7) % 13 + 1) / 13);
+    return { id: n.id, area: n.area, r: n.r, x: c.x + Math.cos(a) * d, y: c.y + Math.sin(a) * d };
   });
   const simLinks = state.links.map((l) => ({ source: l.source, target: l.target, type: l.type }));
-  const hubLink = (l) => HUBS.includes(l.source.id) && !HUBS.includes(l.target.id);
+  const sameArea = (l) => l.source.area === l.target.area;
+  const fan = (d) => Math.sqrt(state.dependents.get(d.id).length);
 
   d3.forceSimulation(sim)
     .force(
@@ -241,24 +254,31 @@ function layout(shape) {
       d3
         .forceLink(simLinks)
         .id((d) => d.id)
-        .distance((l) => (l.type !== 'needs' ? 130 : hubLink(l) ? (l.source.id === 'rh' ? 200 : 165) : 105))
-        .strength((l) => (l.type !== 'needs' ? 0.12 : HUBS.includes(l.target.id) ? 0 : 0.55)),
+        .distance((l) => (l.type !== 'needs' ? 120 : 62 + 30 * fan(l.source) + 20 * fan(l.target)))
+        .strength((l) => (!sameArea(l) ? 0.02 : l.type !== 'needs' ? 0.1 : 0.5)),
     )
-    .force('charge', d3.forceManyBody().strength(-520).distanceMax(520))
-    .force('collide', d3.forceCollide((d) => (HUBS.includes(d.id) ? 84 : 56)).strength(0.9).iterations(2))
-    .force('x', d3.forceX((d) => hubPos[d.cluster][0]).strength(portrait ? 0.09 : 0.05))
-    .force('y', d3.forceY((d) => hubPos[d.cluster][1]).strength(portrait ? 0.05 : 0.09))
+    .force('charge', d3.forceManyBody().strength((d) => -400 - 90 * fan(d)).distanceMax(460))
+    .force('collide', d3.forceCollide((d) => d.r + 36).strength(0.9).iterations(2))
+    .force('x', d3.forceX((d) => centre.get(d.area).x).strength(0.075))
+    .force('y', d3.forceY((d) => centre.get(d.area).y).strength(0.075))
     .stop()
     .tick(700);
 
-  for (const p of sim) Object.assign(state.byId.get(p.id), { x: p.x, y: p.y });
+  for (const p of sim) Object.assign(node(p.id), { x: p.x, y: p.y });
+  for (const a of state.areas) a.box = bounds(a.nodes);
+}
+
+function bounds(nodes) {
+  const xs = nodes.map((n) => n.x);
+  const ys = nodes.map((n) => n.y);
+  return { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) };
 }
 
 function updatePositions() {
   for (const n of state.nodes) n.el.setAttribute('transform', `translate(${n.x},${n.y})`);
   for (const l of state.links) {
-    const s = state.byId.get(l.source);
-    const t = state.byId.get(l.target);
+    const s = node(l.source);
+    const t = node(l.target);
     l.line.attr('x1', s.x).attr('y1', s.y).attr('x2', t.x).attr('y2', t.y);
     const f = l.equivalent ? 0.5 : 0.58;
     const angle = (Math.atan2(t.y - s.y, t.x - s.x) * 180) / Math.PI;
@@ -266,20 +286,39 @@ function updatePositions() {
   }
 }
 
-function fit(animate = false) {
-  const area = freeArea(freeArea().pan);
-  const xs = state.nodes.map((n) => n.x);
-  const ys = state.nodes.map((n) => n.y);
-  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+function moveTo(target, animate) {
+  if (animate && !reduceMotion) svg.transition().duration(450).call(zoom.transform, target);
+  else svg.call(zoom.transform, target);
+}
+
+// Show all of `nodes` (the whole graph by default) in the free part of the window.
+function fit(animate = false, nodes = state.nodes) {
+  const area = freeArea();
+  const { x0, x1, y0, y1 } = bounds(nodes);
   const padX = Math.min(62, window.innerWidth * 0.08);
-  const padTop = 26;
-  const padBottom = 44;
-  const k = Math.min((area.right - area.left - 2 * padX) / (x1 - x0), (area.bottom - area.top - padTop - padBottom) / (y1 - y0), 1.3);
+  const padTop = Math.min(40, (area.bottom - area.top) * 0.12);
+  const padBottom = Math.min(44, (area.bottom - area.top) * 0.14);
+  const k = Math.min((area.right - area.left - 2 * padX) / (x1 - x0 || 1), (area.bottom - area.top - padTop - padBottom) / (y1 - y0 || 1), 1.3);
   const tx = (area.left + area.right) / 2 - (k * (x0 + x1)) / 2;
   const ty = (area.top + padTop + area.bottom - padBottom) / 2 - (k * (y0 + y1)) / 2;
-  const target = d3.zoomIdentity.translate(tx, ty).scale(k);
-  if (animate && !reduceMotion) svg.transition().duration(350).call(zoom.transform, target);
-  else svg.call(zoom.transform, target);
+  moveTo(d3.zoomIdentity.translate(tx, ty).scale(k), animate);
+}
+
+// Bring one node to the middle of the free part, zoomed in enough to read around it.
+function centreOn(n) {
+  const area = freeArea();
+  const k = Math.max(state.t.k, 0.85);
+  moveTo(d3.zoomIdentity.translate((area.left + area.right) / 2 - k * n.x, (area.top + area.bottom) / 2 - k * n.y).scale(k), true);
+}
+
+// Pan just enough that a node is not hidden behind the header or the panel.
+function ensureVisible(n) {
+  const area = freeArea();
+  const box = { left: area.left + 44, right: area.right - 44, top: area.top + 30, bottom: area.bottom - 50 };
+  const [x, y] = state.t.apply([n.x, n.y]);
+  const dx = Math.max(box.left, Math.min(box.right, x)) - x;
+  const dy = Math.max(box.top, Math.min(box.bottom, y)) - y;
+  if (dx || dy) svg.transition().duration(reduceMotion ? 0 : 350).call(zoom.translateBy, dx / state.t.k, dy / state.t.k);
 }
 
 function onZoom(e) {
@@ -292,38 +331,47 @@ function onZoom(e) {
 const screenR = (n) => n.r * Math.sqrt(state.t.k);
 
 // Labels keep a fixed size on screen. Where two would collide, the less
-// important one is hidden until the user zooms in, hovers or selects it.
+// important one is hidden until the reader zooms in, hovers or selects it.
 function positionLabels() {
   const sel = state.selected;
   const near = sel ? neighbours(sel) : new Set();
+  const hit = (a, b) => a[0] < b[2] && a[2] > b[0] && a[1] < b[3] && a[3] > b[1];
+  const placed = [];
+
+  for (const a of state.areas) {
+    const [x, y] = state.t.apply([(a.box.x0 + a.box.x1) / 2, a.box.y0]);
+    const top = y - 40;
+    const w = a.labelEl.getBBox().width; // differs by screen size, so measured
+    a.labelEl.setAttribute('transform', `translate(${x},${top})`);
+    placed.push([x - w / 2, top, x + w / 2, top + 18]);
+  }
+
   const rank = (n) =>
-    (n.id === state.hover ? 10000 : 0) +
-    (n.id === sel ? 5000 : 0) +
-    (HUBS.includes(n.id) ? 1000 : 0) +
-    (near.has(n.id) ? 400 : 0) +
-    (n.kind === 'hypothesis' ? 100 : 0) +
-    state.dependents.get(n.id).length * 10;
+    (n.id === state.hover ? 100000 : 0) +
+    (n.id === sel ? 50000 : 0) +
+    (state.trace?.origin === n.id ? 50000 : 0) +
+    (n.hub ? 10000 : 0) +
+    (near.has(n.id) ? 4000 : 0) +
+    (state.trace?.seen.has(n.id) ? 4000 : 0) +
+    (n.kind !== 'theorem' ? 100 : 0) +
+    n.weight * 10;
   const order = [...state.nodes].sort((a, b) => rank(b) - rank(a));
   const dots = state.nodes.map((n) => {
     const [x, y] = state.t.apply([n.x, n.y]);
     const r = screenR(n);
     return { id: n.id, box: [x - r, y - r, x + r, y + r] };
   });
-  const hit = (a, b) => a[0] < b[2] && a[2] > b[0] && a[1] < b[3] && a[3] > b[1];
-  const placed = [];
   for (const n of order) {
     const [x, y] = state.t.apply([n.x, n.y]);
-    const hub = HUBS.includes(n.id);
-    const h = n.lines.length * (hub ? 15 : 13) + 2;
-    const forced = n.id === state.hover || n.id === sel || hub;
-    const free = (top) => {
-      const box = [x - n.labelW / 2 - 2, top, x + n.labelW / 2 + 2, top + h];
-      return placed.some((b) => hit(box, b)) || dots.some((d) => d.id !== n.id && hit(box, d.box)) ? null : box;
-    };
+    const h = n.lines.length * (n.hub ? 15 : 13) + 2;
+    const forced = n.id === state.hover || n.id === sel || state.trace?.origin === n.id;
+    const boxAt = (top) => [x - n.labelW / 2 - 2, top, x + n.labelW / 2 + 2, top + h];
+    // The most rested-on statements may sit on top of neighbouring dots; they only give way to other labels.
+    const free = (top) => (placed.some((b) => hit(boxAt(top), b)) || (!n.hub && dots.some((d) => d.id !== n.id && hit(boxAt(top), d.box))) ? null : boxAt(top));
     const below = y + screenR(n) + 4;
     const above = y - screenR(n) - 4 - h;
     const top = free(below) || forced ? below : above;
-    const box = free(top) || (forced ? [x - n.labelW / 2 - 2, top, x + n.labelW / 2 + 2, top + h] : null);
+    const box = free(top) || (forced ? boxAt(top) : null);
     n.labelEl.setAttribute('transform', `translate(${x},${top})`);
     n.labelEl.classList.toggle('hidden', !box);
     if (box) placed.push(box);
@@ -333,15 +381,17 @@ function positionLabels() {
 /* ---------- state ---------- */
 
 function neighbours(id) {
-  const n = state.byId.get(id);
-  const out = new Set([id, ...n.needs, ...n.related, ...n.formerly, ...state.dependents.get(id)]);
+  const n = node(id);
+  const out = new Set([id, ...n.inputs, ...n.related, ...n.formerly, ...state.dependents.get(id)]);
   for (const l of state.links) if (l.source === id) out.add(l.target);
   return out;
 }
 
-function targetIds() {
-  const ids = new Set(state.whatIf);
-  if (state.mode === 'today') for (const id of state.data.today.proven) ids.add(id);
+// What counts as holding without any what-if: today's proof in "Today", and
+// the axioms assumed by default unless the reader dropped them.
+function baseMarks() {
+  const ids = new Set(state.index.assumed.filter((id) => !state.dropped.has(id)));
+  if (state.mode === 'today') for (const id of state.index.today.proven) ids.add(id);
   return ids;
 }
 
@@ -349,22 +399,29 @@ function litFor(shown) {
   return new Set(state.links.filter((l) => l.type === 'needs' && shown.has(l.source)).map((l) => l.key));
 }
 
+// Recompute what holds and move the picture there. A change in one direction
+// (only gains or only losses) is played as a wave; anything else is applied at once.
 function go({ animate }) {
-  finishRipple();
-  state.real = computeProven(state.nodes, state.mode === 'today' ? new Set(state.data.today.proven) : new Set());
-  const after = computeProven(state.nodes, targetIds());
-  const kept = new Set([...state.shown].filter((id) => after.has(id)));
-  const grows = [...after].some((id) => !kept.has(id));
-  state.shown = kept;
-  state.lit = litFor(kept);
-  if (grows && animate && !reduceMotion) {
+  finishWave();
+  state.trace = null;
+  const real = computeProven(state.nodes, baseMarks());
+  const after = computeProven(state.nodes, new Set([...baseMarks(), ...state.whatIf]));
+  const before = state.shown;
+  const gains = [...after].some((id) => !before.has(id));
+  const losses = [...before].some((id) => !after.has(id));
+  const wave = animate && !reduceMotion && gains !== losses;
+  // While a withdrawal spreads, nodes it has not reached yet keep their old colour.
+  if (!(wave && losses)) state.real = real;
+  if (wave) {
     applyStatus();
-    startRipple(kept, after);
+    if (gains) proveWave(before, after);
+    else loseWave(before, after, real);
   } else {
     state.shown = after;
     state.lit = litFor(after);
     applyStatus();
   }
+  $('btn-reset').hidden = state.whatIf.size + state.dropped.size === 0;
   renderStatusLine();
   renderPanel();
 }
@@ -372,32 +429,34 @@ function go({ animate }) {
 function setMode(mode) {
   state.mode = mode;
   state.whatIf.clear();
+  state.dropped.clear();
   $('btn-before').setAttribute('aria-pressed', String(mode === 'before'));
   $('btn-today').setAttribute('aria-pressed', String(mode === 'today'));
-  $('btn-reset').hidden = true;
   go({ animate: mode === 'today' });
 }
 
-function toggleWhatIf(id) {
-  if (state.whatIf.has(id)) state.whatIf.delete(id);
-  else state.whatIf.add(id);
-  $('btn-reset').hidden = state.whatIf.size === 0;
-  state.focus = false; // show the whole graph while the what-if spreads
+function toggle(set, id) {
+  if (set.has(id)) set.delete(id);
+  else set.add(id);
+  state.focus = false; // show the whole graph while the change spreads
   go({ animate: true });
 }
 
 function applyStatus() {
   const sel = state.selected;
-  const near = sel && state.focus ? neighbours(sel) : null;
+  const trace = state.trace;
+  const near = sel && state.focus && !trace ? neighbours(sel) : null;
+  const dimNode = (id) => (trace ? id !== trace.origin && !trace.seen.has(id) : !!near && !near.has(id));
   for (const n of state.nodes) {
     const st = statusOf(n);
-    for (const node of [n.el, n.labelEl]) {
-      const cl = node.classList;
+    for (const dom of [n.el, n.labelEl]) {
+      const cl = dom.classList;
       cl.toggle('st-proven', st === 'proven');
       cl.toggle('st-conditional', st === 'conditional');
       cl.toggle('st-open', st === 'open');
       cl.toggle('whatif', isHypothetical(n.id));
-      cl.toggle('dim', !!near && !near.has(n.id));
+      cl.toggle('dim', dimNode(n.id));
+      cl.toggle('traced', !!trace && (trace.seen.has(n.id) || trace.origin === n.id));
     }
     n.el.classList.toggle('selected', n.id === sel);
     if (n.arc) {
@@ -410,10 +469,12 @@ function applyStatus() {
   for (const l of state.links) {
     const cl = l.el.classList;
     const on = l.type === 'needs' && state.lit.has(l.key);
+    const traced = !!trace && trace.edges.has(l.key);
     cl.toggle('on', on);
     cl.toggle('waiting', l.type === 'needs' && !on && !state.shown.has(l.target));
     cl.toggle('whatif', on && !state.real.has(l.source));
-    cl.toggle('dim', !!near && l.source !== sel && l.target !== sel);
+    cl.toggle('traced', traced);
+    cl.toggle('dim', trace ? !traced : !!near && l.source !== sel && l.target !== sel);
   }
   renderTally();
 }
@@ -429,71 +490,70 @@ function renderTally() {
 
 function renderStatusLine() {
   const line = $('status-line');
-  line.classList.toggle('today', state.mode === 'today' && !state.whatIf.size);
-  line.classList.toggle('whatif', state.whatIf.size > 0);
-  if (state.whatIf.size) {
-    line.replaceChildren(el('strong', { text: 'What-if. ' }), `Treating ${listNames([...state.whatIf])} as proven. This has not happened.`);
+  const changed = state.whatIf.size + state.dropped.size > 0;
+  line.classList.toggle('today', state.mode === 'today' && !changed);
+  line.classList.toggle('whatif', changed);
+  if (changed) {
+    const parts = [];
+    if (state.whatIf.size) parts.push(`treating ${listNames([...state.whatIf])} as true`);
+    if (state.dropped.size) parts.push(`not assuming ${listNames([...state.dropped])}`);
+    const text = andList.format(parts);
+    line.replaceChildren(el('strong', { text: 'What-if. ' }), `${text[0].toUpperCase()}${text.slice(1)}. This is your experiment, not the state of mathematics.`);
   } else if (state.mode === 'today') {
-    line.replaceChildren(el('strong', { text: 'The Riemann Hypothesis is proven. ' }), state.data.today.status);
+    line.replaceChildren(el('strong', { text: 'The Riemann Hypothesis is proven. ' }), state.index.today.status);
   } else {
-    const waiting = state.nodes.filter((n) => n.base === 'conditional').length;
+    const waiting = state.nodes.filter((n) => statusOf(n) === 'conditional').length;
     line.replaceChildren(
       el('strong', { text: 'Before 20 Nov 2026. ' }),
-      `The Riemann Hypothesis is open. ${waiting} results on this map are proven only if it, or a related hypothesis, is true.`,
+      `The Riemann Hypothesis is open. ${waiting} statements on this map hold only if an unproven hypothesis is true.`,
     );
   }
 }
 
-/* ---------- ripple ---------- */
+/* ---------- waves ---------- */
 
-function startRipple(before, after) {
-  const { flipped, touched } = rippleOrder(state.nodes, before, after);
-  const seeds = [...flipped].filter(([, depth]) => depth === 0).map(([id]) => state.byId.get(id));
+// One animation serves every kind of spreading change. From the `seeds`, a
+// ring expands; each node in `order` (pairs of id and ring number) is reached
+// when the ring gets to it, but never before the nodes it follows from
+// (`parents`). `flows` are the links the change travels along.
+function runWave({ seeds, order, parents, flows, cls, onReach, onFlowDone, onDone }) {
   const fromSeed = (n) => Math.min(...seeds.map((s) => Math.hypot(n.x - s.x, n.y - s.y)));
-  const involved = [...flipped.keys(), ...touched.keys()].map((id) => state.byId.get(id));
-  const maxDist = Math.max(140, ...involved.map(fromSeed));
+  const maxDist = Math.max(140, ...order.map(([id]) => fromSeed(node(id))));
   const speed = maxDist / 2200; // graph units per millisecond
-  const hypothetical = seeds.some((s) => !state.real.has(s.id));
+  const seedIds = new Set(seeds.map((s) => s.id));
 
-  // A node changes when the wave front reaches it, but never before the
-  // requirement it follows from has changed.
   const at = new Map();
-  for (const [id, depth] of [...flipped, ...touched].sort((a, b) => a[1] - b[1])) {
-    const n = state.byId.get(id);
-    if (flipped.has(id) && depth === 0) {
+  for (const [id] of [...order].sort((a, b) => a[1] - b[1])) {
+    if (seedIds.has(id)) {
       at.set(id, 0);
       continue;
     }
-    const parents = n.needs.filter((p) => flipped.has(p)).map((p) => at.get(p));
-    at.set(id, Math.max(150 + fromSeed(n) / speed, Math.max(...parents) + 260));
+    const earlier = parents(id).map((p) => at.get(p)).filter((time) => time !== undefined);
+    at.set(id, Math.max(150 + fromSeed(node(id)) / speed, Math.max(0, ...earlier) + 260));
   }
 
-  const flows = state.links
-    .filter((l) => l.type === 'needs' && flipped.has(l.source))
-    .map((l) => {
-      const s = state.byId.get(l.source);
-      const t = state.byId.get(l.target);
-      const start = at.get(l.source);
-      const end = at.has(l.target) ? at.get(l.target) : start + Math.min(900, Math.max(300, Math.hypot(t.x - s.x, t.y - s.y) / speed));
-      const g = gFlows.append('g').attr('class', `flow${hypothetical ? ' whatif' : ''}`).style('display', 'none');
-      const line = g.append('line').attr('x1', s.x).attr('y1', s.y);
-      const dot = g.append('circle').attr('r', 3.5 / state.t.k);
-      return { l, s, t, start, end, g, line, dot, done: false };
-    });
+  const drawn = flows.map(({ from, to, link }) => {
+    const start = at.get(from.id) ?? 0;
+    const end = at.has(to.id) ? Math.max(at.get(to.id), start + 120) : start + Math.min(900, Math.max(300, Math.hypot(to.x - from.x, to.y - from.y) / speed));
+    const g = gFlows.append('g').attr('class', `flow ${cls}`).style('display', 'none');
+    const line = g.append('line').attr('x1', from.x).attr('y1', from.y);
+    const dot = g.append('circle').attr('r', 3.5 / state.t.k);
+    return { link, from, to, start, end, g, line, dot, done: false };
+  });
 
-  const reach = maxDist + 110;
-  const waves = seeds.flatMap((s) =>
+  const reachR = maxDist + 110;
+  const rings = seeds.flatMap((s) =>
     [0, 280, 560].map((delay, i) => ({
       delay,
       alpha: 0.75 - i * 0.2,
-      el: gWaves.append('circle').attr('class', `wave${hypothetical ? ' whatif' : ''}`).attr('cx', s.x).attr('cy', s.y).attr('stroke-width', 2.5 - i * 0.7).style('display', 'none'),
+      el: gWaves.append('circle').attr('class', `wave ${cls}`).attr('cx', s.x).attr('cy', s.y).attr('stroke-width', 2.5 - i * 0.7).style('display', 'none'),
     })),
   );
 
-  const events = [...at].map(([id, time]) => ({ id, time, flip: flipped.has(id) })).sort((a, b) => a.time - b.time);
-  const end = Math.max(...events.map((e) => e.time), ...flows.map((f) => f.end), 560 + reach / speed) + 150;
-  const ripple = { after, flows, waves, raf: 0 };
-  state.ripple = ripple;
+  const events = [...at].map(([id, time]) => ({ id, time })).sort((a, b) => a.time - b.time);
+  const end = Math.max(...events.map((e) => e.time), ...drawn.map((f) => f.end), 560 + reachR / speed) + 150;
+  const wave = { flows: drawn, rings, raf: 0, onDone };
+  state.wave = wave;
   let next = 0;
   const t0 = performance.now();
 
@@ -501,162 +561,321 @@ function startRipple(before, after) {
     const t = now - t0;
     let dirty = false;
 
-    for (const w of waves) {
+    for (const w of rings) {
       const r = (t - w.delay) * speed;
-      const visible = r > 0 && r < reach;
+      const visible = r > 0 && r < reachR;
       w.el.style('display', visible ? null : 'none');
-      if (visible) w.el.attr('r', r).attr('opacity', w.alpha * (1 - r / reach));
+      if (visible) w.el.attr('r', r).attr('opacity', w.alpha * (1 - r / reachR));
     }
 
-    for (const f of flows) {
+    for (const f of drawn) {
       if (f.done || t < f.start) continue;
       const p = Math.min(1, (t - f.start) / (f.end - f.start));
-      const x = f.s.x + (f.t.x - f.s.x) * p;
-      const y = f.s.y + (f.t.y - f.s.y) * p;
+      const x = f.from.x + (f.to.x - f.from.x) * p;
+      const y = f.from.y + (f.to.y - f.from.y) * p;
       f.g.style('display', null);
       f.line.attr('x2', x).attr('y2', y);
       f.dot.attr('cx', x).attr('cy', y);
       if (p >= 1) {
         f.done = true;
         f.g.remove();
-        state.lit.add(f.l.key);
+        onFlowDone?.(f.link);
         dirty = true;
       }
     }
 
     while (next < events.length && events[next].time <= t) {
       const e = events[next++];
-      const node = state.byId.get(e.id);
-      if (e.flip) state.shown.add(e.id);
-      pulse(node.el, e.flip ? 'flip' : 'denied');
+      onReach(e.id);
       dirty = true;
       if (e.id === state.selected) renderPanel();
     }
 
-    if (dirty) applyStatus();
-    if (t < end) ripple.raf = requestAnimationFrame(frame);
-    else finishRipple();
+    if (dirty) {
+      applyStatus();
+      if (state.trace) positionLabels();
+    }
+    if (t < end) wave.raf = requestAnimationFrame(frame);
+    else finishWave();
   };
-  ripple.raf = requestAnimationFrame(frame);
+  wave.raf = requestAnimationFrame(frame);
 }
 
-function pulse(node, cls) {
-  node.classList.remove('flip', 'denied');
-  node.getBoundingClientRect(); // restart the CSS animation
-  node.classList.add(cls);
-  setTimeout(() => node.classList.remove(cls), 1000);
+function finishWave() {
+  const wave = state.wave;
+  if (!wave) return;
+  cancelAnimationFrame(wave.raf);
+  wave.flows.forEach((f) => f.g.remove());
+  wave.rings.forEach((w) => w.el.remove());
+  state.wave = null;
+  wave.onDone();
+  applyStatus();
+  positionLabels();
+  renderPanel();
 }
 
-function finishRipple() {
-  const ripple = state.ripple;
-  if (!ripple) return;
-  cancelAnimationFrame(ripple.raf);
-  ripple.flows.forEach((f) => f.g.remove());
-  ripple.waves.forEach((w) => w.el.remove());
-  state.ripple = null;
-  state.shown = ripple.after;
-  state.lit = litFor(ripple.after);
+function pulse(dom, cls) {
+  dom.classList.remove('flip', 'denied', 'ping');
+  dom.getBoundingClientRect(); // restart the CSS animation
+  dom.classList.add(cls);
+  setTimeout(() => dom.classList.remove(cls), 1000);
+}
+
+// Statements become proven (or assumed): green, or blue for a what-if.
+function proveWave(before, after) {
+  const { flipped, touched } = rippleOrder(state.nodes, before, after);
+  const seeds = [...flipped].filter(([, depth]) => depth === 0).map(([id]) => node(id));
+  runWave({
+    seeds,
+    order: [...flipped, ...touched],
+    parents: (id) => node(id).inputs.filter((p) => flipped.has(p)),
+    flows: state.links.filter((l) => l.type === 'needs' && flipped.has(l.source)).map((l) => ({ from: node(l.source), to: node(l.target), link: l })),
+    cls: seeds.some((s) => !state.real.has(s.id)) ? 'whatif' : '',
+    onReach: (id) => {
+      if (flipped.has(id)) state.shown.add(id);
+      pulse(node(id).el, flipped.has(id) ? 'flip' : 'denied');
+    },
+    onFlowDone: (l) => state.lit.add(l.key),
+    onDone: () => {
+      state.shown = after;
+      state.lit = litFor(after);
+    },
+  });
+}
+
+// An assumption is withdrawn: everything that rested on it turns conditional.
+function loseWave(before, after, real) {
+  const { flipped: lost } = rippleOrder(state.nodes, after, before);
+  runWave({
+    seeds: [...lost].filter(([, depth]) => depth === 0).map(([id]) => node(id)),
+    order: [...lost],
+    parents: (id) => node(id).inputs.filter((p) => lost.has(p)),
+    flows: state.links.filter((l) => l.type === 'needs' && lost.has(l.source) && lost.has(l.target)).map((l) => ({ from: node(l.source), to: node(l.target), link: l })),
+    cls: 'amber',
+    onReach: (id) => {
+      state.shown.delete(id);
+      state.lit = litFor(state.shown);
+      pulse(node(id).el, 'denied');
+    },
+    onDone: () => {
+      state.real = real;
+      state.shown = after;
+      state.lit = litFor(after);
+    },
+  });
+}
+
+// "What rests on this" (down) and "What this rests on" (up): nothing changes,
+// the wave only lights up the part of the network that is connected.
+function startTrace(id, dir) {
+  finishWave();
+  const origin = node(id);
+  const members = dir === 'down' ? origin.down : origin.up;
+  const inside = (x) => x === id || members.has(x);
+  const trace = { origin: id, dir, seen: new Set(), edges: new Set() };
+  const links = state.links.filter((l) => l.type === 'needs' && inside(l.source) && inside(l.target));
+  const finish = () => {
+    trace.seen = new Set(members.keys());
+    trace.edges = new Set(links.map((l) => l.key));
+  };
+  state.trace = trace;
+  state.focus = false;
   applyStatus();
   renderPanel();
+  if (reduceMotion) {
+    finish();
+    applyStatus();
+    positionLabels();
+    return;
+  }
+  runWave({
+    seeds: [origin],
+    order: [[id, 0], ...members],
+    parents: (x) => (dir === 'down' ? node(x).inputs : state.dependents.get(x)).filter(inside),
+    flows: links.map((l) => (dir === 'down' ? { from: node(l.source), to: node(l.target), link: l } : { from: node(l.target), to: node(l.source), link: l })),
+    cls: 'trace',
+    onReach: (x) => {
+      if (x === id) return;
+      trace.seen.add(x);
+      pulse(node(x).el, 'ping');
+    },
+    onFlowDone: (l) => trace.edges.add(l.key),
+    onDone: finish,
+  });
+  fit(true, [origin, ...[...members.keys()].map(node)]);
+}
+
+function clearTrace() {
+  if (!state.trace) return;
+  finishWave();
+  state.trace = null;
 }
 
 /* ---------- panel ---------- */
 
-function select(id) {
-  const wasOpen = !$('panel').hidden;
+function select(id, { centre = false } = {}) {
+  clearTrace();
   state.selected = id;
+  state.view = 'node';
   state.focus = !!id;
   applyStatus();
   renderPanel();
   positionLabels();
-  const area = freeArea();
-  if (area.pan) ensureVisible(state.byId.get(id), area);
-  else if (wasOpen !== !!id) fit(true);
+  if (!id) return;
+  if (centre) centreOn(node(id));
+  else ensureVisible(node(id));
 }
 
-function ensureVisible(n, area) {
-  const box = { left: 50, right: area.right - 50, top: area.top + 30, bottom: area.bottom - 50 };
-  const [x, y] = state.t.apply([n.x, n.y]);
-  const dx = Math.max(box.left, Math.min(box.right, x)) - x;
-  const dy = Math.max(box.top, Math.min(box.bottom, y)) - y;
-  if (dx || dy) svg.transition().duration(reduceMotion ? 0 : 350).call(zoom.translateBy, dx / state.t.k, dy / state.t.k);
-}
-
-function refList(ids) {
+function refList(ids, extra = () => null) {
   return el(
     'ul',
     { class: 'reflist' },
     ...ids.map((id) => {
-      const n = state.byId.get(id);
-      const dot = el('span', { class: `dot ${statusOf(n)}${isHypothetical(id) ? ' whatif' : ''}` });
-      return el('li', {}, el('button', { type: 'button', onclick: () => select(id) }, dot, el('span', { text: n.name })));
+      const n = node(id);
+      const dot = el('span', { class: `dot ${statusOf(n)}${isHypothetical(id) ? ' whatif' : ''}${n.kind === 'axiom' ? ' axiom' : ''}` });
+      return el('li', {}, el('button', { type: 'button', onclick: () => select(id, { centre: true }) }, dot, el('span', { text: n.name })), extra(id));
     }),
   );
 }
 
 function explain(n) {
-  const today = state.data.today;
-  const proven = state.shown.has(n.id);
-  if (n.base === 'proven') return 'Proven without assuming any hypothesis.';
+  const today = state.index.today;
+  const holds = state.shown.has(n.id);
+  if (n.kind === 'axiom') {
+    if (state.whatIf.has(n.id)) return 'You chose to assume this to see what would follow. It is not one of the axioms assumed by default.';
+    if (holds) return 'An axiom: it cannot be proven from the other axioms, and most of mathematics assumes it. Stop assuming it to see what depends on it.';
+    if (state.dropped.has(n.id)) return 'You stopped assuming this axiom. Everything that needs it is now shown as conditional.';
+    return 'An axiom that can be neither proven nor refuted from the standard axioms. It is not assumed by default.';
+  }
+  if (n.base === 'proven') return n.needs.length ? `Proven. The cited proof rests on ${listNames(n.needs)}.` : 'Proven. Shown here as a foundation: nothing else on this map is needed for it.';
+  const met = n.inputs.filter((id) => state.shown.has(id)); // the requirements that hold right now
   if (state.whatIf.has(n.id)) return 'You marked this as proven to see what would follow. It is still open.';
-  if (proven && state.mode === 'today' && today.proven.includes(n.id)) return today.status;
-  if (proven) {
-    const verb = n.needs.length > 1 ? 'are' : 'is';
-    return isHypothetical(n.id)
-      ? `Would be proven in your what-if, because ${listNames(n.needs)} would be.`
-      : `Proven, because ${listNames(n.needs)} ${verb} proven.`;
+  if (holds && state.mode === 'today' && today.proven.includes(n.id)) return today.status;
+  if (holds) {
+    const axioms = met.filter((id) => node(id).kind === 'axiom');
+    if (isHypothetical(n.id)) return `Would hold in your what-if, because ${listNames(met)} would.`;
+    if (axioms.length) return `Proven, given ${listNames(axioms)}, which ${axioms.length > 1 ? 'are' : 'is'} assumed.`;
+    return `Proven, because ${listNames(met)} ${met.length > 1 ? 'are' : 'is'} proven.`;
   }
   const missing = missingFor(state.nodes, state.shown, n.id);
-  if (n.base === 'conditional') return `Proven only on condition. Still waiting on: ${listNames(missing)}.`;
+  if (n.base === 'conditional') return `Proven only on condition. Still needs: ${listNames(missing)}.`;
   if (today.claimed.includes(n.id)) return `Open. ${today.claimedNote}`;
   return missing.length && !isRoot(state.nodes, n.id) ? `Open. Would follow from ${listNames(missing)}.` : 'Open.';
 }
 
 function renderPanel() {
   const panel = $('panel');
-  const n = state.selected && state.byId.get(state.selected);
-  panel.hidden = !n;
-  document.body.classList.toggle('panel-open', !!n);
-  if (!n) return;
+  const n = state.view === 'node' && state.selected ? node(state.selected) : null;
+  const open = !!n || state.view === 'rankings';
+  panel.hidden = !open;
+  document.body.classList.toggle('panel-open', open);
+  document.body.classList.toggle('tracing', !!state.trace);
+  $('btn-rankings').setAttribute('aria-pressed', String(state.view === 'rankings'));
+  if (!open) return;
+  const key = n ? n.id : 'rankings';
+  const scroll = panel.dataset.key === key ? panel.scrollTop : 0;
+  const close = el('button', { class: 'close', type: 'button', 'aria-label': 'Close', onclick: closePanel, text: '✕' });
+  panel.replaceChildren(close, ...(n ? nodeView(n) : rankingsView()).filter(Boolean));
+  panel.dataset.key = key;
+  panel.scrollTop = scroll;
+}
 
+function closePanel() {
+  state.view = 'node';
+  select(null);
+}
+
+function nodeView(n) {
   const st = statusOf(n);
   const hypo = isHypothetical(n.id);
-  const kind = { hypothesis: 'Hypothesis', theorem: 'Result', data: 'Computed data' }[n.kind];
-  const stLabel = hypo ? 'Proven in what-if' : { proven: 'Proven', conditional: 'Conditional', open: 'Open' }[st];
-  const dependents = state.dependents.get(n.id);
-  const root = isRoot(state.nodes, n.id);
-  const canWhatIf = state.whatIf.has(n.id) || (root && !state.shown.has(n.id) && !state.ripple);
-  const section = (title, ids) => (ids.length ? [el('h3', { text: title }), refList(ids)] : []);
-  const links = [{ title: new URL(n.url).hostname.replace(/^(www|en)\./, ''), url: n.url }, ...(n.id === 'rh' || state.data.today.claimed.includes(n.id) ? state.data.today.sources : [])];
-  const scroll = panel.dataset.id === n.id ? panel.scrollTop : 0;
+  const axiom = n.kind === 'axiom';
+  const kind = { hypothesis: 'Hypothesis', theorem: 'Result', data: 'Computed data', axiom: 'Axiom' }[n.kind];
+  const stLabel = axiom
+    ? st === 'proven' ? (hypo ? 'Assumed in what-if' : 'Assumed') : 'Not assumed'
+    : hypo ? 'Proven in what-if' : { proven: 'Proven', conditional: 'Conditional', open: 'Open' }[st];
+  const area = state.areas.find((a) => a.id === n.area);
+  const today = state.index.today;
+  const section = (title, ids, extra) => (ids.length ? [el('h3', { text: title }), refList(ids, extra)] : []);
+  const host = (url) => new URL(url).hostname.replace(/^(www|en)\./, '');
+  const linkSource = (id) => (n.needUrl[id] ? el('a', { class: 'why', href: n.needUrl[id], target: '_blank', rel: 'noopener', title: 'Source for this link', text: 'source' }) : null);
+  const sources = [{ title: host(n.url), url: n.url }, ...(n.id === 'rh' || today.claimed.includes(n.id) ? today.sources : [])];
 
-  const parts = [
-    el('button', { class: 'close', type: 'button', 'aria-label': 'Close details', onclick: () => select(null), text: '✕' }),
-    el('div', { class: 'badges' }, el('span', { class: 'badge', text: kind }), el('span', { class: `badge ${hypo ? 'whatif' : st}`, text: stLabel })),
+  const tracing = state.trace?.origin === n.id ? state.trace.dir : null;
+  const traceBtn = (dir, count, lead, tail) =>
+    count
+      ? el('button', { class: `trace-btn${tracing === dir ? ' active' : ''}`, type: 'button', onclick: () => (tracing === dir ? (clearTrace(), select(n.id)) : startTrace(n.id, dir)) }, lead, el('b', { text: String(count) }), tail)
+      : null;
+
+  const isDefault = state.index.assumed.includes(n.id);
+  let action = null;
+  if (isDefault) {
+    const off = state.dropped.has(n.id);
+    action = el('button', { class: `whatif-btn${off ? '' : ' amber'}`, type: 'button', text: off ? 'Assume this again' : 'Stop assuming this', onclick: () => toggle(state.dropped, n.id) });
+  } else if (state.whatIf.has(n.id) || (isRoot(state.nodes, n.id) && !state.shown.has(n.id) && !state.wave)) {
+    const label = state.whatIf.has(n.id) ? 'Undo this what-if' : axiom ? 'What if we assume this?' : 'What if this is proven?';
+    action = el('button', { class: 'whatif-btn', type: 'button', text: label, onclick: () => toggle(state.whatIf, n.id) });
+  }
+
+  return [
+    el(
+      'div',
+      { class: 'badges' },
+      el('span', { class: 'badge', text: kind }),
+      el('span', { class: `badge ${hypo ? 'whatif' : st}`, text: stLabel }),
+      el('span', { class: 'badge', text: area.name }),
+    ),
     el('h2', { text: n.name }),
     el('p', { class: 'statement', text: n.statement }),
     el('p', { class: 'by', text: n.by }),
     el('p', { class: 'explain', text: explain(n) }),
-    n.equivalent ? el('p', { class: 'explain', text: 'Equivalent to the Riemann Hypothesis: each one implies the other.' }) : null,
+    n.claim ? el('p', { class: 'claim' }, el('strong', { text: 'Unreviewed claim. ' }), n.claim) : null,
+    n.equivalent ? el('p', { class: 'explain', text: `Equivalent to ${listNames(n.needs)}: each implies the other.` }) : null,
     n.note ? el('p', { class: 'note', text: n.note }) : null,
-    canWhatIf
-      ? el('button', {
-          class: 'whatif-btn',
-          type: 'button',
-          text: state.whatIf.has(n.id) ? 'Undo this what-if' : 'What if this is proven?',
-          onclick: () => toggleWhatIf(n.id),
-        })
-      : null,
-    ...section(n.kind === 'hypothesis' ? 'Would follow from' : 'Proven assuming', n.needs),
+    n.weight + n.up.size ? el('div', { class: 'trace-row' }, traceBtn('down', n.weight, '', n.weight === 1 ? ' statement rests on this' : ' statements rest on this'), traceBtn('up', n.up.size, 'This rests on ', n.up.size === 1 ? ' statement' : ' statements')) : null,
+    action,
+    ...section(n.base === 'open' ? 'Would follow from' : 'Rests on', n.needs, linkSource),
+    ...section('Would follow from any one of', n.anyOf, linkSource),
     ...section('First proven assuming', n.formerly),
     ...section('Related', n.related),
-    ...section('What follows from it', dependents),
+    ...section('What rests on it directly', state.dependents.get(n.id)),
     el('h3', { text: 'Sources' }),
-    el('ul', { class: 'links' }, ...links.map((s) => el('li', {}, el('a', { href: s.url, target: '_blank', rel: 'noopener', text: s.title })))),
+    el('ul', { class: 'links' }, ...sources.map((s) => el('li', {}, el('a', { href: s.url, target: '_blank', rel: 'noopener', text: s.title })))),
   ];
-  panel.replaceChildren(...parts.filter(Boolean));
-  panel.dataset.id = n.id;
-  panel.scrollTop = scroll;
+}
+
+function rankingsView() {
+  const top = (nodes, value) => nodes.filter((n) => value(n) > 0).sort((a, b) => value(b) - value(a) || a.name.localeCompare(b.name)).slice(0, 8);
+  const list = (nodes, text) =>
+    el(
+      'ol',
+      { class: 'ranking' },
+      ...nodes.map((n) =>
+        el(
+          'li',
+          {},
+          el(
+            'button',
+            { type: 'button', onclick: () => select(n.id, { centre: true }) },
+            el('span', { class: `dot ${statusOf(n)}${isHypothetical(n.id) ? ' whatif' : ''}${n.kind === 'axiom' ? ' axiom' : ''}` }),
+            el('span', { class: 'r-name', text: n.name }),
+            el('span', { class: 'r-num', text: text(n) }),
+          ),
+        ),
+      ),
+    );
+  const proven = state.nodes.filter((n) => state.real.has(n.id) && n.kind !== 'axiom');
+  const unproven = state.nodes.filter((n) => isRoot(state.nodes, n.id) && (n.kind === 'axiom' || !state.real.has(n.id)));
+  const rests = (n) => `${n.weight} ${n.weight === 1 ? 'rests' : 'rest'} on it`;
+  return [
+    el('h2', { text: 'Rankings' }),
+    el('p', { class: 'note', text: 'Counted on this map only. A statement rests on another directly or through a chain of other statements.' }),
+    el('h3', { text: 'Proven foundations: most rests on them' }),
+    list(top(proven, (n) => n.weight), rests),
+    el('h3', { text: 'Unproven or assumed, yet most rests on them' }),
+    list(top(unproven, (n) => n.weight), rests),
+    el('h3', { text: 'Furthest from the foundations' }),
+    list(top(state.nodes, (n) => n.depth), (n) => plural(n.depth, 'step')),
+  ];
 }
 
 /* ---------- input ---------- */
@@ -672,11 +891,46 @@ function nodeAt(clientX, clientY) {
   return best;
 }
 
+function wireSearch() {
+  const input = $('search');
+  const list = $('search-results');
+  let matches = [];
+  const pick = (n) => {
+    input.value = '';
+    list.hidden = true;
+    input.blur();
+    select(n.id, { centre: true });
+  };
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    const starts = (n) => (n.name.toLowerCase().startsWith(q) || n.short.toLowerCase().startsWith(q) ? 1 : 0);
+    matches = q ? state.nodes.filter((n) => `${n.name} ${n.short}`.toLowerCase().includes(q)).sort((a, b) => starts(b) - starts(a) || b.weight - a.weight).slice(0, 8) : [];
+    list.hidden = !q;
+    list.replaceChildren(
+      ...(matches.length
+        ? matches.map((n) => el('li', {}, el('button', { type: 'button', onclick: () => pick(n) }, el('span', { class: `dot ${statusOf(n)}` }), el('span', { text: n.name }))))
+        : [el('li', { class: 'none', text: 'Nothing on this map matches.' })]),
+    );
+  });
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && matches.length) pick(matches[0]);
+    if (e.key === 'Escape') {
+      input.value = '';
+      list.hidden = true;
+      input.blur();
+    }
+  });
+  document.addEventListener('pointerdown', (e) => {
+    if (!e.target.closest('.search')) list.hidden = true;
+  });
+}
+
 function wire() {
   svg.on('click', (e) => {
     state.touched = true;
     const n = nodeAt(e.clientX, e.clientY);
-    select(n ? n.id : null);
+    if (n) select(n.id);
+    else if (state.view === 'node') select(null);
   });
   svg.on('pointermove', (e) => {
     if (e.pointerType !== 'mouse') return;
@@ -687,27 +941,40 @@ function wire() {
     svg.classed('hovering', !!id);
     positionLabels();
   });
-  $('btn-before').addEventListener('click', () => {
+  const touch = (fn) => () => {
     state.touched = true;
-    setMode('before');
-  });
-  $('btn-today').addEventListener('click', () => {
-    state.touched = true;
-    setMode('today');
-  });
-  $('btn-replay').addEventListener('click', () => {
-    state.touched = true;
-    setMode('before');
-    setTimeout(() => setMode('today'), 500);
-  });
+    fn();
+  };
+  $('btn-before').addEventListener('click', touch(() => setMode('before')));
+  $('btn-today').addEventListener('click', touch(() => setMode('today')));
+  $('btn-replay').addEventListener(
+    'click',
+    touch(() => {
+      setMode('before');
+      setTimeout(() => setMode('today'), 500);
+    }),
+  );
   $('btn-reset').addEventListener('click', () => {
     state.whatIf.clear();
-    $('btn-reset').hidden = true;
+    state.dropped.clear();
     go({ animate: false });
   });
-  $('status-line').addEventListener('click', () => select('rh'));
+  $('btn-rankings').addEventListener(
+    'click',
+    touch(() => {
+      if (state.view === 'rankings') return closePanel();
+      clearTrace();
+      state.selected = null;
+      state.view = 'rankings';
+      applyStatus();
+      renderPanel();
+    }),
+  );
+  $('btn-all').addEventListener('click', touch(() => fit(true)));
+  $('status-line').addEventListener('click', () => select('rh', { centre: true }));
+  wireSearch();
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') select(null);
+    if (e.key === 'Escape' && document.activeElement !== $('search')) closePanel();
   });
   let timer = 0;
   window.addEventListener('resize', () => {

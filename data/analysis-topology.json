@@ -1,0 +1,353 @@
+{
+  "area": "analysis-topology",
+  "nodes": [
+    {
+      "id": "geometrization",
+      "name": "Thurston's geometrization conjecture (geometrization theorem)",
+      "short": "Geometrization",
+      "statement": "Every closed, orientable 3-dimensional manifold can be cut along spheres and then along tori, in an essentially unique way, into pieces each of which carries one of eight standard geometric structures.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "uniformization"
+      ],
+      "by": "Grigori Perelman, 2002–2003 (conjectured by William Thurston, 1982)",
+      "note": "Perelman's proof uses Ricci flow with surgery, completing a program started by Richard Hamilton. It is the three-dimensional analogue of the uniformization theorem for surfaces.",
+      "url": "https://en.wikipedia.org/wiki/Geometrization_conjecture",
+      "area": "analysis-topology",
+      "year": 1982,
+      "settled": 2002
+    },
+    {
+      "id": "elliptization",
+      "name": "Thurston's elliptization conjecture",
+      "short": "Elliptization",
+      "statement": "Every closed 3-dimensional manifold with finite fundamental group is spherical: it carries a metric of constant positive curvature, so it is the 3-sphere divided by a finite group of rotations acting without fixed points.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Grigori Perelman, 2002–2003 (conjectured by William Thurston, 1980)",
+      "note": "A special case of geometrization, but Perelman's finite-extinction argument proves it without full geometrization, so it is linked here as related and not as resting on it. It is logically equivalent to the Poincaré conjecture together with the spherical space form conjecture.",
+      "url": "https://arxiv.org/abs/math/0607607",
+      "area": "analysis-topology",
+      "related": [
+        "geometrization"
+      ],
+      "year": 1980,
+      "settled": 2002
+    },
+    {
+      "id": "poincare",
+      "name": "Poincaré conjecture",
+      "short": "Poincaré conjecture",
+      "statement": "Every closed, connected 3-dimensional manifold in which every loop can be shrunk to a point is homeomorphic to the 3-sphere.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Grigori Perelman, 2002 and 2003 (posed by Henri Poincaré, 1904)",
+      "note": "It is the case of elliptization with trivial fundamental group. Perelman proved it directly, by showing that Ricci flow with surgery dies out in finite time, without needing full geometrization. It is the only Millennium Prize Problem the Clay Institute has declared solved. Perelman declined the prize in 2010.",
+      "url": "https://en.wikipedia.org/wiki/Poincar%C3%A9_conjecture",
+      "area": "analysis-topology",
+      "related": [
+        "elliptization",
+        "geometrization"
+      ],
+      "year": 1904,
+      "settled": 2002
+    },
+    {
+      "id": "h-cobordism",
+      "name": "h-cobordism theorem",
+      "short": "h-cobordism theorem",
+      "statement": "Let W be a smooth, simply connected compact manifold of dimension at least 6 whose boundary is two simply connected pieces M and N, each of which W can be continuously shrunk onto. Then W is diffeomorphic to the cylinder M × [0, 1].",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Stephen Smale, 1962",
+      "note": "When M and N are 4-dimensional (so W is 5-dimensional), Michael Freedman proved the topological version, and Simon Donaldson showed that the smooth version fails.",
+      "url": "https://en.wikipedia.org/wiki/H-cobordism",
+      "area": "analysis-topology",
+      "year": 1962
+    },
+    {
+      "id": "poincare-high-dim",
+      "name": "Generalized Poincaré conjecture in dimensions 5 and higher",
+      "short": "Poincaré, dimension ≥ 5",
+      "statement": "For every n ≥ 5, a closed smooth n-dimensional manifold that is homotopy equivalent to the n-sphere is homeomorphic to the n-sphere.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "h-cobordism",
+          "url": "https://sites.math.northwestern.edu/~jnkf/classes/mflds/14poincare.pdf"
+        }
+      ],
+      "by": "Stephen Smale, 1960–61 (first n ≥ 7, then n ≥ 5); independently John Stallings (n ≥ 7, 1960) and Christopher Zeeman (n = 5, 6, 1962)",
+      "note": "The standard textbook proof removes a small ball and applies the h-cobordism theorem, which covers n ≥ 6. The case n = 5 uses Kervaire and Milnor's work on exotic spheres. Smale's original 1961 proof used handle decompositions directly. Homeomorphic does not mean diffeomorphic: Milnor's exotic 7-spheres show the smooth version fails in general.",
+      "url": "https://en.wikipedia.org/wiki/Generalized_Poincar%C3%A9_conjecture",
+      "area": "analysis-topology",
+      "year": 1960,
+      "settled": 1961
+    },
+    {
+      "id": "poincare-4d-top",
+      "name": "Topological Poincaré conjecture in dimension 4",
+      "short": "Poincaré, dim 4 (top.)",
+      "statement": "Every closed topological 4-dimensional manifold that is homotopy equivalent to the 4-sphere is homeomorphic to the 4-sphere.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "smooth-poincare-4",
+        "h-cobordism"
+      ],
+      "by": "Michael Freedman, 1982",
+      "note": "Freedman also proved the topological h-cobordism theorem for 5-dimensional h-cobordisms between simply connected 4-manifolds. He received the Fields Medal in 1986.",
+      "url": "https://en.wikipedia.org/wiki/Generalized_Poincar%C3%A9_conjecture",
+      "area": "analysis-topology",
+      "year": 1982
+    },
+    {
+      "id": "smooth-poincare-4",
+      "name": "Smooth 4-dimensional Poincaré conjecture",
+      "short": "Smooth Poincaré, dim 4",
+      "statement": "Every smooth 4-dimensional manifold homeomorphic to the 4-sphere is also diffeomorphic to it; in other words, the 4-sphere has only one smooth structure.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "The case of the generalized Poincaré conjecture left open after Freedman's topological proof, 1982",
+      "note": "It is the last open case of the Poincaré conjectures. Most experts expect it to be false, but no counterexample is known.",
+      "url": "https://epoch.ai/frontiermath/open-problems/smooth-poincare-4d",
+      "area": "analysis-topology",
+      "year": 1982
+    },
+    {
+      "id": "uniformization",
+      "name": "Uniformization theorem",
+      "short": "Uniformization theorem",
+      "statement": "Every simply connected Riemann surface is conformally equivalent to one of three: the open unit disk, the complex plane, or the Riemann sphere.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Paul Koebe and Henri Poincaré, 1907",
+      "note": "Through universal covers it gives every Riemann surface a metric of constant curvature 1, 0 or −1. Geometrization is its analogue for 3-manifolds.",
+      "url": "https://en.wikipedia.org/wiki/Uniformization_theorem",
+      "area": "analysis-topology",
+      "year": 1907
+    },
+    {
+      "id": "carleson",
+      "name": "Carleson's theorem",
+      "short": "Carleson's theorem",
+      "statement": "The Fourier series of every square-integrable function on the circle converges to the function at almost every point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Lennart Carleson, 1966",
+      "note": "This settled Luzin's conjecture. Kolmogorov had shown in 1923 that it fails for merely integrable functions.",
+      "url": "https://en.wikipedia.org/wiki/Carleson%27s_theorem",
+      "area": "analysis-topology",
+      "year": 1966
+    },
+    {
+      "id": "carleson-hunt",
+      "name": "Carleson–Hunt theorem",
+      "short": "Carleson–Hunt theorem",
+      "statement": "For every p > 1, the Fourier series of every function f on the circle with |f|ᵖ integrable converges to f at almost every point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "carleson"
+      ],
+      "by": "Richard Hunt, 1968",
+      "note": "Carleson had called the extension to p > 1 rather obvious; Hunt carried it out. Kolmogorov's counterexample shows that p = 1 is not allowed.",
+      "url": "https://en.wikipedia.org/wiki/Carleson%27s_theorem",
+      "area": "analysis-topology",
+      "year": 1968
+    },
+    {
+      "id": "atiyah-singer",
+      "name": "Atiyah–Singer index theorem",
+      "short": "Atiyah–Singer index",
+      "statement": "For an elliptic differential operator on a compact manifold, the analytical index (the number of independent solutions minus the number of independent constraints) equals a topological index computed from characteristic classes.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Michael Atiyah and Isadore Singer, announced 1963, proof published 1968",
+      "note": "It contains the Chern–Gauss–Bonnet theorem, the Hirzebruch–Riemann–Roch theorem and the Hirzebruch signature theorem as special cases.",
+      "url": "https://en.wikipedia.org/wiki/Atiyah%E2%80%93Singer_index_theorem",
+      "area": "analysis-topology",
+      "year": 1963
+    },
+    {
+      "id": "chern-gauss-bonnet",
+      "name": "Chern–Gauss–Bonnet theorem",
+      "short": "Chern–Gauss–Bonnet",
+      "statement": "For a closed, oriented, even-dimensional Riemannian manifold, the Euler characteristic equals the integral of a polynomial in the curvature.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "atiyah-singer"
+      ],
+      "by": "Carl Allendoerfer and André Weil, 1943 (general case, proof using embeddings); intrinsic proof by Shiing-Shen Chern, 1944",
+      "note": "It came first and was proved independently. The Atiyah–Singer theorem recovers it from the index of one particular operator.",
+      "url": "https://en.wikipedia.org/wiki/Chern%E2%80%93Gauss%E2%80%93Bonnet_theorem",
+      "area": "analysis-topology",
+      "year": 1943
+    },
+    {
+      "id": "local-smoothing",
+      "name": "Sogge's local smoothing conjecture",
+      "short": "Local smoothing",
+      "statement": "For the wave equation in n ≥ 2 space dimensions and every p with 2n/(n−1) ≤ p < ∞, averaging a solution over a time interval makes it smoother in the Lᵖ sense, by any amount less than 1/p of a derivative, than at a single time.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Christopher Sogge, 1991",
+      "note": "Larry Guth, Hong Wang and Ruixiang Zhang proved it for n = 2 in 2019.",
+      "url": "https://arxiv.org/pdf/1812.11616",
+      "area": "analysis-topology",
+      "claim": "OpenAI posted a claimed proof for all n ≥ 2 on 26 October 2026, with a Lean formalization, after a claimed n = 3 case in September 2026. If correct, it would also prove the Bochner–Riesz, restriction and Kakeya conjectures. As of November 2026 OpenAI names no outside reviewer and the claim has not been through peer review.",
+      "year": 1991
+    },
+    {
+      "id": "bochner-riesz",
+      "name": "Bochner–Riesz conjecture",
+      "short": "Bochner–Riesz conj.",
+      "statement": "In ℝⁿ, the Bochner–Riesz means of order δ, a smoothed way of summing a Fourier integral, are bounded on Lᵖ whenever δ > max(n|1/p − 1/2| − 1/2, 0).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "local-smoothing",
+          "url": "https://arxiv.org/pdf/1812.11616"
+        }
+      ],
+      "by": "Means introduced by Salomon Bochner, 1936; proved in the plane by Lennart Carleson and Per Sjölin, 1972",
+      "note": "The condition on δ is known to be necessary for p ≠ 2. Sogge observed that his local smoothing conjecture implies it (Proposition 3.2 of the linked survey).",
+      "url": "https://en.wikipedia.org/wiki/Bochner%E2%80%93Riesz_mean",
+      "area": "analysis-topology",
+      "year": 1936
+    },
+    {
+      "id": "restriction",
+      "name": "Stein's restriction conjecture (sphere)",
+      "short": "Restriction conjecture",
+      "statement": "If g is a bounded function on the unit sphere in ℝⁿ, then the Fourier transform of g times the surface measure lies in Lᵖ(ℝⁿ) for every p > 2n/(n−1).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "bochner-riesz"
+      ],
+      "by": "Elias Stein, 1967; proved in the plane by Charles Fefferman, 1970 (sharpened by Antoni Zygmund, 1974)",
+      "note": "Terence Tao proved in 1999 that the Bochner–Riesz conjecture implies it. This is the dual form; Stein's original form bounds the restriction of a function's Fourier transform to the sphere.",
+      "url": "https://par.nsf.gov/servlets/purl/10585405",
+      "area": "analysis-topology",
+      "year": 1967
+    },
+    {
+      "id": "kakeya",
+      "name": "Kakeya set conjecture",
+      "short": "Kakeya conjecture",
+      "statement": "Every compact set in ℝⁿ that contains a unit line segment in every direction has Hausdorff dimension n.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "restriction",
+          "url": "https://arxiv.org/pdf/math/0311181"
+        }
+      ],
+      "by": "Proved for n = 2 by Roy Davies, 1971; for n = 3 by Hong Wang and Joshua Zahl, 2025; open for n ≥ 4",
+      "note": "Open in dimension 4 and higher.",
+      "url": "https://en.wikipedia.org/wiki/Kakeya_set",
+      "area": "analysis-topology",
+      "claim": "OpenAI posted claimed proofs for n = 4 (24 September 2026, without a Lean proof) and, through local smoothing, for all n (26 October 2026). Neither has been peer reviewed.",
+      "year": 1971
+    },
+    {
+      "id": "kakeya-3d",
+      "name": "Kakeya set conjecture in three dimensions",
+      "short": "Kakeya in 3 dimensions",
+      "statement": "Every compact set in ℝ³ that contains a unit line segment in every direction has Hausdorff and Minkowski dimension 3.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "kakeya",
+        "restriction"
+      ],
+      "by": "Hong Wang and Joshua Zahl, 2025",
+      "note": "The proof shows that a union of tubes pointing in many directions must have almost maximal volume. The paper is not yet journal-published but is widely accepted. Hong Wang received the Fields Medal in July 2026 for it.",
+      "url": "https://arxiv.org/abs/2502.17655",
+      "area": "analysis-topology",
+      "year": 2025
+    },
+    {
+      "id": "navier-stokes",
+      "name": "Navier–Stokes existence and smoothness (global regularity)",
+      "short": "Navier–Stokes regularity",
+      "statement": "For every smooth, divergence-free starting velocity on ℝ³ that decays fast at infinity, and with no external force, the incompressible Navier–Stokes equations have a smooth solution with finite energy for all time.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "leray-weak"
+      ],
+      "by": "Clay Millennium Prize Problem, 2000 (official statement by Charles Fefferman)",
+      "note": "One of the seven Millennium Prize Problems.",
+      "url": "https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_existence_and_smoothness",
+      "area": "analysis-topology",
+      "claim": "On 20 November 2026 Levent Alpöge and Tristan Buckmaster posted a paper, with a Lean formalization, claiming smooth compactly supported data on ℝ³ whose solution without force blows up in finite time. This would make the statement false. The proof depends on a numerical certificate that has not been released, and it has not been independently confirmed. OpenAI's September 2026 claim of blowup with a smooth, compactly supported force concerns the forced version of the problem and does not touch this statement.",
+      "year": 2000
+    },
+    {
+      "id": "leray-weak",
+      "name": "Leray's existence theorem for weak solutions",
+      "short": "Leray weak solutions",
+      "statement": "The three-dimensional Navier–Stokes equations have weak solutions for all time for every finite-energy, divergence-free starting velocity: velocity fields that satisfy the equations in an averaged sense, though perhaps not pointwise.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Jean Leray, 1934",
+      "note": "Leray also proved that smooth solutions exist for all time when the starting velocity is small enough. Whether weak solutions are always smooth is the open Navier–Stokes problem.",
+      "url": "https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_existence_and_smoothness",
+      "area": "analysis-topology",
+      "year": 1934
+    },
+    {
+      "id": "invariant-subspace",
+      "name": "Invariant subspace problem (Hilbert space)",
+      "short": "Invariant subspace prob.",
+      "statement": "Every bounded linear operator on a separable infinite-dimensional complex Hilbert space has a closed invariant subspace other than {0} and the whole space.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Open problem in operator theory; Banach-space counterexamples by Per Enflo (1975, published 1987) and Charles Read (1985)",
+      "note": "Per Enflo (arXiv, May 2023, expanded April 2024) and Charles W. Neville (arXiv, July 2023) posted claimed proofs. Neither has been published in a journal or accepted by specialists.",
+      "url": "https://en.wikipedia.org/wiki/Invariant_subspace_problem",
+      "area": "analysis-topology",
+      "year": 1975
+    },
+    {
+      "id": "lomonosov",
+      "name": "Lomonosov's invariant subspace theorem",
+      "short": "Lomonosov's theorem",
+      "statement": "If a bounded operator on a complex Banach space commutes with a nonzero compact operator, then it has a nontrivial closed invariant subspace.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "invariant-subspace"
+      ],
+      "by": "Victor Lomonosov, 1973",
+      "note": "It goes further than the Aronszajn–Smith theorem of 1954, which covers compact operators. Its short proof uses the Schauder fixed point theorem.",
+      "url": "https://en.wikipedia.org/wiki/Invariant_subspace_problem",
+      "area": "analysis-topology",
+      "year": 1973
+    }
+  ]
+}

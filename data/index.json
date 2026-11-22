@@ -1,0 +1,62 @@
+{
+  "areas": [
+    {
+      "id": "number-theory",
+      "name": "Number theory",
+      "file": "number-theory.json"
+    },
+    {
+      "id": "complexity",
+      "name": "Complexity and cryptography",
+      "file": "complexity.json"
+    },
+    {
+      "id": "algebra-geometry",
+      "name": "Algebra and geometry",
+      "file": "algebra-geometry.json"
+    },
+    {
+      "id": "combinatorics",
+      "name": "Combinatorics",
+      "file": "combinatorics.json"
+    },
+    {
+      "id": "analysis-topology",
+      "name": "Analysis and topology",
+      "file": "analysis-topology.json"
+    },
+    {
+      "id": "logic",
+      "name": "Logic and set theory",
+      "file": "logic.json"
+    }
+  ],
+  "today": {
+    "date": "2026-11-21",
+    "proven": [
+      "rh"
+    ],
+    "claimed": [
+      "grh"
+    ],
+    "status": "Machine-checked in Lean. The Lean and Mathlib communities certified statement and proof on 21 Nov 2026. No human has reviewed the mathematics yet, and there is no written paper.",
+    "claimedNote": "Alpöge's Lean library also contains this statement, and independent machine checks reported by Andrew Sutherland confirm it. The joint certification of 21 Nov 2026 covers only the Riemann Hypothesis, so it is shown here as claimed, not proven.",
+    "sources": [
+      {
+        "title": "Joint statement of the Lean and Mathlib communities, 21 Nov 2026",
+        "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/"
+      },
+      {
+        "title": "Levent Alpöge's note",
+        "url": "https://alpo.ge/remark.pdf"
+      },
+      {
+        "title": "Andrew Sutherland: which theorems were machine-checked",
+        "url": "https://math.mit.edu/~drew/grh/"
+      }
+    ]
+  },
+  "assumed": [
+    "axiom-of-choice"
+  ]
+}

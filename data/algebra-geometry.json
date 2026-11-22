@@ -1,0 +1,510 @@
+{
+  "area": "algebra-geometry",
+  "nodes": [
+    {
+      "id": "weil-conjectures",
+      "name": "Weil conjectures (Deligne's theorem)",
+      "short": "Weil conjectures",
+      "statement": "For a smooth projective variety over a finite field with q elements, the zeta function built from its numbers of points over the fields with q, q², q³, … elements is a rational function with a functional equation; the degrees of its factors are the variety's Betti numbers; and every Frobenius eigenvalue on cohomology of degree i has absolute value q^(i/2). The last part is the analogue of the Riemann Hypothesis.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "hasse-weil",
+        "lefschetz-standard",
+        "rh"
+      ],
+      "by": "Proposed by André Weil, 1949; rationality by Bernard Dwork, 1960; functional equation by Alexander Grothendieck, 1965; Riemann Hypothesis part by Pierre Deligne, 1974",
+      "note": "Grothendieck hoped to prove the Riemann Hypothesis part from his standard conjectures. Deligne found a way around them, and the standard conjectures are still open.",
+      "url": "https://en.wikipedia.org/wiki/Weil_conjectures",
+      "area": "algebra-geometry",
+      "year": 1949,
+      "settled": 1974
+    },
+    {
+      "id": "hasse-weil",
+      "name": "Hasse–Weil bound (Riemann Hypothesis for curves over finite fields)",
+      "short": "Hasse–Weil bound",
+      "statement": "A smooth projective curve of genus g over a finite field with q elements has N points, where |N − (q + 1)| ≤ 2g√q.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Helmut Hasse for elliptic curves (g = 1), 1933; André Weil for all curves, announced 1940, full proof published 1948",
+      "note": "This is the curve case of the Weil conjectures. Weil's work on it led him to state the conjectures for all dimensions.",
+      "url": "https://ar5iv.labs.arxiv.org/html/1509.00797",
+      "area": "algebra-geometry",
+      "year": 1933,
+      "settled": 1948
+    },
+    {
+      "id": "kloosterman-weil-bound",
+      "name": "Weil bound for Kloosterman sums",
+      "short": "Weil's Kloosterman bound",
+      "statement": "For a prime p and integers a, b not divisible by p, the Kloosterman sum K(a, b; p), the sum of e^(2πi(ax + bx⁻¹)/p) over x = 1, …, p − 1, has absolute value at most 2√p.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "hasse-weil"
+      ],
+      "by": "André Weil, 1948",
+      "note": "Weil wrote the sum as a sum over the hyperbola xy = ab over the field with p elements and got the bound from the Riemann Hypothesis for an Artin–Schreier covering of that curve, whose zeta function has the Kloosterman sums in its factors.",
+      "url": "https://en.wikipedia.org/wiki/Kloosterman_sum",
+      "area": "algebra-geometry",
+      "year": 1948
+    },
+    {
+      "id": "ramanujan-tau",
+      "name": "Ramanujan's conjecture for the tau function (Deligne's theorem)",
+      "short": "Ramanujan τ(p) bound",
+      "statement": "The coefficients τ(n) of the modular form Δ = q ∏ (1 − qⁿ)²⁴ satisfy |τ(p)| ≤ 2p^(11/2) for every prime p.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "weil-conjectures"
+      ],
+      "by": "Conjectured by Srinivasa Ramanujan, 1916; proven by Pierre Deligne, 1974",
+      "note": "Deligne showed in 1969 (Bourbaki seminar, published 1971), using the Eichler–Shimura isomorphism and work of Kuga, Sato, Shimura and Ihara, that the bound follows from the Weil conjectures. His 1974 proof of their Riemann Hypothesis part finished it, and the same argument covers holomorphic cusp forms of weight 2 and more (Petersson's conjecture).",
+      "url": "https://en.wikipedia.org/wiki/Ramanujan%E2%80%93Petersson_conjecture",
+      "area": "algebra-geometry",
+      "year": 1916,
+      "settled": 1974
+    },
+    {
+      "id": "batyrev-betti",
+      "name": "Batyrev's theorem on birational Calabi–Yau manifolds",
+      "short": "Batyrev: equal Betti nos.",
+      "statement": "If two smooth complex projective varieties with trivial canonical bundle (Calabi–Yau manifolds) are birationally equivalent, they have the same Betti numbers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "weil-conjectures"
+      ],
+      "by": "Victor Batyrev, 1997 (published 1999)",
+      "note": "Batyrev used p-adic integration to show that the two varieties have the same number of points over finite fields, then used Deligne's proof of the Weil conjectures to turn equal point counts into equal Betti numbers.",
+      "url": "https://ar5iv.labs.arxiv.org/html/alg-geom/9710020",
+      "area": "algebra-geometry",
+      "year": 1997
+    },
+    {
+      "id": "katz-messing",
+      "name": "Katz–Messing theorem (Künneth standard conjecture over finite fields)",
+      "short": "Künneth conj. over F_q",
+      "statement": "For a smooth projective variety over a finite field, the projections of its cohomology onto each single degree are given by algebraic cycles. This is Grothendieck's standard conjecture C for such varieties.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "weil-conjectures"
+      ],
+      "related": [
+        "lefschetz-standard"
+      ],
+      "by": "Nicholas Katz and William Messing, 1974",
+      "note": "Katz and Messing derived it from Deligne's Riemann Hypothesis for varieties over finite fields. Over the complex numbers the same conjecture is open in general.",
+      "url": "https://en.wikipedia.org/wiki/Standard_conjectures_on_algebraic_cycles",
+      "area": "algebra-geometry",
+      "year": 1974
+    },
+    {
+      "id": "langlands-functoriality",
+      "name": "Langlands functoriality conjecture",
+      "short": "Langlands functoriality",
+      "statement": "A suitable map between the L-groups of two reductive groups should carry automorphic forms on one group to automorphic forms on the other, in a way that matches their L-functions. Applied to the trivial group, it predicts that complex representations of the Galois group correspond to automorphic forms, the part of Langlands reciprocity that covers Artin L-functions.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Robert Langlands, letter to André Weil 1967 and paper 1970",
+      "note": "Harris and Taylor (2001) and Henniart (2000) proved the local correspondence for GL(n). Global functoriality over number fields is open in general. Known cases include symmetric-power lifts of holomorphic modular forms (Newton and Thorne, 2021).",
+      "url": "https://en.wikipedia.org/wiki/Langlands_program",
+      "area": "algebra-geometry",
+      "year": 1967
+    },
+    {
+      "id": "generalized-ramanujan",
+      "name": "Generalized Ramanujan conjecture",
+      "short": "Generalized Ramanujan",
+      "statement": "Every cuspidal automorphic representation of GL(n) over a number field (more generally, every globally generic cuspidal representation of a reductive group) is tempered at every place. For holomorphic modular forms this is the Ramanujan–Petersson bound.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "langlands-functoriality"
+      ],
+      "related": [
+        "ramanujan-tau"
+      ],
+      "by": "Ichirō Satake, 1966, recasting Ramanujan and Petersson's conjecture for automorphic representations",
+      "note": "Functoriality for all symmetric powers of GL(n) would prove it. The holomorphic case is Deligne's theorem; the case of Maass forms is open because Deligne's method does not apply there.",
+      "url": "https://en.wikipedia.org/wiki/Ramanujan%E2%80%93Petersson_conjecture",
+      "area": "algebra-geometry",
+      "year": 1966
+    },
+    {
+      "id": "selberg-eigenvalue",
+      "name": "Selberg's eigenvalue conjecture (1/4 conjecture)",
+      "short": "Selberg 1/4 conjecture",
+      "statement": "For every congruence subgroup of SL(2, ℤ), the eigenvalues of the Laplace operator on its Maass cusp forms are all at least 1/4.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "generalized-ramanujan"
+      ],
+      "by": "Atle Selberg, 1965",
+      "note": "It is the generalized Ramanujan conjecture for GL(2) over the rationals at the infinite place. Selberg proved the bound 3/16; the best known bound, 975/4096 ≈ 0.238, is due to Kim and Sarnak (2003).",
+      "url": "https://en.wikipedia.org/wiki/Selberg%27s_1/4_conjecture",
+      "area": "algebra-geometry",
+      "year": 1965
+    },
+    {
+      "id": "artin-holomorphy",
+      "name": "Artin holomorphy conjecture",
+      "short": "Artin conjecture (L-fns)",
+      "statement": "For a Galois extension of number fields and a non-trivial irreducible representation ρ of its Galois group, the Artin L-function L(s, ρ) extends to an entire function on the whole complex plane.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "langlands-functoriality"
+      ],
+      "by": "Emil Artin, 1923, in the paper introducing these L-functions",
+      "note": "Langlands (1970) pointed out that it would follow from his reciprocity conjecture. Known for one-dimensional representations, for odd two-dimensional representations over ℚ (from the proof of Serre's modularity conjecture by Khare and Wintenberger, 2009), and for two-dimensional tetrahedral (Langlands 1980) and octahedral (Tunnell 1981) ones. The general icosahedral case is open.",
+      "url": "https://en.wikipedia.org/wiki/Artin_L-function",
+      "area": "algebra-geometry",
+      "related": [
+        "serre-modularity"
+      ],
+      "year": 1923
+    },
+    {
+      "id": "hodge-conjecture",
+      "name": "Hodge conjecture",
+      "short": "Hodge conjecture",
+      "statement": "On a smooth complex projective variety, every rational cohomology class of Hodge type (p, p) is a rational linear combination of classes of algebraic subvarieties.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "lefschetz-11",
+        "tate-conjecture",
+        "lefschetz-standard"
+      ],
+      "by": "W. V. D. Hodge, from work in the 1930s, presented at the 1950 International Congress of Mathematicians",
+      "note": "A Clay Millennium Prize problem, still unsolved. It implies the Lefschetz and Künneth standard conjectures and standard conjecture D for varieties in characteristic zero.",
+      "url": "https://en.wikipedia.org/wiki/Hodge_conjecture",
+      "area": "algebra-geometry",
+      "year": 1950
+    },
+    {
+      "id": "lefschetz-11",
+      "name": "Lefschetz theorem on (1,1)-classes",
+      "short": "Lefschetz (1,1) theorem",
+      "statement": "On a smooth complex projective variety, every integral cohomology class of degree 2 and Hodge type (1, 1) is the class of a divisor.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Solomon Lefschetz, 1924",
+      "note": "This is the Hodge conjecture in degree 2, proven before the conjecture was stated. Combined with the hard Lefschetz theorem it gives the Hodge conjecture for all varieties of dimension at most three.",
+      "url": "https://en.wikipedia.org/wiki/Hodge_conjecture",
+      "area": "algebra-geometry",
+      "year": 1924
+    },
+    {
+      "id": "tate-conjecture",
+      "name": "Tate conjecture",
+      "short": "Tate conjecture",
+      "statement": "For a smooth projective variety over a finitely generated field such as a finite field or a number field, the part of its ℓ-adic cohomology in even degree that is fixed by the Galois group is spanned by classes of algebraic cycles.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "hodge-conjecture",
+        "faltings"
+      ],
+      "by": "John Tate, 1963",
+      "note": "Open in general, even for divisors. Proven for divisors on abelian varieties (Tate 1966 over finite fields, Faltings over number fields) and for K3 surfaces. Matt Broe posted a proof for abelian fourfolds over finite fields in August 2026.",
+      "url": "https://en.wikipedia.org/wiki/Tate_conjecture",
+      "area": "algebra-geometry",
+      "claim": "An October 2026 OpenAI catalogue of AI-generated manuscripts claims the Hodge conjecture for CM abelian varieties and, through a theorem of Milne, the Tate conjecture for all abelian varieties over finite fields in every codimension. It has not been independently checked.",
+      "year": 1963
+    },
+    {
+      "id": "bsd-function-fields",
+      "name": "Birch and Swinnerton-Dyer conjecture over function fields",
+      "short": "BSD over function fields",
+      "statement": "For the Jacobian of a curve defined over the function field of a curve over a finite field, the rank of its group of rational points equals the order of vanishing of its L-function at s = 1.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "tate-conjecture"
+      ],
+      "by": "John Tate, 1966, carrying the conjecture of Birch and Swinnerton-Dyer to global function fields",
+      "note": "For a surface fibred over a curve over a finite field, the Tate conjecture for divisors on the surface is equivalent to this conjecture for the Jacobian of the generic fibre. That is why proofs of the Tate conjecture for special surfaces give BSD for special curves.",
+      "url": "https://en.wikipedia.org/wiki/Tate_conjecture",
+      "area": "algebra-geometry",
+      "related": [
+        "bsd"
+      ],
+      "year": 1966
+    },
+    {
+      "id": "standard-conjecture-d",
+      "name": "Grothendieck's standard conjecture D",
+      "short": "Standard conjecture D",
+      "statement": "On a smooth projective variety, an algebraic cycle whose intersection number with every other cycle is zero (numerically trivial) also has zero cohomology class (homologically trivial).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "tate-conjecture",
+        "hodge-conjecture"
+      ],
+      "by": "Alexander Grothendieck, 1969",
+      "note": "The Hodge conjecture and the Tate conjecture each imply it in characteristic zero. Over finite fields the Tate conjecture gives it only together with semisimplicity of Frobenius. Lieberman (1968) proved it over the complex numbers in dimension at most 4 and for abelian varieties.",
+      "url": "https://en.wikipedia.org/wiki/Standard_conjectures_on_algebraic_cycles",
+      "area": "algebra-geometry",
+      "year": 1969
+    },
+    {
+      "id": "lefschetz-standard",
+      "name": "Grothendieck's Lefschetz standard conjecture (conjecture B)",
+      "short": "Lefschetz standard conj.",
+      "statement": "On a smooth projective variety of dimension n, the inverse of each hard Lefschetz isomorphism H^i → H^(2n−i) (cupping n − i times with a hyperplane class) is induced by an algebraic cycle on X × X.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Alexander Grothendieck, 1969",
+      "note": "Conjecture D implies it, and so does the Tate conjecture. Together with the Hodge standard conjecture, the standard conjectures would make homological and numerical motives agree, giving a semisimple Tannakian category of pure motives, and would have given the Riemann Hypothesis part of the Weil conjectures.",
+      "url": "https://en.wikipedia.org/wiki/Standard_conjectures_on_algebraic_cycles",
+      "area": "algebra-geometry",
+      "anyOf": [
+        "standard-conjecture-d",
+        {
+          "id": "tate-conjecture",
+          "url": "https://en.wikipedia.org/wiki/Standard_conjectures_on_algebraic_cycles"
+        }
+      ],
+      "year": 1969
+    },
+    {
+      "id": "hironaka-resolution",
+      "name": "Hironaka's resolution of singularities",
+      "short": "Resolution (char 0)",
+      "statement": "Every algebraic variety over a field of characteristic 0 has a resolution of singularities: a smooth variety with a proper birational map onto it.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "resolution-char-p"
+      ],
+      "by": "Heisuke Hironaka, 1964",
+      "url": "https://en.wikipedia.org/wiki/Resolution_of_singularities",
+      "area": "algebra-geometry",
+      "year": 1964
+    },
+    {
+      "id": "deligne-mixed-hodge",
+      "name": "Deligne's mixed Hodge structure on smooth varieties",
+      "short": "Deligne mixed Hodge theory",
+      "statement": "The cohomology H^n(U, ℤ) of every smooth complex algebraic variety U, compact or not, carries a natural mixed Hodge structure, and maps between varieties respect it.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "hironaka-resolution"
+      ],
+      "by": "Pierre Deligne, Théorie de Hodge II, 1971",
+      "note": "The construction starts from a good compactification: a smooth complete variety containing U whose boundary is a normal crossings divisor. Such compactifications, and the comparisons that show the result does not depend on the choice, come from resolution of singularities.",
+      "url": "https://eudml.org/doc/103914",
+      "area": "algebra-geometry",
+      "year": 1971
+    },
+    {
+      "id": "resolution-char-p",
+      "name": "Resolution of singularities in positive characteristic",
+      "short": "Resolution in char p",
+      "statement": "Every algebraic variety over a field of characteristic p > 0 has a resolution of singularities: a nonsingular (regular) variety with a proper birational map onto it.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Open in general since Hironaka settled characteristic 0 in 1964; surfaces by Shreeram Abhyankar, 1956; threefolds by Abhyankar for characteristic above 5, 1966, and by Vincent Cossart and Olivier Piltant in all characteristics, 2008 and 2009",
+      "note": "Open in dimension 4 and higher. The problem is known for many incorrect proofs and announced proofs that never appeared. Aise Johan de Jong's alterations (1996) give a weaker substitute that is enough for many uses.",
+      "url": "https://en.wikipedia.org/wiki/Resolution_of_singularities",
+      "area": "algebra-geometry",
+      "year": 1964
+    },
+    {
+      "id": "feit-thompson",
+      "name": "Feit–Thompson theorem (odd order theorem)",
+      "short": "Feit–Thompson theorem",
+      "statement": "Every finite group of odd order is solvable. Equivalently, every non-abelian finite simple group has even order.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Walter Feit and John G. Thompson, 1963",
+      "note": "Settles a conjecture of Burnside. The 255-page proof was checked by computer in the Coq (now Rocq) proof assistant by Georges Gonthier and colleagues in 2012.",
+      "url": "https://en.wikipedia.org/wiki/Feit%E2%80%93Thompson_theorem",
+      "area": "algebra-geometry",
+      "year": 1963
+    },
+    {
+      "id": "cfsg",
+      "name": "Classification of finite simple groups",
+      "short": "Classification of FSGs",
+      "statement": "Every finite simple group is a cyclic group of prime order, an alternating group, a group of Lie type, or one of 26 sporadic groups.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "feit-thompson"
+      ],
+      "by": "Many authors, about 1955 to 2004; the last gap, the quasithin case, was closed by Michael Aschbacher and Stephen D. Smith, 2004",
+      "note": "The Feit–Thompson theorem disposes of the groups of odd order, which made the strategy of studying centralizers of involutions possible. A second-generation proof led by Gorenstein, Lyons and Solomon is still being published.",
+      "url": "https://en.wikipedia.org/wiki/Classification_of_finite_simple_groups",
+      "area": "algebra-geometry",
+      "year": 1955,
+      "settled": 2004
+    },
+    {
+      "id": "schreier-conjecture",
+      "name": "Schreier conjecture",
+      "short": "Schreier conjecture",
+      "statement": "For every finite simple group G, the outer automorphism group Out(G) is solvable.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cfsg"
+      ],
+      "by": "Conjectured by Otto Schreier, 1926; proven as a corollary of the classification of finite simple groups",
+      "note": "No proof that avoids the classification is known.",
+      "url": "https://en.wikipedia.org/wiki/Schreier_conjecture",
+      "area": "algebra-geometry",
+      "year": 1926
+    },
+    {
+      "id": "two-transitive",
+      "name": "Classification of finite 2-transitive permutation groups",
+      "short": "2-transitive groups",
+      "statement": "Every finite permutation group that can move any ordered pair of distinct points to any other ordered pair appears on an explicit known list.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cfsg"
+      ],
+      "by": "William Burnside (every such group is affine or almost simple, 1897); Bertram Huppert (solvable groups, 1957); Christoph Hering (remaining affine groups, completed 1985); almost simple groups by Curtis, Kantor, Seitz and others, using the classification",
+      "note": "The almost simple case, and Hering's affine case, use the classification of finite simple groups.",
+      "url": "https://en.wikipedia.org/wiki/2-transitive_group",
+      "area": "algebra-geometry",
+      "year": 1897,
+      "settled": 1985
+    },
+    {
+      "id": "two-generation",
+      "name": "Two-generation of finite simple groups",
+      "short": "Simple groups 2-generated",
+      "statement": "Every finite simple group can be generated by two of its elements.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cfsg"
+      ],
+      "by": "Robert Steinberg (groups of Lie type, 1962); Michael Aschbacher and Robert Guralnick (sporadic groups, 1984)",
+      "note": "The proof goes through the list of finite simple groups family by family, so it relies on the classification.",
+      "url": "https://ar5iv.labs.arxiv.org/html/1710.10434",
+      "area": "algebra-geometry",
+      "year": 1962,
+      "settled": 1984
+    },
+    {
+      "id": "inverse-galois",
+      "name": "Inverse Galois problem",
+      "short": "Inverse Galois problem",
+      "statement": "Every finite group is the Galois group of some Galois extension of the rational numbers.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "shafarevich-solvable"
+      ],
+      "by": "Studied systematically since David Hilbert, who realized the symmetric and alternating groups with his irreducibility theorem (1892)",
+      "note": "Known for symmetric and alternating groups (Hilbert), solvable groups (Shafarevich) and many simple groups through Thompson's rigidity method. In 2026 Huang, Jackson, Lee, Poonen, Pries and Zhang realized the Mathieu group M23, the last sporadic group that was missing.",
+      "url": "https://en.wikipedia.org/wiki/Inverse_Galois_problem",
+      "area": "algebra-geometry",
+      "year": 1892
+    },
+    {
+      "id": "shafarevich-solvable",
+      "name": "Shafarevich's theorem on solvable Galois groups",
+      "short": "Shafarevich: solvable",
+      "statement": "Every finite solvable group is the Galois group of some finite extension of the rational numbers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Igor Shafarevich, 1954; a gap found by Alexander Schmidt was repaired by Shafarevich in 1989",
+      "url": "https://en.wikipedia.org/wiki/Shafarevich%27s_theorem_on_solvable_Galois_groups",
+      "area": "algebra-geometry",
+      "year": 1954
+    },
+    {
+      "id": "jacobian-2d",
+      "name": "Jacobian conjecture in two variables",
+      "short": "Jacobian conjecture (n=2)",
+      "statement": "If a polynomial map of the plane, (x, y) ↦ (P(x, y), Q(x, y)) with complex coefficients, has Jacobian determinant equal to a nonzero constant, then it has an inverse that is also given by polynomials.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Ludwig Kraus, 1884 (two variables); Ott-Heinrich Keller, 1939 (any number of variables)",
+      "note": "The version in three or more variables is false: Levent Alpöge presented a counterexample in three variables on 19 July 2026, and adding coordinates extends it to all higher dimensions. The two-variable case remains open and has a long history of false proofs.",
+      "url": "https://en.wikipedia.org/wiki/Jacobian_conjecture",
+      "area": "algebra-geometry",
+      "year": 1884
+    },
+    {
+      "id": "dixmier-a1",
+      "name": "Dixmier conjecture for the first Weyl algebra",
+      "short": "Dixmier conjecture (A₁)",
+      "statement": "Over a field of characteristic zero, every endomorphism of the first Weyl algebra A₁ (the algebra generated by x and ∂ with ∂x − x∂ = 1) is an automorphism.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "jacobian-2d"
+      ],
+      "by": "Jacques Dixmier, 1968",
+      "note": "The Jacobian conjecture in 2n variables implies the Dixmier conjecture for Aₙ (Tsuchimoto 2005; Belov-Kanel and Kontsevich 2007), so the planar case would settle A₁. For Aₙ with n ≥ 3 the conjecture is false, because Dixmier for Aₙ implies the Jacobian conjecture in n variables. A₂ remains open. Alexander Zheglov announced a proposed proof for A₁ in 2024.",
+      "url": "https://en.wikipedia.org/wiki/Dixmier_conjecture",
+      "area": "algebra-geometry",
+      "year": 1968
+    },
+    {
+      "id": "mordell-weil",
+      "name": "Mordell–Weil theorem",
+      "short": "Mordell–Weil theorem",
+      "statement": "For an abelian variety A over a number field K, such as an elliptic curve over the rationals, the group A(K) of K-rational points is a finitely generated abelian group.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "by": "Louis Mordell, 1922 (elliptic curves over ℚ); André Weil, 1929 (Jacobians over number fields)",
+      "note": "The proof has two halves: a descent showing A(K)/2A(K) is finite, and a height argument. The number of generators of infinite order is the rank.",
+      "url": "https://en.wikipedia.org/wiki/Mordell%E2%80%93Weil_theorem",
+      "area": "algebra-geometry",
+      "related": [
+        "bsd"
+      ],
+      "year": 1922,
+      "settled": 1929
+    },
+    {
+      "id": "chabauty",
+      "name": "Chabauty's theorem",
+      "short": "Chabauty's theorem",
+      "statement": "If a curve of genus g ≥ 2 over ℚ has a Jacobian whose Mordell–Weil group has rank less than g, the curve has only finitely many rational points.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "mordell-weil"
+      ],
+      "by": "Claude Chabauty, 1941",
+      "note": "It was the main result toward Mordell's conjecture over ℚ before Faltings proved it in 1983. Robert Coleman (1985) turned the method into an explicit bound on the number of rational points.",
+      "url": "https://math.mit.edu/~poonen/papers/chabauty.pdf",
+      "area": "algebra-geometry",
+      "related": [
+        "faltings"
+      ],
+      "year": 1941
+    }
+  ]
+}

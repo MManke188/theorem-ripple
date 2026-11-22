@@ -1,0 +1,336 @@
+{
+  "area": "logic",
+  "nodes": [
+    {
+      "id": "axiom-of-choice",
+      "name": "Axiom of choice",
+      "short": "Axiom of choice",
+      "statement": "For any collection of non-empty sets, there is a function that picks one element from each set, even when the collection is infinite and no rule for picking is given.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Ernst Zermelo, 1904",
+      "note": "Gödel (announced 1938, published 1940) showed it cannot be refuted from the other axioms of set theory (ZF), and Cohen (1963) showed it cannot be proven from them, assuming ZF is consistent. Most of mathematics assumes it; ZFC is ZF plus choice.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_choice",
+      "area": "logic",
+      "year": 1904
+    },
+    {
+      "id": "zorns-lemma",
+      "name": "Zorn's lemma",
+      "short": "Zorn's lemma",
+      "statement": "If every chain in a partially ordered set has an upper bound in that set, then the set has a maximal element.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "axiom-of-choice"
+      ],
+      "equivalent": true,
+      "by": "Kazimierz Kuratowski, 1922; Max Zorn, 1935",
+      "note": "The usual way choice is used in algebra and analysis. Over ZF it is equivalent to the axiom of choice and to the well-ordering theorem.",
+      "url": "https://en.wikipedia.org/wiki/Zorn%27s_lemma",
+      "area": "logic",
+      "year": 1922
+    },
+    {
+      "id": "well-ordering-theorem",
+      "name": "Well-ordering theorem (Zermelo's theorem)",
+      "short": "Well-ordering theorem",
+      "statement": "Every set can be well-ordered: its elements can be arranged so that every non-empty subset has a least element. This includes the real numbers.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "axiom-of-choice"
+      ],
+      "equivalent": true,
+      "by": "Ernst Zermelo, 1904",
+      "note": "Zermelo formulated the axiom of choice in order to prove this theorem. Over ZF the two are equivalent.",
+      "url": "https://en.wikipedia.org/wiki/Well-ordering_theorem",
+      "area": "logic",
+      "year": 1904
+    },
+    {
+      "id": "tychonoff",
+      "name": "Tychonoff's theorem",
+      "short": "Tychonoff's theorem",
+      "statement": "Any product of compact topological spaces, with any number of factors, is compact in the product topology.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        {
+          "id": "axiom-of-choice",
+          "url": "https://eudml.org/doc/213229"
+        }
+      ],
+      "equivalent": true,
+      "by": "Andrey Tychonoff, 1930 (powers of the unit interval) and 1935 (general form)",
+      "note": "John L. Kelley showed in 1950 that the theorem implies the axiom of choice. Restricted to Hausdorff spaces it is weaker and equivalent to the Boolean prime ideal theorem.",
+      "url": "https://en.wikipedia.org/wiki/Tychonoff%27s_theorem",
+      "area": "logic",
+      "year": 1930,
+      "settled": 1935
+    },
+    {
+      "id": "vector-space-basis",
+      "name": "Every vector space has a basis",
+      "short": "Vector spaces have bases",
+      "statement": "Every vector space, including infinite-dimensional ones such as the real numbers viewed as a vector space over the rationals, has a basis.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "axiom-of-choice"
+      ],
+      "equivalent": true,
+      "by": "Georg Hamel, 1905 (basis of ℝ over ℚ); in general via Zorn's lemma. Converse: Andreas Blass, 1984",
+      "note": "Blass's paper is \"Existence of bases implies the axiom of choice\" (Contemporary Mathematics 31, 1984).",
+      "url": "https://en.wikipedia.org/wiki/Basis_(linear_algebra)",
+      "area": "logic",
+      "year": 1905
+    },
+    {
+      "id": "boolean-prime-ideal",
+      "name": "Boolean prime ideal theorem (ultrafilter lemma)",
+      "short": "Ultrafilter lemma (BPI)",
+      "statement": "Every Boolean algebra in which 0 ≠ 1 contains a prime ideal. Equivalently (the ultrafilter lemma), every proper filter on a set, meaning one that does not contain the empty set, is contained in an ultrafilter.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "axiom-of-choice"
+      ],
+      "by": "Ultrafilter lemma: Alfred Tarski, 1930. Shown strictly weaker than choice by J. D. Halpern and Azriel Lévy, 1971",
+      "note": "A weak form of choice: it follows from the axiom of choice but does not imply it. Many results that seem to need choice need only this.",
+      "url": "https://en.wikipedia.org/wiki/Boolean_prime_ideal_theorem",
+      "area": "logic",
+      "year": 1930
+    },
+    {
+      "id": "hahn-banach",
+      "name": "Hahn–Banach theorem",
+      "short": "Hahn–Banach theorem",
+      "statement": "A linear functional on a subspace of a real vector space that stays below a sublinear function p can be extended to the whole space while still staying below p.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "boolean-prime-ideal"
+      ],
+      "by": "Hans Hahn and Stefan Banach, independently, late 1920s (a special case: Eduard Helly, 1912)",
+      "note": "Łoś and Ryll-Nardzewski, and independently Luxemburg, proved it from the ultrafilter lemma. Pincus (1974) showed it is strictly weaker than that lemma.",
+      "url": "https://en.wikipedia.org/wiki/Hahn%E2%80%93Banach_theorem",
+      "area": "logic",
+      "year": 1927
+    },
+    {
+      "id": "banach-tarski",
+      "name": "Banach–Tarski paradox",
+      "short": "Banach–Tarski paradox",
+      "statement": "A solid ball in three-dimensional space can be cut into finitely many pieces that can be moved and rotated, without stretching, into two balls each the same size as the original.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        {
+          "id": "hahn-banach",
+          "url": "https://eudml.org/doc/211871"
+        }
+      ],
+      "by": "Stefan Banach and Alfred Tarski, 1924",
+      "note": "The original proof uses the axiom of choice. Janusz Pawlikowski showed in 1991 that the Hahn–Banach theorem is enough. Five pieces suffice and fewer do not (Raphael Robinson, 1947).",
+      "url": "https://en.wikipedia.org/wiki/Banach%E2%80%93Tarski_paradox",
+      "area": "logic",
+      "year": 1924
+    },
+    {
+      "id": "vitali-set",
+      "name": "Existence of a non-measurable set (Vitali set)",
+      "short": "Non-measurable set",
+      "statement": "There is a set of real numbers to which no length (Lebesgue measure) can be assigned.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        {
+          "id": "hahn-banach",
+          "url": "https://eudml.org/doc/211870"
+        }
+      ],
+      "by": "Giuseppe Vitali, 1905",
+      "note": "Vitali's construction uses the axiom of choice to pick one number from each class of reals that differ by a rational. Over ZF the Hahn–Banach theorem already suffices (Foreman and Wehrung, 1991). Assuming an inaccessible cardinal, Solovay (1970) built a model of ZF with dependent choice in which every set of reals is measurable.",
+      "url": "https://en.wikipedia.org/wiki/Vitali_set",
+      "area": "logic",
+      "year": 1905
+    },
+    {
+      "id": "godel-completeness",
+      "name": "Gödel's completeness theorem",
+      "short": "Gödel completeness",
+      "statement": "In first-order logic, every sentence that is true in every model of a theory can be derived from that theory by a formal proof.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "boolean-prime-ideal"
+      ],
+      "equivalent": true,
+      "by": "Kurt Gödel, 1929 (dissertation), published 1930",
+      "note": "For countable languages it is provable in ZF without any choice. For languages of arbitrary size it is equivalent to the ultrafilter lemma.",
+      "url": "https://en.wikipedia.org/wiki/G%C3%B6del%27s_completeness_theorem",
+      "area": "logic",
+      "year": 1929
+    },
+    {
+      "id": "compactness-theorem",
+      "name": "Compactness theorem of first-order logic",
+      "short": "Compactness theorem",
+      "statement": "A set of first-order sentences has a model if and only if every finite subset of it has a model.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "godel-completeness"
+      ],
+      "by": "Kurt Gödel, 1930 (countable languages); Anatoly Maltsev, 1936 (general case)",
+      "note": "Gödel derived it from the completeness theorem: a proof of a contradiction uses only finitely many sentences. Like completeness, it is equivalent to the Boolean prime ideal theorem in general.",
+      "url": "https://en.wikipedia.org/wiki/Compactness_theorem",
+      "area": "logic",
+      "year": 1930,
+      "settled": 1936
+    },
+    {
+      "id": "continuum-hypothesis",
+      "name": "Continuum hypothesis",
+      "short": "Continuum hypothesis",
+      "statement": "There is no set whose size lies strictly between the size of the whole numbers and the size of the real numbers. Equivalently, 2^ℵ₀ = ℵ₁.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "ch-independence"
+      ],
+      "by": "Georg Cantor, 1878",
+      "note": "It can be neither proven nor refuted from the usual axioms (ZFC), and no known large cardinal axiom decides it.",
+      "url": "https://en.wikipedia.org/wiki/Continuum_hypothesis",
+      "area": "logic",
+      "year": 1878
+    },
+    {
+      "id": "ch-independence",
+      "name": "Independence of the continuum hypothesis from ZFC",
+      "short": "CH is independent of ZFC",
+      "statement": "If the usual axioms of set theory (ZFC) are consistent, they neither prove nor refute the continuum hypothesis.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "related": [
+        "continuum-hypothesis"
+      ],
+      "by": "Kurt Gödel, 1940 (CH cannot be refuted); Paul Cohen, 1963 (CH cannot be proven)",
+      "note": "Gödel showed that CH holds in his constructible universe L. Cohen built a model in which it fails, inventing the method of forcing.",
+      "url": "https://en.wikipedia.org/wiki/Continuum_hypothesis",
+      "area": "logic",
+      "year": 1963
+    },
+    {
+      "id": "wetzel-erdos",
+      "name": "Erdős's solution of Wetzel's problem",
+      "short": "Wetzel's problem (Erdős)",
+      "statement": "There is an uncountable family of distinct analytic functions such that, at every point, the functions of the family take only countably many different values.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "continuum-hypothesis"
+      ],
+      "equivalent": true,
+      "by": "Paul Erdős, 1964, answering a question of John Wetzel",
+      "note": "Erdős proved that such a family exists exactly when the continuum hypothesis holds. So Wetzel's question, whether every such family must be countable, has the answer yes if and only if CH fails.",
+      "url": "https://en.wikipedia.org/wiki/Wetzel%27s_problem",
+      "area": "logic",
+      "year": 1964
+    },
+    {
+      "id": "woodin-cardinals",
+      "name": "Existence of infinitely many Woodin cardinals",
+      "short": "Infinitely many Woodins",
+      "statement": "There are infinitely many Woodin cardinals, a kind of very large infinite number defined through elementary embeddings of the universe of sets into inner models.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "W. Hugh Woodin, 1984",
+      "note": "A large cardinal axiom: the existence of such cardinals cannot be proven in ZFC. It is not assumed in ordinary mathematics.",
+      "url": "https://en.wikipedia.org/wiki/Woodin_cardinal",
+      "area": "logic",
+      "year": 1984
+    },
+    {
+      "id": "measurable-cardinal",
+      "name": "Existence of a measurable cardinal",
+      "short": "A measurable cardinal",
+      "statement": "There is an uncountable cardinal κ with a measure on all subsets of κ that takes only the values 0 and 1, gives 0 to every single point and 1 to κ, and adds up correctly over fewer than κ disjoint sets.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [
+        {
+          "id": "woodin-cardinals",
+          "url": "https://en.wikipedia.org/wiki/Woodin_cardinal"
+        }
+      ],
+      "by": "Stanisław Ulam, 1930",
+      "note": "A large cardinal axiom that ZFC cannot prove. Every Woodin cardinal has a stationary set of measurable cardinals below it, so Woodin cardinals imply this axiom.",
+      "url": "https://en.wikipedia.org/wiki/Measurable_cardinal",
+      "area": "logic",
+      "year": 1930
+    },
+    {
+      "id": "scott-v-not-l",
+      "name": "Scott's theorem: a measurable cardinal implies V ≠ L",
+      "short": "Scott: measurable ⇒ V ≠ L",
+      "statement": "If a measurable cardinal exists, then not every set is constructible: the universe of sets V is larger than Gödel's constructible universe L.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "measurable-cardinal"
+      ],
+      "related": [
+        "ch-independence"
+      ],
+      "by": "Dana Scott, 1961",
+      "note": "L is the model Gödel used to show the axiom of choice and the continuum hypothesis are consistent. Scott's proof uses the ultrapower of the universe by the measure.",
+      "url": "https://ncatlab.org/nlab/show/measurable+cardinal",
+      "area": "logic",
+      "year": 1961
+    },
+    {
+      "id": "projective-determinacy",
+      "name": "Projective determinacy",
+      "short": "Projective determinacy",
+      "statement": "In every infinite game where two players alternately name natural numbers and the set of winning sequences is projective, one of the players has a winning strategy.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [
+        {
+          "id": "woodin-cardinals",
+          "url": "https://en.wikipedia.org/wiki/Woodin_cardinal"
+        }
+      ],
+      "by": "Determinacy axioms: Jan Mycielski and Hugo Steinhaus, 1962. Derived from Woodin cardinals by Donald A. Martin and John R. Steel (proved 1985, published 1989)",
+      "note": "Martin and Steel proved that infinitely many Woodin cardinals imply projective determinacy. The full axiom of determinacy, for all sets of reals, contradicts the axiom of choice.",
+      "url": "https://en.wikipedia.org/wiki/Projective_determinacy",
+      "area": "logic",
+      "year": 1962
+    },
+    {
+      "id": "projective-measurable",
+      "name": "Projective sets are Lebesgue measurable (under PD)",
+      "short": "Projective sets measurable",
+      "statement": "Every projective set of real numbers, meaning any set built from Borel sets by finitely many projections and complements, has a well-defined length (is Lebesgue measurable).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "projective-determinacy"
+      ],
+      "by": "Jan Mycielski and Stanisław Świerczkowski, 1964 (determinacy implies measurability)",
+      "note": "Under the axiom of choice there are non-measurable sets, but projective determinacy shows none of them is projective. ZFC alone cannot prove this, since Gödel's constructible universe L contains a non-measurable projective set.",
+      "url": "https://plato.stanford.edu/entries/large-cardinals-determinacy/",
+      "area": "logic",
+      "related": [
+        "vitali-set"
+      ],
+      "year": 1964
+    }
+  ]
+}

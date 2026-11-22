@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Theorem Ripple</title>
+  <meta name="description" content="Which mathematical results were proven only on condition of the Riemann Hypothesis, and what turns true now that it is proven.">
+  <meta name="theme-color" content="#0a0e16">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg id="graph" role="img" aria-label="Graph of results that depend on the Riemann Hypothesis and related hypotheses"></svg>
+
+  <header class="hud-top">
+    <div class="brand">
+      <h1>Theorem Ripple</h1>
+      <p class="tagline">What becomes true when a hypothesis is proven</p>
+    </div>
+    <div class="controls">
+      <div class="switch" role="group" aria-label="Point in time">
+        <button id="btn-before" type="button" aria-pressed="true">Before 20 Nov 2026</button>
+        <button id="btn-today" type="button" aria-pressed="false">Today</button>
+      </div>
+      <button id="btn-replay" type="button" class="ghost">Replay</button>
+      <button id="btn-reset" type="button" class="ghost" hidden>Undo what-if</button>
+    </div>
+    <button id="status-line" type="button" class="status-line"></button>
+  </header>
+
+  <div class="hud-bottom">
+    <div id="tally" class="tally" aria-live="polite"></div>
+    <details id="legend" class="legend">
+      <summary>Legend</summary>
+      <ul>
+        <li><svg viewBox="-12 -12 24 24"><circle r="8" class="lg-proven"/><path d="M-3.5,0.3 L-0.9,3 L3.8,-2.7" class="lg-check"/></svg>Proven</li>
+        <li><svg viewBox="-12 -12 24 24"><circle r="7.5" class="lg-conditional"/></svg>Proven only if a hypothesis holds</li>
+        <li><svg viewBox="-12 -12 24 24"><circle r="7.5" class="lg-open"/></svg>Open</li>
+        <li><svg viewBox="-12 -12 24 24"><circle r="8" class="lg-whatif"/><path d="M-3.5,0.3 L-0.9,3 L3.8,-2.7" class="lg-check"/></svg>Proven in your what-if only</li>
+        <li><svg viewBox="-12 -12 24 24"><rect x="-6.5" y="-6.5" width="13" height="13" rx="1.5" transform="rotate(45)" class="lg-open"/></svg>Diamond: hypothesis or conjecture</li>
+        <li><svg viewBox="-12 -12 24 24"><line x1="-10" x2="10" class="lg-line"/><path d="M4,0 L-3,-4 L-3,4 Z" class="lg-arrow"/></svg>From assumption to result</li>
+        <li><svg viewBox="-12 -12 24 24"><line x1="-10" x2="10" class="lg-line"/><path d="M-8,0 L-2,-4 L-2,4 Z M8,0 L2,-4 L2,4 Z" class="lg-arrow"/></svg>Equivalent statements</li>
+      </ul>
+    </details>
+  </div>
+
+  <aside id="panel" class="panel" hidden aria-label="Details"></aside>
+
+  <script src="js/vendor/d3.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

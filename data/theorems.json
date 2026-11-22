@@ -1,0 +1,661 @@
+{
+  "today": {
+    "date": "2026-11-21",
+    "proven": [
+      "rh"
+    ],
+    "claimed": [
+      "grh"
+    ],
+    "status": "Machine-checked in Lean. The Lean and Mathlib communities certified statement and proof on 21 Nov 2026. No human has reviewed the mathematics yet, and there is no written paper.",
+    "claimedNote": "Alpöge's Lean library also contains this statement, and independent machine checks reported by Andrew Sutherland confirm it. The joint certification of 21 Nov 2026 covers only the Riemann Hypothesis, so it is shown here as claimed, not proven.",
+    "sources": [
+      {
+        "title": "Joint statement of the Lean and Mathlib communities, 21 Nov 2026",
+        "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/"
+      },
+      {
+        "title": "Levent Alpöge's note",
+        "url": "https://alpo.ge/remark.pdf"
+      },
+      {
+        "title": "Andrew Sutherland: which theorems were machine-checked",
+        "url": "https://math.mit.edu/~drew/grh/"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "rh",
+      "name": "Riemann Hypothesis",
+      "short": "Riemann Hypothesis",
+      "statement": "Every non-trivial zero of the Riemann zeta function ζ(s) has real part 1/2.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "grh"
+      ],
+      "by": "Bernhard Riemann, 1859",
+      "note": "Levent Alpöge released a proof as a Lean library of about 17 million lines on 20 Nov 2026. The Lean FRO and Mathlib Initiative certified it on 21 Nov 2026. Human review of the ideas is still pending.",
+      "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis"
+    },
+    {
+      "id": "grh",
+      "name": "Generalized Riemann Hypothesis (Dirichlet L-functions)",
+      "short": "GRH (Dirichlet)",
+      "statement": "Every zero of every Dirichlet L-function L(s, χ) inside the critical strip has real part 1/2.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "erh"
+      ],
+      "by": "Adolf Piltz, 1884",
+      "note": "Contains the Riemann Hypothesis as the special case of the trivial character.",
+      "url": "https://en.wikipedia.org/wiki/Generalized_Riemann_hypothesis"
+    },
+    {
+      "id": "erh",
+      "name": "Extended Riemann Hypothesis (Dedekind zeta functions)",
+      "short": "ERH (number fields)",
+      "statement": "For every number field K, every zero of the Dedekind zeta function ζ_K(s) inside the critical strip has real part 1/2.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "The Riemann Hypothesis carried over to the zeta functions Dedekind defined for number fields",
+      "note": "Implies GRH for Dirichlet L-functions, because the zeta function of a cyclotomic field is a product of Dirichlet L-functions.",
+      "url": "https://en.wikipedia.org/wiki/Generalized_Riemann_hypothesis#Extended_Riemann_hypothesis"
+    },
+    {
+      "id": "rh-modular",
+      "name": "Riemann Hypothesis for modular-form L-functions",
+      "short": "RH for modular L-functions",
+      "statement": "Every zero of the L-function of a Hecke newform inside its critical strip lies on the central line.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "by": "Part of the Grand Riemann Hypothesis",
+      "url": "https://en.wikipedia.org/wiki/Grand_Riemann_hypothesis"
+    },
+    {
+      "id": "pair-correlation",
+      "name": "Montgomery's pair correlation conjecture",
+      "short": "Pair correlation conjecture",
+      "statement": "The spacings between zeros of ζ(s) on the critical line follow the pair correlation density 1 − (sin(πu)/(πu))², the same as eigenvalues of random Hermitian matrices.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "rh"
+      ],
+      "by": "Hugh Montgomery, 1973",
+      "note": "Describes how the zeros are spaced along the line. The Riemann Hypothesis only says they are on the line.",
+      "url": "https://en.wikipedia.org/wiki/Montgomery%27s_pair_correlation_conjecture"
+    },
+    {
+      "id": "linear-independence",
+      "name": "Linear independence hypothesis",
+      "short": "Linear independence of zeros",
+      "statement": "The positive imaginary parts of the zeros of Dirichlet L-functions are linearly independent over the rational numbers.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "grh"
+      ],
+      "by": "Aurel Wintner, 1935 (for ζ); used for Dirichlet L-functions by Rubinstein and Sarnak, 1994",
+      "url": "https://arxiv.org/abs/2311.04860"
+    },
+    {
+      "id": "legendre",
+      "name": "Legendre's conjecture",
+      "short": "Legendre's conjecture",
+      "statement": "There is a prime between n² and (n+1)² for every positive integer n.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "cramer-gap"
+      ],
+      "by": "Adrien-Marie Legendre, 1808",
+      "note": "The Riemann Hypothesis gives prime gaps of size O(√p · log p). Legendre's conjecture needs gaps below about 2√p, so the Riemann Hypothesis falls just short.",
+      "url": "https://en.wikipedia.org/wiki/Legendre%27s_conjecture"
+    },
+    {
+      "id": "cramer-conjecture",
+      "name": "Cramér's conjecture",
+      "short": "Cramér's conjecture",
+      "statement": "p(n+1) − p(n) = O(log² p(n)): gaps between consecutive primes are at most of the order of the squared logarithm.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "related": [
+        "cramer-gap"
+      ],
+      "by": "Harald Cramér, 1936",
+      "note": "Far stronger than what the Riemann Hypothesis gives.",
+      "url": "https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_conjecture"
+    },
+    {
+      "id": "von-koch",
+      "name": "Von Koch's error term for the prime number theorem",
+      "short": "Von Koch's error term",
+      "statement": "π(x) = li(x) + O(√x · log x).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Helge von Koch, 1901",
+      "url": "https://en.wikipedia.org/wiki/Prime_number_theorem"
+    },
+    {
+      "id": "mertens-bound",
+      "name": "Growth of the Mertens function",
+      "short": "Mertens function bound",
+      "statement": "M(x) = O(x^(1/2+ε)) for every ε > 0, where M(x) is the sum of the Möbius function μ(n) for n ≤ x.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "J. E. Littlewood, 1912",
+      "url": "https://en.wikipedia.org/wiki/Mertens_function"
+    },
+    {
+      "id": "robin",
+      "name": "Robin's inequality",
+      "short": "Robin's inequality",
+      "statement": "σ(n) < e^γ · n · log log n for every n > 5040, where σ(n) is the sum of the divisors of n.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Guy Robin, 1984",
+      "url": "https://en.wikipedia.org/wiki/Divisor_function#Growth_rate"
+    },
+    {
+      "id": "lagarias",
+      "name": "Lagarias's inequality",
+      "short": "Lagarias's inequality",
+      "statement": "σ(n) ≤ H(n) + e^H(n) · log H(n) for every n ≥ 1, where H(n) is the n-th harmonic number.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Jeffrey Lagarias, 2002",
+      "url": "https://en.wikipedia.org/wiki/Divisor_function#Growth_rate"
+    },
+    {
+      "id": "li-criterion",
+      "name": "Li's criterion",
+      "short": "Li's criterion",
+      "statement": "λ(n) ≥ 0 for every n ≥ 1, where λ(n) is the sum of 1 − (1 − 1/ρ)^n over the non-trivial zeros ρ of ζ(s).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Xian-Jin Li, 1997",
+      "url": "https://en.wikipedia.org/wiki/Li%27s_criterion"
+    },
+    {
+      "id": "nicolas",
+      "name": "Nicolas's criterion",
+      "short": "Nicolas's criterion",
+      "statement": "N / φ(N) > e^γ · log log N for every primorial N, where φ is Euler's totient function.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Jean-Louis Nicolas, 1983",
+      "url": "https://arxiv.org/abs/1202.0729"
+    },
+    {
+      "id": "franel-landau",
+      "name": "Franel–Landau theorem on Farey sequences",
+      "short": "Farey sequence spacing",
+      "statement": "The Farey fractions of order n deviate from equally spaced points by a total of O(n^(1/2+ε)).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Jérôme Franel and Edmund Landau, 1924",
+      "url": "https://en.wikipedia.org/wiki/Farey_sequence#Riemann_hypothesis"
+    },
+    {
+      "id": "de-bruijn-newman",
+      "name": "De Bruijn–Newman constant equals zero",
+      "short": "De Bruijn–Newman Λ = 0",
+      "statement": "The de Bruijn–Newman constant Λ equals 0.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "N. G. de Bruijn, 1950; Charles Newman, 1976",
+      "note": "The Riemann Hypothesis is equivalent to Λ ≤ 0. Rodgers and Tao proved Λ ≥ 0 in 2018, so together Λ = 0.",
+      "url": "https://en.wikipedia.org/wiki/De_Bruijn%E2%80%93Newman_constant"
+    },
+    {
+      "id": "speiser",
+      "name": "Speiser's criterion",
+      "short": "Speiser's criterion",
+      "statement": "The derivative ζ′(s) has no zeros in the strip 0 < Re(s) < 1/2.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "equivalent": true,
+      "by": "Andreas Speiser, 1934",
+      "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis#Analytic_criteria_equivalent_to_the_Riemann_hypothesis"
+    },
+    {
+      "id": "schoenfeld",
+      "name": "Schoenfeld's explicit prime-counting bound",
+      "short": "Schoenfeld's explicit bound",
+      "statement": "|π(x) − li(x)| < √x · log x / (8π) for every x ≥ 2657.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "Lowell Schoenfeld, 1976",
+      "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis#Distribution_of_prime_numbers"
+    },
+    {
+      "id": "cramer-gap",
+      "name": "Cramér's prime gap bound",
+      "short": "Cramér's prime gap bound",
+      "statement": "p(n+1) − p(n) = O(√p(n) · log p(n)).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "Harald Cramér, 1920",
+      "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis#Large_prime_gap_conjecture"
+    },
+    {
+      "id": "dudek",
+      "name": "Explicit primes in short intervals",
+      "short": "Explicit primes in short intervals",
+      "statement": "For every x ≥ 2 there is a prime p with x − (4/π) · √x · log x < p ≤ x.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "Adrian Dudek, 2015",
+      "url": "https://arxiv.org/abs/1402.6417"
+    },
+    {
+      "id": "littlewood-zeta-bound",
+      "name": "Littlewood's bound for ζ on the critical line",
+      "short": "Littlewood's ζ bound",
+      "statement": "|ζ(1/2 + it)| ≤ exp(C · log t / log log t) for some constant C and all large t.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "J. E. Littlewood, 1924",
+      "url": "https://arxiv.org/abs/0908.2008"
+    },
+    {
+      "id": "lindelof",
+      "name": "Lindelöf hypothesis",
+      "short": "Lindelöf hypothesis",
+      "statement": "ζ(1/2 + it) = O(t^ε) for every ε > 0.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "littlewood-zeta-bound"
+      ],
+      "by": "Ernst Lindelöf, 1908",
+      "note": "Littlewood's bound grows more slowly than any power of t, so it gives the Lindelöf hypothesis at once.",
+      "url": "https://en.wikipedia.org/wiki/Lindel%C3%B6f_hypothesis"
+    },
+    {
+      "id": "density",
+      "name": "Density hypothesis",
+      "short": "Density hypothesis",
+      "statement": "N(σ, T) = O(T^(2(1−σ)+ε)), where N(σ, T) counts zeros of ζ(s) with real part at least σ and imaginary part up to T.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "lindelof"
+      ],
+      "by": "A. E. Ingham, 1937 (showed it follows from the Lindelöf hypothesis)",
+      "url": "https://en.wikipedia.org/wiki/Lindel%C3%B6f_hypothesis#The_density_hypothesis"
+    },
+    {
+      "id": "short-intervals",
+      "name": "Prime number theorem in short intervals",
+      "short": "Prime number theorem in short intervals",
+      "statement": "π(x + x^θ) − π(x) ~ x^θ / log x for every θ > 1/2.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "density"
+      ],
+      "by": "Follows from the density hypothesis (Ingham's method, 1937)",
+      "note": "Also follows from the Riemann Hypothesis directly. Shown here as the end of the chain through Lindelöf and the density hypothesis.",
+      "url": "https://en.wikipedia.org/wiki/Prime_gap#Upper_bounds"
+    },
+    {
+      "id": "montgomery-simple",
+      "name": "Two thirds of the zeros are simple",
+      "short": "2/3 of zeros are simple",
+      "statement": "At least 2/3 of the non-trivial zeros of ζ(s) are simple.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "Hugh Montgomery, 1973",
+      "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis#Montgomery's_pair_correlation_conjecture",
+      "note": "An August 2026 preprint by Alpöge and Furman claims this without assuming the hypothesis."
+    },
+    {
+      "id": "selberg-short",
+      "name": "Selberg's primes in almost all short intervals",
+      "short": "Primes in almost all short intervals",
+      "statement": "If f(x) → ∞, then almost all intervals [x, x + f(x) · log² x] contain a prime.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh"
+      ],
+      "by": "Atle Selberg, 1943",
+      "url": "https://arxiv.org/abs/2206.00433"
+    },
+    {
+      "id": "goldston-heath-brown",
+      "name": "Goldston–Heath-Brown prime gap bound",
+      "short": "Sharper prime gap bound",
+      "statement": "p(n+1) − p(n) = o(√(p(n) · log p(n))).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "rh",
+        "pair-correlation"
+      ],
+      "by": "Roger Heath-Brown and Daniel Goldston, 1984",
+      "url": "https://doi.org/10.1007/BF01475582"
+    },
+    {
+      "id": "almost-all-simple",
+      "name": "Almost all zeros are simple",
+      "short": "Almost all zeros simple",
+      "statement": "The simple zeros of ζ(s) make up 100% of all its non-trivial zeros.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "pair-correlation"
+      ],
+      "by": "P. X. Gallagher and Julia Mueller, 1978 (conjectured by Montgomery, 1973)",
+      "url": "https://arxiv.org/abs/2503.15449",
+      "note": "Follows from the pair correlation conjecture alone. The Riemann Hypothesis by itself only gives two thirds."
+    },
+    {
+      "id": "ankeny",
+      "name": "Ankeny's bound for the least quadratic non-residue",
+      "short": "Least quadratic non-residue",
+      "statement": "The least quadratic non-residue modulo a prime p is O(log² p).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Nesmith Ankeny, 1952",
+      "url": "https://en.wikipedia.org/wiki/Quadratic_residue#Least_quadratic_non-residue"
+    },
+    {
+      "id": "vinogradov-conjecture",
+      "name": "Vinogradov's conjecture on the least non-residue",
+      "short": "Vinogradov's conjecture",
+      "statement": "The least quadratic non-residue modulo p is O(p^ε) for every ε > 0.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "ankeny"
+      ],
+      "by": "I. M. Vinogradov",
+      "url": "https://terrytao.wordpress.com/2009/08/18/the-least-quadratic-nonresidue-and-the-square-root-barrier/"
+    },
+    {
+      "id": "miller",
+      "name": "Miller's deterministic primality test",
+      "short": "Miller's primality test",
+      "statement": "Miller's test decides whether n is prime, without randomness, in time polynomial in log n.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Gary Miller, 1976",
+      "note": "Miller's analysis needs a small witness for every composite n. The hypothesis for quadratic characters guarantees one of size O(log² n).",
+      "url": "https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Miller_test"
+    },
+    {
+      "id": "sqrt-mod-p",
+      "name": "Deterministic square roots modulo a prime",
+      "short": "Square roots mod p",
+      "statement": "Square roots modulo a prime p can be computed without randomness in time polynomial in log p.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "ankeny"
+      ],
+      "by": "Tonelli–Shanks algorithm with Ankeny's bound",
+      "note": "The Tonelli–Shanks algorithm needs one quadratic non-residue. Ankeny's bound guarantees that trying 2, 3, 4, … finds one quickly.",
+      "url": "https://en.wikipedia.org/wiki/Tonelli%E2%80%93Shanks_algorithm"
+    },
+    {
+      "id": "bach-witness",
+      "name": "Bach's explicit witness bound",
+      "short": "Bach's bound 2·ln² n",
+      "statement": "Every proper subgroup of the units modulo n misses some integer below 2 · ln² n. So n is prime exactly when it passes the strong pseudoprime test for every base up to 2 · ln² n.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Eric Bach, 1990",
+      "url": "https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#Miller_test"
+    },
+    {
+      "id": "least-prime-ap",
+      "name": "Least prime in an arithmetic progression",
+      "short": "Least prime in a progression",
+      "statement": "For coprime a and q with q > 3, the least prime p ≡ a (mod q) is at most (φ(q) · log q)².",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Youness Lamzouri, Xiannan Li and Kannan Soundararajan, 2015",
+      "url": "https://en.wikipedia.org/wiki/Linnik%27s_theorem"
+    },
+    {
+      "id": "shoup-primitive-root",
+      "name": "Shoup's bound for the least primitive root",
+      "short": "Least primitive root",
+      "statement": "The least primitive root modulo a prime p is O(log⁶ p).",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Victor Shoup, 1992",
+      "url": "https://en.wikipedia.org/wiki/Primitive_root_modulo_n#Order_of_magnitude_of_primitive_roots"
+    },
+    {
+      "id": "littlewood-l1",
+      "name": "Littlewood's bounds for L(1, χ)",
+      "short": "Littlewood's L(1, χ) bound",
+      "statement": "L(1, χ) ≤ (2 + o(1)) · e^γ · log log q for every primitive real character χ modulo q.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "J. E. Littlewood, 1928",
+      "note": "Through the class number formula this bounds class numbers of quadratic fields.",
+      "url": "https://arxiv.org/abs/math/0206031"
+    },
+    {
+      "id": "idoneal",
+      "name": "Euler's list of idoneal numbers is complete",
+      "short": "65 idoneal numbers",
+      "statement": "There are exactly 65 idoneal numbers, the ones Euler found, the largest being 1848.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh"
+      ],
+      "by": "Peter Weinberger, 1973",
+      "note": "Without the hypothesis, Weinberger's results imply that at most two more idoneal numbers can exist.",
+      "url": "https://en.wikipedia.org/wiki/Idoneal_number"
+    },
+    {
+      "id": "chebyshev-bias",
+      "name": "Chebyshev's bias, quantified",
+      "short": "Chebyshev's bias",
+      "statement": "Primes of the form 4k+3 are ahead of primes of the form 4k+1 for a set of x of logarithmic density about 0.9959.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh",
+        "linear-independence"
+      ],
+      "by": "Michael Rubinstein and Peter Sarnak, 1994",
+      "url": "https://en.wikipedia.org/wiki/Chebyshev%27s_bias"
+    },
+    {
+      "id": "ono-soundararajan",
+      "name": "Ramanujan's ternary quadratic form",
+      "short": "Ramanujan's ternary form",
+      "statement": "The form x² + y² + 10z² represents every odd integer greater than 2719.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "grh",
+        "rh-modular"
+      ],
+      "by": "Ken Ono and Kannan Soundararajan, 1997",
+      "url": "https://en.wikipedia.org/wiki/Ramanujan%27s_ternary_quadratic_form"
+    },
+    {
+      "id": "artin-primitive-root",
+      "name": "Artin's conjecture on primitive roots",
+      "short": "Artin's primitive root conjecture",
+      "statement": "Every integer a that is neither −1 nor a perfect square is a primitive root modulo infinitely many primes, and these primes have a positive density that is a rational multiple of Artin's constant.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "erh"
+      ],
+      "by": "Christopher Hooley, 1967",
+      "url": "https://en.wikipedia.org/wiki/Artin%27s_conjecture_on_primitive_roots",
+      "note": "Preprints from October and November 2026 claim the \"infinitely many primes\" part without the hypothesis. The density is still only known through Hooley's conditional proof."
+    },
+    {
+      "id": "weinberger-euclidean",
+      "name": "Weinberger's theorem on Euclidean number rings",
+      "short": "Euclidean number rings",
+      "statement": "If the ring of integers of a number field has infinitely many units, it is Euclidean exactly when it has class number 1.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "erh"
+      ],
+      "by": "Peter Weinberger, 1973",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_domain"
+    },
+    {
+      "id": "lagarias-odlyzko",
+      "name": "Effective Chebotarev density theorem",
+      "short": "Effective Chebotarev",
+      "statement": "In a Galois extension L of the rationals, every conjugacy class of the Galois group is the Frobenius class of a prime p = O((log |d_L|)²), where d_L is the discriminant of L.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "erh"
+      ],
+      "by": "Jeffrey Lagarias and Andrew Odlyzko, 1977",
+      "url": "https://en.wikipedia.org/wiki/Chebotarev_density_theorem#Effective_version"
+    },
+    {
+      "id": "bach-class-group",
+      "name": "Bach's bound for class group generators",
+      "short": "Class group generators",
+      "statement": "The class group of a number field K is generated by the prime ideals of norm at most 12 · log² |Δ|, where Δ is the discriminant of K.",
+      "kind": "theorem",
+      "base": "conditional",
+      "needs": [
+        "erh"
+      ],
+      "by": "Eric Bach, 1990",
+      "note": "The unconditional Minkowski bound grows like √|Δ|, which is far too large for big fields.",
+      "url": "https://www.ams.org/mcom/2008-77-262/S0025-5718-07-02003-0/"
+    },
+    {
+      "id": "class-group-tables",
+      "name": "Class groups computed assuming the hypothesis",
+      "short": "Computed class groups",
+      "statement": "Class groups and unit groups from PARI/GP's bnfinit, from SageMath with proof=False, from Magma with Proof := \"GRH\", and the LMFDB number-field entries flagged as conditional, are correct.",
+      "kind": "data",
+      "base": "conditional",
+      "needs": [
+        "bach-class-group"
+      ],
+      "by": "PARI/GP, LMFDB (SageMath and Magma on request)",
+      "note": "PARI/GP assumes the hypothesis by default and only searches prime ideals up to a bound it justifies, until the result is certified with bnfcertify. SageMath and Magma do so only when asked.",
+      "url": "https://www.lmfdb.org/NumberField/Reliability"
+    },
+    {
+      "id": "ternary-goldbach",
+      "name": "Ternary Goldbach theorem",
+      "short": "Ternary Goldbach",
+      "statement": "Every odd integer greater than 5 is the sum of three primes.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "formerly": [
+        "grh"
+      ],
+      "by": "Harald Helfgott, 2013",
+      "note": "First proven assuming GRH (Deshouillers, Effinger, te Riele and Zinoviev, 1997). Helfgott's proof removed the hypothesis.",
+      "url": "https://en.wikipedia.org/wiki/Goldbach%27s_weak_conjecture"
+    },
+    {
+      "id": "primes-in-p",
+      "name": "Primality testing in polynomial time",
+      "short": "PRIMES is in P",
+      "statement": "Whether n is prime can be decided without randomness in time polynomial in log n.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "formerly": [
+        "miller"
+      ],
+      "by": "Manindra Agrawal, Neeraj Kayal and Nitin Saxena, 2002",
+      "note": "Known since 1976 assuming GRH, through Miller's test. The AKS test removed the hypothesis.",
+      "url": "https://en.wikipedia.org/wiki/AKS_primality_test"
+    }
+  ]
+}

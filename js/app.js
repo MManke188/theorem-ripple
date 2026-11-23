@@ -108,8 +108,7 @@ async function init() {
   for (const n of nodes) n.big = !!n.hub || n.kind === 'system';
   // Zoomed out, only the entries most is built on are drawn. Among entries nothing is built on, the ones that stand on most come first.
   // An axiom counts by the statements that need it, so that set theory itself is drawn before the eight axioms right below it.
-  // The statement of today's event is drawn at every zoom.
-  const major = (n) => (index.today.proven.includes(n.id) ? Infinity : n.kind === 'axiom' ? n.weight : n.above.size);
+  const major = (n) => (n.kind === 'axiom' ? n.weight : n.above.size);
   state.order = [...nodes].sort((a, b) => major(b) - major(a) || b.roots.size - a.roots.size);
   state.areas = index.areas.map((a) => ({ ...a, nodes: nodes.filter((n) => n.area === a.id) })).filter((a) => a.nodes.length);
 

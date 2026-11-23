@@ -59,6 +59,12 @@ button { font: inherit; color: inherit; }
 .edge.related line { stroke-dasharray: 2 5; }
 .edge.formerly line { stroke-dasharray: 6 4; }
 .edge.related .chev, .edge.formerly .chev { display: none; }
+.edge.within line { stroke: #46557a; stroke-width: 1.1; }
+.edge.within .chev { display: none; }
+/* The links between the systems themselves are the trunk and the boughs of the tree. */
+body.view-tree .edge.within.inner line { stroke: #7c8db5; stroke-width: 2.6; }
+/* Among the areas, the links from a statement to its system would cross the whole map: only those inside the foundations, of the selected entry, or on a trace are drawn. */
+body.view-areas .edge.within:not(.inner):not(.own):not(.traced) { display: none; }
 .edge.dim { opacity: 0.18; }
 
 .flow line { stroke: var(--green); stroke-width: 2.5; vector-effect: non-scaling-stroke; stroke-linecap: round; }
@@ -68,7 +74,7 @@ button { font: inherit; color: inherit; }
 .wave.whatif { stroke: var(--blue); }
 .flow.amber line, .wave.amber { stroke: var(--amber); }
 .flow.trace line, .wave.trace { stroke: var(--violet); }
-.edge.needs.traced line { stroke: var(--violet); opacity: 0.9; stroke-width: 2; }
+.edge.needs.traced line, .edge.within.traced line { stroke: var(--violet); opacity: 0.9; stroke-width: 2; }
 .edge.needs.traced .chev { fill: var(--violet); opacity: 1; }
 
 .node .inner { transform: scale(var(--ns)); }
@@ -97,6 +103,8 @@ button { font: inherit; color: inherit; }
 .node.kind-axiom.st-proven .check { opacity: 0; }
 .node.kind-axiom.st-proven.whatif .shape { fill: var(--bg); stroke: var(--blue); }
 .node.kind-axiom.whatif .pip { fill: var(--blue); }
+.node.kind-system .shape { fill: #1d2639; stroke: #c3cee3; stroke-width: 2.2; }
+.node.kind-system .check { display: none; }
 .node.dim { opacity: 0.3; }
 .node { transition: opacity 0.3s; }
 .node:focus { outline: none; }
@@ -124,6 +132,7 @@ button { font: inherit; color: inherit; }
   stroke-linejoin: round;
 }
 .label.hub text { font-size: 13px; font-weight: 650; fill: var(--text); }
+.label.sys text { font-size: 12.5px; font-weight: 600; fill: #dbe4f3; }
 .label.st-proven text { fill: #c9f5dc; }
 .label.st-proven.whatif text { fill: #cdeefc; }
 .label.hidden { opacity: 0; }
@@ -145,6 +154,7 @@ button { font: inherit; color: inherit; }
 }
 .area-label:hover text, .area-label:focus-visible text { fill: var(--text); }
 .area-label:focus { outline: none; }
+body.view-tree .area-label { display: none; }
 
 /* ---------- top ---------- */
 
@@ -161,7 +171,9 @@ button { font: inherit; color: inherit; }
 }
 .hud-top > * { pointer-events: auto; }
 
-.brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.layout-switch { margin-left: auto; }
+.layout-switch button { min-height: 32px; padding: 0 12px; }
 h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 .tagline { margin: 0; font-size: 13px; color: var(--muted); }
 
@@ -314,6 +326,8 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 .lg-ring { fill: none; stroke: var(--green); stroke-width: 1.5; opacity: 0.6; }
 .lg-flag { fill: #ff7ab8; }
 .lg-line { stroke: var(--muted); stroke-width: 1.5; }
+.lg-within { stroke: #6f80a8; stroke-width: 1.2; }
+.lg-system { fill: #1d2639; stroke: #c3cee3; stroke-width: 2; }
 .lg-arrow { fill: var(--muted); }
 
 /* ---------- panel ---------- */
@@ -379,6 +393,7 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 .dot.proven.whatif { background: var(--blue); }
 .dot.proven.axiom { background: none; border: 3px solid var(--green); }
 .dot.proven.axiom.whatif { border-color: var(--blue); }
+.dot.system { border: 2px solid #c3cee3; border-radius: 3px; background: #1d2639; }
 .reflist li { display: flex; align-items: center; gap: 4px; }
 .reflist li button { flex: 1; min-width: 0; }
 .why { flex: none; font-size: 12px; padding: 12px 6px; }
@@ -461,7 +476,10 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 
 @media (max-height: 480px) {
   .hud-top { right: 0; max-width: none; gap: 6px; padding-top: 8px; padding-bottom: 10px; background: linear-gradient(to bottom, var(--bg) 78%, transparent); }
-  .brand { display: none; }
+  .brand { display: contents; }
+  .brand h1, .brand .tagline, #btn-before .long { display: none; }
+  .layout-switch { margin-left: 0; }
+  .layout-switch button { min-height: 36px; padding: 0 10px; }
   .hud-top { flex-direction: row; flex-wrap: wrap; align-items: center; }
   .switch button { min-height: 36px; }
   .ghost, .search input { min-height: 40px; }

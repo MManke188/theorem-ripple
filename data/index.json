@@ -1,6 +1,11 @@
 {
   "areas": [
     {
+      "id": "foundations",
+      "name": "Foundations",
+      "file": "foundations.json"
+    },
+    {
       "id": "number-theory",
       "name": "Number theory",
       "file": "number-theory.json"
@@ -57,6 +62,14 @@
     ]
   },
   "assumed": [
+    "axiom-extensionality",
+    "axiom-pairing",
+    "axiom-union",
+    "axiom-power-set",
+    "axiom-infinity",
+    "axiom-separation",
+    "axiom-replacement",
+    "axiom-regularity",
     "axiom-of-choice"
   ]
 }

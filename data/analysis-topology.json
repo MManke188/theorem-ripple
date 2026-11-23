@@ -9,6 +9,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "geometric-topology"
+      ],
       "related": [
         "uniformization"
       ],
@@ -27,6 +30,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "geometric-topology"
+      ],
       "by": "Grigori Perelman, 2002–2003 (conjectured by William Thurston, 1980)",
       "note": "A special case of geometrization, but Perelman's finite-extinction argument proves it without full geometrization, so it is linked here as related and not as resting on it. It is logically equivalent to the Poincaré conjecture together with the spherical space form conjecture.",
       "url": "https://arxiv.org/abs/math/0607607",
@@ -45,6 +51,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "geometric-topology"
+      ],
       "by": "Grigori Perelman, 2002 and 2003 (posed by Henri Poincaré, 1904)",
       "note": "It is the case of elliptization with trivial fundamental group. Perelman proved it directly, by showing that Ricci flow with surgery dies out in finite time, without needing full geometrization. It is the only Millennium Prize Problem the Clay Institute has declared solved. Perelman declined the prize in 2010.",
       "url": "https://en.wikipedia.org/wiki/Poincar%C3%A9_conjecture",
@@ -64,6 +73,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "geometric-topology"
+      ],
       "by": "Stephen Smale, 1962",
       "note": "When M and N are 4-dimensional (so W is 5-dimensional), Michael Freedman proved the topological version, and Simon Donaldson showed that the smooth version fails.",
       "url": "https://en.wikipedia.org/wiki/H-cobordism",
@@ -98,6 +110,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "geometric-topology"
+      ],
       "related": [
         "smooth-poincare-4",
         "h-cobordism"
@@ -116,6 +131,12 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        {
+          "id": "geometric-topology",
+          "url": "https://en.wikipedia.org/wiki/Generalized_Poincar%C3%A9_conjecture"
+        }
+      ],
       "by": "The case of the generalized Poincaré conjecture left open after Freedman's topological proof, 1982",
       "note": "It is the last open case of the Poincaré conjectures. Most experts expect it to be false, but no counterexample is known.",
       "url": "https://epoch.ai/frontiermath/open-problems/smooth-poincare-4d",
@@ -130,6 +151,12 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        {
+          "id": "complex-analysis",
+          "url": "https://en.wikipedia.org/wiki/Riemann_surface"
+        }
+      ],
       "by": "Paul Koebe and Henri Poincaré, 1907",
       "note": "Through universal covers it gives every Riemann surface a metric of constant curvature 1, 0 or −1. Geometrization is its analogue for 3-manifolds.",
       "url": "https://en.wikipedia.org/wiki/Uniformization_theorem",
@@ -144,6 +171,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "harmonic-analysis"
+      ],
       "by": "Lennart Carleson, 1966",
       "note": "This settled Luzin's conjecture. Kolmogorov had shown in 1923 that it fails for merely integrable functions.",
       "url": "https://en.wikipedia.org/wiki/Carleson%27s_theorem",
@@ -158,6 +188,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "harmonic-analysis"
+      ],
       "related": [
         "carleson"
       ],
@@ -175,6 +208,10 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "differential-geometry",
+        "partial-differential-equations"
+      ],
       "by": "Michael Atiyah and Isadore Singer, announced 1963, proof published 1968",
       "note": "It contains the Chern–Gauss–Bonnet theorem, the Hirzebruch–Riemann–Roch theorem and the Hirzebruch signature theorem as special cases.",
       "url": "https://en.wikipedia.org/wiki/Atiyah%E2%80%93Singer_index_theorem",
@@ -189,6 +226,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "differential-geometry"
+      ],
       "related": [
         "atiyah-singer"
       ],
@@ -206,6 +246,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "partial-differential-equations"
+      ],
       "by": "Christopher Sogge, 1991",
       "note": "Larry Guth, Hong Wang and Ruixiang Zhang proved it for n = 2 in 2019.",
       "url": "https://arxiv.org/pdf/1812.11616",
@@ -276,6 +319,16 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        {
+          "id": "harmonic-analysis",
+          "url": "https://en.wikipedia.org/wiki/Kakeya_set"
+        },
+        {
+          "id": "measure-theory",
+          "url": "https://en.wikipedia.org/wiki/Kakeya_set"
+        }
+      ],
       "related": [
         "kakeya",
         "restriction"
@@ -294,6 +347,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "partial-differential-equations"
+      ],
       "related": [
         "leray-weak"
       ],
@@ -312,6 +368,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "partial-differential-equations"
+      ],
       "by": "Jean Leray, 1934",
       "note": "Leray also proved that smooth solutions exist for all time when the starting velocity is small enough. Whether weak solutions are always smooth is the open Navier–Stokes problem.",
       "url": "https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_existence_and_smoothness",
@@ -326,6 +385,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "functional-analysis"
+      ],
       "by": "Open problem in operator theory; Banach-space counterexamples by Per Enflo (1975, published 1987) and Charles Read (1985)",
       "note": "Per Enflo (arXiv, May 2023, expanded April 2024) and Charles W. Neville (arXiv, July 2023) posted claimed proofs. Neither has been published in a journal or accepted by specialists.",
       "url": "https://en.wikipedia.org/wiki/Invariant_subspace_problem",
@@ -340,6 +402,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "functional-analysis"
+      ],
       "related": [
         "invariant-subspace"
       ],

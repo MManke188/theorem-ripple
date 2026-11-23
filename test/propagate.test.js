@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach } from '../js/propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach, layers, foundationsOf } from '../js/propagate.js';
 
 const read = (file) => JSON.parse(readFileSync(new URL(`../data/${file}`, import.meta.url), 'utf8'));
 const index = read('index.json');
@@ -19,12 +19,16 @@ test('data is consistent: ids unique across files, links exist, no cycles, field
     for (const n of data.nodes) assert.equal(n.area, area.id, `${n.id} is in ${area.file} but says area ${n.area}`);
   }
   for (const n of nodes) {
-    for (const key of ['id', 'name', 'short', 'statement', 'kind', 'base', 'by', 'url', 'area']) {
+    // A system (a number system or a theory) is not a statement: it has no status and no author is required.
+    const system = n.kind === 'system';
+    for (const key of ['id', 'name', 'short', 'statement', 'kind', 'url', 'area', ...(system ? [] : ['base', 'by'])]) {
       assert.ok(n[key], `${n.id} is missing ${key}`);
     }
     assert.ok(n.short.length <= 40, `${n.id}: label too long`);
-    assert.ok(['hypothesis', 'theorem', 'data', 'axiom'].includes(n.kind), `${n.id} kind`);
-    assert.ok(['open', 'conditional', 'proven'].includes(n.base), `${n.id} base`);
+    assert.ok(['hypothesis', 'theorem', 'data', 'axiom', 'system'].includes(n.kind), `${n.id} kind`);
+    if (system) assert.deepEqual([n.base, n.needs, n.anyOf], [undefined, [], []], `${n.id}: a system has no status and needs nothing; it is built within other systems`);
+    else assert.ok(['open', 'conditional', 'proven'].includes(n.base), `${n.id} base`);
+    for (const ref of n.within) assert.ok(['system', 'axiom'].includes(byId.get(ref).kind), `${n.id}.within lists ${ref}, which is neither a system nor an axiom`);
     assert.doesNotThrow(() => new URL(n.url), `${n.id} url`);
     for (const url of Object.values(n.needUrl)) assert.doesNotThrow(() => new URL(url), `${n.id} link url`);
     if (n.kind === 'axiom' || n.kind === 'hypothesis') assert.notEqual(n.base, 'conditional', `${n.id}: a hypothesis or axiom is open or proven`);
@@ -40,7 +44,8 @@ test('years are plausible, and almost every statement has one', () => {
   for (const n of nodes) {
     for (const key of ['year', 'settled', 'formerlyYear']) {
       if (n[key] === undefined) continue;
-      assert.ok(Number.isInteger(n[key]) && n[key] >= 1500 && n[key] <= thisYear, `${n.id}.${key} = ${n[key]}`);
+      // Years before the common era are negative (Euclid: -300).
+      assert.ok(Number.isInteger(n[key]) && n[key] >= -600 && n[key] !== 0 && n[key] <= thisYear, `${n.id}.${key} = ${n[key]}`);
     }
     if (n.settled !== undefined) {
       assert.notEqual(n.base, 'open', `${n.id} has a settled year but is open`);
@@ -48,18 +53,29 @@ test('years are plausible, and almost every statement has one', () => {
     }
     if (n.formerlyYear !== undefined) assert.ok(n.formerly.length > 0, `${n.id}: formerlyYear without formerly`);
   }
-  assert.ok(nodes.filter((n) => n.year === undefined).length <= 5, 'too many statements without a year');
+  assert.ok(nodes.filter((n) => n.kind !== 'system' && n.year === undefined).length <= 5, 'too many statements without a year');
 });
 
 test('no statement is isolated', () => {
   const linked = new Set();
   for (const n of nodes) {
-    for (const ref of [...n.needs, ...n.anyOf, ...n.related, ...n.formerly]) {
+    for (const ref of [...n.needs, ...n.anyOf, ...n.within, ...n.related, ...n.formerly]) {
       linked.add(ref);
       linked.add(n.id);
     }
   }
   assert.deepEqual(nodes.filter((n) => !linked.has(n.id)).map((n) => n.id), []);
+});
+
+test('everything stands on the axioms of set theory', () => {
+  // Nothing floats: from every entry that is not itself an axiom, the links
+  // (`needs`, `anyOf`, `within`) lead down to ZF set theory, which is built
+  // within axioms that are assumed by default.
+  const zf = byId.get('zf-set-theory');
+  assert.ok(zf.within.length > 0);
+  for (const id of zf.within) assert.ok(byId.get(id).kind === 'axiom' && index.assumed.includes(id), `ZF is built within ${id}, which must be an assumed axiom`);
+  const floating = nodes.filter((n) => n.kind !== 'axiom' && n !== zf && !reach(nodes, n.id, 'up', foundationsOf).has(zf.id));
+  assert.deepEqual(floating.map((n) => n.id), []);
 });
 
 test('with nothing marked, exactly the statements recorded as proven are proven', () => {
@@ -85,7 +101,27 @@ test('normalize accepts links written as ids or as objects with a source', () =>
   const [n] = normalize([{ id: 'b', needs: ['a', { id: 'c', url: 'https://example.org/' }] }]);
   assert.deepEqual(n.needs, ['a', 'c']);
   assert.deepEqual(n.needUrl, { c: 'https://example.org/' });
-  assert.deepEqual([n.related, n.formerly], [[], []]);
+  assert.deepEqual([n.related, n.formerly, n.within], [[], [], []]);
+  const [w] = normalize([{ id: 'b', within: ['s', { id: 't', url: 'https://example.org/t' }] }]);
+  assert.deepEqual(w.within, ['s', 't']);
+  assert.deepEqual(w.needUrl, { t: 'https://example.org/t' });
+});
+
+test('layers and foundation walks include the systems a statement is built in', () => {
+  const sample = normalize([
+    { id: 'axiom', kind: 'axiom', base: 'open' },
+    { id: 'sets', kind: 'system', within: ['axiom'] },
+    { id: 'numbers', kind: 'system', within: ['sets'] },
+    { id: 'lemma', base: 'proven', within: ['numbers'] },
+    { id: 'result', base: 'proven', needs: ['lemma'], within: ['sets'] },
+  ]);
+  assert.deepEqual([...layers(sample)], [['axiom', 0], ['sets', 1], ['numbers', 2], ['lemma', 3], ['result', 4]]);
+  assert.deepEqual([...reach(sample, 'result', 'up').keys()], ['lemma']);
+  assert.deepEqual([...reach(sample, 'result', 'up', foundationsOf)].sort(), [['axiom', 4], ['lemma', 1], ['numbers', 2], ['sets', 3]]);
+  assert.deepEqual([...reach(sample, 'sets', 'down', foundationsOf).keys()].sort(), ['lemma', 'numbers', 'result']);
+  // A system holds no status, and what is built in it does not become proven through it.
+  assert.deepEqual([...computeProven(sample, new Set(['axiom']))].sort(), ['axiom', 'lemma', 'result']);
+  assert.throws(() => validate(normalize([{ id: 'a', within: ['b'] }, { id: 'b', within: ['a'] }])), /cycle/);
 });
 
 test('a statement with several independent routes is proven by any one of them', () => {

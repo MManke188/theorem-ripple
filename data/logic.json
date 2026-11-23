@@ -25,6 +25,9 @@
       "needs": [
         "axiom-of-choice"
       ],
+      "within": [
+        "zf-set-theory"
+      ],
       "equivalent": true,
       "by": "Kazimierz Kuratowski, 1922; Max Zorn, 1935",
       "note": "The usual way choice is used in algebra and analysis. Over ZF it is equivalent to the axiom of choice and to the well-ordering theorem.",
@@ -41,6 +44,9 @@
       "base": "conditional",
       "needs": [
         "axiom-of-choice"
+      ],
+      "within": [
+        "zf-set-theory"
       ],
       "equivalent": true,
       "by": "Ernst Zermelo, 1904",
@@ -62,6 +68,9 @@
           "url": "https://eudml.org/doc/213229"
         }
       ],
+      "within": [
+        "topology"
+      ],
       "equivalent": true,
       "by": "Andrey Tychonoff, 1930 (powers of the unit interval) and 1935 (general form)",
       "note": "John L. Kelley showed in 1950 that the theorem implies the axiom of choice. Restricted to Hausdorff spaces it is weaker and equivalent to the Boolean prime ideal theorem.",
@@ -80,6 +89,9 @@
       "needs": [
         "axiom-of-choice"
       ],
+      "within": [
+        "linear-algebra"
+      ],
       "equivalent": true,
       "by": "Georg Hamel, 1905 (basis of ℝ over ℚ); in general via Zorn's lemma. Converse: Andreas Blass, 1984",
       "note": "Blass's paper is \"Existence of bases implies the axiom of choice\" (Contemporary Mathematics 31, 1984).",
@@ -96,6 +108,9 @@
       "base": "conditional",
       "needs": [
         "axiom-of-choice"
+      ],
+      "within": [
+        "zf-set-theory"
       ],
       "by": "Ultrafilter lemma: Alfred Tarski, 1930. Shown strictly weaker than choice by J. D. Halpern and Azriel Lévy, 1971",
       "note": "A weak form of choice: it follows from the axiom of choice but does not imply it. Many results that seem to need choice need only this.",
@@ -216,6 +231,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
       "related": [
         "continuum-hypothesis"
       ],
@@ -234,6 +252,10 @@
       "base": "conditional",
       "needs": [
         "continuum-hypothesis"
+      ],
+      "within": [
+        "zf-set-theory",
+        "complex-analysis"
       ],
       "equivalent": true,
       "by": "Paul Erdős, 1964, answering a question of John Wetzel",
@@ -285,6 +307,12 @@
       "needs": [
         "measurable-cardinal"
       ],
+      "within": [
+        {
+          "id": "zf-set-theory",
+          "url": "https://en.wikipedia.org/wiki/Measurable_cardinal"
+        }
+      ],
       "related": [
         "ch-independence"
       ],
@@ -322,6 +350,9 @@
       "base": "conditional",
       "needs": [
         "projective-determinacy"
+      ],
+      "within": [
+        "descriptive-set-theory"
       ],
       "by": "Jan Mycielski and Stanisław Świerczkowski, 1964 (determinacy implies measurability)",
       "note": "Under the axiom of choice there are non-measurable sets, but projective determinacy shows none of them is projective. ZFC alone cannot prove this, since Gödel's constructible universe L contains a non-measurable projective set.",

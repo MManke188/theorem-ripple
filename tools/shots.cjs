@@ -7,7 +7,7 @@
 // Needs a server (python3 -m http.server 8377) or SHOT_URL pointing at the live site.
 // Env: PLAYWRIGHT_CORE (path to a playwright-core package, if it is not installed here),
 //      SHOT_DIR (where the PNGs go, default: the system temp folder),
-//      AXIOM, DEEP, AREA (which statements and area the run uses).
+//      AXIOM, DEEP, AREA, HIGH (which statements and area the run uses).
 // Prints a JSON summary; "errors" must be empty. Look at the images, the summary is not enough.
 const { chromium } = require(process.env.PLAYWRIGHT_CORE || 'playwright-core');
 const path = require('path');
@@ -20,6 +20,7 @@ const URL = process.env.SHOT_URL || 'http://127.0.0.1:8377/';
 const AXIOM = process.env.AXIOM || 'Axiom of choice';
 const DEEP = process.env.DEEP || 'Prime number theorem in short';
 const AREA = process.env.AREA || 'Logic and set theory';
+const HIGH = process.env.HIGH || "Fermat's Last Theorem";
 
 (async () => {
   const browser = await chromium.launch();
@@ -62,10 +63,19 @@ const AREA = process.env.AREA || 'Logic and set theory';
   await shot('6-down');
 
   info.deep = await find(DEEP);
-  await page.locator('.trace-btn').last().click();
+  await page.locator('.trace-btn', { hasText: 'This rests on' }).click();
   await page.waitForTimeout(4500);
   info.upTraced = await page.evaluate(() => document.querySelectorAll('.node.traced').length);
   await shot('7-up');
+
+  // The tree: from a result high up, follow everything it stands on down to the axioms.
+  info.high = await find(HIGH);
+  await page.locator('.trace-btn', { hasText: 'Down to the axioms' }).click();
+  await page.waitForTimeout(5000);
+  info.rootsTraced = await page.evaluate(() => document.querySelectorAll('.node.traced').length);
+  await shot('7b-roots');
+  info.system = await find('Complex analysis');
+  await shot('7c-system');
 
   info.axiom = await find(AXIOM);
   await shot('8-axiom');
@@ -88,6 +98,10 @@ const AREA = process.env.AREA || 'Logic and set theory';
   await page.waitForTimeout(300);
   await page.locator('#btn-all').click();
   await page.waitForTimeout(700);
+  await shot('11b-tree');
+  await page.locator('#btn-areas').click();
+  await page.waitForTimeout(1400);
+  await shot('11c-areas');
   await page.locator(`.area-label[aria-label="Zoom to ${AREA}"]`).click();
   await page.waitForTimeout(800);
   info.hiddenLabelsInArea = await page.evaluate(() => document.querySelectorAll('.label.hidden').length);

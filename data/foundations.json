@@ -1,0 +1,827 @@
+{
+  "area": "foundations",
+  "nodes": [
+    {
+      "id": "axiom-extensionality",
+      "name": "Axiom of extensionality",
+      "short": "Extensionality",
+      "statement": "Two sets are equal if they have the same elements.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Ernst Zermelo, 1908",
+      "note": "Zermelo stated it in his 1908 paper on the foundations of set theory, under the name Axiom der Bestimmtheit. It says a set is nothing more than its members.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_extensionality",
+      "area": "foundations",
+      "year": 1908
+    },
+    {
+      "id": "axiom-pairing",
+      "name": "Axiom of pairing",
+      "short": "Pairing",
+      "statement": "For any two sets x and y there is a set that contains x and y as elements.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Ernst Zermelo, 1908",
+      "note": "Zermelo introduced it as a special case of his axiom of elementary sets.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
+      "area": "foundations",
+      "year": 1908
+    },
+    {
+      "id": "axiom-union",
+      "name": "Axiom of union",
+      "short": "Union",
+      "statement": "For any set X there is a set whose elements are exactly the elements of the elements of X.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Ernst Zermelo, 1908",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_union",
+      "area": "foundations",
+      "year": 1908
+    },
+    {
+      "id": "axiom-power-set",
+      "name": "Axiom of power set",
+      "short": "Power set",
+      "statement": "For any set T there is a set, the power set of T, whose elements are exactly the subsets of T.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Ernst Zermelo, 1908",
+      "note": "Axiom IV (Axiom der Potenzmenge) of Zermelo's 1908 list.",
+      "url": "https://en.wikipedia.org/wiki/Zermelo_set_theory",
+      "area": "foundations",
+      "year": 1908
+    },
+    {
+      "id": "axiom-infinity",
+      "name": "Axiom of infinity",
+      "short": "Infinity",
+      "statement": "There is a set that contains the empty set and, with each of its elements x, also contains the next set x ∪ {x}. Such a set contains all the natural numbers, so it is infinite.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Ernst Zermelo, 1908",
+      "note": "The other axioms cannot prove that an infinite set exists. Zermelo's own version used {a} as the next element; the form with x ∪ {x} fits von Neumann's construction of the natural numbers.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_infinity",
+      "area": "foundations",
+      "year": 1908
+    },
+    {
+      "id": "axiom-separation",
+      "name": "Axiom schema of separation (specification)",
+      "short": "Separation",
+      "statement": "From any set A and any property that can be written down, one can form the subset of those elements of A that have the property.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Ernst Zermelo, 1908; the first-order form used today is due to Thoralf Skolem, 1930",
+      "note": "Allowing any property to define a set, without starting from an existing set A, leads to Russell's paradox. Taking the elements from a given set avoids it.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_schema_of_specification",
+      "area": "foundations",
+      "year": 1908
+    },
+    {
+      "id": "axiom-replacement",
+      "name": "Axiom schema of replacement",
+      "short": "Replacement",
+      "statement": "If a rule that can be written down assigns to each element of a set A exactly one set, then the collection of all the assigned sets is again a set.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Abraham Fraenkel, 1922; independently Thoralf Skolem (talk 1922, published 1923)",
+      "note": "Zermelo's 1908 axioms lacked it. Adding replacement turned Zermelo set theory into Zermelo–Fraenkel set theory.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_schema_of_replacement",
+      "area": "foundations",
+      "year": 1922
+    },
+    {
+      "id": "axiom-regularity",
+      "name": "Axiom of regularity (foundation)",
+      "short": "Regularity (foundation)",
+      "statement": "Every non-empty set A has an element that has no element in common with A. As a consequence, no set is an element of itself.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "John von Neumann, 1925; final form by Ernst Zermelo, 1930",
+      "note": "It rules out infinite descending chains of membership. Dmitry Mirimanoff studied such well-founded sets in 1917 but did not propose an axiom.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_regularity",
+      "area": "foundations",
+      "year": 1925
+    },
+    {
+      "id": "zf-set-theory",
+      "name": "Zermelo–Fraenkel set theory (ZF)",
+      "short": "ZF set theory",
+      "statement": "The standard axioms for sets: extensionality, pairing, union, power set, infinity, separation, replacement and regularity. They are the usual starting point for building mathematics out of sets.",
+      "kind": "system",
+      "within": [
+        "axiom-extensionality",
+        "axiom-pairing",
+        "axiom-union",
+        "axiom-power-set",
+        "axiom-infinity",
+        "axiom-separation",
+        "axiom-replacement",
+        "axiom-regularity"
+      ],
+      "by": "Ernst Zermelo, 1908; Abraham Fraenkel and Thoralf Skolem, 1922 (replacement); John von Neumann, 1925 (regularity)",
+      "note": "ZF plus the axiom of choice is ZFC, the usual foundation of mathematics. The axiom of choice is shown as a separate entry on this map.",
+      "url": "https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory",
+      "area": "foundations",
+      "year": 1922
+    },
+    {
+      "id": "natural-numbers",
+      "name": "Natural numbers",
+      "short": "Natural numbers ℕ",
+      "statement": "The counting numbers 0, 1, 2, 3, and so on. In ZF they are built from the empty set: 0 is the empty set and the successor of n is n ∪ {n} (von Neumann ordinals), and the axiom of infinity gives the set of all of them.",
+      "kind": "system",
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Axioms: Giuseppe Peano, 1889, simplifying Richard Dedekind, 1888. Construction from sets: John von Neumann, 1923",
+      "note": "The numbers built this way satisfy the Peano axioms, so Peano's axioms hold as properties of this construction rather than having to be assumed.",
+      "url": "https://en.wikipedia.org/wiki/Natural_number#Set-theoretic_definition",
+      "area": "foundations",
+      "year": 1889
+    },
+    {
+      "id": "integers",
+      "name": "Integers",
+      "short": "Integers ℤ",
+      "statement": "The whole numbers …, −2, −1, 0, 1, 2, …. They can be built from pairs (a, b) of natural numbers standing for a − b, where two pairs (a, b) and (c, d) count as the same integer when a + d = b + c.",
+      "kind": "system",
+      "within": [
+        "natural-numbers"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Integer#Equivalence_classes_of_ordered_pairs",
+      "area": "foundations"
+    },
+    {
+      "id": "rational-numbers",
+      "name": "Rational numbers",
+      "short": "Rational numbers ℚ",
+      "statement": "The fractions m/n of integers with n ≠ 0. They can be built from pairs of integers, where (m, n) and (p, q) count as the same number when mq = np.",
+      "kind": "system",
+      "within": [
+        "integers"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Rational_number#Formal_construction",
+      "area": "foundations"
+    },
+    {
+      "id": "real-numbers",
+      "name": "Real numbers",
+      "short": "Real numbers ℝ",
+      "statement": "The numbers that measure continuous quantities such as length, including irrational ones like √2 and π. They are built from the rational numbers, either as Dedekind cuts or as limits of Cauchy sequences of rationals.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "rational-numbers",
+          "url": "https://en.wikipedia.org/wiki/Construction_of_the_real_numbers"
+        }
+      ],
+      "by": "Richard Dedekind (cuts) and Georg Cantor (Cauchy sequences), 1872",
+      "note": "The two definitions were published independently in 1872. What distinguishes the reals from the rationals is completeness: no gaps.",
+      "url": "https://en.wikipedia.org/wiki/Real_number#History",
+      "area": "foundations",
+      "year": 1872
+    },
+    {
+      "id": "complex-numbers",
+      "name": "Complex numbers",
+      "short": "Complex numbers ℂ",
+      "statement": "Numbers of the form a + bi, where a and b are real numbers and i² = −1. They can be built as pairs (a, b) of real numbers with suitable rules for adding and multiplying.",
+      "kind": "system",
+      "within": [
+        "real-numbers"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Complex_number",
+      "area": "foundations"
+    },
+    {
+      "id": "mathematical-logic",
+      "name": "Mathematical logic (first-order logic and model theory)",
+      "short": "Mathematical logic",
+      "statement": "The study of formal languages, proofs and their meaning. Model theory compares theories written in first-order logic with the structures (models) in which they are true.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "zf-set-theory",
+          "url": "https://en.wikipedia.org/wiki/Model_theory#Set_theory"
+        }
+      ],
+      "note": "A structure in model theory is a set with interpretations of the symbols, and model theory itself is formalised within Zermelo–Fraenkel set theory.",
+      "url": "https://en.wikipedia.org/wiki/Mathematical_logic",
+      "area": "foundations"
+    },
+    {
+      "id": "computability-theory",
+      "name": "Computability theory",
+      "short": "Computability theory",
+      "statement": "The branch of mathematical logic that studies which functions from natural numbers to natural numbers can be computed by an algorithm, for example by a Turing machine.",
+      "kind": "system",
+      "within": [
+        "natural-numbers",
+        "mathematical-logic"
+      ],
+      "by": "Kurt Gödel, Alonzo Church, Rózsa Péter, Alan Turing, Stephen Kleene and Emil Post, 1930s",
+      "note": "Also called recursion theory.",
+      "url": "https://en.wikipedia.org/wiki/Computability_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "complexity-theory",
+      "name": "Computational complexity theory",
+      "short": "Complexity theory",
+      "statement": "The study of how much time and memory computational problems need. It classifies problems by the resources a Turing machine needs to solve them.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "computability-theory",
+          "url": "https://plato.stanford.edu/entries/computational-complexity/"
+        }
+      ],
+      "by": "Juris Hartmanis and Richard E. Stearns, 1965",
+      "note": "Bounding the resources is what distinguishes it from computability theory, which asks only whether a problem can be solved at all. Hartmanis and Stearns began its systematic study in \"On the Computational Complexity of Algorithms\".",
+      "url": "https://en.wikipedia.org/wiki/Computational_complexity_theory",
+      "area": "foundations",
+      "year": 1965
+    },
+    {
+      "id": "cryptography",
+      "name": "Cryptography",
+      "short": "Cryptography",
+      "statement": "The study of methods for secure communication in the presence of adversaries. Modern schemes are built on problems believed to be computationally hard, such as factoring large integers.",
+      "kind": "system",
+      "within": [
+        "complexity-theory",
+        {
+          "id": "elementary-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Number_theory#Applications"
+        }
+      ],
+      "note": "The security of RSA rests on the difficulty of factoring large integers, and that of Diffie–Hellman on the discrete logarithm problem.",
+      "url": "https://en.wikipedia.org/wiki/Cryptography",
+      "area": "foundations"
+    },
+    {
+      "id": "group-theory",
+      "name": "Group theory",
+      "short": "Group theory",
+      "statement": "The study of groups: sets with an operation that combines two elements into a third, is associative, has a neutral element and lets every element be undone. Groups describe symmetry.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "zf-set-theory",
+          "url": "https://en.wikipedia.org/wiki/Group_(mathematics)"
+        }
+      ],
+      "note": "Galois used groups in the 1830s to decide which polynomial equations are solvable. Arthur Cayley gave the first abstract definition of a finite group in 1854.",
+      "url": "https://en.wikipedia.org/wiki/Group_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "rings-and-fields",
+      "name": "Rings and fields",
+      "short": "Rings and fields",
+      "statement": "A ring is a set with addition and multiplication whose elements form an abelian group under addition, like the integers. A field is a commutative ring in which one can divide by every nonzero element, like the rationals or the reals.",
+      "kind": "system",
+      "within": [
+        "group-theory"
+      ],
+      "note": "Hilbert coined the term Zahlring in 1892; Emmy Noether gave the modern axioms for commutative rings in 1921. The first clear definition of an abstract field is due to Heinrich Weber, 1893.",
+      "url": "https://en.wikipedia.org/wiki/Ring_(mathematics)",
+      "area": "foundations"
+    },
+    {
+      "id": "linear-algebra",
+      "name": "Linear algebra",
+      "short": "Linear algebra",
+      "statement": "The study of linear equations, vector spaces over a field, and linear maps between them, usually written as matrices.",
+      "kind": "system",
+      "within": [
+        "rings-and-fields"
+      ],
+      "note": "A vector space is defined over a field such as the real or complex numbers. Giuseppe Peano gave the first modern definition of a vector space in 1888.",
+      "url": "https://en.wikipedia.org/wiki/Linear_algebra",
+      "area": "foundations"
+    },
+    {
+      "id": "galois-theory",
+      "name": "Galois theory",
+      "short": "Galois theory",
+      "statement": "The theory that connects fields and groups: to an extension of fields it attaches the group of symmetries that fix the smaller field, and reads properties of the extension off that group.",
+      "kind": "system",
+      "within": [
+        "group-theory",
+        "rings-and-fields"
+      ],
+      "by": "Évariste Galois, 1830",
+      "note": "Galois submitted his memoir on solvability by radicals to the French Academy in 1830; it was rejected in 1831, and Joseph Liouville published it in 1846.",
+      "url": "https://en.wikipedia.org/wiki/Galois_theory",
+      "area": "foundations",
+      "year": 1830
+    },
+    {
+      "id": "algebraic-number-theory",
+      "name": "Algebraic number theory",
+      "short": "Algebraic number theory",
+      "statement": "The branch of number theory that uses rings, fields and Galois groups to study the integers and their generalisations, such as algebraic number fields and their rings of integers.",
+      "kind": "system",
+      "within": [
+        "galois-theory",
+        {
+          "id": "elementary-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Algebraic_number_theory"
+        }
+      ],
+      "note": "Gauss's Disquisitiones Arithmeticae (1801) is counted among its founding works.",
+      "url": "https://en.wikipedia.org/wiki/Algebraic_number_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "algebraic-geometry",
+      "name": "Algebraic geometry",
+      "short": "Algebraic geometry",
+      "statement": "The study of the shapes cut out by polynomial equations, using methods from commutative algebra (rings and their ideals).",
+      "kind": "system",
+      "within": [
+        "rings-and-fields"
+      ],
+      "note": "Grothendieck's theory of schemes is the central framework of the modern subject.",
+      "url": "https://en.wikipedia.org/wiki/Algebraic_geometry",
+      "area": "foundations"
+    },
+    {
+      "id": "arithmetic-geometry",
+      "name": "Arithmetic geometry",
+      "short": "Arithmetic geometry",
+      "statement": "The use of algebraic geometry for questions in number theory, centred on the rational points of algebraic varieties over fields such as number fields, finite fields and p-adic fields. It includes the study of elliptic curves and their link to modular forms.",
+      "kind": "system",
+      "within": [
+        "algebraic-geometry",
+        "algebraic-number-theory"
+      ],
+      "note": "The Taniyama–Shimura conjecture, now the modularity theorem, matches elliptic curves with modular forms.",
+      "url": "https://en.wikipedia.org/wiki/Arithmetic_geometry",
+      "area": "foundations"
+    },
+    {
+      "id": "representation-theory",
+      "name": "Representation theory",
+      "short": "Representation theory",
+      "statement": "The study of groups and other algebraic structures by representing their elements as linear transformations (matrices) of vector spaces, which turns questions of abstract algebra into linear algebra.",
+      "kind": "system",
+      "within": [
+        "group-theory",
+        "linear-algebra"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Representation_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "real-analysis",
+      "name": "Real analysis",
+      "short": "Real analysis",
+      "statement": "Calculus made rigorous: limits, continuity, derivatives, integrals and series of functions of real numbers and of points in Euclidean space.",
+      "kind": "system",
+      "within": [
+        "real-numbers"
+      ],
+      "note": "The real numbers are its basic setting, and most of its theorems use their completeness.",
+      "url": "https://en.wikipedia.org/wiki/Real_analysis",
+      "area": "foundations"
+    },
+    {
+      "id": "topology",
+      "name": "General topology",
+      "short": "Topology",
+      "statement": "The study of topological spaces: sets with a chosen family of open subsets, which is enough to speak about nearness, continuity and convergence without measuring distances.",
+      "kind": "system",
+      "within": [
+        "zf-set-theory"
+      ],
+      "note": "General topology supplies the basic set-theoretic definitions used in all other branches of topology. It took its present form around 1940.",
+      "url": "https://en.wikipedia.org/wiki/General_topology",
+      "area": "foundations"
+    },
+    {
+      "id": "measure-theory",
+      "name": "Measure theory",
+      "short": "Measure theory",
+      "statement": "The theory of assigning a size (length, area, volume or probability) to sets, and of the Lebesgue integral built on it.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "real-analysis",
+          "url": "https://en.wikipedia.org/wiki/Real_analysis#Integration_and_measure"
+        }
+      ],
+      "note": "A measure gives each measurable set a value from 0 to +∞. Borel, Lebesgue, Radon, Carathéodory and others laid its foundations in the late 19th and early 20th centuries.",
+      "url": "https://en.wikipedia.org/wiki/Measure_(mathematics)",
+      "area": "foundations"
+    },
+    {
+      "id": "complex-analysis",
+      "name": "Complex analysis",
+      "short": "Complex analysis",
+      "statement": "The branch of analysis that studies functions of complex numbers, above all functions that are differentiable in the complex sense (holomorphic). Such a function is automatically differentiable infinitely often.",
+      "kind": "system",
+      "within": [
+        "complex-numbers",
+        {
+          "id": "real-analysis",
+          "url": "https://en.wikipedia.org/wiki/Cauchy%E2%80%93Riemann_equations"
+        }
+      ],
+      "note": "Writing a complex function as u + iv with real functions u and v turns complex differentiability into the Cauchy–Riemann equations for u and v.",
+      "url": "https://en.wikipedia.org/wiki/Complex_analysis",
+      "area": "foundations"
+    },
+    {
+      "id": "functional-analysis",
+      "name": "Functional analysis",
+      "short": "Functional analysis",
+      "statement": "The study of vector spaces, usually infinite-dimensional spaces of functions, equipped with a notion of limit such as a norm or a topology, and of the linear maps between them.",
+      "kind": "system",
+      "within": [
+        "linear-algebra",
+        "topology"
+      ],
+      "note": "Key examples are the Lp spaces of measurable functions, which is how measure and integration enter.",
+      "url": "https://en.wikipedia.org/wiki/Functional_analysis",
+      "area": "foundations"
+    },
+    {
+      "id": "harmonic-analysis",
+      "name": "Harmonic analysis",
+      "short": "Harmonic analysis",
+      "statement": "The study of breaking functions and measures into simpler pieces such as waves of different frequencies, as in Fourier series and the Fourier transform.",
+      "kind": "system",
+      "within": [
+        "measure-theory",
+        "functional-analysis"
+      ],
+      "note": "Fourier analysis has its basic form in Hilbert space, and the field works with Lebesgue measure and Lp spaces.",
+      "url": "https://en.wikipedia.org/wiki/Harmonic_analysis",
+      "area": "foundations"
+    },
+    {
+      "id": "partial-differential-equations",
+      "name": "Partial differential equations",
+      "short": "PDE theory",
+      "statement": "The study of equations that relate a function of several variables to its partial derivatives, such as the heat, wave and Laplace equations.",
+      "kind": "system",
+      "within": [
+        "real-analysis",
+        "functional-analysis"
+      ],
+      "note": "The modern theory looks for weak solutions in Sobolev spaces and uses results from functional analysis.",
+      "url": "https://en.wikipedia.org/wiki/Partial_differential_equation",
+      "area": "foundations"
+    },
+    {
+      "id": "differential-geometry",
+      "name": "Differential geometry",
+      "short": "Differential geometry",
+      "statement": "The geometry of smooth curved spaces (smooth manifolds), studied with calculus and linear algebra: curvature, lengths, angles and volumes.",
+      "kind": "system",
+      "within": [
+        "real-analysis",
+        {
+          "id": "topology",
+          "url": "https://en.wikipedia.org/wiki/Differentiable_manifold"
+        },
+        "linear-algebra"
+      ],
+      "note": "A smooth manifold is a topological manifold with extra structure that allows calculus, and its tangent spaces are vector spaces. Gauss's 1827 work on curved surfaces is an early landmark.",
+      "url": "https://en.wikipedia.org/wiki/Differential_geometry",
+      "area": "foundations"
+    },
+    {
+      "id": "geometric-topology",
+      "name": "Geometric topology",
+      "short": "Geometric topology",
+      "statement": "The study of manifolds, spaces that look like ordinary space near each point, and of maps between them, especially embeddings of one manifold in another.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "topology",
+          "url": "https://en.wikipedia.org/wiki/Manifold"
+        },
+        "group-theory"
+      ],
+      "note": "Among its main tools is the fundamental group, which in every dimension is a very important invariant of a manifold. The field is often traced to the 1935 classification of lens spaces.",
+      "url": "https://en.wikipedia.org/wiki/Geometric_topology",
+      "area": "foundations"
+    },
+    {
+      "id": "elementary-number-theory",
+      "name": "Elementary number theory",
+      "short": "Elementary number theory",
+      "statement": "The study of the integers by elementary methods: divisibility, prime numbers, factorisation and congruences (arithmetic modulo n).",
+      "kind": "system",
+      "within": [
+        "integers"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Number_theory#Elementary_number_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "analytic-number-theory",
+      "name": "Analytic number theory",
+      "short": "Analytic number theory",
+      "statement": "The branch of number theory that uses methods from analysis, especially complex analysis, to answer questions about the integers, such as how the primes are distributed.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "elementary-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Number_theory#Analytic_number_theory"
+        },
+        "complex-analysis"
+      ],
+      "by": "Usually dated from Dirichlet's introduction of L-functions, 1837",
+      "note": "Riemann used complex analysis and the zeta function to study the primes, and the first proofs of the prime number theorem used complex analysis.",
+      "url": "https://en.wikipedia.org/wiki/Analytic_number_theory",
+      "area": "foundations",
+      "year": 1837
+    },
+    {
+      "id": "combinatorics",
+      "name": "Combinatorics",
+      "short": "Combinatorics",
+      "statement": "The mathematics of counting and arranging finite structures. A typical question gives a finite set Sₙ for each natural number n and asks for a formula for how many elements Sₙ has.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "natural-numbers",
+          "url": "https://en.wikipedia.org/wiki/Enumerative_combinatorics"
+        }
+      ],
+      "url": "https://en.wikipedia.org/wiki/Combinatorics",
+      "area": "foundations"
+    },
+    {
+      "id": "graph-theory",
+      "name": "Graph theory",
+      "short": "Graph theory",
+      "statement": "The study of graphs: points (vertices) joined by lines (edges), used to model pairwise relations between objects.",
+      "kind": "system",
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Leonhard Euler, 1736",
+      "note": "Euler's paper on the Seven Bridges of Königsberg is regarded as the first paper in graph theory. The field is often considered part of combinatorics.",
+      "url": "https://en.wikipedia.org/wiki/Graph_theory",
+      "area": "foundations",
+      "year": 1736
+    },
+    {
+      "id": "descriptive-set-theory",
+      "name": "Descriptive set theory",
+      "short": "Descriptive set theory",
+      "statement": "The study of classes of subsets of the real line and of similar spaces (Polish spaces) that can be defined in a certain way, such as Borel sets and projective sets.",
+      "kind": "system",
+      "within": [
+        "zf-set-theory",
+        "topology"
+      ],
+      "note": "A part of mathematical logic with close ties to set theory, topology and analysis.",
+      "url": "https://en.wikipedia.org/wiki/Descriptive_set_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "euclid-primes",
+      "name": "Euclid's theorem on the infinitude of primes",
+      "short": "Infinitely many primes",
+      "statement": "There are infinitely many prime numbers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "related": [
+        "euler-product"
+      ],
+      "by": "Euclid, about 300 BC (Elements, Book IX, Proposition 20)",
+      "note": "Multiply any finite list of primes and add 1: the result has a prime factor that is not on the list. Euler later gave a second proof from his product formula.",
+      "url": "https://en.wikipedia.org/wiki/Euclid%27s_theorem",
+      "area": "foundations",
+      "year": -300
+    },
+    {
+      "id": "fundamental-theorem-arithmetic",
+      "name": "Fundamental theorem of arithmetic",
+      "short": "Unique prime factorisation",
+      "statement": "Every whole number greater than 1 can be written as a product of prime numbers in exactly one way, apart from the order of the factors.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Main steps in Euclid's Elements (Book VII, Propositions 30 to 32); first proof of uniqueness by Carl Friedrich Gauss, 1801 (Disquisitiones Arithmeticae)",
+      "note": "The standard proof of uniqueness uses Euclid's lemma (a prime that divides a product divides one of the factors), not the infinitude of primes.",
+      "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic",
+      "area": "foundations",
+      "year": 1801
+    },
+    {
+      "id": "quadratic-reciprocity",
+      "name": "Law of quadratic reciprocity",
+      "short": "Quadratic reciprocity",
+      "statement": "For two different odd primes p and q, p is a perfect square modulo q exactly when q is a perfect square modulo p, unless both p and q leave remainder 3 when divided by 4, in which case exactly one of the two holds.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Conjectured by Leonhard Euler and Adrien-Marie Legendre; first proven by Carl Friedrich Gauss, 1796 (published 1801)",
+      "note": "Gauss called it the fundamental theorem and published it in Disquisitiones Arithmeticae.",
+      "url": "https://en.wikipedia.org/wiki/Quadratic_reciprocity",
+      "area": "foundations",
+      "year": 1796
+    },
+    {
+      "id": "cantors-theorem",
+      "name": "Cantor's theorem",
+      "short": "Cantor's theorem",
+      "statement": "No set can be mapped onto the set of all its subsets (its power set). So the power set of any set is strictly larger than the set itself, and there is no largest infinity.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "related": [
+        "halting-problem"
+      ],
+      "by": "Georg Cantor, 1891",
+      "note": "Cantor's diagonal argument first appeared in the same 1891 paper. In ZF the diagonal set used in the proof exists by the axiom schema of separation; the same argument applied to a set of all sets gives Russell's paradox.",
+      "url": "https://en.wikipedia.org/wiki/Cantor%27s_theorem",
+      "area": "foundations",
+      "year": 1891
+    },
+    {
+      "id": "fundamental-theorem-calculus",
+      "name": "Fundamental theorem of calculus",
+      "short": "Fund. theorem of calculus",
+      "statement": "Differentiation and integration undo each other: the area under a continuous function f from a to x, viewed as a function of x, has derivative f, and the integral of f from a to b equals F(b) − F(a) for any antiderivative F.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "real-analysis"
+      ],
+      "by": "James Gregory, 1668 (first published statement and proof, in geometric form); generalised by Isaac Barrow; developed into calculus by Isaac Newton and Gottfried Leibniz",
+      "note": "Gregory's version, in Geometriae Pars Universalis (1668), was geometric and covered only a special class of curves.",
+      "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus",
+      "area": "foundations",
+      "year": 1668
+    },
+    {
+      "id": "fundamental-theorem-algebra",
+      "name": "Fundamental theorem of algebra",
+      "short": "Fund. theorem of algebra",
+      "statement": "Every polynomial in one variable with complex coefficients that is not constant has at least one complex root. Equivalently, the complex numbers are algebraically closed.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complex-numbers"
+      ],
+      "related": [
+        "fundamental-theorem-galois"
+      ],
+      "by": "First attempt by Jean le Rond d'Alembert, 1746; Gauss, 1799 (with a gap filled by Alexander Ostrowski in 1920); first rigorous proof by Jean-Robert Argand, 1806",
+      "note": "A common proof uses complex analysis: if p had no root, 1/p would be a bounded entire function, hence constant by Liouville's theorem. No purely algebraic proof exists; even the proof through Galois theory needs the intermediate value theorem from real analysis.",
+      "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra",
+      "area": "foundations",
+      "year": 1806
+    },
+    {
+      "id": "cauchy-integral-theorem",
+      "name": "Cauchy's integral theorem",
+      "short": "Cauchy integral theorem",
+      "statement": "If a function is complex-differentiable (holomorphic) everywhere in a region without holes, then its integral around any closed curve in that region is zero.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complex-analysis"
+      ],
+      "by": "Augustin-Louis Cauchy, 1825; Édouard Goursat, 1900 (first proof assuming only complex differentiability, revising his 1884 proof)",
+      "note": "Cauchy's 1825 memoir argued with the calculus of variations; his proof by Green's formula, which needs a continuous derivative, appeared in 1846.",
+      "url": "https://en.wikipedia.org/wiki/Cauchy%27s_integral_theorem",
+      "area": "foundations",
+      "year": 1825
+    },
+    {
+      "id": "euler-product",
+      "name": "Euler product formula for the zeta function",
+      "short": "Euler product",
+      "statement": "For s > 1, the sum 1 + 1/2ˢ + 1/3ˢ + 1/4ˢ + … equals the product over all primes p of 1/(1 − p⁻ˢ). The same holds for complex s with real part greater than 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "fundamental-theorem-arithmetic"
+      ],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Analytic_number_theory"
+        }
+      ],
+      "related": [
+        "euclid-primes"
+      ],
+      "by": "Leonhard Euler, 1737",
+      "note": "The proof uses only the geometric series and the fundamental theorem of arithmetic: unique factorisation makes every term 1/nˢ appear exactly once. Letting s tend to 1 shows that there are infinitely many primes. Euler's use of analysis to study the integers is counted as the beginning of analytic number theory.",
+      "url": "https://en.wikipedia.org/wiki/Riemann_zeta_function#Euler's_product_formula",
+      "area": "foundations",
+      "year": 1737
+    },
+    {
+      "id": "lagrange-theorem-groups",
+      "name": "Lagrange's theorem (group theory)",
+      "short": "Lagrange's theorem",
+      "statement": "In a finite group, the number of elements of any subgroup divides the number of elements of the group.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "group-theory"
+      ],
+      "by": "Joseph-Louis Lagrange, 1771 (for permutations of the variables of a polynomial); Camille Jordan, 1861 (any permutation group)",
+      "note": "Lagrange's observation came before groups were defined. Gauss (1801) and Cauchy (1844) proved further special cases before Jordan's general permutation-group version.",
+      "url": "https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)",
+      "area": "foundations",
+      "year": 1771
+    },
+    {
+      "id": "fundamental-theorem-galois",
+      "name": "Fundamental theorem of Galois theory",
+      "short": "Fund. theorem of Galois",
+      "statement": "For a finite Galois extension of fields, the fields lying in between correspond one to one to the subgroups of its Galois group, with larger subgroups matching smaller fields.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "galois-theory"
+      ],
+      "by": "Évariste Galois (memoir submitted 1830, published 1846); stated as one theorem in its modern form by Emil Artin (1938, 1942)",
+      "note": "Emil Artin gathered Galois's conclusions into one Fundamental Theorem in his lecture notes Foundations of Galois Theory (1938) and Galois Theory (1942).",
+      "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_Galois_theory",
+      "area": "foundations",
+      "year": 1830
+    },
+    {
+      "id": "godel-incompleteness",
+      "name": "Gödel's incompleteness theorems",
+      "short": "Gödel incompleteness",
+      "statement": "Any consistent formal system whose axioms can be listed by an algorithm and in which a certain amount of elementary arithmetic can be carried out has statements it can neither prove nor disprove. Such a system also cannot prove its own consistency.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic",
+        "natural-numbers"
+      ],
+      "related": [
+        "halting-problem"
+      ],
+      "by": "Kurt Gödel, 1931",
+      "note": "This applies to Peano arithmetic and to ZFC. J. Barkley Rosser (1936) weakened the hypothesis of ω-consistency to plain consistency.",
+      "url": "https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems",
+      "area": "foundations",
+      "year": 1931
+    },
+    {
+      "id": "halting-problem",
+      "name": "Undecidability of the halting problem",
+      "short": "Halting problem",
+      "statement": "No algorithm can decide, for every program and every input, whether the program will eventually stop when run on that input.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "related": [
+        "godel-incompleteness"
+      ],
+      "by": "Alan Turing, 1936 (printed January 1937), for the closely related printing problem; the halting formulation and its name are due to Martin Davis (1952 lectures, book 1958)",
+      "note": "The proof is analogous to Cantor's diagonal argument. A weaker form of Gödel's first incompleteness theorem follows easily from it.",
+      "url": "https://en.wikipedia.org/wiki/Halting_problem",
+      "area": "foundations",
+      "year": 1936
+    }
+  ]
+}

@@ -51,6 +51,21 @@ Look at `data/number-theory.json` for 46 finished examples. Each entry:
 - No cycles. If two statements are equivalent, pick one as the base and mark the other `equivalent: true`.
 - Only use ids that exist: in your own file, or in the list of taken ids if your task allows it.
 
+## Foundations: `system` entries and the `within` field
+
+The map also has a trunk in `data/foundations.json`: the axioms of set theory, the number systems and theories built on them, and a few classical theorems. Two things exist only for it.
+
+**`kind: "system"`** is a number system or a theory (the real numbers, group theory, complex analysis). It is not a statement, so it has no `base` and no `needs`. Its fields: `id`, `name`, `short`, `statement` (what it is, in one or two plain sentences), `kind`, `within`, `url`, `area`, and where a source gives them `by`, `year` and `note`.
+
+**`within`** lists the systems an entry is built in: the prime number theorem is `within` analytic number theory, which is `within` complex analysis and elementary number theory, and so on down to ZF set theory and its axioms. Same two spellings as `needs`: an id, or `{ "id": "...", "url": "..." }` when the link has its own source.
+
+- `within` is coarser than `needs`. It says "this belongs to that theory" or "this system is constructed from that one". It does not claim that a particular proof uses a particular result, and the page never lets a change travel along it.
+- A `within` link needs a source like every other link: a page that says the statement is a result of that field, or that the system is constructed from or defined on the other one. Usually that is the opening of the entry's own `url`.
+- Only systems and axioms may be listed in `within`. For a statement, pick the most specific system that the source supports; two at most, when the statement really sits in both. A system lists the systems it is constructed from or defined on.
+- Which entries get it: every system, and every statement whose `needs` and `anyOf` are empty or hold only axioms. A statement that already rests on other statements inherits its place through them.
+- Axioms have no `within`. The eight Zermelo–Fraenkel axioms are `kind: "axiom"`, `base: "open"`, `needs: []`, like the axiom of choice; `data/index.json` lists them as assumed.
+- Years before the common era are written as negative numbers (Euclid: `-300`).
+
 ## What makes a good set
 
 - A few **foundations**: proven theorems or open conjectures that several other entries rest on.

@@ -9,6 +9,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "algebraic-geometry"
+      ],
       "related": [
         "hasse-weil",
         "lefschetz-standard",
@@ -29,6 +32,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "algebraic-geometry"
+      ],
       "by": "Helmut Hasse for elliptic curves (g = 1), 1933; André Weil for all curves, announced 1940, full proof published 1948",
       "note": "This is the curve case of the Weil conjectures. Weil's work on it led him to state the conjectures for all dimensions.",
       "url": "https://ar5iv.labs.arxiv.org/html/1509.00797",
@@ -112,6 +118,10 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "representation-theory",
+        "algebraic-number-theory"
+      ],
       "by": "Robert Langlands, letter to André Weil 1967 and paper 1970",
       "note": "Harris and Taylor (2001) and Henniart (2000) proved the local correspondence for GL(n). Global functoriality over number fields is open in general. Known cases include symmetric-power lifts of holomorphic modular forms (Newton and Thorne, 2021).",
       "url": "https://en.wikipedia.org/wiki/Langlands_program",
@@ -180,6 +190,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "algebraic-geometry"
+      ],
       "related": [
         "lefschetz-11",
         "tate-conjecture",
@@ -199,6 +212,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "algebraic-geometry"
+      ],
       "by": "Solomon Lefschetz, 1924",
       "note": "This is the Hodge conjecture in degree 2, proven before the conjecture was stated. Combined with the hard Lefschetz theorem it gives the Hodge conjecture for all varieties of dimension at most three.",
       "url": "https://en.wikipedia.org/wiki/Hodge_conjecture",
@@ -213,6 +229,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
       "related": [
         "hodge-conjecture",
         "faltings"
@@ -251,6 +270,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "algebraic-geometry"
+      ],
       "related": [
         "tate-conjecture",
         "hodge-conjecture"
@@ -290,6 +312,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "algebraic-geometry"
+      ],
       "related": [
         "resolution-char-p"
       ],
@@ -322,6 +347,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "algebraic-geometry"
+      ],
       "by": "Open in general since Hironaka settled characteristic 0 in 1964; surfaces by Shreeram Abhyankar, 1956; threefolds by Abhyankar for characteristic above 5, 1966, and by Vincent Cossart and Olivier Piltant in all characteristics, 2008 and 2009",
       "note": "Open in dimension 4 and higher. The problem is known for many incorrect proofs and announced proofs that never appeared. Aise Johan de Jong's alterations (1996) give a weaker substitute that is enough for many uses.",
       "url": "https://en.wikipedia.org/wiki/Resolution_of_singularities",
@@ -336,6 +364,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "group-theory"
+      ],
       "by": "Walter Feit and John G. Thompson, 1963",
       "note": "Settles a conjecture of Burnside. The 255-page proof was checked by computer in the Coq (now Rocq) proof assistant by Georges Gonthier and colleagues in 2012.",
       "url": "https://en.wikipedia.org/wiki/Feit%E2%80%93Thompson_theorem",
@@ -417,6 +448,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "galois-theory"
+      ],
       "related": [
         "shafarevich-solvable"
       ],
@@ -434,6 +468,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "galois-theory"
+      ],
       "by": "Igor Shafarevich, 1954; a gap found by Alexander Schmidt was repaired by Shafarevich in 1989",
       "url": "https://en.wikipedia.org/wiki/Shafarevich%27s_theorem_on_solvable_Galois_groups",
       "area": "algebra-geometry",
@@ -447,6 +484,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "algebraic-geometry"
+      ],
       "by": "Ludwig Kraus, 1884 (two variables); Ott-Heinrich Keller, 1939 (any number of variables)",
       "note": "The version in three or more variables is false: Levent Alpöge presented a counterexample in three variables on 19 July 2026, and adding coordinates extends it to all higher dimensions. The two-variable case remains open and has a long history of false proofs.",
       "url": "https://en.wikipedia.org/wiki/Jacobian_conjecture",
@@ -477,6 +517,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
       "by": "Louis Mordell, 1922 (elliptic curves over ℚ); André Weil, 1929 (Jacobians over number fields)",
       "note": "The proof has two halves: a descent showing A(K)/2A(K) is finite, and a height argument. The number of generators of infinite order is the rank.",
       "url": "https://en.wikipedia.org/wiki/Mordell%E2%80%93Weil_theorem",

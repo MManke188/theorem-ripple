@@ -1,4 +1,4 @@
-import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach } from './propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach, layers, foundationsOf } from './propagate.js';
 
 const d3 = window.d3;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -10,8 +10,12 @@ const state = {
   nodes: [],
   byId: new Map(),
   links: [],
-  dependents: new Map(),
+  dependents: new Map(), // id -> the statements that need it
+  built: new Map(), // id -> the entries built directly within it (systems and axioms)
   areas: [],
+  layout: 'tree', // how the map is arranged: 'tree' (axioms at the bottom) or 'areas' (one cluster per field)
+  pos: {}, // positions per arrangement for the current shape, worked out when first shown
+  tween: 0,
   mode: 'before',
   whatIf: new Set(), // statements the reader marked as proven or assumed
   dropped: new Set(), // default axioms the reader stopped assuming
@@ -25,7 +29,7 @@ const state = {
   hover: null,
   t: d3.zoomIdentity,
   wave: null,
-  shape: null, // which arrangement is laid out: tall, wide or flat
+  shape: null, // the proportions of the free part of the window: tall, wide or flat (areas), and how often the tree's rows are folded
   touched: false,
 };
 
@@ -53,7 +57,9 @@ const el = (tag, props = {}, ...kids) => {
 
 const node = (id) => state.byId.get(id);
 const listNames = (ids) => andList.format(ids.map((id) => node(id).short));
-const statusOf = (n) => (state.shown.has(n.id) ? 'proven' : n.base === 'conditional' ? 'conditional' : 'open');
+// A system (a number system or a theory) is not a statement and has no status.
+const statusOf = (n) => (n.kind === 'system' ? 'system' : state.shown.has(n.id) ? 'proven' : n.base === 'conditional' ? 'conditional' : 'open');
+const isStatement = (n) => n.kind !== 'system' && n.kind !== 'axiom';
 const isHypothetical = (id) => state.shown.has(id) && !state.real.has(id);
 const plural = (count, word) => `${count} ${word}${count === 1 ? '' : 's'}`;
 
@@ -67,28 +73,39 @@ async function init() {
   state.index = index;
   state.nodes = nodes;
   state.byId = new Map(nodes.map((n) => [n.id, n]));
-  for (const n of nodes) state.dependents.set(n.id, []);
+  for (const n of nodes) {
+    state.dependents.set(n.id, []);
+    state.built.set(n.id, []);
+  }
   for (const n of nodes) {
     n.inputs = [...n.needs, ...n.anyOf]; // everything it is linked to upstream
-    for (const [type, refs] of [['needs', n.inputs], ['related', n.related], ['formerly', n.formerly]]) {
+    for (const [type, refs] of [['needs', n.inputs], ['within', n.within], ['related', n.related], ['formerly', n.formerly]]) {
       for (const ref of refs) {
-        state.links.push({ source: ref, target: n.id, type, key: `${ref}>${n.id}`, equivalent: type === 'needs' && !!n.equivalent });
+        const inner = type === 'within' && state.byId.get(ref).area === n.area; // both ends in the same area
+        state.links.push({ source: ref, target: n.id, type, inner, key: `${type === 'within' ? 'in:' : ''}${ref}>${n.id}`, equivalent: type === 'needs' && !!n.equivalent });
       }
     }
     for (const need of n.inputs) state.dependents.get(need).push(n.id);
+    for (const sys of n.within) state.built.get(sys).push(n.id);
   }
+  const layer = layers(nodes);
   for (const n of nodes) {
     n.down = reach(nodes, n.id, 'down'); // what rests on it
     n.up = reach(nodes, n.id, 'up'); // what it rests on
+    n.roots = reach(nodes, n.id, 'up', foundationsOf); // the same, plus the systems it is built in, down to the axioms
+    n.above = reach(nodes, n.id, 'down', foundationsOf); // everything that stands on it in any way
     n.weight = n.down.size;
     n.depth = Math.max(0, ...n.up.values());
-    n.r = Math.min(24, 8 + 2.3 * Math.sqrt(n.weight)) + (n.kind === 'theorem' ? 0 : 1.5);
+    n.layer = layer.get(n.id); // height above the axioms
+    n.r = n.kind === 'system' ? Math.min(22, 9 + 0.9 * Math.sqrt(n.above.size)) : Math.min(24, 8 + 2.3 * Math.sqrt(n.weight)) + (n.kind === 'theorem' ? 0 : 1.5);
   }
-  // The most rested-on statements keep their label at every zoom level.
+  // The most rested-on statements keep their label at every zoom level, and so do the systems.
   [...nodes].sort((a, b) => b.weight - a.weight).slice(0, 12).forEach((n) => (n.hub = n.weight >= 4));
+  for (const n of nodes) n.big = !!n.hub || n.kind === 'system';
   state.areas = index.areas.map((a) => ({ ...a, nodes: nodes.filter((n) => n.area === a.id) })).filter((a) => a.nodes.length);
 
   buildGraph();
+  document.body.classList.add(`view-${state.layout}`);
   svg.call(zoom).on('dblclick.zoom', null);
   state.real = computeProven(nodes, baseMarks());
   state.shown = new Set(state.real);
@@ -107,7 +124,7 @@ async function init() {
 
 function buildGraph() {
   for (const l of state.links) {
-    const g = gEdges.append('g').attr('class', `edge ${l.type}`);
+    const g = gEdges.append('g').attr('class', `edge ${l.type}${l.inner ? ' inner' : ''}`);
     l.line = g.append('line');
     l.chev = g.append('path').attr('class', 'chev').attr('d', l.equivalent ? 'M-8,0 L-2,-4 L-2,4 Z M8,0 L2,-4 L2,4 Z' : 'M4.5,0 L-3,-4 L-3,4 Z');
     l.el = g.node();
@@ -131,7 +148,7 @@ function buildGraph() {
       pop.append('polygon').attr('class', 'shape').attr('points', points.join(' '));
       pop.append('circle').attr('class', 'pip').attr('r', n.r * 0.32);
     } else {
-      const s = n.r * (n.kind === 'hypothesis' ? 0.82 : 0.9);
+      const s = n.r * { hypothesis: 0.82, data: 0.9, system: 0.88 }[n.kind];
       pop
         .append('rect')
         .attr('class', 'shape')
@@ -139,7 +156,7 @@ function buildGraph() {
         .attr('y', -s)
         .attr('width', 2 * s)
         .attr('height', 2 * s)
-        .attr('rx', 2.5)
+        .attr('rx', n.kind === 'system' ? s * 0.42 : 2.5)
         .attr('transform', n.kind === 'hypothesis' ? 'rotate(45)' : null);
     }
     pop.append('path').attr('class', 'check').attr('d', `M${-0.4 * n.r},${0.03 * n.r} L${-0.1 * n.r},${0.32 * n.r} L${0.43 * n.r},${-0.3 * n.r}`);
@@ -153,9 +170,9 @@ function buildGraph() {
     });
     n.el = g.node();
 
-    n.lines = wrap(n.short, n.hub ? 22 : 19);
-    n.labelW = Math.max(...n.lines.map((s) => s.length)) * (n.hub ? 7.4 : 6.1);
-    const label = gLabels.append('g').attr('class', `label${n.hub ? ' hub' : ''}`);
+    n.lines = wrap(n.short, n.big ? 22 : 19);
+    n.labelW = Math.max(...n.lines.map((s) => s.length)) * (n.big ? 7.4 : 6.1);
+    const label = gLabels.append('g').attr('class', `label${n.big ? ' hub' : ''}${n.kind === 'system' ? ' sys' : ''}`);
     const text = label.append('text');
     n.lines.forEach((line, i) => text.append('tspan').attr('x', 0).attr('dy', i === 0 ? '0.9em' : '1.15em').text(line));
     n.labelEl = label.node();
@@ -213,19 +230,136 @@ function relayout() {
   $('legend').open = wide();
   const area = freeArea(true);
   const aspect = (window.innerWidth - 12) / (area.bottom - area.top);
-  const shape = aspect < 0.9 ? 'tall' : aspect > 2.2 ? 'flat' : 'wide';
-  if (shape !== state.shape) {
+  // The tree is much wider than high. Where the free part of the window is not, its crowded rows are folded into two or three lines.
+  const shape = `${aspect < 0.9 ? 'tall' : aspect > 2.2 ? 'flat' : 'wide'}/${aspect < 0.7 ? 3 : aspect < 1.4 ? 2 : 1}`;
+  if (shape !== state.shape || state.tween) {
+    cancelAnimationFrame(state.tween);
+    state.tween = 0;
+    if (shape !== state.shape) state.pos = {};
     state.shape = shape;
-    layout(shape);
-    updatePositions();
+    place(positions(state.layout));
   }
   fit();
 }
 
-// Two passes. First the areas are packed as circles sized by how many
-// statements they hold, pulled into a tall, wide or flat arrangement. Then
-// every statement is pulled towards its area's centre and along its links.
-function layout(shape) {
+// Where every entry sits in one arrangement, worked out the first time that
+// arrangement is shown in the current shape.
+function positions(view) {
+  const [areas, fold] = state.shape.split('/');
+  state.pos[view] ??= view === 'tree' ? layoutTree(+fold) : layoutAreas(areas);
+  return state.pos[view];
+}
+
+function place(pos) {
+  for (const n of state.nodes) [n.x, n.y] = pos.get(n.id);
+  moved();
+}
+
+function moved() {
+  for (const a of state.areas) a.box = bounds(a.nodes);
+  updatePositions();
+}
+
+// Switch between the tree and the areas. The entries glide to their new places.
+function setLayout(view) {
+  if (view === state.layout) return;
+  finishWave();
+  cancelAnimationFrame(state.tween);
+  state.layout = view;
+  for (const v of ['tree', 'areas']) {
+    document.body.classList.toggle(`view-${v}`, v === view);
+    $(`btn-${v}`).setAttribute('aria-pressed', String(v === view));
+  }
+  const to = positions(view);
+  const box = bounds([...to.values()].map(([x, y]) => ({ x, y })));
+  if (reduceMotion) {
+    place(to);
+    applyStatus();
+    fitBox(box);
+    return;
+  }
+  const from = new Map(state.nodes.map((n) => [n.id, [n.x, n.y]]));
+  const t0 = performance.now();
+  const step = (now) => {
+    const p = Math.min(1, (now - t0) / 800);
+    const e = d3.easeCubicInOut(p);
+    for (const n of state.nodes) {
+      const [ax, ay] = from.get(n.id);
+      const [bx, by] = to.get(n.id);
+      n.x = ax + (bx - ax) * e;
+      n.y = ay + (by - ay) * e;
+    }
+    moved();
+    positionLabels();
+    state.tween = p < 1 ? requestAnimationFrame(step) : 0;
+  };
+  state.tween = requestAnimationFrame(step);
+  applyStatus();
+  fitBox(box, true, 800);
+}
+
+// The tree: axioms in the bottom row, and every entry one row above the
+// highest thing it stands on. Within a row, an entry is placed near the
+// average position of what it is linked to in the rows below and above; a few
+// sweeps up and down settle the order. With `fold` above 1, a crowded row is
+// folded into a zigzag of that many lines, so the tree gets narrower.
+function layoutTree(fold) {
+  const slot = 106;
+  const gap = fold > 1 ? 104 : 128;
+  const zig = 56;
+  const rows = [];
+  for (const n of state.nodes) (rows[n.layer] ??= []).push(n);
+  const step = (row) => (row.length > 6 ? slot / fold : slot); // distance between neighbours in a row
+  const x = new Map();
+  const rank = new Map(); // position of an entry within its row, left to right
+  // Start with the entries that carry most in the middle of their row, so the trunk grows straight up.
+  for (const row of rows) {
+    const heavy = [...row].sort((a, b) => b.above.size - a.above.size);
+    heavy.forEach((n, i) => x.set(n.id, (i % 2 ? -1 : 1) * Math.ceil(i / 2) * step(row)));
+  }
+
+  const below = (n) => [...n.inputs, ...n.within];
+  const above = (n) => [...state.dependents.get(n.id), ...state.built.get(n.id)];
+  const both = (n) => [...below(n), ...above(n)];
+  // Order a row by where each entry wants to be, then move entries apart just
+  // enough that neighbours keep their distance (isotonic regression).
+  const spread = (row, linked) => {
+    const d = step(row);
+    const order = row
+      .map((n) => ({ n, was: x.get(n.id), want: d3.mean(linked(n), (id) => x.get(id)) ?? x.get(n.id) }))
+      .sort((a, b) => a.want - b.want || a.was - b.was);
+    const blocks = [];
+    order.forEach((o, i) => {
+      let b = { sum: o.want - i * d, n: 1 };
+      while (blocks.length && blocks.at(-1).sum / blocks.at(-1).n > b.sum / b.n) {
+        const prev = blocks.pop();
+        b = { sum: prev.sum + b.sum, n: prev.n + b.n };
+      }
+      blocks.push(b);
+    });
+    let i = 0;
+    for (const b of blocks) {
+      for (let k = 0; k < b.n; k++, i++) {
+        x.set(order[i].n.id, b.sum / b.n + i * d);
+        rank.set(order[i].n.id, i);
+      }
+    }
+  };
+  for (let sweep = 0; sweep < 8; sweep++) {
+    for (let i = 1; i < rows.length; i++) spread(rows[i], sweep ? both : below);
+    for (let i = rows.length - 2; i >= 0; i--) spread(rows[i], both);
+  }
+  for (let i = 1; i < rows.length; i++) spread(rows[i], both);
+
+  const pitch = gap + (fold - 1) * zig;
+  const folded = (n) => (rows[n.layer].length > 6 ? (rank.get(n.id) % fold) * zig : 0);
+  return new Map(state.nodes.map((n) => [n.id, [x.get(n.id), -n.layer * pitch - folded(n)]]));
+}
+
+// The areas, in two passes. First the areas are packed as circles sized by
+// how many statements they hold, pulled into a tall, wide or flat arrangement.
+// Then every statement is pulled towards its area's centre and along its links.
+function layoutAreas(shape) {
   const [gx, gy] = { tall: [0.12, 0.03], wide: [0.04, 0.1], flat: [0.015, 0.22] }[shape];
   const blobs = [...state.areas]
     .sort((a, b) => b.nodes.length - a.nodes.length)
@@ -246,7 +380,8 @@ function layout(shape) {
   });
   const simLinks = state.links.map((l) => ({ source: l.source, target: l.target, type: l.type }));
   const sameArea = (l) => l.source.area === l.target.area;
-  const fan = (d) => Math.sqrt(state.dependents.get(d.id).length);
+  const firm = (l) => l.type === 'needs' || l.type === 'within';
+  const fan = (d) => Math.sqrt(state.dependents.get(d.id).length + (d.area === 'foundations' ? state.built.get(d.id).filter((id) => node(id).area === d.area).length : 0));
 
   d3.forceSimulation(sim)
     .force(
@@ -254,8 +389,8 @@ function layout(shape) {
       d3
         .forceLink(simLinks)
         .id((d) => d.id)
-        .distance((l) => (l.type !== 'needs' ? 120 : 62 + 30 * fan(l.source) + 20 * fan(l.target)))
-        .strength((l) => (!sameArea(l) ? 0.02 : l.type !== 'needs' ? 0.1 : 0.5)),
+        .distance((l) => (!firm(l) ? 120 : 62 + 30 * fan(l.source) + 20 * fan(l.target)))
+        .strength((l) => (!sameArea(l) ? (l.type === 'within' ? 0.004 : 0.02) : l.type === 'within' ? 0.18 : !firm(l) ? 0.1 : 0.5)),
     )
     .force('charge', d3.forceManyBody().strength((d) => -400 - 90 * fan(d)).distanceMax(460))
     .force('collide', d3.forceCollide((d) => d.r + 36).strength(0.9).iterations(2))
@@ -264,8 +399,7 @@ function layout(shape) {
     .stop()
     .tick(700);
 
-  for (const p of sim) Object.assign(node(p.id), { x: p.x, y: p.y });
-  for (const a of state.areas) a.box = bounds(a.nodes);
+  return new Map(sim.map((p) => [p.id, [p.x, p.y]]));
 }
 
 function bounds(nodes) {
@@ -286,22 +420,25 @@ function updatePositions() {
   }
 }
 
-function moveTo(target, animate) {
-  if (animate && !reduceMotion) svg.transition().duration(450).call(zoom.transform, target);
+function moveTo(target, animate, duration = 450) {
+  if (animate && !reduceMotion) svg.transition().duration(duration).call(zoom.transform, target);
   else svg.call(zoom.transform, target);
 }
 
 // Show all of `nodes` (the whole graph by default) in the free part of the window.
 function fit(animate = false, nodes = state.nodes) {
+  fitBox(bounds(nodes), animate);
+}
+
+function fitBox({ x0, x1, y0, y1 }, animate = false, duration) {
   const area = freeArea();
-  const { x0, x1, y0, y1 } = bounds(nodes);
   const padX = Math.min(62, window.innerWidth * 0.08);
   const padTop = Math.min(40, (area.bottom - area.top) * 0.12);
   const padBottom = Math.min(44, (area.bottom - area.top) * 0.14);
   const k = Math.min((area.right - area.left - 2 * padX) / (x1 - x0 || 1), (area.bottom - area.top - padTop - padBottom) / (y1 - y0 || 1), 1.3);
   const tx = (area.left + area.right) / 2 - (k * (x0 + x1)) / 2;
   const ty = (area.top + padTop + area.bottom - padBottom) / 2 - (k * (y0 + y1)) / 2;
-  moveTo(d3.zoomIdentity.translate(tx, ty).scale(k), animate);
+  moveTo(d3.zoomIdentity.translate(tx, ty).scale(k), animate, duration);
 }
 
 // Bring one node to the middle of the free part, zoomed in enough to read around it.
@@ -338,7 +475,8 @@ function positionLabels() {
   const hit = (a, b) => a[0] < b[2] && a[2] > b[0] && a[1] < b[3] && a[3] > b[1];
   const placed = [];
 
-  for (const a of state.areas) {
+  // Area names head the clusters; in the tree the areas are interleaved, so they are not shown.
+  for (const a of state.layout === 'areas' ? state.areas : []) {
     const [x, y] = state.t.apply([(a.box.x0 + a.box.x1) / 2, a.box.y0]);
     const top = y - 40;
     const w = a.labelEl.getBBox().width; // differs by screen size, so measured
@@ -351,8 +489,9 @@ function positionLabels() {
     (n.id === sel ? 50000 : 0) +
     (state.trace?.origin === n.id ? 50000 : 0) +
     (n.hub ? 10000 : 0) +
+    (n.kind === 'system' ? (state.layout === 'tree' ? 12000 : 3000) + n.above.size : 0) +
     (near.has(n.id) ? 4000 : 0) +
-    (state.trace?.seen.has(n.id) ? 4000 : 0) +
+    (state.trace?.seen.has(n.id) ? 20000 : 0) +
     (n.kind !== 'theorem' ? 100 : 0) +
     n.weight * 10;
   const order = [...state.nodes].sort((a, b) => rank(b) - rank(a));
@@ -363,15 +502,17 @@ function positionLabels() {
   });
   for (const n of order) {
     const [x, y] = state.t.apply([n.x, n.y]);
-    const h = n.lines.length * (n.hub ? 15 : 13) + 2;
+    const h = n.lines.length * (n.big ? 15 : 13) + 2;
     const forced = n.id === state.hover || n.id === sel || state.trace?.origin === n.id;
     const boxAt = (top) => [x - n.labelW / 2 - 2, top, x + n.labelW / 2 + 2, top + h];
-    // The most rested-on statements may sit on top of neighbouring dots; they only give way to other labels.
-    const free = (top) => (placed.some((b) => hit(boxAt(top), b)) || (!n.hub && dots.some((d) => d.id !== n.id && hit(boxAt(top), d.box))) ? null : boxAt(top));
+    // The most rested-on statements, the systems and whatever a trace has lit may sit on top of neighbouring dots; they only give way to other labels.
+    const loud = n.big || state.trace?.seen.has(n.id);
+    const clear = (top) => (placed.some((b) => hit(boxAt(top), b)) ? null : boxAt(top));
+    const free = (top) => (dots.some((d) => d.id !== n.id && hit(boxAt(top), d.box)) ? null : clear(top));
     const below = y + screenR(n) + 4;
     const above = y - screenR(n) - 4 - h;
-    const top = free(below) || forced ? below : above;
-    const box = free(top) || (forced ? boxAt(top) : null);
+    const box = free(below) || free(above) || (loud ? clear(below) || clear(above) : null) || (forced ? boxAt(below) : null);
+    const top = box ? box[1] : below;
     n.labelEl.setAttribute('transform', `translate(${x},${top})`);
     n.labelEl.classList.toggle('hidden', !box);
     if (box) placed.push(box);
@@ -382,7 +523,7 @@ function positionLabels() {
 
 function neighbours(id) {
   const n = node(id);
-  const out = new Set([id, ...n.inputs, ...n.related, ...n.formerly, ...state.dependents.get(id)]);
+  const out = new Set([id, ...n.inputs, ...n.within, ...n.related, ...n.formerly, ...state.dependents.get(id), ...state.built.get(id)]);
   for (const l of state.links) if (l.source === id) out.add(l.target);
   return out;
 }
@@ -474,6 +615,7 @@ function applyStatus() {
     cl.toggle('waiting', l.type === 'needs' && !on && !state.shown.has(l.target));
     cl.toggle('whatif', on && !state.real.has(l.source));
     cl.toggle('traced', traced);
+    cl.toggle('own', l.type === 'within' && (l.source === sel || l.target === sel));
     cl.toggle('dim', trace ? !traced : !!near && l.source !== sel && l.target !== sel);
   }
   renderTally();
@@ -481,7 +623,7 @@ function applyStatus() {
 
 function renderTally() {
   const count = { proven: 0, whatif: 0, conditional: 0, open: 0 };
-  for (const n of state.nodes) count[isHypothetical(n.id) ? 'whatif' : statusOf(n)]++;
+  for (const n of state.nodes.filter(isStatement)) count[isHypothetical(n.id) ? 'whatif' : statusOf(n)]++;
   const chip = (key, label) => el('span', { class: `t-${key}` }, el('i'), el('b', { text: String(count[key]) }), label);
   $('tally').replaceChildren(
     ...[chip('proven', 'proven'), count.whatif ? chip('whatif', 'what-if') : null, chip('conditional', 'conditional'), chip('open', 'open')].filter(Boolean),
@@ -666,14 +808,20 @@ function loseWave(before, after, real) {
 }
 
 // "What rests on this" (down) and "What this rests on" (up): nothing changes,
-// the wave only lights up the part of the network that is connected.
+// the wave only lights up the part of the network that is connected. Two more
+// directions also follow the systems an entry is built in: 'roots' goes down
+// to the axioms, 'above' shows everything that stands on a system or an axiom.
 function startTrace(id, dir) {
   finishWave();
   const origin = node(id);
-  const members = dir === 'down' ? origin.down : origin.up;
+  const members = origin[dir];
+  const all = dir === 'roots' || dir === 'above';
+  const outward = dir === 'down' || dir === 'above'; // the wave runs away from the axioms
   const inside = (x) => x === id || members.has(x);
   const trace = { origin: id, dir, seen: new Set(), edges: new Set() };
-  const links = state.links.filter((l) => l.type === 'needs' && inside(l.source) && inside(l.target));
+  const links = state.links.filter((l) => (l.type === 'needs' || (all && l.type === 'within')) && inside(l.source) && inside(l.target));
+  const below = (x) => (all ? [...node(x).inputs, ...node(x).within] : node(x).inputs);
+  const over = (x) => (all ? [...state.dependents.get(x), ...state.built.get(x)] : state.dependents.get(x));
   const finish = () => {
     trace.seen = new Set(members.keys());
     trace.edges = new Set(links.map((l) => l.key));
@@ -691,8 +839,8 @@ function startTrace(id, dir) {
   runWave({
     seeds: [origin],
     order: [[id, 0], ...members],
-    parents: (x) => (dir === 'down' ? node(x).inputs : state.dependents.get(x)).filter(inside),
-    flows: links.map((l) => (dir === 'down' ? { from: node(l.source), to: node(l.target), link: l } : { from: node(l.target), to: node(l.source), link: l })),
+    parents: (x) => (outward ? below(x) : over(x)).filter(inside),
+    flows: links.map((l) => (outward ? { from: node(l.source), to: node(l.target), link: l } : { from: node(l.target), to: node(l.source), link: l })),
     cls: 'trace',
     onReach: (x) => {
       if (x === id) return;
@@ -741,13 +889,15 @@ function refList(ids, extra = () => null) {
 function explain(n) {
   const today = state.index.today;
   const holds = state.shown.has(n.id);
+  if (n.kind === 'system') return `A number system or a theory, not a statement, so it is neither proven nor open. ${n.above.size === 1 ? '1 entry on this map is' : `${n.above.size} entries on this map are`} built on it, directly or through others.`;
   if (n.kind === 'axiom') {
     if (state.whatIf.has(n.id)) return 'You chose to assume this to see what would follow. It is not one of the axioms assumed by default.';
+    if (holds && !n.weight) return 'An axiom of Zermelo–Fraenkel set theory: assumed, not proven. Everything on this map is built on these axioms.';
     if (holds) return 'An axiom: it cannot be proven from the other axioms, and most of mathematics assumes it. Stop assuming it to see what depends on it.';
     if (state.dropped.has(n.id)) return 'You stopped assuming this axiom. Everything that needs it is now shown as conditional.';
     return 'An axiom that can be neither proven nor refuted from the standard axioms. It is not assumed by default.';
   }
-  if (n.base === 'proven') return n.needs.length ? `Proven. The cited proof rests on ${listNames(n.needs)}.` : 'Proven. Shown here as a foundation: nothing else on this map is needed for it.';
+  if (n.base === 'proven') return n.needs.length ? `Proven. The cited proof rests on ${listNames(n.needs)}.` : 'Proven. No other statement on this map is recorded as needed for its proof.';
   const met = n.inputs.filter((id) => state.shown.has(id)); // the requirements that hold right now
   if (state.whatIf.has(n.id)) return 'You marked this as proven to see what would follow. It is still open.';
   if (holds && state.mode === 'today' && today.proven.includes(n.id)) return today.status;
@@ -789,7 +939,8 @@ function nodeView(n) {
   const st = statusOf(n);
   const hypo = isHypothetical(n.id);
   const axiom = n.kind === 'axiom';
-  const kind = { hypothesis: 'Hypothesis', theorem: 'Result', data: 'Computed data', axiom: 'Axiom' }[n.kind];
+  const system = n.kind === 'system';
+  const kind = { hypothesis: 'Hypothesis', theorem: 'Result', data: 'Computed data', axiom: 'Axiom', system: 'Number system or theory' }[n.kind];
   const stLabel = axiom
     ? st === 'proven' ? (hypo ? 'Assumed in what-if' : 'Assumed') : 'Not assumed'
     : hypo ? 'Proven in what-if' : { proven: 'Proven', conditional: 'Conditional', open: 'Open' }[st];
@@ -806,7 +957,9 @@ function nodeView(n) {
       ? el('button', { class: `trace-btn${tracing === dir ? ' active' : ''}`, type: 'button', onclick: () => (tracing === dir ? (clearTrace(), select(n.id)) : startTrace(n.id, dir)) }, lead, el('b', { text: String(count) }), tail)
       : null;
 
-  const isDefault = state.index.assumed.includes(n.id);
+  // Only an axiom that statements are recorded as needing can be switched off:
+  // nothing would change on the map for the others.
+  const isDefault = state.index.assumed.includes(n.id) && n.weight > 0;
   let action = null;
   if (isDefault) {
     const off = state.dropped.has(n.id);
@@ -821,23 +974,35 @@ function nodeView(n) {
       'div',
       { class: 'badges' },
       el('span', { class: 'badge', text: kind }),
-      el('span', { class: `badge ${hypo ? 'whatif' : st}`, text: stLabel }),
+      system ? null : el('span', { class: `badge ${hypo ? 'whatif' : st}`, text: stLabel }),
       el('span', { class: 'badge', text: area.name }),
     ),
     el('h2', { text: n.name }),
     el('p', { class: 'statement', text: n.statement }),
-    el('p', { class: 'by', text: n.by }),
+    n.by ? el('p', { class: 'by', text: n.by }) : null,
     el('p', { class: 'explain', text: explain(n) }),
     n.claim ? el('p', { class: 'claim' }, el('strong', { text: 'Unreviewed claim. ' }), n.claim) : null,
     n.equivalent ? el('p', { class: 'explain', text: `Equivalent to ${listNames(n.needs)}: each implies the other.` }) : null,
     n.note ? el('p', { class: 'note', text: n.note }) : null,
-    n.weight + n.up.size ? el('div', { class: 'trace-row' }, traceBtn('down', n.weight, '', n.weight === 1 ? ' statement rests on this' : ' statements rest on this'), traceBtn('up', n.up.size, 'This rests on ', n.up.size === 1 ? ' statement' : ' statements')) : null,
+    n.above.size + n.roots.size
+      ? el(
+          'div',
+          { class: 'trace-row' },
+          traceBtn('down', n.weight, '', n.weight === 1 ? ' statement rests on this' : ' statements rest on this'),
+          traceBtn('up', n.up.size, 'This rests on ', n.up.size === 1 ? ' statement' : ' statements'),
+          // Everything that stands on a system or an axiom, where that is more than the statements that need it.
+          traceBtn('above', n.above.size > n.weight ? n.above.size : 0, '', n.above.size === 1 ? ' entry is built on this' : ' entries are built on this'),
+          traceBtn('roots', n.roots.size > n.up.size ? n.roots.size : 0, 'Down to the axioms: ', n.roots.size === 1 ? ' step' : ' entries'),
+        )
+      : null,
     action,
     ...section(n.base === 'open' ? 'Would follow from' : 'Rests on', n.needs, linkSource),
     ...section('Would follow from any one of', n.anyOf, linkSource),
+    ...section('Built within', n.within, linkSource),
     ...section('First proven assuming', n.formerly),
     ...section('Related', n.related),
     ...section('What rests on it directly', state.dependents.get(n.id)),
+    ...section('Built directly on it', state.built.get(n.id)),
     el('h3', { text: 'Sources' }),
     el('ul', { class: 'links' }, ...sources.map((s) => el('li', {}, el('a', { href: s.url, target: '_blank', rel: 'noopener', text: s.title })))),
   ];
@@ -873,7 +1038,7 @@ function rankingsView() {
     list(top(proven, (n) => n.weight), rests),
     el('h3', { text: 'Unproven or assumed, yet most rests on them' }),
     list(top(unproven, (n) => n.weight), rests),
-    el('h3', { text: 'Furthest from the foundations' }),
+    el('h3', { text: 'Longest chains of results' }),
     list(top(state.nodes, (n) => n.depth), (n) => plural(n.depth, 'step')),
   ];
 }
@@ -971,6 +1136,8 @@ function wire() {
     }),
   );
   $('btn-all').addEventListener('click', touch(() => fit(true)));
+  $('btn-tree').addEventListener('click', touch(() => setLayout('tree')));
+  $('btn-areas').addEventListener('click', touch(() => setLayout('areas')));
   $('status-line').addEventListener('click', () => select('rh', { centre: true }));
   wireSearch();
   document.addEventListener('keydown', (e) => {

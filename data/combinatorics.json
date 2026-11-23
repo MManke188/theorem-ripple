@@ -9,6 +9,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "combinatorics"
+      ],
       "by": "Frank Ramsey, 1930",
       "note": "The smallest case is R(3, 3) = 6: among any six people, three all know each other or three are all strangers.",
       "url": "https://en.wikipedia.org/wiki/Ramsey%27s_theorem",
@@ -23,6 +26,12 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        {
+          "id": "combinatorics",
+          "url": "https://en.wikipedia.org/wiki/Ramsey_theory"
+        }
+      ],
       "related": [
         "ramsey"
       ],
@@ -40,6 +49,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "graph-theory"
+      ],
       "by": "Endre Szemerédi, 1978 (a weaker version for bipartite graphs in 1975)",
       "note": "Szemerédi introduced the weaker 1975 version in order to prove his theorem on arithmetic progressions.",
       "url": "https://en.wikipedia.org/wiki/Szemer%C3%A9di_regularity_lemma",
@@ -136,6 +148,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "combinatorics"
+      ],
       "related": [
         "szemeredi",
         "green-tao"
@@ -155,6 +170,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "graph-theory"
+      ],
       "by": "Kenneth Appel and Wolfgang Haken, 1976; formalized in the Coq proof assistant by Georges Gonthier and Benjamin Werner, 2005",
       "note": "The first major theorem proved with essential help from a computer, which checked a large set of reducible configurations. Robertson, Sanders, Seymour and Thomas gave a shorter proof in 1997 with 633 configurations.",
       "url": "https://en.wikipedia.org/wiki/Four_color_theorem#Simplification_and_verification",
@@ -170,6 +188,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "graph-theory"
+      ],
       "by": "Klaus Wagner, 1937",
       "note": "A minor version of Kuratowski's 1930 theorem, which uses subdivisions instead of minors. It is the forerunner of the Robertson–Seymour theorem.",
       "url": "https://en.wikipedia.org/wiki/Wagner%27s_theorem",
@@ -184,6 +205,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "graph-theory"
+      ],
       "related": [
         "wagner-planarity"
       ],
@@ -202,6 +226,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "graph-theory"
+      ],
       "related": [
         "four-colour",
         "graph-minor",
@@ -258,6 +285,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "graph-theory"
+      ],
       "by": "Maria Chudnovsky, Neil Robertson, Paul Seymour and Robin Thomas, announced 2002, published 2006 (conjectured by Claude Berge, 1961)",
       "url": "https://en.wikipedia.org/wiki/Strong_perfect_graph_theorem",
       "area": "combinatorics",
@@ -272,6 +302,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "graph-theory"
+      ],
       "related": [
         "strong-perfect-graph"
       ],
@@ -289,6 +322,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "graph-theory"
+      ],
       "related": [
         "ramsey"
       ],
@@ -306,6 +342,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "graph-theory"
+      ],
       "by": "Paul J. Kelly and Stanisław Ulam (published by Kelly in 1957 and by Ulam in 1960)",
       "note": "Brendan McKay verified it by computer for all graphs with at most 13 vertices.",
       "url": "https://en.wikipedia.org/wiki/Reconstruction_conjecture",
@@ -339,6 +378,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "combinatorics"
+      ],
       "related": [
         "gilmer-union-closed"
       ],
@@ -355,6 +397,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "combinatorics"
+      ],
       "by": "Justin Gilmer, 2022",
       "note": "The first constant fraction ever proven, by an information-theoretic argument. Within a week others raised the fraction to (3 − √5)/2 ≈ 38%, still short of the conjectured 50%.",
       "url": "https://arxiv.org/abs/2211.09055",
@@ -369,6 +414,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "combinatorics"
+      ],
       "by": "Paul Erdős and Richard Rado, 1960",
       "url": "https://en.wikipedia.org/wiki/Sunflower_(mathematics)#Sunflower_lemma",
       "area": "combinatorics",
@@ -382,6 +430,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "combinatorics"
+      ],
       "related": [
         "sunflower-lemma"
       ],

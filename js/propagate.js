@@ -8,21 +8,27 @@
 const index = (nodes) => new Map(nodes.map((n) => [n.id, n]));
 // Everything a node is linked to upstream, whichever way it counts.
 const needsOf = (n) => [...(n.needs || []), ...(n.anyOf || [])];
+// Everything a node stands on: what it needs, plus the number systems and
+// theories it is built in (`within`). Status never travels along `within`;
+// it only says where a statement sits above the axioms.
+export const foundationsOf = (n) => [...needsOf(n), ...(n.within || [])];
 
-// Data files may write a requirement as "id" or as { id, url } when the link
-// has its own source. This turns every node into the plain form the rest of
-// the code uses: `needs` and `anyOf` are lists of ids, `needUrl` maps an id
+// Data files may write a link as "id" or as { id, url } when the link has its
+// own source. This turns every node into the plain form the rest of the code
+// uses: `needs`, `anyOf` and `within` are lists of ids, `needUrl` maps an id
 // to its source.
 export function normalize(raw) {
   return raw.map((n) => {
     const plain = (list) => (list || []).map((x) => (typeof x === 'string' ? { id: x } : x));
     const needs = plain(n.needs);
     const anyOf = plain(n.anyOf);
+    const within = plain(n.within);
     return {
       ...n,
       needs: needs.map((x) => x.id),
       anyOf: anyOf.map((x) => x.id),
-      needUrl: Object.fromEntries([...needs, ...anyOf].filter((x) => x.url).map((x) => [x.id, x.url])),
+      within: within.map((x) => x.id),
+      needUrl: Object.fromEntries([...needs, ...anyOf, ...within].filter((x) => x.url).map((x) => [x.id, x.url])),
       related: n.related || [],
       formerly: n.formerly || [],
     };
@@ -36,7 +42,7 @@ export function validate(nodes) {
     byId.set(n.id, n);
   }
   for (const n of nodes) {
-    for (const key of ['needs', 'anyOf', 'related', 'formerly']) {
+    for (const key of ['needs', 'anyOf', 'within', 'related', 'formerly']) {
       for (const ref of n[key] || []) {
         if (!byId.has(ref)) throw new Error(`${n.id}.${key} refers to unknown id: ${ref}`);
       }
@@ -47,10 +53,25 @@ export function validate(nodes) {
     if (seen.get(id) === 2) return;
     if (seen.get(id) === 1) throw new Error(`dependency cycle: ${[...path, id].join(' -> ')}`);
     seen.set(id, 1);
-    for (const need of needsOf(byId.get(id))) visit(need, [...path, id]);
+    for (const need of foundationsOf(byId.get(id))) visit(need, [...path, id]);
     seen.set(id, 2);
   };
   for (const n of nodes) visit(n.id, []);
+}
+
+// How high a node sits above the axioms: 0 with nothing below it, otherwise
+// one more than the highest thing it stands on.
+export function layers(nodes) {
+  const byId = index(nodes);
+  const layer = new Map();
+  const measure = (id) => {
+    if (layer.has(id)) return layer.get(id);
+    const value = Math.max(-1, ...foundationsOf(byId.get(id)).map(measure)) + 1;
+    layer.set(id, value);
+    return value;
+  };
+  for (const n of nodes) measure(n.id);
+  return layer;
 }
 
 export function computeProven(nodes, marked) {
@@ -83,11 +104,13 @@ export function isRoot(nodes, id) {
 // 'down': the statements that rest on it, directly or through others.
 // 'up': the statements it rests on. The number is the longest chain of links
 // between the two, so a node is always further out than what it follows from.
-export function reach(nodes, id, direction) {
+// `linksOf` chooses the links to walk: what a node needs (the default), or
+// `foundationsOf` to include the systems it is built in.
+export function reach(nodes, id, direction, linksOf = needsOf) {
   const next = new Map(nodes.map((n) => [n.id, []]));
   const prev = new Map(nodes.map((n) => [n.id, []]));
   for (const n of nodes) {
-    for (const need of needsOf(n)) {
+    for (const need of linksOf(n)) {
       const [from, to] = direction === 'down' ? [need, n.id] : [n.id, need];
       next.get(from).push(to);
       prev.get(to).push(from);

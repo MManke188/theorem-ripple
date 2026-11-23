@@ -41,6 +41,16 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Dedekind_zeta_function"
+        },
+        {
+          "id": "algebraic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Dedekind_zeta_function"
+        }
+      ],
       "by": "The Riemann Hypothesis carried over to the zeta functions Dedekind defined for number fields",
       "note": "Implies GRH for Dirichlet L-functions, because the zeta function of a cyclotomic field is a product of Dirichlet L-functions.",
       "url": "https://en.wikipedia.org/wiki/Generalized_Riemann_hypothesis#Extended_Riemann_hypothesis",
@@ -54,6 +64,12 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/L-function"
+        }
+      ],
       "by": "Part of the Grand Riemann Hypothesis",
       "url": "https://en.wikipedia.org/wiki/Grand_Riemann_hypothesis",
       "area": "number-theory"
@@ -66,6 +82,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
       "related": [
         "rh"
       ],
@@ -83,6 +102,12 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/L-function"
+        }
+      ],
       "related": [
         "grh"
       ],
@@ -99,6 +124,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
       "related": [
         "cramer-gap"
       ],
@@ -116,6 +144,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
       "related": [
         "cramer-gap"
       ],
@@ -697,6 +728,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
       "formerly": [
         "grh"
       ],
@@ -715,6 +749,10 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "complexity-theory",
+        "elementary-number-theory"
+      ],
       "formerly": [
         "miller"
       ],
@@ -733,6 +771,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
       "related": [
         "von-koch",
         "rh"
@@ -751,6 +792,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
       "related": [
         "least-prime-ap"
       ],
@@ -768,6 +812,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
       "related": [
         "dirichlet-ap",
         "pnt"
@@ -786,6 +833,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
       "related": [
         "dirichlet-ap",
         "lagarias-odlyzko"
@@ -849,6 +899,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
       "related": [
         "ternary-goldbach",
         "vinogradov-three-primes"
@@ -867,6 +920,12 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Elliott%E2%80%93Halberstam_conjecture"
+        }
+      ],
       "by": "Enrico Bombieri, John Friedlander and Henryk Iwaniec, 1986",
       "note": "Motohashi proved the range θ < 1/2, a generalized Bombieri–Vinogradov theorem.",
       "url": "https://arxiv.org/abs/1407.4897",
@@ -903,6 +962,12 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Elliott%E2%80%93Halberstam_conjecture"
+        }
+      ],
       "formerly": [
         "elliott-halberstam"
       ],
@@ -1003,6 +1068,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
       "related": [
         "dirichlet-ap"
       ],
@@ -1042,6 +1110,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
       "by": "Andrew Wiles, with Richard Taylor, 1995",
       "note": "Semistable means the curve has only the mildest kind of bad reduction at each prime. Wiles announced a proof in 1993; an error found that year was repaired in 1994, with one step justified in a joint paper with Taylor.",
       "url": "https://en.wikipedia.org/wiki/Wiles%27s_proof_of_Fermat%27s_Last_Theorem",
@@ -1056,6 +1127,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
       "by": "Ken Ribet, 1986 (published 1990)",
       "note": "This was the epsilon conjecture, the missing step in an argument Jean-Pierre Serre gave in 1985. After it, the modularity of semistable curves was all that Fermat's Last Theorem needed.",
       "url": "https://en.wikipedia.org/wiki/Ribet%27s_theorem",
@@ -1087,6 +1161,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
       "related": [
         "modularity-semistable",
         "langlands-functoriality"
@@ -1105,6 +1182,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
       "related": [
         "ribet",
         "flt",
@@ -1125,6 +1205,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
       "related": [
         "abc"
       ],
@@ -1252,6 +1335,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
       "related": [
         "fermat-catalan"
       ],
@@ -1270,6 +1356,10 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "arithmetic-geometry",
+        "algebraic-number-theory"
+      ],
       "by": "Benedict Gross and Don Zagier, 1986",
       "url": "https://en.wikipedia.org/wiki/Gross%E2%80%93Zagier_theorem",
       "area": "number-theory",
@@ -1324,6 +1414,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
       "by": "Bryan Birch and Peter Swinnerton-Dyer, 1960s",
       "note": "One of the Clay Millennium Prize problems. No proof has been accepted as of November 2026.",
       "url": "https://en.wikipedia.org/wiki/Birch_and_Swinnerton-Dyer_conjecture",
@@ -1354,6 +1447,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
       "related": [
         "modularity-theorem",
         "langlands-functoriality"
@@ -1373,6 +1469,12 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        {
+          "id": "arithmetic-geometry",
+          "url": "https://en.wikipedia.org/wiki/Abc_conjecture"
+        }
+      ],
       "by": "Used by Noam Elkies, 1991",
       "note": "Stronger than the abc conjecture, which only says that some constant exists. A proof of abc with constants nobody can compute would not give the results that rest on this version.",
       "url": "https://pazuki.perso.math.cnrs.fr/index_fichiers/Elkies91.pdf",

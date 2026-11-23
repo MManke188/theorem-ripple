@@ -9,6 +9,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "by": "Stephen Cook, 1971, and independently Leonid Levin, 1973",
       "note": "SAT was the first problem shown to be NP-complete. Every later NP-completeness proof starts from it, directly or through a chain of reductions.",
       "url": "https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem",
@@ -39,6 +42,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "by": "Juris Hartmanis and Richard E. Stearns, 1965; the log-factor form stated here uses the faster universal simulation of Fred Hennie and Stearns, 1966",
       "url": "https://en.wikipedia.org/wiki/Time_hierarchy_theorem",
       "area": "complexity",
@@ -99,6 +105,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "by": "Implicit in Cook, 1971; the proof-system form is due to Stephen Cook and Robert Reckhow, 1979",
       "note": "Because P is closed under complement, P = NP would force NP = co-NP. So NP ≠ co-NP implies P ≠ NP. Deciding whether a formula is a tautology is co-NP-complete.",
       "url": "https://en.wikipedia.org/wiki/Co-NP",
@@ -132,6 +141,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "related": [
         "ip-pspace"
       ],
@@ -149,6 +161,12 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        {
+          "id": "complexity-theory",
+          "url": "https://en.wikipedia.org/wiki/Interactive_proof_system"
+        }
+      ],
       "by": "Ran Raz, 1998",
       "note": "The rate depends only on the original error and, logarithmically, on the number of possible answers. Combined with the PCP theorem it gives the starting point for sharp hardness-of-approximation results.",
       "url": "https://collaborate.princeton.edu/en/publications/a-parallel-repetition-theorem/",
@@ -181,6 +199,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "by": "Adi Shamir, 1992, using the technique of Carsten Lund, Lance Fortnow, Howard Karloff and Noam Nisan, 1990",
       "note": "Lund, Fortnow, Karloff and Nisan first gave interactive proofs for the permanent, and hence for co-NP and the whole polynomial hierarchy. Shamir extended their technique to all of PSPACE.",
       "url": "https://en.wikipedia.org/wiki/IP_(complexity)",
@@ -195,6 +216,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "by": "Russell Impagliazzo and Ramamohan Paturi, 1999; stated in this form by Chris Calabro, Impagliazzo and Paturi, 2009",
       "note": "SETH implies ETH. So if the October 2026 claimed refutations of ETH are correct, SETH is false too.",
       "url": "https://en.wikipedia.org/wiki/Exponential_time_hypothesis",
@@ -283,6 +307,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "related": [
         "two-to-two",
         "pcp"
@@ -302,6 +329,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "related": [
         "khot-regev-vc",
         "ugc"
@@ -320,6 +350,10 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "complexity-theory",
+        "graph-theory"
+      ],
       "related": [
         "kkmo-maxcut"
       ],
@@ -337,6 +371,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "by": "Elchanan Mossel, Ryan O'Donnell and Krzysztof Oleszkiewicz, 2005",
       "note": "Conjectured by Khot, Kindler, Mossel and O'Donnell for their MAX-CUT result, then proven through an invariance principle for low-influence polynomials.",
       "url": "https://arxiv.org/abs/math/0503503",
@@ -405,6 +442,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "cryptography"
+      ],
       "by": "Oded Goldreich and Leonid Levin, 1989",
       "note": "This gives every one-way function, after a trivial change, a hard-core bit. Hard-core bits are how pseudorandom bits are extracted from one-way functions.",
       "url": "https://en.wikipedia.org/wiki/Hard-core_predicate",
@@ -475,6 +515,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "cryptography"
+      ],
       "related": [
         "shor"
       ],
@@ -509,6 +552,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "by": "Peter Shor, 1994",
       "note": "The hardness of factoring is therefore an assumption about classical computers only. A large enough quantum computer would break RSA.",
       "url": "https://en.wikipedia.org/wiki/Shor%27s_algorithm",
@@ -523,6 +569,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "cryptography"
+      ],
       "by": "Standard assumption of lattice-based cryptography",
       "note": "Regev's paper bases the security of its cryptosystem on this worst-case quantum hardness, through the learning with errors problem.",
       "url": "https://arxiv.org/abs/2401.03703",
@@ -572,6 +621,9 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "by": "Hypothesis used by Russell Impagliazzo and Avi Wigderson, 1997",
       "url": "https://en.wikipedia.org/wiki/BPP_(complexity)",
       "area": "complexity",
@@ -604,6 +656,9 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
       "related": [
         "ladner"
       ],

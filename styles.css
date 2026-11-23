@@ -65,7 +65,16 @@ button { font: inherit; color: inherit; }
 body.view-tree .edge.within.inner line { stroke: #7c8db5; stroke-width: 2.6; }
 /* Among the areas, the links from a statement to its system would cross the whole map: only those inside the foundations, of the selected entry, or on a trace are drawn. */
 body.view-areas .edge.within:not(.inner):not(.own):not(.traced) { display: none; }
+.edge { transition: opacity 0.3s; }
 .edge.dim { opacity: 0.18; }
+/* Zoomed out, the less important entries and their links are not drawn. */
+.node.gone, .edge.gone { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.3s, visibility 0s 0.3s; }
+/* A dotted line stands for a chain of entries that are hidden at this zoom. */
+.bridge { stroke: #45547a; stroke-width: 1.3; stroke-dasharray: 1 5; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+/* Between two systems it is a stretch of the trunk. */
+body.view-tree .bridge.within.inner { stroke: #7c8db5; stroke-width: 2.4; stroke-dasharray: 1 6; }
+.bridges.dim { opacity: 0.25; }
+body.view-areas .bridge.within:not(.inner) { display: none; }
 
 .flow line { stroke: var(--green); stroke-width: 2.5; vector-effect: non-scaling-stroke; stroke-linecap: round; }
 .flow circle { fill: #eafff3; }
@@ -289,6 +298,7 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 .hud-bottom > * { pointer-events: auto; }
 
 .tally { display: flex; gap: 14px; font-size: 13px; color: var(--muted); background: rgba(18, 24, 38, 0.85); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+.zoom-note { font-size: 12.5px; color: var(--muted); white-space: nowrap; text-shadow: 0 0 6px var(--bg), 0 0 6px var(--bg); }
 .tally b { color: var(--text); font-variant-numeric: tabular-nums; }
 .tally span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
 .tally i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
@@ -327,6 +337,7 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 .lg-flag { fill: #ff7ab8; }
 .lg-line { stroke: var(--muted); stroke-width: 1.5; }
 .lg-within { stroke: #6f80a8; stroke-width: 1.2; }
+.lg-bridge { stroke: #8fa0c8; stroke-width: 1.8; stroke-dasharray: 1 4; stroke-linecap: round; }
 .lg-system { fill: #1d2639; stroke: #c3cee3; stroke-width: 2; }
 .lg-arrow { fill: var(--muted); }
 

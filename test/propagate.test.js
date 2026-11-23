@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach, layers, foundationsOf } from '../js/propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach, layers, foundationsOf, bridges } from '../js/propagate.js';
 
 const read = (file) => JSON.parse(readFileSync(new URL(`../data/${file}`, import.meta.url), 'utf8'));
 const index = read('index.json');
@@ -223,4 +223,24 @@ test('reach finds everything downstream and upstream, with the longest chain as 
   assert.ok(!up.has('von-koch'));
 
   assert.equal(reach(nodes, 'legendre', 'down').size, 0);
+});
+
+test('bridges join a shown entry to the nearest shown entries below it, past hidden ones', () => {
+  const sample = normalize([
+    { id: 'axiom', kind: 'axiom', base: 'open' },
+    { id: 'sets', kind: 'system', within: ['axiom'] },
+    { id: 'numbers', kind: 'system', within: ['sets'] },
+    { id: 'lemma', kind: 'theorem', base: 'proven', within: ['numbers'] },
+    { id: 'result', kind: 'theorem', base: 'proven', needs: ['lemma'] },
+    { id: 'top', kind: 'theorem', base: 'proven', needs: ['result'], within: ['numbers'] },
+  ]);
+  const standsOn = (b, a) => reach(sample, b, 'up', foundationsOf).has(a);
+  const of = (...shown) => bridges(sample, new Set(shown), standsOn).map((l) => `${l.source}>${l.target}${l.needsOnly ? ' needs' : ''}`).sort();
+
+  assert.deepEqual(of('axiom', 'sets', 'numbers', 'lemma', 'result', 'top'), []);
+  assert.deepEqual(of('axiom', 'numbers', 'result'), ['axiom>numbers', 'numbers>result']);
+  // Through `needs` alone, and not a second time through the system the chain passes.
+  assert.deepEqual(of('lemma', 'top', 'axiom'), ['axiom>lemma', 'lemma>top needs']);
+  // `top` is linked to `numbers` directly, so no bridge to what `numbers` stands on.
+  assert.deepEqual(of('axiom', 'numbers', 'top'), ['axiom>numbers']);
 });

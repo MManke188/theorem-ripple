@@ -6,7 +6,7 @@ A map of mathematical statements and what they rest on. Live at https://mmanke18
 
 - `data/index.json` lists the areas, today's event and the axioms assumed by default. One file per area holds the statements. `data/foundations.json` is the trunk: the Zermelo–Fraenkel axioms, the number systems and theories (`kind: "system"`), and a few classical theorems.
 - `js/propagate.js` is the dependency logic with no DOM (what is proven, what rests on what, ripple order, height above the axioms). It is the part with tests.
-- `js/app.js` draws the graph in two arrangements (`layoutTree`: axioms at the bottom, one row per step above them; `layoutAreas`: one cluster per field), runs the waves and the panel. `styles.css`, `index.html`. No build step; `js/vendor/d3.min.js` is the only dependency.
+- `js/app.js` draws the graph in two arrangements (`layoutTree`: axioms at the bottom, one row per step above them; `layoutAreas`: one cluster per field), decides which entries are drawn at the current zoom (`zoomLevels`, `updateShown`), runs the waves and the panel. `styles.css`, `index.html`. No build step; `js/vendor/d3.min.js` is the only dependency.
 
 ## Adding or changing statements
 
@@ -34,5 +34,5 @@ Pushing to `main` publishes (GitHub Pages serves the repository root).
 
 - Few links between proven theorems: sources rarely state "this proof uses that theorem", and only stated links are kept. Unproven hubs therefore dominate the rankings.
 - The tree's `within` links are coarse: they say which theory a statement belongs to, as its source words it, not what its proof uses. A statement's height in the tree is therefore a fact about this map's chain of systems, not a measure of difficulty.
-- On a phone the overview hides most labels; area names zoom in (Areas arrangement only; the tree has no area names).
+- Zoomed out, only the most built-on entries are drawn (`zoomLevels` in `js/app.js` ranks by how many entries stand on each one, so a famous result that nothing here rests on, such as Fermat's Last Theorem, appears late). On a phone the overview therefore holds about five entries. Area names zoom in (Areas arrangement only; the tree has no area names).
 - Three statements have no `year` because no source gave one.

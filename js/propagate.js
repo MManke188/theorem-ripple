@@ -138,6 +138,41 @@ export function reach(nodes, id, direction, linksOf = needsOf) {
   return depth;
 }
 
+// Zoomed out, the page draws only the entries in `shown`, so a drawn entry may
+// have lost the entries it stands on. This returns the links that keep the
+// picture in one piece: from each shown entry to the nearest shown entries
+// below it, reached through hidden ones. A link is left out when another shown
+// entry below already leads there (`standsOn(b, a)`: b stands on a).
+// `needsOnly` says that the hidden chain consists of `needs` links alone.
+export function bridges(nodes, shown, standsOn) {
+  const byId = index(nodes);
+  const through = (id, linksOf) => {
+    const found = new Set();
+    const seen = new Set(linksOf(byId.get(id)).filter((p) => shown.has(p))); // linked directly: that line is drawn anyway
+    const walk = (cur) => {
+      for (const p of linksOf(byId.get(cur))) {
+        if (seen.has(p)) continue;
+        seen.add(p);
+        if (shown.has(p)) found.add(p);
+        else walk(p);
+      }
+    };
+    walk(id);
+    return found;
+  };
+  const out = [];
+  for (const n of nodes) {
+    if (!shown.has(n.id)) continue;
+    const far = through(n.id, foundationsOf);
+    const strict = through(n.id, needsOf);
+    const ends = [...foundationsOf(n).filter((id) => shown.has(id)), ...far];
+    for (const a of far) {
+      if (!ends.some((b) => b !== a && standsOn(b, a))) out.push({ source: a, target: n.id, needsOnly: strict.has(a) });
+    }
+  }
+  return out;
+}
+
 // The unproven root hypotheses a node is still waiting on.
 export function missingFor(nodes, proven, id) {
   const byId = index(nodes);

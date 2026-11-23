@@ -4,6 +4,8 @@ A map of mathematical statements and what they rest on. A link from A to B means
 
 The map opens as a tree. The axioms of set theory are in the bottom row. Above them come the number systems and theories built on them (natural numbers, real numbers, group theory, complex analysis and so on, drawn as rounded squares), and above those the statements. Every entry sits one row above the highest thing it stands on. A pale line from a statement to a system means "built within that system"; it is a coarser link than an arrow and no change ever travels along it. "Areas" in the header switches to the other arrangement, one cluster per field.
 
+The map works like a road map: zoomed out it draws only the entries most is built on, and the others appear as you zoom in. A dotted line then stands for a chain of entries that are not drawn at this zoom. Whatever you are looking at is always drawn: the selected entry and its neighbours, a trace, and everything a change spreads to while it spreads. The line next to the counts says how many entries are drawn.
+
 What you can do on the page:
 
 - Switch from "Before 20 Nov 2026" to "Today" and watch the proof of the Riemann Hypothesis spread: every result that relied on it turns green, then the results that relied on those. Results that need a second, still open hypothesis stay amber.

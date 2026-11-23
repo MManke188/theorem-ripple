@@ -46,6 +46,8 @@ const HIGH = process.env.HIGH || "Fermat's Last Theorem";
   await page.waitForTimeout(350);
   info.nodes = await page.evaluate(() => document.querySelectorAll('.node').length);
   info.before = await tally();
+  const shown = () => page.evaluate(() => document.querySelectorAll('.node:not(.gone)').length);
+  info.shownOverview = await shown();
   await shot('1-before');
   await page.waitForTimeout(1900);
   await shot('2-mid');
@@ -99,6 +101,18 @@ const HIGH = process.env.HIGH || "Fermat's Last Theorem";
   await page.locator('#btn-all').click();
   await page.waitForTimeout(700);
   await shot('11b-tree');
+  // Zooming in brings in the entries that the overview leaves out.
+  info.shownTree = await shown();
+  await page.mouse.move(+w / 2, +h / 2);
+  for (const step of ['11d-zoom1', '11e-zoom2']) {
+    await page.mouse.wheel(0, -260);
+    await page.waitForTimeout(600);
+    info[`shown-${step}`] = await shown();
+    await shot(step);
+  }
+  info.zoomNote = await page.evaluate(() => document.getElementById('zoom-note').textContent);
+  await page.locator('#btn-all').click();
+  await page.waitForTimeout(700);
   await page.locator('#btn-areas').click();
   await page.waitForTimeout(1400);
   await shot('11c-areas');

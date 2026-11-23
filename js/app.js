@@ -1,4 +1,4 @@
-import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach, layers, foundationsOf } from './propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach, layers, foundationsOf, bridges } from './propagate.js';
 
 const d3 = window.d3;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -15,6 +15,9 @@ const state = {
   areas: [],
   layout: 'tree', // how the map is arranged: 'tree' (axioms at the bottom) or 'areas' (one cluster per field)
   pos: {}, // positions per arrangement for the current shape, worked out when first shown
+  levels: {}, // per arrangement: the zoom from which each entry is drawn
+  order: [], // all entries, the ones most is built on first
+  bridges: [], // links drawn past entries that are hidden at this zoom
   tween: 0,
   mode: 'before',
   whatIf: new Set(), // statements the reader marked as proven or assumed
@@ -36,6 +39,7 @@ const state = {
 const svg = d3.select('#graph');
 const viewport = svg.append('g').attr('class', 'viewport');
 const gWaves = viewport.append('g');
+const gBridges = viewport.append('g').attr('class', 'bridges');
 const gEdges = viewport.append('g');
 const gFlows = viewport.append('g');
 const gNodes = viewport.append('g');
@@ -102,6 +106,11 @@ async function init() {
   // The most rested-on statements keep their label at every zoom level, and so do the systems.
   [...nodes].sort((a, b) => b.weight - a.weight).slice(0, 12).forEach((n) => (n.hub = n.weight >= 4));
   for (const n of nodes) n.big = !!n.hub || n.kind === 'system';
+  // Zoomed out, only the entries most is built on are drawn. Among entries nothing is built on, the ones that stand on most come first.
+  // An axiom counts by the statements that need it, so that set theory itself is drawn before the eight axioms right below it.
+  // The statement of today's event is drawn at every zoom.
+  const major = (n) => (index.today.proven.includes(n.id) ? Infinity : n.kind === 'axiom' ? n.weight : n.above.size);
+  state.order = [...nodes].sort((a, b) => major(b) - major(a) || b.roots.size - a.roots.size);
   state.areas = index.areas.map((a) => ({ ...a, nodes: nodes.filter((n) => n.area === a.id) })).filter((a) => a.nodes.length);
 
   buildGraph();
@@ -216,7 +225,7 @@ const wide = () => window.innerWidth >= 1000 && window.innerHeight >= 600;
 // bottom strip, and left of the details panel when that sits at the side.
 function freeArea(ignorePanel = false) {
   const top = $('status-line').getBoundingClientRect().bottom + 6;
-  const strip = wide() ? document.querySelector('.hud-bottom') : $('tally');
+  const strip = document.querySelector('.hud-bottom');
   const panel = $('panel');
   const box = panel.getBoundingClientRect();
   const open = !panel.hidden && !ignorePanel;
@@ -235,11 +244,79 @@ function relayout() {
   if (shape !== state.shape || state.tween) {
     cancelAnimationFrame(state.tween);
     state.tween = 0;
-    if (shape !== state.shape) state.pos = {};
+    if (shape !== state.shape) [state.pos, state.levels] = [{}, {}];
     state.shape = shape;
     place(positions(state.layout));
+    useLevels(state.layout);
   }
   fit();
+}
+
+// The zoom from which each entry is drawn, as on a road map: zoomed out, only
+// the entries most is built on; the others appear as the reader zooms in.
+// Worked out from the farthest zoom inwards. At each step the entries not yet
+// drawn are gone through, the most built-on first, and one is added if it
+// keeps a label's distance on screen from everything drawn so far. Each step
+// also goes only so far down the ranking, so that free space far out is not
+// filled with minor entries that would later stand in the way of major ones.
+// An entry that is drawn stays drawn at every closer zoom.
+function zoomLevels(pos) {
+  const [sx, sy] = [104, 52]; // room on screen for a dot with its label
+  const level = new Map();
+  const drawn = [];
+  for (let k = 0.1; k < 0.95; k *= 1.12) {
+    const eligible = Math.max(40, state.order.length * (k / 0.45) ** 2); // at least the top 40; the whole ranking from a zoom of 0.45
+    for (const n of state.order.slice(0, Math.ceil(eligible))) {
+      if (level.has(n.id)) continue;
+      const [x, y] = pos.get(n.id);
+      if (drawn.some(([mx, my]) => Math.hypot(((x - mx) * k) / sx, ((y - my) * k) / sy) < 1)) continue;
+      level.set(n.id, k > 0.1 ? k : 0);
+      drawn.push([x, y]);
+    }
+  }
+  return new Map(state.order.map((n) => [n.id, level.get(n.id) ?? 0.95]));
+}
+
+function useLevels(view) {
+  state.levels[view] ??= zoomLevels(positions(view));
+  for (const n of state.nodes) n.level = state.levels[view].get(n.id);
+  if (updateShown()) positionLabels();
+}
+
+// Which entries are drawn right now: the ones the zoom is close enough for,
+// and whatever the reader is looking at (the selected entry and its
+// neighbours, a trace, a change that is spreading).
+function updateShown() {
+  const sel = state.selected;
+  const near = sel ? neighbours(sel) : null;
+  const { trace, wave } = state;
+  let changed = false;
+  for (const n of state.nodes) {
+    const vis = state.t.k >= n.level || !!near?.has(n.id) || (!!trace && (trace.origin === n.id || trace.seen.has(n.id))) || !!wave?.ids.has(n.id);
+    if (vis === n.vis) continue;
+    n.vis = vis;
+    n.el.classList.toggle('gone', !vis);
+    changed = true;
+  }
+  if (!changed) return false;
+  for (const l of state.links) l.el.classList.toggle('gone', !(node(l.source).vis && node(l.target).vis));
+  const shown = new Set(state.nodes.filter((n) => n.vis).map((n) => n.id));
+  state.bridges = bridges(state.nodes, shown, (b, a) => node(b).roots.has(a)).map((l) => ({ ...l, source: node(l.source), target: node(l.target) }));
+  drawBridges();
+  $('zoom-note').textContent = shown.size < state.nodes.length ? `Showing ${shown.size} of ${state.nodes.length} entries. Zoom in for more.` : `Showing all ${state.nodes.length} entries.`;
+  return true;
+}
+
+function drawBridges() {
+  gBridges
+    .selectAll('line')
+    .data(state.bridges, (l) => `${l.source.id}>${l.target.id}`)
+    .join('line')
+    .attr('class', (l) => `bridge${l.needsOnly ? '' : ' within'}${l.source.area === l.target.area ? ' inner' : ''}`)
+    .attr('x1', (l) => l.source.x)
+    .attr('y1', (l) => l.source.y)
+    .attr('x2', (l) => l.target.x)
+    .attr('y2', (l) => l.target.y);
 }
 
 // Where every entry sits in one arrangement, worked out the first time that
@@ -271,6 +348,7 @@ function setLayout(view) {
     $(`btn-${v}`).setAttribute('aria-pressed', String(v === view));
   }
   const to = positions(view);
+  useLevels(view);
   const box = bounds([...to.values()].map(([x, y]) => ({ x, y })));
   if (reduceMotion) {
     place(to);
@@ -418,6 +496,7 @@ function updatePositions() {
     const angle = (Math.atan2(t.y - s.y, t.x - s.x) * 180) / Math.PI;
     l.chev.attr('transform', `translate(${s.x + (t.x - s.x) * f},${s.y + (t.y - s.y) * f}) rotate(${angle})`);
   }
+  drawBridges();
 }
 
 function moveTo(target, animate, duration = 450) {
@@ -462,6 +541,7 @@ function onZoom(e) {
   state.t = e.transform;
   viewport.attr('transform', e.transform);
   svg.node().style.setProperty('--ns', Math.pow(e.transform.k, -0.5));
+  updateShown();
   positionLabels();
 }
 
@@ -495,12 +575,16 @@ function positionLabels() {
     (n.kind !== 'theorem' ? 100 : 0) +
     n.weight * 10;
   const order = [...state.nodes].sort((a, b) => rank(b) - rank(a));
-  const dots = state.nodes.map((n) => {
+  const dots = state.nodes.filter((n) => n.vis).map((n) => {
     const [x, y] = state.t.apply([n.x, n.y]);
     const r = screenR(n);
     return { id: n.id, box: [x - r, y - r, x + r, y + r] };
   });
   for (const n of order) {
+    if (!n.vis) {
+      n.labelEl.classList.add('hidden');
+      continue;
+    }
     const [x, y] = state.t.apply([n.x, n.y]);
     const h = n.lines.length * (n.big ? 15 : 13) + 2;
     const forced = n.id === state.hover || n.id === sel || state.trace?.origin === n.id;
@@ -587,6 +671,8 @@ function applyStatus() {
   const sel = state.selected;
   const trace = state.trace;
   const near = sel && state.focus && !trace ? neighbours(sel) : null;
+  if (updateShown()) positionLabels();
+  gBridges.classed('dim', !!trace || !!near);
   const dimNode = (id) => (trace ? id !== trace.origin && !trace.seen.has(id) : !!near && !near.has(id));
   for (const n of state.nodes) {
     const st = statusOf(n);
@@ -694,8 +780,10 @@ function runWave({ seeds, order, parents, flows, cls, onReach, onFlowDone, onDon
 
   const events = [...at].map(([id, time]) => ({ id, time })).sort((a, b) => a.time - b.time);
   const end = Math.max(...events.map((e) => e.time), ...drawn.map((f) => f.end), 560 + reachR / speed) + 150;
-  const wave = { flows: drawn, rings, raf: 0, onDone };
+  // Everything the wave touches is drawn while it runs, whatever the zoom.
+  const wave = { flows: drawn, rings, raf: 0, onDone, ids: new Set([...seedIds, ...order.map(([id]) => id)]) };
   state.wave = wave;
+  if (updateShown()) positionLabels();
   let next = 0;
   const t0 = performance.now();
 
@@ -1048,7 +1136,7 @@ function rankingsView() {
 function nodeAt(clientX, clientY) {
   let best = null;
   let bestD = Infinity;
-  for (const n of state.nodes) {
+  for (const n of state.nodes.filter((n) => n.vis)) {
     const [x, y] = state.t.apply([n.x, n.y]);
     const d = Math.hypot(x - clientX, y - clientY);
     if (d < Math.max(22, screenR(n) + 8) && d < bestD) [best, bestD] = [n, d];

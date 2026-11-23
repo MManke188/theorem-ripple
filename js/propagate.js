@@ -107,6 +107,12 @@ export function isRoot(nodes, id) {
 // `linksOf` chooses the links to walk: what a node needs (the default), or
 // `foundationsOf` to include the systems it is built in.
 export function reach(nodes, id, direction, linksOf = needsOf) {
+  return reachFrom(nodes, direction, linksOf)(id);
+}
+
+// The same for many nodes: the table of links is built once, and the function
+// returned answers for one id at a time.
+export function reachFrom(nodes, direction, linksOf = needsOf) {
   const next = new Map(nodes.map((n) => [n.id, []]));
   const prev = new Map(nodes.map((n) => [n.id, []]));
   for (const n of nodes) {
@@ -116,26 +122,28 @@ export function reach(nodes, id, direction, linksOf = needsOf) {
       prev.get(to).push(from);
     }
   }
-  const members = new Set();
-  const queue = [id];
-  while (queue.length) {
-    for (const to of next.get(queue.shift())) {
-      if (!members.has(to)) {
-        members.add(to);
-        queue.push(to);
+  return (id) => {
+    const members = new Set();
+    const queue = [id];
+    while (queue.length) {
+      for (const to of next.get(queue.shift())) {
+        if (!members.has(to)) {
+          members.add(to);
+          queue.push(to);
+        }
       }
     }
-  }
-  const depth = new Map([[id, 0]]);
-  const measure = (cur) => {
-    if (depth.has(cur)) return depth.get(cur);
-    const value = 1 + Math.max(...prev.get(cur).filter((p) => p === id || members.has(p)).map(measure));
-    depth.set(cur, value);
-    return value;
+    const depth = new Map([[id, 0]]);
+    const measure = (cur) => {
+      if (depth.has(cur)) return depth.get(cur);
+      const value = 1 + Math.max(...prev.get(cur).filter((p) => p === id || members.has(p)).map(measure));
+      depth.set(cur, value);
+      return value;
+    };
+    members.forEach(measure);
+    depth.delete(id);
+    return depth;
   };
-  members.forEach(measure);
-  depth.delete(id);
-  return depth;
 }
 
 // Zoomed out, the page draws only the entries in `shown`, so a drawn entry may

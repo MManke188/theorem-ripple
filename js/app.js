@@ -1,4 +1,4 @@
-import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach, layers, foundationsOf, bridges } from './propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reachFrom, layers, foundationsOf, bridges } from './propagate.js';
 
 const d3 = window.d3;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -37,14 +37,16 @@ const state = {
 };
 
 const svg = d3.select('#graph');
-const viewport = svg.append('g').attr('class', 'viewport');
+// The graph is built outside the page and put in at the end of init(): the
+// browser then styles and lays out its 4,000 elements once, in their final state.
+const viewport = d3.create('svg:g').attr('class', 'viewport');
 const gWaves = viewport.append('g');
 const gBridges = viewport.append('g').attr('class', 'bridges');
 const gEdges = viewport.append('g');
 const gFlows = viewport.append('g');
 const gNodes = viewport.append('g');
-const gAreas = svg.append('g');
-const gLabels = svg.append('g');
+const gAreas = d3.create('svg:g');
+const gLabels = d3.create('svg:g');
 const zoom = d3.zoom().scaleExtent([0.12, 5]).on('zoom', onZoom);
 
 const el = (tag, props = {}, ...kids) => {
@@ -93,16 +95,18 @@ async function init() {
     for (const sys of n.within) state.built.get(sys).push(n.id);
   }
   const layer = layers(nodes);
-  for (const n of nodes) {
-    n.down = reach(nodes, n.id, 'down'); // what rests on it
-    n.up = reach(nodes, n.id, 'up'); // what it rests on
-    n.roots = reach(nodes, n.id, 'up', foundationsOf); // the same, plus the systems it is built in, down to the axioms
-    n.above = reach(nodes, n.id, 'down', foundationsOf); // everything that stands on it in any way
+  const [down, up, roots, above] = [reachFrom(nodes, 'down'), reachFrom(nodes, 'up'), reachFrom(nodes, 'up', foundationsOf), reachFrom(nodes, 'down', foundationsOf)];
+  nodes.forEach((n, i) => {
+    n.i = i;
+    n.down = down(n.id); // what rests on it
+    n.up = up(n.id); // what it rests on
+    n.roots = roots(n.id); // the same, plus the systems it is built in, down to the axioms
+    n.above = above(n.id); // everything that stands on it in any way
     n.weight = n.down.size;
     n.depth = Math.max(0, ...n.up.values());
     n.layer = layer.get(n.id); // height above the axioms
     n.r = n.kind === 'system' ? Math.min(22, 9 + 0.9 * Math.sqrt(n.above.size)) : Math.min(24, 8 + 2.3 * Math.sqrt(n.weight)) + (n.kind === 'theorem' ? 0 : 1.5);
-  }
+  });
   // The most rested-on statements keep their label at every zoom level, and so do the systems.
   [...nodes].sort((a, b) => b.weight - a.weight).slice(0, 12).forEach((n) => (n.hub = n.weight >= 4));
   for (const n of nodes) n.big = !!n.hub || n.kind === 'system';
@@ -121,6 +125,7 @@ async function init() {
   relayout();
   applyStatus();
   renderStatusLine();
+  svg.node().append(viewport.node(), gAreas.node(), gLabels.node());
   wire();
 
   setTimeout(() => {
@@ -146,6 +151,7 @@ function buildGraph() {
       .attr('role', 'button')
       .attr('aria-label', n.name);
     const inner = g.append('g').attr('class', 'inner');
+    n.inner = inner.node();
     inner.append('circle').attr('class', 'halo').attr('r', n.r + 7);
     inner.append('circle').attr('class', 'burst').attr('r', n.r + 2);
     const pop = inner.append('g').attr('class', 'pop');
@@ -248,7 +254,9 @@ function relayout() {
     place(positions(state.layout));
     useLevels(state.layout);
   }
+  for (const a of state.areas) a.labelW = undefined; // the size of the area names depends on the window
   fit();
+  requestAnimationFrame(prepareAreas); // after this picture is on screen
 }
 
 // The zoom from which each entry is drawn, as on a road map: zoomed out, only
@@ -322,8 +330,40 @@ function drawBridges() {
 // arrangement is shown in the current shape.
 function positions(view) {
   const [areas, fold] = state.shape.split('/');
-  state.pos[view] ??= view === 'tree' ? layoutTree(+fold) : layoutAreas(areas);
+  state.pos[view] ??= view === 'tree' ? layoutTree(+fold) : areasFor(areas).finish();
   return state.pos[view];
+}
+
+// The Areas arrangement takes long to work out (half a second on a fast
+// machine, two on a phone), so it is not left to the click on "Areas": it is
+// advanced a few steps at a time whenever the page has nothing else to do.
+// Asked for before it is finished, the remaining steps run at once.
+let areasJob = null; // the arrangement being worked out, for one shape of the window
+let areasQueued = false;
+const whenIdle = window.requestIdleCallback
+  ? (fn) => window.requestIdleCallback(fn)
+  : (fn) =>
+      setTimeout(() => {
+        const end = performance.now() + 6;
+        fn({ timeRemaining: () => end - performance.now() });
+      }, 16);
+
+function areasFor(shape) {
+  if (areasJob?.shape !== shape) areasJob = { shape, ...layoutAreas(shape) };
+  return areasJob;
+}
+
+function prepareAreas() {
+  if (state.pos.areas || areasQueued) return;
+  areasQueued = true;
+  whenIdle((idle) => {
+    areasQueued = false;
+    if (state.pos.areas) return;
+    const job = areasFor(state.shape.split('/')[0]);
+    while (job.left() && idle.timeRemaining() > 1) job.step();
+    if (job.left()) return prepareAreas();
+    state.levels.areas ??= zoomLevels(positions('areas'));
+  });
 }
 
 function place(pos) {
@@ -436,6 +476,8 @@ function layoutTree(fold) {
 // The areas, in two passes. First the areas are packed as circles sized by
 // how many statements they hold, pulled into a tall, wide or flat arrangement.
 // Then every statement is pulled towards its area's centre and along its links.
+// The second pass is returned unfinished: `step` advances it by one of its 700
+// steps, `left` says how many remain, `finish` runs the rest and returns the positions.
 function layoutAreas(shape) {
   const [gx, gy] = { tall: [0.12, 0.03], wide: [0.04, 0.1], flat: [0.015, 0.22] }[shape];
   const blobs = [...state.areas]
@@ -460,7 +502,8 @@ function layoutAreas(shape) {
   const firm = (l) => l.type === 'needs' || l.type === 'within';
   const fan = (d) => Math.sqrt(state.dependents.get(d.id).length + (d.area === 'foundations' ? state.built.get(d.id).filter((id) => node(id).area === d.area).length : 0));
 
-  d3.forceSimulation(sim)
+  const simulation = d3
+    .forceSimulation(sim)
     .force(
       'link',
       d3
@@ -473,10 +516,23 @@ function layoutAreas(shape) {
     .force('collide', d3.forceCollide((d) => d.r + 36).strength(0.9).iterations(2))
     .force('x', d3.forceX((d) => centre.get(d.area).x).strength(0.075))
     .force('y', d3.forceY((d) => centre.get(d.area).y).strength(0.075))
-    .stop()
-    .tick(700);
+    .stop();
 
-  return new Map(sim.map((p) => [p.id, [p.x, p.y]]));
+  let left = 700;
+  let result = null;
+  return {
+    left: () => left,
+    step: () => {
+      simulation.tick();
+      left--;
+    },
+    finish: () => {
+      simulation.tick(left);
+      left = 0;
+      result ??= new Map(sim.map((p) => [p.id, [p.x, p.y]]));
+      return result;
+    },
+  };
 }
 
 function bounds(nodes) {
@@ -537,9 +593,14 @@ function ensureVisible(n) {
 }
 
 function onZoom(e) {
+  // Dots shrink and grow with the zoom, but only by its square root. Written on each dot: a CSS variable
+  // on the whole graph would make the browser work out the style of every element again at each step.
+  if (e.transform.k !== state.t.k) {
+    const scale = `scale(${Math.pow(e.transform.k, -0.5)})`;
+    for (const n of state.nodes) n.inner.setAttribute('transform', scale);
+  }
   state.t = e.transform;
   viewport.attr('transform', e.transform);
-  svg.node().style.setProperty('--ns', Math.pow(e.transform.k, -0.5));
   updateShown();
   positionLabels();
 }
@@ -548,57 +609,101 @@ const screenR = (n) => n.r * Math.sqrt(state.t.k);
 
 // Labels keep a fixed size on screen. Where two would collide, the less
 // important one is hidden until the reader zooms in, hovers or selects it.
+// This runs on every step of a zoom or a pan, so it keeps its boxes as plain
+// numbers (four per box: left, top, right, bottom) and writes to a label only
+// what changed since the last time.
+let labelOrder = null; // all entries, re-sorted by rank on each call
+let boxes = null; // the labels placed so far in this call, then the dots
 function positionLabels() {
   const sel = state.selected;
   const near = sel ? neighbours(sel) : new Set();
-  const hit = (a, b) => a[0] < b[2] && a[2] > b[0] && a[1] < b[3] && a[3] > b[1];
-  const placed = [];
+  const { trace, hover, t } = state;
+  const tree = state.layout === 'tree';
+  labelOrder ??= [...state.nodes];
+  boxes ??= new Float64Array(4 * (2 * state.nodes.length + state.areas.length));
+  let placed = 0; // labels take boxes[0 .. placed)
+  const hits = (from, to, x0, y0, x1, y1) => {
+    for (let i = from; i < to; i += 4) if (x0 < boxes[i + 2] && x1 > boxes[i] && y0 < boxes[i + 3] && y1 > boxes[i + 1]) return true;
+    return false;
+  };
+  const put = (at, x0, y0, x1, y1) => {
+    boxes[at] = x0;
+    boxes[at + 1] = y0;
+    boxes[at + 2] = x1;
+    boxes[at + 3] = y1;
+  };
+  const move = (item, dom, x, top) => {
+    const to = `translate(${x},${top})`;
+    if (to !== item.labelAt) dom.setAttribute('transform', (item.labelAt = to));
+  };
+  const hide = (n, hidden) => {
+    if (hidden !== n.labelHidden) n.labelEl.classList.toggle('hidden', (n.labelHidden = hidden));
+  };
 
   // Area names head the clusters; in the tree the areas are interleaved, so they are not shown.
-  for (const a of state.layout === 'areas' ? state.areas : []) {
-    const [x, y] = state.t.apply([(a.box.x0 + a.box.x1) / 2, a.box.y0]);
+  for (const a of tree ? [] : state.areas) {
+    const [x, y] = t.apply([(a.box.x0 + a.box.x1) / 2, a.box.y0]);
     const top = y - 40;
-    const w = a.labelEl.getBBox().width; // differs by screen size, so measured
-    a.labelEl.setAttribute('transform', `translate(${x},${top})`);
-    placed.push([x - w / 2, top, x + w / 2, top + 18]);
+    a.labelW ??= a.labelEl.getBBox().width; // differs by screen size, so measured (again after a resize)
+    move(a, a.labelEl, x, top);
+    put(placed, x - a.labelW / 2, top, x + a.labelW / 2, top + 18);
+    placed += 4;
   }
 
-  const rank = (n) =>
-    (n.id === state.hover ? 100000 : 0) +
-    (n.id === sel ? 50000 : 0) +
-    (state.trace?.origin === n.id ? 50000 : 0) +
-    (n.hub ? 10000 : 0) +
-    (n.kind === 'system' ? (state.layout === 'tree' ? 12000 : 3000) + n.above.size : 0) +
-    (near.has(n.id) ? 4000 : 0) +
-    (state.trace?.seen.has(n.id) ? 20000 : 0) +
-    (n.kind !== 'theorem' ? 100 : 0) +
-    n.weight * 10;
-  const order = [...state.nodes].sort((a, b) => rank(b) - rank(a));
-  const dots = state.nodes.filter((n) => n.vis).map((n) => {
-    const [x, y] = state.t.apply([n.x, n.y]);
-    const r = screenR(n);
-    return { id: n.id, box: [x - r, y - r, x + r, y + r] };
-  });
-  for (const n of order) {
+  for (const n of state.nodes) {
+    n.rank =
+      (n.id === hover ? 100000 : 0) +
+      (n.id === sel ? 50000 : 0) +
+      (trace?.origin === n.id ? 50000 : 0) +
+      (n.hub ? 10000 : 0) +
+      (n.kind === 'system' ? (tree ? 12000 : 3000) + n.above.size : 0) +
+      (near.has(n.id) ? 4000 : 0) +
+      (trace?.seen.has(n.id) ? 20000 : 0) +
+      (n.kind !== 'theorem' ? 100 : 0) +
+      n.weight * 10;
+  }
+  labelOrder.sort((a, b) => b.rank - a.rank || a.i - b.i);
+
+  // The dots of the entries that are drawn sit behind the room kept for labels.
+  const dots = 4 * (state.nodes.length + state.areas.length);
+  let dotsEnd = dots;
+  for (const n of state.nodes) {
+    if (!n.vis) continue;
+    n.sx = t.x + t.k * n.x;
+    n.sy = t.y + t.k * n.y;
+    n.sr = screenR(n);
+    n.dot = dotsEnd;
+    put(dotsEnd, n.sx - n.sr, n.sy - n.sr, n.sx + n.sr, n.sy + n.sr);
+    dotsEnd += 4;
+  }
+
+  for (const n of labelOrder) {
     if (!n.vis) {
-      n.labelEl.classList.add('hidden');
+      hide(n, true);
       continue;
     }
-    const [x, y] = state.t.apply([n.x, n.y]);
     const h = n.lines.length * (n.big ? 15 : 13) + 2;
-    const forced = n.id === state.hover || n.id === sel || state.trace?.origin === n.id;
-    const boxAt = (top) => [x - n.labelW / 2 - 2, top, x + n.labelW / 2 + 2, top + h];
+    const x0 = n.sx - n.labelW / 2 - 2;
+    const x1 = n.sx + n.labelW / 2 + 2;
+    const forced = n.id === hover || n.id === sel || trace?.origin === n.id;
     // The most rested-on statements, the systems and whatever a trace has lit may sit on top of neighbouring dots; they only give way to other labels.
-    const loud = n.big || state.trace?.seen.has(n.id);
-    const clear = (top) => (placed.some((b) => hit(boxAt(top), b)) ? null : boxAt(top));
-    const free = (top) => (dots.some((d) => d.id !== n.id && hit(boxAt(top), d.box)) ? null : clear(top));
-    const below = y + screenR(n) + 4;
-    const above = y - screenR(n) - 4 - h;
-    const box = free(below) || free(above) || (loud ? clear(below) || clear(above) : null) || (forced ? boxAt(below) : null);
-    const top = box ? box[1] : below;
-    n.labelEl.setAttribute('transform', `translate(${x},${top})`);
-    n.labelEl.classList.toggle('hidden', !box);
-    if (box) placed.push(box);
+    const loud = n.big || trace?.seen.has(n.id);
+    const clear = (top) => !hits(0, placed, x0, top, x1, top + h);
+    const free = (top) => !hits(dots, n.dot, x0, top, x1, top + h) && !hits(n.dot + 4, dotsEnd, x0, top, x1, top + h) && clear(top);
+    const below = n.sy + n.sr + 4;
+    const above = n.sy - n.sr - 4 - h;
+    let top = null;
+    if (free(below)) top = below;
+    else if (free(above)) top = above;
+    else if (loud && clear(below)) top = below;
+    else if (loud && clear(above)) top = above;
+    else if (forced) top = below;
+    move(n, n.labelEl, n.sx, top ?? below);
+    hide(n, top === null);
+    if (top !== null) {
+      put(placed, x0, top, x1, top + h);
+      placed += 4;
+    }
   }
 }
 
@@ -706,9 +811,13 @@ function applyStatus() {
   renderTally();
 }
 
+let tallyShown = '';
 function renderTally() {
   const count = { proven: 0, whatif: 0, conditional: 0, open: 0 };
   for (const n of state.nodes.filter(isStatement)) count[isHypothetical(n.id) ? 'whatif' : statusOf(n)]++;
+  const key = Object.values(count).join();
+  if (key === tallyShown) return; // called on every step of a wave, mostly with nothing new
+  tallyShown = key;
   const chip = (key, label) => el('span', { class: `t-${key}` }, el('i'), el('b', { text: String(count[key]) }), label);
   $('tally').replaceChildren(
     ...[chip('proven', 'proven'), count.whatif ? chip('whatif', 'what-if') : null, chip('conditional', 'conditional'), chip('open', 'open')].filter(Boolean),
@@ -844,10 +953,12 @@ function finishWave() {
 }
 
 function pulse(dom, cls) {
-  dom.classList.remove('flip', 'denied', 'ping');
-  dom.getBoundingClientRect(); // restart the CSS animation
-  dom.classList.add(cls);
-  setTimeout(() => dom.classList.remove(cls), 1000);
+  const cl = dom.classList;
+  const again = cl.contains('flip') || cl.contains('denied') || cl.contains('ping');
+  cl.remove('flip', 'denied', 'ping');
+  if (again) dom.getBoundingClientRect(); // restart the CSS animation (this makes the browser lay the page out, so only when needed)
+  cl.add(cls);
+  setTimeout(() => cl.remove(cls), 1000);
 }
 
 // Statements become proven (or assumed): green, or blue for a what-if.

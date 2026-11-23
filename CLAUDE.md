@@ -6,7 +6,7 @@ A map of mathematical statements and what they rest on. Live at https://mmanke18
 
 - `data/index.json` lists the areas, today's event and the axioms assumed by default. One file per area holds the statements. `data/foundations.json` is the trunk: the Zermelo–Fraenkel axioms, the number systems and theories (`kind: "system"`), and a few classical theorems.
 - `js/propagate.js` is the dependency logic with no DOM (what is proven, what rests on what, ripple order, height above the axioms). It is the part with tests.
-- `js/app.js` draws the graph in two arrangements (`layoutTree`: axioms at the bottom, one row per step above them; `layoutAreas`: one cluster per field), decides which entries are drawn at the current zoom (`zoomLevels`, `updateShown`), runs the waves and the panel. `styles.css`, `index.html`. No build step; `js/vendor/d3.min.js` is the only dependency.
+- `js/app.js` draws the graph in two arrangements (`layoutTree`: axioms at the bottom, one row per step above them; `layoutAreas`: one cluster per field), decides which entries are drawn at the current zoom (`zoomLevels`, `updateShown`), runs the waves and the panel. `styles.css`, `index.html`. No build step; `js/vendor/d3.min.js` is the only dependency. It holds only the parts of d3 listed in `tools/d3-entry.js` (how to rebuild it is written there); a d3 function outside that list does not exist on the page.
 
 ## Adding or changing statements
 
@@ -28,7 +28,8 @@ Pushing to `main` publishes (GitHub Pages serves the repository root).
 
 1. `node --test`
 2. Serve locally (`python3 -m http.server 8377`) and run `node tools/shots.cjs` at the three sizes named in its header. `errors` must be empty, and the screenshots have to be looked at: label collisions and covered controls do not show up in the summary.
-3. After the push, wait for the Pages build of that commit and run `tools/shots.cjs` once with `SHOT_URL` set to the live address.
+3. After a change to how the graph is drawn or animated, also run `node tools/perf.cjs phone` before and after it and compare (the header of the file explains the numbers). Two things made the page slow before: anything that makes the browser restyle or measure the whole graph on every frame (a CSS variable on the `<svg>`, `getBBox()`, `getBoundingClientRect()` inside a loop), and long work inside a click.
+4. After the push, wait for the Pages build of that commit and run `tools/shots.cjs` once with `SHOT_URL` set to the live address.
 
 ## Known limits
 

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach, layers, foundationsOf, bridges } from '../js/propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach, reachFrom, layers, foundationsOf, bridges } from '../js/propagate.js';
 
 const read = (file) => JSON.parse(readFileSync(new URL(`../data/${file}`, import.meta.url), 'utf8'));
 const index = read('index.json');
@@ -223,6 +223,24 @@ test('reach finds everything downstream and upstream, with the longest chain as 
   assert.ok(!up.has('von-koch'));
 
   assert.equal(reach(nodes, 'legendre', 'down').size, 0);
+});
+
+test('one reachFrom lookup, used for every entry, answers like a fresh reach each time', () => {
+  for (const direction of ['down', 'up']) {
+    for (const linksOf of [undefined, foundationsOf]) {
+      const lookup = reachFrom(nodes, direction, linksOf);
+      for (const n of nodes) assert.deepEqual([...lookup(n.id)], [...reach(nodes, n.id, direction, linksOf)], `${n.id} ${direction}`);
+    }
+  }
+});
+
+/* ---------- the page ---------- */
+
+test('index.html asks for every data file up front', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  for (const file of ['index.json', ...index.areas.map((a) => a.file)]) {
+    assert.ok(html.includes(`<link rel="preload" href="data/${file}" as="fetch" crossorigin>`), `index.html has no preload line for data/${file}: add one next to the others`);
+  }
 });
 
 test('bridges join a shown entry to the nearest shown entries below it, past hidden ones', () => {

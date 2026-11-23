@@ -42,7 +42,7 @@ const HIGH = process.env.HIGH || "Fermat's Last Theorem";
   const tally = () => page.evaluate(() => document.getElementById('tally').innerText.replace(/\s+/g, ' '));
 
   await page.goto(URL);
-  await page.waitForSelector('.node');
+  await page.waitForSelector('.node:not(.gone)');
   await page.waitForTimeout(350);
   info.nodes = await page.evaluate(() => document.querySelectorAll('.node').length);
   info.before = await tally();

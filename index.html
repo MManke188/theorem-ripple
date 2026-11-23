@@ -7,6 +7,16 @@
   <meta name="description" content="A map of mathematical statements and what they rest on: proven foundations, open conjectures, and the results that hold only if those conjectures are true.">
   <meta name="theme-color" content="#0a0e16">
   <link rel="stylesheet" href="styles.css">
+  <!-- Asked for right away, so the browser does not find them one after the other. One line per file in data/index.json. -->
+  <link rel="modulepreload" href="js/propagate.js">
+  <link rel="preload" href="data/index.json" as="fetch" crossorigin>
+  <link rel="preload" href="data/foundations.json" as="fetch" crossorigin>
+  <link rel="preload" href="data/number-theory.json" as="fetch" crossorigin>
+  <link rel="preload" href="data/complexity.json" as="fetch" crossorigin>
+  <link rel="preload" href="data/algebra-geometry.json" as="fetch" crossorigin>
+  <link rel="preload" href="data/combinatorics.json" as="fetch" crossorigin>
+  <link rel="preload" href="data/analysis-topology.json" as="fetch" crossorigin>
+  <link rel="preload" href="data/logic.json" as="fetch" crossorigin>
 </head>
 <body>
   <svg id="graph" role="img" aria-label="Graph of mathematical statements and what each one rests on"></svg>

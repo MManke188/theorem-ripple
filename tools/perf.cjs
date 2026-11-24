@@ -1,8 +1,11 @@
 // Measures how fast the page is: loads it, then zooms, pans, hovers, selects, traces, drops an
 // axiom and switches arrangement in headless Chromium, the same way on every run.
 //
-// Usage: node tools/perf.cjs <desktop|phone> [--profile] [--only=zoom-tree,trace-250]
+// Usage: node tools/perf.cjs <desktop|phone|big> [--profile] [--only=zoom-tree,trace-250]
 //   desktop: 1440x900.  phone: 375x667 with the processor slowed down four times.
+//   big: 1920x1080 at double density (a 4K screen), drawn by the graphics chip as in a real
+//   browser window (macOS, needs Playwright's full Chromium). Only this one shows what drawing
+//   costs on a large screen; frames come at up to 120 a second there, so read p95Ms and over33.
 // Needs a server (python3 -m http.server 8377) or SHOT_URL, and PLAYWRIGHT_CORE as for shots.cjs.
 // Prints JSON. Per scenario: taskMs is the time the page's main thread was busy, split into
 // script, style, layout and the rest (painting); then the frames (median, 95th percentile and
@@ -18,6 +21,7 @@ const only = (process.argv.find((a) => a.startsWith('--only=')) || '').slice(7).
 const cfg = {
   desktop: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2, throttle: 1 },
   phone: { viewport: { width: 375, height: 667 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, throttle: 4 },
+  big: { viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 2, throttle: 1, launch: { channel: 'chromium', args: ['--use-angle=metal', '--enable-gpu-rasterization', '--ignore-gpu-blocklist'] } },
 }[device];
 
 const frameRecorder = () => {
@@ -41,7 +45,7 @@ const frameRecorder = () => {
 };
 
 async function open(browser, { network } = {}) {
-  const { throttle, ...ctxOpts } = cfg;
+  const { throttle, launch, ...ctxOpts } = cfg;
   const ctx = await browser.newContext(ctxOpts);
   const page = await ctx.newPage();
   const cdp = await ctx.newCDPSession(page);
@@ -53,7 +57,7 @@ async function open(browser, { network } = {}) {
   }
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
-  page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  page.on('console', (m) => m.type() === 'error' && !m.location().url.endsWith('/favicon.ico') && errors.push(m.text())); // the page has no icon
   await page.addInitScript(frameRecorder);
   return { ctx, page, cdp, errors };
 }
@@ -156,7 +160,7 @@ const find = async (page, text) => {
 };
 
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(cfg.launch);
 
   // ---- load, cold cache, three times each ----
   for (const [name, network] of [['load', false], ['load-slow4g', true]]) {

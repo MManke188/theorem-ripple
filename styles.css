@@ -82,20 +82,25 @@ button { font: inherit; color: inherit; }
 body.view-tree .edge.within.inner line { stroke: #7c8db5; stroke-width: 2.6; }
 /* Among the areas, the links from a statement to its system would cross the whole map: only those inside the foundations, of the selected entry, or on a trace are drawn. */
 body.view-areas .edge.within:not(.inner):not(.own):not(.traced) { display: none; }
+.edge.within.bulk:not(.own):not(.traced) { display: none; }
 .edge { transition: --og 0.3s; }
 .edge.dim { --og: 0.18; }
 /* A link without an arrowhead is a single line, which is dimmed through its stroke for the same reason. */
 .edge.dim:not(.needs) { --og: 1; }
 .edge.dim:not(.needs) line { --op: 0.18; }
 /* Zoomed out, the less important entries and their links are not drawn. */
+/* Not drawn and past its fade, or far outside the window: out of the page (see cull() in app.js). */
+.node.out, .edge.out, .label.out { display: none; }
 .node.gone, .edge.gone { visibility: hidden; pointer-events: none; transition: --og 0.3s, visibility 0s 0.3s; }
 .node.gone { --og: 0; }
 /* A link fades part by part: a see-through group has to be drawn on its own sheet first, which is slow for a line across the whole screen. */
 .edge.gone line, .edge.gone .chev { --op: 0 !important; }
 /* A dotted line stands for a chain of entries that are hidden at this zoom. */
-.bridge { stroke: #45547a; stroke-width: 1.3; stroke-dasharray: 1 5; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+/* Square dots, not round ones: Firefox draws round line ends several times slower, and at this size they look the same.
+   One dot and gap are 6 long for every bridge; clipLine() in app.js counts on that. */
+.bridge { stroke: #45547a; stroke-width: 1.3; stroke-dasharray: 1.5 4.5; vector-effect: non-scaling-stroke; }
 /* Between two systems it is a stretch of the trunk. */
-body.view-tree .bridge.within.inner { stroke: #7c8db5; stroke-width: 2.4; stroke-dasharray: 1 6; }
+body.view-tree .bridge.within.inner { stroke: #7c8db5; stroke-width: 2.4; stroke-dasharray: 2.4 3.6; }
 .bridges.dim { opacity: 0.25; }
 body.view-areas .bridge.within:not(.inner) { display: none; }
 

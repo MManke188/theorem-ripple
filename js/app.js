@@ -34,6 +34,7 @@ const state = {
   wave: null,
   shape: null, // the proportions of the free part of the window: tall, wide or flat (areas), and how often the tree's rows are folded
   touched: false,
+  dotScale: 'scale(1)', // dots shrink and grow with the zoom, by its square root
 };
 
 const svg = d3.select('#graph');
@@ -137,16 +138,20 @@ async function init() {
 
 function buildGraph() {
   for (const l of state.links) {
-    const g = gEdges.append('g').attr('class', `edge ${l.type}${l.inner ? ' inner' : ''}`);
-    l.line = g.append('line');
-    l.chev = g.append('path').attr('class', 'chev').attr('d', l.equivalent ? 'M-8,0 L-2,-4 L-2,4 Z M8,0 L2,-4 L2,4 Z' : 'M4.5,0 L-3,-4 L-3,4 Z');
+    // A field with many statements built directly on it would send a fan of lines into its block; the block's place above the field says the same.
+    const bulk = l.type === 'within' && node(l.target).kind !== 'system' && state.built.get(l.source).length > 12;
+    const g = gEdges.append('g').attr('class', `edge ${l.type}${l.inner ? ' inner' : ''}${bulk ? ' bulk' : ''} gone out`);
+    [l.from, l.to] = [node(l.source), node(l.target)];
+    l.dash = { related: 7, formerly: 10 }[l.type]; // the length of one dash and gap in styles.css
+    l.line = g.append('line').node();
+    l.chev = g.append('path').attr('class', 'chev').attr('d', l.equivalent ? 'M-8,0 L-2,-4 L-2,4 Z M8,0 L2,-4 L2,4 Z' : 'M4.5,0 L-3,-4 L-3,4 Z').node();
     l.el = g.node();
   }
 
   for (const n of state.nodes) {
     const g = gNodes
       .append('g')
-      .attr('class', `node kind-${n.kind}${n.hub ? ' hub' : ''}`)
+      .attr('class', `node kind-${n.kind}${n.hub ? ' hub' : ''} gone out`)
       .attr('tabindex', 0)
       .attr('role', 'button')
       .attr('aria-label', n.name);
@@ -174,7 +179,7 @@ function buildGraph() {
         .attr('transform', n.kind === 'hypothesis' ? 'rotate(45)' : null);
     }
     pop.append('path').attr('class', 'check').attr('d', `M${-0.4 * n.r},${0.03 * n.r} L${-0.1 * n.r},${0.32 * n.r} L${0.43 * n.r},${-0.3 * n.r}`);
-    if (n.needs.length > 1) n.arc = inner.append('circle').attr('class', 'arc').attr('r', n.r + 4.5).attr('transform', 'rotate(-90)');
+    if (n.needs.length > 1) n.arc = inner.append('circle').attr('class', 'arc').attr('r', n.r + 4.5).attr('transform', 'rotate(-90)').node();
     if (n.claim || state.index.today.claimed.includes(n.id)) inner.append('circle').attr('class', 'flag').attr('r', 3.6).attr('cx', n.r * 0.95).attr('cy', -n.r * 0.95);
     g.on('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -186,7 +191,7 @@ function buildGraph() {
 
     n.lines = wrap(n.short, n.big ? 22 : 19);
     n.labelW = Math.max(...n.lines.map((s) => s.length)) * (n.big ? 7.4 : 6.1);
-    const label = gLabels.append('g').attr('class', `label${n.big ? ' hub' : ''}${n.kind === 'system' ? ' sys' : ''}`);
+    const label = gLabels.append('g').attr('class', `label${n.big ? ' hub' : ''}${n.kind === 'system' ? ' sys' : ''} out`);
     const text = label.append('text');
     n.lines.forEach((line, i) => text.append('tspan').attr('x', 0).attr('dy', i === 0 ? '0.9em' : '1.15em').text(line));
     n.labelEl = label.node();
@@ -298,15 +303,24 @@ function updateShown() {
   const near = sel ? neighbours(sel) : null;
   const { trace, wave } = state;
   let changed = false;
+  let look = null; // worked out when the first entry appears
   for (const n of state.nodes) {
     const vis = state.t.k >= n.level || !!near?.has(n.id) || (!!trace && (trace.origin === n.id || trace.seen.has(n.id))) || !!wave?.ids.has(n.id);
     if (vis === n.vis) continue;
     n.vis = vis;
-    n.el.classList.toggle('gone', !vis);
+    // An entry that was not drawn does not have its colours up to date.
+    if (vis) paintNode(n, (look ??= lookNow()));
+    appear(n, vis);
     changed = true;
   }
   if (!changed) return false;
-  for (const l of state.links) l.el.classList.toggle('gone', !(node(l.source).vis && node(l.target).vis));
+  for (const l of state.links) {
+    const vis = l.from.vis && l.to.vis;
+    if (vis === l.vis) continue;
+    l.vis = vis;
+    if (vis) paintLink(l, (look ??= lookNow()));
+    appear(l, vis);
+  }
   const shown = new Set(state.nodes.filter((n) => n.vis).map((n) => n.id));
   state.bridges = bridges(state.nodes, shown, (b, a) => node(b).roots.has(a)).map((l) => ({ ...l, source: node(l.source), target: node(l.target) }));
   drawBridges();
@@ -314,16 +328,116 @@ function updateShown() {
   return true;
 }
 
+// Written straight to the elements, without d3: this runs on every step of a
+// zoom that changes what is drawn, and for thousands of lines when the
+// arrangement changes.
+function setLine(line, x1, y1, x2, y2) {
+  line.setAttribute('x1', x1);
+  line.setAttribute('y1', y1);
+  line.setAttribute('x2', x2);
+  line.setAttribute('y2', y2);
+}
+
+// A dotted or dashed line is drawn only as far as it is inside the window.
+// The browser works out every dot of such a line along its whole length, also
+// outside the window: with 500 dotted lines across a map of 3,000 entries,
+// Firefox took 350 ms for a frame. Returns false when no part is inside.
+// The dots keep their place along the line (stroke-dashoffset), so they do not
+// crawl while the map is panned. `period` is the length of one dash and gap.
+function clipLine(line, a, b, period) {
+  const { x, y, k } = state.t;
+  const [x0, y0, x1, y1] = [(-40 - x) / k, (-40 - y) / k, (window.innerWidth + 40 - x) / k, (window.innerHeight + 40 - y) / k];
+  const [dx, dy] = [b.x - a.x, b.y - a.y];
+  let [from, to] = [0, 1]; // the part inside, as fractions of the line (Liang–Barsky)
+  for (const [p, q] of [[-dx, a.x - x0], [dx, x1 - a.x], [-dy, a.y - y0], [dy, y1 - a.y]]) {
+    if (p === 0 && q < 0) return false;
+    if (p < 0) from = Math.max(from, q / p);
+    if (p > 0) to = Math.min(to, q / p);
+  }
+  if (from >= to) return false;
+  setLine(line, a.x + dx * from, a.y + dy * from, a.x + dx * to, a.y + dy * to);
+  line.setAttribute('stroke-dashoffset', (from * Math.hypot(dx, dy) * k) % period);
+  return true;
+}
+
+const bridgeLines = []; // the <line> elements in use, reused from one call to the next
+// Fading an entry or a link in and out. What is not drawn is taken out of the
+// page altogether (class `out`: display none), because Firefox slows down with
+// every element the graph holds, drawn or not: with 3,000 entries a zoom took
+// 180 ms a frame. Something that is out cannot fade in within the same frame,
+// so it is put back first and loses `gone` one frame later. Fading out, it
+// stays for the length of the fade (`until`); cull() takes it out afterwards.
+const FADE = 320;
+let appearing = [];
+function appear(item, vis) {
+  if (!vis) {
+    item.until = performance.now() + FADE;
+    item.el.classList.add('gone');
+    return;
+  }
+  if (!item.live) {
+    item.live = true;
+    item.el.classList.remove('out');
+  }
+  if (!appearing.length) {
+    requestAnimationFrame(() => {
+      for (const it of appearing) if (it.vis) it.el.classList.remove('gone');
+      appearing = [];
+    });
+  }
+  appearing.push(item);
+}
+
+// Keeps in the page only what is drawn and in or near the window. Runs with
+// every step of a zoom or a pan (from positionLabels, which works out `near`).
+let cullTimer = 0;
+function cull() {
+  const now = performance.now();
+  let fading = false;
+  const set = (item, live) => {
+    if (live === !!item.live) return;
+    item.live = live;
+    item.el.classList.toggle('out', !live);
+  };
+  for (const n of state.nodes) {
+    const stays = n.vis || n.until > now;
+    fading ||= !n.vis && n.until > now;
+    set(n, stays && n.near);
+    if (n.on !== n.labelLive) n.labelEl.classList.toggle('out', !(n.labelLive = n.on));
+  }
+  for (const l of state.links) {
+    const stays = l.vis || l.until > now;
+    fading ||= !l.vis && l.until > now;
+    const [a, b] = [l.from, l.to];
+    // A link stays unless both ends lie beyond the same side of the window.
+    const inside = a.near || b.near || !((a.sx < 0 && b.sx < 0) || (a.sy < 0 && b.sy < 0) || (a.sx > window.innerWidth && b.sx > window.innerWidth) || (a.sy > window.innerHeight && b.sy > window.innerHeight));
+    // "Related" and "first proven assuming" are drawn dotted and dashed: see clipLine.
+    set(l, stays && inside && (!l.dash || clipLine(l.line, a, b, l.dash)));
+  }
+  placeBridges();
+  clearTimeout(cullTimer);
+  if (fading) cullTimer = setTimeout(cull, FADE + 30);
+}
+
 function drawBridges() {
-  gBridges
-    .selectAll('line')
-    .data(state.bridges, (l) => `${l.source.id}>${l.target.id}`)
-    .join('line')
-    .attr('class', (l) => `bridge${l.needsOnly ? '' : ' within'}${l.source.area === l.target.area ? ' inner' : ''}`)
-    .attr('x1', (l) => l.source.x)
-    .attr('y1', (l) => l.source.y)
-    .attr('x2', (l) => l.target.x)
-    .attr('y2', (l) => l.target.y);
+  const g = gBridges.node();
+  state.bridges.forEach((l, i) => {
+    const line = (bridgeLines[i] ??= g.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'line')));
+    const cls = `bridge${l.needsOnly ? '' : ' within'}${l.source.area === l.target.area ? ' inner' : ''}`;
+    if (line.getAttribute('class') !== cls) line.setAttribute('class', cls);
+  });
+  for (const line of bridgeLines.splice(state.bridges.length)) line.remove();
+  placeBridges();
+}
+
+// On every step of a zoom or a pan: the part of each bridge that is inside the window.
+function placeBridges() {
+  state.bridges.forEach((l, i) => {
+    const line = bridgeLines[i];
+    // A bridge between two entries that are both far outside the window is left out, even where it would cross it.
+    const shown = (l.source.near || l.target.near) && clipLine(line, l.source, l.target, 6);
+    if (shown !== line.shown) line.style.display = (line.shown = shown) ? '' : 'none';
+  });
 }
 
 // Where every entry sits in one arrangement, worked out the first time that
@@ -416,49 +530,108 @@ function setLayout(view) {
 }
 
 // The tree: axioms in the bottom row, and every entry one row above the
-// highest thing it stands on. Within a row, an entry is placed near the
-// average position of what it is linked to in the rows below and above; a few
-// sweeps up and down settle the order. With `fold` above 1, a crowded row is
-// folded into a zigzag of that many lines, so the tree gets narrower.
+// highest thing it stands on. Entries of a row that stand on the same entry
+// form a block: a few of them sit side by side, many are stacked in several
+// lines, so that the hundreds of statements of one field do not stretch the
+// row. Blocks are placed near the average position of what their entries are
+// linked to in the rows below and above; a few sweeps up and down settle the
+// order. `fold` (1 to 3) says how narrow the window is. The blocks are made
+// as tall as it takes for the whole tree to have about the window's proportions.
 function layoutTree(fold) {
-  const slot = 106;
-  const gap = fold > 1 ? 104 : 128;
-  const zig = 56;
-  const rows = [];
-  for (const n of state.nodes) (rows[n.layer] ??= []).push(n);
-  const step = (row) => (row.length > 6 ? slot / fold : slot); // distance between neighbours in a row
-  const x = new Map();
-  const rank = new Map(); // position of an entry within its row, left to right
-  // Start with the entries that carry most in the middle of their row, so the trunk grows straight up.
-  for (const row of rows) {
-    const heavy = [...row].sort((a, b) => b.above.size - a.above.size);
-    heavy.forEach((n, i) => x.set(n.id, (i % 2 ? -1 : 1) * Math.ceil(i / 2) * step(row)));
-  }
-
+  const slot = 106; // room for a dot and its label, side by side
+  const line = 58; // distance between the lines of a block
+  const gap = 128; // between the top line of one row and the bottom line of the next
+  const proportions = [0, 2.1, 1.2, 0.6][fold]; // width of the tree divided by its height
   const below = (n) => [...n.inputs, ...n.within];
   const above = (n) => [...state.dependents.get(n.id), ...state.built.get(n.id)];
   const both = (n) => [...below(n), ...above(n)];
-  // Order a row by where each entry wants to be, then move entries apart just
-  // enough that neighbours keep their distance (isotonic regression).
-  const spread = (row, linked) => {
-    const d = step(row);
-    const order = row
-      .map((n) => ({ n, was: x.get(n.id), want: d3.mean(linked(n), (id) => x.get(id)) ?? x.get(n.id) }))
-      .sort((a, b) => a.want - b.want || a.was - b.was);
-    const blocks = [];
-    order.forEach((o, i) => {
-      let b = { sum: o.want - i * d, n: 1 };
-      while (blocks.length && blocks.at(-1).sum / blocks.at(-1).n > b.sum / b.n) {
-        const prev = blocks.pop();
-        b = { sum: prev.sum + b.sum, n: prev.n + b.n };
+
+  const rows = [];
+  const blockOf = new Map(); // row and the entry stood on -> block
+  for (const n of state.nodes) {
+    const base = below(n).reduce((best, id) => (best && node(best).layer >= node(id).layer ? best : id), null); // the highest thing it stands on
+    const key = `${n.layer}|${base}`;
+    if (!blockOf.has(key)) {
+      const block = { members: [], x: 0 };
+      blockOf.set(key, block);
+      (rows[n.layer] ??= []).push(block);
+    }
+    blockOf.get(key).members.push(n);
+  }
+  const x = new Map();
+  const y = new Map();
+  // `wideness`: how many times more entries a block has side by side than stacked.
+  // The axioms (nothing below them) and small blocks stay in one line.
+  const shape = (wideness) => {
+    let [width, height] = [0, 0];
+    for (const row of rows) {
+      for (const b of row) {
+        const count = b.members.length;
+        b.cols = count <= 5 || !below(b.members[0]).length ? count : Math.min(count, Math.ceil(Math.sqrt(count * wideness)));
+        b.lines = Math.ceil(count / b.cols);
+        b.width = b.cols * slot;
       }
-      blocks.push(b);
+      width = Math.max(width, row.reduce((sum, b) => sum + b.width + slot / 2, 0));
+      height += (Math.max(...row.map((b) => b.lines)) - 1) * line + gap;
+    }
+    return width / height;
+  };
+  let [narrow, wide] = [0.1, 12];
+  for (let i = 0; i < 9; i++) {
+    const wideness = Math.sqrt(narrow * wide);
+    if (shape(wideness) > proportions) wide = wideness;
+    else narrow = wideness;
+  }
+  shape(narrow);
+
+  for (const row of rows) {
+    for (const b of row) {
+      const count = b.members.length;
+      b.heavy = b.members.reduce((sum, n) => sum + n.above.size, 0);
+      // What most is built on goes in the top line, nearest to what stands on it, and in the middle of its line.
+      b.members.sort((p, q) => q.above.size - p.above.size || p.i - q.i);
+      b.members.forEach((n, i) => {
+        const inLine = Math.min(b.cols, count - Math.floor(i / b.cols) * b.cols); // the last line may be shorter
+        const k = i % b.cols;
+        n.cell = [(k % 2 ? -1 : 1) * Math.ceil(k / 2) * slot + (inLine % 2 ? 0 : slot / 2), b.lines - 1 - Math.floor(i / b.cols)];
+      });
+    }
+    // Start with the blocks that carry most in the middle of their row, so the trunk grows straight up.
+    let [left, right] = [0, 0];
+    [...row].sort((p, q) => q.heavy - p.heavy).forEach((b, i) => {
+      if (i === 0) [b.x, left, right] = [0, -b.width / 2, b.width / 2];
+      else if (i % 2) [b.x, right] = [right + slot / 2 + b.width / 2, right + slot / 2 + b.width];
+      else [b.x, left] = [left - slot / 2 - b.width / 2, left - slot / 2 - b.width];
+      settle(b);
+    });
+  }
+  function settle(b) {
+    for (const n of b.members) x.set(n.id, b.x + n.cell[0]);
+  }
+
+  // Order the blocks of a row by where each wants to be, then move them apart
+  // just enough that neighbours do not overlap (isotonic regression).
+  const spread = (row, linked) => {
+    const order = row
+      .map((b) => ({ b, was: b.x, want: d3.mean(b.members.flatMap(linked), (id) => x.get(id)) ?? b.x }))
+      .sort((p, q) => p.want - q.want || p.was - q.was);
+    let at = 0; // where the block would sit if all were pushed together from the left
+    const stack = [];
+    order.forEach((o, i) => {
+      if (i) at += (order[i - 1].b.width + o.b.width) / 2 + slot / 2;
+      o.at = at;
+      let s = { sum: o.want - at, n: 1 };
+      while (stack.length && stack.at(-1).sum / stack.at(-1).n > s.sum / s.n) {
+        const prev = stack.pop();
+        s = { sum: prev.sum + s.sum, n: prev.n + s.n };
+      }
+      stack.push(s);
     });
     let i = 0;
-    for (const b of blocks) {
-      for (let k = 0; k < b.n; k++, i++) {
-        x.set(order[i].n.id, b.sum / b.n + i * d);
-        rank.set(order[i].n.id, i);
+    for (const s of stack) {
+      for (let k = 0; k < s.n; k++, i++) {
+        order[i].b.x = s.sum / s.n + order[i].at;
+        settle(order[i].b);
       }
     }
   };
@@ -468,9 +641,12 @@ function layoutTree(fold) {
   }
   for (let i = 1; i < rows.length; i++) spread(rows[i], both);
 
-  const pitch = gap + (fold - 1) * zig;
-  const folded = (n) => (rows[n.layer].length > 6 ? (rank.get(n.id) % fold) * zig : 0);
-  return new Map(state.nodes.map((n) => [n.id, [x.get(n.id), -n.layer * pitch - folded(n)]]));
+  let floor = 0; // the bottom line of the current row
+  for (const row of rows) {
+    for (const b of row) for (const n of b.members) y.set(n.id, floor - n.cell[1] * line);
+    floor -= (Math.max(...row.map((b) => b.lines)) - 1) * line + gap;
+  }
+  return new Map(state.nodes.map((n) => [n.id, [x.get(n.id), y.get(n.id)]]));
 }
 
 // The areas, in two passes. First the areas are packed as circles sized by
@@ -546,10 +722,10 @@ function updatePositions() {
   for (const l of state.links) {
     const s = node(l.source);
     const t = node(l.target);
-    l.line.attr('x1', s.x).attr('y1', s.y).attr('x2', t.x).attr('y2', t.y);
+    if (!l.dash) setLine(l.line, s.x, s.y, t.x, t.y); // dotted and dashed lines are placed in cull()
     const f = l.equivalent ? 0.5 : 0.58;
     const angle = (Math.atan2(t.y - s.y, t.x - s.x) * 180) / Math.PI;
-    l.chev.attr('transform', `translate(${s.x + (t.x - s.x) * f},${s.y + (t.y - s.y) * f}) rotate(${angle})`);
+    l.chev.setAttribute('transform', `translate(${s.x + (t.x - s.x) * f},${s.y + (t.y - s.y) * f}) rotate(${angle})`);
   }
   drawBridges();
 }
@@ -595,14 +771,16 @@ function ensureVisible(n) {
 function onZoom(e) {
   // Dots shrink and grow with the zoom, but only by its square root. Written on each dot: a CSS variable
   // on the whole graph would make the browser work out the style of every element again at each step.
-  if (e.transform.k !== state.t.k) {
-    const scale = `scale(${Math.pow(e.transform.k, -0.5)})`;
-    for (const n of state.nodes) n.inner.setAttribute('transform', scale);
-  }
+  // Only the dots inside the window are resized, in positionLabels: zoomed in, most entries are drawn but far outside it.
+  if (e.transform.k !== state.t.k) state.dotScale = `scale(${Math.pow(e.transform.k, -0.5)})`;
   state.t = e.transform;
   viewport.attr('transform', e.transform);
   updateShown();
   positionLabels();
+}
+
+function sizeDot(n) {
+  if (n.dotScale !== state.dotScale) n.inner.setAttribute('transform', (n.dotScale = state.dotScale));
 }
 
 const screenR = (n) => n.r * Math.sqrt(state.t.k);
@@ -612,14 +790,12 @@ const screenR = (n) => n.r * Math.sqrt(state.t.k);
 // This runs on every step of a zoom or a pan, so it keeps its boxes as plain
 // numbers (four per box: left, top, right, bottom) and writes to a label only
 // what changed since the last time.
-let labelOrder = null; // all entries, re-sorted by rank on each call
 let boxes = null; // the labels placed so far in this call, then the dots
 function positionLabels() {
   const sel = state.selected;
   const near = sel ? neighbours(sel) : new Set();
   const { trace, hover, t } = state;
   const tree = state.layout === 'tree';
-  labelOrder ??= [...state.nodes];
   boxes ??= new Float64Array(4 * (2 * state.nodes.length + state.areas.length));
   let placed = 0; // labels take boxes[0 .. placed)
   const hits = (from, to, x0, y0, x1, y1) => {
@@ -650,7 +826,22 @@ function positionLabels() {
     placed += 4;
   }
 
+  // Entries that are drawn but outside the window need neither a label nor room kept for their dot.
+  const [right, bottom] = [window.innerWidth + 140, window.innerHeight + 60];
+  const onScreen = [];
   for (const n of state.nodes) {
+    n.sx = t.x + t.k * n.x;
+    n.sy = t.y + t.k * n.y;
+    n.on = n.vis && n.sx > -140 && n.sx < right && n.sy > -60 && n.sy < bottom;
+    n.near = n.sx > -400 && n.sx < right + 260 && n.sy > -400 && n.sy < bottom + 340;
+    if (!n.on) {
+      hide(n, true);
+      continue;
+    }
+    onScreen.push(n);
+    sizeDot(n);
+  }
+  for (const n of onScreen) {
     n.rank =
       (n.id === hover ? 100000 : 0) +
       (n.id === sel ? 50000 : 0) +
@@ -662,26 +853,19 @@ function positionLabels() {
       (n.kind !== 'theorem' ? 100 : 0) +
       n.weight * 10;
   }
-  labelOrder.sort((a, b) => b.rank - a.rank || a.i - b.i);
+  onScreen.sort((a, b) => b.rank - a.rank || a.i - b.i);
 
   // The dots of the entries that are drawn sit behind the room kept for labels.
   const dots = 4 * (state.nodes.length + state.areas.length);
   let dotsEnd = dots;
-  for (const n of state.nodes) {
-    if (!n.vis) continue;
-    n.sx = t.x + t.k * n.x;
-    n.sy = t.y + t.k * n.y;
+  for (const n of onScreen) {
     n.sr = screenR(n);
     n.dot = dotsEnd;
     put(dotsEnd, n.sx - n.sr, n.sy - n.sr, n.sx + n.sr, n.sy + n.sr);
     dotsEnd += 4;
   }
 
-  for (const n of labelOrder) {
-    if (!n.vis) {
-      hide(n, true);
-      continue;
-    }
+  for (const n of onScreen) {
     const h = n.lines.length * (n.big ? 15 : 13) + 2;
     const x0 = n.sx - n.labelW / 2 - 2;
     const x1 = n.sx + n.labelW / 2 + 2;
@@ -705,6 +889,7 @@ function positionLabels() {
       placed += 4;
     }
   }
+  cull();
 }
 
 /* ---------- state ---------- */
@@ -771,43 +956,59 @@ function toggle(set, id) {
   go({ animate: true });
 }
 
-function applyStatus() {
+// What decides how an entry and a link are drawn, apart from their own status:
+// the selection, a trace, and which entries are dimmed.
+function lookNow() {
   const sel = state.selected;
   const trace = state.trace;
   const near = sel && state.focus && !trace ? neighbours(sel) : null;
-  if (updateShown()) positionLabels();
-  gBridges.classed('dim', !!trace || !!near);
-  const dimNode = (id) => (trace ? id !== trace.origin && !trace.seen.has(id) : !!near && !near.has(id));
-  for (const n of state.nodes) {
-    const st = statusOf(n);
-    for (const dom of [n.el, n.labelEl]) {
-      const cl = dom.classList;
-      cl.toggle('st-proven', st === 'proven');
-      cl.toggle('st-conditional', st === 'conditional');
-      cl.toggle('st-open', st === 'open');
-      cl.toggle('whatif', isHypothetical(n.id));
-      cl.toggle('dim', dimNode(n.id));
-      cl.toggle('traced', !!trace && (trace.seen.has(n.id) || trace.origin === n.id));
-    }
-    n.el.classList.toggle('selected', n.id === sel);
-    if (n.arc) {
-      const met = n.needs.filter((p) => state.shown.has(p)).length;
-      const frac = st === 'proven' ? 0 : met / n.needs.length;
+  return { sel, trace, near, dimNode: (id) => (trace ? id !== trace.origin && !trace.seen.has(id) : !!near && !near.has(id)) };
+}
+
+function paintNode(n, { sel, trace, dimNode }) {
+  const st = statusOf(n);
+  for (const dom of [n.el, n.labelEl]) {
+    const cl = dom.classList;
+    cl.toggle('st-proven', st === 'proven');
+    cl.toggle('st-conditional', st === 'conditional');
+    cl.toggle('st-open', st === 'open');
+    cl.toggle('whatif', isHypothetical(n.id));
+    cl.toggle('dim', dimNode(n.id));
+    cl.toggle('traced', !!trace && (trace.seen.has(n.id) || trace.origin === n.id));
+  }
+  n.el.classList.toggle('selected', n.id === sel);
+  if (n.arc) {
+    const met = n.needs.filter((p) => state.shown.has(p)).length;
+    const frac = st === 'proven' ? 0 : met / n.needs.length;
+    if (frac !== n.arcAt) {
       const c = 2 * Math.PI * (n.r + 4.5);
-      n.arc.attr('stroke-dasharray', `${frac * c} ${c}`).style('display', frac > 0 ? null : 'none');
+      n.arc.setAttribute('stroke-dasharray', `${frac * c} ${c}`);
+      n.arc.style.display = frac > 0 ? '' : 'none';
+      n.arcAt = frac;
     }
   }
-  for (const l of state.links) {
-    const cl = l.el.classList;
-    const on = l.type === 'needs' && state.lit.has(l.key);
-    const traced = !!trace && trace.edges.has(l.key);
-    cl.toggle('on', on);
-    cl.toggle('waiting', l.type === 'needs' && !on && !state.shown.has(l.target));
-    cl.toggle('whatif', on && !state.real.has(l.source));
-    cl.toggle('traced', traced);
-    cl.toggle('own', l.type === 'within' && (l.source === sel || l.target === sel));
-    cl.toggle('dim', trace ? !traced : !!near && l.source !== sel && l.target !== sel);
-  }
+}
+
+function paintLink(l, { sel, trace, near }) {
+  const cl = l.el.classList;
+  const on = l.type === 'needs' && state.lit.has(l.key);
+  const traced = !!trace && trace.edges.has(l.key);
+  cl.toggle('on', on);
+  cl.toggle('waiting', l.type === 'needs' && !on && !state.shown.has(l.target));
+  cl.toggle('whatif', on && !state.real.has(l.source));
+  cl.toggle('traced', traced);
+  cl.toggle('own', l.type === 'within' && (l.source === sel || l.target === sel));
+  cl.toggle('dim', trace ? !traced : !!near && l.source !== sel && l.target !== sel);
+}
+
+// Brings the picture in line with the state. Only what is drawn is touched:
+// with thousands of entries most are not, and updateShown paints an entry when it appears.
+function applyStatus() {
+  if (updateShown()) positionLabels();
+  const look = lookNow();
+  gBridges.classed('dim', !!look.trace || !!look.near);
+  for (const n of state.nodes) if (n.vis) paintNode(n, look);
+  for (const l of state.links) if (l.vis) paintLink(l, look);
   renderTally();
 }
 
@@ -872,9 +1073,9 @@ function runWave({ seeds, order, parents, flows, cls, onReach, onFlowDone, onDon
     const start = at.get(from.id) ?? 0;
     const end = at.has(to.id) ? Math.max(at.get(to.id), start + 120) : start + Math.min(900, Math.max(300, Math.hypot(to.x - from.x, to.y - from.y) / speed));
     const g = gFlows.append('g').attr('class', `flow ${cls}`).style('display', 'none');
-    const line = g.append('line').attr('x1', from.x).attr('y1', from.y);
-    const dot = g.append('circle').attr('r', 3.5 / state.t.k);
-    return { link, from, to, start, end, g, line, dot, done: false };
+    const line = g.append('line').attr('x1', from.x).attr('y1', from.y).node();
+    const dot = g.append('circle').attr('r', 3.5 / state.t.k).node();
+    return { link, from, to, start, end, g: g.node(), line, dot, shown: false, done: false };
   });
 
   const reachR = maxDist + 110;
@@ -882,7 +1083,8 @@ function runWave({ seeds, order, parents, flows, cls, onReach, onFlowDone, onDon
     [0, 280, 560].map((delay, i) => ({
       delay,
       alpha: 0.75 - i * 0.2,
-      el: gWaves.append('circle').attr('class', `wave ${cls}`).attr('cx', s.x).attr('cy', s.y).attr('stroke-width', 2.5 - i * 0.7).style('display', 'none'),
+      shown: false,
+      el: gWaves.append('circle').attr('class', `wave ${cls}`).attr('cx', s.x).attr('cy', s.y).attr('stroke-width', 2.5 - i * 0.7).style('display', 'none').node(),
     })),
   );
 
@@ -902,8 +1104,11 @@ function runWave({ seeds, order, parents, flows, cls, onReach, onFlowDone, onDon
     for (const w of rings) {
       const r = (t - w.delay) * speed;
       const visible = r > 0 && r < reachR;
-      w.el.style('display', visible ? null : 'none');
-      if (visible) w.el.attr('r', r).attr('opacity', w.alpha * (1 - r / reachR));
+      if (visible !== w.shown) w.el.style.display = (w.shown = visible) ? '' : 'none';
+      if (visible) {
+        w.el.setAttribute('r', r);
+        w.el.setAttribute('opacity', w.alpha * (1 - r / reachR));
+      }
     }
 
     for (const f of drawn) {
@@ -911,9 +1116,11 @@ function runWave({ seeds, order, parents, flows, cls, onReach, onFlowDone, onDon
       const p = Math.min(1, (t - f.start) / (f.end - f.start));
       const x = f.from.x + (f.to.x - f.from.x) * p;
       const y = f.from.y + (f.to.y - f.from.y) * p;
-      f.g.style('display', null);
-      f.line.attr('x2', x).attr('y2', y);
-      f.dot.attr('cx', x).attr('cy', y);
+      if (!f.shown) f.g.style.display = (f.shown = true) && '';
+      f.line.setAttribute('x2', x);
+      f.line.setAttribute('y2', y);
+      f.dot.setAttribute('cx', x);
+      f.dot.setAttribute('cy', y);
       if (p >= 1) {
         f.done = true;
         f.g.remove();

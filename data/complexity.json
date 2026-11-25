@@ -76,7 +76,18 @@
       "statement": "Some problems whose solutions can be checked in polynomial time cannot be solved in polynomial time. Equivalently, no NP-complete problem, such as SAT, Hamiltonian circuit or the travelling salesman decision problem, has a polynomial-time algorithm.",
       "kind": "hypothesis",
       "base": "open",
-      "needs": [],
+      "needs": [
+        {
+          "id": "berman-hartmanis-conjecture",
+          "url": "https://en.wikipedia.org/wiki/Berman%E2%80%93Hartmanis_conjecture",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "eth-lower-bounds",
+          "url": "https://en.wikipedia.org/wiki/Exponential_time_hypothesis",
+          "origin": "wikipedia-import"
+        }
+      ],
       "related": [
         "cook-levin",
         "karp-21"
@@ -667,6 +678,839 @@
       "url": "https://en.wikipedia.org/wiki/Graph_isomorphism_problem",
       "area": "complexity",
       "year": 2015
+    },
+    {
+      "id": "entscheidungsproblem",
+      "name": "Entscheidungsproblem",
+      "short": "Entscheidungsproblem",
+      "statement": "There is no algorithm that takes any statement of first-order logic and answers \"yes\" or \"no\" according to whether it is universally valid, that is, valid in every structure. This holds under the assumption that effectively calculable means computable by a Turing machine (the Church–Turing thesis).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory",
+        "mathematical-logic"
+      ],
+      "by": "Posed by David Hilbert and Wilhelm Ackermann, 1928; shown impossible by Alonzo Church and Alan Turing, 1936",
+      "note": "By the completeness theorem of first-order logic, it is equivalent to asking for an algorithm that decides whether a statement is provable.",
+      "url": "https://en.wikipedia.org/wiki/Entscheidungsproblem",
+      "area": "complexity",
+      "year": 1928,
+      "settled": 1936,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bekics-theorem",
+      "name": "Bekić's theorem",
+      "short": "Bekić's theorem",
+      "statement": "Let f: P × Q → P and g: P × Q → Q be operators on pointed directed-complete partial orders P and Q, continuous in each component. Then the least fixed point of (x, y) ↦ (f(x, y), g(x, y)) is the pair (x₀, y₀) with x₀ = μx. f(x, μy. g(x, y)) and y₀ = μy. g(x₀, y), where μ denotes the least fixed point in one variable.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "Hans Bekić, 1969; published posthumously in a book by Cliff Jones, 1984",
+      "note": "It allows a mutual recursion to be split into recursions on one variable at a time. A variant for complete lattices needs the operators only to be monotone.",
+      "url": "https://en.wikipedia.org/wiki/Beki%C4%87's_theorem",
+      "area": "complexity",
+      "year": 1969,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "friedberg-muchnik-theorem",
+      "name": "Friedberg–Muchnik theorem",
+      "short": "Friedberg–Muchnik theorem",
+      "statement": "There exist two computably enumerable languages A and B that are incomparable: there is no Turing reduction from A to B and none from B to A.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "Albert Muchnik and Richard Friedberg, independently, in the middle of the 1950s",
+      "note": "It strengthens the Kleene–Post theorem, which gives incomparable languages that are Turing reducible to the halting problem. Its proof is notable for the priority finite injury method.",
+      "url": "https://en.wikipedia.org/wiki/Friedberg%E2%80%93Muchnik_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "no-low-energy-trivial-state-conjecture",
+      "name": "No low-energy trivial state conjecture",
+      "short": "NLTS conjecture",
+      "statement": "There is a family of local Hamiltonians H⁽ⁿ⁾ on n qubits, for infinitely many n, with the following properties. Each H⁽ⁿ⁾ is a sum of terms that each act on a bounded number of qubits and have bounded norm, each qubit is involved in a bounded number of terms, and each H⁽ⁿ⁾ has ground energy 0. There are also a constant ε > 0 and a function f such that every state U|0ⁿ⟩ prepared by a depth-d circuit U of two-qubit gates has energy ⟨0ⁿ|U†H⁽ⁿ⁾U|0ⁿ⟩ > εn whenever n ≥ f(d).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Conjectured by Michael Freedman and Matthew Hastings, 2013; proved by Anurag Anshu, Nikolas Breuckmann and Chinmay Nirkhe, 2023",
+      "note": "It was intended as a weaker consequence of the conjectural quantum PCP theorem that would be easier to prove. The proof constructs Hamiltonians whose ground states are the codewords of a quantum stabilizer code.",
+      "url": "https://en.wikipedia.org/wiki/NLTS_conjecture",
+      "area": "complexity",
+      "year": 2013,
+      "settled": 2023,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "richardsons-theorem",
+      "name": "Richardson's theorem",
+      "short": "Richardson's theorem",
+      "statement": "Take expressions generated by the rational numbers, π, ln 2, the variable x, addition, subtraction, multiplication, composition, and the functions sin, exp and abs. There is no algorithm that decides whether such an expression is zero everywhere, so equality of the real numbers they define is undecidable. There is also no algorithm that decides whether such an expression is nonnegative everywhere.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory",
+        "real-analysis"
+      ],
+      "by": "Daniel Richardson, 1968",
+      "note": "For some classes of expressions built from other primitives, algorithms exist that can decide whether an expression is zero.",
+      "url": "https://en.wikipedia.org/wiki/Richardson's_theorem",
+      "area": "complexity",
+      "year": 1968,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sensitivity-theorem",
+      "name": "Sensitivity theorem",
+      "short": "Sensitivity theorem",
+      "statement": "For every Boolean function f from {0,1}ⁿ to {0,1}, the sensitivity s(f) is at least the square root of the degree deg(f). Here deg(f) is the degree of the unique multilinear real polynomial expressing f, and s(f) is the largest number of coordinates whose flip changes the value of f at a single point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Hao Huang, 2019; it settled a conjecture posed by Nisan and Szegedy in 1992",
+      "note": "The bound is tight for the AND-of-ORs function, which has degree m² and sensitivity m.",
+      "url": "https://en.wikipedia.org/wiki/Sensitivity_theorem",
+      "area": "complexity",
+      "year": 1992,
+      "settled": 2019,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "selmans-theorem",
+      "name": "Selman's theorem",
+      "short": "Selman's theorem",
+      "statement": "A set A is enumeration-reducible to a set B if and only if, for every oracle X, A is computably enumerable with oracle X whenever B is computably enumerable with oracle X.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "Alan Selman, 1971, as part of his PhD thesis",
+      "note": "It relates enumeration reducibility with enumerability relative to oracles.",
+      "url": "https://en.wikipedia.org/wiki/Selman's_theorem",
+      "area": "complexity",
+      "year": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "church-rosser-theorem",
+      "name": "Church–Rosser theorem",
+      "short": "Church–Rosser theorem",
+      "statement": "In the pure untyped lambda calculus, if a term M reduces by β-reduction (in any number of steps, possibly none) to both N₁ and N₂, then there is a term X to which both N₁ and N₂ reduce. The same holds for η-reduction and for βη-reduction.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory",
+        "mathematical-logic"
+      ],
+      "by": "Alonzo Church and J. Barkley Rosser, 1936, for β-reduction in the λI-calculus; for the pure untyped lambda calculus, D. E. Schroer, 1965",
+      "note": "The theorem means the reduction rules of the lambda calculus are confluent. As a consequence, a term has at most one normal form.",
+      "url": "https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem",
+      "area": "complexity",
+      "year": 1936,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "borodin-trakhtenbrot-gap-theorem",
+      "name": "Borodin–Trakhtenbrot gap theorem",
+      "short": "Borodin–Trakhtenbrot gap",
+      "statement": "For a fixed Turing machine model and any total computable function g with g(n) > n for all n, there is a total computable function t such that the functions computable in time t(n) are exactly those computable in time g(t(n)). So adding compute time need not allow more functions to be computed.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory",
+        "computability-theory"
+      ],
+      "by": "Proved independently by Boris Trakhtenbrot and Allan Borodin",
+      "note": "It holds for any abstract (Blum) complexity measure. Because the bound t may be very large and nonconstructible, it says nothing about classes such as P or NP and does not contradict the time hierarchy theorem.",
+      "url": "https://en.wikipedia.org/wiki/Gap_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hartmanis-stearns-conjecture",
+      "name": "Hartmanis–Stearns conjecture",
+      "short": "Hartmanis–Stearns conj.",
+      "statement": "If a real number x has an expansion in some base b ≥ 2 that is real-time computable, then x is rational or transcendental. An infinite word is real-time computable when a multitape Turing machine, run without input, writes its successive letters taking a bounded amount of time between two successive letters.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Juris Hartmanis and Richard E. Stearns, 1965",
+      "note": "The conjecture would imply that there is no integer multiplication algorithm running in time O(n). Boris Adamczewski and Yann Bugeaud proved the case where the expansion is an automatic sequence.",
+      "url": "https://en.wikipedia.org/wiki/Hartmanis%E2%80%93Stearns_conjecture",
+      "area": "complexity",
+      "year": 1965,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "greibachs-theorem",
+      "name": "Greibach's theorem",
+      "short": "Greibach's theorem",
+      "statement": "Let C be a class of formal languages over an alphabet Σ∪{#} such that each language in C has a finite description, every regular language over Σ∪{#} is in C, descriptions of L₁R, RL₁ and L₁∪L₂ can be computed effectively from descriptions of L₁, L₂ in C and a regular language R, and it is undecidable for a language L in C with L ⊆ Σ* whether L = Σ*. Let P be any nontrivial subset of C that contains all regular sets over Σ∪{#} and is closed under quotient by each single symbol in Σ∪{#}. Then it is undecidable, given a description of a language L in C, whether L belongs to P.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "Sheila Greibach, 1963",
+      "note": "It shows, for example, that it is undecidable whether a given context-free grammar describes a regular language.",
+      "url": "https://en.wikipedia.org/wiki/Greibach's_theorem",
+      "area": "complexity",
+      "year": 1963,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "myhill-isomorphism-theorem",
+      "name": "Myhill isomorphism theorem",
+      "short": "Myhill isomorphism theorem",
+      "statement": "Two sets A, B ⊆ ℕ are computably isomorphic, meaning there is a computable bijection f: ℕ → ℕ with x ∈ A if and only if f(x) ∈ B, exactly when A is one-one reducible to B and B is one-one reducible to A. A one-one reduction is an injective total computable function f with x ∈ A if and only if f(x) ∈ B.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "Named after John Myhill",
+      "note": "It is reminiscent of the Schröder–Bernstein theorem in set theory and has been called a constructive version of it.",
+      "url": "https://en.wikipedia.org/wiki/Myhill_isomorphism_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "blums-speedup-theorem",
+      "name": "Blum's speedup theorem",
+      "short": "Blum's speedup theorem",
+      "statement": "For any Blum complexity measure and any total computable function f of two parameters, there is a total computable predicate g such that for every program i computing g there is a program j computing g with f(x, Φⱼ(x)) ≤ Φᵢ(x) for almost all x. So some computable functions have no optimal program, because every program has a program of lower complexity.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory",
+        "computability-theory"
+      ],
+      "by": "Manuel Blum, 1967",
+      "note": "The speedup function f may grow as fast as desired, so the smaller program can be significantly faster, for instance exponentially so.",
+      "url": "https://en.wikipedia.org/wiki/Blum's_speedup_theorem",
+      "area": "complexity",
+      "year": 1967,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "smn-theorem",
+      "name": "Smn theorem",
+      "short": "s-m-n theorem",
+      "statement": "Let m and n be positive integers. For every Turing machine TMₓ of arity m + n and all input values y₁, …, yₘ, there is a Turing machine TMₖ of arity n such that TMₓ(y₁, …, yₘ, z₁, …, zₙ) = TMₖ(z₁, …, zₙ) for all z₁, …, zₙ. Moreover, k can be computed from x and y₁, …, yₘ by a primitive recursive function Sᵐₙ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "Stephen Cole Kleene, 1938",
+      "note": "In practical terms, there is an algorithm that takes the source code of a program with m + n free variables and m values, and produces code that substitutes those values for the first m variables.",
+      "url": "https://en.wikipedia.org/wiki/Smn_theorem",
+      "area": "complexity",
+      "year": 1938,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ogdens-lemma",
+      "name": "Ogden's lemma",
+      "short": "Ogden's lemma",
+      "statement": "If a language L is context-free, then there is a number p ≥ 1 such that the following holds for every string s in L of length at least p and every way of marking at least p positions of s. The string s can be written as s = uvwxy, where vx contains at least one marked position, vwx contains at most p marked positions, and uvⁿwxⁿy is in L for every n ≥ 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory",
+        "mathematical-logic"
+      ],
+      "by": "Named after William F. Ogden",
+      "note": "When every position is marked it is equivalent to the pumping lemma for context-free languages. It can show that some languages are not context-free where the pumping lemma is not enough, and it can prove that some languages are inherently ambiguous.",
+      "url": "https://en.wikipedia.org/wiki/Ogden's_lemma",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rices-theorem",
+      "name": "Rice's theorem",
+      "short": "Rice's theorem",
+      "statement": "Let φ be an admissible numbering of the partial computable functions, and let P be a set of natural numbers that is neither empty nor all of ℕ and that is extensional: if φ_m = φ_n, then m is in P exactly when n is in P. Then P is undecidable. In words, every non-trivial semantic property of programs is undecidable.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "kleenes-recursion-theorem"
+      ],
+      "by": "Henry Gordon Rice, 1951, in his doctoral dissertation at Syracuse University",
+      "note": "The theorem generalizes the undecidability of the halting problem. It implies that no tool can check whether any given program is correct.",
+      "url": "https://en.wikipedia.org/wiki/Rice's_theorem",
+      "area": "complexity",
+      "year": 1951,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kleenes-recursion-theorem",
+      "name": "Kleene's recursion theorem",
+      "short": "Kleene's recursion theorem",
+      "statement": "Fix an admissible numbering φ of the partial recursive functions, where φₑ is the function with index e. For every partial recursive function Q(x, y) there is an index p such that, for every y, φₚ(y) and Q(p, y) are either both undefined or both defined and equal.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "smn-theorem"
+      ],
+      "by": "Stephen Kleene, 1938",
+      "note": "This is the second recursion theorem. Rogers's fixed-point theorem is a simpler version of it. Taking Q(x, y) = x gives a program that outputs its own index, which is called a quine.",
+      "url": "https://en.wikipedia.org/wiki/Kleene's_recursion_theorem",
+      "area": "complexity",
+      "year": 1938,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "mahaneys-theorem",
+      "name": "Mahaney's theorem",
+      "short": "Mahaney's theorem",
+      "statement": "If any sparse language is NP-hard, then P = NP.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Stephen Mahaney",
+      "note": "It was motivated by the Berman–Hartmanis conjecture. It shows that, if P ≠ NP, there are no NP-complete sparse sets.",
+      "url": "https://en.wikipedia.org/wiki/Mahaney's_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fagins-theorem",
+      "name": "Fagin's theorem",
+      "short": "Fagin's theorem",
+      "statement": "A property of finite structures, such as finite graphs, can be expressed in existential second-order logic exactly when it belongs to the complexity class NP. So the properties expressible in existential second-order logic are precisely the class NP.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory",
+        "mathematical-logic"
+      ],
+      "by": "Ronald Fagin, 1973, in his doctoral thesis; published in his 1974 paper",
+      "note": "It is the oldest result of descriptive complexity theory. For example, 3-colorability of a graph can be written as an existential second-order formula.",
+      "url": "https://en.wikipedia.org/wiki/Fagin's_theorem",
+      "area": "complexity",
+      "year": 1973,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pumping-lemma-for-regular-languages",
+      "name": "Pumping lemma for regular languages",
+      "short": "Pumping lemma, regular",
+      "statement": "For every regular language L there is an integer p ≥ 1, depending only on L, such that every string w in L of length at least p can be written as w = xyz with |y| ≥ 1 and |xy| ≤ p, and such that xyⁿz is in L for every n ≥ 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "pigeonhole-principle"
+      ],
+      "by": "Michael Rabin and Dana Scott, 1959; rediscovered by Yehoshua Bar-Hillel, Micha A. Perles and Eli Shamir, 1961",
+      "note": "It is used to prove that a specific language is not regular, by showing that the language does not have this property. The converse is false: some non-regular languages also satisfy it.",
+      "url": "https://en.wikipedia.org/wiki/Pumping_lemma_for_regular_languages",
+      "area": "complexity",
+      "year": 1959,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "no-free-lunch-theorem-for-search-and-optimization",
+      "name": "No free lunch theorem for search and optimization",
+      "short": "No free lunch (search)",
+      "statement": "Let X be a finite set of candidate solutions and Y a finite ordered set of cost values, and let the objective function from X to Y not change during the search. If every such function is equally likely, then for every m the probability of observing a given sequence of m cost values is the same for every deterministic search algorithm that never evaluates the same candidate twice.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory",
+        "probability-theory"
+      ],
+      "by": "David Wolpert and William G. Macready",
+      "note": "Before Wolpert's article was published, Cullen Schaffer independently proved a restricted version of one of Wolpert's theorems. Later work showed that there is no free lunch exactly when the distribution of objective functions is unchanged by permuting the candidate solutions.",
+      "url": "https://en.wikipedia.org/wiki/No_free_lunch_in_search_and_optimization",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pumping-lemma-for-context-free-languages",
+      "name": "Pumping lemma for context-free languages",
+      "short": "Pumping lemma for CFLs",
+      "statement": "If a language L is context-free, then there is an integer p ≥ 1 such that every string s in L of length at least p can be split as s = uvwxy, where v and x together contain at least one symbol (|vx| ≥ 1), |vwx| ≤ p, and uvⁿwxⁿy is in L for every n ≥ 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "Named after Bar-Hillel",
+      "note": "It is used to show by contradiction that a specific language is not context-free. It does not guarantee that a language is context-free: some languages that are not context-free still satisfy it.",
+      "url": "https://en.wikipedia.org/wiki/Pumping_lemma_for_context-free_languages",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "structured-program-theorem",
+      "name": "Structured program theorem",
+      "short": "Structured program theorem",
+      "statement": "Every computable function can be computed by a flowchart (control-flow graph) that combines subprograms using only three control structures: sequence (run one subprogram, then another), selection (run one of two subprograms depending on a true or false test) and iteration (repeat a subprogram while a test is true). Such a program may need extra variables to keep track of information that the original program records by its position in the code.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "Corrado Böhm, 1964 (sequence and iteration suffice); typically credited to the 1966 paper of Böhm and Jacopini",
+      "note": "It is the basis of structured programming, which avoids the goto statement. Böhm's 1964 result says every partial recursive function can be computed using only sequence and iteration.",
+      "url": "https://en.wikipedia.org/wiki/Structured_program_theorem",
+      "area": "complexity",
+      "year": 1964,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "posts-theorem",
+      "name": "Post's theorem",
+      "short": "Post's theorem",
+      "statement": "For every natural number n, a set B of natural numbers is Σ⁰ₙ₊₁ (a level of the arithmetical hierarchy) if and only if B can be computably enumerated by an oracle Turing machine with an oracle for ∅⁽ⁿ⁾, the n-fold iterated Turing jump of the empty set. Moreover, for every n > 0, ∅⁽ⁿ⁾ is Σ⁰ₙ-complete: every Σ⁰ₙ set is many-one reducible to ∅⁽ⁿ⁾.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory",
+        "mathematical-logic"
+      ],
+      "by": "Named after Emil Post",
+      "note": "It connects the arithmetical hierarchy with the Turing degrees of the form ∅⁽ⁿ⁾. A corollary is that a set is arithmetical if and only if it is Turing reducible to ∅⁽ᵐ⁾ for some m.",
+      "url": "https://en.wikipedia.org/wiki/Post's_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "piling-up-lemma",
+      "name": "Piling-up lemma",
+      "short": "Piling-up lemma",
+      "statement": "For independent binary random variables X₁, …, Xₙ, the imbalance P(X=0) − P(X=1) of their XOR equals the product of the imbalances of the individual variables. Equivalently, the bias P(X=0) − 1/2 of the XOR equals 2ⁿ⁻¹ times the product of the individual biases.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "cryptography"
+      ],
+      "by": "Introduced by Mitsuru Matsui, 1993",
+      "note": "It is used in linear cryptanalysis to build linear approximations to the action of block ciphers.",
+      "url": "https://en.wikipedia.org/wiki/Piling-up_lemma",
+      "area": "complexity",
+      "year": 1993,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "chomsky-schutzenberger-representation-theorem",
+      "name": "Chomsky–Schützenberger representation theorem",
+      "short": "Chomsky–Schützenberger",
+      "statement": "A language L over the alphabet Σ is context-free if and only if there exist a matched alphabet T ∪ T̄, a regular language R over T ∪ T̄, and a homomorphism h from (T ∪ T̄)* to Σ* such that L = h(D_T ∩ R), where D_T is the Dyck language of correctly nested sequences over the matched alphabet.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "Noam Chomsky and Marcel-Paul Schützenberger, 1959",
+      "note": "Every context-free language is obtained from a Dyck language by intersecting with a regular language and applying a homomorphism.",
+      "url": "https://en.wikipedia.org/wiki/Chomsky%E2%80%93Sch%C3%BCtzenberger_representation_theorem",
+      "area": "complexity",
+      "year": 1959,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "linear-speedup-theorem",
+      "name": "Linear speedup theorem",
+      "short": "Linear speedup theorem",
+      "statement": "For any real c > 0 and any Turing machine with k > 1 tapes that solves a problem in time f(n), there is another k-tape Turing machine that solves the same problem in time at most f(n)/c + 2n + 3.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "note": "The new machine gets its speed by using a larger tape alphabet. If the original machine is non-deterministic, so is the new one.",
+      "url": "https://en.wikipedia.org/wiki/Linear_speedup_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "myhill-nerode-theorem",
+      "name": "Myhill–Nerode theorem",
+      "short": "Myhill–Nerode theorem",
+      "statement": "For a language L, call two strings x and y equivalent if there is no string z such that exactly one of xz and yz belongs to L. Then L is regular if and only if this relation has finitely many equivalence classes; that number then equals the number of states of the minimal deterministic finite automaton accepting L, and every minimal such automaton is isomorphic to the canonical one built from these classes.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "John Myhill and Anil Nerode, 1957",
+      "note": "Its corollary that a language with infinitely many equivalence classes is not regular is frequently used to prove that a language is not regular.",
+      "url": "https://en.wikipedia.org/wiki/Myhill%E2%80%93Nerode_theorem",
+      "area": "complexity",
+      "year": 1957,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "berman-hartmanis-conjecture",
+      "name": "Berman–Hartmanis conjecture",
+      "short": "Berman–Hartmanis",
+      "statement": "Any two NP-complete languages are p-isomorphic: there is a one-to-one correspondence between strings that sends members of one language exactly to members of the other, such that both the correspondence and its inverse can be computed in polynomial time.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Leonard C. Berman and Juris Hartmanis",
+      "note": "If true, there would be no sparse NP-complete languages, which would imply P ≠ NP. Many complexity theorists believe the conjecture is false.",
+      "url": "https://en.wikipedia.org/wiki/Berman%E2%80%93Hartmanis_conjecture",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "compression-theorem",
+      "name": "Compression theorem",
+      "short": "Compression theorem",
+      "statement": "Fix a Gödel numbering φ of the computable functions and a Blum complexity measure Φ, and for a function f let C(f) be the class of total computable functions φᵢ whose complexity Φᵢ(x) is at most f(x) for all but finitely many x. Then there is a total computable function f such that for every i, φᵢ and φ_f(i) have the same domain and C(φᵢ) is strictly contained in C(φ_f(i)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory",
+        "computability-theory"
+      ],
+      "note": "Consequently there is no largest complexity class with computable boundary that contains all computable functions.",
+      "url": "https://en.wikipedia.org/wiki/Compression_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "courcelles-theorem",
+      "name": "Courcelle's theorem",
+      "short": "Courcelle's theorem",
+      "statement": "Every graph property definable in the monadic second-order logic of graphs can be decided in linear time on graphs of bounded treewidth.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory",
+        "graph-theory"
+      ],
+      "by": "Bruno Courcelle, 1990; independently rediscovered by Borie and Parker and Tovey, 1992",
+      "note": "It is considered the archetype of algorithmic meta-theorems.",
+      "url": "https://en.wikipedia.org/wiki/Courcelle's_theorem",
+      "area": "complexity",
+      "year": 1990,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "forking-lemma",
+      "name": "Forking lemma",
+      "short": "Forking lemma",
+      "statement": "Let A be a probabilistic algorithm with random tape r that takes input (x, h₁, …, h_q; r), where x is drawn from a distribution IG and each hᵢ is drawn uniformly from a set H of size h, and that outputs a pair (J, y) with J one of 0, 1, …, q; let acc be the probability that J ≥ 1. The forking algorithm runs A, and if J ≥ 1 runs it again with the same x, r and h₁, …, h_{J−1} but fresh random values for positions J to q, and it succeeds if the second run returns the same J and the new J-th value differs from h_J; the probability frk of success satisfies frk ≥ acc·(acc/q − 1/h).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "cryptography"
+      ],
+      "by": "First used by David Pointcheval and Jacques Stern, Eurocrypt 1996; later generalized by Mihir Bellare and Gregory Neven",
+      "note": "It is used to prove the security of digital signature schemes and other constructions based on random oracles. The reduction it provides is not tight.",
+      "url": "https://en.wikipedia.org/wiki/Forking_lemma",
+      "area": "complexity",
+      "year": 1996,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gottesman-knill-theorem",
+      "name": "Gottesman–Knill theorem",
+      "short": "Gottesman–Knill theorem",
+      "statement": "A quantum circuit that uses only preparation of qubits in computational-basis states, Clifford gates (generated by the Hadamard, controlled NOT and phase gates) and measurements in the computational basis can be simulated efficiently on a classical computer. Such stabilizer circuits can be simulated perfectly in polynomial time on a probabilistic classical computer.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Daniel Gottesman and Emanuel Knill",
+      "note": "It shows that even some highly entangled states can be simulated efficiently on a classical computer. It was published in a single-author paper by Gottesman, who credits Knill with the result.",
+      "url": "https://en.wikipedia.org/wiki/Gottesman%E2%80%93Knill_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "karp-lipton-theorem",
+      "name": "Karp–Lipton theorem",
+      "short": "Karp–Lipton theorem",
+      "statement": "If the Boolean satisfiability problem (SAT) can be solved by Boolean circuits with a polynomial number of logic gates, then Π₂ = Σ₂ and therefore the polynomial hierarchy PH equals Σ₂.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cook-levin"
+      ],
+      "by": "Richard M. Karp and Richard J. Lipton, 1980; Michael Sipser improved the collapse from Σ₃ to Σ₂",
+      "note": "Such a collapse is believed unlikely, so the theorem is viewed as evidence that SAT and other NP-complete problems have no polynomial size circuits.",
+      "url": "https://en.wikipedia.org/wiki/Karp%E2%80%93Lipton_theorem",
+      "area": "complexity",
+      "year": 1980,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "leftover-hash-lemma",
+      "name": "Leftover hash lemma",
+      "short": "Leftover hash lemma",
+      "statement": "Let X be a random variable with min-entropy H(X) = −log maxₓ Pr[X = x], let m > 0, and let h(S, X) be a 2-universal hash function with values in {0,1}ᵐ. If m ≤ H(X) − 2 log(1/ε), then for S uniform and independent of X, the statistical distance between (h(S, X), S) and (U, S) is at most ε, where U is uniform on {0,1}ᵐ and independent of S.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "cryptography"
+      ],
+      "by": "First stated by Russell Impagliazzo, Leonid Levin, and Michael Luby",
+      "note": "It means that a key about which an adversary knows only part can be turned into a shorter key that is almost uniformly random for the adversary. This is also known as privacy amplification.",
+      "url": "https://en.wikipedia.org/wiki/Leftover_hash_lemma",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "low-basis-theorem",
+      "name": "Low basis theorem",
+      "short": "Low basis theorem",
+      "statement": "Every nonempty Π⁰₁ class in 2^ω contains a set of low degree, that is, a set whose Turing jump is Turing equivalent to the halting problem ∅′. Equivalently, every infinite computable subtree of the binary tree 2^{<ω} has an infinite path of low degree.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "note": "It is one of several basis theorems, which find paths with particular computability properties through infinite subtrees of the binary tree. It implies the existence of PA degrees strictly below ∅′.",
+      "url": "https://en.wikipedia.org/wiki/Low_basis_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ardens-rule",
+      "name": "Arden's rule",
+      "short": "Arden's rule",
+      "statement": "For sets of strings A and B, the set A*⋅B is the smallest language X satisfying X = A⋅X ∪ B, and if A does not contain the empty word, this solution is unique. Equivalently, B⋅A* is the smallest solution of X = X⋅A ∪ B.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "note": "It can be used to help convert some finite automata to regular expressions, as in Kleene's algorithm.",
+      "url": "https://en.wikipedia.org/wiki/Arden's_rule",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "todas-theorem",
+      "name": "Toda's theorem",
+      "short": "Toda's theorem",
+      "statement": "The entire polynomial hierarchy PH is contained in P^PP. It follows that PH is also contained in P^#P.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Seinosuke Toda",
+      "note": "The result was given the 1998 Gödel Prize.",
+      "url": "https://en.wikipedia.org/wiki/Toda's_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rice-shapiro-theorem",
+      "name": "Rice–Shapiro theorem",
+      "short": "Rice–Shapiro theorem",
+      "statement": "Let P be a set of partial computable functions such that the set of program indices e with φ_e in P, for a fixed admissible numbering φ, is semi-decidable. Then for every partial computable function f, P contains f if and only if P contains a finite subfunction of f, that is, a function defined at only finitely many points that agrees with f there.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "by": "Named after Henry Gordon Rice and Norman Shapiro",
+      "note": "It generalizes Rice's theorem. A closely related result is the Kreisel–Lacombe–Shoenfield–Tseitin theorem.",
+      "url": "https://en.wikipedia.org/wiki/Rice%E2%80%93Shapiro_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "schaefers-dichotomy-theorem",
+      "name": "Schaefer's dichotomy theorem",
+      "short": "Schaefer's dichotomy",
+      "statement": "Let Γ be a finite set of relations over the Boolean domain {0, 1}. The constraint satisfaction problem CSP(Γ) is solvable in polynomial time if Γ has one of six polymorphisms: the constant 1, the constant 0, binary AND, binary OR, ternary majority, or ternary minority (x ⊕ y ⊕ z); otherwise it is NP-complete. An operation is a polymorphism of Γ if applying it coordinate-wise to tuples of any relation in Γ always gives a tuple of that relation.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Thomas Jerome Schaefer",
+      "note": "Special cases include the NP-completeness of SAT, 1-in-3 SAT and not-all-equal 3SAT, also in their monotone versions.",
+      "url": "https://en.wikipedia.org/wiki/Schaefer's_dichotomy_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "immerman-szelepcsenyi-theorem",
+      "name": "Immerman–Szelepcsényi theorem",
+      "short": "Immerman–Szelepcsényi",
+      "statement": "For any function s(n) ≥ log n, the class of problems solvable by a nondeterministic machine in space s(n) equals the class of complements of such problems, that is NSPACE(s(n)) = co-NSPACE(s(n)). The special case s(n) = log n is NL = co-NL.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Neil Immerman and Róbert Szelepcsényi, independently, 1987",
+      "note": "No similar result is known for time complexity classes. The theorem solved the second LBA problem, and its proof method is called inductive counting.",
+      "url": "https://en.wikipedia.org/wiki/Immerman%E2%80%93Szelepcs%C3%A9nyi_theorem",
+      "area": "complexity",
+      "year": 1987,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sipser-lautemann-theorem",
+      "name": "Sipser–Lautemann theorem",
+      "short": "Sipser–Lautemann theorem",
+      "statement": "Bounded-error probabilistic polynomial time (BPP) is contained in the polynomial time hierarchy, and more specifically in Σ₂ ∩ Π₂.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Michael Sipser, 1983, showed that BPP is in the polynomial hierarchy; Péter Gács showed that it is in Σ₂ ∩ Π₂; Clemens Lautemann gave a simple proof of this, also in 1983",
+      "note": "It is conjectured that BPP = P, which is a much stronger statement.",
+      "url": "https://en.wikipedia.org/wiki/Sipser%E2%80%93Lautemann_theorem",
+      "area": "complexity",
+      "year": 1983,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "space-hierarchy-theorem",
+      "name": "Space hierarchy theorem",
+      "short": "Space hierarchy theorem",
+      "statement": "Call a function f from the natural numbers to the natural numbers space-constructible if f(n) ≥ log n and some Turing machine, started on a string of n ones, computes f(n) using space O(f(n)). For every space-constructible f there is a language that can be decided in space O(f(n)) but not in space o(f(n)), so SPACE(g(n)) is a proper subset of SPACE(f(n)) for every g(n) in o(f(n)), for deterministic and for nondeterministic machines alike.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "immerman-szelepcsenyi-theorem"
+      ],
+      "note": "The theorem is false if f is not required to be space-constructible. The analogous time hierarchy theorems are somewhat weaker.",
+      "url": "https://en.wikipedia.org/wiki/Space_hierarchy_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "utm-theorem",
+      "name": "UTM theorem",
+      "short": "UTM theorem",
+      "statement": "There is a partial computable function u of two variables such that for every computable function f of one variable there is a number e with f(x) ≃ u(e,x) for all x. This means that for each x, either f(x) and u(e,x) are both defined and equal, or both are undefined.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory"
+      ],
+      "note": "The function u is called a universal function. It is an abstract version of the universal Turing machine.",
+      "url": "https://en.wikipedia.org/wiki/UTM_theorem",
+      "area": "complexity",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "valiant-vazirani-theorem",
+      "name": "Valiant–Vazirani theorem",
+      "short": "Valiant–Vazirani theorem",
+      "statement": "If there is a polynomial time algorithm for Unambiguous-SAT, then NP = RP. Unambiguous-SAT is the problem of deciding, for a Boolean formula that has at most one satisfying assignment, whether it is unsatisfiable or has exactly one satisfying assignment.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "isolation-lemma-of-mulmuley-vazirani-and-vazirani",
+          "url": "https://en.wikipedia.org/wiki/Isolation_lemma"
+        }
+      ],
+      "by": "Leslie Valiant and Vijay Vazirani, 1986",
+      "note": "It implies that Boolean satisfiability remains computationally hard even when the inputs are promised to have at most one satisfying assignment.",
+      "url": "https://en.wikipedia.org/wiki/Valiant%E2%80%93Vazirani_theorem",
+      "area": "complexity",
+      "year": 1986,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "savitchs-theorem",
+      "name": "Savitch's theorem",
+      "short": "Savitch's theorem",
+      "statement": "For any space-constructable function f with f ∈ Ω(log n), every problem solvable by a nondeterministic Turing machine in space f(n) is solvable by a deterministic Turing machine in space f(n)². That is, NSPACE(f(n)) ⊆ DSPACE(f(n)²).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "complexity-theory"
+      ],
+      "by": "Walter Savitch, 1970",
+      "note": "It shows that nondeterminism has a much more limited effect on space requirements than it appears to have on time. The theorem still holds when every Turing machine is replaced by an oracle Turing machine.",
+      "url": "https://en.wikipedia.org/wiki/Savitch's_theorem",
+      "area": "complexity",
+      "year": 1970,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hilberts-tenth-problem",
+      "name": "Hilbert's tenth problem",
+      "short": "Hilbert's tenth problem",
+      "statement": "There is no general algorithm that, for every Diophantine equation (a polynomial equation with integer coefficients and a finite number of unknowns), decides whether the equation has a solution in which all unknowns are integers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "computability-theory",
+        "elementary-number-theory"
+      ],
+      "by": "Posed by David Hilbert, 1900; solved in the negative by Martin Davis, Yuri Matiyasevich, Hilary Putnam and Julia Robinson over 21 years, with Matiyasevich completing the theorem in 1970",
+      "note": "The question was posed by David Hilbert in 1900 as the tenth problem on his list. Its negative answer follows from the MRDP theorem, which says that every recursively enumerable set is Diophantine.",
+      "url": "https://en.wikipedia.org/wiki/Hilbert's_tenth_problem",
+      "area": "complexity",
+      "year": 1900,
+      "settled": 1970,
+      "origin": "wikipedia-import"
     }
   ]
 }

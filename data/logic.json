@@ -8,7 +8,13 @@
       "statement": "For any collection of non-empty sets, there is a function that picks one element from each set, even when the collection is infinite and no rule for picking is given.",
       "kind": "axiom",
       "base": "open",
-      "needs": [],
+      "needs": [
+        {
+          "id": "axiom-of-constructibility",
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_constructibility",
+          "origin": "wikipedia-import"
+        }
+      ],
       "by": "Ernst Zermelo, 1904",
       "note": "Gödel (announced 1938, published 1940) showed it cannot be refuted from the other axioms of set theory (ZF), and Cohen (1963) showed it cannot be proven from them, assuming ZF is consistent. Most of mathematics assumes it; ZFC is ZF plus choice.",
       "url": "https://en.wikipedia.org/wiki/Axiom_of_choice",
@@ -362,6 +368,1660 @@
         "vitali-set"
       ],
       "year": 1964
+    },
+    {
+      "id": "axiom-of-countable-choice",
+      "name": "Axiom of countable choice",
+      "short": "Axiom of countable choice",
+      "statement": "Every countable collection of non-empty sets has a choice function. That is, if A is a function on ℕ such that A(n) is non-empty for every n in ℕ, then there is a function f on ℕ with f(n) in A(n) for every n.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [
+        {
+          "id": "axiom-of-dependent-choice",
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
+        }
+      ],
+      "note": "It is strictly weaker than the axiom of dependent choice, which in turn is weaker than the axiom of choice. Paul Cohen showed that it is not provable in Zermelo–Fraenkel set theory without the axiom of choice.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_countable_choice",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "schroder-bernstein-theorem",
+      "name": "Schröder–Bernstein theorem",
+      "short": "Schröder–Bernstein theorem",
+      "statement": "If A and B are sets and there exist injective functions f : A → B and g : B → A, then there exists a bijective function h : A → B.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "knaster-tarski-theorem"
+      ],
+      "by": "First stated by Georg Cantor, 1887, without proof; first proved by Richard Dedekind, 1887, unpublished; Felix Bernstein's proof published 1898, while Ernst Schröder's 1898 proof was flawed",
+      "note": "In terms of cardinality, if A ≤ B and B ≤ A then A and B have the same cardinality. It can be proved without the axiom of choice, but it is not provable in intuitionistic set theory.",
+      "url": "https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem",
+      "area": "logic",
+      "year": 1887,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "freges-theorem",
+      "name": "Frege's theorem",
+      "short": "Frege's theorem",
+      "statement": "The Peano axioms of arithmetic can be derived in second-order logic from Hume's principle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Gottlob Frege, informally 1884 in The Foundations of Arithmetic and more formally 1893 in Grundgesetze der Arithmetik I; re-discovered by Crispin Wright in the early 1980s",
+      "note": "It is at the core of the philosophy of mathematics known as neo-logicism. In propositional logic the name also refers to the tautology (P→(Q→R))→((P→Q)→(P→R)).",
+      "url": "https://en.wikipedia.org/wiki/Frege's_theorem",
+      "area": "logic",
+      "year": 1884,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "craigs-interpolation-theorem",
+      "name": "Craig's interpolation theorem",
+      "short": "Craig interpolation",
+      "statement": "In first-order logic, if a formula φ implies a formula ψ and the two have at least one atomic variable symbol in common, then there is a formula ρ, called an interpolant, such that every non-logical symbol in ρ occurs in both φ and ψ, φ implies ρ, and ρ implies ψ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cut-elimination-theorem"
+      ],
+      "by": "William Craig, 1957 (for first-order logic)",
+      "note": "Variants hold for other logics, such as propositional logic. Roger Lyndon proved a stronger form for first-order logic in 1959.",
+      "url": "https://en.wikipedia.org/wiki/Craig_interpolation",
+      "area": "logic",
+      "year": 1957,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lowenheim-skolem-theorem",
+      "name": "Löwenheim–Skolem theorem",
+      "short": "Löwenheim–Skolem theorem",
+      "statement": "Let σ be a signature (a stock of function and relation symbols), M an infinite structure for σ, and κ an infinite cardinal at least as large as the number of symbols in σ. Then there is a σ-structure N with exactly κ elements that is an elementary substructure of M if κ is smaller than the size of M, and an elementary extension of M if κ is at least the size of M.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Leopold Löwenheim, 1915; Thoralf Skolem, 1920; proved in full generality by Anatoly Maltsev, 1936",
+      "note": "It implies that a countable first-order theory with an infinite model has a model of every infinite size, so no first-order theory with an infinite model has a unique model up to isomorphism. It does not hold in general in stronger logics such as second-order logic.",
+      "url": "https://en.wikipedia.org/wiki/L%C3%B6wenheim%E2%80%93Skolem_theorem",
+      "area": "logic",
+      "year": 1915,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "buchi-elgot-trakhtenbrot-theorem",
+      "name": "Büchi–Elgot–Trakhtenbrot theorem",
+      "short": "Büchi–Elgot–Trakhtenbrot",
+      "statement": "A language of finite strings over a finite alphabet is regular, meaning it is accepted by some finite-state automaton, if and only if it can be defined by a formula of monadic second-order logic (MSO) that speaks about the positions of a string, the letters at those positions and the successor relation. Equivalently, every such MSO formula has a finite-state automaton defining the same language, and every finite-state automaton has such an MSO formula.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic",
+        "computability-theory"
+      ],
+      "by": "Julius Richard Büchi, Calvin Elgot and Boris Trakhtenbrot",
+      "note": "Some regular languages, such as the strings of even length made only of the letter a, cannot be defined in first-order logic and need the second-order quantifiers of MSO.",
+      "url": "https://en.wikipedia.org/wiki/B%C3%BCchi%E2%80%93Elgot%E2%80%93Trakhtenbrot_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "konigs-theorem",
+      "name": "Kőnig's theorem",
+      "short": "Kőnig's theorem (sets)",
+      "statement": "Assume the axiom of choice. If I is a set and κᵢ and λᵢ are cardinal numbers with κᵢ < λᵢ for every i in I, then the sum of the κᵢ is strictly less than the product of the λᵢ, where the sum is the cardinality of the disjoint union and the product is the cardinality of the Cartesian product.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Kőnig, 1904, in a slightly weaker form for strictly increasing sequences of nonzero cardinals",
+      "note": "In its formulation for arbitrary sets the theorem is equivalent to the axiom of choice. Its strict inequality is notable, since simpler rules for infinite sums and products of cardinals give only ≤.",
+      "url": "https://en.wikipedia.org/wiki/K%C5%91nig's_theorem_(set_theory)",
+      "area": "logic",
+      "year": 1904,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "trakhtenbrots-theorem",
+      "name": "Trakhtenbrot's theorem",
+      "short": "Trakhtenbrot's theorem",
+      "statement": "For first-order logic over a vocabulary that contains at least one binary relation symbol, it is undecidable whether a sentence is valid in all finite structures. In fact, the set of sentences valid in all finite structures is not recursively enumerable, though it is co-recursively enumerable.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic",
+        "computability-theory"
+      ],
+      "by": "Boris Trakhtenbrot, first published 1950",
+      "note": "It implies that Gödel's completeness theorem does not hold in the finite case.",
+      "url": "https://en.wikipedia.org/wiki/Trakhtenbrot's_theorem",
+      "area": "logic",
+      "year": 1950,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "feferman-vaught-theorem",
+      "name": "Feferman–Vaught theorem",
+      "short": "Feferman–Vaught theorem",
+      "statement": "For structures A_i (i ∈ I) of one first-order signature, there is an algorithm that turns each first-order formula φ(x̄) into a formula φ* about sets such that, for all elements ā of the product ∏ A_i, φ(ā) holds in the product exactly when φ* holds of the k + 1 sets I, ||θ₁(ā)||, …, ||θₖ(ā)||. Here θ₁ ∨ … ∨ θₖ is the game normal form of φ, a finite disjunction of mutually contradictory formulas, and ||θ(ā)|| is the set of indices i for which θ(ā(i)) holds in A_i.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Solomon Feferman and Robert Lawson Vaught",
+      "note": "The theorem extends an earlier result of Andrzej Mostowski on direct products of theories. It implies the decidability of Skolem arithmetic.",
+      "url": "https://en.wikipedia.org/wiki/Feferman%E2%80%93Vaught_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "consequentia-mirabilis",
+      "name": "Consequentia mirabilis",
+      "short": "Consequentia mirabilis",
+      "statement": "In classical logic, (¬A → A) → A holds: if a proposition A follows from its own negation, then A is true.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "peirces-law"
+      ],
+      "by": "The pattern of argument first appeared in a fragment of Aristotle's Protrepticus",
+      "note": "Also known as Clavius's Law. Weaker variants are provable in minimal logic, but the full principle is not provable even in intuitionistic logic.",
+      "url": "https://en.wikipedia.org/wiki/Consequentia_mirabilis",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "goodsteins-theorem",
+      "name": "Goodstein's theorem",
+      "short": "Goodstein's theorem",
+      "statement": "Write a natural number m in hereditary base-2 notation (a sum of powers of 2 whose exponents are themselves written the same way), replace every 2 by 3 and subtract 1; then write the result in hereditary base 3, replace every 3 by 4 and subtract 1, and so on. For every starting number m, this Goodstein sequence eventually reaches 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic",
+        "natural-numbers"
+      ],
+      "by": "Reuben Goodstein, 1944",
+      "note": "Laurence Kirby and Jeff Paris showed in 1982 that it cannot be proved in Peano arithmetic, though it can be proved in stronger systems such as second-order arithmetic or Zermelo–Fraenkel set theory.",
+      "url": "https://en.wikipedia.org/wiki/Goodstein's_theorem",
+      "area": "logic",
+      "year": 1944,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "axiom-of-constructibility",
+      "name": "Axiom of constructibility",
+      "short": "Axiom of constructibility",
+      "statement": "Every set is constructible. This is written V = L, where V is the von Neumann universe of all well-founded sets and L is the class of constructible sets.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "First investigated by Kurt Gödel, who used it in his 1938 proof of the relative consistency of the axiom of choice and the generalized continuum hypothesis",
+      "note": "It implies the axiom of choice and the generalized continuum hypothesis. It is inconsistent with the existence of zero sharp and with stronger large cardinal axioms.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_constructibility",
+      "area": "logic",
+      "year": 1938,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "deduction-theorem",
+      "name": "Deduction theorem",
+      "short": "Deduction theorem",
+      "statement": "In a Hilbert-style proof system for propositional logic whose axioms are P → (Q → P) and (P → (Q → R)) → ((P → Q) → (P → R)) and whose rule is modus ponens, if a formula B can be deduced from a set of assumptions Δ together with a formula A, then the implication A → B can be deduced from Δ alone.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It justifies proving an implication by assuming its hypothesis. In first-order logic it holds when A is a closed formula, and it fails in Birkhoff–von Neumann quantum logic.",
+      "url": "https://en.wikipedia.org/wiki/Deduction_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "zermelos-categoricity-theorem",
+      "name": "Zermelo's categoricity theorem",
+      "short": "Zermelo's categoricity",
+      "statement": "Let ZFC² be Zermelo–Fraenkel set theory with the axiom of replacement taken in its second-order form, the second-order universal closure of the replacement schema. Then every model of ZFC² is isomorphic to a set V_κ in the von Neumann hierarchy, for some strongly inaccessible cardinal κ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Ernst Zermelo, 1930",
+      "url": "https://en.wikipedia.org/wiki/Zermelo's_categoricity_theorem",
+      "area": "logic",
+      "year": 1930,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-rado-theorem",
+      "name": "Erdős–Rado theorem",
+      "short": "Erdős–Rado theorem",
+      "statement": "Let r ≥ 0 be finite and κ an infinite cardinal, with exp₀(κ) = κ and exp_{r+1}(κ) = 2^exp_r(κ). If the (r+1)-element subsets of a set of cardinality exp_r(κ)⁺ are colored in κ many colors, then there is a homogeneous set of cardinality κ⁺, that is, a set all of whose (r+1)-element subsets get the same color.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Named after Paul Erdős and Richard Rado; Đuro Kurepa proved it under the additional assumption of the generalised continuum hypothesis",
+      "note": "It extends Ramsey's theorem to uncountable sets. It is sharp: exp_r(κ)⁺ cannot be replaced by exp_r(κ).",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Rado_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "mostowski-collapse-lemma",
+      "name": "Mostowski collapse lemma",
+      "short": "Mostowski collapse lemma",
+      "statement": "Let R be a binary relation on a class X that is set-like (for every x, the collection of y with y R x is a set), well-founded (every nonempty subset of X has an R-minimal element) and extensional (distinct elements x and y have different sets of R-predecessors). Then there is a unique transitive class, possibly proper, whose structure under membership is isomorphic to (X, R), and the isomorphism is unique.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory",
+        "mathematical-logic"
+      ],
+      "by": "Introduced by Mostowski, 1949, and Shepherdson, 1953",
+      "note": "The isomorphism sends each element x of X to the set of images of the elements y with y R x. It shows that every well-founded set model of ZF is isomorphic to a unique transitive model.",
+      "url": "https://en.wikipedia.org/wiki/Mostowski_collapse_lemma",
+      "area": "logic",
+      "year": 1949,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "transfinite-recursion-theorem",
+      "name": "Transfinite recursion theorem",
+      "short": "Transfinite recursion",
+      "statement": "Let X be a set and let G be a class function with values in X, defined on the class of all functions. Then for each ordinal α there is a unique function f: α → X such that f(β) = G(f restricted to β) for every ordinal β < α.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "note": "The theorem is also stated for general well-ordered sets, and transfinite recursion is an instance of transfinite induction.",
+      "url": "https://en.wikipedia.org/wiki/Transfinite_recursion_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tarski-seidenberg-theorem",
+      "name": "Tarski–Seidenberg theorem",
+      "short": "Tarski–Seidenberg theorem",
+      "statement": "If a set in (n + 1)-dimensional real space can be described by polynomial equations and inequalities in n + 1 variables combined with 'and', 'or' and 'not', then its projection that drops one of the variables can be described in the same way. In other words, quantifier elimination is possible in the first-order theory of the real numbers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic",
+        "algebraic-geometry"
+      ],
+      "by": "Alfred Tarski, 1930; later discovered independently by Abraham Seidenberg",
+      "note": "Tarski proved it in view of his proof that the theory of real closed fields is complete and admits quantifier elimination. The statement fails for sets defined by equations alone: the projection of the hyperbola xy = 1 is not an algebraic set.",
+      "url": "https://en.wikipedia.org/wiki/Tarski%E2%80%93Seidenberg_theorem",
+      "area": "logic",
+      "year": 1930,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "transfer-principle",
+      "name": "Transfer principle",
+      "short": "Transfer principle",
+      "statement": "A statement built from functions and relations of finitely many variables, the logical connectives and quantifiers over the real numbers is true of the real numbers if and only if it is true of the hyperreal numbers, with the quantifiers then ranging over the hyperreals and each particular set A or function f of reals it mentions replaced by its natural extension *A or *f. If the statement also quantifies over sets of reals, those quantifiers must range only over internal sets of hyperreals.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic",
+        "real-analysis"
+      ],
+      "by": "Jerzy Łoś, 1955, for any hyperreal number system",
+      "note": "Its most common use is in Abraham Robinson's nonstandard analysis of the hyperreal numbers. An early form was described by Leibniz as the Law of Continuity.",
+      "url": "https://en.wikipedia.org/wiki/Transfer_principle",
+      "area": "logic",
+      "year": 1955,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "de-morgans-laws",
+      "name": "De Morgan's laws",
+      "short": "De Morgan's laws",
+      "statement": "The negation of \"P and Q\" is equivalent to \"not P or not Q\", and the negation of \"P or Q\" is equivalent to \"not P and not Q\", where \"or\" is inclusive (at least one). For sets, the complement of a union is the intersection of the complements, and the complement of an intersection is the union of the complements.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Augustus De Morgan, whose first explicit statement of them is in his 1847 book Formal Logic; similar observations were made by Aristotle, William of Ockham and Jean Buridan",
+      "note": "They are used to simplify logical expressions in computer programs and digital circuit designs.",
+      "url": "https://en.wikipedia.org/wiki/De_Morgan's_laws",
+      "area": "logic",
+      "year": 1847,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "diamond-principle",
+      "name": "Diamond principle",
+      "short": "Diamond principle ◊",
+      "statement": "There is a family of sets A_α ⊆ α, one for each α < ω₁, such that for every subset A of ω₁ the set of α with A ∩ α = A_α is stationary in ω₁.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [
+        {
+          "id": "axiom-of-constructibility",
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_constructibility"
+        }
+      ],
+      "by": "Introduced by Ronald Jensen",
+      "note": "It holds in the constructible universe, implies the continuum hypothesis and the existence of Suslin trees, and is independent of the axioms of ZFC. Jensen extracted it from his proof that the axiom of constructibility implies the existence of a Suslin tree.",
+      "url": "https://en.wikipedia.org/wiki/Diamond_principle",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rasiowa-sikorski-lemma",
+      "name": "Rasiowa–Sikorski lemma",
+      "short": "Rasiowa–Sikorski lemma",
+      "statement": "Let (P, ≤) be a poset and p ∈ P. A subset E of P is dense if every element of P lies above some element of E. If D is a countable set of dense subsets of P, then there is a filter F in P containing p that meets every set in D.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Named after Helena Rasiowa and Roman Sikorski",
+      "note": "It is one of the most fundamental facts used in the technique of forcing. It is equivalent to MA(ℵ₀), a weak form of Martin's axiom.",
+      "url": "https://en.wikipedia.org/wiki/Rasiowa%E2%80%93Sikorski_lemma",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "axiom-of-adjunction",
+      "name": "Axiom of adjunction",
+      "short": "Axiom of adjunction",
+      "statement": "For any two sets x and y there is a set w whose members are exactly the members of x together with y, that is, w = x ∪ {y}.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Introduced by Bernays, 1937",
+      "note": "It is a weak axiom, used in weak systems of set theory such as general set theory and finitary set theory. Tarski and Szmielew showed that Robinson arithmetic can be interpreted in the set theory with extensionality, the empty set axiom and adjunction.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_adjunction",
+      "area": "logic",
+      "year": 1937,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "herbrands-theorem",
+      "name": "Herbrand's theorem",
+      "short": "Herbrand's theorem",
+      "statement": "Let (∃y₁,…,yₙ) F(y₁,…,yₙ) be a first-order formula with F quantifier-free, possibly containing further free variables. It is valid if and only if there are a natural number r > 1 and terms t_ij (1 ≤ i ≤ r, 1 ≤ j ≤ n), possibly in an expansion of the language, such that the disjunction F(t₁₁,…,t₁ₙ) ∨ … ∨ F(t_r1,…,t_rn) is valid.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cut-elimination-theorem"
+      ],
+      "by": "Jacques Herbrand, 1930",
+      "note": "It reduces first-order logic to propositional logic in a certain way, and is the logical foundation for most automatic theorem provers. Herbrand proved it for arbitrary first-order formulas; this simpler version for existential prenex formulas became more popular.",
+      "url": "https://en.wikipedia.org/wiki/Herbrand's_theorem",
+      "area": "logic",
+      "year": 1930,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kuratowski-ulam-theorem",
+      "name": "Kuratowski–Ulam theorem",
+      "short": "Kuratowski–Ulam theorem",
+      "statement": "Let X and Y be second countable Baire spaces and let A be a subset of X × Y that has the Baire property. Then A is meager (respectively comeager) if and only if the set of x in X for which the slice A_x of A over x is meager (respectively comeager) in Y is comeager in X. Even if A does not have the Baire property, the second condition follows from the first.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "descriptive-set-theory",
+        "topology"
+      ],
+      "by": "Kazimierz Kuratowski and Stanislaw Ulam, 1932",
+      "note": "It is also called the Fubini theorem for category. Meager sets play the role of sets of measure zero, and sets with the Baire property play the role of measurable sets.",
+      "url": "https://en.wikipedia.org/wiki/Kuratowski%E2%80%93Ulam_theorem",
+      "area": "logic",
+      "year": 1932,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "axiom-of-empty-set",
+      "name": "Axiom of empty set",
+      "short": "Axiom of empty set",
+      "statement": "There exists a set with no elements: there is a set A such that no x is a member of A.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Zermelo originally stipulated it as an axiom",
+      "note": "It is an axiom of Kripke–Platek set theory, and a demonstrable truth in Zermelo–Fraenkel set theory, with or without the axiom of choice. By the axiom of extensionality there is only one such set, the empty set.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_empty_set",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "eastons-theorem",
+      "name": "Easton's theorem",
+      "short": "Easton's theorem",
+      "statement": "Assume ZFC is consistent. Let G be a class function from a class of ordinals to ordinals that is non-decreasing, such that for every α in its domain ℵ_α is regular and the cofinality of ℵ_G(α) is greater than ℵ_α. Then there is a model of ZFC in which 2^(ℵ_α) = ℵ_G(α) for every α in the domain of G.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Easton, 1970, extending a result of Robert M. Solovay",
+      "note": "For regular cardinals, the only constraints on the value of 2^κ are that its cofinality is greater than κ and that it does not decrease as κ grows. The theorem cannot be extended to singular cardinals.",
+      "url": "https://en.wikipedia.org/wiki/Easton's_theorem",
+      "area": "logic",
+      "year": 1970,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lindenbaums-lemma",
+      "name": "Lindenbaum's lemma",
+      "short": "Lindenbaum's lemma",
+      "statement": "Every consistent theory of predicate logic can be extended to a complete consistent theory.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Named after Adolf Lindenbaum, who did not publish it; Alfred Tarski originally attributed it to him",
+      "note": "It is a special case of the ultrafilter lemma for Boolean algebras and is used in the proof of Gödel's completeness theorem. The version for computably enumerable theories fails if Peano arithmetic is consistent, by Gödel's incompleteness theorem.",
+      "url": "https://en.wikipedia.org/wiki/Lindenbaum's_lemma",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tennenbaums-theorem",
+      "name": "Tennenbaum's theorem",
+      "short": "Tennenbaum's theorem",
+      "statement": "No countable nonstandard model of first-order Peano arithmetic is recursive. Moreover, neither the addition nor the multiplication of such a model can be recursive.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "godel-incompleteness"
+      ],
+      "by": "Stanley Tennenbaum, 1959",
+      "url": "https://en.wikipedia.org/wiki/Tennenbaum's_theorem",
+      "area": "logic",
+      "year": 1959,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "suslins-problem",
+      "name": "Suslin's problem",
+      "short": "Suslin's problem",
+      "statement": "Let R be a non-empty totally ordered set that has no least or greatest element, in which between any two distinct elements there is another, in which every non-empty bounded subset has a supremum and an infimum, and in which every collection of mutually disjoint non-empty open intervals is countable. Then R is order-isomorphic to the real line.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "diamond-principle",
+        "axiom-of-constructibility",
+        "martins-axiom"
+      ],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Posed by Suslin, 1920 (published posthumously); shown independent of ZFC by Solovay and Tennenbaum, 1971",
+      "note": "The statement can neither be proven nor disproven from ZFC, assuming ZF is consistent. If the countable chain condition is replaced by having a countable dense subset, the answer is yes, as proved by Cantor.",
+      "url": "https://en.wikipedia.org/wiki/Suslin's_problem",
+      "area": "logic",
+      "year": 1920,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lindstroms-theorem",
+      "name": "Lindström's theorem",
+      "short": "Lindström's theorem",
+      "statement": "First-order logic is the strongest logic, among those satisfying certain conditions such as closure under classical negation, that has both the countable compactness property and the downward Löwenheim–Skolem property.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Per Lindström, published 1969",
+      "note": "It is perhaps the best known result of abstract model theory. It has been extended to other systems of logic, including modal logics.",
+      "url": "https://en.wikipedia.org/wiki/Lindstr%C3%B6m's_theorem",
+      "area": "logic",
+      "year": 1969,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "peirces-law",
+      "name": "Peirce's law",
+      "short": "Peirce's law",
+      "statement": "In classical propositional logic, ((P → Q) → P) → P holds for all propositions P and Q. In words, P must be true if there is a proposition Q such that the truth of P follows from \"if P then Q\".",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Charles Sanders Peirce, 1885; he took it as an axiom in his first axiomatisation of propositional logic",
+      "note": "It does not hold in intuitionistic logic. Over intuitionistic logic it is equivalent to the law of excluded middle.",
+      "url": "https://en.wikipedia.org/wiki/Peirce's_law",
+      "area": "logic",
+      "year": 1885,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cantor-bernstein-theorem",
+      "name": "Cantor–Bernstein theorem",
+      "short": "Cantor–Bernstein theorem",
+      "statement": "The class of countable order types has the same cardinality as the continuum.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Named by Felix Hausdorff after Georg Cantor and Felix Bernstein. Cantor constructed a family of countable order types with the cardinality of the continuum, and Bernstein proved in 1901 that such a family can have no higher cardinality.",
+      "url": "https://en.wikipedia.org/wiki/Cantor%E2%80%93Bernstein_theorem",
+      "area": "logic",
+      "year": 1901,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "os-vaught-test",
+      "name": "Łoś–Vaught test",
+      "short": "Łoś–Vaught test",
+      "statement": "If a satisfiable first-order theory with signature σ has no finite model and is κ-categorical for some infinite cardinal κ ≥ |σ|, then the theory is complete.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Proved independently by Łoś and Vaught, 1954",
+      "note": "A theory is κ-categorical if it has exactly one model of cardinality κ up to isomorphism. Complete means that for every sentence the theory contains either the sentence or its negation but not both.",
+      "url": "https://en.wikipedia.org/wiki/%C5%81o%C5%9B%E2%80%93Vaught_test",
+      "area": "logic",
+      "year": 1954,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "teichmuller-tukey-lemma",
+      "name": "Teichmüller–Tukey lemma",
+      "short": "Teichmüller–Tukey lemma",
+      "statement": "Every nonempty collection of finite character has a maximal element with respect to inclusion, where a family of sets has finite character when a set belongs to it exactly when all its finite subsets do. More precisely, if F is a family of subsets of a set Z that is of finite character and X belongs to F, then F has an inclusion-maximal member Y with X ⊆ Y.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Named after John Tukey and Oswald Teichmüller",
+      "note": "Over Zermelo–Fraenkel set theory it is equivalent to the axiom of choice, and so to the well-ordering theorem, Zorn's lemma and the Hausdorff maximal principle.",
+      "url": "https://en.wikipedia.org/wiki/Teichm%C3%BCller%E2%80%93Tukey_lemma",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "diagonal-lemma",
+      "name": "Diagonal lemma",
+      "short": "Diagonal lemma",
+      "statement": "Let T be a first-order theory that contains Robinson arithmetic Q, with a standard Gödel numbering. For every formula ψ(x) in the language of T whose only free variable is x, there is a sentence φ such that T proves φ ↔ ψ(⌜φ⌝), where ⌜φ⌝ is the numeral for the Gödel number of φ; informally, φ says of itself that it has the property ψ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "First published in some generality by Rudolf Carnap, 1934; a particular instance was used earlier by Kurt Gödel, 1931",
+      "note": "Gödel used a particular instance to prove his incompleteness theorems, and Tarski used one to prove his undefinability theorem. Carnap's 1934 version was phrased in terms of truth rather than provability.",
+      "url": "https://en.wikipedia.org/wiki/Diagonal_lemma",
+      "area": "logic",
+      "year": 1934,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tarskis-theorem-about-choice",
+      "name": "Tarski's theorem about choice",
+      "short": "Tarski's theorem on choice",
+      "statement": "In ZF set theory, if every infinite set A can be put in one-to-one correspondence with the set A × A of its ordered pairs, then the axiom of choice holds.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Tarski, 1924",
+      "note": "The opposite direction was already known, so this statement is equivalent to the axiom of choice. The proof shows that the statement implies that every set can be well-ordered.",
+      "url": "https://en.wikipedia.org/wiki/Tarski's_theorem_about_choice",
+      "area": "logic",
+      "year": 1924,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "axiom-of-dependent-choice",
+      "name": "Axiom of dependent choice",
+      "short": "Axiom of dependent choice",
+      "statement": "Let X be any nonempty set and R a relation on X such that every a in X has some b in X with a R b. Then there is a sequence x₀, x₁, x₂, … of elements of X, indexed by the natural numbers, such that xₙ R xₙ₊₁ for every n.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Paul Bernays, 1942",
+      "note": "It is a weak form of the axiom of choice that is still sufficient to develop much of real analysis. The first term x₀ may be taken to be any desired element of X.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice",
+      "area": "logic",
+      "year": 1942,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "modus-ponendo-tollens",
+      "name": "Modus ponendo tollens",
+      "short": "Modus ponendo tollens",
+      "statement": "In propositional logic, if it is not the case that both A and B hold, and A holds, then B does not hold.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It is closely related to modus ponens and modus tollendo ponens.",
+      "url": "https://en.wikipedia.org/wiki/Modus_ponendo_tollens",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "axiom-of-global-choice",
+      "name": "Axiom of global choice",
+      "short": "Axiom of global choice",
+      "statement": "There is a global choice function τ, that is, a function such that for every non-empty set z, τ(z) is an element of z.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [
+        {
+          "id": "axiom-of-constructibility",
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_constructibility"
+        },
+        "axiom-of-limitation-of-size"
+      ],
+      "note": "It is a stronger variant of the axiom of choice that applies to proper classes as well as sets. In von Neumann–Bernays–Gödel set theory it adds no consequences about sets beyond those of the ordinary axiom of choice.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_global_choice",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cantors-isomorphism-theorem",
+      "name": "Cantor's isomorphism theorem",
+      "short": "Cantor's isomorphism thm",
+      "statement": "Every two nonempty countable dense unbounded linear orders are order-isomorphic.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Georg Cantor, 1895",
+      "note": "In model theory it says that the first-order theory of unbounded dense linear orders is countably categorical. The back-and-forth proof was published later by Felix Hausdorff.",
+      "url": "https://en.wikipedia.org/wiki/Cantor's_isomorphism_theorem",
+      "area": "logic",
+      "year": 1895,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "diaconescus-theorem",
+      "name": "Diaconescu's theorem",
+      "short": "Diaconescu's theorem",
+      "statement": "In a constructive set theory with full Separation, the axiom of choice implies the law of excluded middle: for every proposition P, either P or not P holds. If Separation is restricted, choice still implies excluded middle, but only for the propositions that Separation can use.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory",
+        "mathematical-logic"
+      ],
+      "by": "Radu Diaconescu, 1975, and later Nicolas Goodman and John Myhill; Errett Bishop posed it as an exercise in 1967",
+      "note": "Over classical logic the result is trivial, because excluded middle is assumed there. The proof also uses Pairing and Extensionality, and shows that excluded middle is equivalent to choice for all inhabited sets that are images of the two-element set {0, 1}.",
+      "url": "https://en.wikipedia.org/wiki/Diaconescu's_theorem",
+      "area": "logic",
+      "year": 1967,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cut-elimination-theorem",
+      "name": "Cut-elimination theorem",
+      "short": "Cut-elimination theorem",
+      "statement": "In Gentzen's sequent calculi LJ and LK for intuitionistic and classical logic, any sequent that has a proof using the cut rule also has a cut-free proof, that is, a proof that does not use the cut rule.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Gerhard Gentzen, 1935",
+      "note": "The natural deduction version, the normalization theorem, was first proved for a variety of logics by Dag Prawitz in 1965. Once a system is shown to have cut elimination, it is normally immediate that the system is consistent.",
+      "url": "https://en.wikipedia.org/wiki/Cut-elimination_theorem",
+      "area": "logic",
+      "year": 1935,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "absorption-rule-of-propositional-logic",
+      "name": "Absorption rule of propositional logic",
+      "short": "Absorption (logic)",
+      "statement": "If P implies Q, then P implies (P and Q). Equivalently, (P → Q) ↔ (P → (P ∧ Q)) is a theorem of propositional logic.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Stated as a theorem of propositional logic by Russell and Whitehead in Principia Mathematica",
+      "note": "The rule makes it possible to introduce conjunctions into proofs.",
+      "url": "https://en.wikipedia.org/wiki/Absorption_(logic)",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "barwise-compactness-theorem",
+      "name": "Barwise compactness theorem",
+      "short": "Barwise compactness",
+      "statement": "Let A be a countable admissible set and L an A-finite relational language. If Γ is a set of L_A-sentences that is a Σ₁ set with parameters from A, and every A-finite subset of Γ is satisfiable, then Γ is satisfiable.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Jon Barwise, 1967",
+      "note": "It generalizes the usual compactness theorem for first-order logic to a certain class of infinitary languages.",
+      "url": "https://en.wikipedia.org/wiki/Barwise_compactness_theorem",
+      "area": "logic",
+      "year": 1967,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "beth-definability-theorem",
+      "name": "Beth definability theorem",
+      "short": "Beth definability theorem",
+      "statement": "For first-order logic, let T be a theory in an extended language and φ a formula of the extended language. Then any two models of T that have the same reduct to the original language L agree on φ if and only if φ is equivalent modulo T to a formula ψ of the original language L. In other words, a property that is implicitly definable in a theory is explicitly definable in it.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Evert Willem Beth, 1953",
+      "note": "It gives an equivalence between implicit and explicit definability in classical first-order logic. The theorem does not hold if the condition is restricted to finite models.",
+      "url": "https://en.wikipedia.org/wiki/Beth_definability_theorem",
+      "area": "logic",
+      "year": 1953,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "unique-homomorphic-extension-theorem",
+      "name": "Unique homomorphic extension theorem",
+      "short": "Unique homomorphic ext.",
+      "statement": "Let X₊ be the set built from a set X by repeatedly applying the functions in a set F, and suppose X₊ is freely generated by X and F, so that each element is built in only one way. If B is a non-empty set and each n-ary function f in F is assigned a function d(f): Bⁿ → B, then every function h: X → B extends to exactly one function ĥ: X₊ → B with ĥ(x) = h(x) for x in X and ĥ(f(x₁, …, xₙ)) = d(f)(ĥ(x₁), …, ĥ(xₙ)) for every f in F of arity n > 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It formalizes the idea that the truth or falsity of a statement can be deduced from the truth values of its parts. For example, it gives the function that computes the truth value of each proposition from the truth values of its atomic propositions.",
+      "url": "https://en.wikipedia.org/wiki/Unique_homomorphic_extension_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "biconditional-elimination",
+      "name": "Biconditional elimination",
+      "short": "Biconditional elimination",
+      "statement": "If \"P if and only if Q\" is true, then \"if P then Q\" is true, and also \"if Q then P\" is true.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It is stated as two valid rules of inference, and equally as tautologies of propositional logic.",
+      "url": "https://en.wikipedia.org/wiki/Biconditional_elimination",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "biconditional-introduction",
+      "name": "Biconditional introduction",
+      "short": "Biconditional introduction",
+      "statement": "If P → Q is true and Q → P is true, then one may infer that P ↔ Q is true.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It is the converse of biconditional elimination.",
+      "url": "https://en.wikipedia.org/wiki/Biconditional_introduction",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "borel-determinacy-theorem",
+      "name": "Borel determinacy theorem",
+      "short": "Borel determinacy",
+      "statement": "For any set A of moves, every Gale–Stewart game whose payoff set is a Borel subset of A^ω (the set of infinite sequences of moves) is determined: one of the two players has a winning strategy.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "descriptive-set-theory",
+        "zf-set-theory"
+      ],
+      "by": "Donald A. Martin, 1975",
+      "note": "It generalizes Zermelo's theorem about the determinacy of finite games. For arbitrary sets A of moves it relies on the axiom of choice, since determinacy of closed sets for arbitrary A is equivalent to the axiom of choice over ZF.",
+      "url": "https://en.wikipedia.org/wiki/Borel_determinacy_theorem",
+      "area": "logic",
+      "year": 1975,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bourbaki-witt-theorem",
+      "name": "Bourbaki–Witt theorem",
+      "short": "Bourbaki–Witt theorem",
+      "statement": "Let X be a non-empty partially ordered set in which every chain has a least upper bound. If f: X → X satisfies f(x) ≥ x for all x, then f has a fixed point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Named after Nicolas Bourbaki and Ernst Witt",
+      "note": "It is a basic fixed-point theorem for partially ordered sets. Its proof does not depend on the axiom of choice, and it is typically used to prove that the axiom of choice implies Zorn's lemma.",
+      "url": "https://en.wikipedia.org/wiki/Bourbaki%E2%80%93Witt_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "codds-theorem",
+      "name": "Codd's theorem",
+      "short": "Codd's theorem",
+      "statement": "Relational algebra and the domain-independent relational calculus queries are equivalent in expressive power: a database query can be formulated in one of these languages if and only if it can be expressed in the other.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Named after Edgar F. Codd",
+      "note": "Domain-independent queries are those whose result does not change when the domain of values is enlarged beyond the values in the database. Relational calculus is essentially equivalent to first-order logic.",
+      "url": "https://en.wikipedia.org/wiki/Codd's_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "commutativity-of-conjunction",
+      "name": "Commutativity of conjunction",
+      "short": "Conjunction commutes",
+      "statement": "For any propositions P and Q, \"P and Q\" implies \"Q and P\", and \"Q and P\" implies \"P and Q\". The two conjuncts may switch places without changing the truth-value of the proposition.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It is considered a law of classical logic.",
+      "url": "https://en.wikipedia.org/wiki/Commutativity_of_conjunction",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "completeness-of-atomic-initial-sequents",
+      "name": "Completeness of atomic initial sequents",
+      "short": "Atomic initial sequents",
+      "statement": "In sequent calculus, every initial sequent A ⊢ A, where A is an arbitrary formula, can be derived from initial sequents p ⊢ p in which p is an atomic formula.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It plays a role analogous to eta expansion in lambda calculus and dual to cut elimination and beta reduction. It can typically be established by induction on the structure of A, much more easily than cut elimination.",
+      "url": "https://en.wikipedia.org/wiki/Completeness_of_atomic_initial_sequents",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "condensation-lemma",
+      "name": "Condensation lemma",
+      "short": "Condensation lemma",
+      "statement": "If X is a transitive set and (X,∈) is an elementary submodel of (L_α,∈), a level of the constructible hierarchy, then there is an ordinal β ≤ α such that X = L_β.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Kurt Gödel, in his proof that the axiom of constructibility implies GCH",
+      "note": "If X is not transitive, its transitive collapse equals some L_β, and elementarity is only needed for Σ₁ formulas of the Lévy hierarchy. Devlin showed that X is automatically transitive when α = ω₁.",
+      "url": "https://en.wikipedia.org/wiki/Condensation_lemma",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "conjunction-introduction",
+      "name": "Conjunction introduction",
+      "short": "Conjunction introduction",
+      "statement": "If the proposition P is true and the proposition Q is true, then the conjunction P ∧ Q is true. In a proof, wherever P and Q appear on lines, P ∧ Q may be placed on a later line.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Conjunction_introduction",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "extension-by-new-constant-and-function-names",
+      "name": "Extension by new constant and function names",
+      "short": "Conservative new function",
+      "statement": "Suppose a closed formula ∀x ∃y φ(y, x), with x = (x₁,…,xₙ), is a theorem of a first-order theory T. Let T₁ be obtained by adding a new function symbol f of arity n and the new axiom ∀x φ(f(x), x). Then T₁ is a conservative extension of T: the two theories prove the same theorems that do not involve f.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "Constants are functions of zero arguments, so new constant names can be added in the same way, without requiring unique existence.",
+      "url": "https://en.wikipedia.org/wiki/Extension_by_new_constant_and_function_names",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "constructive-dilemma",
+      "name": "Constructive dilemma",
+      "short": "Constructive dilemma",
+      "statement": "If P implies Q, R implies S, and either P or R is true, then either Q or S is true.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It is the disjunctive version of modus ponens. It can be written as the tautology (((P → Q) ∧ (R → S)) ∧ (P ∨ R)) → (Q ∨ S).",
+      "url": "https://en.wikipedia.org/wiki/Constructive_dilemma",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "craigs-theorem",
+      "name": "Craig's theorem",
+      "short": "Craig's theorem",
+      "statement": "For every recursively enumerable set of well-formed formulas of a first-order language, there is a set of axioms with the same consequences that is recursive, even primitive recursive, and even decidable in polynomial time.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic",
+        "computability-theory"
+      ],
+      "by": "Named after William Craig",
+      "note": "It has been used in proofs of Gödel's incompleteness theorems, to pass from theories with primitive recursive axiom sets to theories with recursively enumerable ones. It is unrelated to the Craig interpolation theorem, although both are named after William Craig.",
+      "url": "https://en.wikipedia.org/wiki/Craig's_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "destructive-dilemma",
+      "name": "Destructive dilemma",
+      "short": "Destructive dilemma",
+      "statement": "If P implies Q, R implies S, and either Q is false or S is false, then either P is false or R is false.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It is the disjunctive version of modus tollens.",
+      "url": "https://en.wikipedia.org/wiki/Destructive_dilemma",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "disjunction-elimination",
+      "name": "Disjunction elimination",
+      "short": "Disjunction elimination",
+      "statement": "If a statement P implies a statement Q, a statement R also implies Q, and either P or R is true, then Q is true. As a formula: (((P → Q) ∧ (R → Q)) ∧ (P ∨ R)) → Q.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It is also called proof by cases or case analysis, and is used as a rule of inference.",
+      "url": "https://en.wikipedia.org/wiki/Disjunction_elimination",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "disjunction-introduction",
+      "name": "Disjunction introduction",
+      "short": "Disjunction introduction",
+      "statement": "If a proposition P is true, then the proposition P or Q is true, for any proposition Q. As a formula, P → (P ∨ Q) is a tautology of propositional logic.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "It is a rule of inference in propositional logic and almost every other deduction system. It is not a rule in some paraconsistent logics, because together with other rules it leads to explosion.",
+      "url": "https://en.wikipedia.org/wiki/Disjunction_introduction",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "double-negation",
+      "name": "Double negation",
+      "short": "Double negation",
+      "statement": "In classical logic, every statement A is logically equivalent to its double negation ¬¬A. In intuitionistic logic only one direction holds: A implies ¬¬A, but ¬¬A does not in general imply A.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Stated as a theorem of propositional logic by Russell and Whitehead in Principia Mathematica",
+      "note": "Like the law of the excluded middle, it is considered a law of thought in classical logic. Double negation elimination fails in intuitionistic and minimal logic.",
+      "url": "https://en.wikipedia.org/wiki/Double_negation",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ehrenfeucht-mostowski-theorem",
+      "name": "Ehrenfeucht–Mostowski theorem",
+      "short": "Ehrenfeucht–Mostowski",
+      "statement": "If T is a theory with an infinite model, then for any given linearly ordered set X there is a model of T containing X as a set of indiscernibles. A linearly ordered set X is a set of indiscernibles of a model if the truth of a statement about elements of X depends only on their order.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "ramsey"
+      ],
+      "by": "Ehrenfeucht and Mostowski, 1956",
+      "note": "The proof uses Ramsey's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Ehrenfeucht%E2%80%93Mostowski_theorem",
+      "area": "logic",
+      "year": 1956,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "exportation",
+      "name": "Exportation",
+      "short": "Exportation",
+      "statement": "For any propositions P, Q and R, the statement \"if P and Q, then R\" is logically equivalent to the statement \"if P, then (if Q, then R)\", so either may replace the other in a proof.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "material-implication",
+        "de-morgans-laws"
+      ],
+      "note": "The direction from the first form to the second is the law of exportation, and the converse is the law of importation. Through the Curry–Howard correspondence it is associated with currying.",
+      "url": "https://en.wikipedia.org/wiki/Exportation_(logic)",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "federer-morse-theorem",
+      "name": "Federer–Morse theorem",
+      "short": "Federer–Morse theorem",
+      "statement": "If f is a surjective continuous map from a compact metric space X to a compact metric space Y, then there is a Borel subset Z of X such that f restricted to Z is a bijection from Z to Y. The inverse of that restriction is a Borel section of f and a Borel isomorphism.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "descriptive-set-theory"
+      ],
+      "by": "Herbert Federer and Anthony Morse, 1943",
+      "url": "https://en.wikipedia.org/wiki/Federer%E2%80%93Morse_theorem",
+      "area": "logic",
+      "year": 1943,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fixed-point-lemma-for-normal-functions",
+      "name": "Fixed-point lemma for normal functions",
+      "short": "Fixed points of normal fns",
+      "statement": "Let f be a normal function, that is, a strictly increasing function from the ordinals to the ordinals that is continuous at every limit ordinal λ, meaning f(λ) is the supremum of f(α) for α < λ. Then for every ordinal α there is an ordinal β ≥ α with f(β) = β.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Oswald Veblen, 1908",
+      "note": "Because the fixed points of a normal function also form a closed class, the lemma says they form a closed and unbounded class.",
+      "url": "https://en.wikipedia.org/wiki/Fixed-point_lemma_for_normal_functions",
+      "area": "logic",
+      "year": 1908,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gabbays-separation-theorem",
+      "name": "Gabbay's separation theorem",
+      "short": "Gabbay's separation",
+      "statement": "Any formula in linear temporal logic (LTL) with past operators can be rewritten as a boolean combination of formulas that are only concerned with the past, present, or future.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Dov Gabbay",
+      "note": "Separation was first used to prove Kamp's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Gabbay's_separation_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "godels-speed-up-theorem",
+      "name": "Gödel's speed-up theorem",
+      "short": "Gödel's speed-up theorem",
+      "statement": "Let T be a consistent, recursively axiomatizable formal system that includes Robinson arithmetic, and let S ⊇ T be a stronger system. Then for every computable function f from ℕ to ℕ there is a statement φ provable in T whose shortest proof in T is longer than f(m), where m is the length of the shortest proof of φ in S.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Kurt Gödel, 1936",
+      "note": "For example, \"This statement cannot be proved in Peano arithmetic in fewer than a googolplex symbols\" is provable in Peano arithmetic only with at least a googolplex symbols, but has a short proof once the consistency of Peano arithmetic is added as an axiom.",
+      "url": "https://en.wikipedia.org/wiki/G%C3%B6del's_speed-up_theorem",
+      "area": "logic",
+      "year": 1936,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tarskis-undefinability-theorem",
+      "name": "Tarski's undefinability theorem",
+      "short": "Tarski's undefinability",
+      "statement": "In first-order arithmetic there is no formula True(n) such that, for every sentence A of the language, True(g(A)) holds in the standard natural numbers exactly when A holds there, where g(A) is the Gödel number of A. In other words, arithmetical truth cannot be defined in arithmetic.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Alfred Tarski, 1933; discovered independently by Kurt Gödel in 1930, who never published it",
+      "note": "The theorem applies more generally to any sufficiently strong formal system: truth in the standard model of the system cannot be defined within the system. Truth for arithmetic can still be defined in a stronger system such as second-order arithmetic.",
+      "url": "https://en.wikipedia.org/wiki/Tarski's_undefinability_theorem",
+      "area": "logic",
+      "year": 1930,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "principle-of-explosion",
+      "name": "Principle of explosion",
+      "short": "Principle of explosion",
+      "statement": "In classical logic, intuitionistic logic and similar logical systems, any statement can be proven from a contradiction. From a contradiction, any proposition, including its negation, can be inferred.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "disjunction-introduction"
+      ],
+      "by": "First proof given by the 12th-century French philosopher William of Soissons",
+      "note": "Because of this principle, a contradiction in a formal axiomatic system makes every statement provable there.",
+      "url": "https://en.wikipedia.org/wiki/Principle_of_explosion",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "jensens-covering-theorem",
+      "name": "Jensen's covering theorem",
+      "short": "Jensen's covering theorem",
+      "statement": "If 0♯ (zero sharp) does not exist, then every uncountable set of ordinals is contained in a constructible set of the same cardinality.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "First proof by Devlin and Jensen, 1975; simpler proofs by Silver and by Magidor, 1990",
+      "note": "Informally, it says that the constructible universe is close to the universe of all sets. The converse also holds: if 0♯ exists, the countable set of all cardinals below ℵ_ω cannot be covered by a constructible set of cardinality less than ℵ_ω.",
+      "url": "https://en.wikipedia.org/wiki/Jensen's_covering_theorem",
+      "area": "logic",
+      "year": 1975,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "martins-axiom",
+      "name": "Martin's axiom",
+      "short": "Martin's axiom",
+      "statement": "For every cardinal κ smaller than the cardinality of the continuum, the following holds. For any partial order P satisfying the countable chain condition and any set of at most κ dense subsets of P, there is a filter on P that meets every one of those dense sets.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [
+        "proper-forcing-axiom",
+        "martins-maximum"
+      ],
+      "by": "Introduced by Donald A. Martin and Robert M. Solovay",
+      "note": "It is independent of ZFC, implied by the continuum hypothesis, and consistent with the negation of the continuum hypothesis. It is used to control certain forcing arguments.",
+      "url": "https://en.wikipedia.org/wiki/Martin's_axiom",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kanamori-mcaloon-theorem",
+      "name": "Kanamori–McAloon theorem",
+      "short": "Kanamori–McAloon theorem",
+      "statement": "The following proposition is not provable in Peano arithmetic. For every n and k there is an m such that every regressive function f from the n-element subsets of {0,1,…,m−1} to the natural numbers has a k-element subset H of {0,1,…,m−1} such that f(s) = f(t) for all n-element subsets s, t of H with min(s) = min(t). Here f is regressive if f(s) < min(s) for all s not containing 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic",
+        "combinatorics"
+      ],
+      "by": "Kanamori and McAloon, 1987",
+      "note": "It is an example of incompleteness in Peano arithmetic, similar to the Paris–Harrington theorem, using a finitistic theorem in Ramsey theory.",
+      "url": "https://en.wikipedia.org/wiki/Kanamori%E2%80%93McAloon_theorem",
+      "area": "logic",
+      "year": 1987,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kunens-inconsistency-theorem",
+      "name": "Kunen's inconsistency theorem",
+      "short": "Kunen inconsistency",
+      "statement": "Assuming the axiom of choice, there is no non-trivial elementary embedding j of the universe V of all sets into itself, so there is no Reinhardt cardinal; this is proved in Morse–Kelley set theory, or in ZFC with replacement allowed for formulas involving j. Several other plausible large cardinal axioms, such as the existence of an ω-huge cardinal, are likewise inconsistent with the axiom of choice.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Kunen, 1971",
+      "note": "It is not known whether the theorem still holds in ZF without the axiom of choice, though there is no definable elementary embedding from V into V.",
+      "url": "https://en.wikipedia.org/wiki/Kunen's_inconsistency_theorem",
+      "area": "logic",
+      "year": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kuratowskis-free-set-theorem",
+      "name": "Kuratowski's free set theorem",
+      "short": "Kuratowski free set thm",
+      "statement": "Let n be a positive integer and X a set. For a mapping Φ from the n-element subsets of X to the finite subsets of X, call a subset U of X free if for every n-element subset V of U and every u in U not in V, u is not in Φ(V). Then the cardinality of X is at least ℵₙ if and only if, for every such mapping Φ, there is a free subset of X with n+1 elements.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Kazimierz Kuratowski, 1951",
+      "note": "It characterizes the infinite cardinals of the form ℵₙ and has recently been applied to lattice theory problems such as the congruence lattice problem. For n = 1 it is superseded by Hajnal's set mapping theorem.",
+      "url": "https://en.wikipedia.org/wiki/Kuratowski's_free_set_theorem",
+      "area": "logic",
+      "year": 1951,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lusins-separation-theorem",
+      "name": "Lusin's separation theorem",
+      "short": "Lusin's separation theorem",
+      "statement": "If A and B are disjoint analytic subsets of a Polish space, then there is a Borel set C in the space such that A ⊆ C and B ∩ C = ∅.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "descriptive-set-theory"
+      ],
+      "by": "Nikolai Luzin, 1927",
+      "note": "For every sequence of disjoint analytic sets A_n there is a sequence of disjoint Borel sets B_n with A_n ⊆ B_n. It immediately implies Suslin's theorem: a set that is analytic and has an analytic complement is Borel.",
+      "url": "https://en.wikipedia.org/wiki/Lusin's_separation_theorem",
+      "area": "logic",
+      "year": 1927,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "martins-maximum",
+      "name": "Martin's maximum",
+      "short": "Martin's maximum",
+      "statement": "If D is a collection of ℵ₁ dense subsets of a notion of forcing that preserves stationary subsets of ω₁, then there is a D-generic filter.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "Introduced by Foreman, Magidor and Shelah, 1988; named after Donald Martin",
+      "note": "It is a stronger form of the proper forcing axiom, which is itself a stronger form of Martin's axiom. The existence of a supercompact cardinal implies its consistency.",
+      "url": "https://en.wikipedia.org/wiki/Martin's_maximum",
+      "area": "logic",
+      "year": 1988,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "material-implication",
+      "name": "Material implication",
+      "short": "Material implication",
+      "statement": "In classical propositional logic, P implies Q is logically equivalent to (not P) or Q, and either form can replace the other in a proof.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "The rule is a valid rule of replacement. Intuitionistic logic does not treat the two forms as equivalent, because that would give the law of excluded middle.",
+      "url": "https://en.wikipedia.org/wiki/Material_implication_(rule_of_inference)",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "nicods-axiom",
+      "name": "Nicod's axiom",
+      "short": "Nicod's axiom",
+      "statement": "The formula ((φ | (χ | ψ)) | ((τ | (τ | τ)) | ((θ | χ) | ((φ | θ) | (φ | θ))))), written with the Sheffer stroke | as its only connective, can serve as the sole axiom of a semantically complete system of propositional calculus. The one rule of inference is Nicod's modus ponens: from φ and (φ | (χ | ψ)), infer ψ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Jean Nicod",
+      "note": "Nicod showed that the whole propositional logic of Principia Mathematica can be derived from this axiom alone. In 1931 Mordechaj Wajsberg found an equally powerful alternative that is easier to work with.",
+      "url": "https://en.wikipedia.org/wiki/Nicod's_axiom",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "paris-harrington-theorem",
+      "name": "Paris–Harrington theorem",
+      "short": "Paris–Harrington theorem",
+      "statement": "If Peano arithmetic is consistent, the strengthened finite Ramsey theorem cannot be proved in it, though it is provable in slightly stronger systems such as second-order arithmetic. That theorem says: for any positive integers n, k, m with m ≥ n there is an N such that, however the n-element subsets of {1, …, N} are colored with k colors, some subset Y with at least m elements has all its n-element subsets the same color and has at least as many elements as its smallest element.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "ramsey",
+          "url": "https://en.wikipedia.org/wiki/Ramsey's_theorem"
+        }
+      ],
+      "by": "Jeff Paris and Leo Harrington, 1977",
+      "note": "It has been described as the first natural example of a true statement about the integers, expressible in the language of arithmetic, that Peano arithmetic cannot prove.",
+      "url": "https://en.wikipedia.org/wiki/Paris%E2%80%93Harrington_theorem",
+      "area": "logic",
+      "year": 1977,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cantors-diagonal-argument",
+      "name": "Cantor's diagonal argument",
+      "short": "Cantor diagonal argument",
+      "statement": "The set of all infinite sequences of binary digits (0s and 1s) cannot be put into one-to-one correspondence with the natural numbers, so it is uncountable. Hence there are infinite sets that in this sense contain more elements than there are positive integers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Georg Cantor, 1891",
+      "note": "Cantor's first proof of the uncountability of the real numbers appeared earlier, in 1874. The same diagonalization technique is used in the first of Gödel's incompleteness theorems and in Turing's answer to the Entscheidungsproblem.",
+      "url": "https://en.wikipedia.org/wiki/Cantor's_diagonal_argument",
+      "area": "logic",
+      "year": 1891,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "robinsons-joint-consistency-theorem",
+      "name": "Robinson's joint consistency theorem",
+      "short": "Robinson joint consistency",
+      "statement": "Let T₁ and T₂ be consistent first-order theories. If their intersection T₁ ∩ T₂ is complete in the common language of T₁ and T₂, then the union T₁ ∪ T₂ is consistent.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Abraham Robinson",
+      "note": "A variant drops completeness: the union is also consistent if no formula φ in the common language has T₁ ⊢ φ and T₂ ⊢ ¬φ. The theorem is related to Craig interpolation and Beth definability.",
+      "url": "https://en.wikipedia.org/wiki/Robinson's_joint_consistency_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "proper-forcing-axiom",
+      "name": "Proper forcing axiom",
+      "short": "Proper forcing axiom",
+      "statement": "If P is a proper forcing and D_α is a dense subset of P for each α < ω₁, then there is a filter G ⊆ P that meets every D_α. Here a forcing P is proper if, for all regular uncountable cardinals λ, forcing with P preserves stationary subsets of [λ]^ω.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "note": "It is a significant strengthening of Martin's axiom, where forcings with the countable chain condition are replaced by proper forcings.",
+      "url": "https://en.wikipedia.org/wiki/Proper_forcing_axiom",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "solovays-theorem-on-the-solovay-model",
+      "name": "Solovay's theorem on the Solovay model",
+      "short": "Solovay model theorem",
+      "statement": "Assuming the existence of an inaccessible cardinal, there is an inner model of ZF + DC (ZF with the axiom of dependent choice) of a suitable forcing extension V[G] in which every set of reals is Lebesgue measurable, has the perfect set property, and has the Baire property.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "zf-set-theory"
+      ],
+      "by": "Robert M. Solovay",
+      "note": "It shows that the axiom of choice is essential in proving the existence of a non-measurable set, at least granted that an inaccessible cardinal is consistent with ZFC.",
+      "url": "https://en.wikipedia.org/wiki/Solovay_model",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "takeutis-conjecture",
+      "name": "Takeuti's conjecture",
+      "short": "Takeuti's conjecture",
+      "statement": "A sequent formalisation of second-order logic has cut-elimination.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Conjectured by Gaisi Takeuti, 1953; settled positively by Tait, 1966, and independently by Prawitz, 1968 and Takahashi, 1967",
+      "note": "It is equivalent to the 1-consistency of second-order arithmetic, and also to the strong normalization of System F.",
+      "url": "https://en.wikipedia.org/wiki/Takeuti's_conjecture",
+      "area": "logic",
+      "year": 1953,
+      "settled": 1966,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tarskis-exponential-function-problem",
+      "name": "Tarski's exponential function problem",
+      "short": "Tarski exponential problem",
+      "statement": "The theory of the real numbers together with the exponential function is decidable: there is an effective procedure that decides, for every sentence in the language of ordered rings extended by a symbol for the exponential function, whether it is true in the real numbers.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "mathematical-logic",
+        "computability-theory"
+      ],
+      "by": "Posed by Alfred Tarski",
+      "note": "Tarski proved that the theory of the real field without the exponential function is decidable. Macintyre and Wilkie (1996) showed that a real version of Schanuel's conjecture implies a positive answer.",
+      "url": "https://en.wikipedia.org/wiki/Tarski's_exponential_function_problem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tarskis-high-school-algebra-problem",
+      "name": "Tarski's high school algebra problem",
+      "short": "Tarski's algebra problem",
+      "statement": "There are identities involving only addition, multiplication and exponentiation that are true for all positive integers but cannot be proved from the eleven high school axioms (commutativity and associativity of + and ·, x·1 = x, distributivity, 1^x = 1, x^1 = x, x^(y+z) = x^y·x^z, (x·y)^z = x^z·y^z, (x^y)^z = x^(y·z)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Posed by Alfred Tarski; solved by Alex Wilkie, 1980",
+      "note": "The problem asked whether the eleven axioms prove every true identity of this kind. Wilkie gave an explicit unprovable identity, W(x, y), and the result is compared with Gödel's first incompleteness theorem.",
+      "url": "https://en.wikipedia.org/wiki/Tarski's_high_school_algebra_problem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "vaught-conjecture",
+      "name": "Vaught conjecture",
+      "short": "Vaught conjecture",
+      "statement": "Let T be a first-order, countable, complete theory with infinite models, and let I(T, ℵ₀) be the number of its countable models up to isomorphism. Then I(T, ℵ₀) cannot lie strictly between ℵ₀ and 2^ℵ₀.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Robert Lawson Vaught, 1961",
+      "note": "It follows trivially from the continuum hypothesis. Morley showed that the number of countable models is finite, ℵ₀, ℵ₁ or 2^ℵ₀, which settles all cases except ℵ₁ models when the continuum hypothesis fails.",
+      "url": "https://en.wikipedia.org/wiki/Vaught_conjecture",
+      "area": "logic",
+      "year": 1961,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "wilkies-theorem",
+      "name": "Wilkie's theorem",
+      "short": "Wilkie's theorem",
+      "statement": "In the real ordered field with the exponential function, every formula φ(x₁,…,x_m) in the language (+, −, ·, <, 0, 1, eˣ) is equivalent to an existential formula. That is, there are an integer n ≥ m and polynomials f₁,…,f_r with integer coefficients in x₁,…,x_n, e^(x₁),…,e^(x_n) such that φ(x₁,…,x_m) holds exactly when there exist x_(m+1),…,x_n with f₁ = … = f_r = 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Alex Wilkie",
+      "note": "It shows that the theory of the real ordered field with the exponential function is model complete. Geometrically, every definable set is a projection of an exponential variety. It can be seen as a variation of Gabrielov's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Wilkie's_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "os-tarski-preservation-theorem",
+      "name": "Łoś–Tarski preservation theorem",
+      "short": "Łoś–Tarski theorem",
+      "statement": "A first-order sentence is preserved under substructures (whenever it holds in a structure, it holds in every substructure) if and only if it is logically equivalent to a universal sentence.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Named after Jerzy Łoś and Alfred Tarski",
+      "note": "It is one of the classical preservation theorems of model theory. The equivalence fails if only finite models are considered.",
+      "url": "https://en.wikipedia.org/wiki/%C5%81o%C5%9B%E2%80%93Tarski_preservation_theorem",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "axiom-of-limitation-of-size",
+      "name": "Axiom of limitation of size",
+      "short": "Limitation of size",
+      "statement": "In a theory of sets and classes, a class is a set if and only if there is no function mapping it onto V, the class of all sets. Equivalently, a class is a proper class if and only if some function maps it onto V.",
+      "kind": "axiom",
+      "base": "open",
+      "needs": [],
+      "by": "John von Neumann, 1925",
+      "note": "It implies the axioms of replacement, separation, union and global choice. In Von Neumann–Bernays–Gödel set theory and Morse–Kelley set theory it is equivalent to the combination of replacement, union and global choice.",
+      "url": "https://en.wikipedia.org/wiki/Axiom_of_limitation_of_size",
+      "area": "logic",
+      "year": 1925,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "modus-tollens",
+      "name": "Modus tollens",
+      "short": "Modus tollens",
+      "statement": "If P implies Q, and Q is not the case, then P is not the case.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "First explicitly described by Theophrastus",
+      "note": "It is an application of the truth that a statement and its contrapositive are equivalent, and it is closely related to modus ponens.",
+      "url": "https://en.wikipedia.org/wiki/Modus_tollens",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "law-of-noncontradiction",
+      "name": "Law of noncontradiction",
+      "short": "Law of noncontradiction",
+      "statement": "For any proposition p, p and its negation ¬p cannot both be true at the same time. Formally, ¬(p ∧ ¬p) is a tautology.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "Formulated by Aristotle in Metaphysics Book IV; stated as theorem *3·24 of propositional logic by Russell and Whitehead in Principia Mathematica",
+      "note": "The law is used in reductio ad absurdum proofs. Dialetheists such as Graham Priest hold that some statements can be both true and false, and some paraconsistent logics deny the law, though others prove it.",
+      "url": "https://en.wikipedia.org/wiki/Law_of_noncontradiction",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "conjunction-elimination",
+      "name": "Conjunction elimination",
+      "short": "Conjunction elimination",
+      "statement": "In propositional logic, if the conjunction \"P and Q\" is true, then P is true and Q is true. Equivalently, (P ∧ Q) → P and (P ∧ Q) → Q are tautologies.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "note": "The rule shortens proofs by allowing one conjunct to be written on a line by itself.",
+      "url": "https://en.wikipedia.org/wiki/Conjunction_elimination",
+      "area": "logic",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "consensus-theorem",
+      "name": "Consensus theorem",
+      "short": "Consensus theorem",
+      "statement": "In Boolean algebra, (x ∧ y) ∨ (¬x ∧ z) ∨ (y ∧ z) = (x ∧ y) ∨ (¬x ∧ z). The term y ∧ z, the consensus of the other two terms, can be dropped without changing the value.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "mathematical-logic"
+      ],
+      "by": "The concept of consensus was introduced by Archie Blake, 1937; rediscovered by Samson and Mills, 1954, and by Quine, 1955",
+      "note": "Its conjunctive dual is (x ∨ y)(¬x ∨ z)(y ∨ z) = (x ∨ y)(¬x ∨ z). Robinson used consensus for clauses in 1965 as the basis of his resolution principle.",
+      "url": "https://en.wikipedia.org/wiki/Consensus_theorem",
+      "area": "logic",
+      "year": 1937,
+      "origin": "wikipedia-import"
     }
   ]
 }

@@ -1,0 +1,2025 @@
+{
+  "area": "probability",
+  "nodes": [
+    {
+      "id": "law-of-total-variance",
+      "name": "Law of total variance",
+      "short": "Law of total variance",
+      "statement": "If X and Y are random variables on the same probability space and Y has finite variance, then Var(Y) = E[Var(Y | X)] + Var(E[Y | X]).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-total-expectation"
+      ],
+      "note": "The total variance of Y splits into the average of the within-group variances and the variance of the group means. It is also called Eve's law, the variance decomposition formula or the conditional variance formula.",
+      "url": "https://en.wikipedia.org/wiki/Law_of_total_variance",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "frisch-waugh-lovell-theorem",
+      "name": "Frisch–Waugh–Lovell theorem",
+      "short": "Frisch–Waugh–Lovell",
+      "statement": "In a least squares regression of y on a constant and explanatory variables x₁, …, x_k, where the least squares coefficients are uniquely determined, the coefficient of x_j can be found in two steps. First regress x_j on the other explanatory variables and keep the residuals; then regress y on those residuals, and the coefficient equals the covariance of y with the residuals divided by the variance of the residuals.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "Named after Ragnar Frisch, Frederick V. Waugh and Michael C. Lovell; an initial version by Udny Yule, 1907; Frisch and Waugh, 1933; generalized by Lovell, 1963",
+      "note": "It is a numerical property of least squares estimation and does not depend on statistical properties of the data.",
+      "url": "https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem",
+      "area": "probability",
+      "year": 1907,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "markov-chain-tree-theorem",
+      "name": "Markov chain tree theorem",
+      "short": "Markov chain tree theorem",
+      "statement": "For an irreducible, aperiodic Markov chain with finitely many states, the stationary probability πᵢ of a state i is proportional to the sum of the weights of all spanning trees directed toward root i, where a tree's weight is the product of the transition probabilities along its edges. That is, πᵢ = (1/Z) ∑ w(T) over trees T rooted at i, where Z is the sum of w(T) over all spanning trees.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "kirchhoffs-matrix-tree-theorem"
+      ],
+      "by": "First stated by Hill, 1966, for certain Markov chains arising in thermodynamics; proved in full generality by Leighton and Rivest, 1986",
+      "note": "It is closely related to Kirchhoff's theorem on counting the spanning trees of a graph, from which it can be derived.",
+      "url": "https://en.wikipedia.org/wiki/Markov_chain_tree_theorem",
+      "area": "probability",
+      "year": 1966,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lehmann-scheffe-theorem",
+      "name": "Lehmann–Scheffé theorem",
+      "short": "Lehmann–Scheffé theorem",
+      "statement": "Let X be a random sample from a distribution P_θ, θ ∈ Θ, and let T be a complete, sufficient statistic for this family of distributions. If S(X) is an unbiased estimator of g(θ) with E_θ[S(X)²] < ∞ for every θ, then E[S(X) | T(X)] is the unique uniformly minimum-variance unbiased estimator (UMVUE) of g(θ): it is unbiased, and for every θ its variance is at most that of any other unbiased estimator.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "rao-blackwell-theorem",
+        "doob-dynkin-lemma"
+      ],
+      "by": "Named after Erich Leo Lehmann and Henry Scheffé, given their two early papers",
+      "note": "The theorem does not say that unbiased estimators exist. It says only that if one does, there is a unique best one.",
+      "url": "https://en.wikipedia.org/wiki/Lehmann%E2%80%93Scheff%C3%A9_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dubins-schwarz-theorem",
+      "name": "Dubins–Schwarz theorem",
+      "short": "Dubins–Schwarz theorem",
+      "statement": "Let M be a continuous local martingale adapted to a filtration (Fₜ), with M₀ = 0 and with quadratic variation ⟨M⟩ₜ tending to ∞ as t → ∞, and let Tₜ = inf{s : ⟨M⟩ₛ > t}. Then Bₜ = M(Tₜ) defines a Brownian motion with respect to the filtration (F(Tₜ)), and Mₜ = B(⟨M⟩ₜ) for all t, so M is a time-changed Brownian motion.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Lester Dubins and Gideon E. Schwarz, 1965; independently K. E. Dambis, 1965",
+      "note": "The condition that ⟨M⟩ tends to infinity guarantees that the probability space is rich enough for the Brownian motion to exist. Without it one may have to enlarge the filtered probability space.",
+      "url": "https://en.wikipedia.org/wiki/Dubins%E2%80%93Schwarz_theorem",
+      "area": "probability",
+      "year": 1965,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cramer-rao-bound",
+      "name": "Cramér–Rao bound",
+      "short": "Cramér–Rao bound",
+      "statement": "Suppose a fixed unknown parameter θ is estimated from n independent observations, each with probability density f(x; θ). Assume that ∂/∂θ log f(x; θ) exists and is finite wherever f(x; θ) > 0, and that differentiation in θ can be interchanged with integration over x in the expectation of the estimator. Then every unbiased estimator θ̂ of θ satisfies var(θ̂) ≥ 1/I(θ), where I(θ) = n·E[(∂/∂θ log f(X; θ))²] is the Fisher information.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "Named after Harald Cramér and Calyampudi Radhakrishna Rao; also derived independently by Maurice Fréchet, Georges Darmois, and by Alexander Aitken and Harold Silverstone",
+      "note": "An unbiased estimator that reaches this bound is called efficient. Biased estimators can have a smaller mean squared error than the bound allows for unbiased ones.",
+      "url": "https://en.wikipedia.org/wiki/Cram%C3%A9r%E2%80%93Rao_bound",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kramkovs-optional-decomposition-theorem",
+      "name": "Kramkov's optional decomposition theorem",
+      "short": "Kramkov decomposition",
+      "statement": "On a filtered probability space whose filtration satisfies the usual conditions, let X be a locally bounded càdlàg process in d dimensions whose set M(X) of equivalent local martingale measures is nonempty, with P in M(X). A positive process V is a Q-supermartingale for every Q in M(X) if and only if there exist an X-integrable predictable process H and an adapted increasing process C such that V_t = V₀ + (H·X)_t − C_t for all t ≥ 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Dmitry Kramkov, 1994",
+      "note": "In financial mathematics, V is the wealth process of a trader, H·X the gain or loss and C the consumption process.",
+      "url": "https://en.wikipedia.org/wiki/Kramkov's_optional_decomposition_theorem",
+      "area": "probability",
+      "year": 1994,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "van-den-berg-kesten-inequality",
+      "name": "Van den Berg–Kesten inequality",
+      "short": "Van den Berg–Kesten ineq.",
+      "statement": "Take a product of finitely many probability spaces, each with finitely many elements, with the product measure. For any two events A and B, the probability that A and B occur disjointly, meaning their occurrence can be verified on disjoint sets of coordinates, is at most P(A)·P(B).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Van den Berg and Kesten, 1985, for monotone events; they conjectured the general case, which was proved later",
+      "note": "It is applied to probability spaces with a product structure, such as in percolation problems, where it helps prove exponential decay of cluster radii in the subcritical regime.",
+      "url": "https://en.wikipedia.org/wiki/Van_den_Berg%E2%80%93Kesten_inequality",
+      "area": "probability",
+      "year": 1985,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "doob-decomposition-theorem",
+      "name": "Doob decomposition theorem",
+      "short": "Doob decomposition",
+      "statement": "Let X be a discrete-time stochastic process, indexed by {0, 1, …, N} or by all natural numbers including 0, that is adapted to a filtration (𝓕ₙ) and has finite expectation E[|Xₙ|] for every n. Then Xₙ = Mₙ + Aₙ for every n, where M is a martingale and A is an integrable predictable process with A₀ = 0 (each Aₙ with n ≥ 1 is 𝓕ₙ₋₁-measurable), and this decomposition is unique almost surely.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Joseph L. Doob",
+      "note": "The analogous theorem in continuous time is the Doob–Meyer decomposition theorem. A real-valued process is a submartingale exactly when the predictable part A is almost surely increasing.",
+      "url": "https://en.wikipedia.org/wiki/Doob_decomposition_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "doobs-martingale-inequality",
+      "name": "Doob's martingale inequality",
+      "short": "Doob's inequality",
+      "statement": "Let X₁, …, Xₙ be a submartingale with respect to a filtration 𝓕₁, …, 𝓕ₙ, which means Xᵢ ≤ E[Xᵢ₊₁ | 𝓕ᵢ]. Then for every positive number C, the probability that max over 1 ≤ i ≤ n of Xᵢ is at least C is at most E[max(Xₙ, 0)]/C.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Joseph L. Doob",
+      "note": "It is also known as Kolmogorov's submartingale inequality and directly implies Kolmogorov's inequality. The same bound holds in continuous time on an interval [0, T] when the sample paths are almost surely right-continuous.",
+      "url": "https://en.wikipedia.org/wiki/Doob's_martingale_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "yamada-watanabe-theorem",
+      "name": "Yamada–Watanabe theorem",
+      "short": "Yamada–Watanabe theorem",
+      "statement": "Consider the n-dimensional Itô equation dXₜ = b(t,X)dt + σ(t,X)dWₜ with X₀ = x₀, where b and σ are predictable and W is an r-dimensional Brownian motion. If pathwise uniqueness holds (any two solutions on the same probability space with the same Brownian motion agree almost surely), then uniqueness in distribution holds; and if in addition a weak solution exists for every initial distribution, then for every initial distribution a pathwise unique strong solution exists.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Toshio Yamada and Shinzo Watanabe, 1971",
+      "note": "Jean Jacod generalized it in 1980 to equations driven by general semimartingales. Its converse, the dual Yamada–Watanabe theorem, was first proven by Engelbert in 1991.",
+      "url": "https://en.wikipedia.org/wiki/Yamada%E2%80%93Watanabe_theorem",
+      "area": "probability",
+      "year": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "blackwells-informativeness-theorem",
+      "name": "Blackwell's informativeness theorem",
+      "short": "Blackwell informativeness",
+      "statement": "For two information structures σ and σ′, the following are equivalent: (1) for every decision problem, a decision maker attains at least as high an expected utility under σ as under σ′; (2) σ′ is a garbling of σ, meaning there is a stochastic map γ with σ′(s′|w) = ∑ γ(s,s′) σ(s|w), summed over s; (3) σ yields a larger set of feasible strategies than σ′.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "information-theory"
+      ],
+      "by": "David Blackwell, 1951; generalized in 1953",
+      "note": "The equivalence defines a partial order on information structures, known as the Blackwell order.",
+      "url": "https://en.wikipedia.org/wiki/Blackwell's_informativeness_theorem",
+      "area": "probability",
+      "year": 1951,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ghosh-pratt-identity",
+      "name": "Ghosh–Pratt identity",
+      "short": "Ghosh–Pratt identity",
+      "statement": "Let X be a random variable whose distribution depends on a parameter θ, and let C(X) be a confidence set for θ. If θ₀ is the true parameter value, the expected volume of C(X) (its expected length when the parameter space is one-dimensional) equals the integral, over all values θ ≠ θ₀, of the probability that C(X) contains θ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "fubinis-theorem"
+      ],
+      "by": "Jayanta Kumar Ghosh and John Winsor Pratt, independently, 1961",
+      "note": "It lets the search for the shortest confidence interval be treated as maximizing the power of a statistical test.",
+      "url": "https://en.wikipedia.org/wiki/Ghosh%E2%80%93Pratt_identity",
+      "area": "probability",
+      "year": 1961,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dying-percolation-conjecture",
+      "name": "Dying percolation conjecture",
+      "short": "Dying percolation",
+      "statement": "Make each edge of the nearest-neighbour integer lattice ℤ^d, with d ≥ 2, open independently with probability p. At the critical value p = p_c, there is almost surely no infinite connected cluster of open edges, so the probability θ(p_c) that the origin lies in an infinite cluster is 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Proved for d = 2 by Kesten, building on Harris; for d ≥ 19 by Hara and Slade, 1990, using lace expansion; improved to d ≥ 11 by Fitzner and van der Hofstad; proved for all d ≥ 2 in 2026 by a Lean-formalized AI proof posted by Justin Leder in an Anthropic repository, which completed a reduction by Gady Kozma and Shahaf Nitzan (2024), and later checked by human mathematicians",
+      "note": "It is equivalent to the continuity of θ at p_c, and by a result of Aizenman, Kesten and Newman to the continuity of θ everywhere. In dimension 1 the statement is false, since there p_c = 1.",
+      "url": "https://en.wikipedia.org/wiki/Dying_percolation_conjecture",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gibbs-inequality",
+      "name": "Gibbs' inequality",
+      "short": "Gibbs' inequality",
+      "statement": "For two discrete probability distributions P = {p₁, …, pₙ} and Q = {q₁, …, qₙ}, and logarithms to any base greater than 1, −∑ pᵢ log pᵢ ≤ −∑ pᵢ log qᵢ, with equality if and only if pᵢ = qᵢ for every i. Equivalently, the Kullback–Leibler divergence ∑ pᵢ log(pᵢ/qᵢ) is at least 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "jensens-inequality"
+      ],
+      "by": "First presented by J. Willard Gibbs in the 19th century",
+      "note": "Several other bounds on the entropy of probability distributions are derived from it, including Fano's inequality. A corollary is that the entropy of a distribution on n outcomes is at most log n.",
+      "url": "https://en.wikipedia.org/wiki/Gibbs'_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "plotkin-bound",
+      "name": "Plotkin bound",
+      "short": "Plotkin bound",
+      "statement": "Let A₂(n,d) be the maximum number of codewords in a binary code of length n and minimum distance d. If d is even and 2d > n, then A₂(n,d) ≤ 2⌊d/(2d−n)⌋; if d is odd and 2d+1 > n, then A₂(n,d) ≤ 2⌊(d+1)/(2d+1−n)⌋; also A₂(2d,d) ≤ 4d for even d, and A₂(2d+1,d) ≤ 4d+4 for odd d.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "information-theory",
+        "combinatorics"
+      ],
+      "by": "Named after Morris Plotkin",
+      "url": "https://en.wikipedia.org/wiki/Plotkin_bound",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bennetts-inequality",
+      "name": "Bennett's inequality",
+      "short": "Bennett's inequality",
+      "statement": "Let X₁, …, Xₙ be independent random variables with finite variance, and let a > 0 be a constant with Xᵢ − E(Xᵢ) ≤ a almost surely for every i. With Sₙ = ∑ (Xᵢ − E(Xᵢ)) and σ² = ∑ E((Xᵢ − E(Xᵢ))²), for every t ≥ 0 the probability Pr(Sₙ > t) is at most exp(−(σ²/a²)·h(at/σ²)), where h(u) = (1 + u)ln(1 + u) − u.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "chernoff-bound",
+          "url": "https://en.wikipedia.org/wiki/Chernoff_bound"
+        }
+      ],
+      "by": "George Bennett of the University of New South Wales, 1962",
+      "note": "It improves on Hoeffding's inequality when the variances of the summands are small compared to their almost sure bounds, and it does not require the variables to have identical distributions.",
+      "url": "https://en.wikipedia.org/wiki/Bennett's_inequality",
+      "area": "probability",
+      "year": 1962,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kolmogorovs-inequality",
+      "name": "Kolmogorov's inequality",
+      "short": "Kolmogorov's inequality",
+      "statement": "Let X₁, …, Xₙ be independent real-valued random variables on a common probability space, each with expected value 0 and finite variance, and let S_k = X₁ + … + X_k. Then for every λ > 0, the probability that the largest of |S₁|, …, |Sₙ| is at least λ is at most (1/λ²) times the sum of the variances of X₁, …, Xₙ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "chebyshevs-inequality"
+      ],
+      "note": "It bounds the worst deviation of a random walk at any time up to n using only its value at the end of the interval. Hájek and Rényi generalized it in 1955.",
+      "url": "https://en.wikipedia.org/wiki/Kolmogorov's_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "buffons-needle-problem",
+      "name": "Buffon's needle problem",
+      "short": "Buffon's needle",
+      "statement": "Drop a needle of length l onto a plane ruled with parallel lines t units apart, where l ≤ t. Suppose the distance from its center to the nearest line is uniformly random between 0 and t/2, its acute angle with the lines is uniformly random between 0 and π/2, and the two are independent. Then the probability that the needle crosses a line is (2/π) · (l/t).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Posed by Georges-Louis Leclerc, Comte de Buffon, in the 18th century",
+      "note": "It can be used to design a Monte Carlo method for approximating π. For a needle longer than the gap between the lines, the probability is given by a different formula.",
+      "url": "https://en.wikipedia.org/wiki/Buffon's_needle_problem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "shannon-hartley-theorem",
+      "name": "Shannon–Hartley theorem",
+      "short": "Shannon–Hartley theorem",
+      "statement": "Take an analog communication channel with bandwidth B hertz, average received signal power S, and additive white Gaussian noise of power N. Its channel capacity is C = B log₂(1 + S/N) bits per second. The capacity is the tightest upper bound on the rate at which information can be sent with an arbitrarily low error rate.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "noisy-channel-coding-theorem"
+      ],
+      "by": "Named after Claude Shannon and Ralph Hartley; Shannon developed the concept of channel capacity in the 1940s, based in part on ideas of Nyquist and Hartley",
+      "note": "It applies the noisy-channel coding theorem to a continuous-time analog channel with Gaussian noise.",
+      "url": "https://en.wikipedia.org/wiki/Shannon%E2%80%93Hartley_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "doobs-martingale-convergence-theorem-discrete-time",
+      "name": "Doob's martingale convergence theorem (discrete time)",
+      "short": "Martingale convergence",
+      "statement": "Let X₁, X₂, X₃, … be a supermartingale for which the expectations of the negative parts max(−Xₜ, 0) are bounded over all t. Then the sequence converges almost surely to a random variable X with finite expectation.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "doobs-martingale-inequality",
+          "url": "https://en.wikipedia.org/wiki/Doob's_martingale_inequality"
+        },
+        "monotone-convergence-theorem",
+        "booles-inequality"
+      ],
+      "by": "Named after Joseph L. Doob",
+      "note": "It is a random variable analogue of the monotone convergence theorem. A symmetric statement holds for submartingales.",
+      "url": "https://en.wikipedia.org/wiki/Doob's_martingale_convergence_theorems",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "berry-esseen-theorem",
+      "name": "Berry–Esseen theorem",
+      "short": "Berry–Esseen theorem",
+      "statement": "There is a positive constant C with the following property. If X₁, X₂, … are independent, identically distributed random variables with mean 0, variance σ² > 0 and finite third absolute moment ρ = E(|X₁|³), and Fₙ is the distribution function of (X₁ + … + Xₙ)/(σ√n), then |Fₙ(x) − Φ(x)| ≤ Cρ/(σ³√n) for all x and all n, where Φ is the distribution function of the standard normal distribution.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Andrew C. Berry, 1941, and independently Carl-Gustav Esseen, 1942",
+      "note": "It gives the rate 1/√n at which the central limit theorem's normal approximation becomes accurate. Upper bounds on C have been lowered from Esseen's 7.59 to below 0.4748, and Esseen (1956) showed that C is at least about 0.4097.",
+      "url": "https://en.wikipedia.org/wiki/Berry%E2%80%93Esseen_theorem",
+      "area": "probability",
+      "year": 1941,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bayes-theorem",
+      "name": "Bayes' theorem",
+      "short": "Bayes' theorem",
+      "statement": "For events A and B with P(B) ≠ 0, the conditional probability P(A|B) equals P(B|A)·P(A) / P(B).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Thomas Bayes, published 1763; found independently by Pierre-Simon Laplace, 1774",
+      "note": "It inverts conditional probabilities, giving the probability of a cause from its effect. One of its applications is Bayesian inference.",
+      "url": "https://en.wikipedia.org/wiki/Bayes'_theorem",
+      "area": "probability",
+      "year": 1763,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lindebergs-central-limit-theorem",
+      "name": "Lindeberg's central limit theorem",
+      "short": "Lindeberg CLT",
+      "statement": "Let X₁, X₂, … be independent real random variables with finite expected values μ_k and finite variances σ_k², and let s_n² = σ₁² + … + σ_n². If for every ε > 0 the limit as n → ∞ of (1/s_n²) ∑_{k=1}^n E[(X_k − μ_k)² · 1{|X_k − μ_k| > ε s_n}] equals 0 (Lindeberg's condition), then ∑_{k=1}^n (X_k − μ_k) / s_n converges in distribution to a standard normal random variable.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Jarl Waldemar Lindeberg",
+      "note": "The condition is sufficient but not necessary in general. If max σ_k²/s_n² → 0 as n → ∞, it is both sufficient and necessary.",
+      "url": "https://en.wikipedia.org/wiki/Lindeberg's_condition",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "de-moivre-laplace-theorem",
+      "name": "De Moivre–Laplace theorem",
+      "short": "de Moivre–Laplace theorem",
+      "statement": "Let 0 < p < 1 and q = 1 − p. In n independent trials that each succeed with probability p, the probability C(n,k)·pᵏ·qⁿ⁻ᵏ of exactly k successes is approximately (1/√(2πnpq))·e^(−(k−np)²/(2npq)) for k near np (within a fixed number of standard deviations √(npq) of np), in the sense that the ratio of the two sides tends to 1 as n → ∞.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "stirlings-approximation"
+      ],
+      "by": "Abraham de Moivre, 1738; Pierre-Simon Laplace published the more general result in 1812",
+      "note": "It is a special case of the central limit theorem and says the normal distribution can approximate the binomial distribution.",
+      "url": "https://en.wikipedia.org/wiki/De_Moivre%E2%80%93Laplace_theorem",
+      "area": "probability",
+      "year": 1738,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "law-of-the-iterated-logarithm",
+      "name": "Law of the iterated logarithm",
+      "short": "Law of iterated logarithm",
+      "statement": "Let Y₁, Y₂, ... be independent, identically distributed random variables with zero mean and unit variance, and let Sₙ = Y₁ + ... + Yₙ. Then, almost surely, the limit superior of |Sₙ| / √(2n log log n) as n → ∞ equals 1, where log is the natural logarithm.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "First stated by A. Ya. Khinchin, 1924, and A. N. Kolmogorov, 1929, for bounded increments; extended to increments with zero mean and finite variance by Hartman and Wintner, 1940",
+      "note": "It describes the size of the fluctuations of a random walk. Kolmogorov's 1929 version allows independent variables that are not identically distributed, provided their total variance Bₙ tends to infinity and each |Yₙ| is bounded by a constant Mₙ that grows slowly compared with √(Bₙ / log log Bₙ).",
+      "url": "https://en.wikipedia.org/wiki/Law_of_the_iterated_logarithm",
+      "area": "probability",
+      "year": 1924,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "law-of-total-probability",
+      "name": "Law of total probability",
+      "short": "Law of total probability",
+      "statement": "Let B₁, B₂, B₃, … be finitely or countably many events that are mutually exclusive and together cover every outcome. Then for any event A, P(A) = ∑ P(A ∩ Bₙ) = ∑ P(A | Bₙ) P(Bₙ), where terms with P(Bₙ) = 0 are left out of the second sum.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "note": "It relates marginal probabilities to conditional probabilities. It also has a continuous form, in which the sum becomes an integral over the distribution of a random variable.",
+      "url": "https://en.wikipedia.org/wiki/Law_of_total_probability",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "optional-stopping-theorem",
+      "name": "Optional stopping theorem",
+      "short": "Optional stopping theorem",
+      "statement": "Let X be a discrete-time martingale and τ a stopping time with values in {0, 1, 2, …} ∪ {∞}, both with respect to the same filtration. Suppose one of three conditions holds: τ is almost surely bounded; or τ has finite expectation and the conditional expectations of |X(t+1) − X(t)| given the past up to time t are bounded by a constant almost surely on the event {τ > t}; or |X(min(t, τ))| is bounded by a constant almost surely for all t. Then X(τ) is an almost surely well-defined random variable and E[X(τ)] = E[X(0)]. For a submartingale E[X(τ)] ≥ E[X(0)], and for a supermartingale E[X(τ)] ≤ E[X(0)].",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "doobs-martingale-convergence-theorem-discrete-time",
+        "monotone-convergence-theorem",
+        "lebesgues-dominated-convergence-theorem"
+      ],
+      "by": "Also called Doob's optional sampling theorem, after Joseph Doob",
+      "note": "For a gambler's fair game, it says that on average nothing can be gained by stopping play based on the information so far. It shows why doubling strategies cannot guarantee a profit with finite resources.",
+      "url": "https://en.wikipedia.org/wiki/Optional_stopping_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kosambi-karhunen-loeve-theorem",
+      "name": "Kosambi–Karhunen–Loève theorem",
+      "short": "Karhunen–Loève theorem",
+      "statement": "Let Xₜ, for t in a closed and bounded interval [a, b], be a stochastic process with mean zero, finite E[Xₜ²] for every t, and continuous covariance function K(s, t) = E[XₛXₜ]. Then Xₜ = ∑ₖ Zₖ eₖ(t), where the eₖ are an orthonormal basis of L²([a, b]) made of eigenfunctions of the integral operator f ↦ ∫ₐᵇ K(s, ·) f(s) ds with eigenvalues λₖ, Zₖ = ∫ₐᵇ Xₜ eₖ(t) dt, the series converges in mean square uniformly in t, and the Zₖ have mean zero, are pairwise uncorrelated and have variance λₖ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "mercers-theorem"
+      ],
+      "by": "Named after Kari Karhunen and Michel Loève",
+      "note": "Among expansions of the process in orthonormal bases of L²([a, b]), this one minimizes the total mean squared error. It is closely related to principal component analysis, and if the process is Gaussian the Zₖ are Gaussian and independent.",
+      "url": "https://en.wikipedia.org/wiki/Kosambi%E2%80%93Karhunen%E2%80%93Lo%C3%A8ve_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hewitt-savage-zero-one-law",
+      "name": "Hewitt–Savage zero–one law",
+      "short": "Hewitt–Savage zero–one law",
+      "statement": "Let X₁, X₂, … be independent and identically distributed random variables. Any event determined by these variables whose occurrence is unchanged by every finite permutation of the indices has probability either 0 or 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Edwin Hewitt and Leonard Jimmie Savage",
+      "note": "It is similar to Kolmogorov's zero–one law and the Borel–Cantelli lemma.",
+      "url": "https://en.wikipedia.org/wiki/Hewitt%E2%80%93Savage_zero%E2%80%93one_law",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cramers-decomposition-theorem",
+      "name": "Cramér's decomposition theorem",
+      "short": "Cramér decomposition",
+      "statement": "If a normally distributed random variable ξ is the sum ξ = ξ₁ + ξ₂ of two independent random variables, then ξ₁ and ξ₂ are also normally distributed.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Anticipated by Paul Lévy; proved by Harald Cramér",
+      "note": "It is the converse of the fact that the sum of independent normal random variables is normal. It started the theory of decompositions of random variables into independent summands.",
+      "url": "https://en.wikipedia.org/wiki/Cram%C3%A9r's_decomposition_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "wiener-khinchin-theorem",
+      "name": "Wiener–Khinchin theorem",
+      "short": "Wiener–Khinchin theorem",
+      "statement": "Let x be a continuous-time wide-sense-stationary random process whose autocorrelation r(τ) = E[x(t)x(t − τ)*] is finite for all τ and t. Then there is a non-negative measure μ on the frequencies f (equivalently a monotone function F) with r(τ) = ∫ e^(2πiτf) μ(df), and when μ has a density S(f), the power spectral density, and r and S are nice enough for Fourier inversion, r and S are a Fourier transform pair.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory",
+        "statistics"
+      ],
+      "by": "Norbert Wiener, 1930, for deterministic functions; Aleksandr Khinchin, 1934, for stationary stochastic processes; Albert Einstein explained the idea without proofs in 1914",
+      "note": "The ordinary Fourier transform of the process generally does not exist, so the spectral distribution function F is used instead.",
+      "url": "https://en.wikipedia.org/wiki/Wiener%E2%80%93Khinchin_theorem",
+      "area": "probability",
+      "year": 1914,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "noisy-channel-coding-theorem",
+      "name": "Noisy-channel coding theorem",
+      "short": "Noisy-channel coding",
+      "statement": "For every discrete memoryless channel, let C be its capacity, the supremum over input distributions of the mutual information I(X;Y). For any ε > 0 and any rate R < C, for large enough N there is a code of length N and rate at least R, with a decoding algorithm, such that the maximal probability of block error is at most ε. If a bit error probability p_b is acceptable, rates up to C/(1 − H₂(p_b)) are achievable, where H₂ is the binary entropy function, and higher rates are not.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "asymptotic-equipartition-property"
+      ],
+      "by": "Claude Shannon, 1948; first rigorous proof for the discrete case by Feinstein, 1954",
+      "note": "The capacity C is the Shannon limit: the maximum rate of error-free data that can be sent over the channel at a given noise level.",
+      "url": "https://en.wikipedia.org/wiki/Noisy-channel_coding_theorem",
+      "area": "probability",
+      "year": 1948,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "shannons-source-coding-theorem",
+      "name": "Shannon's source coding theorem",
+      "short": "Source coding theorem",
+      "statement": "Take N independent, identically distributed random variables, each with Shannon entropy H(X). As N → ∞, they can be compressed into more than N·H(X) bits with negligible risk of losing information, but if they are compressed into fewer than N·H(X) bits, it is virtually certain that information will be lost.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "asymptotic-equipartition-property",
+        "gibbs-inequality",
+        "kraft-mcmillan-inequality"
+      ],
+      "by": "Claude Shannon, 1948",
+      "note": "It gives the Shannon entropy its operational meaning as the limit of lossless data compression for i.i.d. sources. For sources with more dependencies, Kolmogorov complexity is more suitable.",
+      "url": "https://en.wikipedia.org/wiki/Shannon's_source_coding_theorem",
+      "area": "probability",
+      "year": 1948,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "zermelos-theorem",
+      "name": "Zermelo's theorem",
+      "short": "Zermelo's theorem",
+      "statement": "In a finite two-person game of perfect information in which the players move alternately and chance plays no role, if the game cannot end in a draw then one of the two players has a winning strategy. If draws are possible, then either the first player can force a win, or the second player can force a win, or both players can at least force a draw.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "game-theory"
+      ],
+      "by": "Ernst Zermelo, 1913 (proved for the example game of chess)",
+      "note": "A player in a winning position can force a win in no more moves than there are positions in the game.",
+      "url": "https://en.wikipedia.org/wiki/Zermelo's_theorem_(game_theory)",
+      "area": "probability",
+      "year": 1913,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hattendorffs-theorem",
+      "name": "Hattendorff's theorem",
+      "short": "Hattendorff's theorem",
+      "statement": "Consider a life insurance policy in which the insured pays a premium πₖ at the start of each year until the year of death and the insurer pays a benefit at the end of the year of death, with yearly discount factor v. Given that the insured is alive at time h, the variance of the present value L_h of the insurer's total future loss equals ∑ from k=h to ∞ of v^(2(k−h)) Var[Λₖ], where Λₖ is the net loss in year (k, k+1), the cash loss plus the discounted change in the reserve, and each variance is taken given that the insured is alive at time h.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "K. Hattendorff, 1868",
+      "note": "The proof rests on the fact that the net losses of different years are uncorrelated. The result helps manage the risk of insurance contracts over short periods of time.",
+      "url": "https://en.wikipedia.org/wiki/Hattendorff's_theorem",
+      "area": "probability",
+      "year": 1868,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "binomial-sum-variance-inequality",
+      "name": "Binomial sum variance inequality",
+      "short": "Binomial sum variance",
+      "statement": "Let X ~ B(m₀, p₀) and Y ~ B(m₁, p₁) be independent binomial random variables and Z = X + Y. Then Var(Z) ≤ E[Z](1 − E[Z]/(m₀ + m₁)), which is the variance Z would have if both success probabilities were replaced by the average success probability per trial, E[Z]/(m₀ + m₁).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory",
+        "statistics"
+      ],
+      "note": "It is a special case of a more general theorem involving the expected value of convex functions. Uneven success probabilities give a smaller variance than the binomial one.",
+      "url": "https://en.wikipedia.org/wiki/Binomial_sum_variance_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "wolds-theorem",
+      "name": "Wold's theorem",
+      "short": "Wold decomposition",
+      "statement": "Every covariance-stationary time series Yₜ can be written as Yₜ = ∑ bⱼ εₜ₋ⱼ + ηₜ, with the sum over j ≥ 0. Here εₜ is an uncorrelated innovation sequence (white noise), the weights bⱼ are constant, causal, square summable and minimum phase with b₀ = 1, and ηₜ is a covariance-stationary series completely determined as a linear combination of its past values.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "Named after Herman Wold",
+      "note": "It allows the dynamic evolution of a variable to be approximated by a linear model.",
+      "url": "https://en.wikipedia.org/wiki/Wold's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "paley-zygmund-inequality",
+      "name": "Paley–Zygmund inequality",
+      "short": "Paley–Zygmund inequality",
+      "statement": "If Z ≥ 0 is a random variable with finite variance and 0 ≤ θ ≤ 1, then P(Z > θE[Z]) ≥ (1−θ)² E[Z]² / E[Z²].",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cauchy-schwarz-inequality"
+      ],
+      "by": "Raymond Paley and Antoni Zygmund",
+      "note": "It bounds the probability that a positive random variable is small, in terms of its first two moments.",
+      "url": "https://en.wikipedia.org/wiki/Paley%E2%80%93Zygmund_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "arrival-theorem",
+      "name": "Arrival theorem",
+      "short": "Arrival theorem",
+      "statement": "In an open Jackson network of m queues with equilibrium distribution π, the probability that the network is in state n = (n₁, …, nₘ) immediately before an arrival at any node equals π(n). In a closed Gordon–Newell network, the probability that a customer arriving at queue i sees the state (n₁, …, nᵢ − 1, …, nₘ) just before arrival equals the steady-state probability of that state in a network of the same type with one customer fewer.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Sevcik and Mitrani, 1981 (open Jackson networks); the closed-network version was published independently by Sevcik and Mitrani and by Reiser and Lavenberg",
+      "note": "It is also called the random observer property; for Poisson arrivals it is known as PASTA (Poisson Arrivals See Time Averages). The closed-network version was used to develop mean value analysis, and the theorem fails in some product-form networks such as reversible Kingman networks.",
+      "url": "https://en.wikipedia.org/wiki/Arrival_theorem",
+      "area": "probability",
+      "year": 1981,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "khinchins-theorem-on-the-factorization-of-distributions",
+      "name": "Khinchin's theorem on the factorization of distributions",
+      "short": "Khinchin factorization",
+      "statement": "Every probability distribution P on the real line can be written as a convolution of two distributions P₁ and P₂. Here P₁ is a probability distribution without any indecomposable factor, and P₂ is either degenerate or the convolution of a finite or countable set of indecomposable distributions.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "A. Ya. Khinchin, for distributions on the line",
+      "note": "The factorization is not unique in general. The theorem was later found to be valid for distributions on considerably more general groups.",
+      "url": "https://en.wikipedia.org/wiki/Khinchin's_theorem_on_the_factorization_of_distributions",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gaussian-correlation-inequality",
+      "name": "Gaussian correlation inequality",
+      "short": "Gaussian correlation ineq.",
+      "statement": "Let μ be a multivariate normal probability distribution on ℝⁿ centered at the origin. Then for all convex sets E and F in ℝⁿ that are symmetric about the origin, μ(E ∩ F) ≥ μ(E) · μ(F).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics",
+        "probability-theory"
+      ],
+      "by": "General case stated as a conjecture in 1972; proved by Thomas Royen, 2014",
+      "note": "A special case was conjectured in 1955. Royen also generalized the statement to multivariate gamma distributions.",
+      "url": "https://en.wikipedia.org/wiki/Gaussian_correlation_inequality",
+      "area": "probability",
+      "year": 1972,
+      "settled": 2014,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gibbards-theorem",
+      "name": "Gibbard's theorem",
+      "short": "Gibbard's theorem",
+      "statement": "Consider a deterministic procedure in which each of finitely many agents picks a strategy from a finite set and the chosen strategies determine the outcome. If the procedure has at least three possible outcomes and every agent, whatever her preferences over the alternatives, has a strategy that is best no matter what the others do, then it is dictatorial: one agent can force any possible outcome regardless of the strategies of the others.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "game-theory"
+      ],
+      "by": "Named after Gibbard",
+      "note": "The Gibbard–Satterthwaite theorem about ranked voting is a corollary. Gibbard's 1978 theorem and Hylland's theorem extend the result to procedures that involve chance.",
+      "url": "https://en.wikipedia.org/wiki/Gibbard's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tanakas-formula",
+      "name": "Tanaka's formula",
+      "short": "Tanaka's formula",
+      "statement": "For a standard Brownian motion B, |B_t| = ∫₀ᵗ sgn(B_s) dB_s + L_t, where sgn is the sign function (+1 for x > 0, 0 at x = 0, −1 for x < 0) and L_t is the local time of B at 0 up to time t. L_t is the L²-limit, as ε decreases to 0, of (1/2ε) times the length of time in [0, t] that B spends in (−ε, ε).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "note": "It is the explicit Doob–Meyer decomposition of the submartingale |B_t| into a martingale part and a continuous increasing process, the local time. It can also be seen as the analogue of Itō's lemma for the absolute value function.",
+      "url": "https://en.wikipedia.org/wiki/Tanaka's_formula",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "birthday-problem",
+      "name": "Birthday problem",
+      "short": "Birthday problem",
+      "statement": "Suppose each person's birthday is equally likely to be any of 365 days, independently of everyone else. Then the probability that at least two of n people share a birthday is 1 − 365!/(365ⁿ·(365 − n)!) for n ≤ 365, and it first exceeds 50% at n = 23, where it is about 50.73%.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Generally attributed to Harold Davenport, about 1927 (unpublished); first published in a version by Richard von Mises, 1939",
+      "note": "With 23 people there are 253 pairs whose birthdays can match. The same reasoning underlies the birthday attack, which reduces the work of finding a collision for a hash function.",
+      "url": "https://en.wikipedia.org/wiki/Birthday_problem",
+      "area": "probability",
+      "year": 1927,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kraft-mcmillan-inequality",
+      "name": "Kraft–McMillan inequality",
+      "short": "Kraft–McMillan inequality",
+      "statement": "If source symbols are encoded into a uniquely decodable code over an alphabet of size r with codeword lengths ℓ₁, …, ℓₙ, then the sum of r^(−ℓᵢ) over i = 1 to n is at most 1. Conversely, for any natural numbers ℓ₁, …, ℓₙ satisfying this inequality, there exists a uniquely decodable code over an alphabet of size r with those codeword lengths.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "information-theory"
+      ],
+      "by": "Leon G. Kraft, 1949, for prefix codes, crediting the analysis to Raymond Redheffer; independently Brockway McMillan, 1956, for uniquely decodable codes",
+      "note": "Kraft's version concerns prefix codes and McMillan's concerns uniquely decodable codes. For every uniquely decodable code there is a prefix code with the same codeword lengths.",
+      "url": "https://en.wikipedia.org/wiki/Kraft%E2%80%93McMillan_inequality",
+      "area": "probability",
+      "year": 1949,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "holevos-theorem",
+      "name": "Holevo's theorem",
+      "short": "Holevo's theorem",
+      "statement": "Suppose one of the quantum states ρ₁, …, ρₙ is prepared, the i-th with probability pᵢ, and let X record which one. For every measurement (POVM) of the state, with outcome Y, the classical mutual information between X and Y is at most χ = S(∑ pᵢρᵢ) − ∑ pᵢ S(ρᵢ), where S is the von Neumann entropy.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "information-theory"
+      ],
+      "by": "Alexander Holevo, 1973",
+      "note": "The quantity χ is called the Holevo information. The bound implies that only up to n classical bits of information can be retrieved from n qubits.",
+      "url": "https://en.wikipedia.org/wiki/Holevo's_theorem",
+      "area": "probability",
+      "year": 1973,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bartletts-theorem",
+      "name": "Bartlett's theorem",
+      "short": "Bartlett's theorem",
+      "statement": "Suppose customers arrive according to a non-stationary Poisson process with rate A(t) and then move independently around a system of nodes. Let p(s,t) be the probability that a customer who arrives at time s is in a given part E of the system at time t. Then the number of customers in E at time t has a Poisson distribution with mean μ(t) = ∫ A(s) p(s,t) ds, integrated over s from −∞ to t.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Bartlett's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gauss-markov-theorem",
+      "name": "Gauss–Markov theorem",
+      "short": "Gauss–Markov theorem",
+      "statement": "Consider a linear regression model y = Xβ + ε in which the explanatory variables X are fixed and X has full column rank, and suppose the errors each have mean zero, all have the same finite variance and are mutually uncorrelated. Then the ordinary least squares estimator has the lowest variance among all linear unbiased estimators of β: for every other linear unbiased estimator β̃, Var(β̃) − Var(β̂) is a positive semi-definite matrix.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "Named after Carl Friedrich Gauss and Andrey Markov; Gauss derived it under the stronger assumptions of independence and normality, and Markov later showed it under the relaxed modern assumptions",
+      "note": "The errors need not be normal or independent, but the theorem holds only for unbiased estimators, since biased estimators such as ridge regression can have lower variance. Alexander Aitken extended it to correlated errors or errors with unequal variances, for which generalized least squares is the best linear unbiased estimator.",
+      "url": "https://en.wikipedia.org/wiki/Gauss%E2%80%93Markov_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "de-finettis-theorem",
+      "name": "De Finetti's theorem",
+      "short": "De Finetti's theorem",
+      "statement": "Let X₁, X₂, X₃, … be an infinite exchangeable sequence of Bernoulli (0 or 1 valued) random variables, meaning that its joint distribution does not change when finitely many indices are permuted. Then there is a random variable Y with values in [0, 1] such that, given Y, the Xᵢ are independent and each equals 1 with probability Y, so the sequence is a mixture of independent identically distributed Bernoulli sequences.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Bruno de Finetti",
+      "note": "The theorem is not generally true for finite exchangeable sequences. It holds for a finite one that can be extended to an infinite exchangeable sequence.",
+      "url": "https://en.wikipedia.org/wiki/De_Finetti's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "isserliss-theorem",
+      "name": "Isserlis's theorem",
+      "short": "Isserlis's theorem",
+      "statement": "If (X₁, …, Xₙ) is a zero-mean multivariate normal random vector, then the expectation E[X₁X₂⋯Xₙ] equals the sum, over all ways of splitting {1, …, n} into pairs {i, j}, of the product of the covariances Cov(Xᵢ, Xⱼ) over those pairs. The same formula holds for a zero-mean complex-valued multivariate normal vector, and for odd n there are no pairings, so the expectation is 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "leibniz-integral-rule"
+      ],
+      "by": "Leon Isserlis, who proved it by induction in his original paper; known in particle physics as Wick's theorem after the work of Wick (1950)",
+      "note": "It computes higher-order moments of the multivariate normal distribution from its covariance matrix. The right-hand side is the hafnian of the covariance matrix.",
+      "url": "https://en.wikipedia.org/wiki/Isserlis's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "asymptotic-equipartition-property",
+      "name": "Asymptotic equipartition property",
+      "short": "Asymptotic equipartition",
+      "statement": "Let X be a discrete-time stationary ergodic stochastic process that takes only finitely many values. Then, almost surely, −(1/n) log p(X₁, X₂, …, Xₙ) tends to the entropy rate H(X) of X as n tends to infinity.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-large-numbers"
+      ],
+      "by": "Claude Shannon, Brockway McMillan and Leo Breiman (the Shannon–McMillan–Breiman theorem)",
+      "note": "It is fundamental to the concept of the typical set used in data compression. For i.i.d. sources it follows from the law of large numbers, and Chung Kai-lai extended it to processes with countably many values whose entropy rate is finite.",
+      "url": "https://en.wikipedia.org/wiki/Asymptotic_equipartition_property",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bapat-beg-theorem",
+      "name": "Bapat–Beg theorem",
+      "short": "Bapat–Beg theorem",
+      "statement": "Let X₁, …, Xₙ be independent real random variables with cumulative distribution functions F₁, …, Fₙ, which need not be equal. For order statistics positions n₁ < … < nₖ and points x₁ < … < xₖ, the probability that X₍ₙ₁₎ ≤ x₁, …, X₍ₙₖ₎ ≤ xₖ all hold is the sum, over all i₁ ≤ i₂ ≤ … ≤ iₖ ≤ n with each iⱼ ≥ nⱼ, of the permanent of an n × n matrix divided by i₁!(i₂ − i₁)!⋯(n − iₖ)!. Row m of that matrix consists of i₁ copies of Fₘ(x₁), then i₂ − i₁ copies of Fₘ(x₂) − Fₘ(x₁), and so on, ending with n − iₖ copies of 1 − Fₘ(xₖ).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Ravindra Bapat and M.I. Beg, 1989, published without a proof; a simple proof by Hande, 1994",
+      "note": "It describes order statistics when each element of the sample comes from a different population with its own distribution. No continuity of the distribution functions is needed.",
+      "url": "https://en.wikipedia.org/wiki/Bapat%E2%80%93Beg_theorem",
+      "area": "probability",
+      "year": 1989,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "infinite-monkey-theorem",
+      "name": "Infinite monkey theorem",
+      "short": "Infinite monkey theorem",
+      "statement": "If a monkey presses keys on a typewriter with finitely many keys forever, each key chosen independently and uniformly at random, then with probability 1 it types every given finite text, and in fact types it infinitely many times. More generally, if an infinite sequence of independent events has probabilities that all stay above some fixed positive number, then with probability 1 infinitely many of the events occur.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "borel-cantelli-lemma"
+      ],
+      "by": "Émile Borel used the typing monkey image in 1913; the idea may be older",
+      "note": "The monkey stands for an abstract device that produces an endless random sequence of letters and symbols. The result follows from the second Borel–Cantelli lemma.",
+      "url": "https://en.wikipedia.org/wiki/Infinite_monkey_theorem",
+      "area": "probability",
+      "year": 1913,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bernstein-von-mises-theorem",
+      "name": "Bernstein–von Mises theorem",
+      "short": "Bernstein–von Mises",
+      "statement": "Let X₁, …, Xₙ be independent samples from P_θ₀ in a well-specified model whose parameters form a subset of ℝᵏ, and suppose the model has densities, the Fisher information matrix at θ₀ is nonsingular, the model is differentiable in quadratic mean, for every ε > 0 there are tests whose error probabilities tend to 0 against all parameters farther than ε from θ₀, and the prior is absolutely continuous near θ₀ with a continuous positive density at θ₀. Then for any estimator θ̂ₙ for which √n(θ̂ₙ − θ₀) converges in distribution to a normal law with covariance equal to the inverse Fisher information at θ₀, the total variation distance between the posterior and the normal distribution with mean θ̂ₙ and covariance (1/n) times that inverse Fisher information tends to 0 in probability as n → ∞.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "Named after Richard von Mises and S. N. Bernstein; the first proper proof was given by Joseph L. Doob in 1949 for random variables with finite probability space, and later extended by Lucien Le Cam, Lorraine Schwartz, David A. Freedman and Persi Diaconis",
+      "note": "It links Bayesian inference with frequentist inference: asymptotically, many Bayesian credible sets act as confidence sets of the same level.",
+      "url": "https://en.wikipedia.org/wiki/Bernstein%E2%80%93von_Mises_theorem",
+      "area": "probability",
+      "year": 1949,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bhatia-davis-inequality",
+      "name": "Bhatia–Davis inequality",
+      "short": "Bhatia–Davis inequality",
+      "statement": "Let a probability distribution on the real line take values only between a lower bound m and an upper bound M, and let μ be its expected value. Then its variance σ² satisfies σ² ≤ (M − μ)(μ − m), with equality if and only if every value it takes is equal to M or to m.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Rajendra Bhatia and Chandler Davis; found earlier by Muilwijk, based on Murthy and Sethi, 34 years before their article",
+      "note": "It is stronger than Popoviciu's inequality on variances. It extends to positive unital linear maps between C*-algebras.",
+      "url": "https://en.wikipedia.org/wiki/Bhatia%E2%80%93Davis_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bishop-cannings-theorem",
+      "name": "Bishop–Cannings theorem",
+      "short": "Bishop–Cannings theorem",
+      "statement": "In a mixed evolutionarily stable strategy (ESS), all members of the strategy have the same payoff, and none of them can also be a pure ESS.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "game-theory"
+      ],
+      "by": "Tim Bishop and Chris Cannings, 1978",
+      "note": "The result lets one find ESSs algebraically instead of simulating the game and solving it by iteration.",
+      "url": "https://en.wikipedia.org/wiki/Bishop%E2%80%93Cannings_theorem",
+      "area": "probability",
+      "year": 1978,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bondareva-shapley-theorem",
+      "name": "Bondareva–Shapley theorem",
+      "short": "Bondareva–Shapley theorem",
+      "statement": "The core of a cooperative game (N, v) is non-empty if and only if the game is balanced. That is, take any function α from the non-empty subsets of N to [0,1] such that, for each player i, the values α(S) over the subsets S containing i add up to 1. Then for every such α the sum of α(S)·v(S) over all non-empty S is at most v(N).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "game-theory"
+      ],
+      "by": "Olga Bondareva and Lloyd Shapley, independently, in the 1960s",
+      "note": "It implies that market games and convex games have non-empty cores.",
+      "url": "https://en.wikipedia.org/wiki/Bondareva%E2%80%93Shapley_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "buffons-noodle",
+      "name": "Buffon's noodle",
+      "short": "Buffon's noodle",
+      "statement": "Drop a plane curve (a \"noodle\") of length ℓ at random onto a plane ruled with parallel lines a distance D apart. The expected number of times it crosses the lines is 2ℓ/(πD), whatever the shape of the curve and even when ℓ is larger than D.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Joseph-Émile Barbier, 1860; named after Georges-Louis Leclerc, Comte de Buffon",
+      "note": "The shape of the noodle changes the distribution of the number of crossings but not its expected value. Applied to closed curves of constant width, it proves Barbier's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Buffon's_noodle",
+      "area": "probability",
+      "year": 1860,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "burkes-theorem",
+      "name": "Burke's theorem",
+      "short": "Burke's theorem",
+      "statement": "For an M/M/1, M/M/c or M/M/∞ queue in the steady state whose arrivals form a Poisson process with rate λ, the departure process is a Poisson process with rate λ. Also, at each time t the number of customers in the queue is independent of the departure process before time t.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "kolmogorovs-criterion"
+      ],
+      "by": "Paul J. Burke, 1956",
+      "note": "The theorem was anticipated but not proved by O'Brien (1954) and Morse (1955).",
+      "url": "https://en.wikipedia.org/wiki/Burke's_theorem",
+      "area": "probability",
+      "year": 1956,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "chapman-robbins-bound",
+      "name": "Chapman–Robbins bound",
+      "short": "Chapman–Robbins bound",
+      "statement": "Let {μ_θ : θ ∈ Θ} be a family of probability distributions on Ω and let ĝ be an estimator, a real-valued function on Ω. Then for every θ in Θ, the variance of ĝ under μ_θ is at least the supremum, over all θ′ in Θ with μ_θ′ ≠ μ_θ, of (E_θ′[ĝ] − E_θ[ĝ])² / χ²(μ_θ′; μ_θ), where χ² is the chi-squared divergence.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "Independently discovered by John Hammersley, 1950, and by Douglas Chapman and Herbert Robbins, 1951",
+      "note": "It generalizes the Cramér–Rao bound and is at least as tight when both exist. It needs much weaker regularity conditions; for example, the density need not be differentiable.",
+      "url": "https://en.wikipedia.org/wiki/Chapman%E2%80%93Robbins_bound",
+      "area": "probability",
+      "year": 1950,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "clark-ocone-theorem",
+      "name": "Clark–Ocone theorem",
+      "short": "Clark–Ocone theorem",
+      "statement": "Let C_0 be the classical Wiener space of continuous paths on [0, T] starting at the origin, with Wiener measure γ. If F : C_0 → ℝ is bounded and Fréchet differentiable with bounded derivative, then for each path σ the value F(σ) equals the mean value of F plus an Itô integral over [0, T] with respect to σ. The integrand is the conditional expectation, given the Brownian filtration up to time t, of the Malliavin derivative of F. More generally this holds for any F in L²(C_0; ℝ) that is differentiable in the sense of Malliavin.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after the contributions of J.M.C. Clark (1970), U.G. Haussmann (1978) and Daniel Ocone (1984)",
+      "url": "https://en.wikipedia.org/wiki/Clark%E2%80%93Ocone_theorem",
+      "area": "probability",
+      "year": 1970,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dudleys-theorem",
+      "name": "Dudley's theorem",
+      "short": "Dudley's entropy bound",
+      "statement": "Let (X_t) for t in T be a centered Gaussian process and let d(s,t) = √E[|X_s − X_t|²]. Let N(ε) be the minimal number of open d-balls of radius ε needed to cover T. Then E[sup X_t] ≤ 24 ∫ √(log N(ε)) dε, the integral taken over ε from 0 to ∞. Furthermore, if this entropy integral converges, then X has a version whose sample paths are almost surely bounded and uniformly continuous on (T, d).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "First stated and proved by V. N. Sudakov, as pointed out by Richard M. Dudley; Dudley credited Volker Strassen with connecting entropy and regularity",
+      "note": "It relates the expected upper bound and regularity of a Gaussian process to its entropy and covariance structure.",
+      "url": "https://en.wikipedia.org/wiki/Dudley's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dvoretzky-kiefer-wolfowitz-inequality",
+      "name": "Dvoretzky–Kiefer–Wolfowitz inequality",
+      "short": "DKW inequality",
+      "statement": "Let X₁,…,Xₙ be independent, identically distributed real random variables with distribution function F, and let Fₙ be their empirical distribution function. Then for every ε > 0, the probability that the supremum over x of |Fₙ(x) − F(x)| exceeds ε is at most 2e^(−2nε²).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory",
+        "statistics"
+      ],
+      "by": "Aryeh Dvoretzky, Jack Kiefer and Jacob Wolfowitz, 1956, with an unspecified constant; Pascal Massart, 1990, with the sharp constant 2, confirming a conjecture of Birnbaum and McCarty",
+      "note": "It strengthens the Glivenko–Cantelli theorem by quantifying the rate of convergence, and it bounds the tail probability of the Kolmogorov–Smirnov statistic.",
+      "url": "https://en.wikipedia.org/wiki/Dvoretzky%E2%80%93Kiefer%E2%80%93Wolfowitz_inequality",
+      "area": "probability",
+      "year": 1956,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dynkins-formula",
+      "name": "Dynkin's formula",
+      "short": "Dynkin's formula",
+      "statement": "Let X be a Feller process with infinitesimal generator A, let f be in the domain of A, and let τ be a stopping time with finite expectation. Then the expected value of f(X_τ), starting from x, equals f(x) plus the expected value of the integral of Af(Xₛ) ds from 0 to τ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Eugene Dynkin",
+      "note": "It may be seen as a stochastic generalization of the second fundamental theorem of calculus.",
+      "url": "https://en.wikipedia.org/wiki/Dynkin's_formula",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "eatons-inequality",
+      "name": "Eaton's inequality",
+      "short": "Eaton's inequality",
+      "statement": "Let X_1, …, X_n be independent real random variables, each with expected value 0 and |X_i| ≤ 1, not necessarily identically or symmetrically distributed. Let a_1, …, a_n be real numbers with ∑ a_i² = 1. Then for k > 0, P(|∑ a_i X_i| ≥ k) ≤ 2 · inf over 0 ≤ c ≤ k of ∫ from c to ∞ of ((z − c)/(k − c))³ φ(z) dz, where φ is the density of the standard normal distribution.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Morris L. Eaton, 1974",
+      "note": "It bounds the largest values of a linear combination of bounded random variables. Edelman gave a related bound, and Pinelis showed that Eaton's bound can be sharpened.",
+      "url": "https://en.wikipedia.org/wiki/Eaton's_inequality",
+      "area": "probability",
+      "year": 1974,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "etemadis-inequality",
+      "name": "Etemadi's inequality",
+      "short": "Etemadi's inequality",
+      "statement": "Let X₁, …, Xₙ be independent real-valued random variables on a common probability space, let α ≥ 0, and let S_k = X₁ + … + X_k. Then the probability that the largest of |S₁|, …, |Sₙ| is at least 3α is at most 3 times the largest of the probabilities Pr(|S_k| ≥ α) for k from 1 to n.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Nasrollah Etemadi",
+      "note": "It is a maximal inequality. Combined with Chebyshev's inequality it gives Kolmogorov's inequality with an extra factor of 27.",
+      "url": "https://en.wikipedia.org/wiki/Etemadi's_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fisher-tippett-gnedenko-theorem",
+      "name": "Fisher–Tippett–Gnedenko theorem",
+      "short": "Fisher–Tippett–Gnedenko",
+      "statement": "Let X₁, …, Xₙ be independent identically distributed random variables. If there are real numbers aₙ > 0 and bₙ such that (max{X₁, …, Xₙ} − bₙ)/aₙ converges in distribution to a non-degenerate distribution G, then, up to a linear change of coordinates, G is a Gumbel, Fréchet or Weibull distribution.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics",
+        "probability-theory"
+      ],
+      "by": "Credit is given to Fréchet (1927), Fisher and Tippett (1928), von Mises (1936) and Gnedenko (1943)",
+      "note": "It plays a role for maxima similar to the central limit theorem for averages, but it does not say that the normalized maximum converges.",
+      "url": "https://en.wikipedia.org/wiki/Fisher%E2%80%93Tippett%E2%80%93Gnedenko_theorem",
+      "area": "probability",
+      "year": 1927,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fosters-theorem",
+      "name": "Foster's theorem",
+      "short": "Foster's theorem",
+      "statement": "Let an irreducible discrete-time Markov chain on a countable state space S have transition probabilities pᵢⱼ. The chain is positive recurrent if and only if there are a function V: S → ℝ with V(i) ≥ 0 for all i, a finite set F ⊆ S and a number ε > 0 such that ∑ⱼ pᵢⱼV(j) < ∞ for every i in F and ∑ⱼ pᵢⱼV(j) ≤ V(i) − ε for every i not in F.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Gordon Foster",
+      "note": "The function V is a Lyapunov function, expressing a notion of stability for positive recurrent chains.",
+      "url": "https://en.wikipedia.org/wiki/Foster's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "freidlin-wentzell-theorem",
+      "name": "Freidlin–Wentzell theorem",
+      "short": "Freidlin–Wentzell theorem",
+      "statement": "Let B be standard Brownian motion on ℝᵈ started at the origin and Xᵋ the Itō diffusion solving dXᵋ = b(Xᵋ)dt + √ε dB with Xᵋ₀ = 0, where b: ℝᵈ → ℝᵈ is uniformly Lipschitz continuous. Then on C₀([0,T]; ℝᵈ) with the supremum norm, the family (Xᵋ) satisfies the large deviations principle with good rate function I(ω) = ½∫₀ᵀ |ω̇ₜ − b(ωₜ)|² dt for ω in the Sobolev space H¹([0,T]; ℝᵈ) and I(ω) = +∞ otherwise: as ε → 0, limsup ε log P[Xᵋ ∈ F] ≤ −inf over F of I for every closed F, and liminf ε log P[Xᵋ ∈ G] ≥ −inf over G of I for every open G.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Mark Freidlin and Alexander D. Wentzell",
+      "note": "It generalizes Schilder's theorem for standard Brownian motion.",
+      "url": "https://en.wikipedia.org/wiki/Freidlin%E2%80%93Wentzell_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "frechet-inequalities",
+      "name": "Fréchet inequalities",
+      "short": "Fréchet inequalities",
+      "statement": "For events or propositions A₁, …, Aₙ, max(0, ∑P(Aₖ) − (n−1)) ≤ P(A₁ ∧ … ∧ Aₙ) ≤ min P(Aₖ), and max P(Aₖ) ≤ P(A₁ ∨ … ∨ Aₙ) ≤ min(1, ∑P(Aₖ)). These bounds make no assumption about dependence between the events.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Implicit in the work of George Boole; explicitly derived by Maurice Fréchet",
+      "note": "They bound probabilities of conjunctions and disjunctions given only the probabilities of the individual events.",
+      "url": "https://en.wikipedia.org/wiki/Fr%C3%A9chet_inequalities",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gilbert-varshamov-bound-for-linear-codes",
+      "name": "Gilbert–Varshamov bound for linear codes",
+      "short": "Gilbert–Varshamov (linear)",
+      "statement": "Let q ≥ 2, 0 ≤ δ < 1 − 1/q and 0 < ε ≤ 1 − H_q(δ), where H_q(x) = x log_q(q−1) − x log_q x − (1−x) log_q(1−x) is the q-ary entropy function. Then there exists a q-ary linear code with rate R ≥ 1 − H_q(δ) − ε and relative distance δ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "booles-inequality"
+      ],
+      "by": "Proved by Edgar Gilbert for general codes; refined by Rom Varshamov to linear codes",
+      "note": "The proof uses the probabilistic method, so it does not construct the code.",
+      "url": "https://en.wikipedia.org/wiki/Gilbert%E2%80%93Varshamov_bound_for_linear_codes",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gausss-inequality",
+      "name": "Gauss's inequality",
+      "short": "Gauss's inequality",
+      "statement": "Let X be a unimodal random variable with mode m, and let τ² be the expected value of (X − m)². Then for any k > 0, Pr(|X − m| > k) ≤ (2τ/(3k))² if k ≥ 2τ/√3, and Pr(|X − m| > k) ≤ 1 − k/(τ√3) if 0 ≤ k ≤ 2τ/√3.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Carl Friedrich Gauss, 1823",
+      "note": "It bounds the probability that a unimodal random variable lies more than a given distance from its mode. The Vysochanskiï–Petunin inequality later sharpened the bound and extended it to distances from the mean.",
+      "url": "https://en.wikipedia.org/wiki/Gauss's_inequality",
+      "area": "probability",
+      "year": 1823,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cramers-theorem-large-deviations",
+      "name": "Cramér's theorem (large deviations)",
+      "short": "Cramér's theorem",
+      "statement": "Let X₁, X₂, … be independent identically distributed real random variables whose logarithmic moment generating function Λ(t) = log E[exp(tX₁)] is finite for all real t. Then for every x > E[X₁], the limit of (1/n) log P(X₁ + … + Xₙ ≥ nx) as n → ∞ equals −Λ*(x), where Λ*(x) = sup over real t of (tx − Λ(t)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "A weak version first shown by Harald Cramér, 1938",
+      "note": "Equivalently, the distributions of the sample means satisfy a large deviation principle with rate function Λ*.",
+      "url": "https://en.wikipedia.org/wiki/Cram%C3%A9r's_theorem_(large_deviations)",
+      "area": "probability",
+      "year": 1938,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "glicksbergs-theorem",
+      "name": "Glicksberg's theorem",
+      "short": "Glicksberg's minimax thm",
+      "statement": "Let A and B be compact Hausdorff spaces and let K be an upper semicontinuous or lower semicontinuous function on A×B. Then sup over f of inf over g of ∬K df dg equals inf over g of sup over f of ∬K df dg, where f and g run over the Borel probability measures on A and B.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "game-theory"
+      ],
+      "by": "Named after Glicksberg",
+      "note": "If f and g are read as mixed strategies of two players in a continuous game and the payoff K is upper semicontinuous, the game has a value. The continuity condition cannot be dropped.",
+      "url": "https://en.wikipedia.org/wiki/Glicksberg's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gordon-newell-theorem",
+      "name": "Gordon–Newell theorem",
+      "short": "Gordon–Newell theorem",
+      "statement": "Consider a closed network of m queues with K customers in total, none entering or leaving, where service times at queue i are exponentially distributed with rate μᵢ, service is first come first served, and a customer finishing at queue i moves to queue j with probability pᵢⱼ (these summing to 1 over j). Then the equilibrium distribution exists, and the probability that queue i holds kᵢ customers for each i (with k₁+…+k_m = K) is (1/G(K)) ∏ (eᵢ/μᵢ)^(kᵢ), where the visit ratios eᵢ solve eᵢ = ∑ⱼ eⱼ pⱼᵢ and G(K) is the sum of the same product over all such states.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "note": "It extends Jackson's theorem from open to closed queueing networks. Buzen's algorithm or mean value analysis can compute the normalizing constant efficiently.",
+      "url": "https://en.wikipedia.org/wiki/Gordon%E2%80%93Newell_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kac-bernstein-theorem",
+      "name": "Kac–Bernstein theorem",
+      "short": "Kac–Bernstein theorem",
+      "statement": "Let ξ and η be independent random variables. If ξ + η and ξ − η are independent, then ξ and η are normally distributed.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics",
+        "probability-theory"
+      ],
+      "by": "Proved independently by Mark Kac and Sergei Bernstein",
+      "note": "The Darmois–Skitovich theorem generalizes it to two linear forms of n independent random variables.",
+      "url": "https://en.wikipedia.org/wiki/Kac%E2%80%93Bernstein_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "darmois-skitovich-theorem",
+      "name": "Darmois–Skitovich theorem",
+      "short": "Darmois–Skitovich theorem",
+      "statement": "Let ξ₁, …, ξₙ be independent random variables and let αⱼ, βⱼ be nonzero constants. If the linear forms α₁ξ₁ + … + αₙξₙ and β₁ξ₁ + … + βₙξₙ are independent, then every ξⱼ is normally distributed.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics",
+        "probability-theory"
+      ],
+      "by": "V. P. Skitovich and Georges Darmois, independently, 1953",
+      "note": "It generalizes the Kac–Bernstein theorem, which characterizes the normal distribution by independence of the sum and difference of two independent random variables.",
+      "url": "https://en.wikipedia.org/wiki/Darmois%E2%80%93Skitovich_theorem",
+      "area": "probability",
+      "year": 1953,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "heyde-theorem",
+      "name": "Heyde theorem",
+      "short": "Heyde theorem",
+      "statement": "Let ξ₁, …, ξₙ be independent random variables, and let αⱼ, βⱼ be nonzero constants such that βᵢ/αᵢ + βⱼ/αⱼ ≠ 0 for all i ≠ j. If the conditional distribution of β₁ξ₁ + … + βₙξₙ given α₁ξ₁ + … + αₙξₙ is symmetric, then every ξⱼ has a Gaussian distribution.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cramers-decomposition-theorem"
+      ],
+      "by": "C. C. Heyde, 1970",
+      "note": "It characterizes the Gaussian distribution by the symmetry of a conditional distribution, while the related Kac–Bernstein and Skitovich–Darmois theorems use independence. Its proof relies on Cramér's decomposition theorem and a theorem of Marcinkiewicz.",
+      "url": "https://en.wikipedia.org/wiki/Heyde_theorem",
+      "area": "probability",
+      "year": 1970,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kolmogorovs-criterion",
+      "name": "Kolmogorov's criterion",
+      "short": "Kolmogorov's criterion",
+      "statement": "An irreducible, positive recurrent, aperiodic Markov chain with transition probabilities pᵢⱼ is reversible if and only if, for every finite sequence of states j₁, j₂, …, jₙ, the product of transition probabilities around the cycle forwards equals the product backwards: p(j₁,j₂)·p(j₂,j₃)·…·p(jₙ₋₁,jₙ)·p(jₙ,j₁) = p(j₁,jₙ)·p(jₙ,jₙ₋₁)·…·p(j₃,j₂)·p(j₂,j₁).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Andrey Kolmogorov",
+      "note": "It gives a necessary and sufficient condition for a Markov chain to be stochastically identical to its time-reversed version. An analogous criterion holds for continuous-time Markov chains with transition rates.",
+      "url": "https://en.wikipedia.org/wiki/Kolmogorov's_criterion",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rao-blackwell-theorem",
+      "name": "Rao–Blackwell theorem",
+      "short": "Rao–Blackwell theorem",
+      "statement": "Let δ(X) be any estimator of a parameter θ and let T(X) be a sufficient statistic for θ. Then the estimator δ₁(X) = E[δ(X) | T(X)] has mean squared error no larger than that of δ(X), that is, E[(δ₁(X) − θ)²] ≤ E[(δ(X) − θ)²].",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-total-expectation"
+      ],
+      "by": "Named after C.R. Rao and David Blackwell",
+      "note": "The same inequality holds for the expected loss under any convex loss function, and the improved estimator is unbiased exactly when the original one is. If T is also complete and the original estimator is unbiased, the improved estimator is the unique best unbiased estimator (Lehmann–Scheffé theorem).",
+      "url": "https://en.wikipedia.org/wiki/Rao%E2%80%93Blackwell_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hoeffdings-lemma",
+      "name": "Hoeffding's lemma",
+      "short": "Hoeffding's lemma",
+      "statement": "Let X be a real-valued random variable with a ≤ X ≤ b almost surely. Then for all real λ, E[e^(λX)] ≤ exp(λE[X] + λ²(b − a)²/8).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "taylors-theorem"
+      ],
+      "by": "Named after Wassily Hoeffding",
+      "note": "It bounds the moment-generating function of a bounded random variable and is used in the proofs of Hoeffding's inequality and McDiarmid's inequality.",
+      "url": "https://en.wikipedia.org/wiki/Hoeffding's_lemma",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hajek-le-cam-convolution-theorem",
+      "name": "Hájek–Le Cam convolution theorem",
+      "short": "Hájek–Le Cam convolution",
+      "statement": "Let Tₙ be a uniformly (locally) regular estimator of a differentiable parameter q(θ) in a regular parametric model with Fisher information matrix I(θ). Then √n(Tₙ − q(θ)) converges in distribution to Z + Δ, where Z and Δ are independent, Z is normal with mean 0 and covariance matrix q̇(θ)I(θ)⁻¹q̇(θ)′ (the information bound for q), and Δ can have any distribution.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "Named after Jaroslav Hájek and Lucien Le Cam; the form given here is from Bickel (1998)",
+      "note": "The best regular estimators are those whose second component is identically zero. Such estimators are called efficient, and they always exist for regular parametric models.",
+      "url": "https://en.wikipedia.org/wiki/H%C3%A1jek%E2%80%93Le_Cam_convolution_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cochrans-theorem",
+      "name": "Cochran's theorem",
+      "short": "Cochran's theorem",
+      "statement": "Let U₁, …, U_N be independent standard normal random variables and U the vector of them. Let B⁽¹⁾, …, B⁽ᵏ⁾ be symmetric matrices with ranks r₁, …, r_k, and let Q_i = UᵀB⁽ⁱ⁾U, with the Q_i adding up to UᵀU. Then the following are equivalent: r₁ + … + r_k = N; the Q_i are independent; each Q_i has a chi-squared distribution with r_i degrees of freedom.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "William G. Cochran",
+      "note": "It is used to justify results on the distributions of statistics used in the analysis of variance, for example that the sample mean and sample variance of normal data are independent.",
+      "url": "https://en.wikipedia.org/wiki/Cochran's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ito-isometry",
+      "name": "Itô isometry",
+      "short": "Itô isometry",
+      "statement": "Let W be the canonical real-valued Wiener process on [0, T] with T > 0, and let X be a square-integrable stochastic process adapted to the natural filtration of W. Then the expected value of (∫₀ᵀ X_t dW_t)² equals the expected value of ∫₀ᵀ X_t² dt.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Kiyoshi Itô",
+      "note": "It is used to compute variances of random variables given as Itô integrals. It extends to integrators that are martingales, with dt replaced by the quadratic variation of the integrator.",
+      "url": "https://en.wikipedia.org/wiki/It%C3%B4_isometry",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "littles-law",
+      "name": "Little's law",
+      "short": "Little's law",
+      "statement": "In a stationary (ergodic) system, the long-term average number of customers L equals the long-term average effective arrival rate λ multiplied by the average time W that a customer spends in the system: L = λW.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Assumed without proof in a 1954 paper; the form L = λW first published by Philip M. Morse; proved by John Little, 1961",
+      "note": "The relationship does not depend on the arrival process, the service distribution or the service order, and it applies to systems within systems.",
+      "url": "https://en.wikipedia.org/wiki/Little's_law",
+      "area": "probability",
+      "year": 1954,
+      "settled": 1961,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "slutskys-theorem",
+      "name": "Slutsky's theorem",
+      "short": "Slutsky's theorem",
+      "statement": "Let Xₙ and Yₙ be sequences of scalar, vector or matrix random elements. If Xₙ converges in distribution to X and Yₙ converges in probability to a constant c, then Xₙ + Yₙ converges in distribution to X + c, XₙYₙ converges in distribution to Xc, and Xₙ/Yₙ converges in distribution to X/c provided c is non-zero (invertible, in the matrix case).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "continuous-mapping-theorem"
+      ],
+      "by": "Named after Eugen Slutsky; also attributed to Harald Cramér",
+      "note": "The requirement that Yₙ converges to a constant is needed: if it converges to a non-degenerate random variable the theorem fails. The theorem remains valid if all convergences in distribution are replaced with convergences in probability.",
+      "url": "https://en.wikipedia.org/wiki/Slutsky's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kullbacks-inequality",
+      "name": "Kullback's inequality",
+      "short": "Kullback's inequality",
+      "statement": "Let P and Q be probability distributions on the real line whose first moments exist, with P absolutely continuous with respect to Q. Then the Kullback–Leibler divergence D(P‖Q) is at least Ψ*_Q(μ₁(P)), where Ψ*_Q is the rate function of Q (the convex conjugate of its cumulant-generating function) and μ₁(P) is the first moment of P.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "gibbs-inequality"
+      ],
+      "note": "The Cramér–Rao bound is a corollary of this result.",
+      "url": "https://en.wikipedia.org/wiki/Kullback's_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kunita-watanabe-inequality",
+      "name": "Kunita–Watanabe inequality",
+      "short": "Kunita–Watanabe inequality",
+      "statement": "Let M and N be continuous local martingales and H and K measurable processes. Then ∫₀ᵗ |H_s| |K_s| |d⟨M,N⟩_s| ≤ √(∫₀ᵗ H_s² d⟨M⟩_s) · √(∫₀ᵗ K_s² d⟨N⟩_s), where ⟨·⟩ denotes quadratic variation and ⟨·,·⟩ quadratic covariation, and the integrals are taken in the Lebesgue–Stieltjes sense.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Hiroshi Kunita and Shinzo Watanabe",
+      "note": "It generalizes the Cauchy–Schwarz inequality to integrals of stochastic processes and is used to extend Itô's stochastic integral to square-integrable martingales.",
+      "url": "https://en.wikipedia.org/wiki/Kunita%E2%80%93Watanabe_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "law-of-total-covariance",
+      "name": "Law of total covariance",
+      "short": "Law of total covariance",
+      "statement": "If X, Y and Z are random variables on the same probability space and the covariance of X and Y is finite, then cov(X, Y) = E(cov(X, Y | Z)) + cov(E(X | Z), E(Y | Z)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-total-expectation"
+      ],
+      "note": "It is also called the covariance decomposition formula or the conditional covariance formula. It can be proved from the law of total expectation.",
+      "url": "https://en.wikipedia.org/wiki/Law_of_total_covariance",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "law-of-total-cumulance",
+      "name": "Law of total cumulance",
+      "short": "Law of total cumulance",
+      "statement": "For random variables X₁, …, Xₙ and Y, the joint cumulant κ(X₁, …, Xₙ) equals the sum, over all partitions π of {1, …, n}, of the joint cumulant of the conditional cumulants κ(Xᵢ : i ∈ B | Y), one for each block B of π. Each conditional cumulant is itself a random variable, a function of Y.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory",
+        "statistics"
+      ],
+      "by": "Introduced by David Brillinger",
+      "note": "It generalizes the law of total probability, the law of total expectation and the law of total variance to cumulants, and has applications in time series analysis.",
+      "url": "https://en.wikipedia.org/wiki/Law_of_total_cumulance",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lordens-inequality",
+      "name": "Lorden's inequality",
+      "short": "Lorden's inequality",
+      "statement": "Let X₁, X₂, ... be independent, identically distributed positive random variables with sums S_n = X₁ + ... + X_n, and let R_b = S_n − b, where n is the first index with S_n exceeding b. Then the expected overshoot satisfies E(R_b) ≤ E(X²)/E(X), where X has the common distribution of the X_i.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Gary Lorden, 1970",
+      "note": "Overshoots play a central role in renewal theory.",
+      "url": "https://en.wikipedia.org/wiki/Lorden's_inequality",
+      "area": "probability",
+      "year": 1970,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lukacss-proportion-sum-independence-theorem",
+      "name": "Lukacs's proportion-sum independence theorem",
+      "short": "Lukacs proportion–sum",
+      "statement": "Let Y₁ and Y₂ be non-degenerate, independent, positive random variables. Then W = Y₁ + Y₂ and P = Y₁/(Y₁ + Y₂) are independent if and only if both Y₁ and Y₂ have gamma distributions with the same scale parameter.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics",
+        "probability-theory"
+      ],
+      "by": "Named after Eugene Lukacs",
+      "note": "It is used when studying proportions, in particular the Dirichlet distribution. A corollary extends it to k variables Y₁, …, Y_k and their proportions of the total sum.",
+      "url": "https://en.wikipedia.org/wiki/Lukacs's_proportion-sum_independence_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "levys-modulus-of-continuity-theorem",
+      "name": "Lévy's modulus of continuity theorem",
+      "short": "Lévy modulus of continuity",
+      "statement": "Let B be a standard Wiener process on [0, 1]. Then almost surely the limit as h → 0 of the supremum, over t, t′ ≤ 1 with |t − t′| ≤ h, of |B_t′ − B_t| / √(2h log(1/h)) equals 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Paul Lévy",
+      "note": "Equivalently, the sample paths of Brownian motion have modulus of continuity c√(2δ log(1/δ)) with probability one, for c > 1 and sufficiently small δ > 0.",
+      "url": "https://en.wikipedia.org/wiki/L%C3%A9vy's_modulus_of_continuity_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "marcinkiewicz-zygmund-inequality",
+      "name": "Marcinkiewicz–Zygmund inequality",
+      "short": "Marcinkiewicz–Zygmund",
+      "statement": "Let X₁, …, Xₙ be independent random variables with mean 0 and E(|X_i|^p) finite, where 1 ≤ p < ∞. Then A_p · E((∑|X_i|²)^(p/2)) ≤ E(|∑X_i|^p) ≤ B_p · E((∑|X_i|²)^(p/2)), where A_p and B_p are positive constants that depend only on p and not on the distribution of the random variables.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Józef Marcinkiewicz and Antoni Zygmund",
+      "note": "It generalizes the rule for the sum of variances of independent random variables to moments of arbitrary order, and is a special case of the Burkholder–Davis–Gundy inequality for discrete-time martingales.",
+      "url": "https://en.wikipedia.org/wiki/Marcinkiewicz%E2%80%93Zygmund_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "multidimensional-chebyshevs-inequality",
+      "name": "Multidimensional Chebyshev's inequality",
+      "short": "Multidimensional Chebyshev",
+      "statement": "Let X be an N-dimensional random vector with expected value μ and covariance matrix V, and suppose V is positive-definite. Then for any real number t > 0, the probability that √((X − μ)ᵀ V⁻¹ (X − μ)) is greater than t is at most N/t².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "markovs-inequality"
+      ],
+      "note": "It generalizes Chebyshev's inequality, which bounds the probability that a random variable differs from its expected value by more than a specified amount.",
+      "url": "https://en.wikipedia.org/wiki/Multidimensional_Chebyshev's_inequality",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "myerson-satterthwaite-theorem",
+      "name": "Myerson–Satterthwaite theorem",
+      "short": "Myerson–Satterthwaite",
+      "statement": "Suppose a seller and a buyer each know their own value for an item but know only a probability density for the other's value, the buyer's value lying in an interval [B₁, B₂] and the seller's in [S₁, S₂], with densities strictly positive on these intervals. If the two intervals share more than one point, then no trading mechanism is at once individually rational (each party expects a non-negative gain), weakly budget balanced (no outside subsidy is needed), incentive compatible in Nash equilibrium (reporting one's true value is a best response) and ex post Pareto efficient (the item always ends with whoever values it more).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "game-theory"
+      ],
+      "by": "Roger Myerson and Mark Satterthwaite",
+      "note": "With many buyers and sellers of a private good the inefficiency asymptotically disappears. Ex post efficiency can be attained if both parties initially own half of the good.",
+      "url": "https://en.wikipedia.org/wiki/Myerson%E2%80%93Satterthwaite_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kuhns-theorem",
+      "name": "Kuhn's theorem",
+      "short": "Kuhn's theorem",
+      "statement": "In any finite extensive-form game in which the players have perfect recall, every mixed strategy has an equivalent behavior strategy that gives the same outcome probabilities, and every behavior strategy has an equivalent mixed strategy.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "game-theory"
+      ],
+      "by": "Harold W. Kuhn, 1953",
+      "note": "A mixed strategy assigns probabilities to complete plans of action, while a behavior strategy assigns probabilities to individual actions at each decision point. The theorem also holds for infinite games.",
+      "url": "https://en.wikipedia.org/wiki/Kuhn's_theorem",
+      "area": "probability",
+      "year": 1953,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "palm-khintchine-theorem",
+      "name": "Palm–Khintchine theorem",
+      "short": "Palm–Khintchine theorem",
+      "statement": "For each m take m independent equilibrium renewal processes, and for process j let X_jm be the time between its first and second renewals and λ_jm = 1/E(X_jm). Suppose that for all sufficiently large m the sum λ_1m + … + λ_mm equals the same finite number λ, and that for every ε > 0 and t > 0 and all sufficiently large m, P(X_jm ≤ t) < ε for every j. Then the superposition (the sum of the counting processes) approaches a Poisson process as m → ∞.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Conny Palm and Aleksandr Khinchin",
+      "note": "It is used to generalise the behaviour of users or clients in queuing theory, and in dependability and reliability modelling of computing and telecommunications.",
+      "url": "https://en.wikipedia.org/wiki/Palm%E2%80%93Khintchine_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "parthasarathys-theorem",
+      "name": "Parthasarathy's theorem",
+      "short": "Parthasarathy's theorem",
+      "statement": "Let k(x,y) be a bounded function on the unit square [0,1] × [0,1] that is continuous except possibly on finitely many curves y = φ(x) with φ continuous. Then the game with payoff k has a value when one player is restricted to absolutely continuous probability distributions: the maximum over all distributions μ for x of the infimum over absolutely continuous λ for y of k(μ,λ) equals the infimum over absolutely continuous λ of the maximum over μ of k(μ,λ).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "game-theory"
+      ],
+      "by": "Thiruvenkatachari Parthasarathy, 1970",
+      "note": "It generalizes von Neumann's minimax theorem. Parthasarathy also gives a game with no value in which neither player is restricted.",
+      "url": "https://en.wikipedia.org/wiki/Parthasarathy's_theorem",
+      "area": "probability",
+      "year": 1970,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "poisson-limit-theorem",
+      "name": "Poisson limit theorem",
+      "short": "Poisson limit theorem",
+      "statement": "Let pₙ be a sequence of real numbers in [0, 1] such that n·pₙ converges to a finite limit λ. Then for each fixed whole number k ≥ 0, the binomial probability C(n, k) pₙᵏ (1 − pₙ)ⁿ⁻ᵏ tends to e^(−λ) λᵏ / k! as n tends to infinity.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "stirlings-approximation",
+        "binomial-theorem"
+      ],
+      "by": "Named after Siméon Denis Poisson",
+      "note": "It says the Poisson distribution can approximate the binomial distribution under certain conditions. Le Cam's theorem generalizes it.",
+      "url": "https://en.wikipedia.org/wiki/Poisson_limit_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "poisson-scatter-theorem",
+      "name": "Poisson scatter theorem",
+      "short": "Poisson scatter theorem",
+      "statement": "Suppose random points (hits) fall in a bounded region K of the plane so that there are only finitely many hits in K, no two hits fall at the same point, the hits are homogeneous, and the numbers of hits in any non-overlapping subregions are independent. Then there is a positive constant λ such that, for every subregion B, the number of hits in B has a Poisson distribution with parameter λ times the area of B, and the counts in non-overlapping subregions are independent.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "note": "The constant λ is called the intensity parameter and equals the expected number of hits per unit area. The theorem can be generalized to spaces of any dimension.",
+      "url": "https://en.wikipedia.org/wiki/Poisson_scatter_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "popovicius-inequality-on-variances",
+      "name": "Popoviciu's inequality on variances",
+      "short": "Popoviciu's inequality",
+      "statement": "If a random variable only takes values between a lower bound m and an upper bound M, its variance σ² is at most (M − m)²/4. Equality holds precisely when half of the probability is concentrated at each of the two bounds.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Tiberiu Popoviciu",
+      "note": "If the expectation μ is also known, the stronger Bhatia–Davis inequality σ² ≤ (M − μ)(μ − m) holds, and Popoviciu's inequality follows from it.",
+      "url": "https://en.wikipedia.org/wiki/Popoviciu's_inequality_on_variances",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "no-deleting-theorem",
+      "name": "No-deleting theorem",
+      "short": "No-deleting theorem",
+      "statement": "Take quantum systems A, B and C, where A and B have the same Hilbert space. Suppose a unitary transformation U and a fixed ancilla state in C take two copies of ψ, for every state ψ, together with the ancilla to ψ in A, the blank state 0 in B, and an ancilla state A_ψ that may depend on ψ. Then U is a swapping operation, in the sense that the map ψ ↦ A_ψ is an isometric embedding.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "information-theory"
+      ],
+      "by": "Arun K. Pati and Samuel L. Braunstein",
+      "note": "It is a time-reversed dual to the no-cloning theorem, which states that arbitrary states cannot be copied.",
+      "url": "https://en.wikipedia.org/wiki/No-deleting_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "raikovs-theorem",
+      "name": "Raikov's theorem",
+      "short": "Raikov's theorem",
+      "statement": "If a random variable with a Poisson distribution is written as a sum of two independent random variables, then each of the two summands has a shifted Poisson distribution.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named after Dmitrii Abramovich Raikov",
+      "note": "It is the converse of the fact that the sum of two independent Poisson random variables is Poisson. It is similar to Cramér's decomposition theorem for the normal distribution.",
+      "url": "https://en.wikipedia.org/wiki/Raikov's_theorem",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "revelation-principle",
+      "name": "Revelation principle",
+      "short": "Revelation principle",
+      "statement": "If a social choice function can be implemented by some mechanism (for example in dominant strategies or in Bayesian Nash equilibrium), then it can also be implemented by an incentive-compatible direct mechanism. In that mechanism each player only reports their own preferences, and reporting them truthfully is an equilibrium with the same outcome and payoffs.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "game-theory"
+      ],
+      "by": "Dominant-strategy version first introduced by Allan Gibbard; Bayesian Nash version by Dasgupta, Hammond and Maskin, by Holmström, and by Myerson",
+      "note": "The proof builds a direct mechanism that asks players for their preferences and then plays their equilibrium strategies for them. It can be seen as a mirror image to Gibbard's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Revelation_principle",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kolmogorovs-characterization-of-reversible-diffusions",
+      "name": "Kolmogorov's characterization of reversible diffusions",
+      "short": "Kolmogorov reversibility",
+      "statement": "Let B be a d-dimensional standard Brownian motion, b: ℝᵈ → ℝᵈ a Lipschitz continuous vector field, and X an Itō diffusion solving dX_t = b(X_t) dt + dB_t with square-integrable initial condition. Then X is reversible with stationary distribution μ on ℝᵈ if and only if there is a function Φ: ℝᵈ → ℝ with b = −∇Φ such that μ has density exp(−2Φ(x)) and the integral of exp(−2Φ(x)) over ℝᵈ equals 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Andrey Nikolaevich Kolmogorov",
+      "url": "https://en.wikipedia.org/wiki/Reversible_diffusion",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "robbins-lemma",
+      "name": "Robbins lemma",
+      "short": "Robbins lemma",
+      "statement": "Let X be a random variable with a Poisson distribution with parameter λ, and let f be any function for which the expected value E(f(X)) exists. Then E(X·f(X−1)) = λ·E(f(X)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "Herbert Robbins",
+      "note": "Robbins introduced it while developing empirical Bayes methods.",
+      "url": "https://en.wikipedia.org/wiki/Robbins_lemma",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sanovs-theorem",
+      "name": "Sanov's theorem",
+      "short": "Sanov's theorem",
+      "statement": "Let A be a set of probability distributions on a finite alphabet X and q a distribution on X, and draw n independent samples from q. Then the probability that the observed frequencies of the samples form a distribution in A is at most (n+1)^|X| · 2^(−n·D(p*‖q)), where D is the Kullback–Leibler divergence (with base-2 logarithms) and p* is the information projection of q onto A, the distribution in A closest to q in this divergence.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "information-theory",
+        "probability-theory"
+      ],
+      "by": "I. N. Sanov, 1957",
+      "note": "In large deviations language, it identifies the rate function for large deviations of the empirical measure of i.i.d. random variables.",
+      "url": "https://en.wikipedia.org/wiki/Sanov's_theorem",
+      "area": "probability",
+      "year": 1957,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "schilders-theorem",
+      "name": "Schilder's theorem",
+      "short": "Schilder's theorem",
+      "statement": "Let B be standard Brownian motion in ℝᵈ started at 0, and for ε > 0 let W_ε be the law of the rescaled path √ε·B on the space of continuous paths ω: [0, T] → ℝᵈ with ω(0) = 0, measured with the supremum distance. Then for every closed set F and every open set G of paths, limsup_{ε↓0} ε·log W_ε(F) ≤ −inf_{ω∈F} I(ω) and liminf_{ε↓0} ε·log W_ε(G) ≥ −inf_{ω∈G} I(ω), where I(ω) = ½∫₀ᵀ |ω′(t)|² dt if ω is absolutely continuous and I(ω) = +∞ otherwise.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Schilder, 1966",
+      "note": "It generalizes the Laplace method from integrals on ℝⁿ to Wiener integrals and is itself generalized by the Freidlin–Wentzell theorem for Itō diffusions.",
+      "url": "https://en.wikipedia.org/wiki/Schilder's_theorem",
+      "area": "probability",
+      "year": 1966,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "condorcets-jury-theorem",
+      "name": "Condorcet's jury theorem",
+      "short": "Condorcet's jury theorem",
+      "statement": "Suppose a group with an odd number of voters decides by majority vote between two outcomes, one of which is correct, and each voter independently votes for the correct one with the same probability p. If p > 1/2, adding voters raises the probability that the majority is correct, and this probability tends to 1 as the number of voters grows. If p < 1/2, adding voters lowers this probability, so the best jury is a single voter.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "Marquis de Condorcet, 1785",
+      "note": "Many other researchers have since proved jury theorems that relax some or all of Condorcet's assumptions.",
+      "url": "https://en.wikipedia.org/wiki/Condorcet's_jury_theorem",
+      "area": "probability",
+      "year": 1785,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "spitzers-formula",
+      "name": "Spitzer's formula",
+      "short": "Spitzer's formula",
+      "statement": "Let X₁, X₂, ... be independent and identically distributed random variables with partial sums Sₙ = X₁ + ... + Xₙ, and let Rₙ = max(0, S₁, ..., Sₙ). Then ∑ φₙ(α,β) tⁿ over n ≥ 0 equals exp[∑ (tⁿ/n)(uₙ(α) + vₙ(β) − 1) over n ≥ 1], where φₙ(α,β) = E(exp[i(αRₙ + β(Rₙ − Sₙ))]), uₙ(α) = E(exp[iαSₙ⁺]), vₙ(β) = E(exp[iβSₙ⁻]), i is the imaginary unit, and S⁺ = (|S| + S)/2, S⁻ = (|S| − S)/2.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Frank Spitzer, 1956",
+      "note": "It gives the joint distribution of partial sums and maximal partial sums of a sequence of random variables. A short proof was later given by Wendel.",
+      "url": "https://en.wikipedia.org/wiki/Spitzer's_formula",
+      "area": "probability",
+      "year": 1956,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "steins-lemma",
+      "name": "Stein's lemma",
+      "short": "Stein's lemma",
+      "statement": "Let X be normally distributed with expectation μ and variance σ², and let g be a differentiable function such that the expectations E(g(X)(X − μ)) and E(g′(X)) both exist (the expected absolute values are finite). Then E(g(X)(X − μ)) = σ² E(g′(X)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "by": "Named in honor of Charles Stein",
+      "note": "It is used in James–Stein estimation, empirical Bayes methods and portfolio choice theory. It is a different result from the Chernoff–Stein lemma of hypothesis testing.",
+      "url": "https://en.wikipedia.org/wiki/Stein's_lemma",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tilted-large-deviation-principle",
+      "name": "Tilted large deviation principle",
+      "short": "Tilted large deviation",
+      "statement": "Let X be a Polish space and let (μ_ε) be a family of probability measures on X satisfying the large deviation principle with rate function I. Let F: X → ℝ be continuous and bounded from above, and define ν_ε(S) = ∫_S e^{F(x)/ε} dμ_ε(x) divided by ∫_X e^{F(x)/ε} dμ_ε(x). Then (ν_ε) satisfies the large deviation principle with rate function I^F(x) = sup_y [F(y) − I(y)] − [F(x) − I(x)].",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "probability-theory"
+      ],
+      "note": "It generates a new large deviation principle from an old one by exponential tilting, and can be seen as an alternative formulation of Varadhan's lemma.",
+      "url": "https://en.wikipedia.org/wiki/Tilted_large_deviation_principle",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "basus-theorem",
+      "name": "Basu's theorem",
+      "short": "Basu's theorem",
+      "statement": "For a family of probability distributions depending on a parameter θ, any boundedly complete sufficient statistic for θ is independent of any statistic that is ancillary to θ, under each distribution of the family.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "statistics"
+      ],
+      "by": "Debabrata Basu, 1955",
+      "note": "It is used to prove that two statistics are independent, by showing that one is complete sufficient and the other is ancillary. One example is the independence of the sample mean and sample variance of a normal distribution.",
+      "url": "https://en.wikipedia.org/wiki/Basu's_theorem",
+      "area": "probability",
+      "year": 1955,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lovasz-local-lemma",
+      "name": "Lovász local lemma",
+      "short": "Lovász local lemma",
+      "statement": "Let A₁, …, A_k be finitely many events, each occurring with probability at most p, and each independent of all the other events except for at most d of them. If e·p·(d+1) ≤ 1, where e = 2.718... is the base of natural logarithms, then there is a nonzero probability that none of the events occurs.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "bayes-theorem"
+      ],
+      "by": "László Lovász, 1977, published by Joel Spencer; a weaker version by Lovász and Paul Erdős, 1973, published 1975",
+      "note": "This is the symmetric version, which follows from a more general asymmetric version. It is most commonly used in the probabilistic method to give existence proofs.",
+      "url": "https://en.wikipedia.org/wiki/Lov%C3%A1sz_local_lemma",
+      "area": "probability",
+      "year": 1977,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "walds-equation",
+      "name": "Wald's equation",
+      "short": "Wald's equation",
+      "statement": "Let X₁, X₂, … be real-valued, independent and identically distributed random variables, and let N ≥ 0 be an integer-valued random variable that is independent of the sequence. If N and the Xₙ have finite expectations, then E[X₁ + … + X_N] = E[N]·E[X₁].",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "optional-stopping-theorem",
+        "monotone-convergence-theorem",
+        "lebesgues-dominated-convergence-theorem"
+      ],
+      "by": "Named after Abraham Wald",
+      "note": "It simplifies the calculation of the expected value of a sum of a random number of random quantities. An identity for the second moment is given by the Blackwell–Girshick equation.",
+      "url": "https://en.wikipedia.org/wiki/Wald's_equation",
+      "area": "probability",
+      "origin": "wikipedia-import"
+    }
+  ]
+}

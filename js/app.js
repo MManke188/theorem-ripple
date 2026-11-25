@@ -116,6 +116,7 @@ async function init() {
   const major = (n) => (n.kind === 'axiom' ? n.weight : n.above.size);
   state.order = [...nodes].sort((a, b) => major(b) - major(a) || b.roots.size - a.roots.size);
   state.areas = index.areas.map((a) => ({ ...a, nodes: nodes.filter((n) => n.area === a.id) })).filter((a) => a.nodes.length);
+  state.bySize = [...state.areas].sort((a, b) => b.nodes.length - a.nodes.length);
 
   buildGraph();
   document.body.classList.add(`view-${state.layout}`);
@@ -259,7 +260,11 @@ function relayout() {
     place(positions(state.layout));
     useLevels(state.layout);
   }
-  for (const a of state.areas) a.labelW = undefined; // the size of the area names depends on the window
+  for (const a of state.areas) {
+    a.labelW = undefined; // the size of the area names depends on the window
+    a.labelEl?.classList.remove('hidden'); // a hidden name cannot be measured
+    a.labelHidden = false;
+  }
   fit();
   requestAnimationFrame(prepareAreas); // after this picture is on screen
 }
@@ -276,13 +281,15 @@ function zoomLevels(pos) {
   const [sx, sy] = [104, 52]; // room on screen for a dot with its label
   const level = new Map();
   const drawn = [];
-  for (let k = 0.1; k < 0.95; k *= 1.12) {
+  // The farthest zoom is the one that shows the whole map: on a phone, with a few thousand entries, well below 0.1.
+  const k0 = Math.min(0.1, fitScale(bounds([...pos.values()].map(([x, y]) => ({ x, y }))), freeArea(true)));
+  for (let k = k0; k < 0.95; k *= 1.12) {
     const eligible = Math.max(40, state.order.length * (k / 0.45) ** 2); // at least the top 40; the whole ranking from a zoom of 0.45
     for (const n of state.order.slice(0, Math.ceil(eligible))) {
       if (level.has(n.id)) continue;
       const [x, y] = pos.get(n.id);
       if (drawn.some(([mx, my]) => Math.hypot(((x - mx) * k) / sx, ((y - my) * k) / sy) < 1)) continue;
-      level.set(n.id, k > 0.1 ? k : 0);
+      level.set(n.id, k > k0 ? k : 0);
       drawn.push([x, y]);
     }
   }
@@ -738,14 +745,23 @@ function moveTo(target, animate, duration = 450) {
 // Show all of `nodes` (the whole graph by default) in the free part of the window.
 function fit(animate = false, nodes = state.nodes) {
   fitBox(bounds(nodes), animate);
+  // The reader can always zoom out as far as the whole map.
+  zoom.scaleExtent([Math.min(0.12, fitScale(bounds(state.nodes), freeArea(true))), 5]);
+}
+
+// The zoom at which a box fills the free part of the window.
+function fitScale({ x0, x1, y0, y1 }, area) {
+  const padX = Math.min(62, window.innerWidth * 0.08);
+  const padTop = Math.min(40, (area.bottom - area.top) * 0.12);
+  const padBottom = Math.min(44, (area.bottom - area.top) * 0.14);
+  return Math.min((area.right - area.left - 2 * padX) / (x1 - x0 || 1), (area.bottom - area.top - padTop - padBottom) / (y1 - y0 || 1), 1.3);
 }
 
 function fitBox({ x0, x1, y0, y1 }, animate = false, duration) {
   const area = freeArea();
-  const padX = Math.min(62, window.innerWidth * 0.08);
   const padTop = Math.min(40, (area.bottom - area.top) * 0.12);
   const padBottom = Math.min(44, (area.bottom - area.top) * 0.14);
-  const k = Math.min((area.right - area.left - 2 * padX) / (x1 - x0 || 1), (area.bottom - area.top - padTop - padBottom) / (y1 - y0 || 1), 1.3);
+  const k = fitScale({ x0, x1, y0, y1 }, area);
   const tx = (area.left + area.right) / 2 - (k * (x0 + x1)) / 2;
   const ty = (area.top + padTop + area.bottom - padBottom) / 2 - (k * (y0 + y1)) / 2;
   moveTo(d3.zoomIdentity.translate(tx, ty).scale(k), animate, duration);
@@ -817,10 +833,14 @@ function positionLabels() {
   };
 
   // Area names head the clusters; in the tree the areas are interleaved, so they are not shown.
-  for (const a of tree ? [] : state.areas) {
+  // Zoomed far out, the names of small areas would lie across their neighbours' names: the larger area keeps its name.
+  for (const a of tree ? [] : state.bySize) {
     const [x, y] = t.apply([(a.box.x0 + a.box.x1) / 2, a.box.y0]);
     const top = y - 40;
     a.labelW ??= a.labelEl.getBBox().width; // differs by screen size, so measured (again after a resize)
+    const hidden = hits(0, placed, x - a.labelW / 2 - 8, top - 4, x + a.labelW / 2 + 8, top + 22);
+    if (hidden !== a.labelHidden) a.labelEl.classList.toggle('hidden', (a.labelHidden = hidden));
+    if (hidden) continue;
     move(a, a.labelEl, x, top);
     put(placed, x - a.labelW / 2, top, x + a.labelW / 2, top + 18);
     placed += 4;

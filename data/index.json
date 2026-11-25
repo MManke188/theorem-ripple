@@ -34,6 +34,16 @@
       "id": "logic",
       "name": "Logic and set theory",
       "file": "logic.json"
+    },
+    {
+      "id": "geometry",
+      "name": "Classical geometry",
+      "file": "geometry.json"
+    },
+    {
+      "id": "probability",
+      "name": "Probability and statistics",
+      "file": "probability.json"
     }
   ],
   "today": {

@@ -369,7 +369,12 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [
-        "littlewood-zeta-bound"
+        "littlewood-zeta-bound",
+        {
+          "id": "rh",
+          "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis",
+          "origin": "wikipedia-import"
+        }
       ],
       "by": "Ernst Lindelöf, 1908",
       "note": "Littlewood's bound grows more slowly than any power of t, so it gives the Lindelöf hypothesis at once.",
@@ -770,7 +775,28 @@
       "statement": "The number π(x) of primes up to x is asymptotic to x / log x: the ratio of the two tends to 1 as x grows.",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "cauchy-integral-theorem",
+          "url": "https://en.wikipedia.org/wiki/Prime_number_theorem",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "wiener-ikehara-theorem",
+          "url": "https://en.wikipedia.org/wiki/Prime_number_theorem",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "cauchys-integral-formula",
+          "url": "https://en.wikipedia.org/wiki/Prime_number_theorem",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "wieners-tauberian-theorem",
+          "url": "https://en.wikipedia.org/wiki/Prime_number_theorem",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "analytic-number-theory"
       ],
@@ -857,6 +883,11 @@
         {
           "id": "siegel-walfisz",
           "url": "https://personal.science.psu.edu/rcv4/Bombieri.pdf"
+        },
+        {
+          "id": "vaughans-identity",
+          "url": "https://en.wikipedia.org/wiki/Vaughan's_identity",
+          "origin": "wikipedia-import"
         }
       ],
       "related": [
@@ -1145,7 +1176,17 @@
       "base": "proven",
       "needs": [
         "modularity-semistable",
-        "ribet"
+        "ribet",
+        {
+          "id": "hilberts-irreducibility-theorem",
+          "url": "https://en.wikipedia.org/wiki/Hilbert's_irreducibility_theorem",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "serre-modularity",
+          "url": "https://en.wikipedia.org/wiki/Serre's_modularity_conjecture",
+          "origin": "wikipedia-import"
+        }
       ],
       "by": "Andrew Wiles, 1995 (with Richard Taylor)",
       "note": "A counterexample with a prime exponent p ≥ 5 would give a semistable Frey curve (the exponents 3 and 4 were settled by Euler and Fermat). Ribet showed that curve is not modular, and Wiles showed every semistable curve is modular.",
@@ -1160,7 +1201,13 @@
       "statement": "Every elliptic curve over the rational numbers is modular: it is the image of a classical modular curve under a rational map with integer coefficients.",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "serre-modularity",
+          "url": "https://en.wikipedia.org/wiki/Serre's_modularity_conjecture",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "arithmetic-geometry"
       ],
@@ -1204,7 +1251,13 @@
       "statement": "A non-singular curve of genus greater than 1 defined over the rational numbers has only finitely many rational points.",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "de-franchis-theorem",
+          "url": "https://en.wikipedia.org/wiki/De_Franchis_theorem",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "arithmetic-geometry"
       ],
@@ -1397,7 +1450,12 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [
-        "gross-zagier"
+        "gross-zagier",
+        {
+          "id": "bakers-theorem",
+          "url": "https://en.wikipedia.org/wiki/Baker's_theorem",
+          "origin": "wikipedia-import"
+        }
       ],
       "by": "Dorian Goldfeld, 1976, completed by the Gross–Zagier theorem, 1986",
       "note": "Goldfeld reduced the problem to finding an elliptic curve whose L-function has a zero of high order at s = 1. The Gross–Zagier theorem supplied one.",
@@ -1480,6 +1538,3179 @@
       "url": "https://pazuki.perso.math.cnrs.fr/index_fichiers/Elkies91.pdf",
       "area": "number-theory",
       "year": 1991
+    },
+    {
+      "id": "moessners-theorem",
+      "name": "Moessner's theorem",
+      "short": "Moessner's theorem",
+      "statement": "Let n be a positive integer. Start from the positive integers 1, 2, 3, …, remove every n-th number and replace what remains by its running totals (partial sums). Then remove every (n−1)-st number of the new sequence and take running totals again, and so on, ending with a round that removes every second number; the sequence obtained is 1ⁿ, 2ⁿ, 3ⁿ, 4ⁿ, …",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Alfred Moessner, 1951; first proof by Oskar Perron, 1951",
+      "note": "For n = 2, removing every even number leaves 1, 3, 5, 7, … and the partial sums are 1, 4, 9, 16, … Removing the triangular numbers instead leads in a similar way to the factorials 1!, 2!, 3!, …",
+      "url": "https://en.wikipedia.org/wiki/Moessner's_theorem",
+      "area": "number-theory",
+      "year": 1951,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "aperys-theorem",
+      "name": "Apéry's theorem",
+      "short": "Apéry's theorem",
+      "statement": "Apéry's constant ζ(3) = 1 + 1/2³ + 1/3³ + ⋯ = 1.2020569… is irrational: it cannot be written as a fraction p/q with p and q integers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Roger Apéry, 1978",
+      "note": "The values of the Riemann zeta function at positive even integers are irrational. Whether its values at the odd integers 2n+1 with n > 1 are irrational remains open, though they are conjectured to be.",
+      "url": "https://en.wikipedia.org/wiki/Ap%C3%A9ry's_theorem",
+      "area": "number-theory",
+      "year": 1978,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "minkowskis-theorem",
+      "name": "Minkowski's theorem",
+      "short": "Minkowski's theorem",
+      "statement": "Every convex set in ℝⁿ that is symmetric about the origin and has volume greater than 2ⁿ contains a non-zero integer point. More generally, for a lattice L in ℝⁿ, a symmetric convex set with volume greater than 2ⁿ·d(L) contains a point of L other than the origin, where d(L) is the covolume of L.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Hermann Minkowski, 1889",
+      "note": "The theorem became the foundation of the branch of number theory called the geometry of numbers.",
+      "url": "https://en.wikipedia.org/wiki/Minkowski's_theorem",
+      "area": "number-theory",
+      "year": 1889,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dedekind-kummer-theorem",
+      "name": "Dedekind–Kummer theorem",
+      "short": "Dedekind–Kummer theorem",
+      "statement": "Let K be a number field with ring of algebraic integers O_K, let α ∈ O_K with ℚ[α] = K, and let f be the minimal polynomial of α over ℤ[x]. For any prime p not dividing the index [O_K : ℤ[α]], if f(x) ≡ π₁(x)^e₁ ⋯ π_g(x)^e_g mod p with π₁, …, π_g pairwise distinct monic irreducible polynomials in 𝔽_p[x], then the ideal pO_K factors into prime ideals as 𝔭₁^e₁ ⋯ 𝔭_g^e_g, where the ideal norm N(𝔭ᵢ) equals p raised to the degree of πᵢ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Richard Dedekind, building on the work of Ernst Kummer",
+      "note": "It describes how a prime ideal factors in a larger ring of integers. It holds more generally for a nonzero prime ideal of a Dedekind domain that is coprime to the conductor, in a finite separable extension generated by one element.",
+      "url": "https://en.wikipedia.org/wiki/Dedekind%E2%80%93Kummer_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lemoines-conjecture",
+      "name": "Lemoine's conjecture",
+      "short": "Lemoine's conjecture",
+      "statement": "Every odd integer greater than 5 can be written as the sum of an odd prime and an even semiprime. Equivalently, 2n + 1 = p + 2q has a solution in primes p and q (not necessarily distinct) for every n > 2.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Émile Lemoine, 1895",
+      "note": "MathWorld erroneously attributed it to Hyman Levy, hence the name Levy's conjecture. It implies Goldbach's weak conjecture and has been verified up to 10^9.",
+      "url": "https://en.wikipedia.org/wiki/Lemoine's_conjecture",
+      "area": "number-theory",
+      "year": 1895,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bunyakovsky-conjecture",
+      "name": "Bunyakovsky conjecture",
+      "short": "Bunyakovsky conjecture",
+      "statement": "Let f(x) be a polynomial in one variable with integer coefficients such that its leading coefficient is positive, it is irreducible over the rationals, and the values f(1), f(2), f(3), … have no common factor larger than 1. Then f(n) is prime for infinitely many positive integers n.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "analytic-number-theory",
+        "elementary-number-theory"
+      ],
+      "by": "Viktor Bunyakovsky, 1857",
+      "note": "The three conditions are necessary for infinitely many prime values. Only the degree 1 case is proved, and that case is Dirichlet's theorem; the conjecture is a special case of Schinzel's hypothesis H.",
+      "url": "https://en.wikipedia.org/wiki/Bunyakovsky_conjecture",
+      "area": "number-theory",
+      "year": 1857,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fermat-polygonal-number-theorem",
+      "name": "Fermat polygonal number theorem",
+      "short": "Fermat polygonal numbers",
+      "statement": "For every n ≥ 3, every positive integer is a sum of at most n n-gonal numbers. For example, every positive integer is a sum of three or fewer triangular numbers and of four or fewer square numbers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Stated by Pierre de Fermat, 1638, without proof; the square case was proved by Lagrange, 1770, the triangular case by Gauss, 1796, and the full theorem by Cauchy, 1813",
+      "url": "https://en.wikipedia.org/wiki/Fermat_polygonal_number_theorem",
+      "area": "number-theory",
+      "year": 1638,
+      "settled": 1813,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "halls-conjecture",
+      "name": "Hall's conjecture",
+      "short": "Hall's conjecture",
+      "statement": "For every ε > 0 there is a positive constant c(ε) such that for all integers x and y with y² ≠ x³, |y² − x³| > c(ε)·|x|^(1/2 − ε). In words, a square and a cube that are not equal lie far apart.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
+      "by": "Original strong form by Marshall Hall, Jr., 1970; the weak form stated here by Stark and Trotter around 1980",
+      "note": "The original strong form, with exponent 1/2 and a fixed constant C, has never been disproved but is no longer believed to be true. The weak form would follow from the ABC conjecture.",
+      "url": "https://en.wikipedia.org/wiki/Hall's_conjecture",
+      "area": "number-theory",
+      "year": 1970,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lucass-theorem",
+      "name": "Lucas's theorem",
+      "short": "Lucas's theorem",
+      "statement": "Let m and n be non-negative integers and p a prime, with base p expansions m = m_k·p^k + … + m₁·p + m₀ and n = n_k·p^k + … + n₁·p + n₀. Then the binomial coefficient C(m, n) leaves the same remainder on division by p as the product of the C(mᵢ, nᵢ) for i = 0, …, k, where C(a, b) is taken to be 0 when a < b.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Édouard Lucas, 1878",
+      "note": "It gives the remainder of a binomial coefficient on division by a prime in terms of the base p digits of m and n. One consequence is that C(m, n) is divisible by p exactly when some base p digit of n is larger than the corresponding digit of m.",
+      "url": "https://en.wikipedia.org/wiki/Lucas's_theorem",
+      "area": "number-theory",
+      "year": 1878,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "zeckendorfs-theorem",
+      "name": "Zeckendorf's theorem",
+      "short": "Zeckendorf's theorem",
+      "statement": "Every positive integer can be written in exactly one way as a sum of one or more distinct Fibonacci numbers in which no two consecutive Fibonacci numbers appear.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Named after the amateur mathematician Edouard Zeckendorf",
+      "note": "Such a sum is called the Zeckendorf representation of the number, and it can be found by a greedy algorithm that picks the largest possible Fibonacci number at each step.",
+      "url": "https://en.wikipedia.org/wiki/Zeckendorf's_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dirichlets-unit-theorem",
+      "name": "Dirichlet's unit theorem",
+      "short": "Dirichlet's unit theorem",
+      "statement": "For a number field K, the group of units of its ring of algebraic integers is finitely generated and has rank r₁ + r₂ − 1. Here r₁ is the number of real embeddings of K and r₂ is the number of pairs of complex-conjugate embeddings.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Peter Gustav Lejeune Dirichlet",
+      "note": "The rank is 1 for a real quadratic field and 0 for an imaginary quadratic field. The theory for real quadratic fields is essentially the theory of Pell's equation.",
+      "url": "https://en.wikipedia.org/wiki/Dirichlet's_unit_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dirichlets-approximation-theorem",
+      "name": "Dirichlet's approximation theorem",
+      "short": "Dirichlet approximation",
+      "statement": "For any real numbers α and N with N ≥ 1, there exist integers p and q with 1 ≤ q ≤ N such that |qα − p| ≤ 1/(⌊N⌋ + 1) < 1/N, where ⌊N⌋ is the integer part of N.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "pigeonhole-principle",
+        "minkowskis-theorem"
+      ],
+      "by": "Peter Gustav Lejeune Dirichlet",
+      "note": "It follows that for any irrational α, the inequality |α − p/q| < 1/q² has infinitely many integer solutions p and q. The usual proof uses the pigeonhole principle.",
+      "url": "https://en.wikipedia.org/wiki/Dirichlet's_approximation_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-delange-theorem",
+      "name": "Erdős–Delange theorem",
+      "short": "Erdős–Delange theorem",
+      "statement": "Let ω(n) be the number of prime factors of an integer n, counted with multiplicity, and let λ be any irrational number. Then the fractional parts of the numbers λω(n) are asymptotically uniformly distributed.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Stated without proof by Paul Erdős, 1946; Hubert Delange published a simpler proof, 1958",
+      "note": "It implies the prime number theorem.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Delange_theorem",
+      "area": "number-theory",
+      "year": 1946,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "chens-theorem",
+      "name": "Chen's theorem",
+      "short": "Chen's theorem",
+      "statement": "Every sufficiently large even number can be written as the sum of two primes, or of a prime and a semiprime (a product of two primes).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "jurkat-richert-theorem",
+          "url": "https://en.wikipedia.org/wiki/Jurkat%E2%80%93Richert_theorem"
+        }
+      ],
+      "by": "Chen Jingrun, first stated 1966, with further details of the proof in 1973",
+      "note": "It is a weakened form of Goldbach's conjecture, which states that every even number is the sum of two primes.",
+      "url": "https://en.wikipedia.org/wiki/Chen's_theorem",
+      "area": "number-theory",
+      "year": 1966,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "deshouillers-dress-tenenbaum-theorem",
+      "name": "Deshouillers–Dress–Tenenbaum theorem",
+      "short": "DDT arcsine law",
+      "statement": "Pick a divisor d of a natural number n uniformly at random and let D_n = log d / log n. Then for x ≥ 2 and uniformly for all t in [0, 1], the average (1/x) ∑_{n ≤ x} P(D_n ≤ t) equals (2/π) arcsin √t + O(1/√(log x)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Jean-Marc Deshouillers, François Dress and Gérald Tenenbaum, 1979",
+      "note": "The averaged distribution of D_n tends to the arcsine distribution, so very small and very large divisors are the most likely. Gintautas Bareikis and Eugenijus Manstavičius generalized it in 2007, with a beta distribution as the limit.",
+      "url": "https://en.wikipedia.org/wiki/Deshouillers%E2%80%93Dress%E2%80%93Tenenbaum_theorem",
+      "area": "number-theory",
+      "year": 1979,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "divergence-of-the-sum-of-the-reciprocals-of-the-primes",
+      "name": "Divergence of the sum of the reciprocals of the primes",
+      "short": "Prime reciprocals diverge",
+      "statement": "The sum of the reciprocals of all prime numbers diverges: 1/2 + 1/3 + 1/5 + 1/7 + 1/11 + ... is infinite.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "fundamental-theorem-arithmetic",
+        "integral-test-for-convergence"
+      ],
+      "by": "Leonhard Euler, 1737",
+      "note": "It strengthens Euclid's result that there are infinitely many primes. The divergence is very slow, since the partial sums grow like log log n.",
+      "url": "https://en.wikipedia.org/wiki/Divergence_of_the_sum_of_the_reciprocals_of_the_primes",
+      "area": "number-theory",
+      "year": 1737,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "grosswald-schnitzer-theorem",
+      "name": "Grosswald–Schnitzer theorem",
+      "short": "Grosswald–Schnitzer thm",
+      "statement": "Let pₙ be the n-th prime and choose real numbers qₙ with pₙ ≤ qₙ ≤ pₙ₊₁ for every n. Then ζ*(s) = ∏ 1/(1 − qₙ^(−s)) is nonzero for Re(s) > 1, extends to a meromorphic function on Re(s) > 0 with a simple pole at s = 1 whose residue r satisfies 1/2 ≤ r ≤ 1, and has exactly the same zeros, with the same multiplicities, as the Riemann zeta function ζ(s) in Re(s) > 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Emil Grosswald and Franz Josef Schnitzer, 1978",
+      "note": "The zeros of the Riemann zeta function in Re(s) > 0 are therefore not tied to the primes alone. Grosswald and Schnitzer also proved a version for Dirichlet L-functions.",
+      "url": "https://en.wikipedia.org/wiki/Grosswald%E2%80%93Schnitzer_theorem",
+      "area": "number-theory",
+      "year": 1978,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "centered-polygonal-number-theorem",
+      "name": "Centered polygonal number theorem",
+      "short": "Centered polygonal numbers",
+      "statement": "Every positive integer is a sum of at most n + 2 centered n-gonal numbers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Benjamin Lee Warren and Miroslav Kureš, 2025, generalizing the case of centered nonagonal numbers, which Frederick Pollock conjectured in 1850 and Kureš confirmed in 2023",
+      "note": "For centered nonagonal numbers it says every positive integer is the sum of at most 11 of them.",
+      "url": "https://en.wikipedia.org/wiki/Centered_polygonal_number_theorem",
+      "area": "number-theory",
+      "year": 2025,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kronecker-weber-theorem",
+      "name": "Kronecker–Weber theorem",
+      "short": "Kronecker–Weber theorem",
+      "statement": "Every finite abelian extension of the rational numbers ℚ is a subfield of a cyclotomic field. That is, any algebraic number field whose Galois group over ℚ is abelian lies inside a field obtained by adjoining a root of unity to ℚ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "galois-theory"
+      ],
+      "by": "First stated by Leopold Kronecker, 1853, with an argument incomplete for extensions of degree a power of 2; first complete proof by Hilbert, 1896",
+      "note": "It is a partial converse to the fact that every cyclotomic field is an abelian extension of ℚ.",
+      "url": "https://en.wikipedia.org/wiki/Kronecker%E2%80%93Weber_theorem",
+      "area": "number-theory",
+      "year": 1853,
+      "settled": 1896,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rogers-sieving-theorem",
+      "name": "Rogers sieving theorem",
+      "short": "Rogers sieving theorem",
+      "statement": "Exclude one arithmetic progression a_i + k·d_i for each of the differences d_1, …, d_n, and let m be the least common multiple of the d_i; then the number of residue classes modulo m that are not excluded is at most the number left when every offset a_i is 0, that is, when the excluded classes are t ≡ 0 (mod d_i). Equivalently, the natural density of the union of the progressions is smallest when all the offsets are 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory",
+        "analytic-number-theory"
+      ],
+      "by": "C. A. Rogers, 1960s; in a modified form by Heini Halberstam and Klaus Roth in their 1966 book Sequences",
+      "note": "For many years it was a folk theorem not well documented in the published literature. Its value as a principle in contemporary sieve theory was recognised after more than half a century.",
+      "url": "https://en.wikipedia.org/wiki/Rogers_sieving_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hensels-lemma",
+      "name": "Hensel's lemma",
+      "short": "Hensel's lemma",
+      "statement": "Let h be a polynomial with integer coefficients whose leading coefficient a is not divisible by the prime p, and suppose h ≡ a·f·g modulo p, where f and g are monic polynomials (leading coefficient 1) that are coprime modulo p. Then for every positive integer k there are monic polynomials fₖ ≡ f and gₖ ≡ g modulo p with h ≡ a·fₖ·gₖ modulo pᵏ, unique modulo pᵏ; in particular a simple root of h modulo p lifts to a unique simple root modulo pᵏ that agrees with it modulo p.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "bezouts-identity"
+      ],
+      "by": "Named after Kurt Hensel",
+      "note": "Passing to the limit, a root or factorization modulo p lifts to one over the p-adic integers. The same proof works over any commutative ring with p replaced by a maximal ideal, and it gives an efficient algorithm used for factoring polynomials.",
+      "url": "https://en.wikipedia.org/wiki/Hensel's_lemma",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lander-parkin-and-selfridge-conjecture",
+      "name": "Lander, Parkin, and Selfridge conjecture",
+      "short": "LPS conjecture",
+      "statement": "Let k ≥ 2. If a sum of m positive integer k-th powers equals a sum of n positive integer k-th powers, and no number appears on both sides, then m + n ≥ k.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Posed by Leon J. Lander, Thomas R. Parkin and John Selfridge in their 1967 survey",
+      "note": "For a single k-th power on one side it says that a sum of r k-th powers equal to a k-th power needs r ≥ k − 1, one less than Euler's sum of powers conjecture asserted.",
+      "url": "https://en.wikipedia.org/wiki/Lander%2C_Parkin%2C_and_Selfridge_conjecture",
+      "area": "number-theory",
+      "year": 1967,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "andricas-conjecture",
+      "name": "Andrica's conjecture",
+      "short": "Andrica's conjecture",
+      "statement": "For every n, the square roots of the n-th prime p(n) and the next prime p(n+1) differ by less than 1: √p(n+1) − √p(n) < 1. Equivalently, the gap g(n) = p(n+1) − p(n) between consecutive primes always satisfies g(n) < 2√p(n) + 1.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "note": "Tables of maximal prime gaps confirm it exhaustively beyond 2⁶⁴. The difference √p(n+1) − √p(n) reaches its largest known value, about 0.670873, at n = 4.",
+      "url": "https://en.wikipedia.org/wiki/Andrica's_conjecture",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "heegners-lemma",
+      "name": "Heegner's lemma",
+      "short": "Heegner's lemma",
+      "statement": "Let y² = a₄x⁴ + a₃x³ + a₂x² + a₁x + a₀ be a curve over a field, where a₄ is not a square in that field. If the curve has a solution in some extension of the field of odd degree, then it has a solution in the field itself.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
+      "by": "Kurt Heegner",
+      "note": "Kurt Heegner used it in his paper on the class number problem.",
+      "url": "https://en.wikipedia.org/wiki/Heegner's_lemma",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lindemann-weierstrass-theorem",
+      "name": "Lindemann–Weierstrass theorem",
+      "short": "Lindemann–Weierstrass",
+      "statement": "If α₁, …, αₙ are algebraic numbers that are linearly independent over the rational numbers, then e^α₁, …, e^αₙ are algebraically independent over ℚ; in other words, the field ℚ(e^α₁, …, e^αₙ) has transcendence degree n over ℚ. Equivalently, if α₁, …, αₙ are distinct algebraic numbers, then e^α₁, …, e^αₙ are linearly independent over the algebraic numbers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Ferdinand von Lindemann proved in 1882 that e^α is transcendental for every non-zero algebraic α; Karl Weierstrass proved the general statement in 1885. Charles Hermite first proved the case where the exponents are rational integers.",
+      "note": "The transcendence of e and π follows directly from it. It is extended by Baker's theorem, and Schanuel's conjecture would generalize it further.",
+      "url": "https://en.wikipedia.org/wiki/Lindemann%E2%80%93Weierstrass_theorem",
+      "area": "number-theory",
+      "year": 1885,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lochss-theorem",
+      "name": "Lochs's theorem",
+      "short": "Lochs's theorem",
+      "statement": "For almost all real numbers in the interval (0,1), the ratio m/n tends to 6 ln(2) ln(10)/π² ≈ 0.97027014 as n grows, where m is the number of continued fraction terms needed to determine the first n decimal places of the number.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Gustav Lochs, proof published 1964",
+      "note": "Since the limit is slightly below 1, each extra continued fraction term of a typical number adds about one decimal place of accuracy.",
+      "url": "https://en.wikipedia.org/wiki/Lochs's_theorem",
+      "area": "number-theory",
+      "year": 1964,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "barban-davenport-halberstam-theorem",
+      "name": "Barban–Davenport–Halberstam theorem",
+      "short": "BDH theorem",
+      "statement": "For a coprime to q, let θ(x;q,a) be the sum of log p over all primes p ≤ x with p ≡ a mod q, and let E(x;q,a) = θ(x;q,a) − x/φ(q), where φ is Euler's totient function. Let V(x,Q) be the sum of |E(x;q,a)|² over all q ≤ Q and all a mod q coprime to q. Then V(x,Q) = O(Qx log x) + O(x²(log x)^(−A)) for 1 ≤ Q ≤ x and every positive A.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Barban and, separately, Davenport and Halberstam proved versions valid for Q ≤ x(log x)^(−B); this form is due to Gallagher",
+      "note": "It estimates the error term in how evenly the primes are spread across arithmetic progressions with the same difference.",
+      "url": "https://en.wikipedia.org/wiki/Barban%E2%80%93Davenport%E2%80%93Halberstam_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "mahlers-3-2-problem",
+      "name": "Mahler's 3/2 problem",
+      "short": "Mahler's 3/2 problem",
+      "statement": "There are no Z-numbers. A Z-number is a positive real number x such that the fractional part of x·(3/2)ⁿ is less than 1/2 for every positive integer n.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Kurt Mahler, 1968",
+      "note": "The conjecture would follow if Ω(3/2) exceeds 1/2. Flatto, Lagarias and Pollington showed that Ω(p/q) > 1/p for rational p/q > 1 in lowest terms.",
+      "url": "https://en.wikipedia.org/wiki/Mahler's_3%2F2_problem",
+      "area": "number-theory",
+      "year": 1968,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "legendres-three-square-theorem",
+      "name": "Legendre's three-square theorem",
+      "short": "Three-square theorem",
+      "statement": "A natural number n can be written as a sum of three squares of integers, n = x² + y² + z², if and only if n is not of the form 4ᵃ(8b + 7) for nonnegative integers a and b.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "quadratic-reciprocity",
+        "dirichlet-ap"
+      ],
+      "by": "First proved by A.-M. Legendre in 1797 or 1798; Gauss obtained a more general result in 1801",
+      "note": "The first numbers that cannot be written as a sum of three squares are 7, 15, 23, 28, 31, 39, 47, 55, 60, 63, 71. The theorem can be used to prove Lagrange's four-square theorem.",
+      "url": "https://en.wikipedia.org/wiki/Legendre's_three-square_theorem",
+      "area": "number-theory",
+      "year": 1797,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hurwitzs-theorem-q1630588",
+      "name": "Hurwitz's theorem",
+      "short": "Hurwitz's theorem",
+      "statement": "For every irrational number ξ there are infinitely many pairs of relatively prime integers m, n such that |ξ − m/n| < 1/(√5·n²). The constant √5 cannot be replaced by any larger number.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory",
+        "real-numbers"
+      ],
+      "by": "Adolf Hurwitz, 1891",
+      "note": "The condition that ξ is irrational cannot be omitted. The golden ratio (1+√5)/2 shows that the constant √5 is the best possible.",
+      "url": "https://en.wikipedia.org/wiki/Hurwitz's_theorem_(number_theory)",
+      "area": "number-theory",
+      "year": 1891,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fueter-polya-theorem",
+      "name": "Fueter–Pólya theorem",
+      "short": "Fueter–Pólya theorem",
+      "statement": "Let ℕ = {0, 1, 2, …}. If P is a real quadratic polynomial in two variables whose restriction to ℕ² is a bijection from ℕ² to ℕ, then P(x, y) = ½((x+y)² + 3x + y) or P(x, y) = ½((x+y)² + 3y + x).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "lindemann-weierstrass-theorem"
+      ],
+      "by": "First proved by Rudolf Fueter and George Pólya",
+      "note": "Fueter proved it assuming P(0,0) = 0, and Pólya showed that this condition is not needed. M. A. Vsemirnov published an elementary proof in 2002.",
+      "url": "https://en.wikipedia.org/wiki/Fueter%E2%80%93P%C3%B3lya_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "vinogradovs-theorem",
+      "name": "Vinogradov's theorem",
+      "short": "Vinogradov's theorem",
+      "statement": "For every positive real number A, r(N) = ½·G(N)·N² + O(N²/(log N)^A). Here r(N) is the sum of Λ(k₁)Λ(k₂)Λ(k₃) over all k₁ + k₂ + k₃ = N, Λ is the von Mangoldt function, and G(N) is the product over primes p dividing N of (1 − 1/(p−1)²) times the product over primes p not dividing N of (1 + 1/(p−1)³). As a consequence, every sufficiently large odd integer is a sum of three primes.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "siegel-walfisz",
+        "vaughans-identity",
+        "dirichlets-approximation-theorem"
+      ],
+      "by": "Ivan Matveyevich Vinogradov, 1937; Hardy and Littlewood had shown in 1923 that the result follows from the generalized Riemann hypothesis",
+      "note": "It is a weaker form of Goldbach's weak conjecture, which would give such a representation for all odd integers greater than five. The proof uses the Hardy–Littlewood circle method.",
+      "url": "https://en.wikipedia.org/wiki/Vinogradov's_theorem",
+      "area": "number-theory",
+      "year": 1937,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "shintanis-unit-theorem",
+      "name": "Shintani's unit theorem",
+      "short": "Shintani's unit theorem",
+      "statement": "For a number field, every subgroup of finite index of the totally positive units has a fundamental domain given by a rational polyhedric cone in the Minkowski space of the field.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Introduced by Shintani, 1976",
+      "note": "It is a refinement of Dirichlet's unit theorem.",
+      "url": "https://en.wikipedia.org/wiki/Shintani's_unit_theorem",
+      "area": "number-theory",
+      "year": 1976,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "davenport-schmidt-theorem",
+      "name": "Davenport–Schmidt theorem",
+      "short": "Davenport–Schmidt theorem",
+      "statement": "Let ξ be a real number that is neither rational nor a quadratic irrational. Then there are infinitely many real numbers α that are rational or quadratic irrationals and satisfy |ξ − α| < C·H(α)^(−3)·max(1, ξ²), where C is any real number greater than 160/9 and H(α) is the largest absolute value among the coprime integers x, y, z, not all zero and with the first non-zero one positive, such that xα² + yα + z = 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Named after Harold Davenport and Wolfgang M. Schmidt",
+      "note": "The theorem is related to Roth's theorem. It is effective: the constant C can be worked out for any given ξ.",
+      "url": "https://en.wikipedia.org/wiki/Davenport%E2%80%93Schmidt_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gillies-conjecture",
+      "name": "Gillies' conjecture",
+      "short": "Gillies' conjecture",
+      "statement": "Let p be a prime and M_p = 2^p − 1. If A < B < √M_p, then as B/A and M_p tend to infinity, the number of prime divisors of M_p in the interval [A, B] is Poisson distributed with expected value log(log B / log A) if A ≥ 2p, and log(log B / log 2p) if A < 2p.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Donald B. Gillies, 1964",
+      "note": "The conjecture implies that the number of Mersenne primes less than x is asymptotically 2 log log x / log 2. It disagrees with the Lenstra–Pomerance–Wagstaff conjecture, which is also open.",
+      "url": "https://en.wikipedia.org/wiki/Gillies'_conjecture",
+      "area": "number-theory",
+      "year": 1964,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "iharas-lemma",
+      "name": "Ihara's lemma",
+      "short": "Ihara's lemma",
+      "statement": "Let p be a prime that does not divide N, and let J_0(N) be the Jacobian of the compactification of the modular curve of Γ_0(N). Then the kernel of the sum of the two p-degeneracy maps from J_0(N) × J_0(N) to J_0(Np) is Eisenstein.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
+      "by": "Introduced by Ihara and named by Ribet",
+      "url": "https://en.wikipedia.org/wiki/Ihara's_lemma",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "manin-conjecture",
+      "name": "Manin conjecture",
+      "short": "Manin conjecture",
+      "statement": "Let V be a Fano variety over a number field K, let H be a height function relative to the anticanonical divisor, and assume V(K) is Zariski dense in V. Then there is a non-empty Zariski open subset U of V such that the number N(B) of K-rational points x in U(K) with H(x) ≤ B satisfies N(B) ~ c·B·(log B)^(ρ−1) as B → ∞, where ρ is the rank of the Picard group of V and c is a positive constant.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry",
+        "algebraic-geometry"
+      ],
+      "by": "Yuri I. Manin and his collaborators, 1989",
+      "note": "It has been proved for special families of varieties. The constant c later received a conjectural interpretation by Peyre.",
+      "url": "https://en.wikipedia.org/wiki/Manin_conjecture",
+      "area": "number-theory",
+      "year": 1989,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "jurkat-richert-theorem",
+      "name": "Jurkat–Richert theorem",
+      "short": "Jurkat–Richert theorem",
+      "statement": "Let A be a finite sequence of integers and P a set of primes. Let ω be a multiplicative function with ω(p)/p about the proportion of items of A divisible by p, let X approximate |A|, and let r_A(d) = |A_d| − (ω(d)/d)X, where A_d counts the items of A divisible by d. Suppose the sieve has dimension 1: there is a constant C with ∏_{z≤p<w} (1 − ω(p)/p)⁻¹ ≤ (log w / log z)(1 + C/log z) whenever 2 ≤ z < w. Then for all y and z with 2 ≤ z ≤ y ≤ X, the number S(A,P,z) of items of A that are coprime to the product P(z) of the primes of P below z satisfies XV(z)(f₁(s) − O(E)) − R ≤ S(A,P,z) ≤ XV(z)(F₁(s) + O(E)) + R. Here s = log y / log z, E = (log log y)^(3/4) / (log y)^(1/4), V(z) = ∏_{p∈P, p<z} (1 − ω(p)/p), R = ∑_{m | P(z), m < y} 4^ν(m) |r_A(m)| with ν(m) the number of distinct prime divisors of m, and F₁ and f₁ are fixed functions defined by difference differential equations.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Wolfgang B. Jurkat and Hans-Egon Richert, 1965",
+      "note": "It is a key ingredient in proofs of Chen's theorem on Goldbach's conjecture. The book of Diamond and Halberstam extends the theorem to sieve dimensions higher than 1.",
+      "url": "https://en.wikipedia.org/wiki/Jurkat%E2%80%93Richert_theorem",
+      "area": "number-theory",
+      "year": 1965,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kaplanskys-theorem-on-quadratic-forms",
+      "name": "Kaplansky's theorem on quadratic forms",
+      "short": "Kaplansky quadratic forms",
+      "statement": "A prime p congruent to 1 modulo 16 is representable by both or by neither of x² + 32y² and x² + 64y². A prime p congruent to 9 modulo 16 is representable by exactly one of these two forms.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Irving Kaplansky, 2003",
+      "note": "The primes represented by each of these forms individually are not describable by congruence conditions.",
+      "url": "https://en.wikipedia.org/wiki/Kaplansky's_theorem_on_quadratic_forms",
+      "area": "number-theory",
+      "year": 2003,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "neukirch-uchida-theorem",
+      "name": "Neukirch–Uchida theorem",
+      "short": "Neukirch–Uchida theorem",
+      "statement": "Let K₁ and K₂ be algebraic number fields. Every isomorphism φ of topological groups between their absolute Galois groups (with the Krull topology) comes from a unique field isomorphism σ between their algebraic closures with σ(K₁) = K₂ and φ(g) = σ∘g∘σ⁻¹ for every g. In particular, K₁ and K₂ are isomorphic exactly when their absolute Galois groups are isomorphic as topological groups.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "galois-theory"
+      ],
+      "by": "Jürgen Neukirch, who showed that number fields with the same absolute Galois group are isomorphic, and Kôji Uchida, who proved Neukirch's stronger conjecture",
+      "note": "It is one of the foundational results of anabelian geometry. Florian Pop extended the result to infinite fields that are finitely generated over prime fields.",
+      "url": "https://en.wikipedia.org/wiki/Neukirch%E2%80%93Uchida_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "wolstenholmes-theorem",
+      "name": "Wolstenholme's theorem",
+      "short": "Wolstenholme's theorem",
+      "statement": "For every prime number p ≥ 5, the binomial coefficient C(2p − 1, p − 1) is congruent to 1 modulo p³.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Joseph Wolstenholme, 1862; Charles Babbage showed the same congruence modulo p² in 1819",
+      "note": "For p = 7 it says that 1716 is one more than a multiple of 343. It can also be expressed as a pair of congruences for harmonic numbers.",
+      "url": "https://en.wikipedia.org/wiki/Wolstenholme's_theorem",
+      "area": "number-theory",
+      "year": 1862,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "euclidean-division-theorem",
+      "name": "Euclidean division theorem",
+      "short": "Euclid's division lemma",
+      "statement": "For any integers a and b with b ≠ 0, there exist unique integers q and r such that a = bq + r and 0 ≤ r < |b|.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "well-ordering-principle"
+      ],
+      "note": "The integers a, b, q and r are called the dividend, divisor, quotient and remainder. The theorem is often called the division algorithm, although it is a theorem and not an algorithm.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_division",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "euclid-euler-theorem",
+      "name": "Euclid–Euler theorem",
+      "short": "Euclid–Euler theorem",
+      "statement": "An even natural number is perfect, meaning it equals the sum of its divisors smaller than itself, if and only if it equals 2^(p−1)(2^p − 1) for some p such that 2^p − 1 is a prime number.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Euclid proved the \"if\" part; Alhazen conjectured the \"only if\" part around 1000 CE; Leonhard Euler proved it in the 18th century",
+      "note": "It gives a one-to-one correspondence between even perfect numbers and Mersenne primes. It is unknown whether any odd perfect number exists.",
+      "url": "https://en.wikipedia.org/wiki/Euclid%E2%80%93Euler_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "vinogradovs-mean-value-theorem",
+      "name": "Vinogradov's mean value theorem",
+      "short": "Vinogradov mean value",
+      "statement": "Let s and k be positive integers and let J_{s,k}(X) be the number of solutions in whole numbers 1 ≤ xᵢ, yᵢ ≤ X of the k equations x₁ʲ + … + x_sʲ = y₁ʲ + … + y_sʲ for j = 1, 2, …, k. Then for every ε > 0 there is a constant C, depending on s, k and ε but not on X, such that J_{s,k}(X) ≤ C(X^(s+ε) + X^(2s − k(k+1)/2 + ε)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Named after I. M. Vinogradov, whose original weaker theorem dates from 1935; the main conjecture was proved by Jean Bourgain, Ciprian Demeter and Larry Guth, and by a different method by Trevor Wooley",
+      "note": "A strong bound on J_{s,k}(X) is an important part of the Hardy–Littlewood method for Waring's problem and of proofs of a zero-free region for the Riemann zeta function. The lower bound J_{s,k}(X) ≫ X^s + X^(2s − k(k+1)/2) shows that the estimate is nearly optimal.",
+      "url": "https://en.wikipedia.org/wiki/Vinogradov's_mean-value_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "first-hardy-littlewood-conjecture",
+      "name": "First Hardy–Littlewood conjecture",
+      "short": "First Hardy–Littlewood",
+      "statement": "Let m₁, …, m_k be positive even integers such that the numbers p, p+m₁, …, p+m_k do not form a complete residue system modulo any prime. Then the number of primes p < n for which p+m₁, …, p+m_k are all prime is asymptotic to C·∫₂ⁿ dt/(log t)^(k+1), where C = 2^k times the product over odd primes q of (1 − w(q)/q)/(1 − 1/q)^(k+1), and w(q) is the number of distinct residues of 0, m₁, …, m_k modulo q.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "G. H. Hardy and J. E. Littlewood, 1923",
+      "note": "The case k = 1, m₁ = 2 is related to the twin prime conjecture and involves the twin prime constant. The Bateman–Horn conjecture generalizes it to polynomials of higher degree.",
+      "url": "https://en.wikipedia.org/wiki/First_Hardy%E2%80%93Littlewood_conjecture",
+      "area": "number-theory",
+      "year": 1923,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fermats-right-triangle-theorem",
+      "name": "Fermat's right triangle theorem",
+      "short": "Fermat right triangle",
+      "statement": "A right triangle in the Euclidean plane whose three side lengths are all rational numbers cannot have an area that is the square of a rational number.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Published in 1670 among the works of Pierre de Fermat, soon after his death; it is the only complete proof given by Fermat. One equivalent formulation was stated, but not proved, by Fibonacci in 1225",
+      "note": "The area of a rational-sided right triangle is called a congruent number, so no congruent number can be square. An immediate consequence is that Fermat's Last Theorem is true for exponent 4.",
+      "url": "https://en.wikipedia.org/wiki/Fermat's_right_triangle_theorem",
+      "area": "number-theory",
+      "year": 1225,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fermats-little-theorem",
+      "name": "Fermat's little theorem",
+      "short": "Fermat's little theorem",
+      "statement": "If p is a prime number, then for any integer a, a^p − a is an integer multiple of p, that is, a^p ≡ a (mod p). If a is not divisible by p, this is equivalent to a^(p−1) ≡ 1 (mod p).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Stated by Pierre de Fermat, 1640; first published proof by Euler, 1736",
+      "note": "It is the basis for the Fermat primality test. It is called the little theorem to distinguish it from Fermat's Last Theorem.",
+      "url": "https://en.wikipedia.org/wiki/Fermat's_little_theorem",
+      "area": "number-theory",
+      "year": 1640,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ramanujan-nagell-equation",
+      "name": "Ramanujan–Nagell equation",
+      "short": "Ramanujan–Nagell equation",
+      "statement": "The equation 2ⁿ − 7 = x² has solutions in natural numbers n and x only for n = 3, 4, 5, 7 and 15, which give x = 1, 3, 5, 11 and 181.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Conjectured by Srinivasa Ramanujan, 1913; proposed independently by Wilhelm Ljunggren, 1943; proved by Trygve Nagell, 1948",
+      "note": "It is an exponential Diophantine equation. It implies that there are no perfect binary codes with minimum Hamming distance 5 or 6.",
+      "url": "https://en.wikipedia.org/wiki/Ramanujan%E2%80%93Nagell_equation",
+      "area": "number-theory",
+      "year": 1913,
+      "settled": 1948,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hasse-minkowski-theorem",
+      "name": "Hasse–Minkowski theorem",
+      "short": "Hasse–Minkowski theorem",
+      "statement": "Two quadratic forms over a number field are equivalent if and only if they are equivalent over every completion of the field (real, complex or p-adic). Also, a quadratic form over a number field nontrivially represents zero if and only if it does so over every completion.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "arithmetic-geometry"
+      ],
+      "by": "Proved for the rational numbers by Hermann Minkowski and generalized to number fields by Helmut Hasse",
+      "note": "The same statement holds for all global fields. It is the first significant example of a local-global principle.",
+      "url": "https://en.wikipedia.org/wiki/Hasse%E2%80%93Minkowski_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "chinese-remainder-theorem",
+      "name": "Chinese remainder theorem",
+      "short": "Chinese remainder theorem",
+      "statement": "Let n₁, …, n_k be integers greater than 1 that are pairwise coprime (no two share a common factor other than 1), and let N be their product. Then for any integers a₁, …, a_k with 0 ≤ a_i < n_i for every i, there is exactly one integer x with 0 ≤ x < N whose remainder on division by each n_i is a_i.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "bezouts-identity",
+        "euclids-lemma"
+      ],
+      "by": "Earliest known statement, as a single example, in the Sunzi Suanjing by Sunzi (3rd to 5th century); algorithm by Aryabhata (6th century); complete solution (Da-yan-shu) by Qin Jiushao, 1247",
+      "note": "It is widely used for computing with large integers, because one computation can be replaced by several similar computations on small integers. In terms of congruences it holds over every principal ideal domain.",
+      "url": "https://en.wikipedia.org/wiki/Chinese_remainder_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "eulers-theorem",
+      "name": "Euler's theorem",
+      "short": "Euler's theorem",
+      "statement": "If n and a are coprime positive integers, then a^φ(n) ≡ 1 (mod n), where φ is Euler's totient function. Conversely, if this congruence holds, then a and n are coprime.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "lagrange-theorem-groups"
+      ],
+      "by": "Leonhard Euler: proof of Fermat's little theorem (the case of prime n), 1736; generalization to non-prime n, 1763",
+      "note": "It underlies the RSA cryptosystem and is used to reduce large powers modulo n.",
+      "url": "https://en.wikipedia.org/wiki/Euler's_theorem",
+      "area": "number-theory",
+      "year": 1763,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "siegels-lemma",
+      "name": "Siegel's lemma",
+      "short": "Siegel's lemma",
+      "statement": "Take a system of M linear equations in N unknowns with N > M, set equal to 0, whose coefficients are integers, not all 0, of absolute value at most B. Then the system has a solution in integers X₁, …, X_N, not all 0, each of absolute value at most (NB)^(M/(N−M)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "pigeonhole-principle",
+          "url": "https://en.wikipedia.org/wiki/Pigeonhole_principle"
+        }
+      ],
+      "by": "Carl Ludwig Siegel, 1929; the existence of the auxiliary polynomials was proven by Axel Thue; Bombieri and Vaaler gave a sharper bound in 1983",
+      "note": "It is a pure existence theorem for a system of linear equations. Thue's proof used the pigeonhole principle, and Bombieri and Vaaler replaced it by techniques from the geometry of numbers.",
+      "url": "https://en.wikipedia.org/wiki/Siegel's_lemma",
+      "area": "number-theory",
+      "year": 1929,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "euclids-lemma",
+      "name": "Euclid's lemma",
+      "short": "Euclid's lemma",
+      "statement": "If a prime number p divides a product ab of two integers, then p divides a or p divides b (or both).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "bezouts-identity"
+      ],
+      "by": "Euclid, in the Elements (Book VII, Proposition 30)",
+      "note": "The statement can fail when p is composite: 10 divides 4 × 15 = 60 but divides neither 4 nor 15. It is the key step in the proof of the fundamental theorem of arithmetic and is used to define prime elements in commutative rings.",
+      "url": "https://en.wikipedia.org/wiki/Euclid's_lemma",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gauss-circle-problem",
+      "name": "Gauss circle problem",
+      "short": "Gauss circle problem",
+      "statement": "Let N(r) be the number of pairs of integers (m, n) with m² + n² ≤ r², and let E(r) = N(r) − πr². Then for every ε > 0 there is a constant C such that |E(r)| ≤ C·r^(1/2+ε) for all sufficiently large r.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Named after Carl Friedrich Gauss, who made the first progress",
+      "note": "Hardy and Landau showed in 1915 that |E(r)| is not o(r^(1/2)(log r)^(1/4)). The best proven upper exponent is 131/208, by Martin Huxley in 2000.",
+      "url": "https://en.wikipedia.org/wiki/Gauss_circle_problem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "nicomachuss-theorem",
+      "name": "Nicomachus's theorem",
+      "short": "Sum of cubes identity",
+      "statement": "For every positive integer n, the sum of the first n cubes equals the square of the nth triangular number: 1³ + 2³ + 3³ + ⋯ + n³ = (1 + 2 + 3 + ⋯ + n)².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "summation-by-parts",
+          "url": "https://en.wikipedia.org/wiki/Summation_by_parts"
+        }
+      ],
+      "by": "Named after Nicomachus of Gerasa, c. 60",
+      "note": "Nicomachus observed that the first odd number is 1³, the sum of the next two is 2³, the sum of the next three is 3³, and so on, and the identity follows from this. It also appears in the works of Aryabhata in the 5th century and Al-Karaji around 1000.",
+      "url": "https://en.wikipedia.org/wiki/Squared_triangular_number",
+      "area": "number-theory",
+      "year": 60,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "vantieghems-theorem",
+      "name": "Vantieghem's theorem",
+      "short": "Vantieghem's theorem",
+      "statement": "A natural number n ≥ 3 is prime if and only if the product (2¹ − 1)(2² − 1)⋯(2ⁿ⁻¹ − 1) leaves remainder n when divided by 2ⁿ − 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "note": "It is a primality criterion. Equivalent versions hold as congruences of polynomials in X.",
+      "url": "https://en.wikipedia.org/wiki/Vantieghems_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "agoh-giuga-conjecture",
+      "name": "Agoh–Giuga conjecture",
+      "short": "Agoh–Giuga conjecture",
+      "statement": "An integer p greater than 1 is prime if and only if p·Bₚ₋₁ ≡ −1 (mod p), where Bₖ denotes the Bernoulli numbers.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Takashi Agoh; an equivalent formulation was given by Giuseppe Giuga, 1950",
+      "note": "Giuga's equivalent form says that p is prime if and only if 1ᵖ⁻¹ + 2ᵖ⁻¹ + ⋯ + (p−1)ᵖ⁻¹ ≡ −1 (mod p), and for prime p this follows from Fermat's little theorem. A composite number satisfies the congruence only if it is both a Carmichael number and a Giuga number, and such a number would have at least 13,800 digits.",
+      "url": "https://en.wikipedia.org/wiki/Agoh%E2%80%93Giuga_conjecture",
+      "area": "number-theory",
+      "year": 1950,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "legendres-formula",
+      "name": "Legendre's formula",
+      "short": "Legendre's formula",
+      "statement": "For any prime p and any positive integer n, the exponent of the largest power of p that divides n! equals the sum over i ≥ 1 of ⌊n/pⁱ⌋. Only finitely many terms are nonzero, since ⌊n/pⁱ⌋ = 0 once pⁱ > n.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Named after Adrien-Marie Legendre; also known as de Polignac's formula, after Alphonse de Polignac",
+      "note": "Equivalently, the exponent equals (n − s(n))/(p − 1), where s(n) is the sum of the digits of n in base p. The formula can be used to prove Kummer's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Legendre's_formula",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "eulers-criterion",
+      "name": "Euler's criterion",
+      "short": "Euler's criterion",
+      "statement": "Let p be an odd prime and a an integer coprime to p. Then a^((p−1)/2) ≡ 1 (mod p) if there is an integer x with x² ≡ a (mod p), and a^((p−1)/2) ≡ −1 (mod p) if there is no such integer.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "lagrange-theorem-groups",
+        "fermats-little-theorem"
+      ],
+      "by": "Leonhard Euler, 1748",
+      "note": "It gives a formula for deciding whether an integer is a quadratic residue modulo a prime. Equivalently, the Legendre symbol (a/p) is congruent to a^((p−1)/2) mod p.",
+      "url": "https://en.wikipedia.org/wiki/Euler's_criterion",
+      "area": "number-theory",
+      "year": 1748,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "skolem-mahler-lech-theorem",
+      "name": "Skolem–Mahler–Lech theorem",
+      "short": "Skolem–Mahler–Lech",
+      "statement": "Let K be a field of characteristic zero, such as the complex numbers. Let u₁, u₂, … be a sequence in K in which every term from some point on equals the same fixed linear combination, with coefficients in K, of the d terms before it. Then the set of positions n at which uₙ = 0 is the union of finitely many arithmetic progressions and a finite set.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "strassmanns-theorem",
+          "url": "https://en.wikipedia.org/wiki/Strassmann's_theorem"
+        }
+      ],
+      "by": "Thoralf Skolem proved it for sequences of rational numbers, Kurt Mahler for sequences of algebraic numbers, and Christer Lech for sequences with values in any field of characteristic zero",
+      "note": "The known proofs use p-adic analysis and are non-constructive.",
+      "url": "https://en.wikipedia.org/wiki/Skolem%E2%80%93Mahler%E2%80%93Lech_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "well-ordering-principle",
+      "name": "Well-ordering principle",
+      "short": "Well-ordering principle",
+      "statement": "Every non-empty set of nonnegative integers contains a least element.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "natural-numbers"
+      ],
+      "note": "Depending on how the natural numbers are introduced, this property is either an axiom or a provable theorem; in Peano arithmetic it is derived from the principle of mathematical induction. It justifies proofs that assume a counterexample exists and then take a smallest one.",
+      "url": "https://en.wikipedia.org/wiki/Well-ordering_principle",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gausss-lemma",
+      "name": "Gauss's lemma",
+      "short": "Gauss's lemma",
+      "statement": "Let p be an odd prime and a an integer coprime to p. Take the numbers a, 2a, 3a, …, ((p−1)/2)a and their least positive residues modulo p, and let n be the number of these residues that are greater than p/2. Then the Legendre symbol (a/p) equals (−1)ⁿ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "eulers-criterion"
+      ],
+      "by": "Carl Friedrich Gauss, 1808; proved again by him in 1818",
+      "note": "It gives a condition for an integer to be a quadratic residue and is involved in some proofs of quadratic reciprocity.",
+      "url": "https://en.wikipedia.org/wiki/Gauss's_lemma_(number_theory)",
+      "area": "number-theory",
+      "year": 1808,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "thaines-theorem",
+      "name": "Thaine's theorem",
+      "short": "Thaine's theorem",
+      "statement": "Let p and q be distinct odd primes with q not dividing p−1. Let F = ℚ(ζ_p⁺), let G⁺ be the Galois group of F over ℚ, E the group of units of F, C its subgroup of cyclotomic units, and Cl⁺ the class group of F. If an element θ of the group ring ℤ[G⁺] annihilates E/CE^q, then θ annihilates Cl⁺/(Cl⁺)^q.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Francisco Thaine, 1988",
+      "note": "It is an analogue of Stickelberger's theorem for real abelian fields. Thaine's method has been used to shorten the proof of the Mazur–Wiles theorem and in the proof of Mihăilescu's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Thaine's_theorem",
+      "area": "number-theory",
+      "year": 1988,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "n-conjecture",
+      "name": "n conjecture",
+      "short": "n conjecture",
+      "statement": "Let n ≥ 3 and let a₁, …, aₙ be integers with gcd 1, sum 0, and no proper subsum equal to 0. Then for every ε > 0 there is a constant C depending on n and ε such that the largest of |a₁|, …, |aₙ| is less than C times rad(|a₁|·…·|aₙ|) to the power 2n − 5 + ε, where rad(m) is the product of the distinct prime factors of m.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Browkin and Brzeziński, 1994",
+      "note": "It generalizes the abc conjecture to more than three integers.",
+      "url": "https://en.wikipedia.org/wiki/N_conjecture",
+      "area": "number-theory",
+      "year": 1994,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "schinzels-theorem",
+      "name": "Schinzel's theorem",
+      "short": "Schinzel's theorem",
+      "statement": "For every positive integer n there is a circle in the plane that passes through exactly n points with integer coordinates.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Andrzej Schinzel",
+      "note": "For even n = 2k the circle (x − 1/2)² + y² = 5^(k−1)/4 works, and for odd n = 2k + 1 the circle (x − 1/3)² + y² = 5^(2k)/9. These circles are not the smallest possible, but they have explicit equations.",
+      "url": "https://en.wikipedia.org/wiki/Schinzel's_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hilberts-seventh-problem",
+      "name": "Hilbert's seventh problem",
+      "short": "Hilbert's seventh problem",
+      "statement": "If a is an algebraic number other than 0 and 1, and b is an irrational algebraic number, then aᵇ is transcendental. An algebraic number is a root of a non-zero polynomial with rational coefficients, and a transcendental number is a number that is not algebraic.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "gelfond-schneider-theorem",
+          "url": "https://en.wikipedia.org/wiki/Gelfond%E2%80%93Schneider_theorem"
+        }
+      ],
+      "by": "Posed by David Hilbert, 1900; proved independently by Aleksandr Gelfond and Theodor Schneider, 1934",
+      "note": "Kuzmin proved the case where b is a real quadratic irrational in 1930, which shows that 2^√2 is transcendental. The general result is known as the Gelfond–Schneider theorem.",
+      "url": "https://en.wikipedia.org/wiki/Hilbert's_seventh_problem",
+      "area": "number-theory",
+      "year": 1900,
+      "settled": 1934,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "wilsons-theorem",
+      "name": "Wilson's theorem",
+      "short": "Wilson's theorem",
+      "statement": "A natural number n > 1 is prime if and only if (n − 1)! ≡ −1 (mod n). Equivalently, n > 1 is prime exactly when n divides (n − 1)! + 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "euclids-lemma",
+        "fermats-little-theorem",
+        "lagrange-theorem-groups"
+      ],
+      "by": "First stated by Ibn al-Haytham, c. 1000 AD; announced by Edward Waring in 1770 without proof, crediting John Wilson; first proved by Lagrange, 1771",
+      "note": "In practice it is useless as a primality test, because computing (n − 1)! modulo n for large n is computationally complex. Gauss generalized it to the product of the positive integers below m that are coprime to m.",
+      "url": "https://en.wikipedia.org/wiki/Wilson's_theorem",
+      "area": "number-theory",
+      "year": 1000,
+      "settled": 1771,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "stark-heegner-theorem",
+      "name": "Stark–Heegner theorem",
+      "short": "Stark–Heegner theorem",
+      "statement": "For a square-free integer d < 0, the quadratic field ℚ(√d) has class number one, equivalently its ring of integers is a principal ideal domain, if and only if d is one of −1, −2, −3, −7, −11, −19, −43, −67, −163.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "bakers-theorem",
+          "url": "https://en.wikipedia.org/wiki/Baker's_theorem"
+        }
+      ],
+      "by": "Conjectured by Gauss, 1798; essentially proven by Kurt Heegner, 1952, but not accepted until Harold Stark published a proof in 1967; Alan Baker gave a slightly earlier proof in 1966 by different methods",
+      "note": "It solves a special case of Gauss's class number problem. The listed values of d are known as the Heegner numbers.",
+      "url": "https://en.wikipedia.org/wiki/Stark%E2%80%93Heegner_theorem",
+      "area": "number-theory",
+      "year": 1798,
+      "settled": 1966,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ostrowskis-theorem",
+      "name": "Ostrowski's theorem",
+      "short": "Ostrowski's theorem",
+      "statement": "Every non-trivial absolute value on the rational numbers is equivalent to either the usual real absolute value or a p-adic absolute value for some prime p. Two absolute values are equivalent if they induce the same topology.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "triangle-inequality",
+        "bezouts-identity"
+      ],
+      "by": "Alexander Ostrowski, 1916",
+      "note": "An absolute value on ℚ is a function that is non-negative, zero only at 0, multiplicative, and satisfies the triangle inequality.",
+      "url": "https://en.wikipedia.org/wiki/Ostrowski's_theorem",
+      "area": "number-theory",
+      "year": 1916,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "second-hardy-littlewood-conjecture",
+      "name": "Second Hardy–Littlewood conjecture",
+      "short": "Second Hardy–Littlewood",
+      "statement": "For all integers x and y that are at least 2, the number of primes up to x + y is at most the number of primes up to x plus the number of primes up to y. In symbols, π(x + y) ≤ π(x) + π(y).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "G. H. Hardy and John Edensor Littlewood, 1923",
+      "note": "It was proposed together with the first Hardy–Littlewood conjecture on prime k-tuples, and the two have been proved inconsistent with each other. If the first conjecture holds, the first counterexample is expected for x between 1.5 × 10¹⁷⁴ and 2.2 × 10¹¹⁹⁸.",
+      "url": "https://en.wikipedia.org/wiki/Second_Hardy%E2%80%93Littlewood_conjecture",
+      "area": "number-theory",
+      "year": 1923,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-turan-conjecture-on-additive-bases",
+      "name": "Erdős–Turán conjecture on additive bases",
+      "short": "Erdős–Turán on add. bases",
+      "statement": "Let B be a set of natural numbers and let r_B(n) be the number of pairs (a₁, a₂) of elements of B with a₁ + a₂ = n. If r_B(n) > 0 for all sufficiently large n, then r_B(n) is not bounded: its limit superior as n tends to infinity is infinite.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Paul Erdős and Pál Turán, 1941",
+      "note": "Roughly, it says that the number of ways of writing a number as a sum of two elements of an additive basis cannot stay bounded. In 2006 Borwein, Choi and Chu proved that this number eventually exceeds 7.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Tur%C3%A1n_conjecture_on_additive_bases",
+      "area": "number-theory",
+      "year": 1941,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dicksons-conjecture",
+      "name": "Dickson's conjecture",
+      "short": "Dickson's conjecture",
+      "statement": "Let a₁ + b₁n, a₂ + b₂n, …, a_k + b_kn be finitely many linear forms with integer coefficients and each b_i ≥ 1. Unless a congruence condition prevents it, meaning that some prime p divides at least one of the forms for every n, there are infinitely many positive integers n for which all k forms are prime.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Leonard Dickson, 1903",
+      "note": "The case k = 1 is Dirichlet's theorem. Two other special cases are the conjectures that there are infinitely many twin primes and infinitely many Sophie Germain primes.",
+      "url": "https://en.wikipedia.org/wiki/Dickson's_conjecture",
+      "area": "number-theory",
+      "year": 1903,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "grimms-conjecture",
+      "name": "Grimm's conjecture",
+      "short": "Grimm's conjecture",
+      "statement": "If n + 1, n + 2, …, n + k are all composite numbers, then there are k distinct prime numbers p₁, …, p_k such that each p_i divides n + i for 1 ≤ i ≤ k.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Carl Albert Grimm, 1969",
+      "note": "The conjecture has been verified for all n < 1.9×10¹⁰.",
+      "url": "https://en.wikipedia.org/wiki/Grimm's_conjecture",
+      "area": "number-theory",
+      "year": 1969,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "leopoldts-conjecture",
+      "name": "Leopoldt's conjecture",
+      "short": "Leopoldt's conjecture",
+      "statement": "For a number field K and a prime p, the p-adic regulator of K does not vanish. Equivalently, if E₁ is the group of global units of K that are principal units at every prime of K above p, then the closure of E₁, embedded diagonally in the product of those groups of principal units, has ℤ_p-module rank r₁ + r₂ − 1, where r₁ is the number of real embeddings of K and r₂ the number of pairs of complex embeddings.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Introduced by Heinrich-Wolfgang Leopoldt",
+      "note": "It is known when K is an abelian extension of the rationals or of an imaginary quadratic number field. The p-adic regulator is defined like the usual regulator but with p-adic logarithms.",
+      "url": "https://en.wikipedia.org/wiki/Leopoldt's_conjecture",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "riemann-siegel-formula",
+      "name": "Riemann–Siegel formula",
+      "short": "Riemann–Siegel formula",
+      "statement": "For non-negative integers M and N, the Riemann zeta function satisfies ζ(s) = ∑ₙ₌₁ᴺ n⁻ˢ + γ(1−s) ∑ₙ₌₁ᴹ nˢ⁻¹ + R(s), where γ(s) = π^(1/2−s) Γ(s/2)/Γ((1−s)/2) is the factor in the functional equation ζ(s) = γ(1−s) ζ(1−s). Here R(s) = −Γ(1−s)/(2πi) ∫ (−x)^(s−1) e^(−Nx)/(eˣ−1) dx, taken over a contour that starts and ends at +∞ and circles the singularities of absolute value at most 2πM.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory",
+        "complex-analysis"
+      ],
+      "by": "Found by Siegel, 1932, in unpublished manuscripts of Bernhard Riemann dating from the 1850s",
+      "note": "Siegel and Edwards apply the method of steepest descent to the integral R(s) to obtain an asymptotic expansion of the error term as a series of negative powers of Im(s). Gabcke (1979) found good bounds for the error of the formula.",
+      "url": "https://en.wikipedia.org/wiki/Riemann%E2%80%93Siegel_formula",
+      "area": "number-theory",
+      "year": 1932,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "first-kronecker-limit-formula",
+      "name": "First Kronecker limit formula",
+      "short": "Kronecker limit formula",
+      "statement": "For τ = x + iy with y > 0, let E(τ,s) = ∑ y^s / |mτ+n|^(2s), summed over all integer pairs (m,n) ≠ (0,0) for Re(s) > 1 and extended to other complex s by analytic continuation. Then E(τ,s) = π/(s−1) + 2π(γ − log 2 − log(√y |η(τ)|²)) + O(s−1), where γ is the Euler–Mascheroni constant and η is the Dedekind eta function.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Named for Leopold Kronecker",
+      "note": "The Eisenstein series has a pole at s = 1 with residue π, and the formula gives the constant term of its Laurent series there.",
+      "url": "https://en.wikipedia.org/wiki/Kronecker_limit_formula",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "landsberg-schaar-relation",
+      "name": "Landsberg–Schaar relation",
+      "short": "Landsberg–Schaar relation",
+      "statement": "For all positive integers p and q, (1/√p) times the sum over n = 0, …, p − 1 of exp(2πi n²q/p) equals (e^(πi/4)/√(2q)) times the sum over n = 0, …, 2q − 1 of exp(−πi n²p/(2q)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory",
+        "harmonic-analysis"
+      ],
+      "note": "The standard proof uses an identity of Jacobi, a special case of the Poisson summation formula, and a proof using only finite methods was found by Ben Moore in 2018. For q = 1 it reduces to a formula for the quadratic Gauss sum modulo p.",
+      "url": "https://en.wikipedia.org/wiki/Landsberg%E2%80%93Schaar_relation",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "zolotarevs-lemma",
+      "name": "Zolotarev's lemma",
+      "short": "Zolotarev's lemma",
+      "statement": "For an odd prime p and an integer a not divisible by p, the Legendre symbol (a/p) equals the sign of the permutation of the nonzero residue classes mod p given by multiplication by a.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Yegor Ivanovich Zolotarev, 1872",
+      "note": "Zolotarev introduced it in a proof of quadratic reciprocity. It is equivalent to Gauss's lemma and extends to the Jacobi symbol.",
+      "url": "https://en.wikipedia.org/wiki/Zolotarev's_lemma",
+      "area": "number-theory",
+      "year": 1872,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "class-number-formula",
+      "name": "Class number formula",
+      "short": "Class number formula",
+      "statement": "Let K be a number field with r₁ real embeddings and 2r₂ complex embeddings. Its Dedekind zeta function ζ_K(s) converges absolutely for Re(s) > 1 and extends to a meromorphic function on all complex s whose only pole is a simple pole at s = 1. The residue there is 2^r₁ · (2π)^r₂ · Reg_K · h_K / (w_K · √|D_K|), where h_K is the class number, Reg_K the regulator, w_K the number of roots of unity in K, and D_K the discriminant of K.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "dirichlets-unit-theorem"
+      ],
+      "note": "It relates invariants of a number field to a special value of its Dedekind zeta function. Peter Gustav Lejeune Dirichlet published a proof of the formula for quadratic fields in 1839, stated in the language of quadratic forms, and Gauss appears to have known that case in 1801.",
+      "url": "https://en.wikipedia.org/wiki/Class_number_formula",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hasses-theorem-on-elliptic-curves",
+      "name": "Hasse's theorem on elliptic curves",
+      "short": "Hasse bound",
+      "statement": "If N is the number of points on an elliptic curve E over a finite field with q elements, then |N − (q+1)| ≤ 2√q.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
+      "by": "Conjectured by Emil Artin in his thesis; proved by Helmut Hasse, 1933, with the proof published in 1936",
+      "note": "It is equivalent to determining the absolute value of the roots of the local zeta-function of E, and is the analogue of the Riemann hypothesis for the function field of the curve.",
+      "url": "https://en.wikipedia.org/wiki/Hasse's_theorem_on_elliptic_curves",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ax-kochen-theorem",
+      "name": "Ax–Kochen theorem",
+      "short": "Ax–Kochen theorem",
+      "statement": "For each positive integer d there is a finite set Y_d of prime numbers such that, for every prime p not in Y_d, every homogeneous polynomial of degree d over the p-adic numbers in at least d² + 1 variables has a nontrivial zero.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "mathematical-logic"
+      ],
+      "by": "Named after James Ax and Simon B. Kochen",
+      "note": "Emil Artin conjectured that no exceptional primes are needed, but Guy Terjanian found a 2-adic counterexample of degree 4 in 18 variables. The proof compares p-adic fields with fields of formal Laurent series over finite fields, using ultraproducts and Serge Lang's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Ax%E2%80%93Kochen_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-fuchs-theorem",
+      "name": "Erdős–Fuchs theorem",
+      "short": "Erdős–Fuchs theorem",
+      "statement": "Let A be an infinite set of natural numbers, and let s(x) be the number of ordered pairs (k₁, k₂) of elements of A with k₁ + k₂ ≤ x. Then there is no constant c > 0 for which s(n) = cn + o(n^(1/4) (log n)^(−1/2)) holds.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Paul Erdős and Wolfgang Heinrich Johannes Fuchs, 1956",
+      "note": "It says that the average number of ways to write a number as a sum of two elements of a set cannot be too close to a linear function. It is stronger than a 1941 conjecture of Erdős and Turán that s(n) = cn + O(1) cannot hold.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Fuchs_theorem",
+      "area": "number-theory",
+      "year": 1956,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "takagi-existence-theorem",
+      "name": "Takagi existence theorem",
+      "short": "Takagi existence theorem",
+      "statement": "For any number field K there is an inclusion-reversing correspondence between the finite abelian extensions of K (inside a fixed algebraic closure of K) and the generalized ideal class groups defined via a modulus of K, under which each such group is the Galois group of its extension. The correspondence is one-to-one once generalized ideal class groups for different moduli that give the same extension are treated as equivalent.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Takagi, who proved it during World War I and presented it at the International Congress of Mathematicians in 1920; published in Mathematische Annalen in 1925",
+      "note": "It is called an existence theorem because a main burden of the proof is to show the existence of enough abelian extensions of K. Its special case for the Hilbert class field was proved by Philipp Furtwängler in 1907.",
+      "url": "https://en.wikipedia.org/wiki/Takagi_existence_theorem",
+      "area": "number-theory",
+      "year": 1920,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bakers-theorem",
+      "name": "Baker's theorem",
+      "short": "Baker's theorem",
+      "statement": "If logarithms log α₁, …, log αₙ of nonzero algebraic numbers are linearly independent over the rational numbers, then they are linearly independent over the algebraic numbers. Moreover, β₀ + β₁ log α₁ + ⋯ + βₙ log αₙ is never 0 when β₀, …, βₙ and α₁, …, αₙ are nonzero algebraic numbers, and Baker gave an effective lower bound for its absolute value.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "siegels-lemma"
+      ],
+      "by": "Alan Baker, 1966; he removed an assumption about 2πi and gave the inhomogeneous version in 1967",
+      "note": "It subsumes the Hermite–Lindemann and Gelfond–Schneider theorems. Baker used it to derive effective bounds for solutions of some Diophantine equations and to find all imaginary quadratic fields with class number 1.",
+      "url": "https://en.wikipedia.org/wiki/Baker's_theorem",
+      "area": "number-theory",
+      "year": 1966,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "birchs-theorem",
+      "name": "Birch's theorem",
+      "short": "Birch's theorem",
+      "statement": "Let K be an algebraic number field, let k, l and n be natural numbers, and let f₁, …, f_k be homogeneous polynomials in n variables with coefficients in K, of odd degrees r₁, …, r_k. Then there is a number ψ(r₁, …, r_k, l, K) such that if n ≥ ψ(r₁, …, r_k, l, K), there is an l-dimensional vector subspace V of Kⁿ on which f₁ = … = f_k = 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Named after Bryan John Birch",
+      "url": "https://en.wikipedia.org/wiki/Birch's_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hilbert-speiser-theorem",
+      "name": "Hilbert–Speiser theorem",
+      "short": "Hilbert–Speiser theorem",
+      "statement": "A finite abelian extension K of the rational numbers ℚ has a normal integral basis if and only if it is tamely ramified over ℚ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Introduced by Hilbert in his Zahlbericht and by Speiser, 1916",
+      "note": "Equivalently, K is a subfield of ℚ(ζₙ) where n is a squarefree odd number. A converse says that this property holds for all tamely ramified abelian extensions of a number field J only when J = ℚ.",
+      "url": "https://en.wikipedia.org/wiki/Hilbert%E2%80%93Speiser_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "jacobis-four-square-theorem",
+      "name": "Jacobi's four-square theorem",
+      "short": "Jacobi's four-square",
+      "statement": "The number of ways to write a positive integer n as a sum of four squares of integers, where different orders and different integers being squared (such as 1 and −1) count as different ways, is eight times the sum of the divisors of n if n is odd, and 24 times the sum of the odd divisors of n if n is even. Equivalently, it is eight times the sum of the divisors of n that are not divisible by 4.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Carl Gustav Jakob Jacobi, 1834",
+      "note": "An immediate consequence is that 2n and 8n have the same number of such representations.",
+      "url": "https://en.wikipedia.org/wiki/Jacobi's_four-square_theorem",
+      "area": "number-theory",
+      "year": 1834,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sophie-germains-theorem",
+      "name": "Sophie Germain's theorem",
+      "short": "Sophie Germain's theorem",
+      "statement": "Let p be an odd prime and suppose there is an auxiliary prime q such that no two nonzero p-th powers differ by one modulo q, and p is not a p-th power modulo q. Then in any solution of xᵖ + yᵖ = zᵖ in integers at least one of x, y, z is divisible by p², so the first case of Fermat's Last Theorem, where p does not divide xyz, holds for p.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Sophie Germain; attributed to her by Adrien-Marie Legendre, 1823",
+      "note": "Germain found such an auxiliary prime for every prime p less than 100.",
+      "url": "https://en.wikipedia.org/wiki/Sophie_Germain's_theorem",
+      "area": "number-theory",
+      "year": 1823,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "stickelbergers-theorem",
+      "name": "Stickelberger's theorem",
+      "short": "Stickelberger's theorem",
+      "statement": "Let F be an abelian number field with Galois group G_F over ℚ and Stickelberger element θ(F). Then the Stickelberger ideal of F annihilates the class group of F: if α in ℤ[G_F] is such that αθ(F) = ∑ a_σ σ lies in ℤ[G_F], and J is any fractional ideal of F, then the product over σ in G_F of σ(J^{a_σ}) is a principal ideal.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Special case first proven by Ernst Kummer, 1847; general result by Ludwig Stickelberger, 1890",
+      "note": "It gives information about the Galois module structure of class groups of cyclotomic fields. The element θ(F) itself need not annihilate the class group.",
+      "url": "https://en.wikipedia.org/wiki/Stickelberger's_theorem",
+      "area": "number-theory",
+      "year": 1847,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "principal-ideal-theorem",
+      "name": "Principal ideal theorem",
+      "short": "Principal ideal theorem",
+      "statement": "For any algebraic number field K, let L be its Hilbert class field and O_L the ring of integers of L. Then every ideal I of the ring of integers of K becomes a principal ideal when extended to O_L, that is, I·O_L = α·O_L for some element α of O_L.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Conjectured by Hilbert, 1902; Artin reduced it to a question about finite groups; proved by Philipp Furtwängler, 1929",
+      "note": "It was the last remaining part of Hilbert's program on class fields to be completed. The phenomenon is also called principalization or capitulation.",
+      "url": "https://en.wikipedia.org/wiki/Principal_ideal_theorem",
+      "area": "number-theory",
+      "year": 1902,
+      "settled": 1929,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hasse-norm-theorem",
+      "name": "Hasse norm theorem",
+      "short": "Hasse norm theorem",
+      "statement": "Let L/K be a cyclic extension of number fields. If a nonzero element of K is a local norm everywhere, that is, a norm from the completion of L at every prime of K, archimedean and non-archimedean, then it is a global norm: the relative norm of some element of L.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Hasse, 1931; the case of degree 2 was proved by Hilbert, 1897, and the case of prime degree by Furtwangler, 1902",
+      "note": "It is an example of a local-global principle. It is no longer true in general if the extension is abelian but not cyclic: Hasse showed that 3 is a local norm everywhere for ℚ(√−3, √13)/ℚ but not a global norm.",
+      "url": "https://en.wikipedia.org/wiki/Hasse_norm_theorem",
+      "area": "number-theory",
+      "year": 1931,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "von-staudt-clausen-theorem",
+      "name": "Von Staudt–Clausen theorem",
+      "short": "Von Staudt–Clausen theorem",
+      "statement": "For every positive integer n, adding to the Bernoulli number B₂ₙ the sum of 1/p over all primes p for which p − 1 divides 2n gives an integer.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "fermats-little-theorem"
+      ],
+      "by": "Found independently by von Staudt and Clausen, 1840",
+      "note": "It determines the fractional part of Bernoulli numbers. As a consequence, the denominators of the nonzero Bernoulli numbers B₂ₙ are the products of all primes p for which p − 1 divides 2n, so they are square-free and divisible by 6.",
+      "url": "https://en.wikipedia.org/wiki/Von_Staudt%E2%80%93Clausen_theorem",
+      "area": "number-theory",
+      "year": 1840,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "six-exponentials-theorem",
+      "name": "Six exponentials theorem",
+      "short": "Six exponentials theorem",
+      "statement": "If x₁, x₂, x₃ are complex numbers linearly independent over the rational numbers, and y₁, y₂ are complex numbers linearly independent over the rational numbers, then at least one of the six numbers e^(x₁y₁), e^(x₁y₂), e^(x₂y₁), e^(x₂y₂), e^(x₃y₁), e^(x₃y₂) is transcendental.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "First explicitly stated and proved in complete form independently by Serge Lang and Kanakanahalli Ramachandra in the 1960s; a special case was mentioned by Alaoglu and Erdős in 1944",
+      "note": "It follows from the stronger five exponentials theorem. The four exponentials conjecture, which would strengthen it further, is still unproven.",
+      "url": "https://en.wikipedia.org/wiki/Six_exponentials_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "three-gap-theorem",
+      "name": "Three-gap theorem",
+      "short": "Three-gap theorem",
+      "statement": "If n points are placed on a circle at angles θ, 2θ, 3θ, ..., nθ from a starting point, then there are at most three distinct distances between points in adjacent positions around the circle. Equivalently, for any positive real number α and positive integer n, the fractional parts of α, 2α, ..., nα divide the unit interval into subintervals of at most three different lengths.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Conjectured by Hugo Steinhaus; first proofs in the late 1950s by Vera T. Sós and Stanisław Świerczkowski",
+      "note": "When there are three distances, the largest equals the sum of the other two. It is also known as the three-distance theorem or the Steinhaus conjecture.",
+      "url": "https://en.wikipedia.org/wiki/Three-gap_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "oppermanns-conjecture",
+      "name": "Oppermann's conjecture",
+      "short": "Oppermann's conjecture",
+      "statement": "For every integer n > 1, there is at least one prime number between n(n − 1) and n², and at least one more prime between n² and n(n + 1).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Ludvig Oppermann, announced in an unpublished lecture in March 1877",
+      "note": "It is closely related to but stronger than Legendre's conjecture, Andrica's conjecture and Brocard's conjecture. If true, it would mean there are at least two primes between n² and (n + 1)².",
+      "url": "https://en.wikipedia.org/wiki/Oppermann's_conjecture",
+      "area": "number-theory",
+      "year": 1877,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "riemann-von-mangoldt-formula",
+      "name": "Riemann–von Mangoldt formula",
+      "short": "Riemann–von Mangoldt",
+      "statement": "The number N(T) of zeros of the Riemann zeta function with imaginary part greater than 0 and less than or equal to T satisfies N(T) = (T/2π)·log(T/2π) − T/2π + O(log T).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory",
+        "complex-analysis"
+      ],
+      "by": "Stated by Bernhard Riemann, 1859; proved by Hans Carl Friedrich von Mangoldt, 1905",
+      "note": "It describes the distribution of the zeros of the Riemann zeta function. Under the Lindelöf and Riemann hypotheses the error term can be improved.",
+      "url": "https://en.wikipedia.org/wiki/Riemann%E2%80%93von_Mangoldt_formula",
+      "area": "number-theory",
+      "year": 1859,
+      "settled": 1905,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "proths-theorem",
+      "name": "Proth's theorem",
+      "short": "Proth's theorem",
+      "statement": "Let p = k·2ⁿ + 1, where k is a positive odd integer with k < 2ⁿ (a Proth number). If there is an integer a with a^((p−1)/2) ≡ −1 (mod p), then p is prime.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "François Proth, 1878",
+      "note": "It is the basis of Proth's primality test for Proth numbers. The converse also holds: if a Proth number p is prime, such an a exists.",
+      "url": "https://en.wikipedia.org/wiki/Proth's_theorem",
+      "area": "number-theory",
+      "year": 1878,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sophie-germains-identity",
+      "name": "Sophie Germain's identity",
+      "short": "Sophie Germain's identity",
+      "statement": "For all x and y, x⁴ + 4y⁴ = ((x + y)² + y²)·((x − y)² + y²) = (x² + 2xy + 2y²)·(x² − 2xy + 2y²).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Named after Sophie Germain; the attribution to her was made by Leonard Eugene Dickson, and the identity does not appear in her works",
+      "note": "It is used to factorize integers of the form x⁴ + 4y⁴ and often appears in competition problems. It shows, for example, that n⁴ + 4ⁿ is never prime for n > 1.",
+      "url": "https://en.wikipedia.org/wiki/Sophie_Germain's_identity",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "herbrand-ribet-theorem",
+      "name": "Herbrand–Ribet theorem",
+      "short": "Herbrand–Ribet theorem",
+      "statement": "Let p be an odd prime and let G be the p-primary part of the ideal class group of the field ℚ(ζ) of p-th roots of unity. Split G as a direct sum of pieces G_n (n = 1, …, p − 1) using the idempotents built from the Teichmüller character. Then for odd n, G_n is nontrivial if and only if p divides the Bernoulli number B_(p−n).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Jacques Herbrand (if G_n is nontrivial then p divides B_(p−n)); converse by Kenneth Ribet",
+      "note": "It strengthens Ernst Kummer's theorem that p divides the class number of ℚ(ζ) if and only if p divides the numerator of some Bernoulli number B_n with 0 < n < p − 1. The main conjecture of Iwasawa theory, proved by Mazur and Wiles, sharpens it further.",
+      "url": "https://en.wikipedia.org/wiki/Herbrand%E2%80%93Ribet_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "carmichaels-theorem",
+      "name": "Carmichael's theorem",
+      "short": "Carmichael's theorem",
+      "statement": "Let P and Q be relatively prime integers with PQ ≠ 0 and P² − 4Q > 0, and let U₀ = 0, U₁ = 1, Uₙ = P·Uₙ₋₁ − Q·Uₙ₋₂ be the Lucas sequence of the first kind. Then for every n other than 1, 2 and 6, Uₙ has a prime divisor that divides no earlier term, except for U₁₂(±1, −1) = ±144. In particular, for n greater than 12 the nth Fibonacci number has a prime divisor that divides no earlier Fibonacci number.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "R. D. Carmichael, 1913; a simple proof by Yabuta, 2001",
+      "note": "A prime dividing Uₙ but no earlier term is called a primitive prime divisor of Uₙ. In 2001 Bilu, Hanrot, Voutier and Mignotte extended the theorem to negative discriminants, where it holds for all n > 30.",
+      "url": "https://en.wikipedia.org/wiki/Carmichael's_theorem",
+      "area": "number-theory",
+      "year": 1913,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "equidistribution-theorem",
+      "name": "Equidistribution theorem",
+      "short": "Equidistribution theorem",
+      "statement": "If a is an irrational number, the sequence a, 2a, 3a, ... taken mod 1 is uniformly distributed on the circle ℝ/ℤ. In the long run, every arc of the circle receives a share of the terms equal to its length.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Proved in 1909 and 1910 separately by Hermann Weyl, Wacław Sierpiński and Piers Bohl",
+      "note": "It is a special case of the ergodic theorem, taking the normalized angle measure.",
+      "url": "https://en.wikipedia.org/wiki/Equidistribution_theorem",
+      "area": "number-theory",
+      "year": 1909,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "nivens-theorem",
+      "name": "Niven's theorem",
+      "short": "Niven's theorem",
+      "statement": "For rational values of θ in degrees with 0 ≤ θ ≤ 90, the sine of θ degrees is rational only for θ = 0, 30 and 90, where the sine is 0, 1/2 and 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "rational-numbers"
+      ],
+      "by": "Ivan Niven, in his book Irrational Numbers; proven earlier by D. H. Lehmer, 1933, and by J. M. H. Olmstead",
+      "note": "For rational θ, the only rational values of the sine or cosine are 0, ±1/2 and ±1. Niven extended Lehmer's result to the other trigonometric functions in 1956.",
+      "url": "https://en.wikipedia.org/wiki/Niven's_theorem",
+      "area": "number-theory",
+      "year": 1933,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "legendres-equation",
+      "name": "Legendre's equation",
+      "short": "Legendre's equation",
+      "statement": "Let a, b, c be nonzero, square-free, pairwise relatively prime integers that are not all positive and not all negative. Then ax² + by² + cz² = 0 has a solution in integers x, y, z, not all zero, if and only if −bc, −ca and −ab are quadratic residues modulo a, b and c, respectively.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Adrien-Marie Legendre, 1785",
+      "note": "The equation is homogeneous, so a nonzero rational solution exists exactly when a nonzero integer solution does. Geometrically it asks for a rational point on a rational conic.",
+      "url": "https://en.wikipedia.org/wiki/Legendre's_equation",
+      "area": "number-theory",
+      "year": 1785,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "abhyankars-lemma",
+      "name": "Abhyankar's lemma",
+      "short": "Abhyankar's lemma",
+      "statement": "Let A, B, C be local fields such that A and B are finite extensions of C with ramification indices a and b. If B is tamely ramified over C and b divides a, then the compositum AB is an unramified extension of A.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Named after Shreeram Shankar Abhyankar",
+      "note": "It allows one to kill tame ramification by taking an extension of a base field.",
+      "url": "https://en.wikipedia.org/wiki/Abhyankar's_lemma",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "agrawals-conjecture",
+      "name": "Agrawal's conjecture",
+      "short": "Agrawal's conjecture",
+      "statement": "Let n and r be coprime positive integers. If (X − 1)ⁿ ≡ Xⁿ − 1 (mod n, X^r − 1), that is, the two polynomials agree after reducing coefficients mod n and the polynomials mod X^r − 1, then either n is prime or n² ≡ 1 (mod r).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Formulated by Rajat Bhattacharjee and Prashant Pandey in their 2001 thesis; attributed to Manindra Agrawal, 2002",
+      "note": "If true, it would lower the runtime of the AKS primality test from Õ(log⁶ n) to Õ(log³ n). It has been checked by computer for r < 100 and n < 10¹⁰, but a heuristic argument by Carl Pomerance and Hendrik W. Lenstra suggests there are infinitely many counterexamples.",
+      "url": "https://en.wikipedia.org/wiki/Agrawal's_conjecture",
+      "area": "number-theory",
+      "year": 2001,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "albert-brauer-hasse-noether-theorem",
+      "name": "Albert–Brauer–Hasse–Noether theorem",
+      "short": "ABHN local-global theorem",
+      "statement": "Let A be a central simple algebra over an algebraic number field K. If A splits over every completion K_v of K, then A is a matrix algebra over K.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "rings-and-fields"
+      ],
+      "by": "Richard Brauer, Helmut Hasse and Emmy Noether, and independently Abraham Adrian Albert",
+      "note": "It is an example of a local-global principle and leads to a description of finite-dimensional division algebras over algebraic number fields in terms of their local invariants.",
+      "url": "https://en.wikipedia.org/wiki/Albert%E2%80%93Brauer%E2%80%93Hasse%E2%80%93Noether_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "artin-verdier-duality",
+      "name": "Artin–Verdier duality",
+      "short": "Artin–Verdier duality",
+      "statement": "Let X be the spectrum of the ring of integers of a totally imaginary number field K, and F a constructible étale abelian sheaf on X. Then for every integer r, the Yoneda pairing H^r(X,F) × Ext^(3−r)(F, 𝔾ₘ) → H³(X, 𝔾ₘ) = ℚ/ℤ is a non-degenerate pairing of finite abelian groups.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "arithmetic-geometry"
+      ],
+      "by": "Introduced by Verdier, 1964",
+      "note": "It generalizes Tate duality and shows that, for étale cohomology, the ring of integers in a number field behaves like a 3-dimensional object. Deninger proved it in 1986 for constructible sheaves that need not be torsion.",
+      "url": "https://en.wikipedia.org/wiki/Artin%E2%80%93Verdier_duality",
+      "area": "number-theory",
+      "year": 1964,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bhaskaras-lemma",
+      "name": "Bhaskara's lemma",
+      "short": "Bhaskara's lemma",
+      "statement": "Let m, x, y, N be integers and k a non-zero integer. If N x² + k = y², then N((mx + y)/k)² + (m² − N)/k = ((my + Nx)/k)².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "note": "It is used as a lemma in the chakravala method. It also holds for real or complex numbers, and when neither k nor m² − N is zero the implication goes in both directions.",
+      "url": "https://en.wikipedia.org/wiki/Bhaskara's_lemma",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bogomolov-conjecture",
+      "name": "Bogomolov conjecture",
+      "short": "Bogomolov conjecture",
+      "statement": "Let C be a curve of genus g ≥ 2 defined over a number field K and embedded in its Jacobian J. Let ĥ be the Néron–Tate height on J associated with a symmetric ample line bundle. Then there is a number ε > 0 such that only finitely many points of C have height ĥ less than ε.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
+      "by": "Named after Fedor Bogomolov; proved by Emmanuel Ullmo, 1998, and generalized to subvarieties of abelian varieties by Shou-Wu Zhang, 1998",
+      "note": "It generalizes the Manin–Mumford conjecture by replacing torsion points with points of small Néron–Tate height. A point has height zero exactly when it is a torsion point.",
+      "url": "https://en.wikipedia.org/wiki/Bogomolov_conjecture",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "brauer-siegel-theorem",
+      "name": "Brauer–Siegel theorem",
+      "short": "Brauer–Siegel theorem",
+      "statement": "Let K₁, K₂, … be number fields that are Galois extensions of ℚ, with discriminants D_i, class numbers h_i and regulators R_i. If [K_i : ℚ] / log|D_i| → 0 as i → ∞, then log(h_i R_i) / log √|D_i| → 1 as i → ∞. The Galois assumption can be dropped if all the degrees [K_i : ℚ] are bounded above by a uniform constant.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Richard Brauer and Carl Ludwig Siegel; Brauer's paper appeared in 1947",
+      "note": "It generalizes results on class numbers of imaginary quadratic fields. The result is ineffective; effective results in the same direction began with Harold Stark in the early 1970s.",
+      "url": "https://en.wikipedia.org/wiki/Brauer%E2%80%93Siegel_theorem",
+      "area": "number-theory",
+      "year": 1947,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "brun-titchmarsh-theorem",
+      "name": "Brun–Titchmarsh theorem",
+      "short": "Brun–Titchmarsh theorem",
+      "statement": "Let π(x;q,a) be the number of primes p ≤ x that are congruent to a modulo q. Then π(x;q,a) ≤ 2x / (φ(q) log(x/q)) for all q < x.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Proven by Montgomery and Vaughan using sieve methods; an earlier version by Brun and Titchmarsh had an extra factor 1 + o(1)",
+      "note": "It is an upper bound on the distribution of prime numbers in arithmetic progressions. Motohashi (1973) gave a sharper bound when q ≤ x^(9/20).",
+      "url": "https://en.wikipedia.org/wiki/Brun%E2%80%93Titchmarsh_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "chowla-mordell-theorem",
+      "name": "Chowla–Mordell theorem",
+      "short": "Chowla–Mordell theorem",
+      "statement": "Let p be an odd prime, χ a nontrivial Dirichlet character modulo p, and G(χ) = ∑ χ(a) ζᵃ its Gauss sum, where ζ is a primitive p-th root of unity in the complex numbers. Then G(χ)/|G(χ)| is a root of unity if and only if χ is the quadratic residue symbol modulo p.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Sarvadaman Chowla and Louis Mordell, independently, around 1951; the 'if' part was known to Gauss",
+      "note": "It determines the cases where a Gauss sum is the square root of a prime number multiplied by a root of unity. The ratio in the theorem occurs in the functional equation of L-functions.",
+      "url": "https://en.wikipedia.org/wiki/Chowla%E2%80%93Mordell_theorem",
+      "area": "number-theory",
+      "year": 1951,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "carmichaels-totient-function-conjecture",
+      "name": "Carmichael's totient function conjecture",
+      "short": "Carmichael's conjecture",
+      "statement": "For every positive integer n there is at least one other integer m ≠ n such that φ(m) = φ(n), where φ is Euler's totient function.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Robert Carmichael, 1907, who stated it as a theorem with a faulty proof; in 1922 he retracted the claim and stated it as an open problem",
+      "note": "Kevin Ford determined in 1998 that any counterexample must be at least 10^(10^10).",
+      "url": "https://en.wikipedia.org/wiki/Carmichael's_totient_function_conjecture",
+      "area": "number-theory",
+      "year": 1907,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "brocards-conjecture",
+      "name": "Brocard's conjecture",
+      "short": "Brocard's conjecture",
+      "statement": "For every n ≥ 2, there are at least four prime numbers between (pₙ)² and (pₙ₊₁)², where pₙ is the n-th prime number.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "oppermanns-conjecture",
+          "url": "https://en.wikipedia.org/wiki/Oppermann's_conjecture"
+        }
+      ],
+      "by": "Named after Henri Brocard",
+      "note": "Legendre's conjecture, that there is a prime between consecutive integer squares, directly implies at least two primes between prime squares for pₙ ≥ 3.",
+      "url": "https://en.wikipedia.org/wiki/Brocard's_conjecture",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bezouts-identity",
+      "name": "Bézout's identity",
+      "short": "Bézout's identity",
+      "statement": "For any two integers a and b with greatest common divisor d, there are integers x and y such that ax + by = d. The greatest common divisor of 0 and 0 is taken to be 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "well-ordering-principle"
+      ],
+      "by": "Named after Étienne Bézout (1730–1783), who proved it for polynomials; the statement for integers appears earlier in the work of Claude Gaspard Bachet de Méziriac (1581–1638)",
+      "note": "Euclid's lemma and the Chinese remainder theorem can be deduced from it. The identity also holds in every principal ideal domain.",
+      "url": "https://en.wikipedia.org/wiki/B%C3%A9zout's_identity",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "conductor-discriminant-formula",
+      "name": "Conductor–discriminant formula",
+      "short": "Conductor–discriminant",
+      "statement": "For a finite Galois extension L/K of global fields with Galois group G, the relative discriminant of L/K equals the product, over all irreducible characters χ of G, of the global Artin conductor 𝔣(χ) raised to the power χ(1).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "galois-theory"
+      ],
+      "by": "Introduced by Hasse for abelian extensions and by Artin, 1931, for Galois extensions",
+      "url": "https://en.wikipedia.org/wiki/Conductor%E2%80%93discriminant_formula",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "koukoulopoulos-maynard-theorem-duffin-schaeffer-conjecture",
+      "name": "Koukoulopoulos–Maynard theorem (Duffin–Schaeffer conjecture)",
+      "short": "Duffin–Schaeffer theorem",
+      "statement": "Let f be a function from the positive integers to the positive reals. Then for almost all real α (with respect to Lebesgue measure), the inequality |α − p/q| < f(q)/q has infinitely many solutions in coprime integers p, q with q > 0 if and only if the sum over q ≥ 1 of φ(q)·f(q)/q diverges, where φ is Euler's totient function.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "borel-cantelli-lemma"
+      ],
+      "by": "Proposed as a conjecture by R. J. Duffin and A. C. Schaeffer, 1941; proven by Dimitris Koukoulopoulos and James Maynard, 2019",
+      "note": "That the approximations imply divergence of the series follows from the Borel–Cantelli lemma. The converse was the hard part.",
+      "url": "https://en.wikipedia.org/wiki/Duffin%E2%80%93Schaeffer_theorem",
+      "area": "number-theory",
+      "year": 1941,
+      "settled": 2019,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "feit-thompson-conjecture",
+      "name": "Feit–Thompson conjecture",
+      "short": "Feit–Thompson conjecture",
+      "statement": "There are no distinct prime numbers p and q such that (p^q − 1)/(p − 1) divides (q^p − 1)/(q − 1).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Suggested by Feit and Thompson, 1962",
+      "note": "If true, it would greatly simplify the final chapter of the proof that every finite group of odd order is solvable. It is known for q = 2 and q = 3, while the stronger claim that the two numbers are always coprime fails for p = 17 and q = 3313.",
+      "url": "https://en.wikipedia.org/wiki/Feit%E2%80%93Thompson_conjecture",
+      "area": "number-theory",
+      "year": 1962,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ferrero-washington-theorem",
+      "name": "Ferrero–Washington theorem",
+      "short": "Ferrero–Washington theorem",
+      "statement": "Iwasawa's μ-invariant vanishes for cyclotomic Z_p-extensions of abelian algebraic number fields.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Conjectured by Iwasawa in 1971 for all Z_p-extensions and, after that failed, suggested by him for cyclotomic ones; proved by Ferrero and Washington, 1979; a different proof was given by Sinnott, 1984",
+      "note": "Iwasawa had shown that the vanishing for cyclotomic Z_p-extensions of the rationals is equivalent to certain congruences between Bernoulli numbers, and Ferrero and Washington proved those congruences.",
+      "url": "https://en.wikipedia.org/wiki/Ferrero%E2%80%93Washington_theorem",
+      "area": "number-theory",
+      "year": 1971,
+      "settled": 1979,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "firoozbakhts-conjecture",
+      "name": "Firoozbakht's conjecture",
+      "short": "Firoozbakht's conjecture",
+      "statement": "If pₙ is the n-th prime, then the n-th root of pₙ is a strictly decreasing function of n: the (n+1)-th root of pₙ₊₁ is less than the n-th root of pₙ for all n ≥ 1. Equivalently, pₙ₊₁ < pₙ^(1+1/n).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Farideh Firoozbakht, 1982",
+      "note": "It has been verified for all primes below 2^64. If true, it would give a strong upper bound on gaps between consecutive primes.",
+      "url": "https://en.wikipedia.org/wiki/Firoozbakht's_conjecture",
+      "area": "number-theory",
+      "year": 1982,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "four-exponentials-conjecture",
+      "name": "Four exponentials conjecture",
+      "short": "Four exponentials conj.",
+      "statement": "If x₁, x₂ and y₁, y₂ are two pairs of complex numbers, with each pair linearly independent over the rational numbers, then at least one of the four numbers e^(x₁y₁), e^(x₁y₂), e^(x₂y₁), e^(x₂y₂) is transcendental.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Considered in the early 1940s by Atle Selberg, who never formally stated it; an equivalent statement was first mentioned in print by Theodor Schneider, 1957; Serge Lang and Kanakanahalli Ramachandra explicitly conjectured it in the 1960s",
+      "note": "It would imply that there is no non-integer real number t such that both 2^t and 3^t are integers. The related six exponentials theorem is proven.",
+      "url": "https://en.wikipedia.org/wiki/Four_exponentials_conjecture",
+      "area": "number-theory",
+      "year": 1957,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "friedlander-iwaniec-theorem",
+      "name": "Friedlander–Iwaniec theorem",
+      "short": "Friedlander–Iwaniec thm",
+      "statement": "There are infinitely many prime numbers of the form a² + b⁴, where a and b are integers.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "John Friedlander and Henryk Iwaniec, 1997",
+      "note": "Numbers of the form a² + b⁴ are very sparse: there are roughly X^(3/4) of them below X. The theorem does not settle whether infinitely many primes have the form a² + 1.",
+      "url": "https://en.wikipedia.org/wiki/Friedlander%E2%80%93Iwaniec_theorem",
+      "area": "number-theory",
+      "year": 1997,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fundamental-theorem-of-ideal-theory-in-number-fields",
+      "name": "Fundamental theorem of ideal theory in number fields",
+      "short": "Unique ideal factorization",
+      "statement": "Every nonzero proper ideal in the ring of integers of a number field can be written uniquely as a product of nonzero prime ideals. Equivalently, every ring of integers of a number field is a Dedekind domain.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_ideal_theory_in_number_fields",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rudins-conjecture",
+      "name": "Rudin's conjecture",
+      "short": "Rudin's conjecture",
+      "statement": "For positive integers N, q, a, let Q(N; q, a) be the number of perfect squares among qn + a for n = 0, 1, …, N−1, and let Q(N) be the maximum of Q(N; q, a) over all q, a ≥ 1. The conjecture asserts that Q(N) = O(√N), and in its stronger form that Q(N) = Q(N; 24, 1) for N > 6.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory",
+        "combinatorics"
+      ],
+      "by": "Walter Rudin, 1960",
+      "note": "It has applications in the theory of trigonometric series. Bombieri and Zannier proved Q(N) = O(N^(3/5+o(1))), and the strong form has been verified for 6 ≤ N ≤ 52.",
+      "url": "https://en.wikipedia.org/wiki/Rudin's_conjecture",
+      "area": "number-theory",
+      "year": 1960,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "grunwald-wang-theorem",
+      "name": "Grunwald–Wang theorem",
+      "short": "Grunwald–Wang theorem",
+      "statement": "Let K be a number field, n a natural number and S a finite set of primes of K. Every element of K that is an nth power in the completion K_𝔭 for every prime 𝔭 outside S is an nth power in K, unless K is s-special for some s with 2^(s+1) dividing n and S contains every 2-adic prime 𝔭 for which K_𝔭 is s-special, where a field is s-special if it contains η_s = 2cos(2π/2^s) but none of i, η_(s+1) and i·η_(s+1); in that special case such elements form, modulo nth powers in K, a group of order 2.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Introduced by Grunwald, 1933, with a mistake that Wang found and corrected, 1948; Wang gave and proved the correct formulation in his 1950 thesis",
+      "note": "It is a local-global principle. For K = ℚ the exception occurs only when 8 divides n and S contains 2: 16 is an 8th power in ℚ_p for every odd prime p but is not an 8th power in ℚ.",
+      "url": "https://en.wikipedia.org/wiki/Grunwald%E2%80%93Wang_theorem",
+      "area": "number-theory",
+      "year": 1948,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hardy-ramanujan-theorem",
+      "name": "Hardy–Ramanujan theorem",
+      "short": "Hardy–Ramanujan theorem",
+      "statement": "The normal order of ω(n), the number of distinct prime factors of n, is log log n. More precisely, for every real-valued function ψ(n) that tends to infinity as n tends to infinity, |ω(n) − log log n| < ψ(n)·√(log log n) holds for almost all positive integers n: the proportion of n below x for which it fails tends to 0 as x grows.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "turan-kubilius-inequality",
+          "url": "https://en.wikipedia.org/wiki/Tur%C3%A1n%E2%80%93Kubilius_inequality"
+        }
+      ],
+      "by": "Proved by Ramanujan and checked by Hardy; a simple proof was later given by Pál Turán",
+      "note": "Roughly, most numbers have about log log n distinct prime factors. The same holds for Ω(n), the number of prime factors counted with multiplicity, and the result is generalized by the Erdős–Kac theorem.",
+      "url": "https://en.wikipedia.org/wiki/Hardy%E2%80%93Ramanujan_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hasse-arf-theorem",
+      "name": "Hasse–Arf theorem",
+      "short": "Hasse–Arf theorem",
+      "statement": "Let L/K be a finite abelian Galois extension, where K has a discrete normalised valuation whose residue field has characteristic p > 0 and which extends uniquely to L. Then every jump of the upper numbering filtration G^t(L/K), t ≥ −1, of the ramification groups occurs at an integer.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "A special case with finite residue fields was proved by Helmut Hasse; the general result was proved by Cahit Arf",
+      "note": "For non-abelian extensions the jumps need not be integers. Jean-Pierre Serre gave an extension with Galois group the quaternion group of order 8 that has a jump at 3/2.",
+      "url": "https://en.wikipedia.org/wiki/Hasse%E2%80%93Arf_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hermites-identity",
+      "name": "Hermite's identity",
+      "short": "Hermite's identity",
+      "statement": "For every real number x and every positive integer n, the sum of ⌊x + k/n⌋ for k = 0, 1, …, n−1 equals ⌊nx⌋, where ⌊ ⌋ denotes rounding down to the nearest integer.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Named after the French mathematician Charles Hermite",
+      "url": "https://en.wikipedia.org/wiki/Hermite's_identity",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hilberts-irreducibility-theorem",
+      "name": "Hilbert's irreducibility theorem",
+      "short": "Hilbert irreducibility",
+      "statement": "Let f₁, ..., fₙ be finitely many polynomials in the variables Y₁, ..., Yₛ whose coefficients are rational functions of X₁, ..., Xᵣ with rational coefficients, each irreducible over that field of rational functions. Then there are rational numbers a₁, ..., aᵣ such that, after substituting them for X₁, ..., Xᵣ, all of f₁, ..., fₙ remain irreducible as polynomials in Y₁, ..., Yₛ over ℚ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "David Hilbert, 1892",
+      "note": "There are infinitely many such tuples, and integer values always suffice. Hilbert's original motivation was the inverse Galois problem, and the theorem is used as a step in Wiles's proof of Fermat's Last Theorem.",
+      "url": "https://en.wikipedia.org/wiki/Hilbert's_irreducibility_theorem",
+      "area": "number-theory",
+      "year": 1892,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "honda-tate-theorem",
+      "name": "Honda–Tate theorem",
+      "short": "Honda–Tate theorem",
+      "statement": "Let q be a power of a prime. Sending each simple abelian variety over the finite field with q elements to its Frobenius endomorphism gives a one-to-one correspondence between the isogeny classes of simple abelian varieties over that field and the conjugacy classes of Weil q-numbers. A Weil q-number is an algebraic integer all of whose conjugates have absolute value √q.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry",
+        "algebraic-geometry"
+      ],
+      "by": "Tate, 1966 (the map is injective); Honda, 1968 (the map is surjective)",
+      "note": "Since every abelian variety is isogenous to a product of simple ones, this classifies all abelian varieties over a finite field up to isogeny.",
+      "url": "https://en.wikipedia.org/wiki/Honda%E2%80%93Tate_theorem",
+      "area": "number-theory",
+      "year": 1968,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "huas-lemma",
+      "name": "Hua's lemma",
+      "short": "Hua's lemma",
+      "statement": "Let P be an integral-valued polynomial of degree k, let ε be a positive real number, and let f(α) = ∑ from x = 1 to N of exp(2πiP(x)α). Then the integral from 0 to 1 of |f(α)|^λ dα is at most a constant depending on P and ε times N raised to the power μ(λ), where the point (λ, μ(λ)) lies on the polygonal line with vertices (2^ν, 2^ν − ν + ε) for ν = 1, …, k.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Named after Hua Loo-keng",
+      "url": "https://en.wikipedia.org/wiki/Hua's_lemma",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "goormaghtigh-conjecture",
+      "name": "Goormaghtigh conjecture",
+      "short": "Goormaghtigh conjecture",
+      "statement": "Apart from exchanging the two sides, the equation (xᵐ − 1)/(x − 1) = (yⁿ − 1)/(y − 1), with distinct integers x and y larger than one and exponents m and n larger than two, has only two solutions: (5³ − 1)/(5 − 1) = (2⁵ − 1)/(2 − 1) = 31 and (90³ − 1)/(90 − 1) = (2¹³ − 1)/(2 − 1) = 8191. Equivalently, 31 and 8191 are the only numbers that are repunits with at least three digits in two different bases.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Named for the Belgian mathematician René Goormaghtigh",
+      "note": "Davenport, Lewis and Schinzel showed in 1961 that for fixed m and n there are only finitely many solutions. Yuan showed in 2005 that for m = 3 and odd n there are no solutions other than the two known ones.",
+      "url": "https://en.wikipedia.org/wiki/Goormaghtigh_conjecture",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sums-of-three-cubes-problem",
+      "name": "Sums of three cubes problem",
+      "short": "Sums of three cubes",
+      "statement": "Every integer that is not congruent to 4 or 5 modulo 9 can be written as a sum of three cubes of integers, where negative cubes are allowed.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "note": "The condition is necessary, because cubes modulo 9 are 0, 1 and −1, and no three of these sum to 4 or 5 modulo 9. In 1992 Roger Heath-Brown conjectured that every such integer has infinitely many representations.",
+      "url": "https://en.wikipedia.org/wiki/Sums_of_three_cubes",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bertrands-postulate",
+      "name": "Bertrand's postulate",
+      "short": "Bertrand's postulate",
+      "statement": "For every integer n > 3 there is at least one prime p with n < p < 2n − 2. A weaker form says that for every n > 1 there is a prime p with n < p < 2n.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Conjectured by Joseph Bertrand, 1845, who verified it for all integers up to 3,000,000; proved by Chebyshev, 1852",
+      "note": "It is also called the Bertrand–Chebyshev theorem. It is weaker than the prime number theorem but makes precise claims for small values of n.",
+      "url": "https://en.wikipedia.org/wiki/Bertrand's_postulate",
+      "area": "number-theory",
+      "year": 1845,
+      "settled": 1852,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "katz-lang-finiteness-theorem",
+      "name": "Katz–Lang finiteness theorem",
+      "short": "Katz–Lang finiteness",
+      "statement": "Let X be a smooth, geometrically connected scheme of finite type over a field K that is finitely generated over the prime field, and let Ker(X/K) be the kernel of the maps between their abelianized fundamental groups. Then Ker(X/K) is finite if K has characteristic 0, and the part of the kernel coprime to p is finite if K has characteristic p > 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
+      "by": "Nick Katz and Serge Lang, 1981",
+      "url": "https://en.wikipedia.org/wiki/Katz%E2%80%93Lang_finiteness_theorem",
+      "area": "number-theory",
+      "year": 1981,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "scholz-conjecture",
+      "name": "Scholz conjecture",
+      "short": "Scholz conjecture",
+      "statement": "For every positive integer n, l(2ⁿ − 1) ≤ n − 1 + l(n), where l(n) is the length of the shortest addition chain producing n. An addition chain is a sequence of numbers starting with 1 in which every later number is a sum of two earlier ones (which may be equal), and its length is the number of sums needed.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Arnold Scholz, 1937; Alfred Brauer studied it soon afterward and proved a weaker bound",
+      "note": "If true, it would give short addition chains for the Mersenne numbers. Neill Clift has announced an example showing the bound is not always tight.",
+      "url": "https://en.wikipedia.org/wiki/Scholz_conjecture",
+      "area": "number-theory",
+      "year": 1937,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "krasners-lemma",
+      "name": "Krasner's lemma",
+      "short": "Krasner's lemma",
+      "statement": "Let (K, v) be a Henselian valued field, let f be a monic polynomial of degree n > 1 with coefficients in K and roots α₁, …, αₙ in an algebraic closure of K, and let β lie in that algebraic closure. If v(β − α₁) > v(α₁ − αⱼ) for every j ≠ 1, so that β is closer to α₁ than any other root is, then α₁ lies in the field K(β).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "note": "It can be used to show that ℂ_p, the completion of the algebraic closure of ℚ_p, is algebraically closed. A generalization replaces β by the roots of a polynomial g of any degree close to a group of roots of f.",
+      "url": "https://en.wikipedia.org/wiki/Krasner's_lemma",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kummers-theorem",
+      "name": "Kummer's theorem",
+      "short": "Kummer's theorem",
+      "statement": "For integers n ≥ m ≥ 0 and a prime p, the exponent of the highest power of p dividing the binomial coefficient C(n, m) equals the number of carries when m is added to n − m in base p.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "legendres-formula",
+          "url": "https://en.wikipedia.org/wiki/Legendre's_formula"
+        }
+      ],
+      "by": "Ernst Kummer, 1852",
+      "note": "An equivalent form: this exponent equals (S_p(m) + S_p(n − m) − S_p(n)) / (p − 1), where S_p is the sum of base-p digits. It can be proved from Legendre's formula.",
+      "url": "https://en.wikipedia.org/wiki/Kummer's_theorem",
+      "area": "number-theory",
+      "year": 1852,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "landau-prime-ideal-theorem",
+      "name": "Landau prime ideal theorem",
+      "short": "Landau prime ideal theorem",
+      "statement": "For any number field K, the number of prime ideals of K with norm at most X is asymptotic to X/log X.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "analytic-number-theory"
+      ],
+      "by": "Edmund Landau, 1903",
+      "note": "It generalizes the prime number theorem to number fields. A more precise estimate is Li(X) + O_K(X exp(−c_K √log X)), where c_K is a constant depending on K.",
+      "url": "https://en.wikipedia.org/wiki/Landau_prime_ideal_theorem",
+      "area": "number-theory",
+      "year": 1903,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "latimer-macduffee-theorem",
+      "name": "Latimer–MacDuffee theorem",
+      "short": "Latimer–MacDuffee theorem",
+      "statement": "Let f be a monic polynomial of degree n with integer coefficients that is irreducible. There is a one-to-one correspondence between ℤ-similarity classes of n×n integer matrices with characteristic polynomial f and the ideal classes of the order ℤ[x]/(f(x)), where two ideals are equivalent if they are equal up to a nonzero rational scalar multiple.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "linear-algebra"
+      ],
+      "by": "Claiborne Latimer and Cyrus Colton MacDuffee, 1933",
+      "note": "An order in a number field has only finitely many ideal classes, so there are only finitely many conjugacy classes of integer matrices with characteristic polynomial f. Olga Taussky-Todd later made significant contributions to its theory.",
+      "url": "https://en.wikipedia.org/wiki/Latimer%E2%80%93MacDuffee_theorem",
+      "area": "number-theory",
+      "year": 1933,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bombieri-lang-conjecture",
+      "name": "Bombieri–Lang conjecture",
+      "short": "Bombieri–Lang conjecture",
+      "statement": "If X is a positive-dimensional algebraic variety of general type defined over a number field k, then the k-rational points of X do not form a dense set in the Zariski topology.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry",
+        "algebraic-geometry"
+      ],
+      "by": "Enrico Bombieri (lecture at the University of Chicago, 1980) and Serge Lang (papers starting in 1971), posed independently",
+      "note": "A weak form concerns smooth surfaces of general type, and a refined form asks for a dense open subset with only finitely many rational points over every number field extension of k. If true, the conjecture would resolve the Erdős–Ulam problem.",
+      "url": "https://en.wikipedia.org/wiki/Bombieri%E2%80%93Lang_conjecture",
+      "area": "number-theory",
+      "year": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "davenport-erdos-theorem",
+      "name": "Davenport–Erdős theorem",
+      "short": "Davenport–Erdős theorem",
+      "statement": "Let A be a sequence of positive integers and M(A) the set of all products ka with k a positive integer and a in A. Then the lower natural density of M(A), its logarithmic density (where each element a has weight 1/a), and its sequential density (the limit of the densities of the sets of multiples of the first i elements of A) all give the same number.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "hardy-littlewood-tauberian-theorem"
+      ],
+      "by": "Harold Davenport and Paul Erdős, 1936",
+      "note": "A sequence A for which these densities of M(A) equal one is called a Behrend sequence.",
+      "url": "https://en.wikipedia.org/wiki/Davenport%E2%80%93Erd%C5%91s_theorem",
+      "area": "number-theory",
+      "year": 1936,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hilbert-waring-theorem",
+      "name": "Hilbert–Waring theorem",
+      "short": "Hilbert–Waring theorem",
+      "statement": "For each natural number k there is a positive integer s such that every natural number is the sum of at most s natural numbers raised to the power k.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory",
+        "elementary-number-theory"
+      ],
+      "by": "Proposed by Edward Waring, 1770; proved by Hilbert, 1909",
+      "note": "For example, every natural number is the sum of at most 4 squares, 9 cubes, or 19 fourth powers.",
+      "url": "https://en.wikipedia.org/wiki/Waring's_problem",
+      "area": "number-theory",
+      "year": 1770,
+      "settled": 1909,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kummer-vandiver-conjecture",
+      "name": "Kummer–Vandiver conjecture",
+      "short": "Vandiver conjecture",
+      "statement": "For every prime p, p does not divide the class number of the maximal real subfield ℚ(ζ_p)⁺ of the p-th cyclotomic field.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Ernst Kummer, in letters to Leopold Kronecker, 1849 and 1853; independently rediscovered around 1920 by Philipp Furtwängler and Harry Vandiver",
+      "note": "Kummer showed that if p does not divide the class number of the cyclotomic field ℚ(ζ_p), then Fermat's Last Theorem holds for exponent p. The conjecture has been checked by computer for primes below 2^31.",
+      "url": "https://en.wikipedia.org/wiki/Kummer%E2%80%93Vandiver_conjecture",
+      "area": "number-theory",
+      "year": 1849,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "littlewood-conjecture",
+      "name": "Littlewood conjecture",
+      "short": "Littlewood conjecture",
+      "statement": "For every pair of real numbers α and β, the limit inferior as n → ∞ of n·‖nα‖·‖nβ‖ is 0, where ‖x‖ is the distance from x to the nearest integer.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "J. E. Littlewood, around 1930",
+      "note": "It holds if either number is rational or not badly approximable. In 2006 Einsiedler, Katok and Lindenstrauss proved that the set of counterexamples has Hausdorff dimension zero.",
+      "url": "https://en.wikipedia.org/wiki/Littlewood_conjecture",
+      "area": "number-theory",
+      "year": 1930,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lonely-runner-conjecture",
+      "name": "Lonely runner conjecture",
+      "short": "Lonely runner conjecture",
+      "statement": "Suppose n runners start together at the same point of a circular track of unit length and run with constant speeds that are all distinct from one another (speeds may be negative). Then each runner is lonely at some time, meaning at distance at least 1/n along the circle from every other runner.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Posed in 1967 by Jörg M. Wills in number-theoretic terms, and independently as a view-obstruction problem in 1974 by Thomas W. Cusick",
+      "note": "The conjecture is known to be true for 13 runners or fewer. It implies solutions to view-obstruction problems and bounds related to chromatic numbers of certain graphs.",
+      "url": "https://en.wikipedia.org/wiki/Lonely_runner_conjecture",
+      "area": "number-theory",
+      "year": 1967,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "mahlers-compactness-theorem",
+      "name": "Mahler's compactness theorem",
+      "short": "Mahler's compactness thm",
+      "statement": "Let X be the space GLₙ(ℝ)/GLₙ(ℤ) of lattices in ℝⁿ with its quotient topology, and let Δ be the absolute value of the determinant. A subset Y of X is relatively compact if and only if Δ is bounded on Y and there is a neighbourhood N of 0 in ℝⁿ such that, for every lattice Λ in Y, the only lattice point of Λ in N is 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Mahler, 1946",
+      "note": "A lattice can degenerate in only two ways: its fundamental domain gets ever larger volume, or it contains shorter and shorter vectors. David Mumford generalized it to semisimple Lie groups.",
+      "url": "https://en.wikipedia.org/wiki/Mahler's_compactness_theorem",
+      "area": "number-theory",
+      "year": 1946,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "maiers-theorem",
+      "name": "Maier's theorem",
+      "short": "Maier's theorem",
+      "statement": "Let π be the prime-counting function and λ > 1. Then (π(x + (log x)^λ) − π(x)) / (log x)^(λ−1) has no limit as x tends to infinity: its limit superior is greater than 1 and its limit inferior is less than 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Helmut Maier",
+      "note": "Cramér's probabilistic model of primes incorrectly predicts that this ratio has limit 1 when λ ≥ 2.",
+      "url": "https://en.wikipedia.org/wiki/Maier's_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "main-conjecture-of-iwasawa-theory",
+      "name": "Main conjecture of Iwasawa theory",
+      "short": "Iwasawa main conjecture",
+      "statement": "Let p be a prime, F_n = ℚ(ζ) with ζ a root of unity of order p^(n+1), H_∞ the inverse limit of the p-power parts of the ideal class groups of the F_n, and V = H_∞ ⊗ ℚ_p. If i is an odd integer not congruent to 1 mod p − 1, then the characteristic polynomial h_p(ω^i, T) of a topological generator γ of Γ acting on the ω^i-eigenspace of V (ω the Teichmüller character) and the power series G_p(ω^(1−i), T), defined from the p-adic L-function by G_p(ω^j, u^s − 1) = L_p(ω^j, s), generate the same ideal of the power series ring ℤ_p[[T]].",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Proved by Kenkichi Iwasawa for primes satisfying the Kummer–Vandiver conjecture, and for all primes by Barry Mazur and Andrew Wiles",
+      "note": "The Herbrand–Ribet theorem and the Gras conjecture are both easy consequences of it. Wiles later proved it for all totally real number fields.",
+      "url": "https://en.wikipedia.org/wiki/Main_conjecture_of_Iwasawa_theory",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "manin-drinfeld-theorem",
+      "name": "Manin–Drinfeld theorem",
+      "short": "Manin–Drinfeld theorem",
+      "statement": "The difference of two cusps of a modular curve has finite order in the Jacobian variety.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry",
+        "algebraic-geometry"
+      ],
+      "by": "Manin, 1972, and Drinfeld, 1973",
+      "url": "https://en.wikipedia.org/wiki/Manin%E2%80%93Drinfeld_theorem",
+      "area": "number-theory",
+      "year": 1972,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "meyers-theorem",
+      "name": "Meyer's theorem",
+      "short": "Meyer's theorem",
+      "statement": "An indefinite quadratic form Q with rational coefficients in five or more variables nontrivially represents zero over the rationals. In other words, if Q = 0 has a non-zero real solution, then it has a non-zero rational solution, and by clearing denominators an integral one.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "hasse-minkowski-theorem"
+      ],
+      "note": "The number of variables is best possible, since some indefinite rational quadratic forms in four variables do not represent zero. The theorem is usually deduced from the Hasse–Minkowski theorem, which was proved later.",
+      "url": "https://en.wikipedia.org/wiki/Meyer's_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "neron-ogg-shafarevich-criterion",
+      "name": "Néron–Ogg–Shafarevich criterion",
+      "short": "Néron–Ogg–Shafarevich",
+      "statement": "Let A be an elliptic curve or abelian variety over a local field K, and let ℓ be a prime not dividing the characteristic of the residue field of K. Then A has good reduction if and only if the ℓ-adic Tate module of A is unramified.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "chevalleys-structure-theorem",
+          "url": "https://en.wikipedia.org/wiki/Chevalley's_structure_theorem"
+        }
+      ],
+      "by": "Andrew Ogg introduced it for elliptic curves; Jean-Pierre Serre and John Tate used results of André Néron to extend it to abelian varieties",
+      "note": "Serre and Tate named it after Ogg, Néron and Igor Shafarevich, since Ogg's result seems to have been known to Shafarevich.",
+      "url": "https://en.wikipedia.org/wiki/N%C3%A9ron%E2%80%93Ogg%E2%80%93Shafarevich_criterion",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "oppenheim-conjecture",
+      "name": "Oppenheim conjecture",
+      "short": "Oppenheim conjecture",
+      "statement": "Let Q be a real nondegenerate indefinite quadratic form in n ≥ 3 variables that is not a multiple of a form with rational coefficients. Then for any ε > 0 there is a non-zero vector x with integer components such that |Q(x)| < ε.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Conjectured for n ≥ 5 by Alexander Oppenheim, 1929; the stronger version is due to Harold Davenport, 1946; proved in complete generality by Grigory Margulis, 1987",
+      "note": "The conjecture is also stated as saying that the values of such a form on integer vectors are dense in the real line. Margulis proved it with methods of ergodic theory, and it suffices to treat the case n = 3.",
+      "url": "https://en.wikipedia.org/wiki/Oppenheim_conjecture",
+      "area": "number-theory",
+      "year": 1929,
+      "settled": 1987,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "selbergs-zeta-function-conjecture",
+      "name": "Selberg's zeta function conjecture",
+      "short": "Selberg's zeta conjecture",
+      "statement": "Fix ε with 0 < ε < 0.001 and let H = T^(27/82 + ε), where 27/82 = 1/3 − 1/246. Then there is a constant c > 0 such that for every sufficiently large T, there are at least cH ln T real numbers t between T and T + H with ζ(1/2 + it) = 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Conjectured by Atle Selberg, who had proved the case of exponent 0.5 + ε in 1942; proved by Anatolii Karatsuba, 1984",
+      "note": "Selberg conjectured that the exponent 0.5 in H = T^(0.5+ε) can be lowered. The estimates of Selberg and Karatsuba cannot be improved in the order of growth as T → ∞.",
+      "url": "https://en.wikipedia.org/wiki/Selberg's_zeta_function_conjecture",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "siegels-theorem-on-integral-points",
+      "name": "Siegel's theorem on integral points",
+      "short": "Siegel's integral points",
+      "statement": "Let C be an affine algebraic curve defined over a number field K, let g be the genus of the smooth projective curve birational to C, and let n be the number of points at infinity of C. If g ≥ 1, or g = 0 and n ≥ 3, then C has only finitely many points whose coordinates lie in the ring of integers of K, and more generally only finitely many S-integral points.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "mordell-weil"
+      ],
+      "by": "Carl Ludwig Siegel, 1929",
+      "note": "The proof is ineffective: it shows the set of integral points is finite but gives no method for finding them. It was the first major result on Diophantine equations that depended only on the genus of the curve.",
+      "url": "https://en.wikipedia.org/wiki/Siegel's_theorem_on_integral_points",
+      "area": "number-theory",
+      "year": 1929,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "roths-theorem",
+      "name": "Roth's theorem",
+      "short": "Roth's theorem",
+      "statement": "Every irrational algebraic number α has irrationality exponent equal to 2. That is, for every ε > 0, the inequality |α − p/q| < 1/q^(2+ε) has only finitely many solutions in coprime integers p and q.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Conjectured by Siegel; proved by Roth, 1955",
+      "note": "It gives the best possible bound, culminating earlier bounds by Liouville (1844), Thue (1909), Siegel (1921) and Dyson (1947). The theorem is not effective: no bound is known on the possible values of p and q.",
+      "url": "https://en.wikipedia.org/wiki/Roth's_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lagranges-four-square-theorem",
+      "name": "Lagrange's four-square theorem",
+      "short": "Four-square theorem",
+      "statement": "Every nonnegative integer can be written as a sum of four squares of integers, n = a² + b² + c² + d².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "eulers-four-square-identity",
+          "url": "https://en.wikipedia.org/wiki/Euler's_four-square_identity"
+        }
+      ],
+      "by": "Stated by Claude Gaspard Bachet de Méziriac, 1621; proved by Joseph-Louis Lagrange, 1770",
+      "note": "Diophantus was already aware of the theorem from examples in the Arithmetica. It is a special case of the Fermat polygonal number theorem and of Waring's problem.",
+      "url": "https://en.wikipedia.org/wiki/Lagrange's_four-square_theorem",
+      "area": "number-theory",
+      "year": 1621,
+      "settled": 1770,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "star-of-david-theorem",
+      "name": "Star of David theorem",
+      "short": "Star of David theorem",
+      "statement": "In Pascal's triangle, the two triangles of binomial coefficients that form the Star of David shape around an entry have equal greatest common divisors: gcd{C(n−1, k−1), C(n, k+1), C(n+1, k)} = gcd{C(n−1, k), C(n, k−1), C(n+1, k+1)}.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory",
+        "combinatorics"
+      ],
+      "by": "Henry W. Gould, 1972",
+      "note": "The two sets of three binomial coefficients also have equal products.",
+      "url": "https://en.wikipedia.org/wiki/Star_of_David_theorem",
+      "area": "number-theory",
+      "year": 1972,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "st-rmers-theorem",
+      "name": "Størmer's theorem",
+      "short": "Størmer's theorem",
+      "statement": "For every finite set P of primes, there are only finitely many pairs of consecutive P-smooth numbers. Here the P-smooth numbers are the integers that are products of primes from P.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Named after Carl Størmer, who gave a procedure for finding all such pairs using Pell equations",
+      "note": "Finiteness also follows from the Thue–Siegel–Roth theorem, but Størmer's method finds all the pairs.",
+      "url": "https://en.wikipedia.org/wiki/St%C3%B8rmer's_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "subspace-theorem",
+      "name": "Subspace theorem",
+      "short": "Subspace theorem",
+      "statement": "Let L_1, ..., L_n be linearly independent linear forms in n variables with algebraic coefficients, and let ε > 0 be a real number. Then the non-zero integer points x with |L_1(x)⋯L_n(x)| < |x|^(−ε) lie in a finite number of proper subspaces of ℚⁿ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Schmidt, 1972; generalised by Schlickewei, 1977, to more general absolute values on number fields",
+      "note": "In words, points of small height in projective space lie in a finite number of hyperplanes. The case n = 1 of its corollary on Diophantine approximation is the Thue–Siegel–Roth theorem.",
+      "url": "https://en.wikipedia.org/wiki/Subspace_theorem",
+      "area": "number-theory",
+      "year": 1972,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tate-duality",
+      "name": "Tate duality",
+      "short": "Tate duality",
+      "statement": "For a p-adic local field k, a finite group scheme M and its dual M′ = Hom(M, 𝔾ₘ), there is a perfect pairing of finite groups Hʳ(k,M) × H²⁻ʳ(k,M′) → H²(k,𝔾ₘ) = ℚ/ℤ, where 𝔾ₘ is the multiplicative group.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "galois-theory"
+      ],
+      "by": "John Tate, 1962; Georges Poitou, 1967",
+      "note": "Similar versions hold for local fields of characteristic p > 0 and for Archimedean fields. A global version over number fields is called Poitou–Tate duality.",
+      "url": "https://en.wikipedia.org/wiki/Tate_duality",
+      "area": "number-theory",
+      "year": 1962,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "turan-kubilius-inequality",
+      "name": "Turán–Kubilius inequality",
+      "short": "Turán–Kubilius inequality",
+      "statement": "Let f be an additive complex-valued arithmetic function, and put A(x) = ∑ f(p^ν) p^(−ν) (1 − 1/p) and B(x)² = ∑ |f(p^ν)|² p^(−ν), both sums over all prime powers p^ν ≤ x with ν ≥ 1. Then there is a function ε(x) tending to 0 as x tends to infinity such that for every x ≥ 2, (1/x) ∑_(n ≤ x) |f(n) − A(x)|² ≤ (2 + ε(x)) B(x)².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Pál Turán, 1934 (special case); generalized by Jonas Kubilius, 1956 and 1964",
+      "note": "It is useful for proving results about the normal order of an arithmetic function. Turán developed it to give a simpler proof of the Hardy–Ramanujan theorem on the number of distinct prime divisors.",
+      "url": "https://en.wikipedia.org/wiki/Tur%C3%A1n%E2%80%93Kubilius_inequality",
+      "area": "number-theory",
+      "year": 1934,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "vaughans-identity",
+      "name": "Vaughan's identity",
+      "short": "Vaughan's identity",
+      "statement": "For any positive numbers U and V and every positive integer n, the von Mangoldt function satisfies Λ(n) = a₁(n) + a₂(n) + a₃(n) + a₄(n), where a₁(n) = Λ(n) for n ≤ U and 0 for n > U, a₂(n) = −∑ Λ(m)μ(d) over all mdr = n with m ≤ U and d ≤ V, a₃(n) = ∑ μ(d) log h over all hd = n with d ≤ V, and a₄(n) = −∑ Λ(m)·(∑ μ(d) over divisors d of k with d ≤ V) over all mk = n with m > U and k > 1. Here μ is the Möbius function.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Vaughan, 1977",
+      "note": "It is used to estimate sums of f(n)Λ(n) over n ≤ N, and it simplified Vinogradov's work on trigonometric sums and the proof of the Bombieri–Vinogradov theorem. Heath-Brown generalized it in 1982.",
+      "url": "https://en.wikipedia.org/wiki/Vaughan's_identity",
+      "area": "number-theory",
+      "year": 1977,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "vojtas-conjecture",
+      "name": "Vojta's conjecture",
+      "short": "Vojta's conjecture",
+      "statement": "Let F be a number field, X a non-singular algebraic variety over F, D an effective divisor on X with at worst normal crossings, H an ample divisor and K a canonical divisor on X; choose Weil heights h_H and h_K, a local height λᵥ for D at each absolute value v of F, a finite set S of absolute values of F, and ε > 0. Then there are a constant C and a non-empty Zariski open set U ⊆ X such that the sum of λᵥ(P) over v in S, plus h_K(P), is at most ε·h_H(P) + C for every point P of U with coordinates in F.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "arithmetic-geometry"
+      ],
+      "by": "Introduced by Paul Vojta",
+      "note": "It was motivated by an analogy between diophantine approximation and Nevanlinna theory in complex analysis. It implies many other conjectures in Diophantine approximation, Diophantine equations, arithmetic geometry, and mathematical logic.",
+      "url": "https://en.wikipedia.org/wiki/Vojta's_conjecture",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "weils-conjecture-on-tamagawa-numbers",
+      "name": "Weil's conjecture on Tamagawa numbers",
+      "short": "Weil's Tamagawa conjecture",
+      "statement": "The Tamagawa number τ(G) of a simply connected simple algebraic group G defined over a number field is 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory",
+        "algebraic-geometry"
+      ],
+      "by": "Observed by Weil, 1959; the proof was completed by V. I. Chernousov, 1989, building on Langlands (1966), Lai (1980) and Kottwitz (1988)",
+      "note": "In 2011 Lurie and Gaitsgory announced a proof for algebraic groups over function fields over finite fields.",
+      "url": "https://en.wikipedia.org/wiki/Weil's_conjecture_on_Tamagawa_numbers",
+      "area": "number-theory",
+      "year": 1959,
+      "settled": 1989,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "zsigmondys-theorem",
+      "name": "Zsigmondy's theorem",
+      "short": "Zsigmondy's theorem",
+      "statement": "Let a > b > 0 be coprime integers. For every integer n ≥ 1 other than 1, 2 and 6, there is a prime p that divides aⁿ − bⁿ but does not divide aᵏ − bᵏ for any positive integer k < n.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Karl Zsigmondy, 1892",
+      "note": "Such a prime is called a primitive prime divisor. Similarly, aⁿ + bⁿ has at least one primitive prime divisor, with the single exception 2³ + 1³ = 9.",
+      "url": "https://en.wikipedia.org/wiki/Zsigmondy's_theorem",
+      "area": "number-theory",
+      "year": 1892,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "collatz-conjecture",
+      "name": "Collatz conjecture",
+      "short": "Collatz conjecture",
+      "statement": "Start with any positive integer. If the current number is even, halve it; if it is odd, multiply it by 3 and add 1. Repeating this always eventually reaches 1, whichever positive integer is chosen to start.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "natural-numbers"
+      ],
+      "by": "Lothar Collatz, 1937",
+      "note": "It is one of the most famous unsolved problems in mathematics. It has been checked by computer for all starting values up to 2^71, but no general proof has been found.",
+      "url": "https://en.wikipedia.org/wiki/Collatz_conjecture",
+      "area": "number-theory",
+      "year": 1937,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bruns-theorem",
+      "name": "Brun's theorem",
+      "short": "Brun's theorem",
+      "statement": "The sum of the reciprocals of the twin primes converges to a finite value, known as Brun's constant.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Viggo Brun, 1919",
+      "note": "It has historical importance in the introduction of sieve methods. Because the sum converges, it does not settle whether there are infinitely many twin primes.",
+      "url": "https://en.wikipedia.org/wiki/Brun's_theorem",
+      "area": "number-theory",
+      "year": 1919,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-kac-theorem",
+      "name": "Erdős–Kac theorem",
+      "short": "Erdős–Kac theorem",
+      "statement": "Let ω(n) be the number of distinct prime factors of n. For any fixed a < b, the proportion of integers n ≤ x for which (ω(n) − log log n)/√(log log n) lies between a and b tends, as x → ∞, to (1/√(2π)) ∫ from a to b of e^(−t²/2) dt, the area under the standard normal curve between a and b.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "Named after Paul Erdős and Mark Kac; the proof is due to Erdős",
+      "note": "It is an extension of the Hardy–Ramanujan theorem and is also known as the fundamental theorem of probabilistic number theory.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Kac_theorem",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kroneckers-approximation-theorem",
+      "name": "Kronecker's approximation theorem",
+      "short": "Kronecker approximation",
+      "statement": "Given real vectors α_1, …, α_m and β in ℝⁿ, the vector β can be approximated arbitrarily closely by sums ∑ q_i α_i − p with integers q_i and an integer vector p, if and only if for every integer vector r with ∑_j α_ij r_j an integer for each i, the number ∑_j β_j r_j is also an integer. For m = n = 1: for any irrational α, any real β and any ε > 0 there are integers p and q with q > 0 such that |αq − p − β| < ε.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "pontryagin-duality-theorem"
+      ],
+      "by": "Leopold Kronecker, 1884",
+      "note": "It generalizes Dirichlet's approximation theorem to multiple variables.",
+      "url": "https://en.wikipedia.org/wiki/Kronecker's_theorem",
+      "area": "number-theory",
+      "year": 1884,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "midys-theorem",
+      "name": "Midy's theorem",
+      "short": "Midy's theorem",
+      "statement": "Let p be a prime and a/p a fraction between 0 and 1 whose decimal expansion repeats with a shortest repeating block of even length 2n. Then each digit in the second half of the block and the corresponding digit in the first half add up to 9, so the two n-digit halves add up to 10ⁿ − 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Named after the French mathematician E. Midy, whose paper on periodic decimal fractions appeared in 1836",
+      "note": "For example, 1/7 = 0.142857… and 142 + 857 = 999. The theorem and its extension hold in any base b, with 10ⁿ − 1 replaced by bⁿ − 1.",
+      "url": "https://en.wikipedia.org/wiki/Midy's_theorem",
+      "area": "number-theory",
+      "year": 1836,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rossers-theorem",
+      "name": "Rosser's theorem",
+      "short": "Rosser's theorem",
+      "statement": "For every n ≥ 1, the nth prime number pₙ is greater than n log n, where log is the natural logarithm.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "analytic-number-theory"
+      ],
+      "by": "J. Barkley Rosser, 1939",
+      "note": "In 1999 Pierre Dusart proved a tighter bound: pₙ > n(log n + log log n − 1) for n ≥ 2.",
+      "url": "https://en.wikipedia.org/wiki/Rosser's_theorem",
+      "area": "number-theory",
+      "year": 1939,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bonses-inequality",
+      "name": "Bonse's inequality",
+      "short": "Bonse's inequality",
+      "statement": "For every n ≥ 4, if p₁, …, pₙ, pₙ₊₁ are the first n+1 prime numbers, then the product p₁p₂⋯pₙ of the first n primes is greater than pₙ₊₁².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Named after H. Bonse",
+      "note": "It relates the size of a primorial to the smallest prime that does not appear in its prime factorization.",
+      "url": "https://en.wikipedia.org/wiki/Bonse's_inequality",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fermats-theorem-on-sums-of-two-squares",
+      "name": "Fermat's theorem on sums of two squares",
+      "short": "Fermat's two squares",
+      "statement": "An odd prime p can be written as p = x² + y² with x and y integers if and only if p ≡ 1 (mod 4).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "fermats-little-theorem",
+        "fundamental-theorem-arithmetic",
+        "euclidean-division-theorem",
+        "eulers-criterion",
+        {
+          "id": "thues-lemma",
+          "url": "https://en.wikipedia.org/wiki/Thue's_lemma"
+        }
+      ],
+      "by": "First observed by Albert Girard, published 1625; stated by Fermat in a letter to Marin Mersenne, 1640; first proved by Euler, 1749",
+      "note": "Applied to prime factorizations, it shows that a positive integer is a sum of two squares if and only if every prime factor congruent to 3 modulo 4 occurs to an even exponent. Fermat gave no proof, and Euler found the first one by infinite descent.",
+      "url": "https://en.wikipedia.org/wiki/Fermat's_theorem_on_sums_of_two_squares",
+      "area": "number-theory",
+      "year": 1625,
+      "settled": 1749,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "thues-lemma",
+      "name": "Thue's lemma",
+      "short": "Thue's lemma",
+      "statement": "Let a and m be integers with m > 1, and let X and Y be positive integers with X ≤ m < XY. Then there are integers x and y such that ay ≡ x (mod m), |x| < X and 0 < y < Y.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "pigeonhole-principle"
+      ],
+      "by": "First known proof attributed to Axel Thue, using a pigeonhole argument",
+      "note": "Taking m to be a prime p congruent to 1 modulo 4 gives a proof of Fermat's theorem on sums of two squares.",
+      "url": "https://en.wikipedia.org/wiki/Thue's_lemma",
+      "area": "number-theory",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "newmans-conjecture",
+      "name": "Newman's conjecture",
+      "short": "Newman's conjecture",
+      "statement": "For any integers m and r with 0 ≤ r ≤ m−1, the partition function p(n) satisfies p(n) ≡ r (mod m) for infinitely many non-negative integers n.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "elementary-number-theory"
+      ],
+      "by": "Morris Newman, 1960",
+      "note": "Newman proved the cases m = 5 and 13, and later m = 65. Ahlgren and Boylan extended it to all primes except possibly 3, and then to all prime powers except powers of 2 or 3.",
+      "url": "https://en.wikipedia.org/wiki/Newman's_conjecture",
+      "area": "number-theory",
+      "year": 1960,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gelfond-schneider-theorem",
+      "name": "Gelfond–Schneider theorem",
+      "short": "Gelfond–Schneider theorem",
+      "statement": "If a and b are algebraic numbers (real or complex) with a not equal to 0 or 1 and b not rational, then every value of aᵇ is a transcendental number.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "algebraic-number-theory"
+      ],
+      "by": "Aleksandr Gelfond and Theodor Schneider, independently, 1934",
+      "note": "It answers Hilbert's seventh problem affirmatively. It shows, for example, that 2^√2 and e^π are transcendental.",
+      "url": "https://en.wikipedia.org/wiki/Gelfond%E2%80%93Schneider_theorem",
+      "area": "number-theory",
+      "year": 1934,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lifting-the-exponent-lemma",
+      "name": "Lifting-the-exponent lemma",
+      "short": "Lifting the exponent",
+      "statement": "Let p be an odd prime and let ν_p(x) be the exponent of the highest power of p dividing x. If x and y are integers not divisible by p, n is a positive integer, and p divides x − y, then ν_p(xⁿ − yⁿ) = ν_p(x − y) + ν_p(n).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "binomial-theorem"
+      ],
+      "by": "Some ideas appeared in the work of Édouard Lucas by 1878; modern systematic formulation first published by Mihai Manea, 2006",
+      "note": "This is the main case. The lemma also has formulas for sums xⁿ + yⁿ and for p = 2. It is related to Hensel's lemma and is often used in mathematical olympiads.",
+      "url": "https://en.wikipedia.org/wiki/Lifting-the-exponent_lemma",
+      "area": "number-theory",
+      "year": 2006,
+      "origin": "wikipedia-import"
     }
   ]
 }

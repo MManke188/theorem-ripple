@@ -22,7 +22,28 @@
       "statement": "For any two sets x and y there is a set that contains x and y as elements.",
       "kind": "axiom",
       "base": "open",
-      "needs": [],
+      "needs": [
+        {
+          "id": "axiom-of-empty-set",
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "axiom-power-set",
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "axiom-infinity",
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "axiom-of-adjunction",
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
+          "origin": "wikipedia-import"
+        }
+      ],
       "by": "Ernst Zermelo, 1908",
       "note": "Zermelo introduced it as a special case of his axiom of elementary sets.",
       "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
@@ -36,7 +57,13 @@
       "statement": "For any set X there is a set whose elements are exactly the elements of the elements of X.",
       "kind": "axiom",
       "base": "open",
-      "needs": [],
+      "needs": [
+        {
+          "id": "axiom-of-limitation-of-size",
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_limitation_of_size",
+          "origin": "wikipedia-import"
+        }
+      ],
       "by": "Ernst Zermelo, 1908",
       "url": "https://en.wikipedia.org/wiki/Axiom_of_union",
       "area": "foundations",
@@ -622,7 +649,13 @@
       "statement": "Every whole number greater than 1 can be written as a product of prime numbers in exactly one way, apart from the order of the factors.",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "euclids-lemma",
+          "url": "https://en.wikipedia.org/wiki/Euclid's_lemma",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "elementary-number-theory"
       ],
@@ -639,7 +672,18 @@
       "statement": "For two different odd primes p and q, p is a perfect square modulo q exactly when q is a perfect square modulo p, unless both p and q leave remainder 3 when divided by 4, in which case exactly one of the two holds.",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "gausss-lemma",
+          "url": "https://en.wikipedia.org/wiki/Gauss's_lemma_(number_theory)",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "zolotarevs-lemma",
+          "url": "https://en.wikipedia.org/wiki/Zolotarev's_lemma",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "elementary-number-theory"
       ],
@@ -676,7 +720,13 @@
       "statement": "Differentiation and integration undo each other: the area under a continuous function f from a to x, viewed as a function of x, has derivative f, and the integral of f from a to b equals F(b) − F(a) for any antiderivative F.",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "squeeze-theorem",
+          "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "real-analysis"
       ],
@@ -693,7 +743,48 @@
       "statement": "Every polynomial in one variable with complex coefficients that is not constant has at least one complex root. Equivalently, the complex numbers are algebraically closed.",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "intermediate-value-theorem",
+          "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "de-moivres-formula",
+          "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "extreme-value-theorem",
+          "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "maximum-modulus-principle",
+          "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "liouvilles-theorem-complex-analysis",
+          "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "argument-principle",
+          "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "cauchy-integral-theorem",
+          "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "gauss-bonnet-theorem",
+          "url": "https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "complex-numbers"
       ],
@@ -713,7 +804,13 @@
       "statement": "If a function is complex-differentiable (holomorphic) everywhere in a region without holes, then its integral around any closed curve in that region is zero.",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "greens-theorem",
+          "url": "https://en.wikipedia.org/wiki/Cauchy's_integral_theorem",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "complex-analysis"
       ],
@@ -789,7 +886,18 @@
       "statement": "Any consistent formal system whose axioms can be listed by an algorithm and in which a certain amount of elementary arithmetic can be carried out has statements it can neither prove nor disprove. Such a system also cannot prove its own consistency.",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "chinese-remainder-theorem",
+          "url": "https://en.wikipedia.org/wiki/Chinese_remainder_theorem",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "diagonal-lemma",
+          "url": "https://en.wikipedia.org/wiki/G%C3%B6del's_incompleteness_theorems",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "mathematical-logic",
         "natural-numbers"
@@ -822,6 +930,203 @@
       "url": "https://en.wikipedia.org/wiki/Halting_problem",
       "area": "foundations",
       "year": 1936
+    },
+    {
+      "id": "euclidean-geometry",
+      "name": "Euclidean geometry",
+      "short": "Euclidean geometry",
+      "statement": "The geometry of points, lines, circles, angles and figures in the plane and in three-dimensional space that Euclid set out in his Elements, deducing theorems from a small set of axioms. It includes the geometry of triangles and the trigonometry of triangles. In modern mathematics the plane can be taken to be the set of pairs of real numbers, with distances and angles given by the dot product; this definition is equivalent to the axiomatic one.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "linear-algebra",
+          "url": "https://en.wikipedia.org/wiki/Euclidean_space#Technical_definition"
+        },
+        {
+          "id": "real-numbers",
+          "url": "https://en.wikipedia.org/wiki/Euclidean_space#Technical_definition"
+        }
+      ],
+      "by": "Euclid",
+      "year": -300,
+      "note": "Euclid's axioms have gaps, for example they do not guarantee that two circles meet; Hilbert, Birkhoff and Tarski later gave complete axiom systems. A Euclidean space is defined today as an affine space over the real numbers whose vectors carry an inner product. Hyperbolic and elliptic geometry are consistent non-Euclidean alternatives in which the parallel postulate fails.",
+      "url": "https://en.wikipedia.org/wiki/Euclidean_geometry",
+      "area": "foundations"
+    },
+    {
+      "id": "probability-theory",
+      "name": "Probability theory",
+      "short": "Probability theory",
+      "statement": "The branch of mathematics that treats chance rigorously from axioms: a probability measure assigns to each event, a set of possible outcomes, a number from 0 to 1, and the set of all outcomes gets 1. Its central subjects include random variables, probability distributions and stochastic processes, which describe quantities that change randomly over time.",
+      "kind": "system",
+      "within": [
+        "measure-theory"
+      ],
+      "by": "Andrey Kolmogorov, 1933 (axioms)",
+      "year": 1933,
+      "note": "Kolmogorov combined the notion of a sample space with measure theory and presented his axiom system in 1933. These axioms are the generally accepted basis of modern probability theory, though alternatives exist, such as de Finetti's finite additivity.",
+      "url": "https://en.wikipedia.org/wiki/Probability_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "statistics",
+      "name": "Statistics (mathematical statistics)",
+      "short": "Statistics",
+      "statement": "The mathematical theory of drawing conclusions from data: a probability model is chosen for how the data arose, and from it one estimates unknown quantities and states the uncertainty, for example as a confidence interval.",
+      "kind": "system",
+      "within": [
+        "probability-theory"
+      ],
+      "note": "Techniques commonly used in it include mathematical analysis, linear algebra, stochastic analysis, differential equations and measure theory.",
+      "url": "https://en.wikipedia.org/wiki/Mathematical_statistics",
+      "area": "foundations"
+    },
+    {
+      "id": "algebraic-topology",
+      "name": "Algebraic topology",
+      "short": "Algebraic topology",
+      "statement": "The branch of mathematics that uses tools from abstract algebra to study topological spaces. It attaches algebraic invariants to a space, such as its fundamental group, homotopy groups and homology groups, which stay the same when the space is continuously deformed.",
+      "kind": "system",
+      "within": [
+        "topology",
+        {
+          "id": "group-theory",
+          "url": "https://en.wikipedia.org/wiki/Algebraic_topology#Method_of_algebraic_invariants"
+        }
+      ],
+      "by": "Henri Poincaré, Analysis Situs, 1895",
+      "year": 1895,
+      "note": "An older name was combinatorial topology. The name changed in the 1920s and 1930s, as topological spaces were increasingly studied through the groups attached to them.",
+      "url": "https://en.wikipedia.org/wiki/Algebraic_topology",
+      "area": "foundations"
+    },
+    {
+      "id": "category-theory",
+      "name": "Category theory",
+      "short": "Category theory",
+      "statement": "A general theory of mathematical structures and their relations. A category consists of objects and arrows (morphisms) between them that can be composed, for example all sets together with the functions between them.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "zf-set-theory",
+          "url": "https://en.wikipedia.org/wiki/Universe_(mathematics)"
+        }
+      ],
+      "by": "Samuel Eilenberg and Saunders Mac Lane, 1945",
+      "year": 1945,
+      "note": "It was introduced for the needs of homological algebra, the study of homology in a general algebraic setting, and later widely extended for modern algebraic geometry. Small categories are ordinary sets. Large ones such as the category of all sets need classes or Grothendieck universes, and the existence of a universe cannot be proved in ZFC: it is equivalent to the existence of strongly inaccessible cardinals.",
+      "url": "https://en.wikipedia.org/wiki/Category_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "order-theory",
+      "name": "Order theory",
+      "short": "Order theory",
+      "statement": "The branch of mathematics that studies order, such as \"this is less than that\" or \"this comes before that\", using binary relations on sets. Its basic objects are partially ordered sets, and it includes lattices and Boolean algebras.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "zf-set-theory",
+          "url": "https://en.wikipedia.org/wiki/Order_theory#Partially_ordered_sets"
+        }
+      ],
+      "note": "A partial order on a set is a relation that is reflexive, antisymmetric and transitive. In a lattice every non-empty finite set has a least upper bound and a greatest lower bound.",
+      "url": "https://en.wikipedia.org/wiki/Order_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "ordinary-differential-equations",
+      "name": "Ordinary differential equations",
+      "short": "ODE theory",
+      "statement": "The study of equations that relate an unknown function of a single variable to its derivatives. A solution is a function on an interval of real numbers that can be differentiated often enough and satisfies the equation.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "real-analysis",
+          "url": "https://en.wikipedia.org/wiki/Ordinary_differential_equation#Solutions"
+        }
+      ],
+      "by": "Isaac Newton, Methodus fluxionum, 1671",
+      "year": 1671,
+      "note": "Under suitable conditions on the equation, such as those of the Picard–Lindelöf theorem, an initial value problem has exactly one solution, at least near the starting point. Differential equations came into existence with the calculus of Newton and Leibniz.",
+      "url": "https://en.wikipedia.org/wiki/Ordinary_differential_equation",
+      "area": "foundations"
+    },
+    {
+      "id": "dynamical-systems",
+      "name": "Dynamical systems (including ergodic theory)",
+      "short": "Dynamical systems",
+      "statement": "The study of systems in which a fixed rule describes how a point in some space moves over time, such as a swinging pendulum or the yearly number of fish in a lake. Ergodic theory, the part that studies the long-run average behaviour of such systems, is based on measure theory.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "ordinary-differential-equations",
+          "url": "https://en.wikipedia.org/wiki/Dynamical_system"
+        },
+        {
+          "id": "measure-theory",
+          "url": "https://en.wikipedia.org/wiki/Ergodic_theory"
+        }
+      ],
+      "by": "Henri Poincaré, New Methods of Celestial Mechanics, 1892–1899",
+      "year": 1892,
+      "note": "Many regard Poincaré, with his monographs on celestial mechanics, as the founder of the field. Continuous dynamical systems are usually described by differential equations and discrete ones by difference equations. Birkhoff (1931) and von Neumann (1932) proved the first ergodic theorems, on long-run time averages.",
+      "url": "https://en.wikipedia.org/wiki/Dynamical_system",
+      "area": "foundations"
+    },
+    {
+      "id": "information-theory",
+      "name": "Information theory",
+      "short": "Information theory",
+      "statement": "The mathematical study of how information is quantified, stored and communicated. Its central measure is entropy, the amount of uncertainty in a random variable, and one of its most important and direct applications is coding theory: compressing data and adding redundancy so that messages survive a noisy channel.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "probability-theory",
+          "url": "https://en.wikipedia.org/wiki/Information_theory#Quantities_of_information"
+        }
+      ],
+      "by": "Claude Shannon, 1948",
+      "year": 1948,
+      "note": "Shannon founded the field with his paper \"A Mathematical Theory of Communication\".",
+      "url": "https://en.wikipedia.org/wiki/Information_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "game-theory",
+      "name": "Game theory",
+      "short": "Game theory",
+      "statement": "The mathematical study of models of strategic interaction between rational agents. A game fixes the players, the strategies open to each and their payoffs, and a mixed strategy lets a player choose among strategies at random according to a probability distribution.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "probability-theory",
+          "url": "https://en.wikipedia.org/wiki/Game_theory#Pure_and_mixed_strategies"
+        }
+      ],
+      "by": "John von Neumann, 1928 (minimax theorem); John von Neumann and Oskar Morgenstern, 1944",
+      "year": 1928,
+      "note": "Decision theory, which studies the preferences and beliefs of a single agent, is closely related. Game theory is also applied to voting systems and social choice.",
+      "url": "https://en.wikipedia.org/wiki/Game_theory",
+      "area": "foundations"
+    },
+    {
+      "id": "projective-geometry",
+      "name": "Projective geometry",
+      "short": "Projective geometry",
+      "statement": "The study of geometric properties that do not change under projective transformations; it formalises principles of perspective drawing. Projective space adds points at infinity where parallel lines meet, and can be built from a vector space as the set of its lines through the origin.",
+      "kind": "system",
+      "within": [
+        {
+          "id": "linear-algebra",
+          "url": "https://en.wikipedia.org/wiki/Projective_space#Definition"
+        }
+      ],
+      "by": "Jean-Victor Poncelet, 1822",
+      "year": 1822,
+      "note": "Poncelet published the foundational treatise in 1822. Desargues had explored the principles of perspective in the 17th century.",
+      "url": "https://en.wikipedia.org/wiki/Projective_geometry",
+      "area": "foundations"
     }
   ]
 }

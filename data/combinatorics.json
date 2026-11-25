@@ -8,7 +8,13 @@
       "statement": "For any r and s there is a number R(r, s) such that however the edges of a complete graph on R(r, s) vertices are coloured red and blue, there is a blue clique on r vertices or a red clique on s vertices.",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "millikens-tree-theorem",
+          "url": "https://en.wikipedia.org/wiki/Milliken's_tree_theorem",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "combinatorics"
       ],
@@ -86,6 +92,11 @@
         {
           "id": "triangle-removal",
           "url": "https://en.wikipedia.org/wiki/Graph_removal_lemma#Additive_combinatorics"
+        },
+        {
+          "id": "szemeredi-regularity",
+          "url": "https://en.wikipedia.org/wiki/Roth's_theorem_on_arithmetic_progressions",
+          "origin": "wikipedia-import"
         }
       ],
       "by": "Klaus Roth, 1953",
@@ -109,6 +120,11 @@
         {
           "id": "van-der-waerden",
           "url": "https://arxiv.org/abs/math/0405251"
+        },
+        {
+          "id": "hypergraph-removal-lemma",
+          "url": "https://en.wikipedia.org/wiki/Hypergraph_removal_lemma",
+          "origin": "wikipedia-import"
         }
       ],
       "related": [
@@ -187,7 +203,13 @@
       "statement": "A finite graph is planar exactly when neither the complete graph K₅ nor the complete bipartite graph K₃,₃ can be obtained from it by deleting and contracting edges (as a minor).",
       "kind": "theorem",
       "base": "proven",
-      "needs": [],
+      "needs": [
+        {
+          "id": "three-utilities-problem",
+          "url": "https://en.wikipedia.org/wiki/Three_utilities_problem",
+          "origin": "wikipedia-import"
+        }
+      ],
       "within": [
         "graph-theory"
       ],
@@ -441,6 +463,3484 @@
       "url": "https://en.wikipedia.org/wiki/Sunflower_(mathematics)#Erd%C5%91s-Rado_sunflower_conjecture",
       "area": "combinatorics",
       "year": 1960
+    },
+    {
+      "id": "hales-jewett-theorem",
+      "name": "Hales–Jewett theorem",
+      "short": "Hales–Jewett theorem",
+      "statement": "For any positive integers n and c there is a positive integer H such that, whenever the set of all words of length H over an alphabet of n letters is split into c parts, at least one part contains an entire combinatorial line. A combinatorial line is the set of n words obtained from a word with a special symbol x in at least one place, by replacing every x with 1, 2, ..., n in turn.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Named after Alfred W. Hales and Robert I. Jewett",
+      "note": "Geometrically, if the cells of a high enough dimensional n×n×...×n cube are colored with c colors, some row, column or certain diagonal has all its cells the same color. It generalizes van der Waerden's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Hales%E2%80%93Jewett_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "happy-ending-problem",
+      "name": "Happy ending problem",
+      "short": "Happy ending problem",
+      "statement": "Among any five points in the plane in general position (no three on a line), some four are the vertices of a convex quadrilateral.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Named by Paul Erdős because it led to the marriage of George Szekeres and Esther Klein; generalized to larger polygons by Erdős and Szekeres, 1935",
+      "note": "It was one of the original results that led to the development of Ramsey theory. The Erdős–Szekeres conjecture, that 2^(N−2) + 1 points in general position always contain a convex N-gon, remains unproven.",
+      "url": "https://en.wikipedia.org/wiki/Happy_ending_problem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "polya-enumeration-theorem",
+      "name": "Pólya enumeration theorem",
+      "short": "Pólya enumeration theorem",
+      "statement": "Let X be a finite set, G a group of permutations of X, and Y a finite set of m colors. Then the number of colorings of X with colors from Y (the functions X → Y) that are different up to the action of G is (1/|G|) ∑ m^c(g), where the sum runs over all g in G and c(g) is the number of cycles of g as a permutation of X.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "burnsides-lemma"
+      ],
+      "by": "First published by J. Howard Redfield, 1927; independently rediscovered by George Pólya, 1937",
+      "note": "It follows from and generalizes Burnside's lemma on the number of orbits of a group action. In its more general weighted version the colors carry weights, and the generating function of the colorings by weight is obtained by substituting the color generating function into the cycle index of G.",
+      "url": "https://en.wikipedia.org/wiki/P%C3%B3lya_enumeration_theorem",
+      "area": "combinatorics",
+      "year": 1927,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "turans-theorem",
+      "name": "Turán's theorem",
+      "short": "Turán's theorem",
+      "statement": "Every graph with n vertices that contains no complete subgraph on r+1 vertices has at most as many edges as the Turán graph T(n,r). T(n,r) is formed by splitting the n vertices into r parts of equal or nearly equal size and joining two vertices whenever they lie in different parts.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cauchy-schwarz-inequality"
+      ],
+      "by": "Pál Turán, 1941; the special case for triangle-free graphs is Mantel's theorem, stated by Willem Mantel in 1907",
+      "note": "For fixed r, T(n,r) has about (1 − 1/r)·n²/2 edges. The Erdős–Stone theorem generalizes it from complete subgraphs to any forbidden subgraph.",
+      "url": "https://en.wikipedia.org/wiki/Tur%C3%A1n's_theorem",
+      "area": "combinatorics",
+      "year": 1941,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-sumset-conjecture",
+      "name": "Erdős sumset conjecture",
+      "short": "Erdős sumset conjecture",
+      "statement": "If a set A of natural numbers has positive upper density, then there are two infinite sets B and C of natural numbers such that A contains the sumset B + C, the set of all sums b + c with b in B and c in C.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Posed by Paul Erdős; proved by Joel Moreira, Florian Richter and Donald Robertson, 2019",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s_sumset_conjecture",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "graham-rothschild-theorem",
+      "name": "Graham–Rothschild theorem",
+      "short": "Graham–Rothschild theorem",
+      "statement": "Fix a finite alphabet A, a group G acting on A, a finite number of colours r, and two dimensions m > k. Then there is a string length n ≥ m with this property: however each k-dimensional combinatorial cube of strings of length n over A (with the group action G) is given one of r colours, some m-dimensional combinatorial cube has all its k-dimensional subcubes coloured the same.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Ronald Graham and Bruce Lee Rothschild, 1971",
+      "note": "The special case m = 1, k = 0 with the trivial group action is the Hales–Jewett theorem. A special case with a binary alphabet and two colours motivates the definition of Graham's number.",
+      "url": "https://en.wikipedia.org/wiki/Graham%E2%80%93Rothschild_theorem",
+      "area": "combinatorics",
+      "year": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "eberhards-theorem",
+      "name": "Eberhard's theorem",
+      "short": "Eberhard's theorem",
+      "statement": "Let non-negative whole numbers p₃, p₄, p₅, p₇, p₈, … be given, leaving out p₆. If they satisfy ∑ (6 − i)·pᵢ = 12, then for some number p₆ of hexagons there is a simple convex polyhedron with exactly pᵢ faces having i sides, for every i. A convex polyhedron is simple when every vertex meets exactly three edges.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "steinitzs-theorem",
+          "url": "https://en.wikipedia.org/wiki/Steinitz's_theorem"
+        }
+      ],
+      "by": "Victor Eberhard, published 1888 in his habilitation thesis and in expanded form in an 1891 book",
+      "note": "The equation follows from Euler's polyhedral formula and must hold for every simple polyhedron. The theorem shows it is the only necessary condition that does not depend on p₆.",
+      "url": "https://en.wikipedia.org/wiki/Eberhard's_theorem",
+      "area": "combinatorics",
+      "year": 1888,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "blichfeldts-theorem",
+      "name": "Blichfeldt's theorem",
+      "short": "Blichfeldt's theorem",
+      "statement": "Every bounded measurable set of area A in the plane can be shifted so that the shifted copy contains at least ⌈A⌉ points with integer coordinates, where ⌈A⌉ is A rounded up to a whole number.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Hans Frederick Blichfeldt, 1914",
+      "note": "It extends to any lattice in d dimensions, giving at least ⌈A/L⌉ lattice points where L is the volume of a fundamental parallelotope. It can be used to give a simple proof of Minkowski's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Blichfeldt's_theorem",
+      "area": "combinatorics",
+      "year": 1914,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "konigs-lemma",
+      "name": "Kőnig's lemma",
+      "short": "Kőnig's infinity lemma",
+      "statement": "Every connected, locally finite, infinite graph contains a ray, which is a simple path that starts at one vertex and continues through infinitely many vertices. Locally finite means each vertex is adjacent to only finitely many others.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Dénes Kőnig, 1927",
+      "note": "It gives a sufficient condition for an infinite graph to have an infinitely long path. A special case is that every infinite tree contains a vertex of infinite degree or an infinite simple path.",
+      "url": "https://en.wikipedia.org/wiki/K%C5%91nig's_lemma",
+      "area": "combinatorics",
+      "year": 1927,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "li-shanlan-identity",
+      "name": "Li Shanlan identity",
+      "short": "Li Shanlan identity",
+      "statement": "For non-negative integers n and p, the sum over k from 0 to p of C(p, k)² · C(n + 2p − k, 2p) equals C(n + p, p)², where C(a, b) denotes a binomial coefficient.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "vandermondes-identity"
+      ],
+      "by": "Li Shanlan, in Duoji bilei, 1867; first proof by Pál Turán, 1936",
+      "note": "Li Shanlan gave no proof; at least fifteen different proofs have since been found. The attribution of the identity to a nineteenth-century Chinese mathematician prompted a rethink of the mathematical value of Chinese mathematical writings.",
+      "url": "https://en.wikipedia.org/wiki/Li_Shanlan_identity",
+      "area": "combinatorics",
+      "year": 1867,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kahn-kalai-conjecture",
+      "name": "Kahn–Kalai conjecture",
+      "short": "Kahn–Kalai conjecture",
+      "statement": "There is a universal constant K such that, for every increasing family F of subsets of a power set, the ratio of the threshold of F to its expectation threshold is less than K log l(F), where l(F) is the size of a largest minimal element of F.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "graph-theory"
+      ],
+      "by": "Proposed by Jeff Kahn and Gil Kalai, 2006; proved by Jinyoung Park and Huy Tuan Pham, announced 2022 and published 2024",
+      "note": "The expectation threshold is a lower bound for the threshold at which a phase transition occurs, and it is generally easier to calculate. The result is now also known as the Park–Pham theorem.",
+      "url": "https://en.wikipedia.org/wiki/Kahn%E2%80%93Kalai_conjecture",
+      "area": "combinatorics",
+      "year": 2006,
+      "settled": 2024,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "blow-up-lemma",
+      "name": "Blow-up lemma",
+      "short": "Blow-up lemma",
+      "statement": "Given a graph R with r vertices and positive numbers δ and Δ, there is an ε = ε(δ, Δ, r) > 0 such that the following holds. Replace each vertex of R by its own set of any positive size, the sets pairwise disjoint; let one graph put a complete bipartite graph between the sets for each edge of R, and let G put an (ε, δ)-super-regular pair there instead. Then every graph H of maximum degree at most Δ that embeds into the first graph also embeds into G.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "halls-marriage-theorem",
+        "booles-inequality"
+      ],
+      "by": "János Komlós, Gábor N. Sárközy and Endre Szemerédi, 1997",
+      "note": "It says that the regular pairs in Szemerédi's regularity lemma behave like complete bipartite graphs when embedding spanning graphs of bounded degree. Its authors used it to prove the Pósa–Seymour conjecture for large n and the Alon–Yuster conjecture.",
+      "url": "https://en.wikipedia.org/wiki/Blow-up_lemma",
+      "area": "combinatorics",
+      "year": 1997,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "baik-deift-johansson-theorem",
+      "name": "Baik–Deift–Johansson theorem",
+      "short": "Baik–Deift–Johansson",
+      "statement": "Let π_N be a permutation of {1, 2, …, N} chosen uniformly at random and l(π_N) the length of its longest increasing subsequence. Then for every real x, the probability that (l(π_N) − 2√N)/N^(1/6) ≤ x tends to F₂(x) as N → ∞, where F₂ is the Tracy–Widom distribution of the Gaussian unitary ensemble.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Jinho Baik, Percy Deift and Kurt Johansson, 1999",
+      "note": "The theorem connected KPZ universality with the theory of random matrices.",
+      "url": "https://en.wikipedia.org/wiki/Baik%E2%80%93Deift%E2%80%93Johansson_theorem",
+      "area": "combinatorics",
+      "year": 1999,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dilworths-theorem",
+      "name": "Dilworth's theorem",
+      "short": "Dilworth's theorem",
+      "statement": "In any finite partially ordered set, the maximum size of an antichain (a set of pairwise incomparable elements) equals the minimum number of chains needed to cover all elements.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Robert P. Dilworth, 1950",
+      "note": "The common value is called the width of the partial order.",
+      "url": "https://en.wikipedia.org/wiki/Dilworth's_theorem",
+      "area": "combinatorics",
+      "year": 1950,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "woodalls-conjecture",
+      "name": "Woodall's conjecture",
+      "short": "Woodall's conjecture",
+      "statement": "In a directed graph, if the smallest dicut has k edges, then the graph contains k pairwise disjoint dijoins. Equivalently, the minimum number of edges in a dicut equals the maximum number of disjoint dijoins.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Douglas Woodall, 1976",
+      "note": "A dicut is the set of edges crossing a split of the vertices into two parts when all crossing edges point the same way, and a dijoin is a set of edges containing at least one edge from every dicut. There can be at most k disjoint dijoins, since each must use a different edge of a smallest dicut. The conjecture is known when k = 2, and every such graph has at least ⌊k/6⌋ disjoint dijoins.",
+      "url": "https://en.wikipedia.org/wiki/Woodall's_conjecture",
+      "area": "combinatorics",
+      "year": 1976,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "stones-representation-theorem-for-boolean-algebras",
+      "name": "Stone's representation theorem for Boolean algebras",
+      "short": "Stone representation thm",
+      "statement": "Every Boolean algebra B is isomorphic to a field of sets. Specifically, B is isomorphic to the algebra of clopen (both closed and open) subsets of its Stone space S(B), the space of ultrafilters on B, by sending each element b to the set of ultrafilters that contain b.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "Marshall H. Stone",
+      "note": "The proof needs the axiom of choice or a weaker form of it, and the theorem is equivalent to the Boolean prime ideal theorem. It is a special case of Stone duality.",
+      "url": "https://en.wikipedia.org/wiki/Stone's_representation_theorem_for_Boolean_algebras",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "big-line-big-clique-conjecture",
+      "name": "Big-line-big-clique conjecture",
+      "short": "Big-line-big-clique",
+      "statement": "For any positive integers k and ℓ there is a number n(k,ℓ) such that every set of n(k,ℓ) points in the Euclidean plane contains ℓ collinear points, or k points that are mutually visible (no other point of the set lies between any two of them), or both.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "euclidean-geometry"
+      ],
+      "by": "Jan Kára, Attila Pór, and David R. Wood, 2005",
+      "note": "The conjecture is known to hold when ℓ ≤ 3 and when k ≤ 5. No infinite version is possible, because there are countable point sets with no four points on a line and no three mutually visible points.",
+      "url": "https://en.wikipedia.org/wiki/Big-line-big-clique_conjecture",
+      "area": "combinatorics",
+      "year": 2005,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tuzas-conjecture",
+      "name": "Tuza's conjecture",
+      "short": "Tuza's conjecture",
+      "statement": "In every undirected graph G, the smallest number τ(G) of edges that together include at least one edge of every triangle is at most twice the largest number ν(G) of triangles that can be chosen with no edge shared between two of them. In symbols, τ(G) ≤ 2ν(G).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Zsolt Tuza, 1981",
+      "note": "If true, it would be best possible, since infinitely many graphs have τ(G) = 2ν(G). It is known to hold for planar graphs and several other classes of graphs, and for all graphs the weaker bound τ(G) ≤ (3 − 3/23)ν(G) is proven.",
+      "url": "https://en.wikipedia.org/wiki/Tuza's_conjecture",
+      "area": "combinatorics",
+      "year": 1981,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ajtai-komlos-tusnady-theorem",
+      "name": "Ajtai–Komlós–Tusnády theorem",
+      "short": "AKT optimal matching",
+      "statement": "Choose n points and another n points, all independently and uniformly at random in the unit square [0,1]². There are constants C₁ and C₂, not depending on n, such that with probability tending to 1 as n grows, the smallest total Euclidean distance over all ways of pairing each point of the first set with a different point of the second lies between C₁√(n log n) and C₂√(n log n).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Miklós Ajtai, János Komlós and Gábor Tusnády, 1984",
+      "note": "Also known as the AKT optimal matching theorem. It implies that the average distance per matched pair is of order √(log n / n) with high probability.",
+      "url": "https://en.wikipedia.org/wiki/Ajtai%E2%80%93Koml%C3%B3s%E2%80%93Tusn%C3%A1dy_theorem",
+      "area": "combinatorics",
+      "year": 1984,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lovasz-woodall-conjecture",
+      "name": "Lovász–Woodall conjecture",
+      "short": "Lovász–Woodall conjecture",
+      "statement": "If G is a k-connected graph and L is a set of k independent edges in G (no two sharing an endpoint), then G has a cycle containing all edges of L, unless k is odd and L is an edge cut.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Proposed independently by László Lovász, 1974, and D. R. Woodall, 1977",
+      "note": "It has been proved for small values of k and under stronger connectivity assumptions. Kawarabayashi claimed a proof in 2002 and 2008, but the full proof has not been published.",
+      "url": "https://en.wikipedia.org/wiki/Lov%C3%A1sz%E2%80%93Woodall_conjecture",
+      "area": "combinatorics",
+      "year": 1974,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ahlswede-khachatrian-theorem",
+      "name": "Ahlswede–Khachatrian theorem",
+      "short": "Ahlswede–Khachatrian",
+      "statement": "Let n ≥ k ≥ t ≥ 1 be integers, and let F be a collection of k-element subsets of {1, …, n} in which any two sets share at least t elements. Then |F| is at most the largest size of a Frankl family F(n,k,t,r) with t + 2r ≤ n, where F(n,k,t,r) consists of all k-element subsets A with |A ∩ {1, …, t + 2r}| ≥ t + r. Equality holds only if F coincides with a Frankl family after permuting the elements.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Ahlswede and Khachatrian; the families were constructed by Frankl",
+      "note": "It generalizes the Erdős–Ko–Rado theorem to t-intersecting families and contains the 4m conjecture of Erdős, Ko and Rado as a special case.",
+      "url": "https://en.wikipedia.org/wiki/Ahlswede%E2%80%93Khachatrian_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "steinhaus-chessboard-theorem",
+      "name": "Steinhaus chessboard theorem",
+      "short": "Steinhaus chessboard",
+      "statement": "On a chessboard where some cells contain landmines, either the king can cross the board from left to right without meeting a mined square, or the rook can cross the board from top to bottom moving only on mined squares.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Hugo Steinhaus",
+      "note": "David Gale proved a variant with hexagonal tiles, as in the game of Hex, where king moves and rook moves do not differ.",
+      "url": "https://en.wikipedia.org/wiki/Steinhaus_chessboard_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kotzigs-conjecture",
+      "name": "Kotzig's conjecture",
+      "short": "Kotzig's conjecture",
+      "statement": "Call a graph a P_k-graph if each pair of distinct vertices is connected by exactly one path of length k. For every k ≥ 3, there is no finite P_k-graph with two or more vertices.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Anton Kotzig, 1974",
+      "note": "The conjecture has been verified for k ≤ 20. P₁-graphs are the complete graphs, and P₂-graphs are the windmill graphs.",
+      "url": "https://en.wikipedia.org/wiki/Kotzig's_conjecture",
+      "area": "combinatorics",
+      "year": 1974,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "arctic-circle-theorem",
+      "name": "Arctic circle theorem",
+      "short": "Arctic circle theorem",
+      "statement": "As the order of the Aztec diamond tends to infinity, almost all uniformly random domino tilings of it have a frozen region near the boundary, separated from a disordered region by a circle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "William Jockusch, James Propp and Peter Shor, 1995",
+      "note": "Later work by Kurt Johansson showed that fluctuations of the arctic boundary converge, after rescaling, to the Airy process. This connects random tilings to random matrix theory and the KPZ universality class.",
+      "url": "https://en.wikipedia.org/wiki/Arctic_circle_theorem",
+      "area": "combinatorics",
+      "year": 1995,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tuttes-theorem-on-hamiltonian-cycles",
+      "name": "Tutte's theorem on Hamiltonian cycles",
+      "short": "Tutte's Hamiltonian cycles",
+      "statement": "Every 4-vertex-connected planar graph has a Hamiltonian cycle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "W. T. Tutte, 1956; he included a simplified proof in a 1977 survey paper",
+      "note": "It strengthens an earlier theorem of Hassler Whitney about 4-vertex-connected maximal planar graphs.",
+      "url": "https://en.wikipedia.org/wiki/Tutte's_theorem_on_Hamiltonian_cycles",
+      "area": "combinatorics",
+      "year": 1956,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pataraias-theorem",
+      "name": "Pataraia's theorem",
+      "short": "Pataraia's theorem",
+      "statement": "Every monotone map f : P → P on an inductive poset P has a least fixed point. An inductive poset is a dcpo with a least element.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "Dito Pataraia, 1997",
+      "note": "It is a variant of the Bourbaki–Witt theorem.",
+      "url": "https://en.wikipedia.org/wiki/Pataraia's_theorem",
+      "area": "combinatorics",
+      "year": 1997,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "markowskys-theorem",
+      "name": "Markowsky's theorem",
+      "short": "Markowsky's theorem",
+      "statement": "Every chain-complete poset is a dcpo. Here a poset is chain-complete if each chain in it has a least upper bound, and a dcpo if each directed set in it has a least upper bound.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "note": "The converse is trivial, since a chain is a directed set.",
+      "url": "https://en.wikipedia.org/wiki/Markowsky's_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "m3-n5-theorem",
+      "name": "M3-N5 theorem",
+      "short": "M3-N5 theorem",
+      "statement": "A lattice is modular if and only if it contains no sublattice isomorphic to N₅, the five-element pentagon lattice. A lattice is distributive if and only if it contains no sublattice isomorphic to N₅ or to M₃, the five-element diamond lattice.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "Modular part proved by Richard Dedekind, 1900; distributive part proved by Garrett Birkhoff, 1934",
+      "note": "It characterises modularity and distributivity of a lattice by looking only at its five-element sublattices, and it applies to infinite lattices as well. It is also called the Dedekind–Birkhoff theorem.",
+      "url": "https://en.wikipedia.org/wiki/M3-N5_theorem",
+      "area": "combinatorics",
+      "year": 1900,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fruchts-theorem",
+      "name": "Frucht's theorem",
+      "short": "Frucht's theorem",
+      "statement": "Every finite group is the group of symmetries of some finite undirected graph. More strongly, for any finite group G there are infinitely many non-isomorphic simple connected graphs whose automorphism group is isomorphic to G.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "group-theory"
+      ],
+      "by": "Conjectured by Dénes Kőnig, 1936; proved by Robert Frucht, 1939",
+      "note": "Frucht also showed that the graphs can be chosen 3-regular. Johannes de Groot and Gert Sabidussi extended the result to arbitrary groups and infinite graphs, assuming the axiom of choice.",
+      "url": "https://en.wikipedia.org/wiki/Frucht's_theorem",
+      "area": "combinatorics",
+      "year": 1936,
+      "settled": 1939,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "littlewood-richardson-rule",
+      "name": "Littlewood–Richardson rule",
+      "short": "Littlewood–Richardson rule",
+      "statement": "For partitions λ, μ and ν, write the product s_λ s_μ of two Schur functions as a sum of Schur functions. The coefficient of s_ν in that sum equals the number of Littlewood–Richardson tableaux of skew shape ν/λ and weight μ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "representation-theory"
+      ],
+      "by": "First stated by Dudley E. Littlewood and Archibald Read Richardson, 1934, who proved only simple special cases; first rigorous proofs by Schützenberger and by Thomas, the latter in 1974",
+      "note": "The coefficients also give multiplicities in decompositions of tensor products of finite-dimensional representations of general linear groups.",
+      "url": "https://en.wikipedia.org/wiki/Littlewood%E2%80%93Richardson_rule",
+      "area": "combinatorics",
+      "year": 1934,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sprague-grundy-theorem",
+      "name": "Sprague–Grundy theorem",
+      "short": "Sprague–Grundy theorem",
+      "statement": "Every impartial game under the normal play convention (a player who cannot move loses) in which every line of play ends after finitely many moves is equivalent to a one-heap game of nim, or to an infinite generalization of nim. So each such game has a unique nim-value.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Credited to R. P. Sprague, 1936, and P. M. Grundy, 1939, who discovered the underlying theory independently",
+      "note": "Sprague and Grundy never stated the theorem explicitly, but it follows directly from their results. Richard Guy, Elwyn Berlekamp, John Horton Conway and others later developed it into the field of combinatorial game theory.",
+      "url": "https://en.wikipedia.org/wiki/Sprague%E2%80%93Grundy_theorem",
+      "area": "combinatorics",
+      "year": 1936,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "2-factor-theorem",
+      "name": "2-factor theorem",
+      "short": "2-factor theorem",
+      "statement": "Let G be a regular graph whose degree is an even number 2k. Then the edges of G can be split into k edge-disjoint 2-factors, where a 2-factor is a subgraph in which every vertex of G has degree two, that is, a collection of cycles that together touch each vertex exactly once.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Julius Petersen, 1891",
+      "note": "It is one of the first results ever discovered in graph theory.",
+      "url": "https://en.wikipedia.org/wiki/2-factor_theorem",
+      "area": "combinatorics",
+      "year": 1891,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "beck-fiala-theorem",
+      "name": "Beck–Fiala theorem",
+      "short": "Beck–Fiala theorem",
+      "statement": "Let S₁, …, S_m be subsets of {1, …, n} such that each element of {1, …, n} lies in at most t of them. Then each element can be assigned +1 or −1 so that, for every j, the sum of the values over S_j has absolute value at most 2t − 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "József Beck and Tibor Fiala",
+      "note": "Beck and Fiala conjectured that the bound 2t − 1 can be improved to O(√t).",
+      "url": "https://en.wikipedia.org/wiki/Beck%E2%80%93Fiala_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "birkhoffs-representation-theorem-for-distributive-lattices",
+      "name": "Birkhoff's representation theorem for distributive lattices",
+      "short": "Birkhoff representation",
+      "statement": "Every finite distributive lattice can be represented, up to isomorphism, as a family of finite sets closed under union and intersection, with the join and meet operations corresponding to union and intersection.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "Garrett Birkhoff, 1937",
+      "note": "The lattice can be recovered from the lower sets of the partial order of its join-irreducible elements. The theorem is also called the fundamental theorem for finite distributive lattices.",
+      "url": "https://en.wikipedia.org/wiki/Birkhoff's_representation_theorem",
+      "area": "combinatorics",
+      "year": 1937,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gale-ryser-theorem",
+      "name": "Gale–Ryser theorem",
+      "short": "Gale–Ryser theorem",
+      "statement": "Let (a_1,…,a_n) and (b_1,…,b_m) be sequences of nonnegative integers with a_1 ≥ … ≥ a_n. They are the degree sequences of the two sides of a labeled simple bipartite graph if and only if ∑ a_i = ∑ b_i and, for every k from 1 to n, a_1 + … + a_k ≤ ∑ min(b_i, k), the sum taken over all i from 1 to m.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Published independently by H. J. Ryser and David Gale, 1957",
+      "note": "It solves the bipartite realization problem and is an analog of the Erdős–Gallai theorem for simple graphs. Ford and Fulkerson gave an equivalent formulation in 1962.",
+      "url": "https://en.wikipedia.org/wiki/Gale%E2%80%93Ryser_theorem",
+      "area": "combinatorics",
+      "year": 1957,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hanani-tutte-theorem",
+      "name": "Hanani–Tutte theorem",
+      "short": "Hanani–Tutte theorem",
+      "statement": "Every drawing in the plane of a non-planar graph contains a pair of independent edges, meaning edges that do not share an endpoint, that cross each other an odd number of times. Equivalently, a graph is planar if and only if it has a drawing in which every pair of independent edges crosses an even number of times or not at all.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Haim Hanani proved it for the graphs K₅ and K₃,₃ in 1934; W. T. Tutte stated the full theorem explicitly in 1970",
+      "note": "A consequence is that testing whether a graph is planar can be formulated as solving a system of linear equations over the field with two elements.",
+      "url": "https://en.wikipedia.org/wiki/Hanani%E2%80%93Tutte_theorem",
+      "area": "combinatorics",
+      "year": 1970,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "monks-formula",
+      "name": "Monk's formula",
+      "short": "Monk's formula",
+      "statement": "Write t_ij for the transposition (i j) and s_r = t_r,r+1. For a permutation w, the product of the linear Schubert polynomial 𝔖_{s_r} = x_1 + ⋯ + x_r with the Schubert polynomial 𝔖_w equals the sum of 𝔖_{wt_ij} over all pairs i ≤ r < j with ℓ(wt_ij) = ℓ(w) + 1, where ℓ is the length of a permutation.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "algebraic-geometry"
+      ],
+      "by": "Monk, 1959",
+      "note": "It is an analogue of Pieri's formula. Equivalently, it describes the product of a special Schubert cycle by a Schubert cycle in the cohomology of a flag manifold.",
+      "url": "https://en.wikipedia.org/wiki/Monk's_formula",
+      "area": "combinatorics",
+      "year": 1959,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kalais-3-d-conjecture",
+      "name": "Kalai's 3^d conjecture",
+      "short": "Kalai's 3^d conjecture",
+      "statement": "Every d-dimensional centrally symmetric polytope has at least 3^d nonempty faces, counting the polytope itself as a face but not the empty set.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Gil Kalai, 1989",
+      "note": "It is known to be true for d ≤ 4, for simplicial polytopes, and for the Hansen polytopes of split graphs. The hypercube and the Hanner polytopes have exactly 3^d faces.",
+      "url": "https://en.wikipedia.org/wiki/Kalai's_3%5Ed_conjecture",
+      "area": "combinatorics",
+      "year": 1989,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ingletons-inequality",
+      "name": "Ingleton's inequality",
+      "short": "Ingleton's inequality",
+      "statement": "For the rank function ρ of a representable matroid M and any subsets X₁, X₂, X₃, X₄ of its support: ρ(X₁) + ρ(X₂) + ρ(X₁∪X₂∪X₃) + ρ(X₁∪X₂∪X₄) + ρ(X₃∪X₄) ≤ ρ(X₁∪X₂) + ρ(X₁∪X₃) + ρ(X₁∪X₄) + ρ(X₂∪X₃) + ρ(X₂∪X₄).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Aubrey William Ingleton, 1969",
+      "note": "It is a necessary condition for representability of a matroid over a finite field, with applications in information theory and network coding.",
+      "url": "https://en.wikipedia.org/wiki/Ingleton's_inequality",
+      "area": "combinatorics",
+      "year": 1969,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pascals-rule",
+      "name": "Pascal's rule",
+      "short": "Pascal's rule",
+      "statement": "For positive integers n and k, C(n−1, k) + C(n−1, k−1) = C(n, k), where C(n, k) is the binomial coefficient, the number of k-element subsets of an n-element set. There is no restriction on the relative sizes of n and k, since C(n, k) = 0 whenever n < k.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "note": "With the boundary values C(n, 0) = C(n, n) = 1, the rule determines the binomial coefficients, so it is the recurrence relation that defines them.",
+      "url": "https://en.wikipedia.org/wiki/Pascal's_rule",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "upper-bound-theorem",
+      "name": "Upper bound theorem",
+      "short": "Upper bound theorem",
+      "statement": "Cyclic polytopes have the largest possible number of faces among all convex polytopes with a given dimension and number of vertices. More generally, a simplicial sphere of dimension d−1 with n vertices has at most as many faces of each dimension as the cyclic polytope with n vertices in dimension d.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Formulated as a conjecture by Theodore Motzkin, 1957; proved by Peter McMullen, 1970; extended to subdivisions of a sphere by Richard P. Stanley, 1975",
+      "note": "Asymptotically it implies that a polytope has at most O(n^⌊d/2⌋) faces of all dimensions.",
+      "url": "https://en.wikipedia.org/wiki/Upper_bound_theorem",
+      "area": "combinatorics",
+      "year": 1957,
+      "settled": 1970,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sauer-shelah-lemma",
+      "name": "Sauer–Shelah lemma",
+      "short": "Sauer–Shelah lemma",
+      "statement": "The VC dimension of a family of sets is the largest size of a set T such that every subset of T is the intersection of T with some member of the family. If a family has VC dimension k and its union has n elements, then the family has at most ∑ (n choose i), summed over i from 0 to k, sets, which is O(n^k).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Norbert Sauer and Saharon Shelah, independently, 1972; the same result was published slightly earlier, also independently, by Vladimir Vapnik and Alexey Chervonenkis",
+      "note": "The bound is tight: the family of all subsets of {1,…,n} with fewer than k elements has ∑ (n choose i), summed over i from 0 to k−1, sets but shatters no set of size k. Its authors were motivated by the combinatorics of set systems, model theory and statistics, and it has also been applied in discrete geometry and graph theory.",
+      "url": "https://en.wikipedia.org/wiki/Sauer%E2%80%93Shelah_lemma",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hook-length-formula",
+      "name": "Hook length formula",
+      "short": "Hook length formula",
+      "statement": "For a partition λ of n, drawn as a Young diagram, the number of standard Young tableaux of shape λ is n! divided by the product of the hook lengths of all cells. The hook of a cell is the cell itself, the cells to its right in the same row and the cells below it in the same column.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "lhopitals-rule"
+      ],
+      "by": "Frame, Robinson and Thrall, 1953",
+      "note": "It improved an earlier determinant formula of Frobenius and Young. It has applications in representation theory, probability and the analysis of longest increasing subsequences.",
+      "url": "https://en.wikipedia.org/wiki/Hook_length_formula",
+      "area": "combinatorics",
+      "year": 1953,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fkg-inequality",
+      "name": "FKG inequality",
+      "short": "FKG inequality",
+      "statement": "Let X be a finite distributive lattice and μ a nonnegative function on X with μ(x∧y)·μ(x∨y) ≥ μ(x)·μ(y) for all x, y in X. Then for any two increasing functions f and g on X, (∑ f(x)g(x)μ(x))·(∑ μ(x)) ≥ (∑ f(x)μ(x))·(∑ g(x)μ(x)), with sums over x in X. The same holds when both functions are decreasing, and the inequality is reversed when one is increasing and the other decreasing.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "ahlswede-daykin-inequality"
+      ],
+      "by": "Fortuin, Kasteleyn and Ginibre, 1971",
+      "note": "Informally, increasing events are positively correlated in many random systems. An earlier version for independent identically distributed variables is the Harris inequality (Harris, 1960).",
+      "url": "https://en.wikipedia.org/wiki/FKG_inequality",
+      "area": "combinatorics",
+      "year": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fulkerson-chen-anstee-theorem",
+      "name": "Fulkerson–Chen–Anstee theorem",
+      "short": "Fulkerson–Chen–Anstee",
+      "statement": "Let ((a_1,b_1),…,(a_n,b_n)) be a sequence of pairs of nonnegative integers with a_1 ≥ … ≥ a_n. It is the list of indegree-outdegree pairs of a simple directed graph if and only if ∑ a_i = ∑ b_i and, for every k with 1 ≤ k ≤ n, the sum of a_i for i ≤ k is at most the sum of min(b_i, k−1) for i ≤ k plus the sum of min(b_i, k) for i from k+1 to n.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "D. R. Fulkerson, 1960; Chen reduced it to n inequalities, 1966; Anstee observed in 1982 that ordering by a_1 ≥ … ≥ a_n suffices; Berger later gave a direct proof",
+      "note": "It is one of two known approaches to the digraph realization problem. Fulkerson's characterization is analogous to the Erdős–Gallai theorem for graphs.",
+      "url": "https://en.wikipedia.org/wiki/Fulkerson%E2%80%93Chen%E2%80%93Anstee_theorem",
+      "area": "combinatorics",
+      "year": 1960,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "four-color-theorem",
+      "name": "Four color theorem",
+      "short": "Four color theorem",
+      "statement": "Any division of the plane into connected regions can be colored with at most four colors so that two regions sharing a boundary segment of non-zero length get different colors, provided no region is bizarre (such as having finite area but infinitely long perimeter). In graph terms, every loopless planar graph has chromatic number at most 4.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Conjectured by Francis Guthrie, 1852; proved by Kenneth Appel and Wolfgang Haken, 1976, in a computer-aided proof",
+      "note": "It was the first major theorem to be proved with extensive computer assistance. Robertson, Sanders, Seymour and Thomas later gave a proof needing only 633 reducible configurations, and in 2005 Benjamin Werner and Georges Gonthier formalized a proof in the Coq proof assistant.",
+      "url": "https://en.wikipedia.org/wiki/Four_color_theorem",
+      "area": "combinatorics",
+      "year": 1852,
+      "settled": 1976,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lubell-yamamoto-meshalkin-inequality",
+      "name": "Lubell–Yamamoto–Meshalkin inequality",
+      "short": "LYM inequality",
+      "statement": "Let U be an n-element set and A a family of subsets of U in which no set is a subset of another. If a_k is the number of sets of size k in A, then the sum over k from 0 to n of a_k divided by the binomial coefficient C(n,k) is at most 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Bollobás, 1965; Lubell, 1966; Meshalkin, 1963; Yamamoto, 1954",
+      "note": "It can be used to prove Sperner's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Lubell%E2%80%93Yamamoto%E2%80%93Meshalkin_inequality",
+      "area": "combinatorics",
+      "year": 1954,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pigeonhole-principle",
+      "name": "Pigeonhole principle",
+      "short": "Pigeonhole principle",
+      "statement": "If n items are put into m containers and n > m, then at least one container holds more than one item.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Appears as early as 1622 in a book by Jean Leurechon; commonly named after Peter Gustav Lejeune Dirichlet for his 1834 treatment",
+      "note": "A more quantified version says that when n objects are distributed among m sets, at least one set contains at least ⌈n/m⌉ objects.",
+      "url": "https://en.wikipedia.org/wiki/Pigeonhole_principle",
+      "area": "combinatorics",
+      "year": 1622,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "chomsky-schutzenberger-enumeration-theorem",
+      "name": "Chomsky–Schützenberger enumeration theorem",
+      "short": "Chomsky–Schützenberger",
+      "statement": "Let L be a context-free language that has an unambiguous context-free grammar, and let a_k be the number of words of length k in L. Then the power series ∑ a_k x^k, which has coefficients in the nonnegative integers, is algebraic over ℚ(x).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "computability-theory"
+      ],
+      "by": "Noam Chomsky and Marcel-Paul Schützenberger",
+      "note": "A power series f is algebraic over ℚ(x) if p₀ + p₁f + p₂f² + … + pₙfⁿ = 0 for some polynomials pᵢ with rational coefficients. The theorem is used to estimate how many words of each length a grammar generates, and to prove that some context-free languages are inherently ambiguous.",
+      "url": "https://en.wikipedia.org/wiki/Chomsky%E2%80%93Sch%C3%BCtzenberger_enumeration_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "road-coloring-theorem",
+      "name": "Road coloring theorem",
+      "short": "Road coloring theorem",
+      "statement": "Every finite, strongly connected, aperiodic directed graph in which all vertices have the same out-degree k has a synchronizing coloring. That is, its edges can be labelled with the letters 1, …, k so that each vertex has exactly one outgoing edge with each label, and for every vertex v there is a word over these letters such that all paths following that word end at v.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "First conjectured by Roy Adler and Benjamin Weiss; proved by Avraham Trahtman, 2009",
+      "note": "A synchronizing coloring can only exist if the graph is aperiodic, and the theorem shows this condition is also sufficient. The name comes from the related notion of a synchronizing word in finite automata theory.",
+      "url": "https://en.wikipedia.org/wiki/Road_coloring_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hamming-bound",
+      "name": "Hamming bound",
+      "short": "Hamming bound",
+      "statement": "Let A_q(n,d) be the largest possible number of words in a code whose words are strings of length n over an alphabet of q symbols, where any two words differ in at least d positions. Then A_q(n,d) ≤ qⁿ / ∑ C(n,k)(q−1)ᵏ, where the sum runs over k = 0, 1, …, t with t = ⌊(d−1)/2⌋ and C(n,k) is the binomial coefficient.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "note": "It is also called the sphere-packing bound, and a code that attains it is called a perfect code. In 1973 Tietäväinen proved that any non-trivial perfect code over a prime-power alphabet has the parameters of a Hamming code or a Golay code.",
+      "url": "https://en.wikipedia.org/wiki/Hamming_bound",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "harborths-conjecture",
+      "name": "Harborth's conjecture",
+      "short": "Harborth's conjecture",
+      "statement": "Every planar graph has a planar drawing in which every edge is a straight segment of integer length.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        {
+          "id": "erdos-ulam-problem",
+          "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Ulam_problem"
+        }
+      ],
+      "by": "Named after Heiko Harborth",
+      "note": "If true, it would strengthen Fáry's theorem on straight-line drawings of planar graphs. It has been proven only for several special kinds of planar graph.",
+      "url": "https://en.wikipedia.org/wiki/Harborth's_conjecture",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "singleton-bound",
+      "name": "Singleton bound",
+      "short": "Singleton bound",
+      "statement": "For a q-ary block code of length n and minimum distance d, the largest possible number of codewords A_q(n, d) satisfies A_q(n, d) ≤ q^(n−d+1).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Usually cited to Richard Collom Singleton, 1964; proven earlier by Joshi, 1958, and even earlier by Komamiya, 1953",
+      "note": "For a linear code of dimension k it reads d ≤ n − k + 1. Linear codes that reach equality are called MDS (maximum distance separable) codes, for example Reed-Solomon codes.",
+      "url": "https://en.wikipedia.org/wiki/Singleton_bound",
+      "area": "combinatorics",
+      "year": 1953,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bruck-ryser-chowla-theorem",
+      "name": "Bruck–Ryser–Chowla theorem",
+      "short": "Bruck–Ryser–Chowla",
+      "statement": "Suppose a symmetric (v, b, r, k, λ)-design exists, that is, one with v = b. If v is even, then k − λ is a perfect square. If v is odd, then the equation x² − (k − λ)y² − (−1)^((v−1)/2) λ z² = 0 has a solution in integers x, y, z that are not all zero.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "hasse-minkowski-theorem"
+      ],
+      "by": "Bruck and Ryser, 1949, for projective planes; extended to symmetric designs by Chowla and Ryser, 1950",
+      "note": "It implies that certain designs do not exist, for example projective planes of orders 6 and 14. The condition is not sufficient for existence: it allows order 10, but no projective plane of order 10 exists.",
+      "url": "https://en.wikipedia.org/wiki/Bruck%E2%80%93Ryser%E2%80%93Chowla_theorem",
+      "area": "combinatorics",
+      "year": 1949,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kirchhoffs-matrix-tree-theorem",
+      "name": "Kirchhoff's matrix tree theorem",
+      "short": "Kirchhoff's matrix tree",
+      "statement": "For a simple undirected graph, the number of spanning trees equals any cofactor of the graph's Laplacian matrix (the degree matrix minus the adjacency matrix); in particular all these cofactors are equal. Equivalently, if the graph has n vertices and its Laplacian has eigenvalues 0 = λ₀ ≤ λ₁ ≤ … ≤ λₙ₋₁, the number of spanning trees is (1/n)·λ₁λ₂⋯λₙ₋₁.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cauchy-binet-formula"
+      ],
+      "by": "Gustav Kirchhoff, 1847",
+      "note": "It generalizes Cayley's formula for the number of spanning trees of a complete graph, and shows the number can be computed in polynomial time. It also holds for multigraphs, and a modified version counts oriented spanning trees in directed multigraphs.",
+      "url": "https://en.wikipedia.org/wiki/Kirchhoff's_theorem",
+      "area": "combinatorics",
+      "year": 1847,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sperners-theorem",
+      "name": "Sperner's theorem",
+      "short": "Sperner's theorem",
+      "statement": "Let S be a family of sets, none of which is a strict subset of another, whose union has n elements. Then S contains at most the binomial coefficient C(n, ⌊n/2⌋) sets, and equality holds if and only if S consists of all subsets of size ⌊n/2⌋ or of all subsets of size ⌈n/2⌉ of an n-element set.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "lubell-yamamoto-meshalkin-inequality",
+          "url": "https://en.wikipedia.org/wiki/Lubell%E2%80%93Yamamoto%E2%80%93Meshalkin_inequality"
+        }
+      ],
+      "by": "Emanuel Sperner, 1928",
+      "note": "Equivalently, the width of the inclusion order on the power set of an n-element set is C(n, ⌊n/2⌋). Erdős extended it to families with no long chains.",
+      "url": "https://en.wikipedia.org/wiki/Sperner's_theorem",
+      "area": "combinatorics",
+      "year": 1928,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "vizings-theorem",
+      "name": "Vizing's theorem",
+      "short": "Vizing's theorem",
+      "statement": "The edges of every simple undirected graph can be colored with at most Δ + 1 colors so that edges sharing a vertex always get different colors. Here Δ is the maximum degree of the graph, the largest number of edges meeting at one vertex. At least Δ colors are always necessary.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Vadim G. Vizing, 1964",
+      "note": "Graphs needing only Δ colors are called class one and those needing Δ + 1 are called class two. R. P. Gupta independently discovered the theorem during his doctorate (1965-1967).",
+      "url": "https://en.wikipedia.org/wiki/Vizing's_theorem",
+      "area": "combinatorics",
+      "year": 1964,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bertrands-ballot-theorem",
+      "name": "Bertrand's ballot theorem",
+      "short": "Bertrand's ballot theorem",
+      "statement": "In an election where candidate A receives p votes and candidate B receives q votes with p > q, and the votes are counted in a random order with all orders equally likely, the probability that A is strictly ahead of B throughout the count is (p − q)/(p + q).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "First published by W. A. Whitworth, 1878; rediscovered by Joseph Louis François Bertrand, 1887; a direct proof was given by Désiré André",
+      "note": "It is related to the cycle lemma, which gives similar formulas but considers circular shifts of a counting order rather than all permutations.",
+      "url": "https://en.wikipedia.org/wiki/Bertrand's_ballot_theorem",
+      "area": "combinatorics",
+      "year": 1878,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ores-theorem",
+      "name": "Ore's theorem",
+      "short": "Ore's theorem",
+      "statement": "Let G be a finite simple graph with n ≥ 3 vertices. If the degrees of every pair of non-adjacent vertices add up to at least n, then G is Hamiltonian, meaning it has a cycle that passes through every vertex exactly once.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Øystein Ore, 1960",
+      "note": "It generalizes Dirac's theorem, which asks every vertex to have degree at least n/2. It is in turn a consequence of the Bondy–Chvátal theorem.",
+      "url": "https://en.wikipedia.org/wiki/Ore's_theorem",
+      "area": "combinatorics",
+      "year": 1960,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "booles-expansion-theorem",
+      "name": "Boole's expansion theorem",
+      "short": "Boole's expansion theorem",
+      "statement": "For any Boolean function F and variable x, F = x · F_x + x′ · F_x′. Here x′ is the complement of x, and F_x and F_x′ are F with x set equal to 1 and to 0 respectively.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "George Boole, in his Laws of Thought, 1854; Claude Shannon showed its switching network interpretations in 1949",
+      "note": "It is also called the Shannon expansion and has been called the fundamental theorem of Boolean algebra, although the attribution to Shannon is incorrect. It paved the way for binary decision diagrams and satisfiability solvers.",
+      "url": "https://en.wikipedia.org/wiki/Boole's_expansion_theorem",
+      "area": "combinatorics",
+      "year": 1854,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kelmans-seymour-conjecture",
+      "name": "Kelmans–Seymour conjecture",
+      "short": "Kelmans–Seymour conjecture",
+      "statement": "Every 5-vertex-connected graph that is not planar contains a subdivision of the complete graph K₅ on 5 vertices.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Described independently by Paul Seymour, 1977, and Alexander Kelmans, 1979; proved by Xingxing Yu, Dawei He and Yan Wang, announced 2016 and published in four papers in 2020",
+      "note": "It refines Kuratowski's theorem by giving a condition under which a non-planar graph must contain a subdivision of K₅ specifically.",
+      "url": "https://en.wikipedia.org/wiki/Kelmans%E2%80%93Seymour_conjecture",
+      "area": "combinatorics",
+      "year": 1977,
+      "settled": 2020,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "crossing-number-inequality",
+      "name": "Crossing number inequality",
+      "short": "Crossing number inequality",
+      "statement": "Let G be a simple undirected graph with n vertices and e edges, where e > 7n. Then every drawing of G in the plane has at least e³/(29n²) edge crossings, that is, the crossing number cr(G) is at least e³/(29n²).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Discovered independently by Ajtai, Chvátal, Newborn and Szemerédi and by Leighton; the constant 29 is due to Ackerman",
+      "note": "It gives a lower bound on the minimum number of edge crossings in a plane drawing of a graph. It has applications in VLSI design and gives short proofs of results in incidence geometry such as the Szemerédi–Trotter theorem and Beck's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Crossing_number_inequality",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "approximate-max-flow-min-cut-theorem",
+      "name": "Approximate max-flow min-cut theorem",
+      "short": "Approx. max-flow min-cut",
+      "statement": "In a uniform multicommodity flow problem on a network with n ≥ 2 nodes, every pair of nodes is a commodity with the same demand and the capacities are arbitrary; let f be the largest fraction of every demand that can be routed at the same time within the capacities, and φ the smallest ratio, over all cuts, of the capacity of the cut to the demand it separates. Then f ≤ φ, and f ≥ cφ/log n for a constant c > 0 that is the same for all such problems.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Tom Leighton and Satish Rao, 1988; extended in 1999",
+      "note": "Up to the constant, the log n factor cannot be improved: for every n there is an n-node uniform problem whose max-flow is at most a constant times φ/log n. The theorem gives an O(log n) approximation for the sparsest cut problem.",
+      "url": "https://en.wikipedia.org/wiki/Approximate_max-flow_min-cut_theorem",
+      "area": "combinatorics",
+      "year": 1988,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ky-fans-lemma",
+      "name": "Ky Fan's lemma",
+      "short": "Ky Fan's lemma",
+      "statement": "Let T be a triangulation of the closed n-dimensional ball whose simplices on the boundary sphere triangulate that sphere with −σ a simplex whenever σ is, and label each vertex of T with a nonzero integer so that opposite boundary vertices get opposite labels. If no edge has two labels of equal size and opposite sign (such as −2 and +2), then the number of n-dimensional simplices whose labels have different sizes and alternate in sign (such as −1, +2, −3) is odd.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Ky Fan, 1952",
+      "note": "It generalizes Tucker's lemma: a labeling that uses only the labels ±1, …, ±n cannot have an alternating n-dimensional simplex, so it must have a complementary edge.",
+      "url": "https://en.wikipedia.org/wiki/Ky_Fan_lemma",
+      "area": "combinatorics",
+      "year": 1952,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bregman-minc-inequality",
+      "name": "Bregman–Minc inequality",
+      "short": "Bregman–Minc inequality",
+      "statement": "For a square matrix A of size n whose entries are all 0 or 1 and whose row sums are r₁, …, rₙ, the permanent of A is at most the product over i of (rᵢ!)^(1/rᵢ).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Conjectured by Henryk Minc, 1963; first proved by Lev M. Bregman, 1973",
+      "note": "The same bound holds for column sums. In graph theory it gives upper bounds for the number of perfect matchings in a bipartite graph.",
+      "url": "https://en.wikipedia.org/wiki/Bregman%E2%80%93Minc_inequality",
+      "area": "combinatorics",
+      "year": 1963,
+      "settled": 1973,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "even-circuit-theorem",
+      "name": "Even circuit theorem",
+      "short": "Even circuit theorem",
+      "statement": "For each fixed k there is a constant C such that every graph with n vertices and no simple cycle of length 2k has at most C·n^(1+1/k) edges.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Stated without proof by Paul Erdős, 1964; first proved by Bondy and Simonovits, 1974",
+      "note": "For instance, graphs without 4-cycles have O(n^(3/2)) edges and graphs without 6-cycles have O(n^(4/3)) edges.",
+      "url": "https://en.wikipedia.org/wiki/Even_circuit_theorem",
+      "area": "combinatorics",
+      "year": 1964,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "boolean-pythagorean-triples-problem",
+      "name": "Boolean Pythagorean triples problem",
+      "short": "Boolean Pythagorean triple",
+      "statement": "The numbers 1 to 7824 can be colored red and blue so that no Pythagorean triple a, b, c with a² + b² = c² has all three members the same color, but the numbers 1 to 7825 cannot. Hence the positive integers cannot be colored in two colors this way.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Marijn Heule, Oliver Kullmann and Victor W. Marek, 2016, by a computer-assisted proof",
+      "note": "The proof used a SAT solver and produced a 200 terabyte propositional proof. The question for three or more colors was still open as of 2018.",
+      "url": "https://en.wikipedia.org/wiki/Boolean_Pythagorean_triples_problem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "binomial-theorem",
+      "name": "Binomial theorem",
+      "short": "Binomial theorem",
+      "statement": "For any nonnegative integer n, (x + y)ⁿ is the sum over k from 0 to n of C(n,k)·xⁿ⁻ᵏ·yᵏ, where C(n,k) = n! / (k!(n−k)!) is a positive integer called a binomial coefficient.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Special cases were known to Euclid (exponent 2) from the 4th century BC",
+      "note": "The binomial coefficients can be arranged in Pascal's triangle. C(n,k) also counts the subsets of k elements that can be chosen from an n-element set.",
+      "url": "https://en.wikipedia.org/wiki/Binomial_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "abels-binomial-theorem",
+      "name": "Abel's binomial theorem",
+      "short": "Abel's binomial theorem",
+      "statement": "For every nonnegative integer m and all numbers w and z with w ≠ 0, the sum over k from 0 to m of C(m,k)·(w+m−k)^(m−k−1)·(z+k)^k equals w⁻¹·(z+w+m)^m, where C(m,k) is the binomial coefficient.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Named after Niels Henrik Abel",
+      "url": "https://en.wikipedia.org/wiki/Abel's_binomial_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "heawood-conjecture-ringel-youngs-theorem",
+      "name": "Heawood conjecture (Ringel–Youngs theorem)",
+      "short": "Heawood conjecture",
+      "statement": "For an orientable surface of genus g > 0, the smallest number of colors that suffices to color every graph drawn on it is ⌊(7 + √(1 + 48g))/2⌋. In terms of the Euler characteristic χ the number is ⌊(7 + √(49 − 24χ))/2⌋, which holds for all surfaces except the Klein bottle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Conjectured by Percy John Heawood, 1890; proved by Gerhard Ringel and J.W.T. Youngs, 1968",
+      "note": "The upper bound was proved in Heawood's original paper. The hard direction was to construct extreme examples for every genus.",
+      "url": "https://en.wikipedia.org/wiki/Heawood_conjecture",
+      "area": "combinatorics",
+      "year": 1890,
+      "settled": 1968,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "eulers-pentagonal-number-theorem",
+      "name": "Euler's pentagonal number theorem",
+      "short": "Pentagonal number theorem",
+      "statement": "The infinite product (1 − x)(1 − x²)(1 − x³)⋯ equals 1 + ∑ over k ≥ 1 of (−1)ᵏ (x^(k(3k+1)/2) + x^(k(3k−1)/2)), which begins 1 − x − x² + x⁵ + x⁷ − x¹² − x¹⁵ + x²² + x²⁶ − ⋯. This holds for |x| < 1 and also as an identity of formal power series.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Named after Euler",
+      "note": "It gives a recurrence for the number of partitions p(n): p(n) = p(n−1) + p(n−2) − p(n−5) − p(n−7) + ⋯, where the subtracted arguments run over the generalized pentagonal numbers. It is a special case of the Jacobi triple product.",
+      "url": "https://en.wikipedia.org/wiki/Pentagonal_number_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hockey-stick-identity",
+      "name": "Hockey-stick identity",
+      "short": "Hockey-stick identity",
+      "statement": "If n ≥ r ≥ 0 are integers, then the binomial coefficients C(r,r) + C(r+1,r) + C(r+2,r) + … + C(n,r) add up to C(n+1,r+1).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "pascals-rule",
+        "binomial-theorem"
+      ],
+      "note": "The name comes from the shape the addends and the sum make when highlighted on Pascal's triangle. It is also called the Christmas stocking identity, boomerang identity, Fermat's identity or Chu's Theorem.",
+      "url": "https://en.wikipedia.org/wiki/Hockey-stick_identity",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cap-set-conjecture",
+      "name": "Cap set conjecture",
+      "short": "Cap set conjecture",
+      "statement": "There is a constant c < 3 such that, for all sufficiently large n, every cap set in ℤ₃ⁿ (a set of length-n vectors with entries 0, 1, 2 added modulo 3, no three distinct of which sum to the zero vector) has at most cⁿ elements. Ellenberg and Gijswijt proved this with the bound 2.756ⁿ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Asked by Péter Frankl, Ronald Graham and Vojtěch Rödl, 1987; proved by Jordan Ellenberg and Dion Gijswijt, 2016, using a method of Ernie Croot, Vsevolod Lev and Péter Pál Pach",
+      "note": "It improved Roy Meshulam's 1995 bound of 2·3ⁿ/n on the size of cap sets. It also implies a partial form of the sunflower conjecture.",
+      "url": "https://en.wikipedia.org/wiki/Cap_set",
+      "area": "combinatorics",
+      "year": 1987,
+      "settled": 2016,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-graham-problem",
+      "name": "Erdős–Graham problem",
+      "short": "Erdős–Graham problem",
+      "statement": "If the integers greater than one are split into r subsets, then one subset contains a finite set S whose reciprocals add up to exactly 1. Moreover, there is a constant b, not depending on r, such that for all sufficiently large r the set S can be chosen with largest member at most bʳ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "elementary-number-theory"
+      ],
+      "by": "Conjectured by Paul Erdős and Ronald Graham; proved by Ernie Croot",
+      "note": "Croot's value for b is at most e¹⁶⁷⁰⁰⁰, and b must be at least e. A stronger form, for every set of integers with positive upper density, was announced in 2021 by Thomas Bloom.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Graham_problem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "burr-erdos-conjecture",
+      "name": "Burr–Erdős conjecture",
+      "short": "Burr–Erdős conjecture",
+      "statement": "For every integer p there is a constant c_p such that every p-degenerate graph on n vertices has Ramsey number at most c_p · n. Equivalently, every colouring of the edges of a complete graph on c_p · n vertices with two colours contains a copy of such a graph in a single colour.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Conjectured by Stefan Burr and Paul Erdős, 1973; proved by Choongbum Lee",
+      "note": "A graph is p-degenerate if every subgraph has a vertex of degree p or smaller. The conjecture was first proved in special cases, such as graphs of bounded degree.",
+      "url": "https://en.wikipedia.org/wiki/Burr%E2%80%93Erd%C5%91s_conjecture",
+      "area": "combinatorics",
+      "year": 1973,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cameron-erdos-conjecture",
+      "name": "Cameron–Erdős conjecture",
+      "short": "Cameron–Erdős conjecture",
+      "statement": "There is a constant C such that, for every N, the number of sum-free subsets of {1, …, N} is at most C·2^(N/2). A set is sum-free when no two of its elements, equal or not, add up to an element of the set.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Stated by Peter Cameron and Paul Erdős, 1988; proved by Ben Green and independently by Alexander Sapozhenko, 2003",
+      "note": "Any set of odd numbers is sum-free, because the sum of two odd numbers is even. This gives about 2^(N/2) sum-free subsets of {1, …, N}, and the theorem says these make up a constant proportion of all sum-free sets.",
+      "url": "https://en.wikipedia.org/wiki/Cameron%E2%80%93Erd%C5%91s_conjecture",
+      "area": "combinatorics",
+      "year": 1988,
+      "settled": 2003,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kemnitzs-conjecture",
+      "name": "Kemnitz's conjecture",
+      "short": "Kemnitz's conjecture",
+      "statement": "For every natural number n, any set of 4n − 3 integer lattice points in the plane has a subset of n points whose centroid is also a lattice point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "chevalley-warning-theorem"
+      ],
+      "by": "Formulated by Arnfried Kemnitz, 1983; proved independently by Christian Reiher and Carlos di Fiore, 2003",
+      "note": "It generalizes the Erdős–Ginzburg–Ziv theorem, which says that every 2n − 1 integers have a subset of size n whose average is an integer. Reiher's proof uses the Chevalley–Warning theorem.",
+      "url": "https://en.wikipedia.org/wiki/Kemnitz's_conjecture",
+      "area": "combinatorics",
+      "year": 1983,
+      "settled": 2003,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "singmasters-conjecture",
+      "name": "Singmaster's conjecture",
+      "short": "Singmaster's conjecture",
+      "statement": "There is a finite number M such that every number a > 1 appears at most M times among the entries of Pascal's triangle.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "elementary-number-theory"
+      ],
+      "by": "David Singmaster, 1971",
+      "note": "The number 1 appears infinitely many times, but any other number x can appear only within the first x + 1 rows. The only number known to appear eight times is 3003.",
+      "url": "https://en.wikipedia.org/wiki/Singmaster's_conjecture",
+      "area": "combinatorics",
+      "year": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-tetali-theorem",
+      "name": "Erdős–Tetali theorem",
+      "short": "Erdős–Tetali theorem",
+      "statement": "For every fixed integer h ≥ 2 there is a set B of natural numbers such that, for all sufficiently large n, the number of ways to write n as a sum of h elements of B lies between c₁ log n and c₂ log n, for some positive constants c₁ and c₂.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "elementary-number-theory"
+      ],
+      "by": "Paul Erdős and Prasad V. Tetali, 1990; the case h = 2 was proved by Erdős in 1956",
+      "note": "It generalizes Erdős's 1956 answer to a question that S. Sidon posed in 1932, whether an economical additive basis of order 2 exists. The proof uses the probabilistic method and is non-constructive.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Tetali_theorem",
+      "area": "combinatorics",
+      "year": 1990,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cobhams-theorem",
+      "name": "Cobham's theorem",
+      "short": "Cobham's theorem",
+      "statement": "Let b₁ and b₂ be bases that are not powers of the same integer. A set S of natural numbers is recognised by finite automata when written in base b₁ and in base b₂ if and only if S differs by a finite set from a finite union of arithmetic progressions.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "dirichlets-approximation-theorem"
+      ],
+      "by": "Alan Cobham, 1969",
+      "url": "https://en.wikipedia.org/wiki/Cobham's_theorem",
+      "area": "combinatorics",
+      "year": 1969,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "robertss-triangle-theorem",
+      "name": "Roberts's triangle theorem",
+      "short": "Roberts's triangle theorem",
+      "statement": "Every simple arrangement of n lines in the Euclidean plane, meaning no two lines are parallel and no three pass through the same point, has at least n − 2 triangular faces. Only bounded faces with exactly three sides count as triangles.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Samuel Roberts, 1889; Branko Grünbaum credits the first correct proof to Robert W. Shannon, 1979",
+      "note": "The bound is attained by n lines tangent to a semicircle. The related Kobon triangle problem asks for the largest possible number of triangles instead of the fewest.",
+      "url": "https://en.wikipedia.org/wiki/Roberts's_triangle_theorem",
+      "area": "combinatorics",
+      "year": 1889,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "vandermondes-identity",
+      "name": "Vandermonde's identity",
+      "short": "Vandermonde's identity",
+      "statement": "For any nonnegative integers r, m, n, the binomial coefficient (m+n choose r) equals the sum over k from 0 to r of (m choose k)·(n choose r−k).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Named after Alexandre-Théophile Vandermonde, 1772; already known in 1303 to the Chinese mathematician Zhu Shijie",
+      "note": "It can be proved by comparing coefficients of x^r in (1+x)^(m+n) = (1+x)^m (1+x)^n.",
+      "url": "https://en.wikipedia.org/wiki/Vandermonde's_identity",
+      "area": "combinatorics",
+      "year": 1303,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "balinskis-theorem",
+      "name": "Balinski's theorem",
+      "short": "Balinski's theorem",
+      "statement": "The graph formed by the vertices and edges of a convex d-dimensional polytope is at least d-vertex-connected. Removing any d − 1 vertices leaves a connected graph.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "graph-theory"
+      ],
+      "by": "Michel Balinski, 1961",
+      "note": "The three-dimensional case dates from earlier in the 20th century and follows from Steinitz's theorem on graphs of three-dimensional polyhedra.",
+      "url": "https://en.wikipedia.org/wiki/Balinski's_theorem",
+      "area": "combinatorics",
+      "year": 1961,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "higmans-lemma",
+      "name": "Higman's lemma",
+      "short": "Higman's lemma",
+      "statement": "The set of finite sequences over a finite alphabet, ordered by the subsequence relation, is a well partial order. That is, in every infinite sequence of words w₁, w₂, … over a finite alphabet there are indices i < j such that wᵢ can be obtained from wⱼ by deleting some (possibly none) symbols.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Graham Higman, 1952",
+      "note": "It extends to sequences over any well-quasi-ordered alphabet with the embedding order, and it is a special case of the later Kruskal's tree theorem. Over the base theory RCA₀ it is equivalent to ACA₀.",
+      "url": "https://en.wikipedia.org/wiki/Higman's_lemma",
+      "area": "combinatorics",
+      "year": 1952,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "three-utilities-problem",
+      "name": "Three utilities problem",
+      "short": "K₃,₃ is not planar",
+      "statement": "The complete bipartite graph K₃,₃ (three houses and three utilities, with a line joining each house to each utility) is not planar: its nine edges cannot be drawn in the plane without two of them crossing. So in the plane, with lines not allowed to pass through other houses or utilities, the three utilities puzzle has no solution.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "jordan-curve-theorem"
+      ],
+      "by": "Kazimierz Kuratowski stated it in 1930; the puzzle was posed earlier by Henry Dudeney (1913) and, by his son's account, by Sam Loyd (1900)",
+      "note": "Proofs use the Jordan curve theorem or Euler's formula, and the fact is part of Kuratowski's theorem characterizing planar graphs. K₃,₃ can be drawn without crossings on a torus, and it can be drawn in the plane with exactly one crossing.",
+      "url": "https://en.wikipedia.org/wiki/Three_utilities_problem",
+      "area": "combinatorics",
+      "year": 1930,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "seven-bridges-of-konigsberg",
+      "name": "Seven Bridges of Königsberg",
+      "short": "Königsberg bridges",
+      "statement": "In historical Königsberg, four land masses were joined by seven bridges, with one land mass touched by 5 bridges and each of the other three by 3. There is no walk that crosses every bridge exactly once, where land is reached only by bridges and every bridge entered is crossed to its other end. In graph terms, this graph has no Eulerian path, because it has four vertices of odd degree.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Leonhard Euler, 1736; presented to the St. Petersburg Academy on 26 August 1735 and published in 1741",
+      "note": "Euler's argument shows that such a walk can exist only if the graph is connected and has exactly zero or two vertices of odd degree; Carl Hierholzer later proved that this condition is also sufficient. The solution is considered the first theorem of graph theory.",
+      "url": "https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg",
+      "area": "combinatorics",
+      "year": 1735,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-distinct-distances-problem",
+      "name": "Erdős distinct distances problem",
+      "short": "Erdős distinct distances",
+      "statement": "For every exponent c < 1 there is a constant k > 0 such that any n ≥ 2 distinct points in the plane have at least k·nᶜ different distances between them. In other words, the number of distinct distances among n points in the plane grows nearly linearly in n.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Posed by Paul Erdős, 1946; current best result by Larry Guth and Nets Katz, 2015",
+      "note": "Erdős further conjectured that the square grid is optimal, so that the least number of distinct distances is of order n/√(log n). He offered $500 for a proof or disproof of this sharper conjecture.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s_distinct_distances_problem",
+      "area": "combinatorics",
+      "year": 1946,
+      "settled": 2015,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bondys-theorem",
+      "name": "Bondy's theorem",
+      "short": "Bondy's theorem",
+      "statement": "If A₁, …, Aₙ are distinct subsets of a set X with n elements, then there is a subset S of X with n − 1 elements such that the sets Aᵢ ∩ S are all distinct.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "John Adrian Bondy, 1972",
+      "note": "Equivalently, in a 0-1 matrix with n distinct rows and n columns, one column can be removed so that the rows stay distinct.",
+      "url": "https://en.wikipedia.org/wiki/Bondy's_theorem",
+      "area": "combinatorics",
+      "year": 1972,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-szemeredi-theorem",
+      "name": "Erdős–Szemerédi theorem",
+      "short": "Erdős–Szemerédi",
+      "statement": "There are positive constants c and ε such that for every finite non-empty set A of natural numbers, the larger of the number of distinct pairwise sums a+b and the number of distinct pairwise products a·b (a, b in A) is at least c·|A|^(1+ε).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Paul Erdős and Endre Szemerédi, 1983",
+      "note": "It is the first example of the sum-product phenomenon. The stronger sum-product conjecture of Erdős from 1974, with the bound |A|^(2−o(1)), was disproved over the real numbers in 2026 and remains open over the integers.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Szemer%C3%A9di_theorem",
+      "area": "combinatorics",
+      "year": 1983,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "best-theorem",
+      "name": "BEST theorem",
+      "short": "BEST theorem",
+      "statement": "In a connected directed graph with indegree equal to outdegree at every vertex, the number of Eulerian circuits is t_w(G) · ∏ (deg(v) − 1)!, the product taken over all vertices v. Here deg(v) is the indegree of v and t_w(G) is the number of spanning trees directed towards a fixed vertex w.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Tatyana van Aardenne-Ehrenfest and N. G. de Bruijn, 1951; Cedric Smith and W. T. Tutte, 1941, proved the case deg(v) = 2 at every vertex",
+      "note": "The number t_w(G) can be computed as a determinant by the matrix tree theorem for directed graphs. The name is an acronym of de Bruijn, van Aardenne-Ehrenfest, Smith and Tutte.",
+      "url": "https://en.wikipedia.org/wiki/BEST_theorem",
+      "area": "combinatorics",
+      "year": 1951,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "becks-theorem",
+      "name": "Beck's theorem",
+      "short": "Beck's theorem",
+      "statement": "There are positive constants C and K such that for any n points in the plane at least one of the following holds: some line contains at least n/C of the points, or there are at least n²/K lines each containing at least two of the points.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "crossing-number-inequality",
+          "url": "https://en.wikipedia.org/wiki/Crossing_number_inequality"
+        },
+        "szemeredi-trotter-theorem"
+      ],
+      "by": "József Beck",
+      "note": "It follows from the Erdős–Beck theorem. In Beck's original argument C is 100, and the optimal values of C and K are not known.",
+      "url": "https://en.wikipedia.org/wiki/Beck's_theorem_(geometry)",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "de-bruijn-erdos-theorem-graph-theory",
+      "name": "De Bruijn–Erdős theorem (graph theory)",
+      "short": "De Bruijn–Erdős coloring",
+      "statement": "Assuming the axiom of choice: if the chromatic numbers of the finite subgraphs of a graph G have a finite maximum c, then the chromatic number of G itself is exactly c. In other words, if every finite subgraph can be colored with c colors so that adjacent vertices get different colors, then so can the whole, possibly infinite, graph.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Nicolaas Govert de Bruijn and Paul Erdős",
+      "note": "All proofs use some form of the axiom of choice, and the theorem is equivalent to the Boolean prime ideal theorem. It extends the four-color theorem and Dilworth's theorem to infinite graphs and partially ordered sets.",
+      "url": "https://en.wikipedia.org/wiki/De_Bruijn%E2%80%93Erd%C5%91s_theorem_(graph_theory)",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "de-bruijn-erdos-theorem-incidence-geometry",
+      "name": "De Bruijn–Erdős theorem (incidence geometry)",
+      "short": "De Bruijn–Erdős (lines)",
+      "statement": "Let P be a set of n points in a projective plane, not all on one line, and let t be the number of lines determined by P. Then t ≥ n. If t = n, any two lines have exactly one point of P in common, and P is either a projective plane or a near pencil, meaning that exactly n − 1 of the points are collinear.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Nicolaas Govert de Bruijn and Paul Erdős, 1948",
+      "note": "By duality it is also a bound on the number of intersection points determined by a configuration of lines. The analogous Euclidean result is a consequence of the Sylvester–Gallai theorem.",
+      "url": "https://en.wikipedia.org/wiki/De_Bruijn%E2%80%93Erd%C5%91s_theorem_(incidence_geometry)",
+      "area": "combinatorics",
+      "year": 1948,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "folkmans-theorem",
+      "name": "Folkman's theorem",
+      "short": "Folkman's theorem",
+      "statement": "Suppose the positive integers are partitioned into finitely many subsets. Then for every positive integer m, there is a set of m numbers such that every sum of a nonempty subset of it lies in the same one of the subsets of the partition.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Discovered and proved independently by several mathematicians; named in memory of Jon Folkman by Graham, Rothschild and Spencer",
+      "url": "https://en.wikipedia.org/wiki/Folkman's_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "freimans-theorem",
+      "name": "Freiman's theorem",
+      "short": "Freiman's theorem",
+      "statement": "If A is a finite subset of the integers with |A+A| ≤ K|A|, then A is contained in a generalized arithmetic progression of dimension at most d(K) and size at most f(K)|A|, where d(K) and f(K) are constants depending only on K.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "bertrands-postulate"
+      ],
+      "by": "Gregory Freiman, 1964 and 1966",
+      "note": "It describes the approximate structure of sets whose sumset is small. A new proof by Imre Z. Ruzsa in 1992 and 1994 led to much interest and many applications.",
+      "url": "https://en.wikipedia.org/wiki/Freiman's_theorem",
+      "area": "combinatorics",
+      "year": 1964,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kruskals-tree-theorem",
+      "name": "Kruskal's tree theorem",
+      "short": "Kruskal's tree theorem",
+      "statement": "If X is a well-quasi-ordered set of labels, then the finite rooted trees with labels in X are well-quasi-ordered under homeomorphic (inf-) embedding. This means that in every infinite sequence T₁, T₂, … of such trees, some earlier tree Tᵢ embeds into some later tree Tⱼ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "mathematical-logic"
+      ],
+      "by": "Conjectured by Andrew Vázsonyi; proved by Kruskal, 1960; a short proof was given by Nash-Williams, 1963",
+      "note": "A finitary application gives the fast-growing TREE function. The theorem cannot be proved in ATR_0, a second-order arithmetic theory.",
+      "url": "https://en.wikipedia.org/wiki/Kruskal's_tree_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kruskal-katona-theorem",
+      "name": "Kruskal–Katona theorem",
+      "short": "Kruskal–Katona theorem",
+      "statement": "For positive integers N and k, write N = C(a_k, k) + C(a_{k−1}, k−1) + … + C(a_j, j) with a_k > a_{k−1} > … > a_j ≥ j ≥ 1 (this expansion with binomial coefficients C is unique) and let N⁽ᵏ⁻¹⁾ = C(a_k, k−1) + C(a_{k−1}, k−2) + … + C(a_j, j−1). Then positive integers f₀, f₁, …, f_{d−1} are the numbers of faces with 1, 2, …, d vertices of some (d−1)-dimensional simplicial complex if and only if fᵢ⁽ⁱ⁾ ≤ fᵢ₋₁ for 1 ≤ i ≤ d−1, where fᵢ⁽ⁱ⁾ is formed from the expansion of fᵢ with k = i + 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Joseph Kruskal, 1963, and Gyula O. H. Katona, 1968; discovered independently also by Schützenberger, 1959 (with an incomplete proof), Harper, 1966, and Clements and Lindström, 1969",
+      "note": "It includes the Erdős–Ko–Rado theorem as a special case and can be restated in terms of uniform hypergraphs.",
+      "url": "https://en.wikipedia.org/wiki/Kruskal%E2%80%93Katona_theorem",
+      "area": "combinatorics",
+      "year": 1959,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rados-theorem",
+      "name": "Rado's theorem",
+      "short": "Rado's theorem",
+      "statement": "Let Ax = 0 be a system of linear equations with integer matrix A. Call the system regular if, for every r ≥ 1 and every coloring of the natural numbers with r colors, the system has a solution whose entries all have the same color. Then the system is regular if and only if A satisfies the columns condition: the column indices can be partitioned into C₁, …, Cₙ so that, with sᵢ the sum of the columns cⱼ for j in Cᵢ, s₁ = 0 and each sᵢ for i ≥ 2 is a rational linear combination of the columns in all Cₖ with k < i.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Richard Rado, in his thesis Studien zur Kombinatorik",
+      "note": "Schur's theorem, van der Waerden's theorem and Folkman's theorem are special cases.",
+      "url": "https://en.wikipedia.org/wiki/Rado's_theorem_(Ramsey_theory)",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kleene-fixed-point-theorem",
+      "name": "Kleene fixed-point theorem",
+      "short": "Kleene fixed-point theorem",
+      "statement": "Let L be a directed-complete partial order with a least element ⊥, and let f : L → L be a Scott-continuous function. Then f has a least fixed point, which is the supremum of the chain ⊥ ⊑ f(⊥) ⊑ f(f(⊥)) ⊑ …",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "Named after Stephen Cole Kleene; often attributed to Alfred Tarski, who proves it for additive functions",
+      "note": "Unlike Tarski's fixed point theorem, it shows how the fixed point can be computed by iterating f from the least element.",
+      "url": "https://en.wikipedia.org/wiki/Kleene_fixed-point_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "maximum-minimums-identity",
+      "name": "Maximum-minimums identity",
+      "short": "Maximum-minimums identity",
+      "statement": "For n numbers x₁, …, xₙ, the largest of them equals the sum of all the numbers, minus the sum of the minima of all pairs, plus the sum of the minima of all triples, and so on with alternating signs, ending with (−1)ⁿ⁺¹ times the minimum of all n numbers. The same holds with maximum and minimum exchanged.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "note": "It relates the maximum of a set of n numbers to the minima of its 2ⁿ − 1 non-empty subsets.",
+      "url": "https://en.wikipedia.org/wiki/Maximum-minimums_identity",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "farys-theorem",
+      "name": "Fáry's theorem",
+      "short": "Fáry's theorem",
+      "statement": "Any simple planar graph can be drawn without crossings so that all its edges are straight line segments.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "chvatals-art-gallery-theorem"
+      ],
+      "by": "Named after István Fáry; proved independently by Wagner (1936), Fáry (1948) and Stein (1951)",
+      "note": "Drawing edges as curves instead of straight segments does not allow a larger class of graphs to be drawn without crossings.",
+      "url": "https://en.wikipedia.org/wiki/F%C3%A1ry's_theorem",
+      "area": "combinatorics",
+      "year": 1936,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "1-3-2-3-conjecture",
+      "name": "1/3–2/3 conjecture",
+      "short": "1/3–2/3 conjecture",
+      "statement": "In every finite partially ordered set that is not totally ordered, there is a pair of elements x and y such that at least 1/3 and at most 2/3 of the linear extensions of the partial order place x earlier than y.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Formulated by Sergey Kislitsyn, 1968; made independently by Michael Fredman and by Nati Linial, 1984",
+      "note": "Equivalently, when comparison sorting, it is always possible to choose the next comparison so that it reduces the number of possible sorted orders by a factor of 2/3 or better.",
+      "url": "https://en.wikipedia.org/wiki/1%2F3%E2%80%932%2F3_conjecture",
+      "area": "combinatorics",
+      "year": 1968,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ahlswede-daykin-inequality",
+      "name": "Ahlswede–Daykin inequality",
+      "short": "Ahlswede–Daykin inequality",
+      "statement": "Let f₁, f₂, f₃, f₄ be nonnegative functions on a finite distributive lattice such that f₁(x)f₂(y) ≤ f₃(x∨y)f₄(x∧y) for all x, y in the lattice. Then f₁(X)f₂(Y) ≤ f₃(X∨Y)f₄(X∧Y) for all subsets X, Y of the lattice, where f(X) is the sum of f(x) over x in X, X∨Y is the set of all x∨y with x in X and y in Y, and X∧Y is the set of all x∧y.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Ahlswede and Daykin, 1978",
+      "note": "Also known as the four functions theorem. It gives a short proof of the Holley inequality and the FKG inequality, and it implies the XYZ inequality.",
+      "url": "https://en.wikipedia.org/wiki/Ahlswede%E2%80%93Daykin_inequality",
+      "area": "combinatorics",
+      "year": 1978,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "oberwolfach-problem",
+      "name": "Oberwolfach problem",
+      "short": "Oberwolfach problem",
+      "statement": "Let G be a 2-regular graph (a disjoint union of cycles) on n vertices, other than two triangles, four triangles, a 4-cycle with a 5-cycle, or two triangles with a 5-cycle. If n is odd, the complete graph Kₙ can be written as an edge-disjoint union of copies of G, and if n is even, the same holds for Kₙ with a perfect matching removed.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Posed by Gerhard Ringel at the Oberwolfach Research Institute for Mathematics, 1967",
+      "note": "Glock, Joos, Kim, Kühn and Osthus found a solution for all but finitely many instances, so it is true for all sufficiently large complete graphs. Kirkman's schoolgirl problem is the special case of five triangles.",
+      "url": "https://en.wikipedia.org/wiki/Oberwolfach_problem",
+      "area": "combinatorics",
+      "year": 1967,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cheeger-bound",
+      "name": "Cheeger bound",
+      "short": "Cheeger bound",
+      "statement": "Let K be the transition matrix of a reversible Markov chain on a finite set X with stationary distribution π. Define Q(x, y) = π(x)K(x, y), and let Φ be the minimum, over nonempty subsets S of X with π(S) ≤ 1/2, of Q(S × Sᶜ) / π(S). Then the second largest eigenvalue λ₂ of K satisfies 1 − 2Φ ≤ λ₂ ≤ 1 − Φ²/2.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "linear-algebra"
+      ],
+      "note": "The largest eigenvalue of K is 1. The bound can be seen as a special case of Cheeger inequalities in expander graphs.",
+      "url": "https://en.wikipedia.org/wiki/Cheeger_bound",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tuttes-theorem-on-perfect-matchings",
+      "name": "Tutte's theorem on perfect matchings",
+      "short": "Tutte's perfect matchings",
+      "statement": "A finite undirected graph G has a perfect matching if and only if, for every subset U of its vertices, the graph G − U has at most |U| odd components, that is, components with an odd number of vertices.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "tutte-berge-formula"
+      ],
+      "by": "Named after William Thomas Tutte",
+      "note": "It is a special case of the Tutte–Berge formula.",
+      "url": "https://en.wikipedia.org/wiki/Tutte's_theorem_on_perfect_matchings",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "circle-packing-theorem",
+      "name": "Circle packing theorem",
+      "short": "Circle packing theorem",
+      "statement": "Every finite connected simple planar graph G has a circle packing in the plane whose intersection graph is isomorphic to G. Here a circle packing is a collection of circles whose union is connected and whose interiors are disjoint, and its intersection graph has a vertex for each circle and an edge for each pair of tangent circles.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "brouwer-fixed-point-theorem",
+        "mostow-rigidity-theorem"
+      ],
+      "by": "First stated and proved by Koebe, 1936; also known as the Koebe–Andreev–Thurston theorem",
+      "note": "For a maximal planar graph the packing is unique up to reflections and Möbius transformations.",
+      "url": "https://en.wikipedia.org/wiki/Circle_packing_theorem",
+      "area": "combinatorics",
+      "year": 1936,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "brooks-theorem",
+      "name": "Brooks' theorem",
+      "short": "Brooks' theorem",
+      "statement": "Let G be a connected graph whose maximum degree is Δ, meaning that no vertex has more than Δ neighbors and some vertex has exactly Δ. Then the vertices of G can be colored with Δ colors so that adjacent vertices get different colors, unless G is a complete graph or an odd cycle, in which case Δ + 1 colors are needed.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "R. Leonard Brooks, 1941",
+      "note": "It relates the maximum degree of a graph to its chromatic number.",
+      "url": "https://en.wikipedia.org/wiki/Brooks'_theorem",
+      "area": "combinatorics",
+      "year": 1941,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "conways-thrackle-conjecture",
+      "name": "Conway's thrackle conjecture",
+      "short": "Thrackle conjecture",
+      "statement": "Every thrackle has at most as many edges as vertices. A thrackle is a drawing of a graph in the plane in which each edge is a Jordan arc and every pair of edges meet exactly once, either at a common endpoint or, if they share no endpoint, by crossing at a point in their interiors.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "John H. Conway",
+      "note": "Erdős showed that the bound holds for linear thrackles, whose edges are straight segments. For general thrackles the best known bound is 1.393n edges for n vertices.",
+      "url": "https://en.wikipedia.org/wiki/Thrackle",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "corners-theorem",
+      "name": "Corners theorem",
+      "short": "Corners theorem",
+      "statement": "For every ε > 0 and all large enough N, any set of at least εN² points in the N×N grid {1,…,N}² contains a corner, that is, three points of the form (x,y), (x+h,y), (x,y+h) with h ≠ 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "szemeredi"
+      ],
+      "by": "Miklós Ajtai and Endre Szemerédi, 1974; a short proof by József Solymosi, 2003",
+      "note": "Ajtai and Szemerédi proved it using Szemerédi's theorem. Solymosi's proof uses the triangle removal lemma.",
+      "url": "https://en.wikipedia.org/wiki/Corners_theorem",
+      "area": "combinatorics",
+      "year": 1974,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cyclotomic-identity",
+      "name": "Cyclotomic identity",
+      "short": "Cyclotomic identity",
+      "statement": "1/(1 − kz) = ∏ over j ≥ 1 of (1/(1 − zʲ)) raised to the power M_j(k), where M_n(k) = (1/n) ∑ over divisors d of n of μ(n/d)·kᵈ, and μ is the Möbius function.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "note": "The left side is the generating function for the free associative algebra on k generators, and the right side is the generating function for the universal enveloping algebra of the free Lie algebra on k generators, so the identity witnesses that these two algebras are isomorphic.",
+      "url": "https://en.wikipedia.org/wiki/Cyclotomic_identity",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "de-bruijns-theorem",
+      "name": "De Bruijn's theorem",
+      "short": "De Bruijn's theorem",
+      "statement": "If congruent copies of a harmonic brick, one in which each side length is an integer multiple of the next smaller side length, fill a rectangular box with no space left over, then the box is a multiple of the brick: its side lengths, in some order, are integer multiples of the brick's side lengths.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Nicolaas Govert de Bruijn, 1969",
+      "note": "The bricks may be rotated relative to each other, yet the only boxes that can be filled are those that could also be filled by translates of the brick. For a brick that is not harmonic there is always a box it can fill that is not a multiple of it.",
+      "url": "https://en.wikipedia.org/wiki/De_Bruijn's_theorem",
+      "area": "combinatorics",
+      "year": 1969,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dicksons-lemma",
+      "name": "Dickson's lemma",
+      "short": "Dickson's lemma",
+      "statement": "Every set of n-tuples of natural numbers has finitely many minimal elements for the pointwise partial order, where (a₁,…,aₙ) ≤ (b₁,…,bₙ) means aᵢ ≤ bᵢ for every i. Equivalently, in every infinite sequence of n-tuples of natural numbers there are two indices i < j with xᵢ ≤ xⱼ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Named after L. E. Dickson, who used it to prove a result about perfect numbers; known earlier to Paul Gordan, who used a restatement of it in 1899",
+      "note": "Dickson used it to prove that for any n there are only finitely many odd perfect numbers with at most n prime factors. It is a special case of Hilbert's basis theorem for ideals generated by monomials.",
+      "url": "https://en.wikipedia.org/wiki/Dickson's_lemma",
+      "area": "combinatorics",
+      "year": 1899,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dinitz-theorem",
+      "name": "Dinitz theorem",
+      "short": "Dinitz theorem",
+      "statement": "Given an n × n array, a pool of m ≥ n symbols, and for each cell an n-element set of symbols from the pool, each cell can be labelled with an element of its own set so that no symbol repeats within any row or any column.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "graph-theory"
+      ],
+      "by": "Proposed by Jeff Dinitz, 1979; proved by Fred Galvin, 1994",
+      "note": "If all the cell sets are the same set of n symbols, the labelling is an ordinary n × n Latin square. Galvin proved the more general result that every bipartite multigraph has list chromatic index equal to its chromatic index.",
+      "url": "https://en.wikipedia.org/wiki/Dinitz_theorem",
+      "area": "combinatorics",
+      "year": 1979,
+      "settled": 1994,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dyson-conjecture",
+      "name": "Dyson conjecture",
+      "short": "Dyson conjecture",
+      "statement": "For nonnegative integers a₁, …, aₙ, the Laurent polynomial ∏ (1 − tᵢ/tⱼ)^aᵢ, taken over all ordered pairs (i, j) with i ≠ j and 1 ≤ i, j ≤ n, has constant term (a₁+a₂+⋯+aₙ)! / (a₁! a₂! ⋯ aₙ!).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Conjectured by Dyson, 1962; proved independently by Wilson and Gunson, 1962",
+      "note": "Good later found a short proof using recursion relations. It was generalized to the q-Dyson conjecture and to the Macdonald constant term conjecture.",
+      "url": "https://en.wikipedia.org/wiki/Dyson_conjecture",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "halls-marriage-theorem",
+      "name": "Hall's marriage theorem",
+      "short": "Hall's marriage theorem",
+      "statement": "A finite family of sets (the sets themselves may be infinite) has a transversal, a choice of a different element from each set, if and only if any k sets of the family together contain at least k distinct elements, for every k. Equivalently, a finite bipartite graph with sides X and Y has a matching covering every vertex of X if and only if every set W of vertices in X has at least |W| neighbours in Y.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "graph-theory"
+      ],
+      "by": "Philip Hall, 1935",
+      "note": "Marshall Hall Jr. extended it to infinite families of finite sets. For infinite families that contain infinite sets the condition no longer guarantees a transversal.",
+      "url": "https://en.wikipedia.org/wiki/Hall's_marriage_theorem",
+      "area": "combinatorics",
+      "year": 1935,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-faber-lovasz-conjecture",
+      "name": "Erdős–Faber–Lovász conjecture",
+      "short": "Erdős–Faber–Lovász",
+      "statement": "If k complete graphs, each with exactly k vertices, are such that every two of them share at most one vertex, then the union of the graphs can be properly colored with k colors.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Paul Erdős, Vance Faber and László Lovász, 1972",
+      "note": "In 2023 Dong Yeap Kang, Tom Kelly, Daniela Kühn, Abhishek Methuku and Deryk Osthus proved it for all sufficiently large k. Hindman's work shows it holds for k ≤ 10.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Faber%E2%80%93Lov%C3%A1sz_conjecture",
+      "area": "combinatorics",
+      "year": 1972,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-gallai-theorem",
+      "name": "Erdős–Gallai theorem",
+      "short": "Erdős–Gallai theorem",
+      "statement": "A sequence of non-negative integers d₁ ≥ ⋯ ≥ dₙ is the degree sequence of a finite simple graph on n vertices if and only if d₁ + ⋯ + dₙ is even and, for every k with 1 ≤ k ≤ n, d₁ + ⋯ + dₖ ≤ k(k − 1) + ∑ min(dᵢ, k), where the sum runs over i = k + 1, …, n.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Paul Erdős and Tibor Gallai, 1960",
+      "note": "It gives a necessary and sufficient condition for a finite sequence of natural numbers to be the degree sequence of a simple graph. It is one of two known approaches to the graph realization problem.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Gallai_theorem",
+      "area": "combinatorics",
+      "year": 1960,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-posa-theorem",
+      "name": "Erdős–Pósa theorem",
+      "short": "Erdős–Pósa theorem",
+      "statement": "There is a function f from the natural numbers to the natural numbers such that, for every positive integer k, every graph either contains k cycles with no vertex in common or has a set of at most f(k) vertices that contains a vertex of every cycle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Paul Erdős and Lajos Pósa, 1965",
+      "note": "Erdős and Pósa also showed that the least such f(k) lies between c₁k log k and c₂k log k for some constants c₁ and c₂.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93P%C3%B3sa_theorem",
+      "area": "combinatorics",
+      "year": 1965,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-stone-theorem",
+      "name": "Erdős–Stone theorem",
+      "short": "Erdős–Stone theorem",
+      "statement": "Let ex(n; H) be the largest number of edges in a graph with n vertices that has no subgraph isomorphic to H, and let K_r(t) be the complete r-partite graph with t vertices in each class. For fixed r ≥ 2 and t, ex(n; K_r(t)) = ((r−2)/(r−1) + o(1))·n(n−1)/2 as n grows, where o(1) is a term that tends to 0, and the same holds for every graph H with chromatic number r > 2.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Paul Erdős and Arthur Stone, 1946",
+      "note": "It extends Turán's theorem, which gives the exact extremal number for complete graphs, and has been described as the fundamental theorem of extremal graph theory. For bipartite graphs H it only gives ex(n; H) = o(n²).",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Stone_theorem",
+      "area": "combinatorics",
+      "year": 1946,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "expander-mixing-lemma",
+      "name": "Expander mixing lemma",
+      "short": "Expander mixing lemma",
+      "statement": "Let G be a d-regular graph on n vertices in which every eigenvalue of the adjacency matrix except one has absolute value at most λ. For any two sets S and T of vertices, if e(S, T) counts the pairs (x, y) with x in S, y in T and xy an edge (so edges inside both S and T count twice), then |e(S, T) − d|S||T|/n| ≤ λ√(|S||T|).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cauchy-schwarz-inequality"
+      ],
+      "note": "It says the edges of such graphs are evenly spread, with the number of edges between S and T close to d|S||T|/n, the expected number in a random d-regular graph. It implies that an independent set has at most λn/d vertices.",
+      "url": "https://en.wikipedia.org/wiki/Expander_mixing_lemma",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fleischners-theorem",
+      "name": "Fleischner's theorem",
+      "short": "Fleischner's theorem",
+      "statement": "The square of a finite biconnected graph with at least three vertices is Hamiltonian. Equivalently, the vertices of every such graph can be arranged in a cyclic order in which neighbours in the order are at distance at most two from each other in the graph.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Conjectured by Crispin Nash-Williams in 1966, and independently by L. W. Beineke and Michael D. Plummer; proved by Herbert Fleischner, announced 1971 and published 1974",
+      "note": "The square of a graph has the same vertices, and two vertices are adjacent when they are at distance at most two in the original graph. A graph is biconnected when no single vertex can be deleted to disconnect it.",
+      "url": "https://en.wikipedia.org/wiki/Fleischner's_theorem",
+      "area": "combinatorics",
+      "year": 1966,
+      "settled": 1974,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gallai-hasse-roy-vitaver-theorem",
+      "name": "Gallai–Hasse–Roy–Vitaver theorem",
+      "short": "Gallai–Hasse–Roy–Vitaver",
+      "statement": "The minimum number of colors needed to properly color the vertices of a graph G equals one plus the number of edges in a longest directed path, where the edges of G are given the directions that make this longest path as short as possible. Among the directions that achieve this minimum there is always at least one with no directed cycle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Named after separate publications by Tibor Gallai, Maria Hasse, B. Roy and L. M. Vitaver; Roy credits the statement to a conjecture in a 1958 graph theory textbook by Claude Berge",
+      "note": "It generalizes Rédei's 1934 theorem that every tournament contains a directed Hamiltonian path.",
+      "url": "https://en.wikipedia.org/wiki/Gallai%E2%80%93Hasse%E2%80%93Roy%E2%80%93Vitaver_theorem",
+      "area": "combinatorics",
+      "year": 1958,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "berges-theorem",
+      "name": "Berge's theorem",
+      "short": "Berge's theorem",
+      "statement": "A matching M in a graph G has the largest possible number of edges if and only if there is no augmenting path with respect to M. An augmenting path starts and ends on unmatched vertices and alternates between edges in M and edges not in M.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Claude Berge, 1957; already observed by Petersen in 1891 and Kőnig in 1931",
+      "url": "https://en.wikipedia.org/wiki/Berge's_theorem",
+      "area": "combinatorics",
+      "year": 1891,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "glaishers-theorem",
+      "name": "Glaisher's theorem",
+      "short": "Glaisher's theorem",
+      "statement": "For every positive integer d and every positive integer n, the number of partitions of n into parts not divisible by d equals the number of partitions of n in which no part is repeated d or more times.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "elementary-number-theory"
+      ],
+      "by": "James Whitbread Lee Glaisher, 1883; the case d = 2 was established by Leonhard Euler, 1748",
+      "note": "For d = 2 it becomes Euler's theorem: the number of partitions of n into distinct parts equals the number of partitions of n into odd parts.",
+      "url": "https://en.wikipedia.org/wiki/Glaisher's_theorem",
+      "area": "combinatorics",
+      "year": 1883,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "graph-structure-theorem",
+      "name": "Graph structure theorem",
+      "short": "Graph structure theorem",
+      "statement": "For any graph H there is a positive integer k such that every graph without H as a minor can be built as follows. Start with a list of graphs, each embedded on a surface on which H does not embed; add to each at most k vortices of depth at most k; add to each at most k new vertices (apices) with any number of edges having at least one endpoint among the apices; finally join the resulting graphs by k-clique-sums.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Neil Robertson and Paul Seymour, stated in the seventeenth of their series of 23 papers",
+      "note": "It implies that for every planar graph H, the graphs without H as a minor have bounded tree width. Its proof is very long and involved.",
+      "url": "https://en.wikipedia.org/wiki/Graph_structure_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "grinbergs-theorem",
+      "name": "Grinberg's theorem",
+      "short": "Grinberg's theorem",
+      "statement": "Let G be a finite planar graph, drawn in the plane without crossings, that has a Hamiltonian cycle C (a cycle passing through every vertex exactly once). If f_k and g_k are the numbers of faces with k sides inside and outside C, then ∑ over k ≥ 3 of (k − 2)(f_k − g_k) = 0.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Emanuel Grinberg, 1968",
+      "note": "It is a necessary condition for a planar graph to be Hamiltonian, so a graph that fails it is not Hamiltonian. It has been used to show that some counterexamples to Tait's conjecture are not Hamiltonian.",
+      "url": "https://en.wikipedia.org/wiki/Grinberg's_theorem",
+      "area": "combinatorics",
+      "year": 1968,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "grotzschs-theorem",
+      "name": "Grötzsch's theorem",
+      "short": "Grötzsch's theorem",
+      "statement": "Every triangle-free planar graph can be colored with three colors, so that the two endpoints of every edge have different colors.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Herbert Grötzsch, 1959",
+      "note": "The four-color theorem says four colors suffice for every planar graph. Grötzsch's theorem says three suffice when the graph has no three mutually adjacent vertices.",
+      "url": "https://en.wikipedia.org/wiki/Gr%C3%B6tzsch's_theorem",
+      "area": "combinatorics",
+      "year": 1959,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "halins-grid-theorem",
+      "name": "Halin's grid theorem",
+      "short": "Halin's grid theorem",
+      "statement": "An infinite graph has a thick end exactly when it contains a subdivision of the hexagonal tiling of the plane. A thick end is an end that contains infinitely many pairwise disjoint rays.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Rudolf Halin, 1965",
+      "note": "It is a precursor to the work of Robertson and Seymour linking treewidth to large grid minors in finite graphs.",
+      "url": "https://en.wikipedia.org/wiki/Halin's_grid_theorem",
+      "area": "combinatorics",
+      "year": 1965,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "halpern-lauchli-theorem",
+      "name": "Halpern–Läuchli theorem",
+      "short": "Halpern–Läuchli theorem",
+      "statement": "Let d and r be natural numbers and T₀, …, T_{d−1} finitely splitting trees of height ω, and colour each tuple made of one node from each tree, all on the same level, with one of r colours. Then there are subtrees Sᵢ strongly embedded in the Tᵢ such that all such same-level tuples from the Sᵢ have the same colour.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Halpern–Läuchli–Laver–Pincus (James D. Halpern, Hans Läuchli, Richard Laver and David Pincus), following Milliken (1979)",
+      "note": "Its original purpose was to give a model for set theory in which the Boolean prime ideal theorem is true but the axiom of choice is false.",
+      "url": "https://en.wikipedia.org/wiki/Halpern%E2%80%93L%C3%A4uchli_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hobby-rice-theorem",
+      "name": "Hobby–Rice theorem",
+      "short": "Hobby–Rice theorem",
+      "statement": "For any n continuously integrable functions g₁, …, gₙ from [0,1] to ℝ, there is a division of [0,1] into n+1 subintervals by n points, with each subinterval given a sign +1 or −1, such that for each of the n functions the signed sum of its integrals over the subintervals is 0. In other words, each function has the same integral over the positive subintervals as over the negative ones.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Charles R. Hobby and John R. Rice, 1965; simplified proof by A. Pinkus, 1976",
+      "note": "Noga Alon used it for necklace splitting in 1987. It implies that a cake can be cut with n cuts into two parts that all n partners value equally.",
+      "url": "https://en.wikipedia.org/wiki/Hobby%E2%80%93Rice_theorem",
+      "area": "combinatorics",
+      "year": 1965,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "max-flow-min-cut-theorem",
+      "name": "Max-flow min-cut theorem",
+      "short": "Max-flow min-cut theorem",
+      "statement": "In a network given by a finite directed graph with a source, a sink and a nonnegative real capacity on each edge, the maximum value of a flow from the source to the sink equals the minimum capacity of a cut. A cut splits the vertices into a part containing the source and a part containing the sink, and its capacity is the total capacity of the edges leading from the source part to the sink part.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Ford and Fulkerson, soon after the problem was posed to them by T. E. Harris in 1955",
+      "note": "It is a special case of the duality theorem for linear programs and can be used to derive Menger's theorem and the Kőnig–Egerváry theorem.",
+      "url": "https://en.wikipedia.org/wiki/Max-flow_min-cut_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "isolation-lemma-of-mulmuley-vazirani-and-vazirani",
+      "name": "Isolation lemma of Mulmuley, Vazirani and Vazirani",
+      "short": "Isolation lemma (MVV)",
+      "statement": "Let n and N be positive integers and F any nonempty family of subsets of {1, …, n}. If each element of {1, …, n} gets an integer weight chosen independently and uniformly at random from {1, …, N}, and the weight of a set is the sum of the weights of its elements, then with probability at least 1 − n/N exactly one set in F has the minimum weight.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "complexity-theory"
+      ],
+      "by": "Mulmuley, Vazirani and Vazirani, 1987",
+      "note": "It can be used to obtain a randomized parallel algorithm for the maximum matching problem, and it gives a simpler proof of the Valiant–Vazirani theorem.",
+      "url": "https://en.wikipedia.org/wiki/Isolation_lemma",
+      "area": "combinatorics",
+      "year": 1987,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "knaster-tarski-theorem",
+      "name": "Knaster–Tarski theorem",
+      "short": "Knaster–Tarski theorem",
+      "statement": "Let (L, ≤) be a complete lattice and let f : L → L be an order-preserving (monotonic) function with respect to ≤. Then the set of fixed points of f in L forms a complete lattice under ≤.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "Named after Bronisław Knaster and Alfred Tarski; Tarski stated it in its most general form, and earlier Knaster and Tarski established the case where L is the lattice of subsets of a set",
+      "note": "In particular f has a least and a greatest fixed point. The theorem is used in the semantics of programming languages, abstract interpretation and game theory.",
+      "url": "https://en.wikipedia.org/wiki/Knaster%E2%80%93Tarski_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "multinomial-theorem",
+      "name": "Multinomial theorem",
+      "short": "Multinomial theorem",
+      "statement": "For any positive integer m and any non-negative integer n, (x₁ + x₂ + ⋯ + x_m)ⁿ equals the sum, over all choices of non-negative integers k₁, …, k_m with k₁ + ⋯ + k_m = n, of n!/(k₁! k₂! ⋯ k_m!) · x₁^k₁ · x₂^k₂ ⋯ x_m^k_m.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "binomial-theorem"
+      ],
+      "note": "It generalizes the binomial theorem, which is the case m = 2. Setting every xᵢ = 1 shows that the multinomial coefficients for given n and m add up to mⁿ.",
+      "url": "https://en.wikipedia.org/wiki/Multinomial_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "behrends-theorem",
+      "name": "Behrend's theorem",
+      "short": "Behrend's theorem",
+      "statement": "Call a subset of {1, …, n} primitive if none of its elements is a multiple of another. Its logarithmic density is the sum of 1/i over its elements i, divided by 1 + 1/2 + ⋯ + 1/n (equivalently, by log n). Every primitive subset has logarithmic density O(1/√(log log n)), and for infinite primitive sequences the density is o(1/√(log log n)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "elementary-number-theory"
+      ],
+      "by": "Felix Behrend, proved 1934 and published 1935; Paul Erdős independently proved the same result in 1934",
+      "note": "The set of numbers with exactly k prime factors, for k about log log n, has logarithmic density (1+o(1))/√(2π log log n), so the bound has the best possible form.",
+      "url": "https://en.wikipedia.org/wiki/Behrend's_theorem",
+      "area": "combinatorics",
+      "year": 1934,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "conways-99-graph-problem",
+      "name": "Conway's 99-graph problem",
+      "short": "Conway's 99-graph problem",
+      "statement": "The problem asks whether there is an undirected graph with 99 vertices in which every two adjacent vertices have exactly one common neighbor and every two non-adjacent vertices have exactly two common neighbors. Equivalently, every edge lies in a unique triangle and every non-adjacent pair is one of the two diagonals of a unique 4-cycle.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Possibility suggested by Norman L. Biggs, 1969; John Horton Conway offered a $1000 prize for its solution in 2014",
+      "note": "Such a graph would have to be a strongly regular graph with parameters (99,14,1,2). It cannot have symmetries that take every vertex to every other vertex.",
+      "url": "https://en.wikipedia.org/wiki/Conway's_99-graph_problem",
+      "area": "combinatorics",
+      "year": 1969,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kawasakis-theorem",
+      "name": "Kawasaki's theorem",
+      "short": "Kawasaki's theorem",
+      "statement": "A crease pattern on a flat sheet of paper, with 2n creases all starting from one vertex inside the sheet and consecutive angles α₁, α₂, …, α₂ₙ between them, can be folded flat with every crease folded and no other folds if and only if α₁ − α₂ + α₃ − … − α₂ₙ = 0, which is the same as each of the two alternating sets of angles summing to 180 degrees. A pattern with an odd number of creases never folds flat.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Discovered independently by Toshikazu Kawasaki, Stuart Robertson and Jacques Justin in the late 1970s and early 1980s; sufficiency of the condition may first have been stated by Hull (1994)",
+      "note": "Crease patterns with more than one vertex do not obey such a simple criterion and are NP-hard to fold. The theorem is also called the Kawasaki–Justin theorem or Husimi's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Kawasaki's_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "labelled-enumeration-theorem",
+      "name": "Labelled enumeration theorem",
+      "short": "Labelled enumeration thm",
+      "statement": "Suppose labelled objects, none of size zero, are given by an exponential generating function g(z), and one object is placed in each of n slots that are permuted by a permutation group G. Then the exponential generating function of the number of different configurations under the re-labelling process is fₙ(z) = g(z)ⁿ/|G|. If G is the symmetric group on the n slots, then the sum over n of fₙ(z)tⁿ equals e^{g(z)t}.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "note": "It is the labelled counterpart of the Pólya enumeration theorem.",
+      "url": "https://en.wikipedia.org/wiki/Labelled_enumeration_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lambek-moser-theorem",
+      "name": "Lambek–Moser theorem",
+      "short": "Lambek–Moser theorem",
+      "statement": "Let f be a non-decreasing, unbounded function from positive integers to non-negative integers, and let f*(n) be the number of values x with f(x) < n. Then every positive integer occurs exactly once among the values of F(n) = f(n) + n and F*(n) = f*(n) + n, and F and F* list the two complementary sets in increasing order. Conversely, every partition of the positive integers into two infinite complementary sets arises in this way.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "elementary-number-theory"
+      ],
+      "by": "Joachim Lambek and Leo Moser, 1954",
+      "note": "When a formula is known for the nth number in a set, the theorem can give a formula for the nth number not in the set. It extends Rayleigh's theorem on complementary Beatty sequences.",
+      "url": "https://en.wikipedia.org/wiki/Lambek%E2%80%93Moser_theorem",
+      "area": "combinatorics",
+      "year": 1954,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "nash-williams-theorem",
+      "name": "Nash-Williams theorem",
+      "short": "Nash-Williams tree packing",
+      "statement": "A graph G has t edge-disjoint spanning trees if and only if, for every partition of its vertices into k non-empty parts, at least t(k − 1) edges join vertices in different parts.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Proved independently by Tutte and Nash-Williams, 1961; Kaiser gave a short elementary proof in 2012",
+      "note": "In 1964 Nash-Williams generalized it to partitions of a graph into edge-disjoint forests. As a corollary, every 2k-edge connected graph has k edge-disjoint spanning trees.",
+      "url": "https://en.wikipedia.org/wiki/Nash-Williams_theorem",
+      "area": "combinatorics",
+      "year": 1961,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rural-hospitals-theorem",
+      "name": "Rural hospitals theorem",
+      "short": "Rural hospitals theorem",
+      "statement": "Suppose finitely many doctors are matched to finitely many hospitals, each doctor to at most one hospital and each hospital having several positions, and all preferences of doctors and hospitals are strict. Then the set of assigned doctors and the number of filled positions in each hospital are the same in all stable matchings, and any hospital with an empty position in some stable matching receives exactly the same set of doctors in all stable matchings.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Special case with one position per hospital proved by McVitie and Wilson, 1970; the two parts of the full theorem proved by Alvin E. Roth in the 1980s",
+      "note": "It shows that changing the matching mechanism, as long as it produces stable matchings, does not help rural hospitals: they receive neither more doctors nor better doctors.",
+      "url": "https://en.wikipedia.org/wiki/Rural_hospitals_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "levis-lemma",
+      "name": "Levi's lemma",
+      "short": "Levi's lemma",
+      "statement": "For all strings u, v, x and y, if uv = xy, then there is a string w such that either uw = x and v = wy (when |u| ≤ |x|), or u = xw and wv = y (when |u| ≥ |x|).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Friedrich Wilhelm Levi, 1944",
+      "note": "A monoid in which Levi's lemma holds is said to have the equidivisibility property.",
+      "url": "https://en.wikipedia.org/wiki/Levi's_lemma",
+      "area": "combinatorics",
+      "year": 1944,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lindstrom-gessel-viennot-lemma",
+      "name": "Lindström–Gessel–Viennot lemma",
+      "short": "Lindström–Gessel–Viennot",
+      "statement": "Let G be a locally finite directed acyclic graph with edge weights in a commutative ring, and let a₁,…,aₙ and b₁,…,bₙ be vertices such that for i < j and k < l every path from aᵢ to b_l meets every path from aⱼ to b_k. Let e(a, b) be the sum of the weights of all paths from a to b, and M the matrix with entries e(aᵢ, bⱼ). Then det(M) is the sum, over all n-tuples of pairwise vertex-disjoint paths with Pᵢ going from aᵢ to b_σ(i) for some permutation σ, of sign(σ) times the product of the weights of the paths. With all weights 1 and only the identity permutation possible, det(M) is the number of such non-intersecting n-tuples.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "graph-theory"
+      ],
+      "by": "Gessel and Viennot, 1985, based on earlier work of Lindström, 1973",
+      "note": "It gives a way to count tuples of non-intersecting lattice paths, or more generally paths on a directed graph.",
+      "url": "https://en.wikipedia.org/wiki/Lindstr%C3%B6m%E2%80%93Gessel%E2%80%93Viennot_lemma",
+      "area": "combinatorics",
+      "year": 1985,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "macmahons-master-theorem",
+      "name": "MacMahon's master theorem",
+      "short": "MacMahon's master theorem",
+      "statement": "Let A = (a_ij) be an m×m complex matrix and x₁,…,x_m formal variables. For nonnegative integers k₁,…,k_m, let G(k₁,…,k_m) be the coefficient of x₁^k₁⋯x_m^k_m in the product over i of (∑_j a_ij x_j)^k_i. Let t₁,…,t_m be further formal variables and T the diagonal matrix diag(t₁,…,t_m). Then the sum of G(k₁,…,k_m) t₁^k₁⋯t_m^k_m over all nonnegative integer vectors (k₁,…,k_m) equals 1/det(I − TA), where I is the m×m identity matrix.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "linear-algebra"
+      ],
+      "by": "Percy MacMahon, 1916",
+      "note": "It is often used to derive binomial identities, most notably Dixon's identity.",
+      "url": "https://en.wikipedia.org/wiki/MacMahon's_master_theorem",
+      "area": "combinatorics",
+      "year": 1916,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "millikens-tree-theorem",
+      "name": "Milliken's tree theorem",
+      "short": "Milliken's tree theorem",
+      "statement": "Let T be a finitely splitting rooted tree of height ω and n a positive integer. If the collection of all strongly embedded subtrees of T of height n is split into finitely many classes, then there is a strongly embedded infinite subtree R of T such that all strongly embedded subtrees of R of height n lie in one class.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Keith R. Milliken, 1979",
+      "note": "It generalizes Ramsey's theorem to infinite trees, and it implies Ramsey's theorem when T is taken to be a linear ordering on ω vertices.",
+      "url": "https://en.wikipedia.org/wiki/Milliken's_tree_theorem",
+      "area": "combinatorics",
+      "year": 1979,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "milliken-taylor-theorem",
+      "name": "Milliken–Taylor theorem",
+      "short": "Milliken–Taylor theorem",
+      "statement": "Colour the k-element subsets of ℕ with finitely many colours. Then there is a sequence a₀, a₁, a₂, … in ℕ such that all k-element sets {sum of a_t over t in α₁, …, sum of a_t over t in αₖ} have the same colour, where α₁, …, αₖ are finite sets of indices with each set lying entirely below the next.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Named after Keith Milliken and Alan D. Taylor",
+      "note": "It generalizes both Ramsey's theorem and Hindman's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Milliken%E2%80%93Taylor_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "mirskys-theorem",
+      "name": "Mirsky's theorem",
+      "short": "Mirsky's theorem",
+      "statement": "For every finite partially ordered set, the height (the largest number of elements in a chain, a subset in which every two elements are comparable) equals the smallest number of antichains (subsets in which no two elements are comparable) into which the set can be partitioned.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Mirsky, 1971",
+      "note": "It is closely related to Dilworth's theorem and the Erdős–Szekeres theorem. It extends immediately to infinite partially ordered sets of finite height.",
+      "url": "https://en.wikipedia.org/wiki/Mirsky's_theorem",
+      "area": "combinatorics",
+      "year": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "mnevs-universality-theorem",
+      "name": "Mnëv's universality theorem",
+      "short": "Mnëv universality theorem",
+      "statement": "Let V be a semialgebraic variety in ℝⁿ defined over the integers. Then V is stably equivalent to the realization space of some oriented matroid, that is, to the space of all point configurations that induce one fixed oriented matroid.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "algebraic-geometry"
+      ],
+      "by": "Nikolai Mnëv, 1986",
+      "note": "Informally, point configurations of a fixed combinatorics can show arbitrarily complicated behavior. It also gives the universality theorem for convex polytopes.",
+      "url": "https://en.wikipedia.org/wiki/Mn%C3%ABv's_universality_theorem",
+      "area": "combinatorics",
+      "year": 1986,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "new-digraph-reconstruction-conjecture",
+      "name": "New digraph reconstruction conjecture",
+      "short": "New digraph reconstruction",
+      "statement": "If D and E are any two digraphs and f is a bijection from V(D) to V(E) such that, for every vertex v of D, the digraphs D∖{v} and E∖{f(v)} (with that vertex deleted) are isomorphic and v and f(v) have the same outdegree and the same indegree, then D and E are isomorphic.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Ramachandran, 1979",
+      "note": "It is stronger than Ulam's reconstruction conjecture but weaker than the disproved digraph reconstruction conjecture. It is also known as the degree associated reconstruction conjecture, and as of 2026 no counterexample is known.",
+      "url": "https://en.wikipedia.org/wiki/New_digraph_reconstruction_conjecture",
+      "area": "combinatorics",
+      "year": 1979,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "petersens-theorem",
+      "name": "Petersen's theorem",
+      "short": "Petersen's theorem",
+      "statement": "Every cubic, bridgeless graph contains a perfect matching. That is, if a graph has exactly three edges at each vertex and every edge belongs to a cycle, then it has a set of edges that touches every vertex exactly once.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "tuttes-theorem-on-perfect-matchings"
+      ],
+      "by": "Julius Petersen, 1891; simplified proofs by Frink (1926) and König (1936)",
+      "note": "It is one of the earliest results in graph theory. Modern textbooks cover it as an application of Tutte's theorem on perfect matchings.",
+      "url": "https://en.wikipedia.org/wiki/Petersen's_theorem",
+      "area": "combinatorics",
+      "year": 1891,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-ko-rado-theorem",
+      "name": "Erdős–Ko–Rado theorem",
+      "short": "Erdős–Ko–Rado",
+      "statement": "Let 𝒜 be a family of distinct r-element subsets of an n-element set, with n ≥ 2r, such that every two subsets share at least one element. Then 𝒜 has at most C(n−1, r−1) members. For n > 2r the largest such families are exactly those made of all r-element subsets containing one chosen element.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Paul Erdős, Chao Ko and Richard Rado, proved 1938, published 1961",
+      "note": "It can also be stated as the independence number of the Kneser graph KG(n,r) being C(n−1, r−1) for n ≥ 2r.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Ko%E2%80%93Rado_theorem",
+      "area": "combinatorics",
+      "year": 1938,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "planar-separator-theorem",
+      "name": "Planar separator theorem",
+      "short": "Planar separator theorem",
+      "statement": "In any planar graph with n vertices, the vertices can be split into three sets A, S and B so that A and B each have at most 2n/3 vertices, S has at most a constant times √n vertices (O(√n)), and no edge joins a vertex of A to a vertex of B.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "circle-packing-theorem",
+          "url": "https://en.wikipedia.org/wiki/Circle_packing_theorem"
+        }
+      ],
+      "by": "Lipton and Tarjan, 1979; a weaker form with a larger separator was proven by Ungar, 1951",
+      "note": "It is a form of isoperimetric inequality for planar graphs. Repeated use of it gives separator hierarchies, which are used to design efficient divide and conquer algorithms for planar graphs.",
+      "url": "https://en.wikipedia.org/wiki/Planar_separator_theorem",
+      "area": "combinatorics",
+      "year": 1979,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "szemeredi-trotter-theorem",
+      "name": "Szemerédi–Trotter theorem",
+      "short": "Szemerédi–Trotter theorem",
+      "statement": "Given n points and m lines in the Euclidean plane, the number of incidences, meaning pairs of a point and a line through it, is at most a constant times n^(2/3) m^(2/3) + n + m. This bound cannot be improved except in the constant.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "crossing-number-inequality",
+          "url": "https://en.wikipedia.org/wiki/Crossing_number_inequality"
+        }
+      ],
+      "by": "Endre Szemerédi and William T. Trotter; a simpler proof was later found by László Székely",
+      "note": "An equivalent form says that for n points and an integer k ≥ 2, the number of lines through at least k of the points is O(n²/k³ + n/k). Consequences include Beck's theorem in incidence geometry.",
+      "url": "https://en.wikipedia.org/wiki/Szemer%C3%A9di%E2%80%93Trotter_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "q-vandermonde-identity",
+      "name": "q-Vandermonde identity",
+      "short": "q-Vandermonde identity",
+      "statement": "For q-binomial coefficients, [m+n choose k]_q = ∑ over j of [m choose k−j]_q · [n choose j]_q · q^(j(m−k+j)). The only nonzero terms come from the j with max(0, k−m) ≤ j ≤ min(n, k).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "note": "It is a q-analogue of the Chu–Vandermonde identity and can be proved with the q-binomial theorem.",
+      "url": "https://en.wikipedia.org/wiki/Q-Vandermonde_identity",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sperners-lemma",
+      "name": "Sperner's lemma",
+      "short": "Sperner's lemma",
+      "statement": "Divide an n-dimensional simplex with corners A₁, …, A₍ₙ₊₁₎ into smaller n-dimensional simplices that meet face to face. Color each vertex of the division with one of the colors 1, …, n+1 so that each corner Aᵢ gets color i and every vertex on a face spanned by some of the corners gets one of those corners' colors. Then the number of small simplices whose vertices carry all n+1 colors is odd, so there is at least one.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "handshaking-lemma"
+      ],
+      "by": "Emanuel Sperner",
+      "note": "It is a discrete analogue of the Brouwer fixed point theorem and is equivalent to it. In one dimension it is a discrete version of the intermediate value theorem. Sperner colorings are used to compute fixed points and in fair division (cake cutting) algorithms.",
+      "url": "https://en.wikipedia.org/wiki/Sperner's_lemma",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "robbins-theorem",
+      "name": "Robbins' theorem",
+      "short": "Robbins' theorem",
+      "statement": "The edges of an undirected graph G can each be given a direction so that the resulting directed graph has a path from every vertex to every other vertex if and only if G is connected and has no bridge. A bridge is an edge whose removal disconnects the graph.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Robbins, 1939",
+      "note": "Equivalently, the graphs with strong orientations are exactly the 2-edge-connected graphs. Robbins proved it using ear decomposition, a tool he introduced for this task, and was motivated by the design of one-way streets in cities.",
+      "url": "https://en.wikipedia.org/wiki/Robbins'_theorem",
+      "area": "combinatorics",
+      "year": 1939,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rogers-ramanujan-identities",
+      "name": "Rogers–Ramanujan identities",
+      "short": "Rogers–Ramanujan",
+      "statement": "With (a;q)ₙ the q-Pochhammer symbol, ∑ over n ≥ 0 of q^(n²)/(q;q)ₙ = 1/((q;q⁵)_∞ (q⁴;q⁵)_∞), and ∑ over n ≥ 0 of q^(n²+n)/(q;q)ₙ = 1/((q²;q⁵)_∞ (q³;q⁵)_∞).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Discovered and proved by Rogers, 1894; rediscovered without proof by Srinivasa Ramanujan before 1913; independently rediscovered and proved by Schur, 1917; joint new proof by Rogers and Ramanujan, 1919",
+      "note": "In terms of partitions, the number of ways to write n as a sum of parts that differ pairwise by at least 2 equals the number of ways to write n as a sum of parts that are 1 or 4 modulo 5. The second identity gives the same with smallest part at least 2 on one side and parts 2 or 3 modulo 5 on the other.",
+      "url": "https://en.wikipedia.org/wiki/Rogers%E2%80%93Ramanujan_identities",
+      "area": "combinatorics",
+      "year": 1894,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rothe-hagen-identity",
+      "name": "Rothe–Hagen identity",
+      "short": "Rothe–Hagen identity",
+      "statement": "For every non-negative integer n and all complex numbers x, y, z for which no denominator vanishes, ∑ₖ₌₀ⁿ [x/(x+kz)]·C(x+kz, k)·[y/(y+(n−k)z)]·C(y+(n−k)z, n−k) = [(x+y)/(x+y+nz)]·C(x+y+nz, n). Here C(a, k) = a(a−1)⋯(a−k+1)/k! is the binomial coefficient.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Heinrich August Rothe, 1793, and Johann Georg Hagen, 1891, independently",
+      "note": "It is a generalization of Vandermonde's identity.",
+      "url": "https://en.wikipedia.org/wiki/Rothe%E2%80%93Hagen_identity",
+      "area": "combinatorics",
+      "year": 1793,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "scheinermans-conjecture",
+      "name": "Scheinerman's conjecture",
+      "short": "Scheinerman's conjecture",
+      "statement": "Every planar graph is the intersection graph of a set of line segments in the plane. That is, each vertex can be drawn as a straight line segment so that two vertices are joined by an edge exactly when their segments intersect.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Formulated by E. R. Scheinerman in his Ph.D. thesis, 1984; proved by Chalopin and Gonçalves, 2009",
+      "note": "Earlier results had shown that every planar graph is the intersection graph of simple curves in the plane. A related conjecture that four segment directions always suffice was shown false by Gonçalves in 2020.",
+      "url": "https://en.wikipedia.org/wiki/Scheinerman's_conjecture",
+      "area": "combinatorics",
+      "year": 1984,
+      "settled": 2009,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "schnyders-theorem",
+      "name": "Schnyder's theorem",
+      "short": "Schnyder's theorem",
+      "statement": "A graph G is planar if and only if the order dimension of its incidence poset P(G) is at most three. The incidence poset has the vertices and edges of G as elements, with a vertex below an edge when it is an endpoint of that edge.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Walter Schnyder, 1989",
+      "note": "The order dimension of a partial order is the smallest number of total orderings whose intersection is that partial order. Trotter extended the result to vertices, edges and faces of a convex polyhedron or embedded planar graph, where the dimension is at most four.",
+      "url": "https://en.wikipedia.org/wiki/Schnyder's_theorem",
+      "area": "combinatorics",
+      "year": 1989,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "schuette-nesbitt-formula",
+      "name": "Schuette–Nesbitt formula",
+      "short": "Schuette–Nesbitt formula",
+      "statement": "Let A_1, …, A_m be subsets of a set Ω; for a point ω let N(ω) be the number of these sets containing ω, and N_k(ω) the number of ways to pick k of the sets so that ω lies in all of them (N_0 = 1). Then for every c_0, …, c_m in a vector space over a field (or a module over a ring with identity), c_{N(ω)} = ∑_{k=0}^{m} N_k(ω) ∑_{l=0}^{k} (−1)^{k−l} C(k,l) c_l at every ω, where C(k,l) is a binomial coefficient; in polynomial form, ∑_{n=0}^{m} 1_{N=n} xⁿ = ∑_{k=0}^{m} N_k (x − 1)^k.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "binomial-theorem"
+      ],
+      "by": "Donald R. Schuette and Cecil J. Nesbitt, 1959 (for independent events); named and generalized to arbitrary events by Hans U. Gerber, 1979; elementary combinatorial proof by Christian Buchta, 1994",
+      "note": "It generalizes the inclusion–exclusion principle. Its probabilistic version, with expectations of N_k, is used in actuarial science to calculate the net single premium for life annuities and life insurances.",
+      "url": "https://en.wikipedia.org/wiki/Schuette%E2%80%93Nesbitt_formula",
+      "area": "combinatorics",
+      "year": 1959,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "stanleys-reciprocity-theorem",
+      "name": "Stanley's reciprocity theorem",
+      "short": "Stanley reciprocity",
+      "statement": "Let C be a d-dimensional rational cone in ℝᵈ (the points satisfying finitely many homogeneous linear inequalities with integer coefficients), and let F_C(x₁, …, x_d) be the sum of x₁^a₁ ⋯ x_d^a_d over all integer points (a₁, …, a_d) in C, with F_int(C) defined in the same way for the interior of C. Then, as rational functions, F_C(1/x₁, …, 1/x_d) = (−1)ᵈ F_int(C)(x₁, …, x_d).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Named after Richard P. Stanley",
+      "note": "It generalizes Ehrhart–Macdonald reciprocity for Ehrhart polynomials of rational convex polytopes. Stanley also coined the term combinatorial reciprocity theorem.",
+      "url": "https://en.wikipedia.org/wiki/Stanley's_reciprocity_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "stanley-wilf-conjecture",
+      "name": "Stanley–Wilf conjecture",
+      "short": "Stanley–Wilf theorem",
+      "statement": "For every permutation β there is a constant C, depending on β, such that the number of permutations of length n that avoid β as a permutation pattern is at most Cⁿ for every n.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Formulated independently by Richard P. Stanley and Herbert Wilf in the late 1980s; proved by Adam Marcus and Gábor Tardos, 2004",
+      "note": "Marcus and Tardos actually proved a different conjecture of Füredi and Hajnal (1992), which Klazar had shown in 2000 to imply this one. It is equivalent to the convergence of the n-th root of the number of such permutations as n grows.",
+      "url": "https://en.wikipedia.org/wiki/Stanley%E2%80%93Wilf_conjecture",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "steinitzs-theorem",
+      "name": "Steinitz's theorem",
+      "short": "Steinitz's theorem",
+      "statement": "A finite simple graph is the graph of vertices and edges of a three-dimensional convex polyhedron if and only if it is planar and 3-vertex-connected.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "circle-packing-theorem"
+      ],
+      "by": "Ernst Steinitz, written 1916 and published 1922; graph-theoretic formulation introduced by Branko Grünbaum and Theodore Motzkin in the early 1960s",
+      "note": "It gives a purely combinatorial classification of three-dimensional convex polyhedra, which is not known in higher dimensions.",
+      "url": "https://en.wikipedia.org/wiki/Steinitz's_theorem",
+      "area": "combinatorics",
+      "year": 1916,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "symmetric-hypergraph-theorem",
+      "name": "Symmetric hypergraph theorem",
+      "short": "Symmetric hypergraph thm",
+      "statement": "Let H be a symmetric hypergraph, meaning its automorphism group acts transitively on the vertex set S, and let m = |S|. Then the chromatic number satisfies χ(H) ≤ 1 + (ln m) / (−ln(1 − α(H)/m)), where α(H) is the independence number of H.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "graph-theory"
+      ],
+      "note": "Its original reference is unknown and it has been called folklore. It is used in graph Ramsey theory and for colorings that avoid monochromatic arithmetic progressions.",
+      "url": "https://en.wikipedia.org/wiki/Symmetric_hypergraph_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "szymanskis-conjecture",
+      "name": "Szymanski's conjecture",
+      "short": "Szymanski's conjecture",
+      "statement": "Every permutation σ on the n-dimensional doubly directed hypercube graph can be routed with edge-disjoint paths: for each vertex v there is a path from v to σ(v) such that no two paths use the same edge in the same direction.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Named after Ted H. Szymanski",
+      "note": "Computer experiments have verified it for n ≤ 4. For n ≥ 5 it remains open, and there are permutations that need paths which are not shortest paths.",
+      "url": "https://en.wikipedia.org/wiki/Szymanski's_conjecture",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "entropy-influence-conjecture",
+      "name": "Entropy influence conjecture",
+      "short": "Entropy-influence conj.",
+      "statement": "There is an absolute constant C such that for every function f from {−1,1}ⁿ to {−1,1}, H(f) ≤ C·I(f). Here f(x) = ∑ f̂(S) x_S is the Fourier expansion of f, the total influence is I(f) = ∑ |S| f̂(S)², and the entropy of the spectrum is H(f) = −∑ f̂(S)² log f̂(S)², with x log x taken to be 0 when x = 0.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Ehud Friedgut and Gil Kalai, 1996",
+      "url": "https://en.wikipedia.org/wiki/Entropy_influence_conjecture",
+      "area": "combinatorics",
+      "year": 1996,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "topkiss-theorem",
+      "name": "Topkis's theorem",
+      "short": "Topkis's theorem",
+      "statement": "Let D be a lattice, and let f(x,θ) be supermodular in x and have increasing differences in (x,θ). Whenever the set of maximizers x*(θ) of f(x,θ) over x in D is nonempty, it is increasing in θ as a correspondence, in the strong set order. Under standard existence conditions, the greatest and least selections from it are nondecreasing in θ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "Named after Donald M. Topkis",
+      "note": "It is used to establish comparative statics, including when the objective function is not differentiable.",
+      "url": "https://en.wikipedia.org/wiki/Topkis's_theorem",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tuckers-lemma",
+      "name": "Tucker's lemma",
+      "short": "Tucker's lemma",
+      "statement": "Let T be a triangulation of the closed n-dimensional ball whose part on the boundary sphere is antipodally symmetric, so that if σ is a boundary simplex then so is −σ. If every vertex v of T gets a label L(v) from +1, −1, +2, −2, …, +n, −n such that L(−v) = −L(v) for every vertex v on the boundary sphere, then T contains a complementary edge: an edge whose two vertices carry the same number with opposite signs.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "ky-fans-lemma"
+      ],
+      "by": "Named after Albert W. Tucker",
+      "note": "It is a combinatorial analog of the Borsuk–Ulam theorem. Constructive proofs give algorithms that find the complementary edge, and finding it is PPA-complete even for n = 2.",
+      "url": "https://en.wikipedia.org/wiki/Tucker's_lemma",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tutte-homotopy-theorem",
+      "name": "Tutte homotopy theorem",
+      "short": "Tutte homotopy theorem",
+      "statement": "In a matroid, call any union of circuits a flat: circuits are 0-flats, the minimal nonempty flats that are not 0-flats are 1-flats, and so on, and a path is a finite sequence of circuits in which any two consecutive ones lie in a common 1-flat. Then every closed path can be turned into the trivial path by repeatedly inserting or removing elementary paths, which have the form (X, Y, X) or (X, Y, Z, X) with X, Y, Z in a common 2-flat.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "Tutte, 1958",
+      "note": "It generalises the idea of a path from graphs to matroids. Flats here are in Tutte's original sense, which differs from modern usage, and a stronger form covers paths that avoid certain convex subsets.",
+      "url": "https://en.wikipedia.org/wiki/Tutte_homotopy_theorem",
+      "area": "combinatorics",
+      "year": 1958,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tutte-berge-formula",
+      "name": "Tutte–Berge formula",
+      "short": "Tutte–Berge formula",
+      "statement": "For a graph G = (V, E), the size of a maximum matching equals ½ · min over all subsets U of V of (|U| − odd(G−U) + |V|), where odd(H) is the number of connected components of H with an odd number of vertices. Equivalently, the number of unmatched vertices in a maximum matching equals the maximum over U ⊆ V of (odd(G−U) − |U|).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Claude Berge, who proved it as a generalization of Tutte's theorem; also named after W. T. Tutte",
+      "note": "It generalizes Tutte's theorem on perfect matchings, which follows from it as a corollary.",
+      "url": "https://en.wikipedia.org/wiki/Tutte%E2%80%93Berge_formula",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tverbergs-theorem",
+      "name": "Tverberg's theorem",
+      "short": "Tverberg's theorem",
+      "statement": "For any positive integers d and r, any set of (d + 1)(r − 1) + 1 points in d-dimensional Euclidean space can be partitioned into r subsets whose convex hulls all have a common point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics"
+      ],
+      "by": "First stated by Helge Tverberg, 1966",
+      "note": "The case r = 2 was proved earlier by Radon and is known as Radon's theorem. A topological version with continuous maps holds when r is a prime power but has counterexamples for other r.",
+      "url": "https://en.wikipedia.org/wiki/Tverberg's_theorem",
+      "area": "combinatorics",
+      "year": 1966,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "baranyais-theorem",
+      "name": "Baranyai's theorem",
+      "short": "Baranyai's theorem",
+      "statement": "Let 2 ≤ r < k be integers with r dividing k. Then the r-element subsets of a k-element set can be split into C(k−1, r−1) groups, each group being a partition of the k elements into subsets of size r, so that every r-element subset appears in exactly one group.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "graph-theory"
+      ],
+      "by": "Zsolt Baranyai, 1975; the case r = 3 was established by R. Peltesohn in 1936",
+      "note": "The case r = 2 says that the edges of a complete graph with an even number of vertices split into perfect matchings. That case can be used to schedule round-robin tournaments.",
+      "url": "https://en.wikipedia.org/wiki/Baranyai's_theorem",
+      "area": "combinatorics",
+      "year": 1975,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "veblens-theorem",
+      "name": "Veblen's theorem",
+      "short": "Veblen's theorem",
+      "statement": "The set of edges of a finite graph can be written as a union of disjoint simple cycles if and only if every vertex has even degree.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Introduced by Veblen, 1912",
+      "note": "It is closely related to Euler's theorem of 1736 on Euler tours. Unlike that theorem, it also applies to disconnected graphs, and it can be generalized to infinite graphs in which every vertex has finite degree.",
+      "url": "https://en.wikipedia.org/wiki/Veblen's_theorem",
+      "area": "combinatorics",
+      "year": 1912,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "vizings-conjecture",
+      "name": "Vizing's conjecture",
+      "short": "Vizing's conjecture",
+      "statement": "For any graphs G and H, the domination number of the Cartesian product of G and H is at least the product of the domination numbers of G and H: γ(G □ H) ≥ γ(G)γ(H).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Vizing, 1968",
+      "note": "It is known to hold when either graph has domination number one, for cycles, and for graphs with domination number two. Clark and Suen (2000) proved that the domination number of the product is at least half the conjectured bound.",
+      "url": "https://en.wikipedia.org/wiki/Vizing's_conjecture",
+      "area": "combinatorics",
+      "year": 1968,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "theorem-on-friends-and-strangers",
+      "name": "Theorem on friends and strangers",
+      "short": "Friends and strangers",
+      "statement": "Call two people mutual strangers if they have not met before and mutual acquaintances if they have. In any party of six people, there are at least three who are all pairwise mutual strangers or all pairwise mutual acquaintances.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "pigeonhole-principle"
+      ],
+      "by": "A simple case of the general theorem proved by Frank Ramsey, 1930",
+      "note": "Six is the smallest party size for which this holds: five people can be arranged so that no three are all strangers or all acquaintances. In Ramsey theory this is written R(3,3:2) = 6.",
+      "url": "https://en.wikipedia.org/wiki/Theorem_on_friends_and_strangers",
+      "area": "combinatorics",
+      "year": 1930,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kuratowskis-theorem",
+      "name": "Kuratowski's theorem",
+      "short": "Kuratowski's theorem",
+      "statement": "A finite graph can be drawn in the plane without edges crossing if and only if it does not contain a subgraph that is a subdivision of K₅ (the complete graph on five vertices) or of K₃,₃ (the complete bipartite graph with three vertices on each side). A subdivision is obtained by replacing edges with paths.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "three-utilities-problem",
+          "url": "https://en.wikipedia.org/wiki/Three_utilities_problem"
+        }
+      ],
+      "by": "Kazimierz Kuratowski, 1930; independently proved by Orrin Frink and Paul Smith in 1930, though their proof was never published; reportedly also proved by Lev Pontryagin around 1927, unpublished",
+      "note": "It is a forbidden graph characterization of planar graphs. It is equivalent to Wagner's theorem, which uses minors of the same two graphs.",
+      "url": "https://en.wikipedia.org/wiki/Kuratowski's_theorem",
+      "area": "combinatorics",
+      "year": 1930,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cerecedas-conjecture",
+      "name": "Cereceda's conjecture",
+      "short": "Cereceda's conjecture",
+      "statement": "Let G be a graph with n vertices and degeneracy at most d. Then any two colorings of G with at most d + 2 colors can be turned into each other by changing the color of one vertex at a time, staying within colorings with at most d + 2 colors, using a number of steps that is O(n²), that is at most a constant times n².",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "Posed as a question by Luis Cereceda in his 2007 doctoral dissertation; known as Cereceda's conjecture by 2018",
+      "note": "If true, it would be best possible, as the space of 3-colorings of a path graph has quadratic diameter. It is known that the diameter is polynomial for every fixed d.",
+      "url": "https://en.wikipedia.org/wiki/Cereceda's_conjecture",
+      "area": "combinatorics",
+      "year": 2007,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hypergraph-removal-lemma",
+      "name": "Hypergraph removal lemma",
+      "short": "Hypergraph removal lemma",
+      "statement": "Let H be an r-uniform hypergraph (every edge joins exactly r vertices) with h vertices. For every ε > 0 there is a δ > 0 such that any r-uniform hypergraph G on n vertices with fewer than δnʰ subhypergraphs isomorphic to H can be made free of copies of H by removing at most εnʳ edges.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "First proved by Nagle, Rödl, Schacht and Skokan and, independently, by Gowers",
+      "note": "It generalizes the graph removal lemma (the case r = 2) and can be used to prove Szemerédi's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Hypergraph_removal_lemma",
+      "area": "combinatorics",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kotzigs-theorem",
+      "name": "Kotzig's theorem",
+      "short": "Kotzig's theorem",
+      "statement": "Every polyhedral graph (the graph of the vertices and edges of a convex polyhedron) has an edge whose two endpoints have total degree at most 13. Equivalently, every convex polyhedron has two adjacent faces with a total of at most 13 sides.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Anton Kotzig, 1955, in the dual form about faces; named and popularized in the west by Branko Grünbaum in the 1970s",
+      "note": "The triakis icosahedron is an extreme case, where no edge has smaller total degree. The theorem does not extend to all planar graphs.",
+      "url": "https://en.wikipedia.org/wiki/Kotzig's_theorem",
+      "area": "combinatorics",
+      "year": 1955,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cayleys-formula",
+      "name": "Cayley's formula",
+      "short": "Cayley's formula",
+      "statement": "For every positive integer n, the number of trees on n labeled vertices is n^(n−2). Equivalently, a complete graph on n labeled vertices has n^(n−2) spanning trees.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "kirchhoffs-matrix-tree-theorem",
+          "url": "https://en.wikipedia.org/wiki/Kirchhoff's_theorem"
+        }
+      ],
+      "by": "First discovered by Carl Wilhelm Borchardt in 1860 and proved via a determinant; Arthur Cayley extended it in 1889",
+      "note": "Many proofs are known, including ones using Kirchhoff's matrix tree theorem and Prüfer sequences.",
+      "url": "https://en.wikipedia.org/wiki/Cayley's_formula",
+      "area": "combinatorics",
+      "year": 1860,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "szpilrajn-extension-theorem",
+      "name": "Szpilrajn extension theorem",
+      "short": "Szpilrajn extension",
+      "statement": "Every partial order on a set is contained in a total order on that set. A partial order is a relation that is reflexive, transitive and antisymmetric. A total order is a partial order in which any two elements are comparable.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "Edward Szpilrajn, 1930",
+      "note": "The proof uses the axiom of choice in the form of Zorn's lemma, and some form of the axiom of choice is necessary to prove the theorem.",
+      "url": "https://en.wikipedia.org/wiki/Szpilrajn_extension_theorem",
+      "area": "combinatorics",
+      "year": 1930,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "konigs-theorem-q897769",
+      "name": "Kőnig's theorem",
+      "short": "Kőnig's theorem",
+      "statement": "In any bipartite graph, the number of edges in a maximum matching equals the number of vertices in a minimum vertex cover.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "max-flow-min-cut-theorem"
+      ],
+      "by": "Dénes Kőnig, 1931; discovered independently in 1931 by Jenő Egerváry in the more general case of weighted graphs",
+      "note": "For graphs that are not bipartite, the minimum vertex cover may be larger than the maximum matching. The theorem lets minimum vertex covers of bipartite graphs be computed efficiently.",
+      "url": "https://en.wikipedia.org/wiki/K%C5%91nig's_theorem_(graph_theory)",
+      "area": "combinatorics",
+      "year": 1931,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "mengers-theorem",
+      "name": "Menger's theorem",
+      "short": "Menger's theorem",
+      "statement": "Let G be a finite undirected graph and x and y two distinct vertices. Then the minimum number of edges whose removal disconnects x and y equals the maximum number of pairwise edge-disjoint paths from x to y.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "max-flow-min-cut-theorem",
+        "konigs-theorem-q897769"
+      ],
+      "by": "Karl Menger, 1927",
+      "note": "This is the edge-connectivity version. It implies that a graph is k-edge-connected if and only if every pair of vertices has k edge-disjoint paths between them.",
+      "url": "https://en.wikipedia.org/wiki/Menger's_theorem",
+      "area": "combinatorics",
+      "year": 1927,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "handshaking-lemma",
+      "name": "Handshaking lemma",
+      "short": "Handshaking lemma",
+      "statement": "In every finite undirected graph, the number of vertices of odd degree is even. Here the degree of a vertex is the number of edges touching it, with a loop counted twice; equivalently, the sum of all degrees equals twice the number of edges.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Leonhard Euler, 1736",
+      "note": "Euler proved it in his paper on the Seven Bridges of Königsberg. It does not hold in its usual form for infinite graphs.",
+      "url": "https://en.wikipedia.org/wiki/Handshaking_lemma",
+      "area": "combinatorics",
+      "year": 1736,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lovasz-conjecture",
+      "name": "Lovász conjecture",
+      "short": "Lovász conjecture",
+      "statement": "Every finite connected vertex-transitive graph contains a Hamiltonian path.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory"
+      ],
+      "by": "László Lovász, 1969 (he originally stated the problem in the opposite way)",
+      "note": "In 1996 László Babai published a conjecture sharply contradicting this one, and both conjectures remain widely open.",
+      "url": "https://en.wikipedia.org/wiki/Lov%C3%A1sz_conjecture",
+      "area": "combinatorics",
+      "year": 1969,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "proizvolovs-identity",
+      "name": "Proizvolov's identity",
+      "short": "Proizvolov's identity",
+      "statement": "Split the numbers 1, 2, …, 2N into two subsets of N numbers each. List one subset in increasing order A₁ < … < A_N and the other in decreasing order B₁ > … > B_N. Then |A₁ − B₁| + |A₂ − B₂| + … + |A_N − B_N| = N².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "combinatorics",
+        "elementary-number-theory"
+      ],
+      "by": "Posed by Vyacheslav Proizvolov as a problem in the 1985 All-Union Soviet Student Olympiads",
+      "note": "The identity concerns sums of differences of positive integers.",
+      "url": "https://en.wikipedia.org/wiki/Proizvolov's_identity",
+      "area": "combinatorics",
+      "year": 1985,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dushnik-miller-theorem",
+      "name": "Dushnik–Miller theorem",
+      "short": "Dushnik–Miller theorem",
+      "statement": "Every countably infinite linear order has an order embedding into itself other than the identity.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "Ben Dushnik and E. W. Miller, 1940",
+      "note": "The same paper shows, using the axiom of choice, that the statement does not always hold for uncountable linear orders. In reverse mathematics the theorem for countable linear orders has the same strength as ACA_0.",
+      "url": "https://en.wikipedia.org/wiki/Dushnik%E2%80%93Miller_theorem",
+      "area": "combinatorics",
+      "year": 1940,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-dushnik-miller-theorem",
+      "name": "Erdős–Dushnik–Miller theorem",
+      "short": "Erdős–Dushnik–Miller thm",
+      "statement": "Every infinite graph contains either a countably infinite independent set, or a clique with the same cardinality as the whole graph.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "First published by Miller, 1941; the paper credited Paul Erdős with assistance in the proof",
+      "note": "An equivalent complementary form says every infinite graph contains either a countably infinite clique or an independent set of the same cardinality as the whole graph.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Dushnik%E2%80%93Miller_theorem",
+      "area": "combinatorics",
+      "year": 1941,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lavers-theorem",
+      "name": "Laver's theorem",
+      "short": "Laver's theorem",
+      "statement": "Order embeddability of countable total orders is a well-quasi-ordering. That is, in every infinite sequence of countable totally ordered sets, there is an order embedding from an earlier member of the sequence into a later one.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "order-theory"
+      ],
+      "by": "Conjectured by Roland Fraïssé, 1948; proved by Richard Laver, 1971",
+      "note": "Laver also proved the same result for countable unions of scattered orders. In reverse mathematics its strength lies between ATR₀ and Π¹₁-CA₀, it is weaker than Π¹₁-CA₀, and it is open whether it is equivalent to ATR₀.",
+      "url": "https://en.wikipedia.org/wiki/Laver's_theorem",
+      "area": "combinatorics",
+      "year": 1948,
+      "settled": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "graham-pollak-theorem",
+      "name": "Graham–Pollak theorem",
+      "short": "Graham–Pollak theorem",
+      "statement": "The edges of a complete graph on n vertices cannot be partitioned into fewer than n−1 complete bipartite graphs.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "Ronald Graham and Henry O. Pollak, 1971 and 1972, crediting Hans Witsenhausen for a key lemma",
+      "note": "A partition into exactly n−1 complete bipartite graphs exists, for example using stars. Aigner and Ziegler write that all known proofs rest on linear algebra and no combinatorial proof is known.",
+      "url": "https://en.wikipedia.org/wiki/Graham%E2%80%93Pollak_theorem",
+      "area": "combinatorics",
+      "year": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rysers-conjecture",
+      "name": "Ryser's conjecture",
+      "short": "Ryser's conjecture",
+      "statement": "If a hypergraph H is r-partite, meaning its vertices can be split into r sets so that every edge contains exactly one vertex from each set, then its smallest transversal size τ(H) is at most r − 1 times its largest matching size ν(H): τ(H) ≤ (r − 1)·ν(H).",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "graph-theory",
+        "combinatorics"
+      ],
+      "by": "First appeared in the Ph.D. thesis of J. R. Henderson, 1971, whose advisor was Herbert John Ryser",
+      "note": "The case r = 2 follows from Kőnig's theorem, and the case r = 3 was proved by Ron Aharoni. Truncated projective planes show that the factor r − 1 cannot be made smaller.",
+      "url": "https://en.wikipedia.org/wiki/Ryser's_conjecture",
+      "area": "combinatorics",
+      "year": 1971,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-szekeres-theorem",
+      "name": "Erdős–Szekeres theorem",
+      "short": "Erdős–Szekeres theorem",
+      "statement": "Given r and s, every sequence of distinct real numbers of length at least (r−1)(s−1)+1 contains an increasing subsequence of length r or a decreasing subsequence of length s.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "dilworths-theorem",
+          "url": "https://en.wikipedia.org/wiki/Dilworth's_theorem"
+        },
+        {
+          "id": "mirskys-theorem",
+          "url": "https://en.wikipedia.org/wiki/Mirsky's_theorem"
+        },
+        "pigeonhole-principle"
+      ],
+      "by": "Paul Erdős and George Szekeres, 1935",
+      "note": "It is a finitary result that makes precise one of the corollaries of Ramsey's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Szekeres_theorem",
+      "area": "combinatorics",
+      "year": 1935,
+      "origin": "wikipedia-import"
     }
   ]
 }

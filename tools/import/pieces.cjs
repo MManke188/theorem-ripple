@@ -7,7 +7,7 @@
 //             intro alone was too vague to state the claim for a third of the articles.
 //   history   the start of a section called History, Background or similar (dates and names)
 //   mentions  every sentence that links to another statement on the candidate
-//             list or on the map: { target, sentence }
+//             list or on the map: { target, sentence, paragraph }
 //
 // Run on its own to look at one article:  node tools/import/pieces.cjs "Rolle's theorem"
 const fs = require('fs');
@@ -122,15 +122,18 @@ function pieces(qid, { introMax = 2600, formalMax = 3000, historyMax = 1200, sen
   const seen = new Set();
   for (const s of secs) {
     if (/^(see also|references|notes|external links|further reading|bibliography|citations|sources)$/i.test(s.heading)) continue;
-    for (const sentence of s.body.split(/(?<=[.!?])\s+(?=[A-Z[('"])|\n+/)) {
-      for (const [, raw] of sentence.matchAll(/\[\[([^[\]|]*)(?:\|[^[\]]*)?\]\]/g)) {
-        const target = index.get(canon(raw));
-        if (!target || target.qid === qid) continue;
-        const shown = unlink(sentence).replace(/^[*#:;]+\s*/, '').trim();
-        const key = `${target.qid}|${shown}`;
-        if (seen.has(key) || shown.length < 25) continue;
-        seen.add(key);
-        mentions.push({ target: target.qid, title: target.title, existing: target.existing, section: s.heading, sentence: shown.slice(0, sentenceMax) });
+    for (const paragraph of s.body.split(/\n+/)) {
+      for (const sentence of paragraph.split(/(?<=[.!?])\s+(?=[A-Z[('"])/)) {
+        for (const [, raw] of sentence.matchAll(/\[\[([^[\]|]*)(?:\|[^[\]]*)?\]\]/g)) {
+          const target = index.get(canon(raw));
+          if (!target || target.qid === qid) continue;
+          const shown = unlink(sentence).replace(/^[*#:;]+\s*/, '').trim();
+          const key = `${target.qid}|${shown}`;
+          if (seen.has(key) || shown.length < 25) continue;
+          seen.add(key);
+          // `paragraph` is what stands around the sentence, for the second look at a link (linkcheck.cjs).
+          mentions.push({ target: target.qid, title: target.title, existing: target.existing, section: s.heading, sentence: shown.slice(0, sentenceMax), paragraph: unlink(paragraph).trim().slice(0, 1100) });
+        }
       }
     }
   }

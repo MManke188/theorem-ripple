@@ -20,8 +20,10 @@ test('data is consistent: ids unique across files, links exist, no cycles, field
   }
   for (const n of nodes) {
     // A system (a number system or a theory) is not a statement: it has no status and no author is required.
+    // An entry from the bulk import (tools/import) may lack `by`: where the article names nobody, nobody is guessed.
     const system = n.kind === 'system';
-    for (const key of ['id', 'name', 'short', 'statement', 'kind', 'url', 'area', ...(system ? [] : ['base', 'by'])]) {
+    const imported = n.origin === 'wikipedia-import';
+    for (const key of ['id', 'name', 'short', 'statement', 'kind', 'url', 'area', ...(system ? [] : imported ? ['base'] : ['base', 'by'])]) {
       assert.ok(n[key], `${n.id} is missing ${key}`);
     }
     assert.ok(n.short.length <= 40, `${n.id}: label too long`);
@@ -53,7 +55,8 @@ test('years are plausible, and almost every statement has one', () => {
     }
     if (n.formerlyYear !== undefined) assert.ok(n.formerly.length > 0, `${n.id}: formerlyYear without formerly`);
   }
-  assert.ok(nodes.filter((n) => n.kind !== 'system' && n.year === undefined).length <= 5, 'too many statements without a year');
+  // The entries of the bulk import are not counted: about half of their articles give no year in the parts that are read.
+  assert.ok(nodes.filter((n) => n.kind !== 'system' && n.origin !== 'wikipedia-import' && n.year === undefined).length <= 5, 'too many statements without a year');
 });
 
 test('no statement is isolated', () => {

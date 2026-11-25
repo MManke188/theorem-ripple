@@ -38,8 +38,9 @@ async function ask({ step, model, system, user, items }) {
   }
 }
 
-// Runs `job` over `list` with a few calls at a time.
+// Runs `job` over `list` with a few calls at a time (IMPORT_POOL=8 in the environment for more).
 async function pool(list, size, job) {
+  size = +process.env.IMPORT_POOL || size;
   const queue = [...list.entries()];
   await Promise.all(Array.from({ length: size }, async () => {
     for (let next; (next = queue.shift()); ) {

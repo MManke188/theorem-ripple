@@ -1,0 +1,2780 @@
+{
+  "area": "geometry",
+  "nodes": [
+    {
+      "id": "pedoes-inequality",
+      "name": "Pedoe's inequality",
+      "short": "Pedoe's inequality",
+      "statement": "Let a, b, c be the side lengths of a triangle with area f, and A, B, C the side lengths of another triangle with area F. Then A²(b²+c²−a²) + B²(a²+c²−b²) + C²(a²+b²−c²) ≥ 16Ff, with equality if and only if the two triangles are similar with corresponding sides (A, a), (B, b), (C, c).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "herons-formula",
+        "cauchy-schwarz-inequality"
+      ],
+      "by": "Known in the 19th century to Joseph Jean Baptiste Neuberg, who did not prove that equality implies similarity; discovered independently by Daniel Pedoe, 1941",
+      "note": "It generalizes Weitzenböck's inequality, the case where one triangle is equilateral.",
+      "url": "https://en.wikipedia.org/wiki/Pedoe's_inequality",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "morries-law",
+      "name": "Morrie's law",
+      "short": "Morrie's law",
+      "statement": "cos 20° · cos 40° · cos 80° = 1/8.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Name given by Richard Feynman, after Morrie Jacobs",
+      "note": "It is the case n = 3, α = 20° of the general identity 2ⁿ · cos α · cos 2α · cos 4α ⋯ cos 2ⁿ⁻¹α = sin 2ⁿα / sin α.",
+      "url": "https://en.wikipedia.org/wiki/Morrie's_law",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hadwiger-finsler-inequality",
+      "name": "Hadwiger–Finsler inequality",
+      "short": "Hadwiger–Finsler ineq.",
+      "statement": "For every triangle in the Euclidean plane with side lengths a, b, c and area Δ, a² + b² + c² ≥ (a − b)² + (b − c)² + (c − a)² + 4√3·Δ.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-cosines"
+      ],
+      "by": "Paul Finsler and Hugo Hadwiger, 1937",
+      "note": "It is equivalent to Weitzenböck's inequality a² + b² + c² ≥ 4√3·Δ, which follows from it directly.",
+      "url": "https://en.wikipedia.org/wiki/Hadwiger%E2%80%93Finsler_inequality",
+      "area": "geometry",
+      "year": 1937,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "onos-inequality",
+      "name": "Ono's inequality",
+      "short": "Ono's inequality",
+      "statement": "For every acute triangle in the Euclidean plane with side lengths a, b, c and area S, 27(b² + c² − a²)²(c² + a² − b²)²(a² + b² − c²)² ≤ (4S)⁶. Equality holds for an equilateral triangle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-cosines"
+      ],
+      "by": "Conjectured for all triangles by Tôda Ono, 1914, which is false; proved for acute triangles by F. Balitrand, 1916",
+      "note": "Ono's original conjecture covered all triangles and is false. The triangle with sides 2, 3 and 4 is a counterexample.",
+      "url": "https://en.wikipedia.org/wiki/Ono's_inequality",
+      "area": "geometry",
+      "year": 1916,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "jungs-theorem",
+      "name": "Jung's theorem",
+      "short": "Jung's theorem",
+      "statement": "Let K be a compact set in ℝⁿ and let d be its diameter, the largest Euclidean distance between two of its points. Then K is contained in a closed ball of radius r ≤ d·√(n/(2(n+1))). Equality is attained by the regular n-simplex.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Heinrich Jung, who first studied this inequality in 1901",
+      "note": "It relates the diameter of a set of points to the radius of the smallest ball enclosing the set. In the plane the bound is r ≤ d/√3, reached by an equilateral triangle.",
+      "url": "https://en.wikipedia.org/wiki/Jung's_theorem",
+      "area": "geometry",
+      "year": 1901,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hart-circle",
+      "name": "Hart circle",
+      "short": "Hart circle",
+      "statement": "Let three circles cross pairwise so that they form eight circular triangles. For any one of these triangles together with its three neighbouring triangles, there is a circle tangent to the inscribed circles of all four, so the three circles have eight such Hart circles.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Andrew Searle Hart, who discovered the circles",
+      "note": "Hart circles can be seen as analogous to the nine-point circle of triangles with straight sides.",
+      "url": "https://en.wikipedia.org/wiki/Hart_circle",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "midpoint-theorem-for-conics",
+      "name": "Midpoint theorem for conics",
+      "short": "Midpoint theorem (conics)",
+      "statement": "The midpoints of parallel chords in a conic lie on a common line.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "The common line or line segment of the midpoints is called the diameter. For a circle, ellipse or hyperbola it goes through the center, and for a parabola it is perpendicular to the directrix.",
+      "url": "https://en.wikipedia.org/wiki/Midpoint_theorem_(conics)",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "carnots-theorem",
+      "name": "Carnot's theorem",
+      "short": "Carnot's theorem",
+      "statement": "For any triangle ABC with circumcenter D, the sum of the signed distances from D to the three sides equals R + r, where R is the circumradius and r is the inradius. A distance is negative exactly when the open segment from D to the side lies completely outside the triangle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Lazare Carnot (1753–1823)",
+      "note": "It is used in a proof of the Japanese theorem for concyclic polygons.",
+      "url": "https://en.wikipedia.org/wiki/Carnot's_theorem_(inradius%2C_circumradius)",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "eyeball-theorem",
+      "name": "Eyeball theorem",
+      "short": "Eyeball theorem",
+      "statement": "Let c_P and c_Q be two nonintersecting circles, each lying outside the other, centered at P and Q. Let the two tangent segments from P to c_Q cross c_P at A and B, and let the two tangent segments from Q to c_P cross c_Q at C and D; then AB and CD have equal length.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "japanese-theorem-for-cyclic-quadrilaterals"
+      ],
+      "by": "Posed and solved as a problem by George W. Evans in 1938; discovered in the 1960s by Antonio Gutierrez, who gave it its current name",
+      "note": "Several proofs are known; one derives it from the Japanese theorem for cyclic quadrilaterals.",
+      "url": "https://en.wikipedia.org/wiki/Eyeball_theorem",
+      "area": "geometry",
+      "year": 1938,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "brahmaguptas-formula",
+      "name": "Brahmagupta's formula",
+      "short": "Brahmagupta's formula",
+      "statement": "The area K of a convex cyclic quadrilateral (one that can be inscribed in a circle) with side lengths a, b, c, d is K = √((s−a)(s−b)(s−c)(s−d)), where s = (a+b+c+d)/2 is the semiperimeter.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-cosines"
+      ],
+      "by": "Named after Brahmagupta, a 7th century Indian mathematician",
+      "note": "Heron's formula for triangles is the special case where one side has length zero. Bretschneider's formula generalizes it to quadrilaterals that are not cyclic.",
+      "url": "https://en.wikipedia.org/wiki/Brahmagupta's_formula",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pythagorean-theorem",
+      "name": "Pythagorean theorem",
+      "short": "Pythagorean theorem",
+      "statement": "In a right triangle in Euclidean geometry with legs a and b and hypotenuse c, a² + b² = c². In other words, the square on the hypotenuse has the same area as the squares on the other two sides together.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "sum-of-angles-of-a-triangle"
+      ],
+      "by": "Named after Pythagoras (born around 570 BC); stated in the Indian Shulba Sutras (8th to 5th century BC); oldest surviving axiomatic proof in Euclid's Elements, around 300 BC",
+      "note": "The date of first discovery and of the first proof is uncertain. The proof by similar triangles needs the fact that the angles of a triangle add up to two right angles, which is equivalent to the parallel postulate.",
+      "url": "https://en.wikipedia.org/wiki/Pythagorean_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "mohr-mascheroni-theorem",
+      "name": "Mohr–Mascheroni theorem",
+      "short": "Mohr–Mascheroni theorem",
+      "statement": "In the Euclidean plane, any geometric construction that can be carried out with compass and straightedge can be carried out with a compass alone. A line counts as constructed once two distinct points on it are given or constructed.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "compass-equivalence-theorem",
+          "url": "https://en.wikipedia.org/wiki/Compass_equivalence_theorem"
+        }
+      ],
+      "by": "Georg Mohr, 1672; independently rediscovered by Lorenzo Mascheroni, 1797",
+      "note": "The theorem relies on Archimedes' axiom, so a compass-only construction may need a number of steps with no bound fixed in advance. Poncelet and Steiner later showed that a straightedge together with one given circle and its center suffices.",
+      "url": "https://en.wikipedia.org/wiki/Mohr%E2%80%93Mascheroni_theorem",
+      "area": "geometry",
+      "year": 1672,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "gilbert-pollak-conjecture",
+      "name": "Gilbert–Pollak conjecture",
+      "short": "Gilbert–Pollak conjecture",
+      "statement": "For every finite set of points in the Euclidean plane, the Euclidean minimum spanning tree is no longer than 2/√3 times the length of the Steiner minimum tree. Equivalently, the Steiner ratio equals 2/√3.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Edgar Gilbert and Henry O. Pollak, 1968",
+      "note": "Three points at the corners of an equilateral triangle show that the ratio is at least 2/√3. A proof published in 1990 by Ding-Zhu Du and Frank Kwang-Ming Hwang later turned out to have a serious gap.",
+      "url": "https://en.wikipedia.org/wiki/Gilbert%E2%80%93Pollak_conjecture",
+      "area": "geometry",
+      "year": 1968,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "poncelet-steiner-theorem",
+      "name": "Poncelet–Steiner theorem",
+      "short": "Poncelet–Steiner theorem",
+      "statement": "In the Euclidean plane, every construction possible with straightedge and compass can be carried out with a straightedge alone, provided that a single circle and its centre are given.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Conjectured by Jean Victor Poncelet, who laid the groundwork in 1822; proved by Jakob Steiner, 1833",
+      "note": "Once the first circle is drawn, the compass is no longer needed: arcs of circles cannot be drawn without it, but every point of the construction can be found with the straightedge. It generalizes the older result that all of Euclid's constructions can be done with a straightedge and a compass of fixed opening.",
+      "url": "https://en.wikipedia.org/wiki/Poncelet%E2%80%93Steiner_theorem",
+      "area": "geometry",
+      "year": 1822,
+      "settled": 1833,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "barbiers-theorem",
+      "name": "Barbier's theorem",
+      "short": "Barbier's theorem",
+      "statement": "Every curve of constant width has perimeter equal to π times its width, whatever its precise shape.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "crofton-formula",
+        {
+          "id": "buffons-noodle",
+          "url": "https://en.wikipedia.org/wiki/Buffon's_noodle"
+        }
+      ],
+      "by": "Joseph-Émile Barbier, 1860",
+      "note": "It can be proved with Minkowski sums or with the Crofton formula from integral geometry. The analogous statement for surfaces of constant width in three dimensions is false.",
+      "url": "https://en.wikipedia.org/wiki/Barbier's_theorem",
+      "area": "geometry",
+      "year": 1860,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "weitzenbocks-inequality",
+      "name": "Weitzenböck's inequality",
+      "short": "Weitzenböck's inequality",
+      "statement": "For every triangle with side lengths a, b, c and area Δ, a² + b² + c² ≥ 4√3·Δ. Equality holds if and only if the triangle is equilateral.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "herons-formula"
+      ],
+      "by": "Roland Weitzenböck, 1919",
+      "note": "Pedoe's inequality generalizes it, and the Hadwiger–Finsler inequality strengthens it. Its proof was set as a problem in the International Mathematical Olympiad of 1961.",
+      "url": "https://en.wikipedia.org/wiki/Weitzenb%C3%B6ck's_inequality",
+      "area": "geometry",
+      "year": 1919,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "de-guas-theorem",
+      "name": "De Gua's theorem",
+      "short": "De Gua's theorem",
+      "statement": "If a tetrahedron has a right-angle corner, like the corner of a cube, then the square of the area of the face opposite that corner equals the sum of the squares of the areas of the other three faces.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Published by Jean Paul de Gua de Malves, 1783; a slightly more general version was published around the same time by Charles de Tinseau d'Amondans; known much earlier to Johann Faulhaber and René Descartes",
+      "note": "It is a three-dimensional analog of the Pythagorean theorem. Both are special cases of a theorem on n-simplices with a right-angle corner proved by P. S. Donchian and H. S. M. Coxeter in 1935.",
+      "url": "https://en.wikipedia.org/wiki/De_Gua's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "mollweides-formula",
+      "name": "Mollweide's formula",
+      "short": "Mollweide's formula",
+      "statement": "In a plane triangle with side lengths a, b, c and opposite angles α, β, γ, (a + b)/c = cos(½(α − β))/sin(½γ) and (a − b)/c = sin(½(α − β))/cos(½γ).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "A variant first published by Isaac Newton, 1707; both relations published in 1746, then by Thomas Simpson, 1748; Karl Mollweide republished the result in 1808",
+      "note": "It can be used to check the consistency of solutions of triangles. Dividing one formula by the other gives the law of tangents.",
+      "url": "https://en.wikipedia.org/wiki/Mollweide's_formula",
+      "area": "geometry",
+      "year": 1707,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lexells-theorem",
+      "name": "Lexell's theorem",
+      "short": "Lexell's theorem",
+      "statement": "Fix a base AB, an arc of a great circle on a sphere, and a triangle ABC. A spherical triangle ABX with apex X on the same side of the great circle AB as C has the same area as ABC if and only if X lies on the small-circle arc through C that joins the points antipodal to A and to B.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "spherical-law-of-cosines"
+      ],
+      "by": "Anders Johan Lexell, c. 1777 (published 1784); other proofs by Euler (1778), Legendre (1800), Steiner (1827), Gauss (1841), Serret (1855) and Barbier (1864)",
+      "note": "It is the spherical analog of propositions 37 and 39 in Book I of Euclid's Elements, where triangles of equal area on a fixed base have their apex on a line parallel to the base.",
+      "url": "https://en.wikipedia.org/wiki/Lexell's_theorem",
+      "area": "geometry",
+      "year": 1777,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "egan-conjecture",
+      "name": "Egan conjecture",
+      "short": "Egan conjecture",
+      "statement": "In n-dimensional Euclidean space with n ≥ 2, take two (n−1)-spheres with radii r < R whose centres are a distance d apart. An n-simplex that lies completely inside the larger sphere and completely encloses the smaller sphere exists if and only if d² ≤ (R + (n−2)r)(R − nr).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Proposed by Greg Egan, 2014, who also showed that the condition is sufficient; Sergei Drozdov showed that it is necessary, 2023",
+      "note": "It generalizes an equality of William Chapple, later found independently by Leonhard Euler, which is a special case of Poncelet's closure theorem, and the Grace–Danielsson inequality one dimension higher. For n = 1 the statement is also true but trivial.",
+      "url": "https://en.wikipedia.org/wiki/Egan_conjecture",
+      "area": "geometry",
+      "year": 2014,
+      "settled": 2023,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "griffiths-theorem",
+      "name": "Griffiths' theorem",
+      "short": "Griffiths' theorem",
+      "statement": "Take a triangle and a line through the centre of its circumcircle. The pedal circles of all points on that line pass through one common fixed point, called a Griffiths point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "John Griffiths, published in the Educational Times, 1857; rediscovered by M. Weil, 1880, and W. S. McCay, 1889",
+      "note": "The theorem was found again in 1906 and is also called Fontené's (Second) theorem.",
+      "url": "https://en.wikipedia.org/wiki/Griffiths'_theorem",
+      "area": "geometry",
+      "year": 1857,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "brokards-theorem",
+      "name": "Brokard's theorem",
+      "short": "Brokard's theorem",
+      "statement": "Let A, B, C, D lie in this order on a circle with center O. Let lines AC and BD meet at P, AB and DC at Q, and AD and BC at R. Then O is the orthocenter of triangle PQR, and QR is the polar of P, PQ is the polar of R and PR is the polar of Q with respect to the circle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "projective-geometry",
+        "euclidean-geometry"
+      ],
+      "by": "Named after Henri Brocard",
+      "note": "It is commonly used in Olympiad mathematics.",
+      "url": "https://en.wikipedia.org/wiki/Brokard's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "japanese-theorem-for-cyclic-polygons",
+      "name": "Japanese theorem for cyclic polygons",
+      "short": "Japanese theorem, polygons",
+      "statement": "However a cyclic polygon is divided into triangles by diagonals, the sum of the inradii of the triangles is the same. Conversely, if the sum of the inradii does not depend on the triangulation, then the polygon is cyclic.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "carnots-theorem",
+          "url": "https://en.wikipedia.org/wiki/Carnot's_theorem_(inradius%2C_circumradius)"
+        }
+      ],
+      "note": "It is a Sangaku problem and follows from Carnot's theorem. The general case follows from the case of a cyclic quadrilateral.",
+      "url": "https://en.wikipedia.org/wiki/Japanese_theorem_for_cyclic_polygons",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "longuerres-theorem",
+      "name": "Longuerre's theorem",
+      "short": "Longuerre's theorem",
+      "statement": "Let A₁A₂A₃A₄ be a cyclic quadrilateral and P a point on its circle. For each triple of vertices take the Simson line of P with respect to that triangle, and let D_i be the projection of P onto the Simson line of the triangle formed by omitting vertex A_i. Then D₁, D₂, D₃, D₄ are collinear.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "It generalizes the Simson line theorem, which says that the projections of a point on the circumcircle of a triangle to its sides are collinear. It can be generalized to cyclic n-gons.",
+      "url": "https://en.wikipedia.org/wiki/Longuerre's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "caseys-theorem",
+      "name": "Casey's theorem",
+      "short": "Casey's theorem",
+      "statement": "Let four non-intersecting circles O₁, O₂, O₃, O₄, taken in that order, lie inside a circle O and each be tangent to it. If tᵢⱼ is the length of the exterior common tangent of the circles Oᵢ and Oⱼ, then t₁₂·t₃₄ + t₁₄·t₂₃ = t₁₃·t₂₄.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "pythagorean-theorem",
+        "law-of-cosines",
+        "law-of-sines"
+      ],
+      "by": "Named after the Irish mathematician John Casey; said to have been discovered in Wasan roughly thirty years before Casey's publication",
+      "note": "It is also known as the generalized Ptolemy's theorem. When all four circles shrink to points, it is exactly Ptolemy's theorem, and its converse is used in the shortest known proof of Feuerbach's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Casey's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "crosss-theorem",
+      "name": "Cross's theorem",
+      "short": "Cross's theorem",
+      "statement": "Draw squares DABE, FBCG and HCAI outward on the sides AB, BC and CA of a triangle ABC in the Euclidean plane. Then the triangles AID, BEF and CGH, each formed by a vertex of ABC and the two outer square corners next to it, all have the same area as triangle ABC.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "David Cross, around 2004; the configuration was also studied independently by Vecten, so it is also called Vecten's theorem",
+      "url": "https://en.wikipedia.org/wiki/Cross's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "eulers-theorem-in-geometry",
+      "name": "Euler's theorem in geometry",
+      "short": "Euler's triangle theorem",
+      "statement": "In any triangle, the distance d between the circumcenter and the incenter satisfies d² = R(R − 2r), where R is the circumradius and r is the inradius. Equivalently, 1/(R − d) + 1/(R + d) = 1/r.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "incenter-excenter-lemma"
+      ],
+      "by": "Leonhard Euler, 1765; the same result was published earlier by William Chapple, 1746",
+      "note": "The Euler inequality R ≥ 2r follows from it, with equality only for an equilateral triangle.",
+      "url": "https://en.wikipedia.org/wiki/Euler's_theorem_in_geometry",
+      "area": "geometry",
+      "year": 1746,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "brahmaguptas-theorem",
+      "name": "Brahmagupta's theorem",
+      "short": "Brahmagupta's theorem",
+      "statement": "Let A, B, C and D be four points on a circle such that the lines AC and BD are perpendicular, meeting at M. Drop the perpendicular from M to the line BC, meeting it at E, and let F be the point where the line EM meets the side AD. Then F is the midpoint of AD.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after the Indian mathematician Brahmagupta (598-668)",
+      "url": "https://en.wikipedia.org/wiki/Brahmagupta_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "radons-theorem",
+      "name": "Radon's theorem",
+      "short": "Radon's theorem",
+      "statement": "Any set of d + 2 points in ℝᵈ can be partitioned into two sets whose convex hulls intersect.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Johann Radon, 1921",
+      "note": "A point in the intersection of the two convex hulls is called a Radon point. Radon's theorem is a key step in a standard proof of Helly's theorem on intersections of convex sets.",
+      "url": "https://en.wikipedia.org/wiki/Radon's_theorem",
+      "area": "geometry",
+      "year": 1921,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bundle-theorem",
+      "name": "Bundle theorem",
+      "short": "Bundle theorem",
+      "statement": "Let A₁, A₂, A₃, A₄, B₁, B₂, B₃, B₄ be eight different points in an ovoidal Möbius plane, for example the Euclidean plane, where the cycles are circles and lines (each line completed by a point at infinity). If five of the six quadruples {Aᵢ, Bᵢ, Aⱼ, Bⱼ} with i < j each lie on a cycle, and at least four different cycles occur among them, then the sixth quadruple also lies on a cycle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "By Kahn's theorem, a Möbius plane satisfies the bundle theorem exactly when it is ovoidal, so it plays the role for Möbius planes that Desargues' theorem plays for projective planes.",
+      "url": "https://en.wikipedia.org/wiki/Bundle_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "steiners-generation-of-a-conic",
+      "name": "Steiner's generation of a conic",
+      "short": "Steiner conic",
+      "statement": "In a projective plane over a field, let π be a projective mapping (a finite chain of perspective mappings) of the pencil of lines through a point U onto the pencil of lines through a point V, and suppose π is not itself perspective, meaning that corresponding lines do not all meet on one fixed line. Then the intersection points of corresponding lines form a non-degenerate projective conic section.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "projective-geometry"
+      ],
+      "by": "Named after the Swiss mathematician Jakob Steiner",
+      "note": "Two points U and V together with the images of three lines determine the mapping, and so the conic, uniquely. The dual construction, joining corresponding points of two lines, generates a dual conic.",
+      "url": "https://en.wikipedia.org/wiki/Steiner_conic",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "van-schootens-theorem",
+      "name": "Van Schooten's theorem",
+      "short": "Van Schooten's theorem",
+      "statement": "Let ABC be an equilateral triangle and P a point on its circumcircle. Then the longest of the three segments PA, PB, PC has length equal to the sum of the lengths of the other two.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after the Dutch mathematician Frans van Schooten",
+      "note": "It follows from Ptolemy's theorem for cyclic quadrilaterals.",
+      "url": "https://en.wikipedia.org/wiki/Van_Schooten's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "annes-theorem",
+      "name": "Anne's theorem",
+      "short": "Anne's theorem",
+      "statement": "Let ABCD be a convex quadrilateral that is not a parallelogram, and let E and F be the midpoints of its diagonals AC and BD. If L is a point inside ABCD such that the areas of triangles BCL and DAL add up to the same total as the areas of triangles LAB and DLC, then L lies on the Newton line, the line through E and F. Conversely, every point of the Newton line inside the quadrilateral has this area property.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after the French mathematician Pierre-Léon Anne (1806–1850)",
+      "note": "For a parallelogram the Newton line does not exist, and the area equality holds for every inner point.",
+      "url": "https://en.wikipedia.org/wiki/Anne's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "newtons-theorem-on-tangential-quadrilaterals",
+      "name": "Newton's theorem on tangential quadrilaterals",
+      "short": "Newton's theorem (quad.)",
+      "statement": "In every tangential quadrilateral other than a rhombus, the center of the incircle lies on the Newton line, the line through the midpoints of the two diagonals.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "annes-theorem",
+        "pitot-theorem"
+      ],
+      "note": "It follows from Anne's theorem together with the Pitot theorem. For a rhombus the two midpoints and the incircle center coincide, so no Newton line exists.",
+      "url": "https://en.wikipedia.org/wiki/Newton's_theorem_(quadrilateral)",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lesters-theorem",
+      "name": "Lester's theorem",
+      "short": "Lester's theorem",
+      "statement": "In any scalene triangle, the two Fermat points, the nine-point center and the circumcenter lie on the same circle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "June Lester, 1997",
+      "note": "The circle through these points is called the Lester circle. Lester proved the result using complex numbers, and later authors gave elementary, vector and computerized proofs.",
+      "url": "https://en.wikipedia.org/wiki/Lester's_theorem",
+      "area": "geometry",
+      "year": 1997,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "steiner-lehmus-theorem",
+      "name": "Steiner–Lehmus theorem",
+      "short": "Steiner–Lehmus theorem",
+      "statement": "Every triangle with two angle bisectors of equal lengths is isosceles.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Formulated by C. L. Lehmus (first mentioned in a letter to C. Sturm, 1840); proved by Jakob Steiner",
+      "note": "Lehmus asked for a purely geometric proof, and Steiner was among the first to give one. The theorem has remained a popular topic in elementary geometry.",
+      "url": "https://en.wikipedia.org/wiki/Steiner%E2%80%93Lehmus_theorem",
+      "area": "geometry",
+      "year": 1840,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hellys-theorem",
+      "name": "Helly's theorem",
+      "short": "Helly's theorem",
+      "statement": "Let X₁, …, Xₙ be finitely many convex subsets of ℝᵈ with n ≥ d+1. If every d+1 of these sets have a common point, then all n of them have a common point. For an infinite collection of compact convex subsets of ℝᵈ, if every subcollection of at most d+1 sets has a common point, then the whole collection has a common point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "radons-theorem",
+          "url": "https://en.wikipedia.org/wiki/Radon's_theorem"
+        }
+      ],
+      "by": "Eduard Helly, discovered 1913 and published 1923; alternative proofs by Radon, 1921, and König, 1922",
+      "note": "It gave rise to the notion of a Helly family.",
+      "url": "https://en.wikipedia.org/wiki/Helly's_theorem",
+      "area": "geometry",
+      "year": 1913,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "law-of-cosines",
+      "name": "Law of cosines",
+      "short": "Law of cosines",
+      "statement": "In a triangle with sides a, b, c and opposite angles α, β, γ, c² = a² + b² − 2ab·cos γ, and likewise a² = b² + c² − 2bc·cos α and b² = a² + c² − 2ac·cos β.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-sines",
+        "ptolemys-theorem",
+        "tangent-secant-theorem",
+        "intersecting-chords-theorem",
+        "pythagorean-trigonometric-identity"
+      ],
+      "by": "A geometric form appears in Book II of Euclid's Elements, c. 300 BC; consolidated into one formula by Jamshīd al-Kāshī, 1427; first written in algebraic notation by François Viète in the 16th century",
+      "note": "It generalizes the Pythagorean theorem: if γ is a right angle it reduces to c² = a² + b². It is used to solve a triangle when all three sides, or two sides and their included angle, are given.",
+      "url": "https://en.wikipedia.org/wiki/Law_of_cosines",
+      "area": "geometry",
+      "year": -300,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "japanese-theorem-for-cyclic-quadrilaterals",
+      "name": "Japanese theorem for cyclic quadrilaterals",
+      "short": "Japanese theorem, quads",
+      "statement": "Let ABCD be any cyclic quadrilateral (its four vertices lie on one circle), and let M₁, M₂, M₃, M₄ be the centers of the inscribed circles of the triangles ABD, ABC, BCD and ACD. Then M₁, M₂, M₃, M₄ are the vertices of a rectangle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Stated on a sangaku tablet at a temple in Yamagata prefecture, Japan, in 1880; proofs given by Bogomolny and Reyes",
+      "note": "It can be extended to the Japanese theorem for cyclic polygons, by which the sum of the inradii of a triangulated cyclic polygon does not depend on the triangulation.",
+      "url": "https://en.wikipedia.org/wiki/Japanese_theorem_for_cyclic_quadrilaterals",
+      "area": "geometry",
+      "year": 1880,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "conway-criterion",
+      "name": "Conway criterion",
+      "short": "Conway criterion",
+      "statement": "Suppose a tile is a closed topological disk with six consecutive points A, B, C, D, E, F on its boundary, at least three of them distinct. Suppose the boundary part from A to B is congruent to the part from E to D by a translation T with T(A) = E and T(B) = D, and each of the boundary parts BC, CD, EF and FA is centrosymmetric (congruent to itself under a 180-degree rotation about its midpoint). Then the tile admits a periodic tiling of the plane that uses only 180-degree rotations.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Heinrich Heesch described the five types of tiles satisfying it in 1963; John Horton Conway discovered it independently, as Martin Gardner reported in August 1975; M.C. Escher used it from the mid-1920s without stating it",
+      "note": "The criterion is sufficient but not necessary: some tiles fail it and still tile the plane. Every Conway tile folds into an isotetrahedron or a rectangle dihedron.",
+      "url": "https://en.wikipedia.org/wiki/Conway_criterion",
+      "area": "geometry",
+      "year": 1963,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "law-of-sines",
+      "name": "Law of sines",
+      "short": "Law of sines",
+      "statement": "In any triangle with sides a, b, c and opposite angles α, β, γ, a/sin α = b/sin β = c/sin γ = 2R, where R is the radius of the triangle's circumcircle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "thaless-theorem"
+      ],
+      "by": "An equivalent form was known to Ptolemy in the 2nd century",
+      "note": "It is used to find the remaining sides of a triangle when two angles and a side are known. It is one of two trigonometric equations commonly used for this, the other being the law of cosines.",
+      "url": "https://en.wikipedia.org/wiki/Law_of_sines",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "harcourts-theorem",
+      "name": "Harcourt's theorem",
+      "short": "Harcourt's theorem",
+      "statement": "Take a triangle with side lengths a, b, c opposite vertices A, B, C and area K, and any line tangent to its incircle. Let a′, b′, c′ be the signed perpendicular distances of A, B, C from the line, a distance being negative exactly when the vertex is on the opposite side of the line from the incenter; then aa′ + bb′ + cc′ = 2K.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after J. Harcourt, an Irish professor",
+      "note": "If the line is instead tangent to the excircle opposite A, the formula becomes −aa′ + bb′ + cc′ = 2K.",
+      "url": "https://en.wikipedia.org/wiki/Harcourt's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hjelmslevs-theorem",
+      "name": "Hjelmslev's theorem",
+      "short": "Hjelmslev's theorem",
+      "statement": "If points P, Q, R, ... on a line are isometrically mapped to points P′, Q′, R′, ... of another line in the same plane, then the midpoints of the segments PP′, QQ′, RR′, ... also lie on a line.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Johannes Hjelmslev",
+      "note": "It has a proof that does not presuppose the parallel postulate, so it is valid in non-Euclidean geometry as well.",
+      "url": "https://en.wikipedia.org/wiki/Hjelmslev's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "intersecting-secants-theorem",
+      "name": "Intersecting secants theorem",
+      "short": "Intersecting secants",
+      "statement": "If two lines AD and BC intersect at a point P, and the points A, B, C, D all lie on the same circle, then |PA|·|PD| = |PB|·|PC|.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "It is one of three basic cases of the power of a point theorem, along with the intersecting chords theorem and the tangent-secant theorem.",
+      "url": "https://en.wikipedia.org/wiki/Intersecting_secants_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "compass-equivalence-theorem",
+      "name": "Compass equivalence theorem",
+      "short": "Compass equivalence",
+      "statement": "Any construction made with a modern compass, which keeps its opening when lifted, can also be made with a collapsing compass. Equivalently, with a collapsing compass, given a circle in the plane, one can construct another circle of equal radius centered at any given point of the plane.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Euclid, Elements, Book I, Proposition II",
+      "note": "It can also be proved without a straightedge. This justifies fixed-compass moves in proofs of the Mohr–Mascheroni theorem.",
+      "url": "https://en.wikipedia.org/wiki/Compass_equivalence_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "rouths-theorem",
+      "name": "Routh's theorem",
+      "short": "Routh's theorem",
+      "statement": "In triangle ABC, let points D, E, F lie on segments BC, CA, AB, and write CD/BD = x, AE/CE = y, BF/AF = z. Then the signed area of the triangle formed by the cevians AD, BE, CF is S · (xyz − 1)² / ((xy + y + 1)(yz + z + 1)(zx + x + 1)), where S is the area of ABC.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "menelauss-theorem"
+      ],
+      "by": "Edward John Routh, in his Treatise on Analytical Statics (first edition 1891, second edition 1896); first known published statement and proof in the 1878 Cambridge Tripos problems set by James Whitbread Lee Glaisher",
+      "note": "The case x = y = z = 1 shows that the three medians are concurrent. The case x = y = z = 2 gives the one-seventh area triangle.",
+      "url": "https://en.wikipedia.org/wiki/Routh's_theorem",
+      "area": "geometry",
+      "year": 1878,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pizza-theorem",
+      "name": "Pizza theorem",
+      "short": "Pizza theorem",
+      "statement": "Take a disk and any point p inside it. Let n be a multiple of 4 with n ≥ 8. Cut the disk along n/2 lines through p, each rotated by an angle of 2π/n from the previous one, which gives n sectors with equal angles at p. Then the sectors taken alternately have equal total area, wherever p lies.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Proposed as a challenge problem by Upton, 1967; the published solution is by Michael Goldberg",
+      "note": "Two people who share a pizza sliced this way and take alternating slices each get the same amount. The condition that n is a multiple of 4 is necessary: Don Coppersmith showed that 4 sectors, or a number of sectors not divisible by 4, do not in general give equal areas.",
+      "url": "https://en.wikipedia.org/wiki/Pizza_theorem",
+      "area": "geometry",
+      "year": 1967,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "einstein-problem",
+      "name": "Einstein problem",
+      "short": "Einstein problem",
+      "statement": "There is a single shape that tiles the plane, but only in a nonperiodic way. Such a shape, called an einstein, exists: the \"hat\" tile is one, and the related \"spectre\" tiles the plane only nonperiodically even when only rotations and translations are used.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Solved by David Smith, Craig S. Kaplan, Joseph Samuel Myers and Chaim Goodman-Strauss, 2023",
+      "note": "David Smith, an amateur mathematician, found the hat in November 2022. The problem extends the second part of Hilbert's eighteenth problem.",
+      "url": "https://en.wikipedia.org/wiki/Einstein_problem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "herons-formula",
+      "name": "Heron's formula",
+      "short": "Heron's formula",
+      "statement": "A triangle in the Euclidean plane with side lengths a, b, c and semiperimeter s = (a + b + c)/2 has area A = √(s(s−a)(s−b)(s−c)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-cosines",
+        "pythagorean-theorem",
+        "law-of-cotangents"
+      ],
+      "by": "Heron of Alexandria, first century, who proved it in his work Metrica; probably known centuries earlier",
+      "note": "It can also be written using only the side lengths, or with the Cayley–Menger determinant. It is a special case of Brahmagupta's formula for cyclic quadrilaterals.",
+      "url": "https://en.wikipedia.org/wiki/Heron's_formula",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "incenter-excenter-lemma",
+      "name": "Incenter–excenter lemma",
+      "short": "Incenter–excenter lemma",
+      "statement": "Let ABC be a triangle with incenter I, and let D be the point where line BI (the bisector of angle ABC) crosses the circumcircle of ABC again. Then D is the same distance from A, from C and from I, and the excenter of ABC opposite B is also at this distance from D, diametrically opposite I.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "The incenter and excenters of a triangle form an orthocentric system whose nine-point circle is the circumcircle. It is known in Russia as the trillium theorem or trident lemma.",
+      "url": "https://en.wikipedia.org/wiki/Incenter%E2%80%93excenter_lemma",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "eulers-quadrilateral-theorem",
+      "name": "Euler's quadrilateral theorem",
+      "short": "Euler's quadrilateral law",
+      "statement": "For a convex quadrilateral with sides a, b, c, d, diagonals e and f, and g the length of the segment joining the midpoints of the two diagonals, a² + b² + c² + d² = e² + f² + 4g².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "intercept-theorem"
+      ],
+      "by": "Named after Leonhard Euler, who derived it as a corollary of a related theorem",
+      "note": "It generalises the parallelogram law, which in turn generalises the Pythagorean theorem. It also holds for any four points in ℝⁿ joined in a cycle, including crossed and nonplanar quadrilaterals.",
+      "url": "https://en.wikipedia.org/wiki/Euler's_quadrilateral_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "holditchs-theorem",
+      "name": "Holditch's theorem",
+      "short": "Holditch's theorem",
+      "statement": "Let a chord of fixed length rotate inside a convex closed curve, and let the chord be short enough that the traced locus is a simple closed curve. Then the locus of a point on the chord at distance p from one end and distance q from the other is a closed curve whose enclosed area is less than that of the original curve by πpq.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Rev. Hamnet Holditch, 1858",
+      "note": "The area πpq does not depend on the shape or size of the original curve. Holditch did not mention the assumption that the chord is short enough, but the proof requires it.",
+      "url": "https://en.wikipedia.org/wiki/Holditch's_theorem",
+      "area": "geometry",
+      "year": 1858,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "varignons-theorem",
+      "name": "Varignon's theorem",
+      "short": "Varignon's theorem",
+      "statement": "The midpoints of the sides of any quadrilateral form a parallelogram, which for some self-crossing quadrilaterals degenerates to four points on one line. If the quadrilateral is convex or concave (not self-crossing), the area of this parallelogram is half the area of the quadrilateral.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Pierre Varignon; his proof was published posthumously in 1731",
+      "note": "The parallelogram exists even for a skew quadrilateral and is planar whether or not the quadrilateral is. The theorem can be generalized to the midpoint polygon of an arbitrary polygon.",
+      "url": "https://en.wikipedia.org/wiki/Varignon's_theorem",
+      "area": "geometry",
+      "year": 1731,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "impossibility-of-squaring-the-circle",
+      "name": "Impossibility of squaring the circle",
+      "short": "Circle cannot be squared",
+      "statement": "For a given circle, a square with the same area cannot be constructed using only a compass and straightedge in a finite number of steps.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "lindemann-weierstrass-theorem"
+      ],
+      "by": "Problem from Greek mathematics; impossibility proved by Ferdinand von Lindemann, 1882",
+      "note": "The proof follows from the Lindemann–Weierstrass theorem, which shows that π is transcendental. Pierre Wantzel showed in 1837 that constructible lengths must be algebraic numbers.",
+      "url": "https://en.wikipedia.org/wiki/Squaring_the_circle",
+      "area": "geometry",
+      "year": 1882,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "menelauss-theorem",
+      "name": "Menelaus's theorem",
+      "short": "Menelaus's theorem",
+      "statement": "If a straight line meets the lines BC, AC, AB of a triangle ABC (possibly extended) at points D, E, F, none of which is A, B or C, then with signed lengths (AF/FB) · (BD/DC) · (CE/EA) = −1, and so with ordinary lengths the product is 1. Conversely, if points D, E, F on the lines BC, AC, AB make the signed product equal −1, then D, E, F lie on one line.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named for Menelaus of Alexandria, whose Spherics contains the oldest extant exposition; rediscovered in the West by Giovanni Ceva",
+      "note": "Its equation differs from that of Ceva's theorem only in sign, and the two can be seen as projective duals. The converse of the unsigned version is not necessarily true.",
+      "url": "https://en.wikipedia.org/wiki/Menelaus's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kakutanis-theorem",
+      "name": "Kakutani's theorem",
+      "short": "Kakutani's cube theorem",
+      "statement": "Every convex body in 3-dimensional space has a circumscribed cube, that is, a cube all of whose faces touch the body.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Shizuo Kakutani; generalized by Yamabe and Yujobô to higher dimensions, and by Floyd to other circumscribed parallelepipeds",
+      "note": "It follows from a result on continuous functions on the 2-sphere: for such a function f there is an orthonormal basis u, v, w of ℝ³ with f(u) = f(v) = f(w).",
+      "url": "https://en.wikipedia.org/wiki/Kakutani's_theorem_(geometry)",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "thomsens-theorem",
+      "name": "Thomsen's theorem",
+      "short": "Thomsen's theorem",
+      "statement": "Take a triangle ABC and a point P₁ on side BC. Draw the parallel to AC through P₁ meeting AB at P₂, the parallel to BC through P₂ meeting AC at P₃, the parallel to AB through P₃ meeting BC at P₄, the parallel to AC through P₄ meeting AB at P₅, the parallel to BC through P₅ meeting AC at P₆, and the parallel to AB through P₆ meeting BC at P₇. Then P₇ coincides with P₁, so the path closes up.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Gerhard Thomsen",
+      "note": "It can be generalized to quadrilaterals and to any polygon by drawing appropriate parallels to diagonals, as shown in De Villiers (2009).",
+      "url": "https://en.wikipedia.org/wiki/Thomsen's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "jacobis-theorem",
+      "name": "Jacobi's theorem",
+      "short": "Jacobi point concurrency",
+      "statement": "Given a triangle ABC and three angles α, β, γ, three points X, Y, Z are determined with ∠ZAB = ∠YAC = α, ∠XBC = ∠ZBA = β and ∠YCA = ∠XCB = γ. Then the lines AX, BY and CZ meet in a single point N, called the Jacobi point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "The Jacobi point generalizes the Fermat point. If the three angles are equal, the Jacobi point lies on Kiepert's hyperbola.",
+      "url": "https://en.wikipedia.org/wiki/Jacobi's_theorem_(geometry)",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "chvatals-art-gallery-theorem",
+      "name": "Chvátal's art gallery theorem",
+      "short": "Art gallery theorem",
+      "statement": "Every simple polygon with n vertices can be guarded by ⌊n/3⌋ guards, and some simple polygons with n vertices need that many. A set of guards (points in the polygon) guards it if every point of the polygon can be joined to some guard by a line segment that does not leave the polygon.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry",
+        "graph-theory"
+      ],
+      "by": "Question posed to Václav Chvátal by Victor Klee in 1973; proved by Chvátal shortly thereafter; proof later simplified by Steve Fisk",
+      "note": "Fisk's proof triangulates the polygon and 3-colors the vertices; it was chosen for Proofs from THE BOOK. For orthogonal polygons, ⌊n/4⌋ guards are enough.",
+      "url": "https://en.wikipedia.org/wiki/Art_gallery_problem",
+      "area": "geometry",
+      "year": 1973,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "reuschles-theorem",
+      "name": "Reuschle's theorem",
+      "short": "Reuschle's theorem",
+      "statement": "In a triangle ABC, take three cevians meeting in a common point other than the vertices, and let Pa, Pb, Pc be where they meet the (extended) sides. The circle through Pa, Pb, Pc meets the (extended) sides again in points P'a, P'b, P'c. Then the three cevians AP'a, BP'b and CP'c also meet in a common point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Karl Gustav Reuschle; also known as Terquem's theorem, published by Olry Terquem in 1842",
+      "url": "https://en.wikipedia.org/wiki/Reuschle's_theorem",
+      "area": "geometry",
+      "year": 1842,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pythagorean-trigonometric-identity",
+      "name": "Pythagorean trigonometric identity",
+      "short": "sin²θ + cos²θ = 1",
+      "statement": "For every angle θ, sin²θ + cos²θ = 1, where sin²θ means (sin θ)² and cos²θ means (cos θ)².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "It expresses the Pythagorean theorem in terms of trigonometric functions. Along with the sum-of-angles formulae, it is one of the basic relations between the sine and cosine functions.",
+      "url": "https://en.wikipedia.org/wiki/Pythagorean_trigonometric_identity",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "triangle-inequality",
+      "name": "Triangle inequality",
+      "short": "Triangle inequality",
+      "statement": "In any triangle in Euclidean space, the sum of the lengths of any two sides is greater than or equal to the length of the third side. If the sides have lengths a, b and c, then c ≤ a + b.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "cauchy-schwarz-inequality",
+          "url": "https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality"
+        },
+        "sum-of-angles-of-a-triangle"
+      ],
+      "by": "Euclid, Elements, Book I, Proposition 20",
+      "note": "It is one of the defining properties of a distance function in a metric space and of a norm in a normed vector space.",
+      "url": "https://en.wikipedia.org/wiki/Triangle_inequality",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cevas-theorem",
+      "name": "Ceva's theorem",
+      "short": "Ceva's theorem",
+      "statement": "Take a triangle ABC and a point O that does not lie on any of the three lines through two of its vertices. Let the lines AO, BO, CO meet the lines of the opposite sides at D, E, F. Then, using signed lengths of segments, (AF/FB) · (BD/DC) · (CE/EA) = 1. Conversely, if points D, E, F on the lines BC, AC, AB satisfy this equation, then the lines AD, BE, CF pass through one point or are all three parallel.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "menelauss-theorem"
+      ],
+      "by": "Often attributed to Giovanni Ceva, who published it in 1678 in De lineis rectis; proven much earlier by Yusuf Al-Mu'taman ibn Hűd, an eleventh-century king of Zaragoza",
+      "note": "It can be stated and proved without angles, areas or lengths other than ratios of collinear segments, so it holds in any affine plane over any field. Its equation differs from that of Menelaus' theorem only in sign.",
+      "url": "https://en.wikipedia.org/wiki/Ceva's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "petersen-morley-theorem",
+      "name": "Petersen–Morley theorem",
+      "short": "Petersen–Morley theorem",
+      "statement": "Let a, b, c be three general skew lines in space. Let a′, b′, c′ be the lines of shortest distance for the pairs (b, c), (c, a), (a, b) respectively, and let p, q, r be the lines of shortest distance for the pairs (a, a′), (b, b′), (c, c′) respectively. Then there is a single line that meets each of p, q and r at right angles.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Johannes Hjelmslev, who published his work on it under his original name Johannes Trolle Petersen, and Frank Morley",
+      "url": "https://en.wikipedia.org/wiki/Petersen%E2%80%93Morley_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "beckman-quarles-theorem",
+      "name": "Beckman–Quarles theorem",
+      "short": "Beckman–Quarles theorem",
+      "statement": "Let f be a function, or a multivalued function, from a Euclidean space of finite dimension d ≥ 2 to itself, such that any two points at unit distance always have images at unit distance. Then f is an isometry: it is one-to-one and preserves the distance between every pair of points.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "triangle-inequality"
+      ],
+      "by": "Frank S. Beckman and Donald A. Quarles Jr., 1953",
+      "note": "Equivalently, every homomorphism from the unit distance graph of the plane to itself is an isometry of the plane. The theorem fails for the real line and for the infinite-dimensional Hilbert space of square-summable sequences.",
+      "url": "https://en.wikipedia.org/wiki/Beckman%E2%80%93Quarles_theorem",
+      "area": "geometry",
+      "year": 1953,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "commandinos-theorem",
+      "name": "Commandino's theorem",
+      "short": "Commandino's theorem",
+      "statement": "The four medians of a tetrahedron meet at one point S, which divides each of them in a 3:1 ratio. A median is the segment joining a vertex to the centroid of the opposite triangular face.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Attributed to Federico Commandino, who stated it in De Centro Gravitatis Solidorum, 1565",
+      "note": "The point S is also the centroid of the tetrahedron. The result extends to simplexes of any dimension d > 1, with ratio d:1.",
+      "url": "https://en.wikipedia.org/wiki/Commandino's_theorem",
+      "area": "geometry",
+      "year": 1565,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "legendres-theorem-on-spherical-triangles",
+      "name": "Legendre's theorem on spherical triangles",
+      "short": "Legendre's spherical thm",
+      "statement": "Let ABC be a spherical triangle on the unit sphere with small sides a, b, c, and let A′B′C′ be the planar triangle with the same sides. Then each angle of the spherical triangle exceeds the corresponding angle of the planar triangle by approximately one third of the spherical excess, which is the amount by which the sum of the three spherical angles exceeds π.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Stated by Adrien-Marie Legendre, 1787, who also gave a proof",
+      "note": "The theorem greatly simplified the numerical work of geodetic surveys from about 1800 until the middle of the twentieth century. Corrections of fourth order in the sides were proved by Buzengeiger in 1818.",
+      "url": "https://en.wikipedia.org/wiki/Legendre's_theorem_on_spherical_triangles",
+      "area": "geometry",
+      "year": 1787,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "geometric-mean-theorem",
+      "name": "Geometric mean theorem",
+      "short": "Geometric mean theorem",
+      "statement": "In a right triangle, the altitude h on the hypotenuse divides the hypotenuse into two segments of lengths p and q with h = √(pq), that is h² = pq. Conversely, if the altitude from one corner of a triangle divides the opposite side into two segments of lengths p and q with h² = pq, then the triangle has a right angle at that corner.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Usually attributed to Euclid, who stated it as a corollary to proposition 8 in book VI of the Elements",
+      "note": "It can be seen as a special case of the intersecting chords theorem for a circle. It gives a ruler and compass method for constructing a square with the same area as a given rectangle.",
+      "url": "https://en.wikipedia.org/wiki/Geometric_mean_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "inscribed-square-problem",
+      "name": "Inscribed square problem",
+      "short": "Inscribed square problem",
+      "statement": "Every plane simple closed curve (Jordan curve) contains all four vertices of some square. The vertices of the square need not appear along the curve in any particular order.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Proposed by Otto Toeplitz, 1911",
+      "note": "The claim is known to hold when the curve is convex or piecewise smooth, and in other special cases. It is also called the square peg problem or the Toeplitz conjecture.",
+      "url": "https://en.wikipedia.org/wiki/Inscribed_square_problem",
+      "area": "geometry",
+      "year": 1911,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "intersecting-chords-theorem",
+      "name": "Intersecting chords theorem",
+      "short": "Intersecting chords",
+      "statement": "If two chords AC and BD of a circle intersect at a point S, then |AS|·|SC| = |BS|·|SD|. In words, the two segments of one chord have the same product of lengths as the two segments of the other chord.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Proposition 35 of Book 3 of Euclid's Elements",
+      "note": "The converse also holds: if the equation holds for two segments crossing at S, their four endpoints lie on a common circle. The theorem is one of three basic cases of the power of a point theorem.",
+      "url": "https://en.wikipedia.org/wiki/Intersecting_chords_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tangent-secant-theorem",
+      "name": "Tangent–secant theorem",
+      "short": "Tangent–secant theorem",
+      "statement": "Let a secant line g meet a circle at points G₁ and G₂, and let a tangent line t touch the circle at T, with g and t meeting at a point P. Then |PT|² = |PG₁| · |PG₂|.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Found as Proposition 36 in Book 3 of Euclid's Elements",
+      "note": "It is one of three basic cases of the power of a point theorem, alongside the intersecting chords theorem and the intersecting secants theorem.",
+      "url": "https://en.wikipedia.org/wiki/Tangent%E2%80%93secant_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "segres-theorem",
+      "name": "Segre's theorem",
+      "short": "Segre's theorem",
+      "statement": "Any oval in a finite pappian projective plane of odd order is a nondegenerate projective conic section. Here an oval is a set of points such that every line meets it in at most two points and through each of its points there is exactly one tangent line.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "projective-geometry"
+      ],
+      "by": "Conjectured in 1949 by G. Järnefelt and P. Kustaanheimo; proof published in 1955 by Beniamino Segre",
+      "note": "In pappian planes of even order greater than four there are ovals that are not conics.",
+      "url": "https://en.wikipedia.org/wiki/Segre's_theorem",
+      "area": "geometry",
+      "year": 1949,
+      "settled": 1955,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "qvists-theorem",
+      "name": "Qvist's theorem",
+      "short": "Qvist's theorem",
+      "statement": "Let Ω be an oval (a set of points that no line meets in more than two points and that has exactly one tangent line at each of its points) in a finite projective plane of order n, where n + 1 is the number of points on a line. If n is odd, every point not on Ω lies on 0 or 2 tangents to Ω; if n is even, there is a point N, the nucleus, such that the tangents to Ω are exactly all the lines through N.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "projective-geometry"
+      ],
+      "by": "Named after the Finnish mathematician Qvist",
+      "note": "It answers how many tangents to an oval can pass through a point in a finite projective plane.",
+      "url": "https://en.wikipedia.org/wiki/Qvist's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pitot-theorem",
+      "name": "Pitot theorem",
+      "short": "Pitot theorem",
+      "statement": "In a tangential quadrilateral, meaning a convex quadrilateral whose four sides are all tangent to the same inscribed circle, the two sums of lengths of opposite sides are equal. Both sums equal the semiperimeter. Conversely, a convex quadrilateral whose opposite sides have equal sums of lengths has an inscribed circle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Henri Pitot, 1725; the converse by Jakob Steiner, 1846",
+      "url": "https://en.wikipedia.org/wiki/Pitot_theorem",
+      "area": "geometry",
+      "year": 1725,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "droz-farny-line-theorem",
+      "name": "Droz-Farny line theorem",
+      "short": "Droz-Farny line theorem",
+      "statement": "Let H be the orthocenter of a triangle ABC, and let L₁ and L₂ be two perpendicular lines through H, neither parallel to a side line, so that L₁ meets the lines BC, CA, AB in points A₁, B₁, C₁ and L₂ meets them in points A₂, B₂, C₂. Then the midpoints of the segments A₁A₂, B₁B₂ and C₁C₂ lie on one line.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Stated by Arnold Droz-Farny, 1899, though it is not clear whether he had a proof",
+      "note": "The orthocenter is the common point of the three altitude lines of the triangle. René Goormaghtigh proved a generalization in 1930.",
+      "url": "https://en.wikipedia.org/wiki/Droz-Farny_line_theorem",
+      "area": "geometry",
+      "year": 1899,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "miquels-theorem",
+      "name": "Miquel's theorem",
+      "short": "Miquel's theorem",
+      "statement": "Let ABC be a triangle with arbitrary points A´, B´ and C´ on the sides BC, AC and AB respectively (or their extensions). Then the circles through A, B´, C´, through A´, B, C´ and through A´, B´, C all pass through one common point M, called the Miquel point. The angles MA´B, MB´C and MC´A are all equal, and so are the supplementary angles MA´C, MB´A and MC´B.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Auguste Miquel",
+      "note": "The theorem follows from the properties of cyclic quadrilaterals. If A´, B´ and C´ are collinear, the Miquel point lies on the circumcircle of ABC, and conversely.",
+      "url": "https://en.wikipedia.org/wiki/Miquel's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "caratheodorys-theorem",
+      "name": "Carathéodory's theorem",
+      "short": "Carathéodory (convex hull)",
+      "statement": "If a point x lies in the convex hull of a set P ⊂ ℝᵈ, then x can be written as a convex combination of at most d + 1 points of P. Equivalently, x lies in some d-dimensional simplex with vertices in P.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Constantin Carathéodory, 1911, for compact P; extended to arbitrary sets by Ernst Steinitz, 1914",
+      "note": "It is closely related to the theorems of Helly and Radon.",
+      "url": "https://en.wikipedia.org/wiki/Carath%C3%A9odory's_theorem_(convex_hull)",
+      "area": "geometry",
+      "year": 1911,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hesses-principle-of-transfer",
+      "name": "Hesse's principle of transfer",
+      "short": "Hesse's transfer principle",
+      "statement": "If the points of the projective line P¹ are depicted by a rational normal curve in Pⁿ, then the group of projective transformations of Pⁿ that preserve the curve is isomorphic to the group of projective transformations of P¹.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "projective-geometry"
+      ],
+      "by": "Otto Hesse, 1866, in a more restricted form; this generalization was suggested by Wilhelm Franz Meyer",
+      "note": "It influenced Felix Klein in the development of the Erlangen program.",
+      "url": "https://en.wikipedia.org/wiki/Hesse's_principle_of_transfer",
+      "area": "geometry",
+      "year": 1866,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "two-ears-theorem",
+      "name": "Two ears theorem",
+      "short": "Two ears theorem",
+      "statement": "Every simple polygon that is not a triangle has at least two ears. An ear is a triangle formed by three consecutive vertices u, v, w of the polygon such that the edge uw lies entirely in the interior of the polygon.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Max Dehn, circa 1899; often attributed to Gary H. Meisters, 1975",
+      "note": "It is equivalent to the existence of polygon triangulations.",
+      "url": "https://en.wikipedia.org/wiki/Two_ears_theorem",
+      "area": "geometry",
+      "year": 1899,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hinge-theorem",
+      "name": "Hinge theorem",
+      "short": "Hinge theorem",
+      "statement": "In Euclidean geometry, suppose two sides of one triangle are congruent to two sides of another triangle, and the angle between those two sides is larger in the first triangle than in the second. Then the third side of the first triangle is longer than the third side of the second.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-cosines"
+      ],
+      "by": "Euclid, as Proposition 24 in Book I of the Elements",
+      "note": "It is an immediate corollary of the law of cosines. Its converse is also true, and some textbooks call the two the SAS and SSS Inequality Theorems.",
+      "url": "https://en.wikipedia.org/wiki/Hinge_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hilberts-third-problem",
+      "name": "Hilbert's third problem",
+      "short": "Hilbert's third problem",
+      "statement": "Two polyhedra of equal volume cannot always be cut into finitely many polyhedral pieces and reassembled into each other. For example, a cube and a regular tetrahedron of the same volume cannot be, because the Dehn invariant, which is unchanged by such cutting, is zero for every cube and non-zero for every regular tetrahedron.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Posed by Władysław Kretkowski for a contest, 1882, and independently by David Hilbert, 1900, who conjectured that it is not always possible; proved by his student Max Dehn, and independently in an unpublished solution by Ludwik Antoni Birkenmajer",
+      "note": "It was the first of Hilbert's 23 problems of 1900 to be solved. In 1965 Jean-Pierre Sydler showed that two polyhedra are scissors-congruent if and only if they have the same volume and the same Dehn invariant.",
+      "url": "https://en.wikipedia.org/wiki/Hilbert's_third_problem",
+      "area": "geometry",
+      "year": 1882,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-ulam-problem",
+      "name": "Erdős–Ulam problem",
+      "short": "Erdős–Ulam problem",
+      "statement": "The problem asks whether the Euclidean plane contains a dense set of points whose pairwise distances are all rational numbers.",
+      "kind": "hypothesis",
+      "base": "open",
+      "needs": [
+        "bombieri-lang-conjecture",
+        "abc",
+        {
+          "id": "szpiro",
+          "url": "https://en.wikipedia.org/wiki/Szpiro's_conjecture"
+        }
+      ],
+      "by": "Stanislaw Ulam asked it in 1946; named after Paul Erdős and Stanislaw Ulam",
+      "note": "The only irreducible algebraic curves containing infinitely many points at rational distances are lines and circles. If the Bombieri–Lang conjecture is true, or if the abc conjecture is true, no such dense set exists.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Ulam_problem",
+      "area": "geometry",
+      "year": 1946,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "thaless-theorem",
+      "name": "Thales's theorem",
+      "short": "Thales's theorem",
+      "statement": "If A, B and C are distinct points on a circle and the line AC is a diameter, then the angle ∠ABC is a right angle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "sum-of-angles-of-a-triangle",
+        "pythagorean-trigonometric-identity"
+      ],
+      "by": "Generally attributed to Thales of Miletus, sometimes to Pythagoras; proved as part of proposition 31 in Book III of Euclid's Elements",
+      "note": "It is a special case of the inscribed angle theorem. Its converse says that the hypotenuse of a right triangle is a diameter of its circumcircle.",
+      "url": "https://en.wikipedia.org/wiki/Thales's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "monges-theorem",
+      "name": "Monge's theorem",
+      "short": "Monge's theorem",
+      "statement": "For any three circles in a plane, none of which lies completely inside one of the others, the three points where the two external tangent lines of each pair of circles meet lie on one straight line. When two of the circles have equal size, their external tangents are parallel and their meeting point is a point at infinity in the extended plane.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "desarguess-theorem",
+        "menelauss-theorem"
+      ],
+      "by": "Named after Gaspard Monge",
+      "note": "It can be proved by viewing the circles as spheres or cones in three dimensions, or with Desargues' theorem or Menelaus' theorem.",
+      "url": "https://en.wikipedia.org/wiki/Monge's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "spherical-law-of-cosines",
+      "name": "Spherical law of cosines",
+      "short": "Spherical law of cosines",
+      "statement": "Take a triangle on a sphere whose sides are arcs of great circles, with angular lengths a (from u to v), b (from u to w) and c (from v to w), and let C be the angle at the corner opposite c. Then cos c = cos a cos b + sin a sin b cos C.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "binet-cauchy-identity"
+      ],
+      "by": "Regiomontanus, in De triangulis omnimodis (unfinished at his death in 1476, published posthumously 1533)",
+      "note": "When C = π/2 it gives the spherical analogue of the Pythagorean theorem, cos c = cos a cos b. For small triangles it is approximately the ordinary planar law of cosines.",
+      "url": "https://en.wikipedia.org/wiki/Spherical_law_of_cosines",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kirchbergers-theorem",
+      "name": "Kirchberger's theorem",
+      "short": "Kirchberger's theorem",
+      "statement": "Take finitely many red and blue points in d-dimensional Euclidean space. If the red and blue points in every subset of d+2 of the points are linearly separable, then all the red points and all the blue points are linearly separable. In the plane this means: if every four points can have their red and blue points separated by a line, then a single line separates all the red points from all the blue points.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "hellys-theorem",
+        "caratheodorys-theorem"
+      ],
+      "by": "Paul Kirchberger, 1902 dissertation, published 1903",
+      "note": "Kirchberger proved it as an auxiliary theorem in his analysis of Chebyshev approximation.",
+      "url": "https://en.wikipedia.org/wiki/Kirchberger's_theorem",
+      "area": "geometry",
+      "year": 1902,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "soddys-hexlet",
+      "name": "Soddy's hexlet",
+      "short": "Soddy's hexlet",
+      "statement": "Take any three spheres A, B and C that touch each other in pairs at three distinct points. Then there is a closed chain of six spheres in which each sphere touches A, B and C and also its two neighbours in the chain, so that the sixth sphere touches the first. In fact there are infinitely many such chains.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Recorded on a sangaku tablet by Irisawa Shintarō Hiroatsu, 1822; rediscovered independently and proved by Frederick Soddy, 1937",
+      "note": "It is the spherical analogue of a Steiner chain of six circles. The centres of the six spheres lie in one plane on a conic section, and each family of hexlets fills out a Dupin cyclide.",
+      "url": "https://en.wikipedia.org/wiki/Soddy's_hexlet",
+      "area": "geometry",
+      "year": 1822,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "barrows-inequality",
+      "name": "Barrow's inequality",
+      "short": "Barrow's inequality",
+      "statement": "Let P be a point inside a triangle ABC, and let U, V, W be the points where the angle bisectors of the angles BPC, CPA, APB meet the sides BC, CA, AB. Then PA + PB + PC ≥ 2(PU + PV + PW), with equality only for an equilateral triangle when P is its center.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "David Francis Barrow, proof published 1937",
+      "note": "It strengthens the Erdős–Mordell inequality, which has the same form with PU, PV, PW replaced by the distances of P from the sides of the triangle.",
+      "url": "https://en.wikipedia.org/wiki/Barrow's_inequality",
+      "area": "geometry",
+      "year": 1937,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-anning-theorem",
+      "name": "Erdős–Anning theorem",
+      "short": "Erdős–Anning theorem",
+      "statement": "If an infinite set of points in the plane has all mutual distances equal to integers, then all the points lie on one straight line. The same holds in higher dimensional Euclidean spaces.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "triangle-inequality",
+        "bezouts-theorem"
+      ],
+      "by": "Norman H. Anning and Paul Erdős, 1945; Erdős later gave a simpler proof",
+      "note": "The theorem cannot be strengthened to a finite bound: there are arbitrarily large finite sets of points, not on a line, with integer distances. It inspired the Erdős–Ulam problem on dense point sets with rational distances.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Anning_theorem",
+      "area": "geometry",
+      "year": 1945,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "cauchys-theorem-geometry",
+      "name": "Cauchy's theorem (geometry)",
+      "short": "Cauchy's polytope theorem",
+      "statement": "If two 3-dimensional convex polytopes are combinatorially equivalent (their face lattices are isomorphic) and each pair of corresponding faces is congruent, then the two polytopes are congruent.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Augustin Cauchy, 1813, based on earlier work by Lagrange; an error in his proof of the main lemma was corrected by Ernst Steinitz, Isaac Jacob Schoenberg and Aleksandr Danilovich Aleksandrov",
+      "note": "A consequence is that a model of a convex polyhedron made of rigid plates joined by flexible hinges along the edges is necessarily rigid. Convexity is needed: pushing in a vertex of a regular icosahedron gives a nonconvex polyhedron that is combinatorially equivalent to it.",
+      "url": "https://en.wikipedia.org/wiki/Cauchy's_theorem_(geometry)",
+      "area": "geometry",
+      "year": 1813,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "monskys-theorem",
+      "name": "Monsky's theorem",
+      "short": "Monsky's theorem",
+      "statement": "A square cannot be dissected into an odd number of triangles of equal area.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "sperners-lemma"
+      ],
+      "by": "Posed by Fred Richman, 1967; solved for rational coordinates by John Thomas; extended to all coordinates by Paul Monsky, 1970",
+      "note": "Monsky's proof combines combinatorial and algebraic techniques, including a colouring by 2-adic valuation and Sperner's lemma. The same holds for parallelograms and, more generally, centrally symmetric polygons.",
+      "url": "https://en.wikipedia.org/wiki/Monsky's_theorem",
+      "area": "geometry",
+      "year": 1967,
+      "settled": 1970,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "midpoint-theorem",
+      "name": "Midpoint theorem",
+      "short": "Midpoint theorem",
+      "statement": "If the midpoints of two sides of a triangle are joined, the resulting segment is parallel to the third side and half as long.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "The converse also holds: a line through the midpoint of one side, parallel to another side, bisects the third side. The theorem generalizes to the intercept theorem, where both sides are divided in the same ratio instead of at their midpoints.",
+      "url": "https://en.wikipedia.org/wiki/Midpoint_theorem_(triangle)",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "honeycomb-theorem",
+      "name": "Honeycomb theorem",
+      "short": "Honeycomb theorem",
+      "statement": "A regular hexagonal grid has the least total perimeter of any subdivision of the plane into regions of equal area. Precisely, if a system of smooth curves divides the plane into bounded regions that all have unit area, then, averaged over large disks, the length of the curves per unit area is at least ⁴√12, which is the value for the hexagonal tiling.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "First recorded by Marcus Terentius Varro, 36 BC; proved by Thomas C. Hales, 1999",
+      "note": "It was formerly called the honeycomb conjecture. In 1943 László Fejes Tóth proved the special case where each cell is a convex polygon.",
+      "url": "https://en.wikipedia.org/wiki/Honeycomb_theorem",
+      "area": "geometry",
+      "year": -36,
+      "settled": 1999,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pompeius-theorem",
+      "name": "Pompeiu's theorem",
+      "short": "Pompeiu's theorem",
+      "statement": "Given an equilateral triangle ABC and any point P in the plane of the triangle, the lengths PA, PB and PC form the sides of a triangle, which may be degenerate.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Dimitrie Pompeiu, published 1936; August Ferdinand Möbius had already published in 1852 a more general theorem from which he derived this one as a special case",
+      "note": "If P lies on the circumcircle, the triangle is degenerate and the largest length equals the sum of the other two; this case is also known as Van Schooten's theorem. The theorem is also known as the Möbius–Pompeiu theorem.",
+      "url": "https://en.wikipedia.org/wiki/Pompeiu's_theorem",
+      "area": "geometry",
+      "year": 1852,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "law-of-cotangents",
+      "name": "Law of cotangents",
+      "short": "Law of cotangents",
+      "statement": "In a triangle with side lengths a, b, c, opposite angles α, β, γ, semiperimeter s = (a + b + c)/2 and inradius r, cot(α/2)/(s − a) = cot(β/2)/(s − b) = cot(γ/2)/(s − c) = 1/r. Moreover, r = √((s − a)(s − b)(s − c)/s).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "mollweides-formula",
+          "url": "https://en.wikipedia.org/wiki/Mollweide's_formula"
+        }
+      ],
+      "note": "It relates the inradius of a triangle to its sides and angles, as the law of sines does for the circumscribed circle.",
+      "url": "https://en.wikipedia.org/wiki/Law_of_cotangents",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "intercept-theorem",
+      "name": "Intercept theorem",
+      "short": "Intercept theorem",
+      "statement": "Two rays start at a point S and are cut by two parallel lines. One parallel meets the rays at A and C, the other at B and D, with B further from S than A and D further from S than C. Then |SA|/|AB| = |SC|/|CD| and |SA|/|SB| = |SC|/|SD| = |AC|/|BD|. Conversely, if two arbitrary lines cut the two rays at such points and |SA|/|AB| = |SC|/|CD|, then the two lines are parallel.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Traditionally attributed to Thales of Miletus; known to the ancient Babylonians and Egyptians; first known proof appears in Euclid's Elements",
+      "note": "It is equivalent to the theorem about ratios in similar triangles. The converse of the second statement is not true.",
+      "url": "https://en.wikipedia.org/wiki/Intercept_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "butterfly-theorem",
+      "name": "Butterfly theorem",
+      "short": "Butterfly theorem",
+      "statement": "Let M be the midpoint of a chord PQ of a circle, and draw two other chords AB and CD through M. If AD and BC meet the chord PQ at X and Y respectively, then M is the midpoint of XY.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "intersecting-chords-theorem"
+      ],
+      "by": "Posed as a problem by William Wallace in The Gentleman's Mathematical Companion, 1803; three solutions were published in 1804",
+      "url": "https://en.wikipedia.org/wiki/Butterfly_theorem",
+      "area": "geometry",
+      "year": 1803,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "half-side-formula",
+      "name": "Half-side formula",
+      "short": "Half-side formula",
+      "statement": "For a triangle on a unit sphere with angles A, B, C and opposite sides of angular length a, b, c, let S = ½(A+B+C). Then tan(a/2) = √( −cos(S)·cos(S−A) / (cos(S−B)·cos(S−C)) ). Two more formulas for b and c follow by permuting the labels A, B, C.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "Its polar dual is the half-angle formula, which gives tan(A/2) in terms of the sides and the semiperimeter s.",
+      "url": "https://en.wikipedia.org/wiki/Half-side_formula",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "ptolemys-theorem",
+      "name": "Ptolemy's theorem",
+      "short": "Ptolemy's theorem",
+      "statement": "If a quadrilateral ABCD with vertices in that order lies on a circle, then AC · BD = AB · CD + BC · AD. Conversely, if the product of the diagonals of a quadrilateral equals the sum of the products of its two pairs of opposite sides, then the quadrilateral can be inscribed in a circle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after the Greek astronomer and mathematician Ptolemy (Claudius Ptolemaeus)",
+      "note": "Ptolemy used it to create his table of chords, a trigonometric table that he applied to astronomy.",
+      "url": "https://en.wikipedia.org/wiki/Ptolemy's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "law-of-tangents",
+      "name": "Law of tangents",
+      "short": "Law of tangents",
+      "statement": "In a plane triangle with side lengths a, b, c and opposite angles α, β, γ, (a − b)/(a + b) = tan(½(α − β)) / tan(½(α + β)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "mollweides-formula",
+          "url": "https://en.wikipedia.org/wiki/Mollweide's_formula"
+        }
+      ],
+      "by": "Abu al-Wafa, 10th century; also described for plane triangles by Ibn Muʿādh al-Jayyānī in the 11th century",
+      "note": "It is equivalent to the law of sines and can be used when two sides and the included angle, or two angles and a side, are known. A spherical version was described by Nasir al-Din al-Tusi in the 13th century.",
+      "url": "https://en.wikipedia.org/wiki/Law_of_tangents",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "aristarchuss-inequality",
+      "name": "Aristarchus's inequality",
+      "short": "Aristarchus's inequality",
+      "statement": "If α and β are acute angles (between 0 and a right angle) with β < α, then sin α / sin β < α / β < tan α / tan β.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Aristarchus of Samos",
+      "note": "Ptolemy used the first of these inequalities while constructing his table of chords.",
+      "url": "https://en.wikipedia.org/wiki/Aristarchus's_inequality",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "blaschke-lebesgue-theorem",
+      "name": "Blaschke–Lebesgue theorem",
+      "short": "Blaschke–Lebesgue theorem",
+      "statement": "Among all curves of constant width w in the Euclidean plane, the Reuleaux triangle encloses the least area, namely ½(π − √3)w² ≈ 0.70477w². It is the only such curve with this area: every other convex set of width w has a larger area.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Henri Lebesgue, 1914, and Wilhelm Blaschke, 1915, independently",
+      "note": "A Reuleaux triangle is a curved triangle formed from arcs of three equal-radius circles, each centered at a crossing point of the other two circles. The same theorem also holds in the hyperbolic plane.",
+      "url": "https://en.wikipedia.org/wiki/Blaschke%E2%80%93Lebesgue_theorem",
+      "area": "geometry",
+      "year": 1914,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bonnesens-inequality",
+      "name": "Bonnesen's inequality",
+      "short": "Bonnesen's inequality",
+      "statement": "Take a planar simple closed curve of length L bounding a domain of area A, and let r and R be the radii of its incircle and circumcircle. Then π²(R − r)² ≤ L² − 4πA.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Bonnesen",
+      "note": "It strengthens the classical isoperimetric inequality. The term L² − 4πA is called the isoperimetric defect.",
+      "url": "https://en.wikipedia.org/wiki/Bonnesen's_inequality",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "braikenridge-maclaurin-theorem",
+      "name": "Braikenridge–Maclaurin theorem",
+      "short": "Braikenridge–Maclaurin",
+      "statement": "If the three intersection points of the three pairs of lines through opposite sides of a hexagon lie on a line L, then the six vertices of the hexagon lie on a conic C. The conic may be degenerate.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "projective-geometry"
+      ],
+      "by": "Named for the 18th-century British mathematicians William Braikenridge and Colin Maclaurin",
+      "note": "It is the converse of Pascal's theorem. It gives a construction of the conic through five given points by varying the sixth point.",
+      "url": "https://en.wikipedia.org/wiki/Braikenridge%E2%80%93Maclaurin_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "british-flag-theorem",
+      "name": "British flag theorem",
+      "short": "British flag theorem",
+      "statement": "If ABCD is a rectangle with corners labelled in order and P is any point inside it, then AP² + CP² = BP² + DP². In words, the sums of the squared distances from P to the two pairs of opposite corners are equal. The same holds for points outside the rectangle, and for any point of a Euclidean space containing the rectangle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "pythagorean-theorem"
+      ],
+      "note": "Placing P on a vertex of the rectangle gives the Pythagorean theorem. The name comes from the figure of the proof, which resembles a Union Flag.",
+      "url": "https://en.wikipedia.org/wiki/British_flag_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "busemanns-theorem",
+      "name": "Busemann's theorem",
+      "short": "Busemann's theorem",
+      "statement": "Let K be a convex body in n-dimensional Euclidean space ℝⁿ containing the origin in its interior, and let S be an (n − 2)-dimensional linear subspace. For each unit vector θ in the orthogonal complement S^⊥, let S_θ be the hyperplane containing θ and S, and let r(θ) be the (n − 1)-dimensional volume of K ∩ S_θ. Then the curve of points θr(θ) in S^⊥ is the boundary of a convex body in S^⊥.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Herbert Busemann, 1949",
+      "note": "It was motivated by Busemann's theory of area in Finsler spaces.",
+      "url": "https://en.wikipedia.org/wiki/Busemann's_theorem",
+      "area": "geometry",
+      "year": 1949,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "carpenters-rule-problem",
+      "name": "Carpenter's rule problem",
+      "short": "Carpenter's rule problem",
+      "statement": "Every simple polygon in the plane can be moved continuously, keeping all edge lengths fixed and never letting the polygon cross itself, into a position where all its vertices are in convex position. Likewise, every non-self-crossing polygonal chain in the plane can be straightened by such a motion.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Connelly, Demaine and Rote, 2003",
+      "note": "Ileana Streinu later gave a simplified combinatorial proof. Pardon (2009) showed that every rectifiable Jordan curve can be made convex without increasing its length and without decreasing the distance between any two points.",
+      "url": "https://en.wikipedia.org/wiki/Carpenter's_rule_problem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "crossbar-theorem",
+      "name": "Crossbar theorem",
+      "short": "Crossbar theorem",
+      "statement": "If ray AD is between ray AC and ray AB, then ray AD intersects the line segment BC.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "It is often used to justify that a line through a vertex of a triangle lying inside the triangle meets the opposite side. Euclid used this property without explicit justification.",
+      "url": "https://en.wikipedia.org/wiki/Crossbar_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "dodecahedral-conjecture",
+      "name": "Dodecahedral conjecture",
+      "short": "Dodecahedral conjecture",
+      "statement": "In any packing of unit spheres, every cell of the Voronoi decomposition has volume at least as large as the volume of a regular dodecahedron circumscribed to a unit sphere.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Conjectured by László Fejes Tóth, 1943; proved by Thomas Callister Hales and Sean McLaughlin, 1998",
+      "note": "The proof follows the same strategy as Hales's proof of the Kepler conjecture and relies on extensive computations.",
+      "url": "https://en.wikipedia.org/wiki/Dodecahedral_conjecture",
+      "area": "geometry",
+      "year": 1943,
+      "settled": 1998,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bretschneiders-formula",
+      "name": "Bretschneider's formula",
+      "short": "Bretschneider's formula",
+      "statement": "For any quadrilateral, convex or concave, cyclic or not, with sides a, b, c, d, semiperimeter s = (a + b + c + d)/2 and two opposite angles α and γ, the area is K = √((s−a)(s−b)(s−c)(s−d) − abcd·cos²((α+γ)/2)).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-cosines"
+      ],
+      "by": "Carl Anton Bretschneider, 1842; also derived in the same year by Karl Georg Christian von Staudt",
+      "note": "It generalizes Brahmagupta's formula for the area of a cyclic quadrilateral, which in turn generalizes Heron's formula for the area of a triangle.",
+      "url": "https://en.wikipedia.org/wiki/Bretschneider's_formula",
+      "area": "geometry",
+      "year": 1842,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "equal-incircles-theorem",
+      "name": "Equal incircles theorem",
+      "short": "Equal incircles theorem",
+      "statement": "Draw rays from a given point to a given line so that the incircles of the triangles formed by adjacent rays and the line are all equal. Then, starting from any ray, the incircles of the triangles formed by the line and every other ray, every third ray, and so on are also all equal.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "It comes from a Japanese Sangaku. It follows directly from a lemma that describes the spacing of the rays with the hyperbolic sine.",
+      "url": "https://en.wikipedia.org/wiki/Equal_incircles_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "equichordal-point-problem",
+      "name": "Equichordal point problem",
+      "short": "Equichordal point problem",
+      "statement": "No Jordan curve in the plane has two equichordal points with the curve star-shaped with respect to each of them; an equichordal point is a point such that all chords of the curve through it have the same length. In particular, no closed convex planar curve has two equichordal points.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Posed by Fujiwara, 1916, and by Wilhelm Blaschke, Hermann Rothe and Roland Weitzenböck, 1917; answered in the negative by Marek R. Rychlik, 1997",
+      "note": "The original question asked whether a closed planar convex body can have two equichordal points, and Rychlik answered a more general version. His proof does not use a computer.",
+      "url": "https://en.wikipedia.org/wiki/Equichordal_point_problem",
+      "area": "geometry",
+      "year": 1916,
+      "settled": 1997,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-nagy-theorem",
+      "name": "Erdős–Nagy theorem",
+      "short": "Erdős–Nagy theorem",
+      "statement": "Take a non-convex simple polygon and repeatedly flip a pocket, that is, reflect the polygon edges between two vertices of its convex hull across the hull edge joining them. Every such sequence of flips produces a convex polygon after finitely many steps.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Conjectured by Paul Erdős, 1935; reformulated and published with a proof by Béla Szőkefalvi-Nagy, 1939, a proof with an incorrect case; a corrected proof was given by Demaine, Gassend, O'Rourke and Toussaint",
+      "note": "Some quadrilaterals need arbitrarily many flips, so the number of steps cannot be bounded in terms of the number of sides.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Nagy_theorem",
+      "area": "geometry",
+      "year": 1935,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "exterior-angle-theorem",
+      "name": "Exterior angle theorem",
+      "short": "Exterior angle theorem",
+      "statement": "In absolute geometry, and so in both Euclidean and hyperbolic geometry, an exterior angle of a triangle is greater than each of the two interior angles at the other two vertices. It does not hold in spherical or elliptic geometry.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Euclid, Elements, Proposition 1.16",
+      "note": "Its proof does not depend on the parallel postulate, although Euclid's own proof has a gap. A different result, that the exterior angle equals the sum of the remote interior angles, is sometimes also called the exterior angle theorem and does depend on the parallel postulate.",
+      "url": "https://en.wikipedia.org/wiki/Exterior_angle_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "five-circles-theorem",
+      "name": "Five circles theorem",
+      "short": "Five circles theorem",
+      "statement": "Take five circles whose centres lie on a common sixth circle and which intersect each other in a chain on that same circle. Then the lines joining their second intersection points form a pentagram whose points lie on the five circles.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "url": "https://en.wikipedia.org/wiki/Five_circles_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "five-points-determine-a-conic",
+      "name": "Five points determine a conic",
+      "short": "Five points fix a conic",
+      "statement": "Given any five points in the plane with no three on a common line, there is exactly one conic passing through them, and it is non-degenerate. This holds both in the Euclidean plane and in any pappian projective plane.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "projective-geometry",
+        "euclidean-geometry"
+      ],
+      "note": "Any five points lie on some conic, but if three of them are collinear the conic is degenerate and may not be unique.",
+      "url": "https://en.wikipedia.org/wiki/Five_points_determine_a_conic",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fold-and-cut-theorem",
+      "name": "Fold-and-cut theorem",
+      "short": "Fold-and-cut theorem",
+      "statement": "Any shape with straight sides can be cut from a single idealized sheet of paper by folding it flat and making one straight complete cut. Such shapes include concave polygons, shapes with holes, and collections of such shapes that need not be connected.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Erik Demaine, Martin Demaine and Anna Lubiw, 1999",
+      "note": "The first proof used the straight skeleton method. Two general methods solve instances of the problem, one based on straight skeletons and one on circle packing.",
+      "url": "https://en.wikipedia.org/wiki/Fold-and-cut_theorem",
+      "area": "geometry",
+      "year": 1999,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "van-aubels-theorem",
+      "name": "Van Aubel's theorem",
+      "short": "Van Aubel's theorem",
+      "statement": "Given a convex quadrilateral, construct a square outward on each side. Then the two line segments joining the centers of opposite squares have equal length and are at right angles to one another.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Henri Van Aubel, 1878",
+      "note": "The theorem also holds for re-entrant quadrilaterals and when the squares are constructed inward.",
+      "url": "https://en.wikipedia.org/wiki/Van_Aubel's_theorem",
+      "area": "geometry",
+      "year": 1878,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "constant-chord-theorem",
+      "name": "Constant chord theorem",
+      "short": "Constant chord theorem",
+      "statement": "Two circles k₁ and k₂ intersect in the points P and Q. Take any point Z₁ on k₁ other than P and Q, and let the lines Z₁P and Z₁Q meet the circle k₂ again in P₁ and Q₁. Then the length of the chord P₁Q₁ of k₂ is the same for every choice of Z₁ on k₁.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Nathan Altshiller Court, 1925; he published the three-dimensional version in 1933",
+      "note": "The theorem stays valid when Z₁ coincides with P or Q, if the undefined line is replaced by the tangent to k₁ at Z₁. A similar theorem holds for two intersecting spheres.",
+      "url": "https://en.wikipedia.org/wiki/Constant_chord_theorem",
+      "area": "geometry",
+      "year": 1925,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "lhuiliers-theorem",
+      "name": "L'Huilier's theorem",
+      "short": "L'Huilier's theorem",
+      "statement": "In every triangle, the reciprocals of the radii r_A, r_B, r_C of the three excircles add up to the reciprocal of the radius r of the incircle: 1/r_A + 1/r_B + 1/r_C = 1/r.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Simon Antoine Jean L'Huilier, 1809",
+      "note": "It extends to n-dimensional Euclidean space: for an n-simplex the reciprocals of the n+1 exsphere radii add up to (n−1)/r₀, where r₀ is the radius of the inscribed sphere.",
+      "url": "https://en.wikipedia.org/wiki/L'Huilier's_theorem",
+      "area": "geometry",
+      "year": 1809,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "theorem-of-the-gnomon",
+      "name": "Theorem of the gnomon",
+      "short": "Theorem of the gnomon",
+      "statement": "In a parallelogram ABCD with a point P on the diagonal AC, draw the line through P parallel to AD, meeting CD in G and AB in H, and the line through P parallel to AB, meeting AD in I and BC in F. Then the parallelograms HBFP and IPGD have equal areas.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Euclid, Elements, around 300 BC (Book I, proposition 43)",
+      "note": "It plays an important role in the derivation of other theorems in the Elements. It can be used to construct, with straightedge and compass, a parallelogram or rectangle of equal area to a given one.",
+      "url": "https://en.wikipedia.org/wiki/Theorem_of_the_gnomon",
+      "area": "geometry",
+      "year": -300,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "isoperimetric-inequality",
+      "name": "Isoperimetric inequality",
+      "short": "Isoperimetric inequality",
+      "statement": "For a closed plane curve of length L enclosing a region of area A, 4πA ≤ L². Equality holds if and only if the curve is a circle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "greens-theorem",
+        "cauchy-schwarz-inequality",
+        "brunn-minkowski-theorem"
+      ],
+      "by": "The circle as solution was known in Ancient Greece; Jakob Steiner made the first progress toward a proof in 1838, and the first mathematically rigorous proof came in the 19th century",
+      "note": "Equivalently, among all closed plane curves of a given length, the circle encloses the largest area. It has generalizations to curves on surfaces, to higher dimensions and to graphs.",
+      "url": "https://en.wikipedia.org/wiki/Isoperimetric_inequality",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "carnots-theorem-on-conics",
+      "name": "Carnot's theorem on conics",
+      "short": "Carnot's theorem (conics)",
+      "statement": "In a triangle ABC, take points C_A and C_B on side AB, A_B and A_C on side BC, and B_C and B_A on side AC. These six points lie on a common conic section if and only if (|AC_A|/|BC_A|)·(|AC_B|/|BC_B|)·(|BA_B|/|CA_B|)·(|BA_C|/|CA_C|)·(|CB_C|/|AB_C|)·(|CB_A|/|AB_A|) = 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Lazare Carnot",
+      "url": "https://en.wikipedia.org/wiki/Carnot's_theorem_(conics)",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "carnots-theorem-perpendiculars",
+      "name": "Carnot's theorem (perpendiculars)",
+      "short": "Carnot's perpendiculars",
+      "statement": "For a triangle ABC, take one perpendicular to each side (extended if needed), with feet P_a, P_b, P_c on the sides a, b, c. The three perpendiculars meet in a common point if and only if |AP_c|² + |BP_a|² + |CP_b|² = |BP_c|² + |CP_a|² + |AP_b|².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Lazare Carnot",
+      "note": "The theorem can be thought of as a generalization of the Pythagorean theorem. It also shows that the three perpendicular bisectors of a triangle meet in one point.",
+      "url": "https://en.wikipedia.org/wiki/Carnot's_theorem_(perpendiculars)",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "napoleons-theorem",
+      "name": "Napoleon's theorem",
+      "short": "Napoleon's theorem",
+      "statement": "If equilateral triangles are constructed on the sides of any triangle, either all outward or all inward, then the lines connecting the centres of those equilateral triangles form an equilateral triangle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Often attributed to Napoleon Bonaparte; according to Howard Eves it was discovered by Lorenzo Mascheroni; it appears in a University of Dublin gold medal examination of October 1820",
+      "note": "The difference in the areas of the outer and inner Napoleon triangles equals the area of the original triangle.",
+      "url": "https://en.wikipedia.org/wiki/Napoleon's_theorem",
+      "area": "geometry",
+      "year": 1820,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "picks-theorem",
+      "name": "Pick's theorem",
+      "short": "Pick's theorem",
+      "statement": "For a simple polygon whose vertices all have integer coordinates, let i be the number of integer points inside it and b the number of integer points on its boundary. Then the area of the polygon is A = i + b/2 − 1.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Georg Alexander Pick, 1899",
+      "note": "It was popularized in English by Hugo Steinhaus in 1950. No analogue in three dimensions expresses volume using only the numbers of interior and boundary points.",
+      "url": "https://en.wikipedia.org/wiki/Pick's_theorem",
+      "area": "geometry",
+      "year": 1899,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pons-asinorum",
+      "name": "Pons asinorum",
+      "short": "Isosceles triangle theorem",
+      "statement": "In an isosceles triangle, the angles opposite the two equal sides are equal.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Appears as Proposition 5 of Book 1 of Euclid's Elements",
+      "note": "Its converse also holds: if two angles of a triangle are equal, the sides opposite them are equal. The theorem also holds in inner product spaces over the real or complex numbers.",
+      "url": "https://en.wikipedia.org/wiki/Pons_asinorum",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "hyperplane-separation-theorem",
+      "name": "Hyperplane separation theorem",
+      "short": "Hyperplane separation",
+      "statement": "Let A and B be disjoint, nonempty, convex subsets of n-dimensional Euclidean space. If both are closed and at least one of them is compact, then there are two parallel hyperplanes between them separated by a gap; if both are open, then there is a hyperplane between them, though not necessarily with a gap.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Hermann Minkowski",
+      "note": "The Hahn–Banach separation theorem generalizes the result to topological vector spaces. In infinite-dimensional spaces there are closed, convex, disjoint sets that no closed hyperplane separates.",
+      "url": "https://en.wikipedia.org/wiki/Hyperplane_separation_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "minkowskis-first-inequality-for-convex-bodies",
+      "name": "Minkowski's first inequality for convex bodies",
+      "short": "Minkowski first inequality",
+      "statement": "Let K and L be n-dimensional convex bodies in ℝⁿ, V the n-dimensional Lebesgue measure, and V₁(K, L) defined by nV₁(K, L) = the limit as ε decreases to 0 of (V(K + εL) − V(K))/ε, where + is the Minkowski sum. Then V₁(K, L) ≥ V(K)^((n−1)/n) · V(L)^(1/n), with equality if and only if K and L are homothetic, that is, equal up to translation and dilation.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Hermann Minkowski",
+      "note": "It is closely related to the Brunn–Minkowski inequality and the isoperimetric inequality.",
+      "url": "https://en.wikipedia.org/wiki/Minkowski's_first_inequality_for_convex_bodies",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "minkowskis-second-theorem",
+      "name": "Minkowski's second theorem",
+      "short": "Minkowski's second theorem",
+      "statement": "Let K be a closed convex centrally symmetric body of positive finite volume in ℝⁿ and Γ a lattice in ℝⁿ, and let the k-th successive minimum λₖ be the infimum of the numbers λ such that λK contains k linearly independent vectors of Γ. Then (2ⁿ/n!)·vol(ℝⁿ/Γ) ≤ λ₁λ₂⋯λₙ·vol(K) ≤ 2ⁿ·vol(ℝⁿ/Γ), where vol(ℝⁿ/Γ) is the volume of a fundamental cell of the lattice.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "It is a strengthening of Minkowski's theorem.",
+      "url": "https://en.wikipedia.org/wiki/Minkowski's_second_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "minkowski-hlawka-theorem",
+      "name": "Minkowski–Hlawka theorem",
+      "short": "Minkowski–Hlawka theorem",
+      "statement": "For every dimension n > 1 there is a lattice in Euclidean space of dimension n such that the best packing of hyperspheres with centres at the lattice points has density Δ ≥ ζ(n)/2^(n−1), where ζ is the Riemann zeta function.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Stated without proof by Minkowski, 1911; proved by Hlawka, 1943",
+      "note": "The proof is indirect and gives no explicit lattice. Siegel (1945) proved a generalization from which the theorem follows easily.",
+      "url": "https://en.wikipedia.org/wiki/Minkowski%E2%80%93Hlawka_theorem",
+      "area": "geometry",
+      "year": 1911,
+      "settled": 1943,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "napkin-ring-problem",
+      "name": "Napkin ring problem",
+      "short": "Napkin ring problem",
+      "statement": "Suppose a right circular cylinder has its axis through the centre of a sphere of radius R, and let h be the height (measured parallel to the axis) of the part of the cylinder inside the sphere. Then the band, which is the part of the sphere outside the cylinder, has volume πh³/6, which depends on h but not on R.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "pythagorean-theorem"
+      ],
+      "by": "Early study by the 17th-century Japanese mathematician Seki Kōwa",
+      "note": "As the sphere shrinks, the band gets thicker but shorter around, and the two effects cancel exactly. In the extreme case the cylinder vanishes and the band is the whole sphere of diameter h.",
+      "url": "https://en.wikipedia.org/wiki/Napkin_ring_problem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "newtons-theorem-about-ovals",
+      "name": "Newton's theorem about ovals",
+      "short": "Newton's theorem on ovals",
+      "statement": "There is no convex, infinitely differentiable closed curve such that the area cut off by the line ax + by = c is an algebraic function of a, b and c.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Stated by Isaac Newton as lemma 28 of section VI of book 1 of the Principia; Arnold (1989) pointed out that it is correct for infinitely differentiable convex curves",
+      "note": "Newton used it to show that the position of a planet moving in an orbit is not an algebraic function of time. For weaker meanings of oval, such as any continuous closed convex curve, the claim is false.",
+      "url": "https://en.wikipedia.org/wiki/Newton's_theorem_about_ovals",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "petr-douglas-neumann-theorem",
+      "name": "Petr–Douglas–Neumann theorem",
+      "short": "Petr–Douglas–Neumann",
+      "statement": "Take an arbitrary n-gon A₀. Erect isosceles triangles with apex angle 2kπ/n, for an integer k with 1 ≤ k ≤ n − 2, on its sides, and let their apices be the vertices of a new n-gon A₁. Repeat this n − 2 times in total, using a different value of k at each step, until every k from 1 to n − 2 has been used, in any order. Then the centroids of all the polygons coincide with the centroid of A₀, and the last polygon, A_{n−2}, is a regular n-gon.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Karel Petr, 1905; rediscovered independently by Jesse Douglas, 1940, and B. H. Neumann, 1941",
+      "note": "It generalizes Napoleon's theorem (triangles) and van Aubel's theorem (quadrilaterals).",
+      "url": "https://en.wikipedia.org/wiki/Petr%E2%80%93Douglas%E2%80%93Neumann_theorem",
+      "area": "geometry",
+      "year": 1905,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "stewarts-theorem",
+      "name": "Stewart's theorem",
+      "short": "Stewart's theorem",
+      "statement": "In a triangle with sides a, b, c, let a cevian of length d go to the side of length a and divide it into segments m (adjacent to c) and n (adjacent to b). Then b²m + c²n = a(d² + mn).",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-cosines",
+        "pythagorean-theorem"
+      ],
+      "by": "Matthew Stewart, 1746",
+      "note": "When the cevian is a median, the result is known as Apollonius' theorem.",
+      "url": "https://en.wikipedia.org/wiki/Stewart's_theorem",
+      "area": "geometry",
+      "year": 1746,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "saccheri-legendre-theorem",
+      "name": "Saccheri–Legendre theorem",
+      "short": "Saccheri–Legendre theorem",
+      "statement": "In absolute geometry, the sum of the angles of any triangle is at most 180°. Absolute geometry assumes all the axioms of Euclidean geometry except the one equivalent to Euclid's parallel postulate, so it keeps the Archimedean axiom, which the theorem needs.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Giovanni Girolamo Saccheri, in his 1733 book Euclides ab omni naevo vindicatus; later rediscovered by Adrien-Marie Legendre",
+      "note": "One proof uses the Archimedean axiom. In Dehn's planes, where that axiom fails, a triangle can have an angle sum greater than 180°.",
+      "url": "https://en.wikipedia.org/wiki/Saccheri%E2%80%93Legendre_theorem",
+      "area": "geometry",
+      "year": 1733,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "seven-circles-theorem",
+      "name": "Seven circles theorem",
+      "short": "Seven circles theorem",
+      "statement": "Take a closed chain of six circles in the Euclidean plane, each tangent to a seventh circle and to its two neighbors in the chain. Number the six points where they touch the seventh circle in order around the chain. Then the three lines joining opposite points (first and fourth, second and fifth, third and sixth) pass through one point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Evelyn, Money-Coutts and Tyrrell, 1974",
+      "note": "Although the theorem is elementary in nature, it was not discovered until 1974.",
+      "url": "https://en.wikipedia.org/wiki/Seven_circles_theorem",
+      "area": "geometry",
+      "year": 1974,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sylvester-gallai-theorem",
+      "name": "Sylvester–Gallai theorem",
+      "short": "Sylvester–Gallai theorem",
+      "statement": "Every finite set of points in the Euclidean plane has a line that passes through exactly two of the points, or a line that passes through all of them.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Posed as a problem by James Joseph Sylvester, 1893; proved in the equivalent projective dual form by Melchior, 1941; one of the first proofs published by Tibor Gallai, 1944",
+      "note": "A line containing exactly two of the points is called an ordinary line. A strengthening says a non-collinear finite point set has at least a linear number of ordinary lines.",
+      "url": "https://en.wikipedia.org/wiki/Sylvester%E2%80%93Gallai_theorem",
+      "area": "geometry",
+      "year": 1893,
+      "settled": 1941,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tarskis-plank-problem",
+      "name": "Tarski's plank problem",
+      "short": "Tarski's plank problem",
+      "statement": "If a convex body C in n-dimensional Euclidean space is covered by finitely many planks (closed regions between two parallel hyperplanes), then the sum of the widths of the planks is at least the minimal width of C.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Asked by Alfred Tarski; proved by Bang, 1950",
+      "note": "For example, a circular table of diameter d feet cannot be covered by fewer than d planks of wood one foot wide.",
+      "url": "https://en.wikipedia.org/wiki/Tarski's_plank_problem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "van-lamoen-circle",
+      "name": "Van Lamoen circle",
+      "short": "Van Lamoen circle",
+      "statement": "In any triangle ABC with centroid G, let M_a, M_b and M_c be the midpoints of the sides BC, CA and AB. Then the circumcenters of the six triangles AGM_c, BGM_c, BGM_a, CGM_a, CGM_b and AGM_b lie on a common circle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Posed as a problem by van Lamoen, 2000; proved by Kin Y. Li, 2001",
+      "note": "In 2003 Alexey Myakishev and Peter Y. Woo proved that for a point P inside the triangle, the six circumcenters built in the same way from the cevians through P lie on one circle if and only if P is the centroid or the orthocenter.",
+      "url": "https://en.wikipedia.org/wiki/Van_Lamoen_circle",
+      "area": "geometry",
+      "year": 2000,
+      "settled": 2001,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "sum-of-angles-of-a-triangle",
+      "name": "Sum of angles of a triangle",
+      "short": "Angle sum of a triangle",
+      "statement": "In Euclidean geometry, the three angles of any triangle add up to a straight angle: 180 degrees, π radians, or two right angles.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "Given the other axioms of Euclidean geometry, this is equivalent to the parallel postulate. In spherical geometry the sum is greater than 180° and in hyperbolic geometry it is smaller, by an amount that depends on the triangle.",
+      "url": "https://en.wikipedia.org/wiki/Sum_of_angles_of_a_triangle",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "veblen-young-theorem",
+      "name": "Veblen–Young theorem",
+      "short": "Veblen–Young theorem",
+      "statement": "Consider a projective space given by points and lines, where any two distinct points lie on exactly one line, Veblen's axiom holds, and every line has at least 3 points. If its dimension is at least 3 (there are two lines that do not meet), then it is isomorphic to the projective space of lines in a vector space over some division ring.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "projective-geometry"
+      ],
+      "by": "Proved by Oswald Veblen and John Wesley Young",
+      "note": "Non-Desarguesian planes show that the restriction to dimension at least 3 is necessary. Jacques Tits generalized the theorem to Tits buildings.",
+      "url": "https://en.wikipedia.org/wiki/Veblen%E2%80%93Young_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "wallace-bolyai-gerwien-theorem",
+      "name": "Wallace–Bolyai–Gerwien theorem",
+      "short": "Wallace–Bolyai–Gerwien",
+      "statement": "Two polygons have the same area if and only if each can be cut into finitely many triangles so that the triangles of one can be paired with those of the other, each pair differing only by a translation and a rotation. In other words, one polygon can be cut into finitely many pieces that can be rearranged into the other.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "William Wallace, 1807; according to other sources, Farkas Bolyai, 1833, and P. Gerwien, 1835, independently",
+      "note": "The proof is constructive and does not need the axiom of choice. The analogous statement for polyhedra in three dimensions, Hilbert's third problem, is false, as Max Dehn proved in 1900.",
+      "url": "https://en.wikipedia.org/wiki/Wallace%E2%80%93Bolyai%E2%80%93Gerwien_theorem",
+      "area": "geometry",
+      "year": 1807,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "desarguess-theorem",
+      "name": "Desargues's theorem",
+      "short": "Desargues's theorem",
+      "statement": "In any projective space defined from a field or division ring (this includes the real projective plane and every projective space of dimension greater than two), two triangles are in perspective axially if and only if they are in perspective centrally. Axially means the extended corresponding sides meet at three points on one line; centrally means the three lines through corresponding vertices meet at one point.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        {
+          "id": "pappuss-hexagon-theorem",
+          "url": "https://en.wikipedia.org/wiki/Pappus's_hexagon_theorem"
+        }
+      ],
+      "by": "Girard Desargues; first published in 1648 in an appendix to a book by his friend and pupil Abraham Bosse",
+      "note": "The theorem is false in non-Desarguesian planes. A projective space satisfies it if and only if it is isomorphic to one defined over a field or division ring.",
+      "url": "https://en.wikipedia.org/wiki/Desargues's_theorem",
+      "area": "geometry",
+      "year": 1648,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pappuss-hexagon-theorem",
+      "name": "Pappus's hexagon theorem",
+      "short": "Pappus's hexagon theorem",
+      "statement": "Let A, B, C be three distinct points on one line and a, b, c three distinct points on another line. Then the intersection point X of lines Ab and aB, the intersection point Y of lines Ac and aC, and the intersection point Z of lines Bc and bC lie on one line; this holds in the projective plane over any field.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "projective-geometry"
+      ],
+      "by": "Attributed to Pappus of Alexandria; found in Book VII of his Collection",
+      "note": "It fails in projective planes over noncommutative division rings, and the planes in which it holds are called pappian planes. It is the special case of Pascal's theorem in which the conic degenerates into two straight lines.",
+      "url": "https://en.wikipedia.org/wiki/Pappus's_hexagon_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "vivianis-theorem",
+      "name": "Viviani's theorem",
+      "short": "Viviani's theorem",
+      "statement": "For any point inside an equilateral triangle, the sum of its shortest distances to the three sides equals the length of the triangle's altitude.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Vincenzo Viviani",
+      "note": "It is commonly used in math competitions and secondary school mathematics examinations.",
+      "url": "https://en.wikipedia.org/wiki/Viviani's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "inverse-pythagorean-theorem",
+      "name": "Inverse Pythagorean theorem",
+      "short": "Inverse Pythagoras",
+      "statement": "Let ABC be a right triangle with the right angle at C, and let D be the foot of the perpendicular from C to the hypotenuse AB. Then 1/CD² = 1/AC² + 1/BC².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "note": "It follows from the Pythagorean theorem by writing the area of the triangle in two ways.",
+      "url": "https://en.wikipedia.org/wiki/Inverse_Pythagorean_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "apolloniuss-theorem",
+      "name": "Apollonius's theorem",
+      "short": "Apollonius's theorem",
+      "statement": "In any triangle ABC, let D be the midpoint of side BC, so that AD is a median. Then |AB|² + |AC|² = 2(|BD|² + |AD|²). In words, the sum of the squares of two sides equals twice the square of half the third side plus twice the square of the median to the third side.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "stewarts-theorem",
+        "law-of-cosines"
+      ],
+      "by": "Pappus of Alexandria, Collection, proposition VII.122 (c. 340 AD); possibly already in Apollonius of Perga's lost treatise Plane Loci (c. 200 BC)",
+      "note": "It is a special case of Stewart's theorem and is equivalent to the parallelogram law.",
+      "url": "https://en.wikipedia.org/wiki/Apollonius's_theorem",
+      "area": "geometry",
+      "year": 340,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "pascals-theorem",
+      "name": "Pascal's theorem",
+      "short": "Pascal's theorem",
+      "statement": "If six points are chosen on a conic (an ellipse, parabola or hyperbola) and joined in any order to form a hexagon, then the three pairs of opposite sides, extended if necessary, meet in three points that lie on one straight line. This holds as stated in the projective plane. In the ordinary plane, if exactly one pair of opposite sides is parallel, the line through the other two intersection points is parallel to that pair, and if two pairs are parallel, the third pair is parallel too.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "cayley-bacharach-theorem",
+        "bezouts-theorem"
+      ],
+      "by": "Blaise Pascal, in a note written in 1639 and published in 1640",
+      "note": "Pascal's original note gives no proof. Pappus's hexagon theorem is the special case of a degenerate conic made of two lines with three points on each line.",
+      "url": "https://en.wikipedia.org/wiki/Pascal's_theorem",
+      "area": "geometry",
+      "year": 1639,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "morleys-trisector-theorem",
+      "name": "Morley's trisector theorem",
+      "short": "Morley's trisector theorem",
+      "statement": "In any triangle in the Euclidean plane, the three points where adjacent angle trisectors meet form an equilateral triangle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Discovered by Frank Morley, 1899",
+      "note": "The theorem does not hold in spherical and hyperbolic geometry.",
+      "url": "https://en.wikipedia.org/wiki/Morley's_trisector_theorem",
+      "area": "geometry",
+      "year": 1899,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "fagnanos-problem",
+      "name": "Fagnano's problem",
+      "short": "Fagnano's problem",
+      "statement": "Among all triangles inscribed in an acute triangle, the orthic triangle has the smallest perimeter. The orthic triangle is the triangle whose vertices are the feet of the altitudes of the given triangle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Stated by Giovanni Fagnano, 1775, who proved it using calculus and an intermediate result of his father Giulio Carlo de' Toschi di Fagnano; geometric proofs were later found by Hermann Schwarz and Lipót Fejér, among others",
+      "note": "The geometric proofs use reflections to find a minimal path representing the perimeter. The orthic triangle also gives a periodic light path in a mirrored acute triangle.",
+      "url": "https://en.wikipedia.org/wiki/Fagnano's_problem",
+      "area": "geometry",
+      "year": 1775,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "parallelogram-law",
+      "name": "Parallelogram law",
+      "short": "Parallelogram law",
+      "statement": "In Euclidean geometry, in a parallelogram ABCD the sum of the squares of the lengths of the four sides equals the sum of the squares of the lengths of the two diagonals: 2AB² + 2BC² = AC² + BD².",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-cosines"
+      ],
+      "note": "For a rectangle it reduces to the Pythagorean theorem. In an inner product space the same identity 2‖x‖² + 2‖y‖² = ‖x+y‖² + ‖x−y‖² holds, and a norm that satisfies it must come from an inner product.",
+      "url": "https://en.wikipedia.org/wiki/Parallelogram_law",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "angle-bisector-theorem",
+      "name": "Angle bisector theorem",
+      "short": "Angle bisector theorem",
+      "statement": "In a triangle ABC, if the bisector of angle A meets side BC at a point D between B and C, then |BD| / |CD| = |AB| / |AC|. Conversely, if a point D on side BC divides BC in the ratio |AB| : |AC|, then AD bisects angle A.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [
+        "law-of-sines"
+      ],
+      "by": "Appears in Euclid's Elements, Book VI, Proposition 3",
+      "note": "An immediate consequence is that the bisector of the vertex angle of an isosceles triangle also bisects the opposite side.",
+      "url": "https://en.wikipedia.org/wiki/Angle_bisector_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "tarskis-circle-squaring-problem",
+      "name": "Tarski's circle-squaring problem",
+      "short": "Tarski's circle squaring",
+      "statement": "A disc in the plane can be cut into finitely many pieces that can be moved by translations alone and reassembled into a square of equal area.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry",
+        "measure-theory"
+      ],
+      "by": "Posed by Alfred Tarski, 1925; proved by Miklós Laczkovich, 1990",
+      "note": "Laczkovich's pieces are non-measurable, and his proof uses the axiom of choice. Andrew Marks and Spencer Unger gave a constructive solution with Borel pieces in 2017, and pieces with Jordan curve boundaries cannot work.",
+      "url": "https://en.wikipedia.org/wiki/Tarski's_circle-squaring_problem",
+      "area": "geometry",
+      "year": 1925,
+      "settled": 1990,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "simson-line-theorem",
+      "name": "Simson line theorem",
+      "short": "Simson line",
+      "statement": "Given a triangle ABC and a point P on its circumcircle, the three points on lines AB, AC and BC that are closest to P lie on one line. Conversely, if the three closest points to P on three lines, no two of them parallel, lie on one line, then P lies on the circumcircle of the triangle formed by the three lines.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named for Robert Simson; first published by William Wallace, 1799",
+      "note": "Because Wallace published it first, the line is sometimes called the Wallace line.",
+      "url": "https://en.wikipedia.org/wiki/Simson_line",
+      "area": "geometry",
+      "year": 1799,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "bottemas-theorem",
+      "name": "Bottema's theorem",
+      "short": "Bottema's theorem",
+      "statement": "In a triangle ABC, build squares on the two sides AC and BC, both on the same side as one follows the triangle's vertices around (both to the left or both to the right). Then, keeping A and B fixed, the midpoint of the segment joining the two square vertices opposite C does not depend on the position of C.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Linked to Oene Bottema, who published a simple proof; the theorem was known before",
+      "note": "If S is the projection of that midpoint M onto AB, then AS = BS = MS.",
+      "url": "https://en.wikipedia.org/wiki/Bottema's_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "conway-circle-theorem",
+      "name": "Conway circle theorem",
+      "short": "Conway circle theorem",
+      "statement": "At each vertex of a triangle, extend the two sides meeting there beyond that vertex by the length of the opposite side. The six endpoints of the three resulting line segments lie on a circle whose centre is the incentre of the triangle.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after John Horton Conway",
+      "note": "The radius of this circle is √(r² + s²), where r is the inradius and s the semiperimeter of the triangle.",
+      "url": "https://en.wikipedia.org/wiki/Conway_circle_theorem",
+      "area": "geometry",
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "kepler-conjecture",
+      "name": "Kepler conjecture",
+      "short": "Kepler conjecture",
+      "statement": "No arrangement of equally sized spheres filling three-dimensional Euclidean space has a greater average density than the cubic close packing (face-centered cubic) and hexagonal close packing arrangements. Their density is π/(3√2), about 74.05%.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Stated by Johannes Kepler, 1611; proof announced by Thomas Hales, 1998",
+      "note": "Gauss proved in 1831 that it holds when the spheres are arranged in a regular lattice. Hales' proof is a proof by exhaustion using computer calculations, and a formal proof was accepted by Forum of Mathematics, Pi in 2017.",
+      "url": "https://en.wikipedia.org/wiki/Kepler_conjecture",
+      "area": "geometry",
+      "year": 1611,
+      "settled": 1998,
+      "origin": "wikipedia-import"
+    },
+    {
+      "id": "erdos-mordell-inequality",
+      "name": "Erdős–Mordell inequality",
+      "short": "Erdős–Mordell inequality",
+      "statement": "For any triangle ABC and any point P inside it, let PL, PM and PN be the perpendiculars from P to the lines containing the three sides. Then PA + PB + PC ≥ 2(PL + PM + PN), so the sum of the distances from P to the sides is at most half the sum of the distances from P to the vertices.",
+      "kind": "theorem",
+      "base": "proven",
+      "needs": [],
+      "within": [
+        "euclidean-geometry"
+      ],
+      "by": "Named after Paul Erdős and Louis Mordell; Erdős posed the problem in 1935 and Barrow proved it in 1937",
+      "note": "Equality holds only for the equilateral triangle with P at its centroid. Barrow's inequality is a stronger version in which the distances to the sides are replaced by the distances to the points where the angle bisectors at P cross the sides.",
+      "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Mordell_inequality",
+      "area": "geometry",
+      "year": 1935,
+      "settled": 1937,
+      "origin": "wikipedia-import"
+    }
+  ]
+}

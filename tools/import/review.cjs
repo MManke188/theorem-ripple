@@ -55,7 +55,8 @@ function articleText(p, max = 16000) {
   const out = path.join(dir, folder);
   fs.mkdirSync(out, { recursive: true });
   const want = mode === 'pilot' ? new Set(JSON.parse(fs.readFileSync(path.join(dir, 'pilot.json'), 'utf8'))) : null;
-  const todo = fs.readdirSync(path.join(dir, from)).map((f) => f.replace('.json', '')).filter((q) => (!want || want.has(q)) && !fs.existsSync(path.join(out, `${q}.json`)));
+  // Drafts the writer set aside as "not one statement" are not reviewed: in the pilot the review overturned none of them.
+  const todo = fs.readdirSync(path.join(dir, from)).map((f) => f.replace('.json', '')).filter((q) => (!want || want.has(q)) && !fs.existsSync(path.join(out, `${q}.json`)) && JSON.parse(fs.readFileSync(path.join(dir, from, `${q}.json`), 'utf8')).verdict !== 'skip');
   // Batches by length, so that a call holds about 60,000 characters of articles.
   const batches = [[]];
   let size = 0;

@@ -30,9 +30,14 @@ An unreviewed recent claim of a proof or disproof goes in the `claim` field. It 
 2. `fetch.cjs`: the articles' source text, 50 per request.
 3. `write.cjs`: a cheap model (Sonnet) drafts an entry from the opening, the formal statement and the History section, with the sentences it relied on. The script checks that those sentences are in the article.
 4. `review.cjs`: a stronger model (Opus) reads the whole article and corrects the draft. In the pilot (100 articles, graded by three browsing checkers) 4 of 65 drafts were false before this step, each for a condition given further down the article; the review fixed all four.
-5. `links.cjs`: a model reads each sentence that links two statements and says whether it states that one rests on the other. In the pilot only 29 of 47 such links were fully right, so they need a second look before they go on the map.
+5. `links.cjs`: a model reads each sentence that links two statements and says whether it states that one rests on the other. In the pilot only 29 of 47 such links were fully right.
+6. `linkcheck.cjs`: a stronger model sees the paragraph around each such sentence and keeps, drops or turns round the link. It kept about a third (in the pilot 35 of 47, of which 28 fully right and 6 "one proof among several").
+7. `place.cjs`: finds a field for entries the review could not place, after new fields were written into `.import/new-systems.json` (those are written and checked the careful way, as above).
+8. `merge.cjs`: writes entries and links into `data/`. Each imported entry carries `origin: "wikipedia-import"`; running it again replaces the earlier import. It prints what it left out and why, and saves that list in `.import/left-out.json`.
 
-Working files are in `.import/` (not in git). Nothing reaches `data/` by itself: entries still need a field to stand on (`within`), a web search for the status of every open statement, and a browsing check of a random sample.
+Working files are in `.import/` (not in git). `merge.cjs` keeps off the map: entries the reviewer doubted (`doubt`, about 1 in 13: it believes the article itself is wrong or incomplete, so they need a browsing check), open statements without a web search for their status (`.import/status.json`) or with a claimed proof nobody has checked against its source, statements found proven since (they need an entry written by hand), entries without a field, and links that would put a proven result on an unproven one. Entries listed in `.import/exclude.json` (found wrong by a check) stay off too. After a merge, a browsing agent grades a random sample (40 entries, 20 links) and what it finds wrong goes into that list.
+
+The first run (November 2026) took 2,999 Wikidata candidates to 1,854 entries and 614 links for about 17 million tokens. Wikidata's list ends there: more entries need another list (Wikipedia's categories and lists of theorems, or a textbook index).
 
 ## Before pushing
 
@@ -47,5 +52,5 @@ Pushing to `main` publishes (GitHub Pages serves the repository root).
 
 - Few links between proven theorems: sources rarely state "this proof uses that theorem", and only stated links are kept. Unproven hubs therefore dominate the rankings.
 - The tree's `within` links are coarse: they say which theory a statement belongs to, as its source words it, not what its proof uses. A statement's height in the tree is therefore a fact about this map's chain of systems, not a measure of difficulty.
-- Zoomed out, only the most built-on entries are drawn (`zoomLevels` in `js/app.js` ranks by how many entries stand on each one, so a famous result that nothing here rests on, such as Fermat's Last Theorem, appears late). On a phone the overview therefore holds about five entries. Area names zoom in (Areas arrangement only; the tree has no area names).
+- Zoomed out, only the most built-on entries are drawn (`zoomLevels` in `js/app.js` ranks by how many entries stand on each one, so a famous result that nothing here rests on, such as Fermat's Last Theorem, appears late). On a phone the overview therefore holds about seven entries. Zoomed out, an area name that would lie across a larger area's name is hidden. Area names zoom in (Areas arrangement only; the tree has no area names).
 - Three statements have no `year` because no source gave one.

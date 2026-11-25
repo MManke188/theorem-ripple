@@ -143,7 +143,7 @@ function buildGraph() {
     const bulk = l.type === 'within' && node(l.target).kind !== 'system' && state.built.get(l.source).length > 12;
     const g = gEdges.append('g').attr('class', `edge ${l.type}${l.inner ? ' inner' : ''}${bulk ? ' bulk' : ''} gone out`);
     [l.from, l.to] = [node(l.source), node(l.target)];
-    l.dash = { related: 7, formerly: 10 }[l.type]; // the length of one dash and gap in styles.css
+    l.dash = { related: 14, formerly: 10 }[l.type]; // the length of one dash and gap in styles.css
     l.line = g.append('line').node();
     l.chev = g.append('path').attr('class', 'chev').attr('d', l.equivalent ? 'M-8,0 L-2,-4 L-2,4 Z M8,0 L2,-4 L2,4 Z' : 'M4.5,0 L-3,-4 L-3,4 Z').node();
     l.el = g.node();

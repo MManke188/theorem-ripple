@@ -73,7 +73,7 @@ button { font: inherit; color: inherit; }
 .edge.needs.on .chev { fill: var(--green); --op: 0.85; }
 .edge.needs.on.whatif line { stroke: var(--blue); }
 .edge.needs.on.whatif .chev { fill: var(--blue); }
-.edge.related line { stroke-dasharray: 2 5; }
+.edge.related line { stroke-dasharray: 7 3 1 3; } /* dash-dot: the bridges (.bridge) are dotted and mean something else */
 .edge.formerly line { stroke-dasharray: 6 4; }
 .edge.related .chev, .edge.formerly .chev { display: none; }
 .edge.within line { stroke: #46557a; stroke-width: 1.1; }
@@ -366,6 +366,8 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 .lg-flag { fill: #ff7ab8; }
 .lg-line { stroke: var(--muted); stroke-width: 1.5; }
 .lg-within { stroke: #6f80a8; stroke-width: 1.2; }
+.lg-related { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 6 2.5 1.5 2.5; }
+.lg-formerly { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 3; }
 .lg-bridge { stroke: #8fa0c8; stroke-width: 1.8; stroke-dasharray: 1 4; stroke-linecap: round; }
 .lg-system { fill: #1d2639; stroke: #c3cee3; stroke-width: 2; }
 .lg-arrow { fill: var(--muted); }

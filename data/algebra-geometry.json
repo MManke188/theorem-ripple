@@ -144,6 +144,9 @@
       "needs": [
         "langlands-functoriality"
       ],
+      "within": [
+        "representation-theory"
+      ],
       "related": [
         "ramanujan-tau"
       ],
@@ -163,6 +166,9 @@
       "needs": [
         "generalized-ramanujan"
       ],
+      "within": [
+        "representation-theory"
+      ],
       "by": "Atle Selberg, 1965",
       "note": "It is the generalized Ramanujan conjecture for GL(2) over the rationals at the infinite place. Selberg proved the bound 3/16; the best known bound, 975/4096 ≈ 0.238, is due to Kim and Sarnak (2003).",
       "url": "https://en.wikipedia.org/wiki/Selberg%27s_1/4_conjecture",
@@ -178,6 +184,9 @@
       "base": "open",
       "needs": [
         "langlands-functoriality"
+      ],
+      "within": [
+        "algebraic-number-theory"
       ],
       "by": "Emil Artin, 1923, in the paper introducing these L-functions",
       "note": "Langlands (1970) pointed out that it would follow from his reciprocity conjecture. Known for one-dimensional representations, for odd two-dimensional representations over ℚ (from the proof of Serre's modularity conjecture by Khare and Wintenberger, 2009), and for two-dimensional tetrahedral (Langlands 1980) and octahedral (Tunnell 1981) ones. The general icosahedral case is open.",
@@ -259,6 +268,9 @@
       "needs": [
         "tate-conjecture"
       ],
+      "within": [
+        "arithmetic-geometry"
+      ],
       "by": "John Tate, 1966, carrying the conjecture of Birch and Swinnerton-Dyer to global function fields",
       "note": "For a surface fibred over a curve over a finite field, the Tate conjecture for divisors on the surface is equivalent to this conjecture for the Jacobian of the generic fibre. That is why proofs of the Tate conjecture for special surfaces give BSD for special curves.",
       "url": "https://en.wikipedia.org/wiki/Tate_conjecture",
@@ -307,6 +319,9 @@
           "id": "tate-conjecture",
           "url": "https://en.wikipedia.org/wiki/Standard_conjectures_on_algebraic_cycles"
         }
+      ],
+      "within": [
+        "algebraic-geometry"
       ],
       "year": 1969
     },
@@ -539,6 +554,12 @@
       "base": "open",
       "needs": [
         "jacobian-2d"
+      ],
+      "within": [
+        {
+          "id": "rings-and-fields",
+          "url": "https://en.wikipedia.org/wiki/Weyl_algebra"
+        }
       ],
       "by": "Jacques Dixmier, 1968",
       "note": "The Jacobian conjecture in 2n variables implies the Dixmier conjecture for Aₙ (Tsuchimoto 2005; Belov-Kanel and Kontsevich 2007), so the planar case would settle A₁. For Aₙ with n ≥ 3 the conjecture is false, because Dixmier for Aₙ implies the Jacobian conjecture in n variables. A₂ remains open. Alexander Zheglov announced a proposed proof for A₁ in 2024.",
@@ -2638,6 +2659,9 @@
       "base": "open",
       "needs": [
         "zeeman-conjecture"
+      ],
+      "within": [
+        "group-theory"
       ],
       "by": "James J. Andrews and Morton L. Curtis, 1965",
       "note": "It is widely believed to be false, but no counterexample is known. The Zeeman conjecture on collapsibility implies it.",

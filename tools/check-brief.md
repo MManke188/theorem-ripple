@@ -17,7 +17,7 @@ Use web search and fetch the pages. Do not rely on memory, and do not rely on th
    - Does a source actually say B depends on A (the proof uses A, or B was proven assuming A)?
    - Is the direction right? A common mistake is writing the implication backwards.
    - Is the hypothesis exactly the one needed, not a weaker or stronger relative?
-   - For an open entry: would proving everything in `needs` really prove it?
+   - For an open entry: would proving everything in `needs` really prove it? Does it have a `within` of its own (it is not placed through `needs`)?
    - `equivalent: true`: is it a genuine two-way equivalence?
 5. **`related` and `formerly`**: reasonable and true?
    **`within`** (see "Foundations" in the research brief): does a source place the statement in that field, or say that the system is constructed from or defined on the other one? Is a more specific system on the map the better fit? Is the order right (the reals are built from the rationals, not the other way round)?

@@ -47,7 +47,7 @@ Look at `data/number-theory.json` for 46 finished examples. Each entry:
 
 - `base: "proven"` entry: `needs` lists the proven theorems (in this project) that its standard or original proof uses in an essential, documented way. Example: Fermat's Last Theorem needs the modularity theorem for semistable curves and Ribet's theorem. Only list dependencies a source states. Leave `needs` empty for foundations.
 - `base: "conditional"` entry: `needs` must contain at least one entry that is not proven (a hypothesis or an axiom). It may also list proven theorems the proof uses.
-- `base: "open"` entry: `needs` means "if everything in this list were proven, this would be proven too". Use it for a conjecture that follows from a stronger conjecture (Lindelöf follows from the Riemann Hypothesis). NEVER put only proven theorems in the `needs` of an open entry: the page would then show the conjecture as proven. For "this conjecture is about / generalises that theorem", use `related`.
+- `base: "open"` entry: `needs` means "if everything in this list were proven, this would be proven too". Use it for a conjecture that follows from a stronger conjecture (Lindelöf follows from the Riemann Hypothesis). NEVER put only proven theorems in the `needs` of an open entry: the page would then show the conjecture as proven. For "this conjecture is about / generalises that theorem", use `related`. An open entry does not rest on what it lists: the page draws these links as dashed arrows ("would follow from") and does not use them to place the entry, so an open entry always needs `within`.
 - No cycles. If two statements are equivalent, pick one as the base and mark the other `equivalent: true`.
 - Only use ids that exist: in your own file, or in the list of taken ids if your task allows it.
 
@@ -62,7 +62,7 @@ The map also has a trunk in `data/foundations.json`: the axioms of set theory, t
 - `within` is coarser than `needs`. It says "this belongs to that theory" or "this system is constructed from that one". It does not claim that a particular proof uses a particular result, and the page never lets a change travel along it.
 - A `within` link needs a source like every other link: a page that says the statement is a result of that field, or that the system is constructed from or defined on the other one. Usually that is the opening of the entry's own `url`.
 - Only systems and axioms may be listed in `within`. For a statement, pick the most specific system that the source supports; two at most, when the statement really sits in both. A system lists the systems it is constructed from or defined on.
-- Which entries get it: every system, and every statement whose `needs` and `anyOf` are empty or hold only axioms. A statement that already rests on other statements inherits its place through them.
+- Which entries get it: every system, every open statement, and every other statement whose `needs` are empty or hold only axioms. A proven or conditional statement that rests on other statements inherits its place through them.
 - Axioms have no `within`. The eight Zermelo–Fraenkel axioms are `kind: "axiom"`, `base: "open"`, `needs: []`, like the axiom of choice; `data/index.json` lists them as assumed.
 - Years before the common era are written as negative numbers (Euclid: `-300`).
 

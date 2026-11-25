@@ -135,8 +135,9 @@ for (const [qid, list] of folder('links-checked')) {
     added++;
   }
 }
-// A statement that rests on other statements has its place through them; `within` is for the others.
-for (const e of fresh.values()) if (e.needs.some((x) => byId.get(typeof x === 'string' ? x : x.id).kind !== 'axiom')) delete e.within;
+// A proven statement that rests on other statements has its place through them; `within` is for the others.
+// An open statement keeps it: what it lists is what it would follow from, and that places nothing in the tree.
+for (const e of fresh.values()) if (e.base !== 'open' && e.needs.some((x) => byId.get(typeof x === 'string' ? x : x.id).kind !== 'axiom')) delete e.within;
 // An axiom has no field; without a link it would stand alone on the map.
 const linked = new Set([...byId.values()].flatMap(needsOf));
 for (const [qid, e] of fresh) {

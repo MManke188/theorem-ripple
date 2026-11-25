@@ -6,12 +6,21 @@
 // single statement in `anyOf` is proven (several independent routes to it).
 
 const index = (nodes) => new Map(nodes.map((n) => [n.id, n]));
-// Everything a node is linked to upstream, whichever way it counts.
+// Every statement a node lists, in `needs` or `anyOf`. "Proven" travels along
+// all of these links.
 const needsOf = (n) => [...(n.needs || []), ...(n.anyOf || [])];
-// Everything a node stands on: what it needs, plus the number systems and
+// Such a link means one of two things, decided by the node that lists it.
+// A proven or conditional node rests on what it lists: its proof uses that
+// theorem or assumes that hypothesis. An open node rests on nothing yet: what
+// it lists is a stronger statement it would follow from (the Riemann
+// Hypothesis would follow from GRH). When the open node is proven some other
+// way, the stronger statement stays open.
+export const restsOn = (n) => (n.base === 'open' ? [] : n.needs || []);
+export const followsFrom = (n) => (n.base === 'open' ? needsOf(n) : []);
+// Everything a node stands on: what it rests on, plus the number systems and
 // theories it is built in (`within`). Status never travels along `within`;
 // it only says where a statement sits above the axioms.
-export const foundationsOf = (n) => [...needsOf(n), ...(n.within || [])];
+export const foundationsOf = (n) => [...restsOn(n), ...(n.within || [])];
 
 // Data files may write a link as "id" or as { id, url } when the link has its
 // own source. This turns every node into the plain form the rest of the code
@@ -53,7 +62,7 @@ export function validate(nodes) {
     if (seen.get(id) === 2) return;
     if (seen.get(id) === 1) throw new Error(`dependency cycle: ${[...path, id].join(' -> ')}`);
     seen.set(id, 1);
-    for (const need of foundationsOf(byId.get(id))) visit(need, [...path, id]);
+    for (const need of [...needsOf(byId.get(id)), ...(byId.get(id).within || [])]) visit(need, [...path, id]);
     seen.set(id, 2);
   };
   for (const n of nodes) visit(n.id, []);
@@ -104,15 +113,16 @@ export function isRoot(nodes, id) {
 // 'down': the statements that rest on it, directly or through others.
 // 'up': the statements it rests on. The number is the longest chain of links
 // between the two, so a node is always further out than what it follows from.
-// `linksOf` chooses the links to walk: what a node needs (the default), or
-// `foundationsOf` to include the systems it is built in.
-export function reach(nodes, id, direction, linksOf = needsOf) {
+// `linksOf` chooses the links to walk: what a node rests on (the default), or
+// `foundationsOf` to include the systems it is built in. What an open
+// statement would follow from is in neither.
+export function reach(nodes, id, direction, linksOf = restsOn) {
   return reachFrom(nodes, direction, linksOf)(id);
 }
 
 // The same for many nodes: the table of links is built once, and the function
 // returned answers for one id at a time.
-export function reachFrom(nodes, direction, linksOf = needsOf) {
+export function reachFrom(nodes, direction, linksOf = restsOn) {
   const next = new Map(nodes.map((n) => [n.id, []]));
   const prev = new Map(nodes.map((n) => [n.id, []]));
   for (const n of nodes) {
@@ -172,7 +182,7 @@ export function bridges(nodes, shown, standsOn) {
   for (const n of nodes) {
     if (!shown.has(n.id)) continue;
     const far = through(n.id, foundationsOf);
-    const strict = through(n.id, needsOf);
+    const strict = through(n.id, restsOn);
     const ends = [...foundationsOf(n).filter((id) => shown.has(id)), ...far];
     for (const a of far) {
       if (!ends.some((b) => b !== a && standsOn(b, a))) out.push({ source: a, target: n.id, needsOnly: strict.has(a) });
@@ -189,6 +199,23 @@ export function missingFor(nodes, proven, id) {
     for (const need of needsOf(byId.get(cur))) {
       if (proven.has(need)) continue;
       if (isRoot(nodes, need)) out.add(need);
+      else walk(need);
+    }
+  };
+  walk(id);
+  return [...out];
+}
+
+// The nearest unproven statements a conditional result was proven under, also
+// through other conditional results it uses. Unlike missingFor this stops at
+// the first open statement and does not go on to what that would follow from.
+export function waitsOn(nodes, proven, id) {
+  const byId = index(nodes);
+  const out = new Set();
+  const walk = (cur) => {
+    for (const need of restsOn(byId.get(cur))) {
+      if (proven.has(need)) continue;
+      if (byId.get(need).base === 'open') out.add(need);
       else walk(need);
     }
   };

@@ -1425,6 +1425,9 @@
           "url": "https://en.wikipedia.org/wiki/Szpiro's_conjecture"
         }
       ],
+      "within": [
+        "euclidean-geometry"
+      ],
       "by": "Stanislaw Ulam asked it in 1946; named after Paul Erdős and Stanislaw Ulam",
       "note": "The only irreducible algebraic curves containing infinitely many points at rational distances are lines and circles. If the Bombieri–Lang conjecture is true, or if the abc conjecture is true, no such dense set exists.",
       "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Ulam_problem",

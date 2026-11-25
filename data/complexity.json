@@ -106,6 +106,9 @@
           "url": "https://en.wikipedia.org/wiki/One-way_function"
         }
       ],
+      "within": [
+        "complexity-theory"
+      ],
       "year": 1971
     },
     {
@@ -249,6 +252,9 @@
           "url": "https://www.imsc.res.in/~vraman/exact/ryan.pdf"
         }
       ],
+      "within": [
+        "complexity-theory"
+      ],
       "by": "Russell Impagliazzo and Ramamohan Paturi, 1999",
       "note": "Many lower bounds for exact algorithms are proven assuming it.",
       "url": "https://en.wikipedia.org/wiki/Exponential_time_hypothesis",
@@ -284,6 +290,9 @@
           "id": "seth",
           "url": "https://www.imsc.res.in/~vraman/exact/ryan.pdf"
         }
+      ],
+      "within": [
+        "complexity-theory"
       ],
       "by": "Ryan Williams, 2005",
       "note": "Williams showed that a faster algorithm for orthogonal vectors would give a faster algorithm for SAT, so SETH implies this conjecture. Many quadratic lower bounds in fine-grained complexity are reductions from it. If SETH falls, this conjecture is not known to be affected.",
@@ -439,6 +448,10 @@
           "url": "https://en.wikipedia.org/wiki/One-way_function"
         }
       ],
+      "within": [
+        "complexity-theory",
+        "cryptography"
+      ],
       "by": "Basic open conjecture of cryptography",
       "note": "Their existence would prove P ≠ NP, but P ≠ NP is not known to imply it. Hard factoring gives one: the Rabin function is one-way if and only if factoring is hard.",
       "url": "https://en.wikipedia.org/wiki/One-way_function",
@@ -508,6 +521,9 @@
           "url": "https://en.wikipedia.org/wiki/RSA_problem"
         }
       ],
+      "within": [
+        "cryptography"
+      ],
       "related": [
         "shor",
         "primes-in-p"
@@ -547,6 +563,9 @@
       "base": "open",
       "needs": [
         "factoring-hard"
+      ],
+      "within": [
+        "cryptography"
       ],
       "equivalent": true,
       "by": "Michael O. Rabin, 1979",
@@ -601,6 +620,9 @@
           "id": "lattice-hardness",
           "url": "https://arxiv.org/abs/2401.03703"
         }
+      ],
+      "within": [
+        "cryptography"
       ],
       "by": "Oded Regev, 2005 (journal 2009)",
       "note": "Regev proved, by a quantum reduction, that an efficient algorithm for LWE would give a quantum algorithm for GapSVP and SIVP. Peikert gave a classical reduction in 2009 from a non-standard variant of GapSVP.",

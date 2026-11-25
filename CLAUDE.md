@@ -16,7 +16,7 @@ Entries written from memory were wrong in detail about four times out of ten, so
 2. A second, fresh agent then tries to find errors, and reports without editing. Brief: `tools/check-brief.md`.
 3. Apply the corrections. Drop what stays unconfirmed. Leave a field out before guessing it.
 
-A statement with nothing in `needs`, or only axioms, gets `within`: the system it belongs to, taken from what its source says. `within` only places an entry in the tree. Proven and conditional status never travel along it, so it must not be used to say that a proof uses something. The test "everything stands on the axioms of set theory" fails for an entry that cannot be followed down to ZF.
+A statement with nothing in `needs`, or only axioms, gets `within`: the system it belongs to, taken from what its source says. So does every open statement: what an open entry lists in `needs` or `anyOf` is what it would follow from (`followsFrom` in `js/propagate.js`, drawn as a dashed arc), not what it rests on, and it places nothing in the tree. `within` only places an entry in the tree. Proven and conditional status never travel along it, so it must not be used to say that a proof uses something. The test "everything stands on the axioms of set theory" fails for an entry that cannot be followed down to ZF.
 
 An unreviewed recent claim of a proof or disproof goes in the `claim` field. It does not change `base`: the statement stays open until the mathematics has been reviewed. Check the current status of a conjecture by web search before calling it open; several were claimed settled in 2026.
 

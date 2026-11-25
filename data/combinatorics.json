@@ -386,6 +386,9 @@
           "url": "https://arxiv.org/abs/math/0503316"
         }
       ],
+      "within": [
+        "graph-theory"
+      ],
       "by": "Frank Harary, 1964",
       "note": "D. L. Greenwell proved in 1971 that a reconstructible graph with no isolated vertices is edge-reconstructible, so the reconstruction conjecture would give this one.",
       "url": "https://en.wikipedia.org/wiki/Reconstruction_conjecture#Formal_statements",
@@ -1386,6 +1389,9 @@
           "id": "erdos-ulam-problem",
           "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Ulam_problem"
         }
+      ],
+      "within": [
+        "graph-theory"
       ],
       "by": "Named after Heiko Harborth",
       "note": "If true, it would strengthen Fáry's theorem on straight-line drawings of planar graphs. It has been proven only for several special kinds of planar graph.",

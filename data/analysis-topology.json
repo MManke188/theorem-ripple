@@ -286,6 +286,9 @@
           "url": "https://arxiv.org/pdf/1812.11616"
         }
       ],
+      "within": [
+        "harmonic-analysis"
+      ],
       "by": "Means introduced by Salomon Bochner, 1936; proved in the plane by Lennart Carleson and Per Sjölin, 1972",
       "note": "The condition on δ is known to be necessary for p ≠ 2. Sogge observed that his local smoothing conjecture implies it (Proposition 3.2 of the linked survey).",
       "url": "https://en.wikipedia.org/wiki/Bochner%E2%80%93Riesz_mean",
@@ -301,6 +304,12 @@
       "base": "open",
       "needs": [
         "bochner-riesz"
+      ],
+      "within": [
+        {
+          "id": "harmonic-analysis",
+          "url": "https://en.wikipedia.org/wiki/Restriction_conjecture"
+        }
       ],
       "by": "Elias Stein, 1967; proved in the plane by Charles Fefferman, 1970 (sharpened by Antoni Zygmund, 1974)",
       "note": "Terence Tao proved in 1999 that the Bochner–Riesz conjecture implies it. This is the dual form; Stein's original form bounds the restriction of a function's Fourier transform to the sphere.",
@@ -320,6 +329,9 @@
           "id": "restriction",
           "url": "https://arxiv.org/pdf/math/0311181"
         }
+      ],
+      "within": [
+        "measure-theory"
       ],
       "by": "Proved for n = 2 by Roy Davies, 1971; for n = 3 by Hong Wang and Joshua Zahl, 2025; open for n ≥ 4",
       "note": "Open in dimension 4 and higher.",

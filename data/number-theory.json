@@ -11,6 +11,12 @@
       "needs": [
         "grh"
       ],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Riemann_zeta_function"
+        }
+      ],
       "by": "Bernhard Riemann, 1859",
       "note": "Levent Alpöge released a proof as a Lean library of about 17 million lines on 20 Nov 2026. The Lean FRO and Mathlib Initiative certified it on 21 Nov 2026. Human review of the ideas is still pending.",
       "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis",
@@ -26,6 +32,12 @@
       "base": "open",
       "needs": [
         "erh"
+      ],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Analytic_number_theory"
+        }
       ],
       "by": "Adolf Piltz, 1884",
       "note": "Contains the Riemann Hypothesis as the special case of the trivial character.",
@@ -376,6 +388,12 @@
           "origin": "wikipedia-import"
         }
       ],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Riemann_zeta_function"
+        }
+      ],
       "by": "Ernst Lindelöf, 1908",
       "note": "Littlewood's bound grows more slowly than any power of t, so it gives the Lindelöf hypothesis at once.",
       "url": "https://en.wikipedia.org/wiki/Lindel%C3%B6f_hypothesis",
@@ -391,6 +409,12 @@
       "base": "open",
       "needs": [
         "lindelof"
+      ],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Riemann_zeta_function"
+        }
       ],
       "by": "A. E. Ingham, 1937 (showed it follows from the Lindelöf hypothesis)",
       "url": "https://en.wikipedia.org/wiki/Lindel%C3%B6f_hypothesis#The_density_hypothesis",
@@ -501,6 +525,9 @@
       "base": "open",
       "needs": [
         "ankeny"
+      ],
+      "within": [
+        "analytic-number-theory"
       ],
       "by": "I. M. Vinogradov",
       "url": "https://terrytao.wordpress.com/2009/08/18/the-least-quadratic-nonresidue-and-the-square-root-barrier/",
@@ -976,6 +1003,12 @@
           "url": "https://arxiv.org/abs/1407.4897"
         }
       ],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Bombieri%E2%80%93Vinogradov_theorem"
+        }
+      ],
       "related": [
         "bombieri-vinogradov"
       ],
@@ -1122,6 +1155,12 @@
         {
           "id": "schinzel-h",
           "url": "https://en.wikipedia.org/wiki/Schinzel%27s_hypothesis_H"
+        }
+      ],
+      "within": [
+        {
+          "id": "analytic-number-theory",
+          "url": "https://en.wikipedia.org/wiki/Number_theory#Analytic_number_theory"
         }
       ],
       "related": [
@@ -1300,6 +1339,12 @@
       "needs": [
         "effective-abc"
       ],
+      "within": [
+        {
+          "id": "arithmetic-geometry",
+          "url": "https://en.wikipedia.org/wiki/Glossary_of_arithmetic_and_diophantine_geometry"
+        }
+      ],
       "by": "Joseph Oesterlé and David Masser, 1985",
       "note": "Shinichi Mochizuki claimed a proof in 2012, published in 2021. Peter Scholze and Jakob Stix reported a serious gap in 2018, and the mainstream community still regards the conjecture as unproven in November 2026.",
       "url": "https://en.wikipedia.org/wiki/Abc_conjecture",
@@ -1338,6 +1383,9 @@
       "needs": [
         "abc"
       ],
+      "within": [
+        "arithmetic-geometry"
+      ],
       "equivalent": true,
       "by": "Lucien Szpiro, 1981; equivalence with abc shown by Joseph Oesterlé, 1988",
       "note": "The conductor records the primes where the curve has bad reduction. Szpiro's original form, which bounds the discriminant, follows from this one.",
@@ -1356,6 +1404,12 @@
         {
           "id": "abc",
           "url": "https://arxiv.org/pdf/2412.11933"
+        }
+      ],
+      "within": [
+        {
+          "id": "arithmetic-geometry",
+          "url": "https://en.wikipedia.org/wiki/Number_theory#Diophantine_geometry"
         }
       ],
       "by": "Henri Darmon and Andrew Granville, 1995, who also observed that it follows from the abc conjecture",
@@ -3559,6 +3613,9 @@
           "id": "oppermanns-conjecture",
           "url": "https://en.wikipedia.org/wiki/Oppermann's_conjecture"
         }
+      ],
+      "within": [
+        "analytic-number-theory"
       ],
       "by": "Named after Henri Brocard",
       "note": "Legendre's conjecture, that there is a prime between consecutive integer squares, directly implies at least two primes between prime squares for pₙ ≥ 3.",

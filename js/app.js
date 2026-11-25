@@ -1,4 +1,4 @@
-import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reachFrom, layers, foundationsOf, bridges } from './propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reachFrom, layers, foundationsOf, restsOn, followsFrom, bridges } from './propagate.js';
 
 const d3 = window.d3;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -10,7 +10,8 @@ const state = {
   nodes: [],
   byId: new Map(),
   links: [],
-  dependents: new Map(), // id -> the statements that need it
+  dependents: new Map(), // id -> the statements that rest on it: their proof uses or assumes it
+  follows: new Map(), // id -> the open statements that would follow from it
   built: new Map(), // id -> the entries built directly within it (systems and axioms)
   areas: [],
   layout: 'tree', // how the map is arranged: 'tree' (axioms at the bottom) or 'areas' (one cluster per field)
@@ -82,17 +83,22 @@ async function init() {
   state.byId = new Map(nodes.map((n) => [n.id, n]));
   for (const n of nodes) {
     state.dependents.set(n.id, []);
+    state.follows.set(n.id, []);
     state.built.set(n.id, []);
   }
   for (const n of nodes) {
-    n.inputs = [...n.needs, ...n.anyOf]; // everything it is linked to upstream
+    n.inputs = [...n.needs, ...n.anyOf]; // everything it is linked to upstream: a change of status travels along all of these
+    n.rests = restsOn(n); // the part of them it rests on. An open statement rests on nothing: it would follow from what it lists.
+    const loose = new Set(followsFrom(n));
     for (const [type, refs] of [['needs', n.inputs], ['within', n.within], ['related', n.related], ['formerly', n.formerly]]) {
       for (const ref of refs) {
         const inner = type === 'within' && state.byId.get(ref).area === n.area; // both ends in the same area
-        state.links.push({ source: ref, target: n.id, type, inner, key: `${type === 'within' ? 'in:' : ''}${ref}>${n.id}`, equivalent: type === 'needs' && !!n.equivalent });
+        // `follows`: a 'needs' link of the "would follow from" kind. It is drawn dashed and left out of the tree's rows, the traces and the counts.
+        state.links.push({ source: ref, target: n.id, type, inner, follows: type === 'needs' && loose.has(ref), key: `${type === 'within' ? 'in:' : ''}${ref}>${n.id}`, equivalent: type === 'needs' && !!n.equivalent });
       }
     }
-    for (const need of n.inputs) state.dependents.get(need).push(n.id);
+    for (const need of n.rests) state.dependents.get(need).push(n.id);
+    for (const from of loose) state.follows.get(from).push(n.id);
     for (const sys of n.within) state.built.get(sys).push(n.id);
   }
   const layer = layers(nodes);
@@ -141,10 +147,12 @@ function buildGraph() {
   for (const l of state.links) {
     // A field with many statements built directly on it would send a fan of lines into its block; the block's place above the field says the same.
     const bulk = l.type === 'within' && node(l.target).kind !== 'system' && state.built.get(l.source).length > 12;
-    const g = gEdges.append('g').attr('class', `edge ${l.type}${l.inner ? ' inner' : ''}${bulk ? ' bulk' : ''} gone out`);
+    const g = gEdges.append('g').attr('class', `edge ${l.type}${l.follows ? ' follows' : ''}${l.inner ? ' inner' : ''}${bulk ? ' bulk' : ''} gone out`);
     [l.from, l.to] = [node(l.source), node(l.target)];
     l.dash = { related: 14, formerly: 10 }[l.type]; // the length of one dash and gap in styles.css
-    l.line = g.append('line').node();
+    // "Would follow from" is drawn as a shallow arc. Such a link often joins two entries of one row, where a
+    // straight line would run through the entries between them and read as a chain (ERH, RH, GRH).
+    l.line = l.follows ? g.append('path').attr('class', 'arc').node() : g.append('line').node();
     l.chev = g.append('path').attr('class', 'chev').attr('d', l.equivalent ? 'M-8,0 L-2,-4 L-2,4 Z M8,0 L2,-4 L2,4 Z' : 'M4.5,0 L-3,-4 L-3,4 Z').node();
     l.el = g.node();
   }
@@ -549,7 +557,7 @@ function layoutTree(fold) {
   const line = 58; // distance between the lines of a block
   const gap = 128; // between the top line of one row and the bottom line of the next
   const proportions = [0, 2.1, 1.2, 0.6][fold]; // width of the tree divided by its height
-  const below = (n) => [...n.inputs, ...n.within];
+  const below = (n) => [...n.rests, ...n.within];
   const above = (n) => [...state.dependents.get(n.id), ...state.built.get(n.id)];
   const both = (n) => [...below(n), ...above(n)];
 
@@ -683,7 +691,7 @@ function layoutAreas(shape) {
   const simLinks = state.links.map((l) => ({ source: l.source, target: l.target, type: l.type }));
   const sameArea = (l) => l.source.area === l.target.area;
   const firm = (l) => l.type === 'needs' || l.type === 'within';
-  const fan = (d) => Math.sqrt(state.dependents.get(d.id).length + (d.area === 'foundations' ? state.built.get(d.id).filter((id) => node(id).area === d.area).length : 0));
+  const fan = (d) => Math.sqrt(state.dependents.get(d.id).length + state.follows.get(d.id).length + (d.area === 'foundations' ? state.built.get(d.id).filter((id) => node(id).area === d.area).length : 0));
 
   const simulation = d3
     .forceSimulation(sim)
@@ -729,9 +737,20 @@ function updatePositions() {
   for (const l of state.links) {
     const s = node(l.source);
     const t = node(l.target);
+    const angle = (Math.atan2(t.y - s.y, t.x - s.x) * 180) / Math.PI;
+    if (l.follows) {
+      // The arc bows to one side by up to 110, enough to pass the dots of a row; its arrowhead sits at the top of the bow.
+      const [dx, dy] = [t.x - s.x, t.y - s.y];
+      const length = Math.hypot(dx, dy) || 1;
+      const bow = Math.min(0.3 * length, 110);
+      const [mx, my] = [(s.x + t.x) / 2, (s.y + t.y) / 2];
+      const [px, py] = [(-dy / length) * bow, (dx / length) * bow];
+      l.line.setAttribute('d', `M${s.x},${s.y} Q${mx + px},${my + py} ${t.x},${t.y}`);
+      l.chev.setAttribute('transform', `translate(${mx + px / 2},${my + py / 2}) rotate(${angle})`);
+      continue;
+    }
     if (!l.dash) setLine(l.line, s.x, s.y, t.x, t.y); // dotted and dashed lines are placed in cull()
     const f = l.equivalent ? 0.5 : 0.58;
-    const angle = (Math.atan2(t.y - s.y, t.x - s.x) * 180) / Math.PI;
     l.chev.setAttribute('transform', `translate(${s.x + (t.x - s.x) * f},${s.y + (t.y - s.y) * f}) rotate(${angle})`);
   }
   drawBridges();
@@ -1233,7 +1252,8 @@ function loseWave(before, after, real) {
 }
 
 // "What rests on this" (down) and "What this rests on" (up): nothing changes,
-// the wave only lights up the part of the network that is connected. Two more
+// the wave only lights up the part of the network that is connected. What an
+// open statement would follow from is not part of either. Two more
 // directions also follow the systems an entry is built in: 'roots' goes down
 // to the axioms, 'above' shows everything that stands on a system or an axiom.
 function startTrace(id, dir) {
@@ -1244,8 +1264,8 @@ function startTrace(id, dir) {
   const outward = dir === 'down' || dir === 'above'; // the wave runs away from the axioms
   const inside = (x) => x === id || members.has(x);
   const trace = { origin: id, dir, seen: new Set(), edges: new Set() };
-  const links = state.links.filter((l) => (l.type === 'needs' || (all && l.type === 'within')) && inside(l.source) && inside(l.target));
-  const below = (x) => (all ? [...node(x).inputs, ...node(x).within] : node(x).inputs);
+  const links = state.links.filter((l) => ((l.type === 'needs' && !l.follows) || (all && l.type === 'within')) && inside(l.source) && inside(l.target));
+  const below = (x) => (all ? [...node(x).rests, ...node(x).within] : node(x).rests);
   const over = (x) => (all ? [...state.dependents.get(x), ...state.built.get(x)] : state.dependents.get(x));
   const finish = () => {
     trace.seen = new Set(members.keys());
@@ -1333,7 +1353,7 @@ function explain(n) {
     return `Proven, because ${listNames(met)} ${met.length > 1 ? 'are' : 'is'} proven.`;
   }
   const missing = missingFor(state.nodes, state.shown, n.id);
-  if (n.base === 'conditional') return `Proven only on condition. Still needs: ${listNames(missing)}.`;
+  if (n.base === 'conditional') return `Proven only on condition. Still needs: ${listNames(waitsOn(state.nodes, state.shown, n.id))}.`;
   if (today.claimed.includes(n.id)) return `Open. ${today.claimedNote}`;
   return missing.length && !isRoot(state.nodes, n.id) ? `Open. Would follow from ${listNames(missing)}.` : 'Open.';
 }
@@ -1372,6 +1392,11 @@ function nodeView(n) {
   const area = state.areas.find((a) => a.id === n.area);
   const today = state.index.today;
   const section = (title, ids, extra) => (ids.length ? [el('h3', { text: title }), refList(ids, extra)] : []);
+  // What an open statement lists is what it would follow from. Once it holds, either that is how
+  // it came to hold, or it holds on its own (today's proof, an assumed axiom, a what-if) and the list is only another way to it.
+  const holds = state.shown.has(n.id);
+  const onItsOwn = state.whatIf.has(n.id) || baseMarks().has(n.id);
+  const listed = n.base !== 'open' ? 'Rests on' : !holds ? 'Would follow from' : onItsOwn ? 'Would also follow from' : 'Follows from';
   const host = (url) => new URL(url).hostname.replace(/^(www|en)\./, '');
   const linkSource = (id) => (n.needUrl[id] ? el('a', { class: 'why', href: n.needUrl[id], target: '_blank', rel: 'noopener', title: 'Source for this link', text: 'source' }) : null);
   const sources = [{ title: host(n.url), url: n.url }, ...(n.id === 'rh' || today.claimed.includes(n.id) ? today.sources : [])];
@@ -1421,12 +1446,13 @@ function nodeView(n) {
         )
       : null,
     action,
-    ...section(n.base === 'open' ? 'Would follow from' : 'Rests on', n.needs, linkSource),
+    ...section(listed, n.needs, linkSource),
     ...section('Would follow from any one of', n.anyOf, linkSource),
     ...section('Built within', n.within, linkSource),
     ...section('First proven assuming', n.formerly),
     ...section('Related', n.related),
     ...section('What rests on it directly', state.dependents.get(n.id)),
+    ...section('What would follow from it', state.follows.get(n.id)),
     ...section('Built directly on it', state.built.get(n.id)),
     el('h3', { text: 'Sources' }),
     el('ul', { class: 'links' }, ...sources.map((s) => el('li', {}, el('a', { href: s.url, target: '_blank', rel: 'noopener', text: s.title })))),

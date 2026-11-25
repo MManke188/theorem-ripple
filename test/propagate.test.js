@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { normalize, validate, computeProven, isRoot, missingFor, rippleOrder, reach, reachFrom, layers, foundationsOf, bridges } from '../js/propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reach, reachFrom, layers, foundationsOf, restsOn, followsFrom, bridges } from '../js/propagate.js';
 
 const read = (file) => JSON.parse(readFileSync(new URL(`../data/${file}`, import.meta.url), 'utf8'));
 const index = read('index.json');
@@ -35,6 +35,8 @@ test('data is consistent: ids unique across files, links exist, no cycles, field
     for (const url of Object.values(n.needUrl)) assert.doesNotThrow(() => new URL(url), `${n.id} link url`);
     if (n.kind === 'axiom' || n.kind === 'hypothesis') assert.notEqual(n.base, 'conditional', `${n.id}: a hypothesis or axiom is open or proven`);
     if (n.equivalent) assert.equal(n.needs.length, 1, `${n.id}: equivalent to exactly one statement`);
+    // `anyOf` says "any one of these would prove it", which only an open statement can say.
+    if (n.anyOf.length) assert.equal(n.base, 'open', `${n.id}: anyOf on a statement that is not open`);
   }
 });
 
@@ -71,9 +73,11 @@ test('no statement is isolated', () => {
 });
 
 test('everything stands on the axioms of set theory', () => {
-  // Nothing floats: from every entry that is not itself an axiom, the links
-  // (`needs`, `anyOf`, `within`) lead down to ZF set theory, which is built
-  // within axioms that are assumed by default.
+  // Nothing floats: from every entry that is not itself an axiom, what it rests
+  // on and the systems it is built in (`within`) lead down to ZF set theory,
+  // which is built within axioms that are assumed by default. What an open
+  // statement would follow from does not count, so every open statement needs
+  // a `within` of its own.
   const zf = byId.get('zf-set-theory');
   assert.ok(zf.within.length > 0);
   for (const id of zf.within) assert.ok(byId.get(id).kind === 'axiom' && index.assumed.includes(id), `ZF is built within ${id}, which must be an assumed axiom`);
@@ -91,6 +95,30 @@ test('a proven statement rests only on proven statements', () => {
   for (const n of nodes.filter((x) => x.base === 'proven')) {
     for (const need of n.needs) assert.equal(byId.get(need).base, 'proven', `${n.id} is proven but rests on ${need}`);
   }
+});
+
+test('whatever holds rests only on what holds', () => {
+  // If a statement is proven, everything it rests on is proven. Before this was
+  // checked, the Riemann Hypothesis was drawn as resting on GRH, which it would
+  // only follow from: proven on 20 Nov 2026 while GRH stayed open.
+  for (const marks of [index.assumed, [...index.assumed, ...index.today.proven]]) {
+    const holds = proven(...marks);
+    for (const id of holds) for (const need of restsOn(byId.get(id))) assert.ok(holds.has(need), `${id} holds but rests on ${need}, which does not`);
+  }
+});
+
+test('an open statement rests on nothing: what it lists is what it would follow from', () => {
+  for (const n of nodes) {
+    assert.deepEqual([...restsOn(n), ...followsFrom(n)].sort(), [...n.needs, ...n.anyOf].sort(), n.id);
+    if (n.base === 'open') assert.deepEqual(restsOn(n), [], n.id);
+    else assert.deepEqual(followsFrom(n), [], n.id);
+  }
+  assert.deepEqual(followsFrom(byId.get('rh')), ['grh']);
+  assert.deepEqual(restsOn(byId.get('von-koch')), ['rh']);
+  // In the tree the Riemann Hypothesis therefore stands on its theory, not on GRH, and every axiom is in the bottom row.
+  const layer = layers(nodes);
+  assert.ok(!foundationsOf(byId.get('rh')).includes('grh') && foundationsOf(byId.get('rh')).length > 0);
+  for (const n of nodes) if (n.kind === 'axiom') assert.equal(layer.get(n.id), 0, `${n.id} is an axiom above the bottom row`);
 });
 
 test('the event and the default axioms refer to real entries', () => {
@@ -139,7 +167,9 @@ test('a statement with several independent routes is proven by any one of them',
   const one = computeProven(sample, new Set(['a']));
   assert.ok(!none.has('either'));
   assert.ok(one.has('either') && one.has('after') && !one.has('both'));
-  assert.equal(reach(sample, 'b', 'down').get('after'), 2);
+  // `after` rests on `either`; `either` would follow from `b` and does not rest on it.
+  assert.equal(reach(sample, 'either', 'down').get('after'), 1);
+  assert.deepEqual([...reach(sample, 'b', 'down').keys()], ['both']);
   assert.equal(rippleOrder(sample, none, one).flipped.get('after'), 2);
 });
 
@@ -189,6 +219,19 @@ test('missingFor names the root hypotheses a result still waits on', () => {
   assert.deepEqual(missingFor(nodes, proven('rh'), 'class-group-tables'), ['erh']);
 });
 
+test('waitsOn names the nearest open statements a conditional result was proven under', () => {
+  // The short-intervals result was proven assuming the density hypothesis. That would follow from RH, but the result does not need RH.
+  assert.deepEqual(waitsOn(nodes, proven(), 'short-intervals'), ['density']);
+  assert.deepEqual(waitsOn(nodes, proven(), 'von-koch'), ['rh']);
+  assert.deepEqual(waitsOn(nodes, proven('rh'), 'short-intervals'), []);
+  const sample = normalize([
+    { id: 'h', kind: 'hypothesis', base: 'open' },
+    { id: 'first', kind: 'theorem', base: 'conditional', needs: ['h'] },
+    { id: 'second', kind: 'theorem', base: 'conditional', needs: ['first'] },
+  ]);
+  assert.deepEqual(waitsOn(sample, new Set(), 'second'), ['h']);
+});
+
 test('ripple rings follow the dependency chain', () => {
   const { flipped, touched } = rippleOrder(nodes, proven(), proven('rh'));
   assert.equal(flipped.get('rh'), 0);
@@ -211,19 +254,27 @@ test('a what-if on top of today only ripples through what is new', () => {
   assert.ok(!flipped.has('rh') && !flipped.has('von-koch'));
 });
 
-test('reach finds everything downstream and upstream, with the longest chain as distance', () => {
+test('reach finds what rests on a statement and what it rests on, with the longest chain as distance', () => {
   const down = reach(nodes, 'rh', 'down');
   assert.equal(down.get('von-koch'), 1);
-  assert.equal(down.get('lindelof'), 2);
-  assert.equal(down.get('short-intervals'), 4);
   assert.ok(!down.has('rh') && !down.has('grh') && !down.has('miller'));
+  // The Lindelöf hypothesis would follow from RH; it and what was proven assuming it or its consequences do not rest on RH.
+  assert.ok(!down.has('lindelof') && !down.has('density') && !down.has('short-intervals'));
+  // Nor does RH, or anything that rests on it, rest on the stronger hypotheses it would follow from.
+  assert.ok(!reach(nodes, 'grh', 'down').has('rh') && !reach(nodes, 'erh', 'down').has('von-koch'));
+  assert.ok(reach(nodes, 'grh', 'down').has('miller'));
+  assert.equal(reach(nodes, 'rh', 'up').size, 0);
 
   const up = reach(nodes, 'short-intervals', 'up');
-  assert.equal(up.get('density'), 1);
-  assert.equal(up.get('rh'), 4);
-  assert.equal(up.get('grh'), 5);
-  assert.equal(up.get('erh'), 6);
-  assert.ok(!up.has('von-koch'));
+  assert.deepEqual([...up], [['density', 1]]);
+  // A chain of results that each rest on the one before.
+  const chain = normalize([
+    { id: 'a', kind: 'theorem', base: 'proven' },
+    { id: 'b', kind: 'theorem', base: 'proven', needs: ['a'] },
+    { id: 'c', kind: 'theorem', base: 'proven', needs: ['a', 'b'] },
+  ]);
+  assert.deepEqual([...reach(chain, 'a', 'down')].sort(), [['b', 1], ['c', 2]]);
+  assert.deepEqual([...reach(chain, 'c', 'up')].sort(), [['a', 2], ['b', 1]]);
 
   assert.equal(reach(nodes, 'legendre', 'down').size, 0);
 });

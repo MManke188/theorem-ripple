@@ -1,17 +1,17 @@
 # Theorem Ripple
 
-A map of mathematical statements and what they rest on. A link from A to B means **B rests on A**: either B was proven assuming the open conjecture A, or the cited proof of B uses the proven theorem A.
+A map of mathematical statements and what they rest on. A link from A to B means **B rests on A**: either B was proven assuming the open conjecture A, or the cited proof of B uses the proven theorem A. A dashed, bowed arrow from A to B is a weaker link: the open statement B **would follow from** the stronger statement A and does not rest on it (the Riemann Hypothesis would follow from the Generalized Riemann Hypothesis). When B is proven some other way, A stays open.
 
-The map opens as a tree. The axioms of set theory are in the bottom row. Above them come the number systems and theories built on them (natural numbers, real numbers, group theory, complex analysis and so on, drawn as rounded squares), and above those the statements. Every entry sits one row above the highest thing it stands on. Entries of a row that stand on the same entry form a block above it, several lines high where they are many. A pale line from a statement to a system means "built within that system"; it is a coarser link than an arrow and no change ever travels along it. "Areas" in the header switches to the other arrangement, one cluster per field.
+The map opens as a tree. The axioms of set theory are in the bottom row. Above them come the number systems and theories built on them (natural numbers, real numbers, group theory, complex analysis and so on, drawn as rounded squares), and above those the statements. Every entry sits one row above the highest thing it stands on. An open statement stands on its theory, not on the stronger statements it would follow from. Entries of a row that stand on the same entry form a block above it, several lines high where they are many. A pale line from a statement to a system means "built within that system"; it is a coarser link than an arrow and no change ever travels along it. "Areas" in the header switches to the other arrangement, one cluster per field.
 
 The map works like a road map: zoomed out it draws only the entries most is built on, and the others appear as you zoom in. A dotted line then stands for a chain of entries that are not drawn at this zoom. Whatever you are looking at is always drawn: the selected entry and its neighbours, a trace, and everything a change spreads to while it spreads. The line next to the counts says how many entries are drawn.
 
 What you can do on the page:
 
 - Switch from "Before 20 Nov 2026" to "Today" and watch the proof of the Riemann Hypothesis spread: every result that relied on it turns green, then the results that relied on those. Results that need a second, still open hypothesis stay amber.
-- Select a statement and press "statements rest on this" or "This rests on" to light up everything downstream or upstream of it.
+- Select a statement and press "statements rest on this" or "This rests on" to light up everything downstream or upstream of it. What an open statement would follow from is not part of either; the panel lists it under "Would follow from".
 - Select any entry and press "Down to the axioms" to light up everything it stands on, through its theory and the number systems down to the axioms. On a system or an axiom, "entries are built on this" shows the opposite direction.
-- Select an open conjecture and press "What if this is proven?". What-if results are drawn in blue so they cannot be mistaken for proven ones.
+- Select an open conjecture and press "What if this is proven?". What-if results are drawn in blue so they cannot be mistaken for proven ones. The change also travels along the dashed arrows: with GRH marked as proven, the Riemann Hypothesis holds too.
 - Select an axiom that is assumed by default (the axiom of choice) and stop assuming it. Everything that needs it turns amber.
 - Open "Rankings" for the proven statements most rests on, the unproven ones most rests on, and the results furthest from the foundations.
 
@@ -33,7 +33,7 @@ Then open http://127.0.0.1:8377/.
 node --test
 ```
 
-They cover the dependency logic in `js/propagate.js` and check every data file: ids unique across files, links point at existing entries, no cycles, no isolated entries, no open statement that the page would show as proven by accident, and no entry that cannot be followed down to the axioms of set theory.
+They cover the dependency logic in `js/propagate.js` and check every data file: ids unique across files, links point at existing entries, no cycles, no isolated entries, no open statement that the page would show as proven by accident, nothing that holds while resting on something that does not, and no entry that cannot be followed down to the axioms of set theory.
 
 ## Data
 
@@ -51,8 +51,8 @@ One entry per statement:
 | `statement` | The claim in one or two sentences |
 | `kind` | `theorem`, `hypothesis`, `axiom`, `data`, or `system` (a number system or a theory: not a statement, so it has no `base` and no `needs`) |
 | `base` | `proven`, `conditional` (proven assuming something in `needs` that is not proven) or `open` |
-| `needs` | What the entry rests on. Each item is an id, or `{ "id": "...", "url": "..." }` when the link has its own source |
-| `within` | The systems the entry is built in, written like `needs`. Says "this belongs to that theory" or "this system is constructed from that one". It places the entry in the tree and carries no ripple. Every system has it, and every statement whose `needs` are empty or only axioms |
+| `needs` | What the entry rests on or, for an open entry, what it would follow from. Each item is an id, or `{ "id": "...", "url": "..." }` when the link has its own source |
+| `within` | The systems the entry is built in, written like `needs`. Says "this belongs to that theory" or "this system is constructed from that one". It places the entry in the tree and carries no ripple. Every system has it, every open statement, and every other statement whose `needs` are empty or only axioms |
 | `equivalent` | `true` if the entry is equivalent to the one statement in `needs`, not only a consequence |
 | `related`, `formerly` | Links that carry no ripple: a connected statement (drawn dash-dot, and only while one of the two is selected), or a hypothesis the result no longer needs (dashed) |
 | `by`, `note`, `url` | Attribution, comment, source |
@@ -66,7 +66,7 @@ What `needs` means depends on `base`:
 
 - `proven`: the proven theorems its cited proof uses. Empty for a foundation.
 - `conditional`: at least one unproven statement or axiom, plus any proven theorems the proof uses.
-- `open`: "if everything in this list were proven, this would be too". Never list only proven theorems here, or the page shows the conjecture as proven. The tests catch that.
+- `open`: "if everything in this list were proven, this would be too". Never list only proven theorems here, or the page shows the conjecture as proven. The tests catch that. An open entry rests on nothing: the page draws these links as dashed arcs and leaves them out of the tree's rows, the traces and the "rests on" counts. So an open entry needs a `within` of its own.
 
 To add an area, add its file and list it in `data/index.json`.
 

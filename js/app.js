@@ -1017,7 +1017,7 @@ function paintLink(l, { sel, trace, near }) {
   cl.toggle('waiting', l.type === 'needs' && !on && !state.shown.has(l.target));
   cl.toggle('whatif', on && !state.real.has(l.source));
   cl.toggle('traced', traced);
-  cl.toggle('own', l.type === 'within' && (l.source === sel || l.target === sel));
+  cl.toggle('own', (l.type === 'within' || l.type === 'related') && (l.source === sel || l.target === sel));
   cl.toggle('dim', trace ? !traced : !!near && l.source !== sel && l.target !== sel);
 }
 

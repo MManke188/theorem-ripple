@@ -76,6 +76,7 @@ button { font: inherit; color: inherit; }
 .edge.related line { stroke-dasharray: 7 3 1 3; } /* dash-dot: the bridges (.bridge) are dotted and mean something else */
 .edge.formerly line { stroke-dasharray: 6 4; }
 .edge.related .chev, .edge.formerly .chev { display: none; }
+.edge.related:not(.own) { display: none; } /* drawn only for the selected entry: on the bare map nothing says what such a line means */
 .edge.within line { stroke: #46557a; stroke-width: 1.1; }
 .edge.within .chev { display: none; }
 /* The links between the systems themselves are the trunk and the boughs of the tree. */

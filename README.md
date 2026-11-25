@@ -54,7 +54,7 @@ One entry per statement:
 | `needs` | What the entry rests on. Each item is an id, or `{ "id": "...", "url": "..." }` when the link has its own source |
 | `within` | The systems the entry is built in, written like `needs`. Says "this belongs to that theory" or "this system is constructed from that one". It places the entry in the tree and carries no ripple. Every system has it, and every statement whose `needs` are empty or only axioms |
 | `equivalent` | `true` if the entry is equivalent to the one statement in `needs`, not only a consequence |
-| `related`, `formerly` | Links that carry no ripple: a connected statement (drawn dash-dot), or a hypothesis the result no longer needs (dashed) |
+| `related`, `formerly` | Links that carry no ripple: a connected statement (drawn dash-dot, and only while one of the two is selected), or a hypothesis the result no longer needs (dashed) |
 | `by`, `note`, `url` | Attribution, comment, source |
 | `anyOf` | Statements any one of which would prove this one (several independent routes) |
 | `claim` | An unreviewed recent claim of a proof or disproof. Shown in the panel and as a pink dot; it does not change the status |

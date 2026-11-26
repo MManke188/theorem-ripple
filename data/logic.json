@@ -879,16 +879,12 @@
       "statement": "Let R be a non-empty totally ordered set that has no least or greatest element, in which between any two distinct elements there is another, in which every non-empty bounded subset has a supremum and an infimum, and in which every collection of mutually disjoint non-empty open intervals is countable. Then R is order-isomorphic to the real line.",
       "kind": "hypothesis",
       "base": "open",
-      "needs": [
-        "diamond-principle",
-        "axiom-of-constructibility",
-        "martins-axiom"
-      ],
+      "needs": [],
       "within": [
         "zf-set-theory"
       ],
       "by": "Posed by Suslin, 1920 (published posthumously); shown independent of ZFC by Solovay and Tennenbaum, 1971",
-      "note": "The statement can neither be proven nor disproven from ZFC, assuming ZF is consistent. If the countable chain condition is replaced by having a countable dense subset, the answer is yes, as proved by Cantor.",
+      "note": "The statement can neither be proven nor disproven from ZFC, assuming ZF is consistent. It fails if the diamond principle holds, and so if every set is constructible (Jensen); Martin's axiom together with the negation of the continuum hypothesis implies it (Solovay and Tennenbaum). If the countable chain condition is replaced by having a countable dense subset, the statement holds, as proved by Cantor.",
       "url": "https://en.wikipedia.org/wiki/Suslin's_problem",
       "area": "logic",
       "year": 1920,
@@ -1056,7 +1052,8 @@
       "statement": "There is a global choice function τ, that is, a function such that for every non-empty set z, τ(z) is an element of z.",
       "kind": "axiom",
       "base": "open",
-      "needs": [
+      "needs": [],
+      "anyOf": [
         {
           "id": "axiom-of-constructibility",
           "url": "https://en.wikipedia.org/wiki/Axiom_of_constructibility"
@@ -1618,7 +1615,8 @@
       "statement": "For every cardinal κ smaller than the cardinality of the continuum, the following holds. For any partial order P satisfying the countable chain condition and any set of at most κ dense subsets of P, there is a filter on P that meets every one of those dense sets.",
       "kind": "axiom",
       "base": "open",
-      "needs": [
+      "needs": [],
+      "anyOf": [
         "proper-forcing-axiom",
         "martins-maximum"
       ],

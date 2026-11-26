@@ -1414,10 +1414,11 @@
       "id": "erdos-ulam-problem",
       "name": "Erdős–Ulam problem",
       "short": "Erdős–Ulam problem",
-      "statement": "The problem asks whether the Euclidean plane contains a dense set of points whose pairwise distances are all rational numbers.",
+      "statement": "The Euclidean plane contains no dense set of points whose pairwise distances are all rational numbers. This is the negative answer to the Erdős–Ulam problem, which asks whether such a set exists.",
       "kind": "hypothesis",
       "base": "open",
-      "needs": [
+      "needs": [],
+      "anyOf": [
         "bombieri-lang-conjecture",
         "abc",
         {
@@ -1428,7 +1429,7 @@
       "within": [
         "euclidean-geometry"
       ],
-      "by": "Stanislaw Ulam asked it in 1946; named after Paul Erdős and Stanislaw Ulam",
+      "by": "Question asked by Stanislaw Ulam, 1946; named after Paul Erdős and Stanislaw Ulam",
       "note": "The only irreducible algebraic curves containing infinitely many points at rational distances are lines and circles. If the Bombieri–Lang conjecture is true, or if the abc conjecture is true, no such dense set exists.",
       "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Ulam_problem",
       "area": "geometry",

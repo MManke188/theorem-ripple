@@ -40,6 +40,17 @@ test('data is consistent: ids unique across files, links exist, no cycles, field
   }
 });
 
+test('a link the bulk import gave an open statement is one way to it, not a part of the only way', () => {
+  // The import reads one sentence at a time ("X follows from Y"). Two such links in `needs` would say
+  // that X needs both; tools/import/merge.cjs puts them in `anyOf`. A single link stays in `needs`.
+  for (const n of files.flatMap((f) => f.data.nodes)) {
+    if (n.base !== 'open') continue;
+    const needs = n.needs || [];
+    const imported = n.origin === 'wikipedia-import' ? needs : needs.filter((x) => x.origin === 'wikipedia-import');
+    if (imported.length) assert.equal(needs.length + (n.anyOf || []).length, 1, `${n.id}: imported links in needs next to other links`);
+  }
+});
+
 test('years are plausible, and almost every statement has one', () => {
   // `year`: when the statement was first stated or proven. `settled`: when a
   // statement that started as a conjecture was proven. Left out where the

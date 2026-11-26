@@ -56,7 +56,7 @@ One entry per statement:
 | `equivalent` | `true` if the entry is equivalent to the one statement in `needs`, not only a consequence |
 | `related`, `formerly` | Links that carry no ripple: a connected statement (drawn dash-dot, and only while one of the two is selected), or a hypothesis the result no longer needs (dashed) |
 | `by`, `note`, `url` | Attribution, comment, source |
-| `anyOf` | Statements any one of which would prove this one (several independent routes) |
+| `anyOf` | Only on an open entry: statements any one of which alone would prove it. `needs` is one route (all of it together), each item here is a further route |
 | `claim` | An unreviewed recent claim of a proof or disproof. Shown in the panel and as a pink dot; it does not change the status |
 | `year`, `settled` | When the statement was first stated or proven, and, if it began as a conjecture, when it was proven. Not used by the page yet; recorded for a future timeline. Left out where no source gives a date. Years before the common era are negative |
 | `formerlyYear` | When the result was first proven under the hypothesis in `formerly` |
@@ -66,7 +66,7 @@ What `needs` means depends on `base`:
 
 - `proven`: the proven theorems its cited proof uses. Empty for a foundation.
 - `conditional`: at least one unproven statement or axiom, plus any proven theorems the proof uses.
-- `open`: "if everything in this list were proven, this would be too". Never list only proven theorems here, or the page shows the conjecture as proven. The tests catch that. An open entry rests on nothing: the page draws these links as dashed arcs and leaves them out of the tree's rows, the traces and the "rests on" counts. So an open entry needs a `within` of its own.
+- `open`: "if everything in this list were proven, this would be too". Two stronger statements that would each prove it alone go in `anyOf`, not here. Never list only proven theorems here, or the page shows the conjecture as proven. The tests catch that. An open entry rests on nothing: the page draws these links as dashed arcs and leaves them out of the tree's rows, the traces and the "rests on" counts. So an open entry needs a `within` of its own.
 
 To add an area, add its file and list it in `data/index.json`.
 

@@ -51,7 +51,12 @@ const index = read(path.join(data, 'index.json'));
 const files = new Map(index.areas.map((a) => [a.id, read(path.join(data, a.file))]));
 for (const f of files.values()) f.nodes = f.nodes.filter((n) => n.origin !== 'wikipedia-import');
 // Links an earlier import added to entries researched by hand carry the same mark.
-for (const f of files.values()) for (const n of f.nodes) if (n.needs) n.needs = n.needs.filter((x) => x.origin !== 'wikipedia-import');
+for (const f of files.values()) {
+  for (const n of f.nodes) {
+    for (const key of ['needs', 'anyOf']) if (n[key]) n[key] = n[key].filter((x) => x.origin !== 'wikipedia-import');
+    if (n.anyOf && !n.anyOf.length) delete n.anyOf;
+  }
+}
 for (const sys of read(path.join(dir, 'new-systems.json'), [])) {
   const nodes = files.get('foundations').nodes;
   if (!nodes.some((n) => n.id === sys.id)) nodes.push(sys);
@@ -84,7 +89,7 @@ for (const [qid, e] of folder('reviewed')) {
   const short = e.short && e.short.length <= 26 ? e.short : name.length <= 26 ? name : null;
   if (!short) { leave('no label of 26 characters or fewer', name); continue; }
   const c = candidates.get(qid);
-  const entry = { id, name, short, statement: e.statement, kind: e.kind, base: e.base, needs: [] };
+  const entry = { id, name, short, statement: e.statement, kind: e.kind, base: e.base, needs: [], anyOf: [] };
   if (e.kind !== 'axiom') entry.within = within.slice(0, 2);
   for (const k of ['by', 'note']) if (e[k]) entry[k] = e[k];
   entry.url = wiki(c.title);
@@ -112,10 +117,12 @@ for (const e of fresh.values()) byId.set(e.id, e);
 
 // ---- the links
 const settled = (n) => n.base === 'proven'; // an axiom, also one assumed by default, is not: what rests on it is conditional
-const needsOf = (n) => (n.needs || []).map((x) => (typeof x === 'string' ? x : x.id));
-const below = (n) => [...needsOf(n), ...(n.anyOf || []).map((x) => (typeof x === 'string' ? x : x.id)), ...(n.within || []).map((x) => (typeof x === 'string' ? x : x.id))];
+const ids = (list) => (list || []).map((x) => (typeof x === 'string' ? x : x.id));
+const needsOf = (n) => [...ids(n.needs), ...ids(n.anyOf)]; // every statement it lists
+const below = (n) => [...needsOf(n), ...ids(n.within)];
 const reaches = (from, to, seen = new Set()) => from === to || below(byId.get(from)).some((id) => !seen.has(id) && seen.add(id) && reaches(id, to, seen));
 let added = 0;
+const routes = new Set(); // open statements that were given a link here
 for (const [qid, list] of folder('links-checked')) {
   for (const l of list) {
     if (!l.keep || l.relation === 'equivalent') continue;
@@ -131,17 +138,25 @@ for (const [qid, list] of folder('links-checked')) {
     if (up.base === 'conditional') { leave('link into a conditional result researched by hand', words); continue; }
     if (reaches(down.id, up.id)) { leave('link would close a circle', words); continue; }
     const source = wiki(candidates.get(qid).title);
-    up.needs.push(up.origin ? (source === up.url ? down.id : { id: down.id, url: source }) : { id: down.id, url: source, origin: 'wikipedia-import' });
+    // Each link comes from one sentence saying that the upper statement follows from the lower one. For an open
+    // statement that is one way to it among others, so it goes into `anyOf` (any one would prove it) and not
+    // into `needs` (all of them together). What a proven result lists are the theorems its proof uses: all of them.
+    const list = up.base === 'open' ? (up.anyOf ??= []) : up.needs;
+    list.push(up.origin ? (source === up.url ? down.id : { id: down.id, url: source }) : { id: down.id, url: source, origin: 'wikipedia-import' });
+    if (up.base === 'open') routes.add(up);
     added++;
   }
 }
+// An open statement with a single way to it lists that in `needs`, as the entries written by hand do.
+for (const e of routes) if (!e.needs.length && e.anyOf.length === 1) e.needs = e.anyOf.splice(0);
+for (const e of byId.values()) if (e.anyOf && !e.anyOf.length) delete e.anyOf;
 // A proven statement that rests on other statements has its place through them; `within` is for the others.
 // An open statement keeps it: what it lists is what it would follow from, and that places nothing in the tree.
 for (const e of fresh.values()) if (e.base !== 'open' && e.needs.some((x) => byId.get(typeof x === 'string' ? x : x.id).kind !== 'axiom')) delete e.within;
 // An axiom has no field; without a link it would stand alone on the map.
 const linked = new Set([...byId.values()].flatMap(needsOf));
 for (const [qid, e] of fresh) {
-  if (e.kind === 'axiom' && !linked.has(e.id) && !e.needs.length) {
+  if (e.kind === 'axiom' && !linked.has(e.id) && !needsOf(e).length) {
     leave('axiom that nothing on the map is linked to', e.name);
     fresh.delete(qid);
     byId.delete(e.id);

@@ -76,18 +76,7 @@
       "statement": "Some problems whose solutions can be checked in polynomial time cannot be solved in polynomial time. Equivalently, no NP-complete problem, such as SAT, Hamiltonian circuit or the travelling salesman decision problem, has a polynomial-time algorithm.",
       "kind": "hypothesis",
       "base": "open",
-      "needs": [
-        {
-          "id": "berman-hartmanis-conjecture",
-          "url": "https://en.wikipedia.org/wiki/Berman%E2%80%93Hartmanis_conjecture",
-          "origin": "wikipedia-import"
-        },
-        {
-          "id": "eth-lower-bounds",
-          "url": "https://en.wikipedia.org/wiki/Exponential_time_hypothesis",
-          "origin": "wikipedia-import"
-        }
-      ],
+      "needs": [],
       "related": [
         "cook-levin",
         "karp-21"
@@ -104,6 +93,16 @@
         {
           "id": "one-way-functions",
           "url": "https://en.wikipedia.org/wiki/One-way_function"
+        },
+        {
+          "id": "berman-hartmanis-conjecture",
+          "url": "https://en.wikipedia.org/wiki/Berman%E2%80%93Hartmanis_conjecture",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "eth",
+          "url": "https://en.wikipedia.org/wiki/Exponential_time_hypothesis",
+          "origin": "wikipedia-import"
         }
       ],
       "within": [

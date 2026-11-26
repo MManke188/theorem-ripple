@@ -1384,17 +1384,12 @@
       "statement": "Every planar graph has a planar drawing in which every edge is a straight segment of integer length.",
       "kind": "hypothesis",
       "base": "open",
-      "needs": [
-        {
-          "id": "erdos-ulam-problem",
-          "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Ulam_problem"
-        }
-      ],
+      "needs": [],
       "within": [
         "graph-theory"
       ],
       "by": "Named after Heiko Harborth",
-      "note": "If true, it would strengthen Fáry's theorem on straight-line drawings of planar graphs. It has been proven only for several special kinds of planar graph.",
+      "note": "If true, it would strengthen Fáry's theorem on straight-line drawings of planar graphs. It has been proven only for several special kinds of planar graph. It would follow from a positive answer to the Erdős–Ulam problem: a dense set of points in the plane whose distances are all rational.",
       "url": "https://en.wikipedia.org/wiki/Harborth's_conjecture",
       "area": "combinatorics",
       "origin": "wikipedia-import"

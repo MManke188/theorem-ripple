@@ -381,12 +381,7 @@
       "kind": "hypothesis",
       "base": "open",
       "needs": [
-        "littlewood-zeta-bound",
-        {
-          "id": "rh",
-          "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis",
-          "origin": "wikipedia-import"
-        }
+        "littlewood-zeta-bound"
       ],
       "within": [
         {
@@ -398,7 +393,14 @@
       "note": "Littlewood's bound grows more slowly than any power of t, so it gives the Lindelöf hypothesis at once.",
       "url": "https://en.wikipedia.org/wiki/Lindel%C3%B6f_hypothesis",
       "area": "number-theory",
-      "year": 1908
+      "year": 1908,
+      "anyOf": [
+        {
+          "id": "rh",
+          "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis",
+          "origin": "wikipedia-import"
+        }
+      ]
     },
     {
       "id": "density",

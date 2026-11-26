@@ -24,28 +24,16 @@
       "base": "open",
       "needs": [
         {
-          "id": "axiom-of-empty-set",
-          "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
-          "origin": "wikipedia-import"
-        },
-        {
-          "id": "axiom-power-set",
-          "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
-          "origin": "wikipedia-import"
-        },
-        {
-          "id": "axiom-infinity",
-          "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
-          "origin": "wikipedia-import"
-        },
-        {
           "id": "axiom-of-adjunction",
-          "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
-          "origin": "wikipedia-import"
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing"
+        },
+        {
+          "id": "axiom-of-empty-set",
+          "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing"
         }
       ],
       "by": "Ernst Zermelo, 1908",
-      "note": "Zermelo introduced it as a special case of his axiom of elementary sets.",
+      "note": "Zermelo introduced it as a special case of his axiom of elementary sets. It follows from the axiom of adjunction together with the axiom of empty set. In Zermelo–Fraenkel set theory it also follows from the axiom schema of replacement applied to any set with two elements, and such a set exists by the axiom of infinity, or by the axioms of empty set and power set.",
       "url": "https://en.wikipedia.org/wiki/Axiom_of_pairing",
       "area": "foundations",
       "year": 1908

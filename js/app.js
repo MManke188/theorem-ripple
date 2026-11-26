@@ -1446,8 +1446,9 @@ function nodeView(n) {
         )
       : null,
     action,
-    ...section(listed, n.needs, linkSource),
-    ...section('Would follow from any one of', n.anyOf, linkSource),
+    // `needs` of an open statement are one way to it (all of them together), `anyOf` holds further ways (each alone).
+    ...section(n.base === 'open' && n.needs.length > 1 ? `${listed} these together` : listed, n.needs, linkSource),
+    ...section(n.needs.length ? (n.anyOf.length > 1 ? 'Or from any one of' : 'Or from') : 'Would follow from any one of', n.anyOf, linkSource),
     ...section('Built within', n.within, linkSource),
     ...section('First proven assuming', n.formerly),
     ...section('Related', n.related),

@@ -7,7 +7,7 @@
 // Needs a server (python3 -m http.server 8377) or SHOT_URL pointing at the live site.
 // Env: PLAYWRIGHT_CORE (path to a playwright-core package, if it is not installed here),
 //      SHOT_DIR (where the PNGs go, default: the system temp folder),
-//      AXIOM, DEEP, AREA, HIGH (which statements and area the run uses).
+//      AXIOM, DEEP, AREA, HIGH, FIELD (which statements, area and field the run uses).
 // Prints a JSON summary; "errors" must be empty. Look at the images, the summary is not enough.
 const { chromium } = require(process.env.PLAYWRIGHT_CORE || 'playwright-core');
 const path = require('path');
@@ -21,6 +21,7 @@ const AXIOM = process.env.AXIOM || 'Axiom of choice';
 const DEEP = process.env.DEEP || 'Prime number theorem in short';
 const AREA = process.env.AREA || 'Logic and set theory';
 const HIGH = process.env.HIGH || "Fermat's Last Theorem";
+const FIELD = process.env.FIELD || 'Measure theory';
 
 (async () => {
   const browser = await chromium.launch();
@@ -120,6 +121,30 @@ const HIGH = process.env.HIGH || "Fermat's Last Theorem";
   await page.waitForTimeout(800);
   info.hiddenLabelsInArea = await page.evaluate(() => document.querySelectorAll('.label.hidden').length);
   await shot('12-area');
+
+  // The clusters: every entry lies at the one it stands on, the fields as discs side by side.
+  await page.locator('#btn-clusters').click();
+  await page.waitForTimeout(1400);
+  await page.locator('#btn-all').click();
+  await page.waitForTimeout(700);
+  info.shownClusters = await shown();
+  await shot('13-clusters');
+  await page.mouse.move(+w / 2, +h / 2);
+  for (const step of ['13b-zoom1', '13c-zoom2', '13d-zoom3']) {
+    await page.mouse.wheel(0, -420);
+    await page.waitForTimeout(600);
+    info[`shown-${step}`] = await shown();
+    await shot(step);
+  }
+  info.field = await find(FIELD);
+  await shot('14-field');
+  await page.locator('.trace-btn', { hasText: 'built on this' }).click();
+  await page.waitForTimeout(5000);
+  info.fieldTraced = await page.evaluate(() => document.querySelectorAll('.node.traced').length);
+  await shot('15-field-trace');
+  await page.locator('#btn-tree').click();
+  await page.waitForTimeout(1400);
+  await shot('16-back-to-tree');
   info.scroll = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.scrollHeight]);
   console.log(JSON.stringify({ name, dir, info, errors }, null, 1));
   await browser.close();

@@ -1,4 +1,4 @@
-import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reachFrom, layers, foundationsOf, restsOn, followsFrom, bridges } from './propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reachFrom, layers, homes, foundationsOf, restsOn, followsFrom, bridges } from './propagate.js';
 
 const d3 = window.d3;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -13,8 +13,9 @@ const state = {
   dependents: new Map(), // id -> the statements that rest on it: their proof uses or assumes it
   follows: new Map(), // id -> the open statements that would follow from it
   built: new Map(), // id -> the entries built directly within it (systems and axioms)
+  around: new Map(), // id -> the entries whose home it is: of all they stand on, this is the highest. The clusters put them around it.
   areas: [],
-  layout: 'tree', // how the map is arranged: 'tree' (axioms at the bottom) or 'areas' (one cluster per field)
+  layout: 'tree', // how the map is arranged: 'tree' (axioms at the bottom), 'clusters' (every entry at the one it stands on) or 'areas' (one cloud per data file)
   pos: {}, // positions per arrangement for the current shape, worked out when first shown
   levels: {}, // per arrangement: the zoom from which each entry is drawn
   order: [], // all entries, the ones most is built on first
@@ -85,6 +86,12 @@ async function init() {
     state.dependents.set(n.id, []);
     state.follows.set(n.id, []);
     state.built.set(n.id, []);
+    state.around.set(n.id, []);
+  }
+  const home = homes(nodes);
+  for (const n of nodes) {
+    n.home = home.get(n.id);
+    if (n.home) state.around.get(n.home).push(n.id);
   }
   for (const n of nodes) {
     n.inputs = [...n.needs, ...n.anyOf]; // everything it is linked to upstream: a change of status travels along all of these
@@ -94,7 +101,9 @@ async function init() {
       for (const ref of refs) {
         const inner = type === 'within' && state.byId.get(ref).area === n.area; // both ends in the same area
         // `follows`: a 'needs' link of the "would follow from" kind. It is drawn dashed and left out of the tree's rows, the traces and the counts.
-        state.links.push({ source: ref, target: n.id, type, inner, follows: type === 'needs' && loose.has(ref), key: `${type === 'within' ? 'in:' : ''}${ref}>${n.id}`, equivalent: type === 'needs' && !!n.equivalent });
+        // `stem`: the line from a system to its home. In the clusters it is the only 'within' line drawn.
+        const stem = type === 'within' && n.kind === 'system' && ref === n.home;
+        state.links.push({ source: ref, target: n.id, type, inner, stem, follows: type === 'needs' && loose.has(ref), key: `${type === 'within' ? 'in:' : ''}${ref}>${n.id}`, equivalent: type === 'needs' && !!n.equivalent });
       }
     }
     for (const need of n.rests) state.dependents.get(need).push(n.id);
@@ -147,7 +156,7 @@ function buildGraph() {
   for (const l of state.links) {
     // A field with many statements built directly on it would send a fan of lines into its block; the block's place above the field says the same.
     const bulk = l.type === 'within' && node(l.target).kind !== 'system' && state.built.get(l.source).length > 12;
-    const g = gEdges.append('g').attr('class', `edge ${l.type}${l.follows ? ' follows' : ''}${l.inner ? ' inner' : ''}${bulk ? ' bulk' : ''} gone out`);
+    const g = gEdges.append('g').attr('class', `edge ${l.type}${l.follows ? ' follows' : ''}${l.inner ? ' inner' : ''}${l.stem ? ' stem' : ''}${bulk ? ' bulk' : ''} gone out`);
     [l.from, l.to] = [node(l.source), node(l.target)];
     l.dash = { related: 14, formerly: 10 }[l.type]; // the length of one dash and gap in styles.css
     // "Would follow from" is drawn as a shallow arc. Such a link often joins two entries of one row, where a
@@ -336,11 +345,29 @@ function updateShown() {
     if (vis) paintLink(l, (look ??= lookNow()));
     appear(l, vis);
   }
-  const shown = new Set(state.nodes.filter((n) => n.vis).map((n) => n.id));
-  state.bridges = bridges(state.nodes, shown, (b, a) => node(b).roots.has(a)).map((l) => ({ ...l, source: node(l.source), target: node(l.target) }));
-  drawBridges();
+  const shown = findBridges();
   $('zoom-note').textContent = shown.size < state.nodes.length ? `Showing ${shown.size} of ${state.nodes.length} entries. Zoom in for more.` : `Showing all ${state.nodes.length} entries.`;
   return true;
+}
+
+// The dotted lines past entries that are hidden at this zoom. Returns the ids of the entries that are drawn.
+function findBridges() {
+  const shown = new Set(state.nodes.filter((n) => n.vis).map((n) => n.id));
+  let found = bridges(state.nodes, shown, (b, a) => node(b).roots.has(a));
+  if (state.layout === 'clusters') {
+    // In the clusters the only line a system has to what it is built in is the one to its home. Where the home is
+    // hidden, the dotted line leads on from home to home, to the first entry that is drawn.
+    found = found.filter((l) => l.needsOnly);
+    for (const n of state.nodes) {
+      if (n.kind !== 'system' || !n.vis || !n.home || shown.has(n.home)) continue;
+      let below = node(n.home);
+      while (below.home && !below.vis) below = node(below.home);
+      if (below.vis) found.push({ source: below.id, target: n.id, needsOnly: false });
+    }
+  }
+  state.bridges = found.map((l) => ({ ...l, source: node(l.source), target: node(l.target) }));
+  drawBridges();
+  return shown;
 }
 
 // Written straight to the elements, without d3: this runs on every step of a
@@ -459,7 +486,7 @@ function placeBridges() {
 // arrangement is shown in the current shape.
 function positions(view) {
   const [areas, fold] = state.shape.split('/');
-  state.pos[view] ??= view === 'tree' ? layoutTree(+fold) : areasFor(areas).finish();
+  state.pos[view] ??= view === 'tree' ? layoutTree(+fold) : view === 'clusters' ? layoutClusters(areas) : areasFor(areas).finish();
   return state.pos[view];
 }
 
@@ -467,6 +494,7 @@ function positions(view) {
 // machine, two on a phone), so it is not left to the click on "Areas": it is
 // advanced a few steps at a time whenever the page has nothing else to do.
 // Asked for before it is finished, the remaining steps run at once.
+// The Clusters arrangement is worked out the same way, before the click on it.
 let areasJob = null; // the arrangement being worked out, for one shape of the window
 let areasQueued = false;
 const whenIdle = window.requestIdleCallback
@@ -483,10 +511,15 @@ function areasFor(shape) {
 }
 
 function prepareAreas() {
-  if (state.pos.areas || areasQueued) return;
+  if ((state.pos.areas && state.levels.clusters) || areasQueued) return;
   areasQueued = true;
   whenIdle((idle) => {
     areasQueued = false;
+    // The Clusters arrangement first, in one go: it takes a tenth of a second where the Areas take seconds.
+    if (!state.levels.clusters) {
+      state.levels.clusters = zoomLevels(positions('clusters'));
+      return prepareAreas();
+    }
     if (state.pos.areas) return;
     const job = areasFor(state.shape.split('/')[0]);
     while (job.left() && idle.timeRemaining() > 1) job.step();
@@ -505,18 +538,19 @@ function moved() {
   updatePositions();
 }
 
-// Switch between the tree and the areas. The entries glide to their new places.
+// Switch between the tree, the clusters and the areas. The entries glide to their new places.
 function setLayout(view) {
   if (view === state.layout) return;
   finishWave();
   cancelAnimationFrame(state.tween);
   state.layout = view;
-  for (const v of ['tree', 'areas']) {
+  for (const v of ['tree', 'clusters', 'areas']) {
     document.body.classList.toggle(`view-${v}`, v === view);
     $(`btn-${v}`).setAttribute('aria-pressed', String(v === view));
   }
   const to = positions(view);
   useLevels(view);
+  findBridges(); // they differ between the arrangements, also where the same entries are drawn
   const box = bounds([...to.values()].map(([x, y]) => ({ x, y })));
   if (reduceMotion) {
     place(to);
@@ -564,8 +598,7 @@ function layoutTree(fold) {
   const rows = [];
   const blockOf = new Map(); // row and the entry stood on -> block
   for (const n of state.nodes) {
-    const base = below(n).reduce((best, id) => (best && node(best).layer >= node(id).layer ? best : id), null); // the highest thing it stands on
-    const key = `${n.layer}|${base}`;
+    const key = `${n.layer}|${n.home}`; // the highest thing it stands on
     if (!blockOf.has(key)) {
       const block = { members: [], x: 0 };
       blockOf.set(key, block);
@@ -662,6 +695,121 @@ function layoutTree(fold) {
     floor -= (Math.max(...row.map((b) => b.lines)) - 1) * line + gap;
   }
   return new Map(state.nodes.map((n) => [n.id, [x.get(n.id), y.get(n.id)]]));
+}
+
+// The clusters: every entry lies at its home, the highest thing it stands on.
+// In two steps. First each field (a number system or a theory) gathers the
+// entries that lead to it home by home, on a honeycomb of cells with the field
+// in the middle: an entry takes the free cell nearest to its home. The entries
+// nothing lies at come first and fill the rings around the field; one that
+// has entries of its own comes after them, at the rim, and is followed at once
+// by those entries, which settle around it. Then the fields, as discs of the
+// size they came to, are pushed together so that each touches the field it is
+// built in. Set theory is the first field, with the axioms right around it.
+// A cell is wider than high, because a label needs more room sideways.
+function layoutClusters(shape) {
+  const [cellW, cellH] = [100, 62];
+  const gap = 0.7; // free room around a field's disc, in cells
+  const isField = (n) => n.kind === 'system';
+  const middle = state.nodes.filter((n) => !n.home && n.kind !== 'axiom').sort((a, b) => b.above.size - a.above.size)[0];
+  // What lies at an entry inside its field. Fields are placed on their own; what has no home lies at set theory.
+  const homeless = state.nodes.filter((n) => !n.home && n !== middle).sort((a, b) => Number(b.kind === 'axiom') - Number(a.kind === 'axiom') || Number(middle.within.includes(b.id)) - Number(middle.within.includes(a.id)));
+  const size = new Map(); // an entry with all that lies at it, directly or through others
+  const lying = new Map();
+  const count = (n) => {
+    const at = [...(n === middle ? homeless : []), ...state.around.get(n.id).map(node)].filter((c) => !isField(c));
+    size.set(n.id, 1 + at.reduce((sum, c) => sum + count(c), 0));
+    lying.set(n.id, at.sort((a, b) => size.get(a.id) - size.get(b.id) || a.i - b.i));
+    return size.get(n.id);
+  };
+
+  const ring = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]]; // the six neighbours of a cell
+  const xy = (q, r) => [q + r / 2, (r * Math.sqrt(3)) / 2];
+  const key = (q, r) => (q + 2048) * 4096 + r + 2048;
+  const grow = (field) => {
+    count(field);
+    const taken = new Set([key(0, 0)]);
+    const cell = new Map([[field.id, [0, 0]]]);
+    // The free cell nearest to the cell h; of several equally near, the one nearest to the field.
+    const nearest = ([hq, hr]) => {
+      const [hx, hy] = xy(hq, hr);
+      let best = null;
+      // Ring by ring around h, and one ring past the first that has a free cell: its corners are further from h than the next ring's sides.
+      for (let k = 1, past = 0; past < 2; k++) {
+        let [q, r] = [hq + k * ring[4][0], hr + k * ring[4][1]];
+        for (const [dq, dr] of ring) {
+          for (let i = 0; i < k; i++, q += dq, r += dr) {
+            if (taken.has(key(q, r))) continue;
+            const [x, y] = xy(q, r);
+            const score = Math.round(Math.hypot(x - hx, y - hy) * 1000) * 1000 + Math.hypot(x, y);
+            if (!best || score < best.score) best = { q, r, score };
+          }
+        }
+        if (best) past++;
+      }
+      return [best.q, best.r];
+    };
+    const settle = (n) => {
+      for (const c of lying.get(n.id)) {
+        const at = nearest(cell.get(n.id));
+        taken.add(key(...at));
+        cell.set(c.id, at);
+        settle(c);
+      }
+    };
+    settle(field);
+    const places = [...cell].map(([id, at]) => [id, xy(...at)]);
+    return { id: field.id, places, r: Math.max(...places.map(([, [x, y]]) => Math.hypot(x, y))) + 0.5 + gap, branches: [] };
+  };
+
+  const discs = new Map(state.nodes.filter((n) => isField(n) || n === middle).map((n) => [n.id, grow(n)]));
+  // The field a field is built in: the one its home lies in.
+  const fieldOf = (n) => (discs.has(n.id) ? n : n.home ? fieldOf(node(n.home)) : middle);
+  const links = [];
+  for (const d of discs.values()) {
+    if (d.id === middle.id) continue;
+    const home = node(d.id).home;
+    const parent = discs.get(home ? fieldOf(node(home)).id : middle.id);
+    parent.branches.push(d);
+    links.push({ source: parent, target: d });
+  }
+  // To start with, every field lies against the one it is built in, each branch in its own direction: that way few branches cross.
+  const weight = (d) => (d.weight ??= d.r * d.r + d.branches.reduce((sum, b) => sum + weight(b), 0));
+  const start = (d, x, y, from, to) => {
+    [d.x, d.y] = [x, y];
+    let a = from;
+    for (const b of d.branches.sort((p, q) => weight(q) - weight(p))) {
+      const span = ((to - from) * weight(b)) / (weight(d) - d.r * d.r);
+      start(b, x + (d.r + b.r) * Math.cos(a + span / 2), y + (d.r + b.r) * Math.sin(a + span / 2), a, a + span);
+      a += span;
+    }
+  };
+  start(discs.get(middle.id), 0, 0, 0, 2 * Math.PI);
+  const all = [...discs.values()];
+  d3.forceSimulation(all)
+    .force('link', d3.forceLink(links).distance((l) => l.source.r + l.target.r).strength(1).iterations(6))
+    .force('collide', d3.forceCollide((d) => d.r).strength(1).iterations(4))
+    .force('x', d3.forceX(0).strength(0.015))
+    .force('y', d3.forceY(0).strength(0.015))
+    .stop()
+    .tick(300);
+
+  // The whole is then turned to the angle at which it fills a window of this shape best. Each field's honeycomb stays upright.
+  const want = { tall: 0.6, wide: 1.5, flat: 2.6 }[shape]; // width of the window divided by its height
+  let best = null;
+  for (let i = 0; i < 36; i++) {
+    const [cos, sin] = [Math.cos((i * Math.PI) / 36), Math.sin((i * Math.PI) / 36)];
+    const at = all.map((d) => [d.x * cos - d.y * sin, d.x * sin + d.y * cos]);
+    const span = (k, cell) => (Math.max(...at.map((p, j) => p[k] + all[j].r)) - Math.min(...at.map((p, j) => p[k] - all[j].r))) * cell;
+    const fits = Math.min(want / span(0, cellW), 1 / span(1, cellH));
+    if (!best || fits > best.fits) best = { fits, at };
+  }
+
+  const pos = new Map();
+  all.forEach((d, j) => {
+    for (const [id, [x, y]] of d.places) pos.set(id, [(best.at[j][0] + x) * cellW, (best.at[j][1] + y) * cellH]);
+  });
+  return pos;
 }
 
 // The areas, in two passes. First the areas are packed as circles sized by
@@ -830,7 +978,7 @@ function positionLabels() {
   const sel = state.selected;
   const near = sel ? neighbours(sel) : new Set();
   const { trace, hover, t } = state;
-  const tree = state.layout === 'tree';
+  const byArea = state.layout === 'areas';
   boxes ??= new Float64Array(4 * (2 * state.nodes.length + state.areas.length));
   let placed = 0; // labels take boxes[0 .. placed)
   const hits = (from, to, x0, y0, x1, y1) => {
@@ -851,9 +999,9 @@ function positionLabels() {
     if (hidden !== n.labelHidden) n.labelEl.classList.toggle('hidden', (n.labelHidden = hidden));
   };
 
-  // Area names head the clusters; in the tree the areas are interleaved, so they are not shown.
+  // Area names head the clouds of the Areas arrangement; in the tree and the clusters the areas are interleaved, so they are not shown.
   // Zoomed far out, the names of small areas would lie across their neighbours' names: the larger area keeps its name.
-  for (const a of tree ? [] : state.bySize) {
+  for (const a of byArea ? state.bySize : []) {
     const [x, y] = t.apply([(a.box.x0 + a.box.x1) / 2, a.box.y0]);
     const top = y - 40;
     a.labelW ??= a.labelEl.getBBox().width; // differs by screen size, so measured (again after a resize)
@@ -886,7 +1034,7 @@ function positionLabels() {
       (n.id === sel ? 50000 : 0) +
       (trace?.origin === n.id ? 50000 : 0) +
       (n.hub ? 10000 : 0) +
-      (n.kind === 'system' ? (tree ? 12000 : 3000) + n.above.size : 0) +
+      (n.kind === 'system' ? (byArea ? 3000 : 12000) + n.above.size : 0) +
       (near.has(n.id) ? 4000 : 0) +
       (trace?.seen.has(n.id) ? 20000 : 0) +
       (n.kind !== 'theorem' ? 100 : 0) +
@@ -1588,8 +1736,7 @@ function wire() {
     }),
   );
   $('btn-all').addEventListener('click', touch(() => fit(true)));
-  $('btn-tree').addEventListener('click', touch(() => setLayout('tree')));
-  $('btn-areas').addEventListener('click', touch(() => setLayout('areas')));
+  for (const view of ['tree', 'clusters', 'areas']) $(`btn-${view}`).addEventListener('click', touch(() => setLayout(view)));
   $('status-line').addEventListener('click', () => select('rh', { centre: true }));
   wireSearch();
   document.addEventListener('keydown', (e) => {

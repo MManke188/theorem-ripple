@@ -1,9 +1,9 @@
 // Measures zooming in the installed Firefox, which draws the graph differently from Chromium
 // (tools/perf.cjs) and was slow in places where Chromium was not.
 //
-// Usage: node tools/perf-firefox.cjs [areas]
+// Usage: node tools/perf-firefox.cjs [areas|clusters]
 // Opens a Firefox window of its own for about 15 seconds (temporary profile, yours is not touched),
-// zooms in and out for 240 frames in the tree (or the Areas arrangement) and prints the frames:
+// zooms in and out for 240 frames in the tree (or the arrangement named) and prints the frames:
 // how many took longer than 25 ms (one missed screen refresh at 60 Hz) and than 42 ms (two).
 // Needs a server (python3 -m http.server 8377) or SHOT_URL, Node 22 and macOS. The window has to
 // stay in front while it runs. Run it twice: single runs differ by a few frames.
@@ -13,7 +13,7 @@ const os = require('os');
 const path = require('path');
 
 const url = process.env.SHOT_URL || 'http://127.0.0.1:8377/';
-const areas = process.argv.includes('areas');
+const view = ['areas', 'clusters'].find((v) => process.argv.includes(v)) || '';
 const port = 9333 + Math.floor(Math.random() * 500);
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'theorem-ripple-firefox-'));
 const prefs = { 'browser.shell.checkDefaultBrowser': false, 'browser.aboutwelcome.enabled': false, 'datareporting.policy.dataSubmissionEnabled': false, 'browser.startup.homepage_override.mstone': 'ignore', 'browser.startup.page': 0, 'app.update.enabled': false };
@@ -32,12 +32,12 @@ setTimeout(() => {
 }, 90000);
 
 // Runs in the page: one wheel step per frame, as tools/perf.cjs does.
-const inPage = async (areas) => {
+const inPage = async (view) => {
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   while (!document.querySelector('.node:not(.gone)')) await wait(50);
   await wait(5500); // the opening wave
-  if (areas) {
-    document.getElementById('btn-areas').click();
+  if (view) {
+    document.getElementById(`btn-${view}`).click();
     await wait(1600);
   }
   const graph = document.getElementById('graph');
@@ -86,7 +86,7 @@ const inPage = async (areas) => {
   await send('session.new', { capabilities: {} });
   const context = (await send('browsingContext.getTree')).contexts[0].context;
   await send('browsingContext.navigate', { context, url, wait: 'complete' });
-  const res = await send('script.evaluate', { expression: `(${inPage})(${areas})`, target: { context }, awaitPromise: true });
+  const res = await send('script.evaluate', { expression: `(${inPage})(${JSON.stringify(view)})`, target: { context }, awaitPromise: true });
   console.log(res.result?.value ?? JSON.stringify(res));
   await send('browser.close').catch(() => {});
   finish(0);

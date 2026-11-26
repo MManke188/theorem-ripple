@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reach, reachFrom, layers, foundationsOf, restsOn, followsFrom, bridges } from '../js/propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reach, reachFrom, layers, homes, foundationsOf, restsOn, followsFrom, bridges } from '../js/propagate.js';
 
 const read = (file) => JSON.parse(readFileSync(new URL(`../data/${file}`, import.meta.url), 'utf8'));
 const index = read('index.json');
@@ -164,6 +164,27 @@ test('layers and foundation walks include the systems a statement is built in', 
   // A system holds no status, and what is built in it does not become proven through it.
   assert.deepEqual([...computeProven(sample, new Set(['axiom']))].sort(), ['axiom', 'lemma', 'result']);
   assert.throws(() => validate(normalize([{ id: 'a', within: ['b'] }, { id: 'b', within: ['a'] }])), /cycle/);
+});
+
+test('every entry has one home, the highest thing it stands on, and the homes lead down to set theory', () => {
+  const sample = normalize([
+    { id: 'axiom', kind: 'axiom', base: 'open' },
+    { id: 'sets', kind: 'system', within: ['axiom'] },
+    { id: 'numbers', kind: 'system', within: ['sets'] },
+    { id: 'lemma', base: 'proven', within: ['numbers'] },
+    { id: 'result', base: 'proven', needs: ['lemma'], within: ['sets'] },
+    { id: 'guess', base: 'open', needs: ['result'], within: ['numbers'] },
+  ]);
+  // An open statement stands on its field only: what it lists in `needs` is what it would follow from.
+  assert.deepEqual([...homes(sample)], [['axiom', null], ['sets', null], ['numbers', 'sets'], ['lemma', 'numbers'], ['result', 'lemma'], ['guess', 'numbers']]);
+
+  const home = homes(nodes);
+  const centres = nodes.filter((n) => n.kind !== 'axiom' && home.get(n.id) === null).map((n) => n.id);
+  assert.deepEqual(centres, ['zf-set-theory']);
+  for (const n of nodes) {
+    if (home.get(n.id) !== null) assert.ok(foundationsOf(n).includes(home.get(n.id)), `${n.id} is placed at something it does not stand on`);
+    else assert.ok(n.kind === 'axiom' || n.id === 'zf-set-theory', `${n.id} has no home`);
+  }
 });
 
 test('a statement with several independent routes is proven by any one of them', () => {

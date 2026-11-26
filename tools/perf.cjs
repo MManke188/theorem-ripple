@@ -286,6 +286,25 @@ const find = async (page, text) => {
     await page.waitForTimeout(1300);
   });
 
+  // The Clusters arrangement is worked out inside the first click on it.
+  await measure(s, 'switch-to-clusters-first', async () => {
+    const blocked = await page.evaluate(
+      () =>
+        new Promise((done) => {
+          const t0 = performance.now();
+          document.getElementById('btn-clusters').click();
+          const t1 = performance.now();
+          requestAnimationFrame(() => done({ clickBlockedMs: Math.round(t1 - t0), toNextFrameMs: Math.round(performance.now() - t0) }));
+        }),
+    );
+    await page.waitForTimeout(1300);
+    return blocked;
+  });
+  await page.locator('#btn-all').click();
+  await page.waitForTimeout(700);
+  await measure(s, 'zoom-clusters', () => perFrame(page, 90, wheel));
+  await measure(s, 'pan-clusters', () => perFrame(page, 90, drag));
+
   results.errors = s.errors;
   results.dom = await page.evaluate(() => document.querySelectorAll('*').length);
   console.log(JSON.stringify(results, null, 1));

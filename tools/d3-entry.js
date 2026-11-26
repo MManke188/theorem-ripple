@@ -3,7 +3,7 @@
 // exist on the page: add it, then build again (in an empty folder outside the repository):
 //
 //   npm install d3@7.9.0 esbuild
-//   npx esbuild <repo>/tools/d3-entry.js --bundle --minify --format=iife --global-name=d3 \
+//   NODE_PATH=$PWD/node_modules npx esbuild <repo>/tools/d3-entry.js --bundle --minify --format=iife --global-name=d3 \
 //     --banner:js="// d3 v7.9.0, only the parts listed in tools/d3-entry.js. https://d3js.org Copyright 2010-2023 Mike Bostock, ISC license" \
 //     --outfile=<repo>/js/vendor/d3.min.js
 //

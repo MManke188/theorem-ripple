@@ -83,6 +83,19 @@ export function layers(nodes) {
   return layer;
 }
 
+// The one entry each node is placed at: the highest thing it stands on, and
+// the first of them where several are equally high. Axioms have none, and
+// neither has an entry that stands on axioms alone (set theory itself).
+export function homes(nodes) {
+  const layer = layers(nodes);
+  return new Map(
+    nodes.map((n) => {
+      const home = foundationsOf(n).reduce((best, id) => (best !== null && layer.get(best) >= layer.get(id) ? best : id), null);
+      return [n.id, home !== null && layer.get(home) > 0 ? home : null];
+    }),
+  );
+}
+
 export function computeProven(nodes, marked) {
   const byId = index(nodes);
   const memo = new Map();

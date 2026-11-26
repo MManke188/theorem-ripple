@@ -86,6 +86,10 @@ body.view-tree .edge.within.inner line { stroke: #7c8db5; stroke-width: 2.6; }
 /* Among the areas, the links from a statement to its system would cross the whole map: only those inside the foundations, of the selected entry, or on a trace are drawn. */
 body.view-areas .edge.within:not(.inner):not(.own):not(.traced) { display: none; }
 .edge.within.bulk:not(.own):not(.traced) { display: none; }
+/* In the clusters an entry lies at what it stands on, and a line there would say the same again. Drawn are only the stems:
+   from a system to the system it lies at, like the tree's trunk. */
+body.view-clusters .edge.within:not(.stem):not(.own):not(.traced) { display: none; }
+body.view-clusters .edge.within.stem line { stroke: #7c8db5; stroke-width: 2.6; }
 .edge { transition: --og 0.3s; }
 .edge.dim { --og: 0.18; }
 /* A link without an arrowhead is a single line, which is dimmed through its stroke for the same reason. */
@@ -103,7 +107,7 @@ body.view-areas .edge.within:not(.inner):not(.own):not(.traced) { display: none;
    One dot and gap are 6 long for every bridge; clipLine() in app.js counts on that. */
 .bridge { stroke: #45547a; stroke-width: 1.3; stroke-dasharray: 1.5 4.5; vector-effect: non-scaling-stroke; }
 /* Between two systems it is a stretch of the trunk. */
-body.view-tree .bridge.within.inner { stroke: #7c8db5; stroke-width: 2.4; stroke-dasharray: 2.4 3.6; }
+body.view-tree .bridge.within.inner, body.view-clusters .bridge.within.inner { stroke: #7c8db5; stroke-width: 2.4; stroke-dasharray: 2.4 3.6; }
 .bridges.dim { opacity: 0.25; }
 body.view-areas .bridge.within:not(.inner) { display: none; }
 
@@ -195,7 +199,7 @@ body.view-areas .bridge.within:not(.inner) { display: none; }
 }
 .area-label:hover text, .area-label:focus-visible text { fill: var(--text); }
 .area-label:focus { outline: none; }
-body.view-tree .area-label, .area-label.hidden { display: none; }
+body:not(.view-areas) .area-label, .area-label.hidden { display: none; }
 
 /* ---------- top ---------- */
 

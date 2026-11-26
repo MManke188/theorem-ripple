@@ -227,7 +227,19 @@
       "note": "It can be neither proven nor refuted from the usual axioms (ZFC), and no known large cardinal axiom decides it.",
       "url": "https://en.wikipedia.org/wiki/Continuum_hypothesis",
       "area": "logic",
-      "year": 1878
+      "year": 1878,
+      "anyOf": [
+        {
+          "id": "diamond-principle",
+          "url": "https://en.wikipedia.org/wiki/Diamond_principle",
+          "origin": "wikipedia-import"
+        },
+        {
+          "id": "axiom-of-constructibility",
+          "url": "https://en.wikipedia.org/wiki/Continuum_hypothesis",
+          "origin": "wikipedia-import"
+        }
+      ]
     },
     {
       "id": "ch-independence",
@@ -1617,6 +1629,7 @@
       "base": "open",
       "needs": [],
       "anyOf": [
+        "continuum-hypothesis",
         "proper-forcing-axiom",
         "martins-maximum"
       ],
@@ -1893,7 +1906,9 @@
       "statement": "Let T be a first-order, countable, complete theory with infinite models, and let I(T, ℵ₀) be the number of its countable models up to isomorphism. Then I(T, ℵ₀) cannot lie strictly between ℵ₀ and 2^ℵ₀.",
       "kind": "hypothesis",
       "base": "open",
-      "needs": [],
+      "needs": [
+        "continuum-hypothesis"
+      ],
       "within": [
         "mathematical-logic"
       ],

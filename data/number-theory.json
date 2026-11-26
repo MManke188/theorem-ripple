@@ -1506,12 +1506,7 @@
       "kind": "theorem",
       "base": "proven",
       "needs": [
-        "gross-zagier",
-        {
-          "id": "bakers-theorem",
-          "url": "https://en.wikipedia.org/wiki/Baker's_theorem",
-          "origin": "wikipedia-import"
-        }
+        "gross-zagier"
       ],
       "by": "Dorian Goldfeld, 1976, completed by the Gross–Zagier theorem, 1986",
       "note": "Goldfeld reduced the problem to finding an elliptic curve whose L-function has a zero of high order at s = 1. The Gross–Zagier theorem supplied one.",

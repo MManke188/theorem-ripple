@@ -26,7 +26,7 @@ An unreviewed recent claim of a proof or disproof goes in the `claim` field. It 
 
 `tools/import/` builds draft entries from Wikipedia without browsing agents, at about 6,000 tokens an entry where the steps above cost about 230,000. The header of each script says what it does; they run in this order and each skips what is already done:
 
-1. `list.cjs`: Wikidata's list of theorems, conjectures, lemmas, problems and axioms with an English article.
+1. `list.cjs`: Wikidata's list of theorems, conjectures, lemmas, problems and axioms with an English article. It also says which entry written by hand an article is (`existing`): the one that bears the article's name, else the one entry that cites it. An entry that cites an article is often a special case of it or a result proven under it; those and the unclear cases are in the `ARTICLE` table in the script. `--rematch` works this out again without asking Wikidata.
 2. `fetch.cjs`: the articles' source text, 50 per request.
 3. `write.cjs`: a cheap model (Sonnet) drafts an entry from the opening, the formal statement and the History section, with the sentences it relied on. The script checks that those sentences are in the article.
 4. `review.cjs`: a stronger model (Opus) reads the whole article and corrects the draft. In the pilot (100 articles, graded by three browsing checkers) 4 of 65 drafts were false before this step, each for a condition given further down the article; the review fixed all four.

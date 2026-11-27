@@ -11,6 +11,7 @@
   --blue: #4cc3f5;
   --violet: #b9a5ff;
   --edge: #2c3750;
+  --speck-open: #8792a8; /* the small dot of an open entry (drawSpecks in app.js) */
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -47,6 +48,8 @@ button { font: inherit; color: inherit; }
 .edge line, .edge .arc, .node .check { stroke-opacity: var(--op, 1); }
 .edge .chev, .node .pip { fill-opacity: var(--op, 1); }
 
+/* Three sheets, one over the other: the lines and balls, the small dots, the entries and their names (see the top of app.js). */
+#graph-under, #specks { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 #graph {
   position: fixed;
   inset: 0;
@@ -81,25 +84,17 @@ button { font: inherit; color: inherit; }
 .edge.related:not(.own) { display: none; } /* drawn only for the selected entry: on the bare map nothing says what such a line means */
 .edge.within line { stroke: #46557a; stroke-width: 1.1; }
 .edge.within .chev { display: none; }
-/* The links between the systems themselves are the trunk and the boughs of the tree. */
-body.view-tree .edge.within.inner line, body.view-solo .edge.within.inner line { stroke: #7c8db5; stroke-width: 2.6; }
-/* Among the areas, the links from a statement to its system would cross the whole map: only those inside the foundations, of the selected entry, or on a trace are drawn. */
-body.view-areas .edge.within:not(.inner):not(.own):not(.traced) { display: none; }
-body:not(.view-molecule):not(.view-solo) .edge.within.bulk:not(.own):not(.traced) { display: none; }
-/* In the molecule an entry has one line, the bond to its home (the highest thing it stands on). Its other lines would
+/* The body has the class view-solo while one entry stands in the middle with only what it is connected to; without it, the map is shown. */
+/* With one entry in the middle, the links inside one data file (among them those between the systems) are the heavier ones. */
+body.view-solo .edge.within.inner line { stroke: #7c8db5; stroke-width: 2.6; }
+/* On the map an entry has one line, the bond to its home (the highest thing it stands on). Its other lines would
    cross the map; they are drawn for the selected entry and on a trace. The bonds between two subjects are the frame. */
-body.view-molecule .edge:not(.bond):not(.own):not(.traced) { display: none; }
-body.view-molecule .edge.within.bond line { stroke: #5b6b92; stroke-width: 1.3; }
-body.view-molecule .edge.within.stem line { stroke: #7c8db5; stroke-width: 3; }
+body:not(.view-solo) .edge:not(.bond):not(.own):not(.traced) { display: none; }
+body:not(.view-solo) .edge.within.bond line { stroke: #5b6b92; stroke-width: 1.3; }
+body:not(.view-solo) .edge.within.stem line { stroke: #7c8db5; stroke-width: 3; }
 /* A subject's ball: its size says how many statements lie inside it. They appear as the reader zooms in. */
-.ball { fill: #121a2c; stroke: #7c8db5; stroke-width: 1.5; vector-effect: non-scaling-stroke; display: none; }
-body.view-molecule .ball { display: inline; }
-body.view-molecule .ball.absent { display: none; } /* during the playback: its subject is not on the map yet */
-/* During the playback every entry that is on the map has a dot, three pixels wide at every zoom: one path per status, each dot a line of no length. */
-.specks path { fill: none; stroke-width: 3.2px; stroke-linecap: square; vector-effect: non-scaling-stroke; }
-.specks .proven { stroke: var(--green); }
-.specks .conditional { stroke: var(--amber); }
-.specks .open { stroke: #8792a8; }
+.ball { fill: #121a2c; stroke: #7c8db5; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+body.view-solo .ball, .ball.absent { display: none; } /* absent, during the playback: its subject is not on the map yet */
 .edge { transition: --og 0.3s; }
 .edge.dim { --og: 0.18; }
 /* A link without an arrowhead is a single line, which is dimmed through its stroke for the same reason. */
@@ -116,10 +111,7 @@ body.view-molecule .ball.absent { display: none; } /* during the playback: its s
 /* Square dots, not round ones: Firefox draws round line ends several times slower, and at this size they look the same.
    One dot and gap are 6 long for every bridge; clipLine() in app.js counts on that. */
 .bridge { stroke: #45547a; stroke-width: 1.3; stroke-dasharray: 1.5 4.5; vector-effect: non-scaling-stroke; }
-/* Between two systems it is a stretch of the trunk. */
-body.view-tree .bridge.within.inner { stroke: #7c8db5; stroke-width: 2.4; stroke-dasharray: 2.4 3.6; }
 .bridges.dim { opacity: 0.25; }
-body.view-areas .bridge.within:not(.inner) { display: none; }
 
 .flow line { stroke: var(--green); stroke-width: 2.5; vector-effect: non-scaling-stroke; stroke-linecap: round; }
 .flow circle { fill: #eafff3; }
@@ -197,23 +189,6 @@ body.view-solo .node .count { display: inline; }
 .label.hidden text { --op: 0; }
 .label.dim { --og: 0.25; }
 
-.area-label { cursor: pointer; }
-.area-label text {
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-anchor: middle;
-  dominant-baseline: hanging;
-  fill: #7f8ca3;
-  paint-order: stroke;
-  stroke: var(--bg);
-  stroke-width: 4px;
-}
-.area-label:hover text, .area-label:focus-visible text { fill: var(--text); }
-.area-label:focus { outline: none; }
-body:not(.view-areas) .area-label, .area-label.hidden { display: none; }
-
 /* ---------- top ---------- */
 
 .hud-top {
@@ -230,8 +205,6 @@ body:not(.view-areas) .area-label, .area-label.hidden { display: none; }
 .hud-top > * { pointer-events: auto; }
 
 .brand { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.layout-switch { margin-left: auto; }
-.layout-switch button { min-height: 32px; padding: 0 12px; }
 h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 .tagline { margin: 0; font-size: 13px; color: var(--muted); }
 
@@ -537,7 +510,6 @@ body.playing .controls, body.playing .status-line { display: none; }
   .ghost { padding: 0 12px; }
   .status-line { font-size: 12px; --lines: 2; }
   .hud-bottom { left: 14px; right: 14px; flex-wrap: wrap-reverse; }
-  .area-label text { font-size: 10px; letter-spacing: 0.08em; stroke-width: 3px; }
   .tally { gap: 10px; font-size: 12px; padding: 7px 10px; }
   .panel {
     top: auto;
@@ -559,8 +531,6 @@ body.playing .controls, body.playing .status-line { display: none; }
   .brand { display: contents; }
   .brand h1, .brand .tagline, #btn-before .long, #btn-play .long { display: none; }
   #btn-play .short { display: inline; }
-  .layout-switch { margin-left: 0; }
-  .layout-switch button { min-height: 36px; padding: 0 10px; }
   .hud-top { flex-direction: row; flex-wrap: wrap; align-items: center; }
   .switch button { min-height: 36px; }
   .ghost, .search input { min-height: 40px; }
@@ -570,7 +540,6 @@ body.playing .controls, body.playing .status-line { display: none; }
   .play-year { font-size: 24px; }
   .status-line { font-size: 11.5px; --lines: 1; }
   body.panel-open .hud-top { right: min(320px, 48vw); }
-  .area-label text { font-size: 10px; letter-spacing: 0.08em; stroke-width: 3px; }
   .hud-bottom { bottom: 8px; }
   .panel { width: min(320px, 48vw); padding: 14px 14px 14px; }
   .panel h2 { font-size: 17px; }

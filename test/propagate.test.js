@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reach, reachFrom, layers, homes, foundationsOf, restsOn, followsFrom, bridges, history } from '../js/propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reach, reachFrom, layers, homes, foundationsOf, restsOn, followsFrom, history } from '../js/propagate.js';
 
 const read = (file) => JSON.parse(readFileSync(new URL(`../data/${file}`, import.meta.url), 'utf8'));
 const index = read('index.json');
@@ -126,10 +126,10 @@ test('an open statement rests on nothing: what it lists is what it would follow 
   }
   assert.deepEqual(followsFrom(byId.get('rh')), ['grh']);
   assert.deepEqual(restsOn(byId.get('von-koch')), ['rh']);
-  // In the tree the Riemann Hypothesis therefore stands on its theory, not on GRH, and every axiom is in the bottom row.
+  // The Riemann Hypothesis therefore stands on its theory, not on GRH, and every axiom has nothing below it.
   const layer = layers(nodes);
   assert.ok(!foundationsOf(byId.get('rh')).includes('grh') && foundationsOf(byId.get('rh')).length > 0);
-  for (const n of nodes) if (n.kind === 'axiom') assert.equal(layer.get(n.id), 0, `${n.id} is an axiom above the bottom row`);
+  for (const n of nodes) if (n.kind === 'axiom') assert.equal(layer.get(n.id), 0, `${n.id} is an axiom that stands on something`);
 });
 
 test('the event and the default axioms refer to real entries', () => {
@@ -327,26 +327,6 @@ test('index.html asks for every data file up front', () => {
   for (const file of ['index.json', ...index.areas.map((a) => a.file)]) {
     assert.ok(html.includes(`<link rel="preload" href="data/${file}" as="fetch" crossorigin>`), `index.html has no preload line for data/${file}: add one next to the others`);
   }
-});
-
-test('bridges join a shown entry to the nearest shown entries below it, past hidden ones', () => {
-  const sample = normalize([
-    { id: 'axiom', kind: 'axiom', base: 'open' },
-    { id: 'sets', kind: 'system', within: ['axiom'] },
-    { id: 'numbers', kind: 'system', within: ['sets'] },
-    { id: 'lemma', kind: 'theorem', base: 'proven', within: ['numbers'] },
-    { id: 'result', kind: 'theorem', base: 'proven', needs: ['lemma'] },
-    { id: 'top', kind: 'theorem', base: 'proven', needs: ['result'], within: ['numbers'] },
-  ]);
-  const standsOn = (b, a) => reach(sample, b, 'up', foundationsOf).has(a);
-  const of = (...shown) => bridges(sample, new Set(shown), standsOn).map((l) => `${l.source}>${l.target}${l.needsOnly ? ' needs' : ''}`).sort();
-
-  assert.deepEqual(of('axiom', 'sets', 'numbers', 'lemma', 'result', 'top'), []);
-  assert.deepEqual(of('axiom', 'numbers', 'result'), ['axiom>numbers', 'numbers>result']);
-  // Through `needs` alone, and not a second time through the system the chain passes.
-  assert.deepEqual(of('lemma', 'top', 'axiom'), ['axiom>lemma', 'lemma>top needs']);
-  // `top` is linked to `numbers` directly, so no bridge to what `numbers` stands on.
-  assert.deepEqual(of('axiom', 'numbers', 'top'), ['axiom>numbers']);
 });
 
 test('history: an entry appears in its year and changes status when it was proven', () => {

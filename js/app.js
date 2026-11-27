@@ -1,4 +1,4 @@
-import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reachFrom, layers, homes, foundationsOf, restsOn, followsFrom, bridges, history } from './propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reachFrom, homes, foundationsOf, restsOn, followsFrom, history } from './propagate.js';
 
 const d3 = window.d3;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -16,12 +16,11 @@ const state = {
   around: new Map(), // id -> the entries whose home it is: of all they stand on, this is the highest. The molecule puts them around it.
   inBall: new Map(), // subject -> the entries that lie inside its ball in the molecule: the statements at it that nothing rests on
   middle: null, // set theory, the one subject that stands on axioms alone
-  areas: [],
-  layout: 'tree', // how the map is arranged: 'tree' (axioms at the bottom), 'molecule' (the subjects as atoms, joined by bonds), 'areas' (one cloud per data file) or 'solo' (one entry in the middle, see `solo`)
+  areas: [], // the data files, for the badge in the panel
   play: null, // while the map is played back year by year: see startPlay
-  solo: null, // { id, members, pos, all, back } while one entry stands in the middle with only what it is connected to; `back` is the arrangement and the zoom the map had
-  pos: {}, // positions per arrangement for the current shape, worked out when first shown
-  levels: {}, // per arrangement: the zoom from which each entry is drawn
+  solo: null, // { id, members, pos, all, back } while one entry stands in the middle with only what it is connected to; `back` is the zoom the map had
+  pos: null, // where every entry sits on the map, for the current shape of the window
+  levels: null, // the zoom from which each entry is drawn on the map
   order: [], // all entries, the ones most is built on first
   bridges: [], // links drawn past entries that are hidden at this zoom
   tween: 0,
@@ -38,25 +37,26 @@ const state = {
   hover: null,
   t: d3.zoomIdentity,
   wave: null,
-  shape: null, // the proportions of the free part of the window: tall, wide or flat (areas), and how often the tree's rows are folded
+  shape: null, // the proportions of the free part of the window: tall, wide or flat
   touched: false,
   dotScale: 'scale(1)', // dots shrink and grow with the zoom, by its square root
+  specksDim: false, // the small dots (drawSpecks) are drawn faint
 };
 
 const svg = d3.select('#graph');
 // The graph is built outside the page and put in at the end of init(): the
 // browser then styles and lays out its 4,000 elements once, in their final state.
-const viewport = d3.create('svg:g').attr('class', 'viewport');
-const gWaves = viewport.append('g');
-const gBridges = viewport.append('g').attr('class', 'bridges');
-const gEdges = viewport.append('g');
-const gBalls = viewport.append('g'); // over the lines, so that a line ends at the rim of a ball
-// During the playback: one dot per entry that is on the map, also where the zoom is too far out to draw the entry itself.
-const gSpecks = viewport.append('g').attr('class', 'specks');
-const specks = Object.fromEntries(['proven', 'conditional', 'open'].map((status) => [status, gSpecks.append('path').attr('class', status).node()]));
+// It is drawn in three sheets, one over the other: the lines and the subjects' balls (`under`, in the <svg> #graph-under),
+// one dot per entry on a canvas (drawSpecks), and the entries themselves with their names (`viewport`, in #graph).
+const under = d3.create('svg:g');
+const gWaves = under.append('g');
+const gBridges = under.append('g').attr('class', 'bridges');
+const gEdges = under.append('g');
+const gBalls = under.append('g'); // over the lines, so that a line ends at the rim of a ball
+const specks = $('specks').getContext('2d');
+const viewport = d3.create('svg:g');
 const gFlows = viewport.append('g');
 const gNodes = viewport.append('g');
-const gAreas = d3.create('svg:g');
 const gLabels = d3.create('svg:g');
 const maxZoom = 5;
 const labelRoom = [104, 52]; // room on screen for a dot with its label
@@ -125,8 +125,8 @@ async function init() {
     for (const [type, refs] of [['needs', n.inputs], ['within', n.within], ['related', n.related], ['formerly', n.formerly]]) {
       for (const ref of refs) {
         const inner = type === 'within' && state.byId.get(ref).area === n.area; // both ends in the same area
-        // `follows`: a 'needs' link of the "would follow from" kind. It is drawn dashed and left out of the tree's rows, the traces and the counts.
-        // `bond`: the line from an entry to its home, unless the entry lies inside its home's ball. The molecule draws only these.
+        // `follows`: a 'needs' link of the "would follow from" kind. It is drawn dashed and left out of the traces and the counts.
+        // `bond`: the line from an entry to its home, unless the entry lies inside its home's ball. The map draws only these.
         // `stem`: such a line between two subjects.
         const bond = ref === n.home && !n.ballOf && type !== 'related' && type !== 'formerly';
         const stem = bond && n.kind === 'system';
@@ -137,7 +137,6 @@ async function init() {
     for (const from of loose) state.follows.get(from).push(n.id);
     for (const sys of n.within) state.built.get(sys).push(n.id);
   }
-  const layer = layers(nodes);
   const [down, up, roots, above] = [reachFrom(nodes, 'down'), reachFrom(nodes, 'up'), reachFrom(nodes, 'up', foundationsOf), reachFrom(nodes, 'down', foundationsOf)];
   nodes.forEach((n, i) => {
     n.i = i;
@@ -147,7 +146,6 @@ async function init() {
     n.above = above(n.id); // everything that stands on it in any way
     n.weight = n.down.size;
     n.depth = Math.max(0, ...n.up.values());
-    n.layer = layer.get(n.id); // height above the axioms
     n.r = n.kind === 'system' ? Math.min(22, 9 + 0.9 * Math.sqrt(n.above.size)) : Math.min(24, 8 + 2.3 * Math.sqrt(n.weight)) + (n.kind === 'theorem' ? 0 : 1.5);
   });
   // The most rested-on statements keep their label at every zoom level, and so do the systems.
@@ -157,11 +155,9 @@ async function init() {
   // An axiom counts by the statements that need it, so that set theory itself is drawn before the eight axioms right below it.
   const major = (n) => (n.kind === 'axiom' ? n.weight : n.above.size);
   state.order = [...nodes].sort((a, b) => major(b) - major(a) || b.roots.size - a.roots.size);
-  state.areas = index.areas.map((a) => ({ ...a, nodes: nodes.filter((n) => n.area === a.id) })).filter((a) => a.nodes.length);
-  state.bySize = [...state.areas].sort((a, b) => b.nodes.length - a.nodes.length);
+  state.areas = index.areas;
 
   buildGraph();
-  document.body.classList.add(`view-${state.layout}`);
   svg.call(zoom).on('dblclick.zoom', null);
   state.real = computeProven(nodes, baseMarks());
   state.shown = new Set(state.real);
@@ -169,7 +165,8 @@ async function init() {
   relayout();
   applyStatus();
   renderStatusLine();
-  svg.node().append(viewport.node(), gAreas.node(), gLabels.node());
+  $('graph-under').append(under.node());
+  svg.node().append(viewport.node(), gLabels.node());
   wire();
 
   setTimeout(() => {
@@ -181,13 +178,11 @@ async function init() {
 
 function buildGraph() {
   for (const l of state.links) {
-    // A field with many statements built directly on it would send a fan of lines into its block; the block's place above the field says the same.
-    const bulk = l.type === 'within' && node(l.target).kind !== 'system' && state.built.get(l.source).length > 12;
-    const g = gEdges.append('g').attr('class', `edge ${l.type}${l.follows ? ' follows' : ''}${l.inner ? ' inner' : ''}${l.bond ? ' bond' : ''}${l.stem ? ' stem' : ''}${bulk ? ' bulk' : ''} gone out`);
+    const g = gEdges.append('g').attr('class', `edge ${l.type}${l.follows ? ' follows' : ''}${l.inner ? ' inner' : ''}${l.bond ? ' bond' : ''}${l.stem ? ' stem' : ''} gone out`);
     [l.from, l.to] = [node(l.source), node(l.target)];
     l.dash = { related: 14, formerly: 10 }[l.type]; // the length of one dash and gap in styles.css
-    // "Would follow from" is drawn as a shallow arc. Such a link often joins two entries of one row, where a
-    // straight line would run through the entries between them and read as a chain (ERH, RH, GRH).
+    // "Would follow from" is drawn as a shallow arc. Such a link often joins two entries that stand in one line, where
+    // a straight line would run through the entries between them and read as a chain (ERH, RH, GRH).
     l.line = l.follows ? g.append('path').attr('class', 'arc').node() : g.append('line').node();
     l.chev = g.append('path').attr('class', 'chev').attr('d', l.equivalent ? 'M-8,0 L-2,-4 L-2,4 Z M8,0 L2,-4 L2,4 Z' : 'M4.5,0 L-3,-4 L-3,4 Z').node();
     l.el = g.node();
@@ -244,18 +239,6 @@ function buildGraph() {
   }
 
   for (const n of state.nodes) if (n.kind === 'system') n.ballEl = gBalls.append('circle').attr('class', 'ball').attr('r', n.ball).node();
-
-  for (const a of state.areas) {
-    const g = gAreas.append('g').attr('class', 'area-label').attr('role', 'button').attr('tabindex', 0).attr('aria-label', `Zoom to ${a.name}`);
-    g.append('text').text(a.name);
-    const go = (e) => {
-      e.stopPropagation();
-      state.touched = true;
-      fit(true, a.nodes);
-    };
-    g.on('click', go).on('keydown', (e) => (e.key === 'Enter' || e.key === ' ') && go(e));
-    a.labelEl = g.node();
-  }
 }
 
 function wrap(text, max) {
@@ -297,25 +280,19 @@ function relayout() {
   $('legend').open = wide() && !state.play; // the playback closes it, for room
   const area = freeArea(true);
   const aspect = (window.innerWidth - 12) / (area.bottom - area.top);
-  // The tree is much wider than high. Where the free part of the window is not, its crowded rows are folded into two or three lines.
-  const shape = `${aspect < 0.9 ? 'tall' : aspect > 2.2 ? 'flat' : 'wide'}/${aspect < 0.7 ? 3 : aspect < 1.4 ? 2 : 1}`;
+  const shape = aspect < 0.9 ? 'tall' : aspect > 2.2 ? 'flat' : 'wide'; // the map is turned to suit it
   if (shape !== state.shape || state.tween || state.solo) {
     cancelAnimationFrame(state.tween);
     state.tween = 0;
-    if (shape !== state.shape) [state.pos, state.levels] = [{}, {}];
+    if (shape !== state.shape) [state.pos, state.levels] = [null, null];
     state.shape = shape;
     if (state.solo) Object.assign(state.solo, layoutSolo(state.solo.id)); // the room changed, and perhaps the direction
-    place(positions(state.layout));
-    useLevels(state.layout);
-  }
-  for (const a of state.areas) {
-    a.labelW = undefined; // the size of the area names depends on the window
-    a.labelEl?.classList.remove('hidden'); // a hidden name cannot be measured
-    a.labelHidden = false;
+    place(positions());
+    useLevels();
   }
   fit();
   if (state.solo) fitView(state.solo.pos);
-  requestAnimationFrame(prepareAreas); // after this picture is on screen
+  drawSpecks(); // their canvas has the size of the window
 }
 
 // The zoom from which each entry is drawn, as on a road map: zoomed out, only
@@ -326,7 +303,7 @@ function relayout() {
 // also goes only so far down the ranking, so that free space far out is not
 // filled with minor entries that would later stand in the way of major ones.
 // An entry that is drawn stays drawn at every closer zoom.
-// `first` are entries drawn at every zoom, `skip` entries left to the caller (both for the molecule).
+// `first` are entries drawn at every zoom, `skip` entries left to the caller (see moleculeLevels).
 function zoomLevels(pos, first = [], skip = new Set()) {
   const [sx, sy] = labelRoom;
   const level = new Map(first.map((id) => [id, 0]));
@@ -346,7 +323,7 @@ function zoomLevels(pos, first = [], skip = new Set()) {
   return new Map(state.order.map((n) => [n.id, level.get(n.id) ?? 0.95]));
 }
 
-// In the molecule the subjects are drawn at every zoom: their bonds are the picture. The entries inside a ball
+// The subjects are drawn at every zoom: their bonds are the picture. The entries inside a ball
 // appear as the reader zooms into it, the most built-on first, each as soon as its label has room among those
 // already drawn in that ball. At the largest zoom all of them are drawn.
 function moleculeLevels(pos) {
@@ -370,11 +347,10 @@ function moleculeLevels(pos) {
   return level;
 }
 
-const levelsFor = (view) => (state.levels[view] ??= view === 'molecule' ? moleculeLevels(positions(view)) : zoomLevels(positions(view)));
-
-function useLevels(view) {
-  if (view !== 'solo') levelsFor(view);
-  for (const n of state.nodes) n.level = view === 'solo' ? 0 : state.levels[view].get(n.id);
+// With one entry in the middle the zoom hides nothing.
+function useLevels() {
+  if (!state.solo) state.levels ??= moleculeLevels(mapPositions());
+  for (const n of state.nodes) n.level = state.solo ? 0 : state.levels.get(n.id);
   if (updateShown()) positionLabels();
 }
 
@@ -419,26 +395,22 @@ function zoomNote(shown) {
     if (solo.all) return `Only ${name} and what it is connected to: ${shown} ${shown === 1 ? 'entry' : 'entries'}.`;
     return `Only ${name}, what it stands on, the subjects built on it and its own statements that others rest on: ${shown} of ${node(solo.id).above.size + node(solo.id).roots.size + 1} entries.`;
   }
-  return shown < state.nodes.length ? `Showing ${shown} of ${state.nodes.length} entries. Zoom in for more.` : `Showing all ${state.nodes.length} entries.`;
+  return shown < state.nodes.length ? `${shown} of ${state.nodes.length} entries drawn in full. Zoom in for more.` : `All ${state.nodes.length} entries drawn in full.`;
 }
 
 // The dotted lines past entries that are hidden at this zoom. Returns the ids of the entries that are drawn.
+// The only line an entry has on the map is the one to its home. Where the home is hidden, the dotted line leads on
+// from home to home, to the first entry that is drawn. With one entry in the middle everything it is connected to
+// is drawn: no chain is hidden.
 function findBridges() {
   const shown = new Set(state.nodes.filter((n) => n.vis).map((n) => n.id));
-  // With one entry in the middle everything it is connected to is drawn: no chain is hidden.
-  let found = state.solo ? [] : bridges(state.nodes, shown, (b, a) => node(b).roots.has(a));
-  if (state.layout === 'molecule') {
-    // In the molecule the only line an entry has is the one to its home. Where the home is hidden, the dotted
-    // line leads on from home to home, to the first entry that is drawn.
-    found = [];
-    for (const n of state.nodes) {
-      if (!n.vis || !n.home || n.ballOf || shown.has(n.home)) continue;
-      let below = node(n.home);
-      while (below.home && !below.vis) below = node(below.home);
-      if (below.vis) found.push({ source: below.id, target: n.id, needsOnly: true });
-    }
+  state.bridges = [];
+  for (const n of state.solo ? [] : state.nodes) {
+    if (!n.vis || !n.home || n.ballOf || shown.has(n.home)) continue;
+    let below = node(n.home);
+    while (below.home && !below.vis) below = node(below.home);
+    if (below.vis) state.bridges.push({ source: below, target: n });
   }
-  state.bridges = found.map((l) => ({ ...l, source: node(l.source), target: node(l.target) }));
   drawBridges();
   return shown;
 }
@@ -537,9 +509,9 @@ function cull() {
 function drawBridges() {
   const g = gBridges.node();
   state.bridges.forEach((l, i) => {
-    const line = (bridgeLines[i] ??= g.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'line')));
-    const cls = `bridge${l.needsOnly ? '' : ' within'}${l.source.area === l.target.area ? ' inner' : ''}`;
-    if (line.getAttribute('class') !== cls) line.setAttribute('class', cls);
+    if (bridgeLines[i]) return;
+    bridgeLines[i] = g.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'line'));
+    bridgeLines[i].setAttribute('class', 'bridge');
   });
   for (const line of bridgeLines.splice(state.bridges.length)) line.remove();
   placeBridges();
@@ -555,52 +527,10 @@ function placeBridges() {
   });
 }
 
-// Where every entry sits in one arrangement, worked out the first time that
-// arrangement is shown in the current shape.
-function positions(view) {
-  if (view === 'solo') return state.solo.pos;
-  const [areas, fold] = state.shape.split('/');
-  state.pos[view] ??= view === 'tree' ? layoutTree(+fold) : view === 'molecule' ? layoutMolecule(areas) : areasFor(areas).finish();
-  return state.pos[view];
-}
-
-// The Areas arrangement takes long to work out (half a second on a fast
-// machine, two on a phone), so it is not left to the click on "Areas": it is
-// advanced a few steps at a time whenever the page has nothing else to do.
-// Asked for before it is finished, the remaining steps run at once.
-// The Molecule arrangement is worked out the same way, before the click on it.
-let areasJob = null; // the arrangement being worked out, for one shape of the window
-let areasQueued = false;
-const whenIdle = window.requestIdleCallback
-  ? (fn) => window.requestIdleCallback(fn)
-  : (fn) =>
-      setTimeout(() => {
-        const end = performance.now() + 6;
-        fn({ timeRemaining: () => end - performance.now() });
-      }, 16);
-
-function areasFor(shape) {
-  if (areasJob?.shape !== shape) areasJob = { shape, ...layoutAreas(shape) };
-  return areasJob;
-}
-
-function prepareAreas() {
-  if ((state.pos.areas && state.levels.molecule) || areasQueued) return;
-  areasQueued = true;
-  whenIdle((idle) => {
-    areasQueued = false;
-    // The Molecule arrangement first, in one go: it takes a fraction of the time the Areas take.
-    if (!state.levels.molecule) {
-      levelsFor('molecule');
-      return prepareAreas();
-    }
-    if (state.pos.areas) return;
-    const job = areasFor(state.shape.split('/')[0]);
-    while (job.left() && idle.timeRemaining() > 1) job.step();
-    if (job.left()) return prepareAreas();
-    levelsFor('areas');
-  });
-}
+// Where every entry sits on the map, worked out once for each shape of the window; with one entry in the middle,
+// where that view puts them.
+const mapPositions = () => (state.pos ??= layoutMolecule(state.shape));
+const positions = () => (state.solo ? state.solo.pos : mapPositions());
 
 function place(pos) {
   for (const n of state.nodes) [n.x, n.y] = pos.get(n.id);
@@ -608,27 +538,14 @@ function place(pos) {
 }
 
 function moved() {
-  for (const a of state.areas) a.box = bounds(a.nodes);
   updatePositions();
-  if (state.play) drawSpecks();
-}
-
-// Switch between the tree, the molecule and the areas.
-function setLayout(view) {
-  if (view === state.layout) return;
-  if (view !== 'molecule') stopPlay(); // the playback runs in the molecule
-  if (state.solo) {
-    state.solo = null;
-    state.focus = !!state.selected;
-  }
-  arrange(view);
-  renderPanel();
+  drawSpecks();
 }
 
 // The entries that can be drawn at all: every entry, or with one entry in the middle its members.
 const inView = () => (state.solo ? [...state.solo.members].map(node) : state.nodes);
 
-// Shows the whole arrangement `to` in the free part of the window. With one entry in the middle the names are what
+// Shows all of what lies at the places `to` in the free part of the window. With one entry in the middle the names are what
 // the view is for: where the whole would come out smaller than half size (a phone), the window shows the entry
 // and the rows next to it at half size, and the rest is a pan away ("Show all" still fits everything).
 function fitView(to, animate, duration) {
@@ -639,18 +556,16 @@ function fitView(to, animate, duration) {
   moveTo(d3.zoomIdentity.translate((area.left + area.right) / 2 - 0.5 * x, (area.top + area.bottom) / 2 - 0.5 * y).scale(0.5), animate, duration);
 }
 
-// Brings the map into an arrangement; the entries glide to their new places. The window then shows all of it,
-// or the part of the map given as `target` (a zoom transform).
-function arrange(view, target) {
+// Brings the picture in line with `state.solo`: one entry in the middle, or the map. The entries glide to their
+// new places. The window then shows all of it, or the part of the map given as `target` (a zoom transform).
+function arrange(target) {
   finishWave();
   cancelAnimationFrame(state.tween);
-  state.layout = view;
-  for (const v of ['tree', 'molecule', 'areas', 'solo']) document.body.classList.toggle(`view-${v}`, v === view);
-  for (const v of ['tree', 'molecule', 'areas']) $(`btn-${v}`).setAttribute('aria-pressed', String(v === view));
-  $('btn-back').hidden = view !== 'solo';
-  const to = positions(view);
-  useLevels(view);
-  findBridges(); // they differ between the arrangements, also where the same entries are drawn
+  document.body.classList.toggle('view-solo', !!state.solo);
+  $('btn-back').hidden = !state.solo;
+  const to = positions();
+  useLevels();
+  findBridges(); // the map has them, the one-entry view has none, also where the same entries are drawn
   $('zoom-note').textContent = zoomNote(state.nodes.filter((n) => n.vis).length);
   const look = (animate) => (target ? moveTo(target, animate, 800) : fitView(to, animate, 800));
   if (reduceMotion) {
@@ -681,7 +596,7 @@ function arrange(view, target) {
 
 // One entry in the middle, and around it only what it is connected to: what it stands on, down to the axioms, on
 // one side, what stands on it on the other, one row per step away from it. In a wide window the rows are columns
-// (what it stands on to the left); in a tall one what it stands on lies below, as in the tree.
+// (what it stands on to the left); in a tall one what it stands on lies below.
 // A subject or an axiom may have a thousand entries on it. Past 120, only the subjects among them are drawn and
 // the entries directly on it that something rests on; every subject shows how many entries are built on it.
 // Within a row an entry lies near the entries of the rows before that it is linked to. A row too long for the
@@ -744,7 +659,7 @@ function layoutSolo(id) {
 function showSolo(id) {
   stopPlay();
   clearTrace();
-  const back = state.solo?.back ?? { layout: state.layout, t: state.t };
+  const back = state.solo?.back ?? state.t;
   state.selected = id;
   state.view = 'node';
   state.focus = false;
@@ -754,135 +669,16 @@ function showSolo(id) {
   state.solo = { id, back, members: new Set() };
   renderPanel();
   Object.assign(state.solo, layoutSolo(id));
-  arrange('solo');
+  arrange();
 }
 
-// Back to the map as it was: the same arrangement, the same zoom. The entry stays selected.
+// Back to the map as it was, at the same zoom. The entry stays selected.
 function leaveSolo() {
   const { back } = state.solo;
   state.solo = null;
   state.focus = !!state.selected;
-  arrange(back.layout, back.t);
+  arrange(back);
   renderPanel();
-}
-
-// The tree: axioms in the bottom row, and every entry one row above the
-// highest thing it stands on. Entries of a row that stand on the same entry
-// form a block: a few of them sit side by side, many are stacked in several
-// lines, so that the hundreds of statements of one field do not stretch the
-// row. Blocks are placed near the average position of what their entries are
-// linked to in the rows below and above; a few sweeps up and down settle the
-// order. `fold` (1 to 3) says how narrow the window is. The blocks are made
-// as tall as it takes for the whole tree to have about the window's proportions.
-function layoutTree(fold) {
-  const slot = 106; // room for a dot and its label, side by side
-  const line = 58; // distance between the lines of a block
-  const gap = 128; // between the top line of one row and the bottom line of the next
-  const proportions = [0, 2.1, 1.2, 0.6][fold]; // width of the tree divided by its height
-  const below = (n) => [...n.rests, ...n.within];
-  const above = (n) => [...state.dependents.get(n.id), ...state.built.get(n.id)];
-  const both = (n) => [...below(n), ...above(n)];
-
-  const rows = [];
-  const blockOf = new Map(); // row and the entry stood on -> block
-  for (const n of state.nodes) {
-    const key = `${n.layer}|${n.home}`; // the highest thing it stands on
-    if (!blockOf.has(key)) {
-      const block = { members: [], x: 0 };
-      blockOf.set(key, block);
-      (rows[n.layer] ??= []).push(block);
-    }
-    blockOf.get(key).members.push(n);
-  }
-  const x = new Map();
-  const y = new Map();
-  // `wideness`: how many times more entries a block has side by side than stacked.
-  // The axioms (nothing below them) and small blocks stay in one line.
-  const shape = (wideness) => {
-    let [width, height] = [0, 0];
-    for (const row of rows) {
-      for (const b of row) {
-        const count = b.members.length;
-        b.cols = count <= 5 || !below(b.members[0]).length ? count : Math.min(count, Math.ceil(Math.sqrt(count * wideness)));
-        b.lines = Math.ceil(count / b.cols);
-        b.width = b.cols * slot;
-      }
-      width = Math.max(width, row.reduce((sum, b) => sum + b.width + slot / 2, 0));
-      height += (Math.max(...row.map((b) => b.lines)) - 1) * line + gap;
-    }
-    return width / height;
-  };
-  let [narrow, wide] = [0.1, 12];
-  for (let i = 0; i < 9; i++) {
-    const wideness = Math.sqrt(narrow * wide);
-    if (shape(wideness) > proportions) wide = wideness;
-    else narrow = wideness;
-  }
-  shape(narrow);
-
-  for (const row of rows) {
-    for (const b of row) {
-      const count = b.members.length;
-      b.heavy = b.members.reduce((sum, n) => sum + n.above.size, 0);
-      // What most is built on goes in the top line, nearest to what stands on it, and in the middle of its line.
-      b.members.sort((p, q) => q.above.size - p.above.size || p.i - q.i);
-      b.members.forEach((n, i) => {
-        const inLine = Math.min(b.cols, count - Math.floor(i / b.cols) * b.cols); // the last line may be shorter
-        const k = i % b.cols;
-        n.cell = [(k % 2 ? -1 : 1) * Math.ceil(k / 2) * slot + (inLine % 2 ? 0 : slot / 2), b.lines - 1 - Math.floor(i / b.cols)];
-      });
-    }
-    // Start with the blocks that carry most in the middle of their row, so the trunk grows straight up.
-    let [left, right] = [0, 0];
-    [...row].sort((p, q) => q.heavy - p.heavy).forEach((b, i) => {
-      if (i === 0) [b.x, left, right] = [0, -b.width / 2, b.width / 2];
-      else if (i % 2) [b.x, right] = [right + slot / 2 + b.width / 2, right + slot / 2 + b.width];
-      else [b.x, left] = [left - slot / 2 - b.width / 2, left - slot / 2 - b.width];
-      settle(b);
-    });
-  }
-  function settle(b) {
-    for (const n of b.members) x.set(n.id, b.x + n.cell[0]);
-  }
-
-  // Order the blocks of a row by where each wants to be, then move them apart
-  // just enough that neighbours do not overlap (isotonic regression).
-  const spread = (row, linked) => {
-    const order = row
-      .map((b) => ({ b, was: b.x, want: d3.mean(b.members.flatMap(linked), (id) => x.get(id)) ?? b.x }))
-      .sort((p, q) => p.want - q.want || p.was - q.was);
-    let at = 0; // where the block would sit if all were pushed together from the left
-    const stack = [];
-    order.forEach((o, i) => {
-      if (i) at += (order[i - 1].b.width + o.b.width) / 2 + slot / 2;
-      o.at = at;
-      let s = { sum: o.want - at, n: 1 };
-      while (stack.length && stack.at(-1).sum / stack.at(-1).n > s.sum / s.n) {
-        const prev = stack.pop();
-        s = { sum: prev.sum + s.sum, n: prev.n + s.n };
-      }
-      stack.push(s);
-    });
-    let i = 0;
-    for (const s of stack) {
-      for (let k = 0; k < s.n; k++, i++) {
-        order[i].b.x = s.sum / s.n + order[i].at;
-        settle(order[i].b);
-      }
-    }
-  };
-  for (let sweep = 0; sweep < 8; sweep++) {
-    for (let i = 1; i < rows.length; i++) spread(rows[i], sweep ? both : below);
-    for (let i = rows.length - 2; i >= 0; i--) spread(rows[i], both);
-  }
-  for (let i = 1; i < rows.length; i++) spread(rows[i], both);
-
-  let floor = 0; // the bottom line of the current row
-  for (const row of rows) {
-    for (const b of row) for (const n of b.members) y.set(n.id, floor - n.cell[1] * line);
-    floor -= (Math.max(...row.map((b) => b.lines)) - 1) * line + gap;
-  }
-  return new Map(state.nodes.map((n) => [n.id, [x.get(n.id), y.get(n.id)]]));
 }
 
 // Where the entries inside a subject's ball lie, relative to the subject: on rings around it, 21 apart, with 30
@@ -899,10 +695,10 @@ function ballPlaces(count) {
 
 const ballRadius = (count) => (count ? Math.hypot(...ballPlaces(count)[count - 1]) + 14 : 30);
 
-// The molecule. Every subject (a number system or a theory) is an atom: a ball that holds the statements at it
-// that nothing rests on, so its size says how many there are. The atoms are joined by bonds, each to the subject
-// it is built in, and the bonds run in six directions only, 60 degrees apart, as in a structural formula. Set
-// theory has its subjects on all six sides. In three steps.
+// The map is drawn as a molecule. Every subject (a number system or a theory) is an atom: a ball that holds the
+// statements at it that nothing rests on, so its size says how many there are. The atoms are joined by bonds, each
+// to the subject it is built in, and the bonds run in six directions only, 60 degrees apart, as in a structural
+// formula. Set theory has its subjects on all six sides. In three steps.
 // Around one subject: the statements at it that others rest on stand on rings around the ball, each with what
 // rests on it fanned out behind it on the rings further out. Such a group takes the angle its widest row needs,
 // and the groups share out the gaps between the subject's bonds. Small groups stand on the rings close to the
@@ -1140,68 +936,6 @@ function layoutMolecule(shape) {
   return pos;
 }
 
-// The areas, in two passes. First the areas are packed as circles sized by
-// how many statements they hold, pulled into a tall, wide or flat arrangement.
-// Then every statement is pulled towards its area's centre and along its links.
-// The second pass is returned unfinished: `step` advances it by one of its 700
-// steps, `left` says how many remain, `finish` runs the rest and returns the positions.
-function layoutAreas(shape) {
-  const [gx, gy] = { tall: [0.12, 0.03], wide: [0.04, 0.1], flat: [0.015, 0.22] }[shape];
-  const blobs = [...state.areas]
-    .sort((a, b) => b.nodes.length - a.nodes.length)
-    .map((a, i) => ({ id: a.id, r: 46 * Math.sqrt(a.nodes.length) + 70, x: i ? Math.cos(i * 2.4) * 700 : 0, y: i ? Math.sin(i * 2.4) * 700 : 0 }));
-  d3.forceSimulation(blobs)
-    .force('collide', d3.forceCollide((d) => d.r + 10).strength(1).iterations(3))
-    .force('x', d3.forceX(0).strength(gx))
-    .force('y', d3.forceY(0).strength(gy))
-    .stop()
-    .tick(400);
-  const centre = new Map(blobs.map((b) => [b.id, b]));
-
-  const sim = state.nodes.map((n, i) => {
-    const c = centre.get(n.area);
-    const a = i * 2.399963; // golden angle, so the start is spread and repeatable
-    const d = c.r * 0.7 * Math.sqrt(((i * 7) % 13 + 1) / 13);
-    return { id: n.id, area: n.area, r: n.r, x: c.x + Math.cos(a) * d, y: c.y + Math.sin(a) * d };
-  });
-  const simLinks = state.links.map((l) => ({ source: l.source, target: l.target, type: l.type }));
-  const sameArea = (l) => l.source.area === l.target.area;
-  const firm = (l) => l.type === 'needs' || l.type === 'within';
-  const fan = (d) => Math.sqrt(state.dependents.get(d.id).length + state.follows.get(d.id).length + (d.area === 'foundations' ? state.built.get(d.id).filter((id) => node(id).area === d.area).length : 0));
-
-  const simulation = d3
-    .forceSimulation(sim)
-    .force(
-      'link',
-      d3
-        .forceLink(simLinks)
-        .id((d) => d.id)
-        .distance((l) => (!firm(l) ? 120 : 62 + 30 * fan(l.source) + 20 * fan(l.target)))
-        .strength((l) => (!sameArea(l) ? (l.type === 'within' ? 0.004 : 0.02) : l.type === 'within' ? 0.18 : !firm(l) ? 0.1 : 0.5)),
-    )
-    .force('charge', d3.forceManyBody().strength((d) => -400 - 90 * fan(d)).distanceMax(460))
-    .force('collide', d3.forceCollide((d) => d.r + 36).strength(0.9).iterations(2))
-    .force('x', d3.forceX((d) => centre.get(d.area).x).strength(0.075))
-    .force('y', d3.forceY((d) => centre.get(d.area).y).strength(0.075))
-    .stop();
-
-  let left = 700;
-  let result = null;
-  return {
-    left: () => left,
-    step: () => {
-      simulation.tick();
-      left--;
-    },
-    finish: () => {
-      simulation.tick(left);
-      left = 0;
-      result ??= new Map(sim.map((p) => [p.id, [p.x, p.y]]));
-      return result;
-    },
-  };
-}
-
 function bounds(nodes) {
   const xs = nodes.map((n) => n.x);
   const ys = nodes.map((n) => n.y);
@@ -1289,6 +1023,8 @@ function onZoom(e) {
   if (e.transform.k !== state.t.k) state.dotScale = `scale(${Math.pow(e.transform.k, -0.5)})`;
   state.t = e.transform;
   viewport.attr('transform', e.transform);
+  under.attr('transform', e.transform);
+  paintSpecks();
   updateShown();
   positionLabels();
 }
@@ -1309,9 +1045,7 @@ function positionLabels() {
   const sel = state.selected;
   const near = sel ? neighbours(sel) : new Set();
   const { trace, hover, t } = state;
-  const byArea = state.layout === 'areas';
-  const inMolecule = state.layout === 'molecule';
-  boxes ??= new Float64Array(4 * (2 * state.nodes.length + state.areas.length));
+  boxes ??= new Float64Array(8 * state.nodes.length);
   let placed = 0; // labels take boxes[0 .. placed)
   const hits = (from, to, x0, y0, x1, y1) => {
     for (let i = from; i < to; i += 4) if (x0 < boxes[i + 2] && x1 > boxes[i] && y0 < boxes[i + 3] && y1 > boxes[i + 1]) return true;
@@ -1330,20 +1064,6 @@ function positionLabels() {
   const hide = (n, hidden) => {
     if (hidden !== n.labelHidden) n.labelEl.classList.toggle('hidden', (n.labelHidden = hidden));
   };
-
-  // Area names head the clouds of the Areas arrangement; in the tree and the molecule the areas are interleaved, so they are not shown.
-  // Zoomed far out, the names of small areas would lie across their neighbours' names: the larger area keeps its name.
-  for (const a of byArea ? state.bySize : []) {
-    const [x, y] = t.apply([(a.box.x0 + a.box.x1) / 2, a.box.y0]);
-    const top = y - 40;
-    a.labelW ??= a.labelEl.getBBox().width; // differs by screen size, so measured (again after a resize)
-    const hidden = hits(0, placed, x - a.labelW / 2 - 8, top - 4, x + a.labelW / 2 + 8, top + 22);
-    if (hidden !== a.labelHidden) a.labelEl.classList.toggle('hidden', (a.labelHidden = hidden));
-    if (hidden) continue;
-    move(a, a.labelEl, x, top);
-    put(placed, x - a.labelW / 2, top, x + a.labelW / 2, top + 18);
-    placed += 4;
-  }
 
   // Entries that are drawn but outside the window need neither a label nor room kept for their dot.
   const [right, bottom] = [window.innerWidth + 140, window.innerHeight + 60];
@@ -1366,7 +1086,7 @@ function positionLabels() {
       (n.id === sel ? 50000 : 0) +
       (trace?.origin === n.id ? 50000 : 0) +
       (n.hub ? 10000 : 0) +
-      (n.kind === 'system' ? (byArea ? 3000 : 12000) + n.above.size : 0) +
+      (n.kind === 'system' ? 12000 + n.above.size : 0) +
       (near.has(n.id) ? 4000 : 0) +
       (trace?.seen.has(n.id) ? 20000 : 0) +
       (n.kind !== 'theorem' ? 100 : 0) +
@@ -1375,7 +1095,7 @@ function positionLabels() {
   onScreen.sort((a, b) => b.rank - a.rank || a.i - b.i);
 
   // The dots of the entries that are drawn sit behind the room kept for labels.
-  const dots = 4 * (state.nodes.length + state.areas.length);
+  const dots = 4 * state.nodes.length;
   let dotsEnd = dots;
   for (const n of onScreen) {
     n.sr = screenR(n);
@@ -1393,9 +1113,9 @@ function positionLabels() {
     const loud = n.big || trace?.seen.has(n.id);
     const clear = (top) => !hits(0, placed, x0, top, x1, top + h);
     const free = (top) => !hits(dots, n.dot, x0, top, x1, top + h) && !hits(n.dot + 4, dotsEnd, x0, top, x1, top + h) && clear(top);
-    // In the molecule a subject's name goes below its ball, as long as the ball is small on screen; closer in, the ball
+    // On the map a subject's name goes below its ball, as long as the ball is small on screen; closer in, the ball
     // fills with entries and the name stays at the subject's own mark in the middle.
-    const ball = inMolecule && n.ball && n.ball * t.k < 90 ? n.ball * t.k : 0;
+    const ball = !state.solo && n.ball && n.ball * t.k < 90 ? n.ball * t.k : 0;
     const below = n.sy + Math.max(n.sr, ball) + 4;
     const above = n.sy - Math.max(n.sr, ball) - 4 - h;
     let top = null;
@@ -1529,9 +1249,10 @@ function applyStatus() {
   if (updateShown()) positionLabels();
   const look = lookNow();
   gBridges.classed('dim', !!look.trace || !!look.near);
+  state.specksDim = !!look.trace || !!look.near;
   for (const n of state.nodes) if (n.vis) paintNode(n, look);
   for (const l of state.links) if (l.vis) paintLink(l, look);
-  if (state.play) drawSpecks();
+  drawSpecks();
   renderTally();
 }
 
@@ -1790,13 +1511,13 @@ function clearTrace() {
 
 /* ---------- playback ---------- */
 
-// The map grows year by year, in the molecule. It starts empty; each entry appears in its year, with the status it
+// The map grows year by year. It starts empty; each entry appears in its year, with the status it
 // had then (a conjecture is open until the year it was proven). The 890 entries without a year take no part and
 // are added together at the end, after the present day; then, if the map was on "Today", the proof of 2026 spreads.
 // `history` in propagate.js says what happens when. Here: `events` in order, `at` how many have happened (one more
 // than there are events: the end, with every entry on the map as it is today), `due` the time on the playback's
-// clock at which each happens. Zoomed out the molecule draws only the subjects, so every entry that is on the map
-// also has a small dot (drawSpecks).
+// clock at which each happens. Zoomed out the map draws only the subjects; what grows there are the dots, one for
+// every entry that is on the map (drawSpecks).
 // The years are bunched: 11 entries before 1600, 540 from 1950 to 1999. So the clock does not run evenly: every
 // event takes a moment, a gap of years a little longer for each year, up to a limit.
 const PACE = { each: 25, perYear: 40, most: 600, lead: 700, end: 1500 }; // milliseconds
@@ -1804,6 +1525,7 @@ const yearText = (year) => (year < 0 ? `${-Math.floor(year)} BC` : String(Math.f
 
 function startPlay() {
   if (state.play) return;
+  if (state.solo) leaveSolo();
   clearTrace();
   const mode = state.mode;
   setMode('before', false); // without what-ifs: what holds is what held before the proof of 2026
@@ -1823,8 +1545,7 @@ function startPlay() {
   $('legend').open = false;
   select(null);
   playTo(0);
-  if (state.layout === 'molecule') fit(true);
-  else setLayout('molecule');
+  fit(true);
   state.play.raf = requestAnimationFrame(playFrame);
 }
 
@@ -1839,7 +1560,6 @@ function stopPlay() {
     n.now = undefined;
     setBall(n, true);
   }
-  drawSpecks();
   document.body.classList.remove('playing');
   $('playbar').hidden = true;
   $('legend').open = play.legend;
@@ -1965,10 +1685,45 @@ function seekPlay(count) {
   play.clock = play.at ? play.due[Math.min(play.at, play.events.length) - 1] : 0;
 }
 
+// One dot per entry, three pixels wide at every zoom, in the colour of its status. Zoomed out the map draws only
+// the subjects in full; the dots show how many entries lie in and around each one and how they stand. During the
+// playback only the entries that are on the map have one; with one entry in the middle there are none.
+// They are painted on a canvas. As one SVG path per status (each dot a line of no length) they made Firefox four
+// times as likely to miss a frame while zooming; on the canvas they cost nothing that can be measured there.
+// drawSpecks sorts the dots by colour, when entries move and when a status changes; paintSpecks puts them on the
+// canvas, also on every step of a zoom or a pan, and does as little as it can.
+const speckColours = Object.fromEntries([['proven', '--green'], ['whatif', '--blue'], ['conditional', '--amber'], ['open', '--speck-open']].map(([status, name]) => [status, getComputedStyle(document.documentElement).getPropertyValue(name).trim()]));
+const speckPlaces = { proven: [], whatif: [], conditional: [], open: [] }; // per colour: x, y, x, y, ... on the map
 function drawSpecks() {
-  const d = { proven: '', conditional: '', open: '' };
-  if (state.play) for (const n of state.nodes) if (n.there && n.kind !== 'system') d[statusOf(n)] += `M${n.x.toFixed(1)},${n.y.toFixed(1)}h0`;
-  for (const status in d) if (d[status] !== specks[status].d) specks[status].setAttribute('d', (specks[status].d = d[status]));
+  for (const status in speckPlaces) speckPlaces[status].length = 0;
+  for (const n of state.solo ? [] : state.nodes) {
+    if (n.kind !== 'system' && (!state.play || n.there)) speckPlaces[isHypothetical(n.id) ? 'whatif' : statusOf(n)].push(n.x, n.y);
+  }
+  paintSpecks();
+}
+
+function paintSpecks() {
+  const canvas = specks.canvas;
+  const dpr = window.devicePixelRatio || 1;
+  const w = Math.round(window.innerWidth * dpr);
+  const h = Math.round(window.innerHeight * dpr);
+  if (canvas.width !== w || canvas.height !== h) [canvas.width, canvas.height] = [w, h]; // this also empties it
+  else specks.clearRect(0, 0, w, h);
+  // On a phone the whole map is a third as wide: at full size the dots of one subject run together.
+  const size = (window.innerWidth <= 700 || window.innerHeight <= 480 ? 2.4 : 3.2) * dpr;
+  const x = state.t.x * dpr - size / 2;
+  const y = state.t.y * dpr - size / 2;
+  const k = state.t.k * dpr;
+  specks.globalAlpha = state.specksDim ? 0.3 : 1; // dimmed with everything else while an entry is selected or a trace is shown
+  for (const status in speckPlaces) {
+    const places = speckPlaces[status];
+    specks.fillStyle = speckColours[status];
+    for (let i = 0; i < places.length; i += 2) {
+      const px = x + k * places[i];
+      const py = y + k * places[i + 1];
+      if (px > -size && px < w && py > -size && py < h) specks.fillRect(px, py, size, size);
+    }
+  }
 }
 
 /* ---------- panel ---------- */
@@ -2193,11 +1948,11 @@ function nodeAt(clientX, clientY) {
   return best;
 }
 
-// In the molecule, a click on a subject's ball zooms into it, until the ball is somewhat larger than the free part
+// A click on a subject's ball zooms into it, until the ball is somewhat larger than the free part
 // of the window: from there the names of the statements inside it can be read. Not if it is about that large
 // already. Says whether it zoomed.
 function openBall(clientX, clientY) {
-  if (state.layout !== 'molecule') return false;
+  if (state.solo) return false; // with one entry in the middle there are no balls
   const [x, y] = state.t.invert([clientX, clientY]);
   const n = state.nodes.find((s) => s.ball && Math.hypot(s.x - x, s.y - y) < s.ball);
   const area = freeArea();
@@ -2297,7 +2052,6 @@ function wire() {
     seekPlay(+e.target.value);
     showYear();
   });
-  for (const view of ['tree', 'molecule', 'areas']) $(`btn-${view}`).addEventListener('click', touch(() => setLayout(view)));
   $('status-line').addEventListener('click', () => select('rh', { centre: true }));
   wireSearch();
   document.addEventListener('keydown', (e) => {

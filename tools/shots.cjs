@@ -7,8 +7,8 @@
 // Needs a server (python3 -m http.server 8377) or SHOT_URL pointing at the live site.
 // Env: PLAYWRIGHT_CORE (path to a playwright-core package, if it is not installed here),
 //      SHOT_DIR (where the PNGs go, default: the system temp folder),
-//      AXIOM, DEEP, AREA, HIGH, FIELD, INBALL (which statements, area and subject the run uses;
-//      INBALL is a statement inside the ball of FIELD in the Molecule arrangement).
+//      AXIOM, DEEP, HIGH, FIELD, INBALL (which statements and which subject the run uses;
+//      INBALL is a statement inside the ball of FIELD).
 // Prints a JSON summary; "errors" must be empty. Look at the images, the summary is not enough.
 const { chromium } = require(process.env.PLAYWRIGHT_CORE || 'playwright-core');
 const path = require('path');
@@ -20,7 +20,6 @@ const out = (step) => path.join(dir, `${name}-${step}.png`);
 const URL = process.env.SHOT_URL || 'http://127.0.0.1:8377/';
 const AXIOM = process.env.AXIOM || 'Axiom of choice';
 const DEEP = process.env.DEEP || 'Prime number theorem in short';
-const AREA = process.env.AREA || 'Logic and set theory';
 const HIGH = process.env.HIGH || "Fermat's Last Theorem";
 const FIELD = process.env.FIELD || 'Measure theory';
 const INBALL = process.env.INBALL || "Egorov's theorem";
@@ -73,7 +72,7 @@ const INBALL = process.env.INBALL || "Egorov's theorem";
   info.upTraced = await page.evaluate(() => document.querySelectorAll('.node.traced').length);
   await shot('7-up');
 
-  // The tree: from a result high up, follow everything it stands on down to the axioms.
+  // From a result far out, follow everything it stands on down to the axioms.
   info.high = await find(HIGH);
   await page.locator('.trace-btn', { hasText: 'Down to the axioms' }).click();
   await page.waitForTimeout(5000);
@@ -101,36 +100,12 @@ const INBALL = process.env.INBALL || "Egorov's theorem";
   await shot('11-rankings');
   await page.locator('#panel .close').click();
   await page.waitForTimeout(300);
+  // The whole map: the subjects as balls joined by bonds, every other entry as a dot. Zooming in brings in the
+  // entries that the overview leaves out.
   await page.locator('#btn-all').click();
   await page.waitForTimeout(700);
-  await shot('11b-tree');
-  // Zooming in brings in the entries that the overview leaves out.
-  info.shownTree = await shown();
-  await page.mouse.move(+w / 2, +h / 2);
-  for (const step of ['11d-zoom1', '11e-zoom2']) {
-    await page.mouse.wheel(0, -260);
-    await page.waitForTimeout(600);
-    info[`shown-${step}`] = await shown();
-    await shot(step);
-  }
-  info.zoomNote = await page.evaluate(() => document.getElementById('zoom-note').textContent);
-  await page.locator('#btn-all').click();
-  await page.waitForTimeout(700);
-  await page.locator('#btn-areas').click();
-  await page.waitForTimeout(1400);
-  await shot('11c-areas');
-  await page.locator(`.area-label[aria-label="Zoom to ${AREA}"]`).click();
-  await page.waitForTimeout(800);
-  info.hiddenLabelsInArea = await page.evaluate(() => document.querySelectorAll('.label.hidden').length);
-  await shot('12-area');
-
-  // The molecule: the subjects as balls joined by bonds, the statements that others rest on around them.
-  await page.locator('#btn-molecule').click();
-  await page.waitForTimeout(1400);
-  await page.locator('#btn-all').click();
-  await page.waitForTimeout(700);
-  info.shownMolecule = await shown();
-  await shot('13-molecule');
+  info.shownMap = await shown();
+  await shot('13-map');
   await page.mouse.move(+w / 2, +h / 2);
   for (const step of ['13b-zoom1', '13c-zoom2', '13d-zoom3']) {
     await page.mouse.wheel(0, -420);
@@ -138,6 +113,7 @@ const INBALL = process.env.INBALL || "Egorov's theorem";
     info[`shown-${step}`] = await shown();
     await shot(step);
   }
+  info.zoomNote = await page.evaluate(() => document.getElementById('zoom-note').textContent);
   info.field = await find(FIELD);
   await shot('14-field');
   // Into the ball of that subject: a click on the ball (beside the subject's own mark) zooms until it fills the
@@ -165,9 +141,6 @@ const INBALL = process.env.INBALL || "Egorov's theorem";
   await page.waitForTimeout(5000);
   info.fieldTraced = await page.evaluate(() => document.querySelectorAll('.node.traced').length);
   await shot('15-field-trace');
-  await page.locator('#btn-tree').click();
-  await page.waitForTimeout(1400);
-  await shot('16-back-to-tree');
   // One entry in the middle, with only what it is connected to. Choosing another entry there puts that one in the
   // middle; Escape leads back to the map as it was, a second Escape closes the panel.
   const note = () => page.evaluate(() => document.getElementById('zoom-note').textContent);
@@ -187,7 +160,7 @@ const INBALL = process.env.INBALL || "Egorov's theorem";
   await page.keyboard.press('Escape');
   await page.waitForTimeout(400);
 
-  // The playback: the map grows year by year in the molecule. Then to the end with the slider (the entries
+  // The playback: the map grows year by year. Then to the end with the slider (the entries
   // without a year are added and the proof of 2026 spreads), back to an earlier year, and an entry as it stood then.
   const playing = () => page.evaluate(() => [document.getElementById('play-year').textContent, document.getElementById('play-note').textContent, document.getElementById('tally').innerText.replace(/\s+/g, ' ')]);
   const slide = (part) => page.evaluate((part) => {

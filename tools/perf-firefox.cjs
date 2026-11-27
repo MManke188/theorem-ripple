@@ -1,9 +1,9 @@
 // Measures zooming in the installed Firefox, which draws the graph differently from Chromium
 // (tools/perf.cjs) and was slow in places where Chromium was not.
 //
-// Usage: node tools/perf-firefox.cjs [areas|molecule|play]
+// Usage: node tools/perf-firefox.cjs [play]
 // Opens a Firefox window of its own for about 15 seconds (temporary profile, yours is not touched),
-// zooms in and out for 240 frames in the tree (or the arrangement named) and prints the frames:
+// zooms in and out for 240 frames and prints the frames:
 // how many took longer than 25 ms (one missed screen refresh at 60 Hz) and than 42 ms (two).
 // With "play" it starts the playback instead and prints three lines: its first six seconds, six seconds
 // from the middle (where most entries appear), and the zooming while it plays on (about 30 seconds in all).
@@ -15,7 +15,7 @@ const os = require('os');
 const path = require('path');
 
 const url = process.env.SHOT_URL || 'http://127.0.0.1:8377/';
-const view = ['areas', 'molecule', 'play'].find((v) => process.argv.includes(v)) || '';
+const view = process.argv.includes('play') ? 'play' : '';
 const port = 9333 + Math.floor(Math.random() * 500);
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'theorem-ripple-firefox-'));
 const prefs = { 'browser.shell.checkDefaultBrowser': false, 'browser.aboutwelcome.enabled': false, 'datareporting.policy.dataSubmissionEnabled': false, 'browser.startup.homepage_override.mstone': 'ignore', 'browser.startup.page': 0, 'app.update.enabled': false };
@@ -54,11 +54,9 @@ const inPage = async (view) => {
       requestAnimationFrame(step);
     });
   const lines = [];
-  if (view) {
-    document.getElementById(`btn-${view}`).click();
-    await wait(1600);
-  }
   if (view === 'play') {
+    document.getElementById('btn-play').click();
+    await wait(1600);
     lines.push('start ' + (await watch(6000)));
     const slider = document.getElementById('play-slider');
     slider.value = Math.round(slider.max * 0.45);

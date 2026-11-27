@@ -1,7 +1,7 @@
 // Measures how fast the page is: loads it, then zooms, pans, hovers, selects, traces, drops an
-// axiom, switches arrangement and runs the playback in headless Chromium, the same way on every run.
+// axiom and runs the playback in headless Chromium, the same way on every run.
 //
-// Usage: node tools/perf.cjs <desktop|phone|big> [--profile] [--only=zoom-tree,trace-250]
+// Usage: node tools/perf.cjs <desktop|phone|big> [--profile] [--only=zoom,trace-250]
 //   desktop: 1440x900.  phone: 375x667 with the processor slowed down four times.
 //   big: 1920x1080 at double density (a 4K screen), drawn by the graphics chip as in a real
 //   browser window (macOS, needs Playwright's full Chromium). Only this one shows what drawing
@@ -202,7 +202,7 @@ const find = async (page, text) => {
   await measure(s, 'opening-wave', () => page.waitForTimeout(4200), 0);
 
   const wheel = `document.getElementById('graph').dispatchEvent(new WheelEvent('wheel', { deltaY: i < n / 2 ? -30 : 30, clientX: ${cx}, clientY: ${cy}, bubbles: true, cancelable: true, view: window }));`;
-  await measure(s, 'zoom-tree', () => perFrame(page, 90, wheel));
+  await measure(s, 'zoom', () => perFrame(page, 90, wheel));
 
   const drag = `
     const g = document.getElementById('graph');
@@ -211,10 +211,10 @@ const find = async (page, text) => {
     if (i === 0) g.dispatchEvent(new MouseEvent('mousedown', o));
     else if (i === n - 1) window.dispatchEvent(new MouseEvent('mouseup', o));
     else window.dispatchEvent(new MouseEvent('mousemove', o));`;
-  await measure(s, 'pan-tree', () => perFrame(page, 90, drag));
+  await measure(s, 'pan', () => perFrame(page, 90, drag));
 
   const hover = `document.getElementById('graph').dispatchEvent(new PointerEvent('pointermove', { pointerType: 'mouse', clientX: 40 + (i / n) * ${cfg.viewport.width - 80}, clientY: ${cy} + Math.sin(i / 9) * ${cfg.viewport.height * 0.3}, bubbles: true }));`;
-  await measure(s, 'hover-tree', () => perFrame(page, 120, hover));
+  await measure(s, 'hover', () => perFrame(page, 120, hover));
 
   // Select ten entries one after the other (search, Enter, the map centres on each).
   await measure(s, 'select-x10', async () => {
@@ -224,7 +224,7 @@ const find = async (page, text) => {
     }
   });
 
-  // The biggest trace on the map: everything built on an axiom of set theory (250 of 263 entries).
+  // The biggest trace on the map: everything built on an axiom of set theory (nearly every entry).
   await find(page, 'Axiom of extensionality');
   await page.waitForTimeout(700);
   await measure(s, 'trace-250', async () => {
@@ -258,52 +258,6 @@ const find = async (page, text) => {
   await page.locator('#panel .close').click();
   await page.locator('#btn-all').click();
   await page.waitForTimeout(700);
-
-  // First switch works the Areas arrangement out (a force simulation), later ones only glide.
-  await measure(s, 'switch-to-areas-first', async () => {
-    const blocked = await page.evaluate(
-      () =>
-        new Promise((done) => {
-          const t0 = performance.now();
-          document.getElementById('btn-areas').click();
-          const t1 = performance.now();
-          requestAnimationFrame(() => done({ clickBlockedMs: Math.round(t1 - t0), toNextFrameMs: Math.round(performance.now() - t0) }));
-        }),
-    );
-    await page.waitForTimeout(1300);
-    return blocked;
-  });
-  await measure(s, 'zoom-areas', () => perFrame(page, 90, wheel));
-  await measure(s, 'pan-areas', () => perFrame(page, 90, drag));
-  await page.locator('#btn-all').click();
-  await page.waitForTimeout(700);
-  await measure(s, 'switch-to-tree', async () => {
-    await page.locator('#btn-tree').click();
-    await page.waitForTimeout(1300);
-  });
-  await measure(s, 'switch-to-areas-again', async () => {
-    await page.locator('#btn-areas').click();
-    await page.waitForTimeout(1300);
-  });
-
-  // The Molecule arrangement is worked out before the first click on it, in idle time.
-  await measure(s, 'switch-to-molecule-first', async () => {
-    const blocked = await page.evaluate(
-      () =>
-        new Promise((done) => {
-          const t0 = performance.now();
-          document.getElementById('btn-molecule').click();
-          const t1 = performance.now();
-          requestAnimationFrame(() => done({ clickBlockedMs: Math.round(t1 - t0), toNextFrameMs: Math.round(performance.now() - t0) }));
-        }),
-    );
-    await page.waitForTimeout(1300);
-    return blocked;
-  });
-  await page.locator('#btn-all').click();
-  await page.waitForTimeout(700);
-  await measure(s, 'zoom-molecule', () => perFrame(page, 90, wheel));
-  await measure(s, 'pan-molecule', () => perFrame(page, 90, drag));
 
   // The playback: its first seconds (few entries, long gaps), then from the middle, where most entries appear,
   // and the same while zooming in and out.

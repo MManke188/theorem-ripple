@@ -85,11 +85,15 @@ button { font: inherit; color: inherit; }
 body.view-tree .edge.within.inner line { stroke: #7c8db5; stroke-width: 2.6; }
 /* Among the areas, the links from a statement to its system would cross the whole map: only those inside the foundations, of the selected entry, or on a trace are drawn. */
 body.view-areas .edge.within:not(.inner):not(.own):not(.traced) { display: none; }
-.edge.within.bulk:not(.own):not(.traced) { display: none; }
-/* In the clusters an entry lies at what it stands on, and a line there would say the same again. Drawn are only the stems:
-   from a system to the system it lies at, like the tree's trunk. */
-body.view-clusters .edge.within:not(.stem):not(.own):not(.traced) { display: none; }
-body.view-clusters .edge.within.stem line { stroke: #7c8db5; stroke-width: 2.6; }
+body:not(.view-molecule) .edge.within.bulk:not(.own):not(.traced) { display: none; }
+/* In the molecule an entry has one line, the bond to its home (the highest thing it stands on). Its other lines would
+   cross the map; they are drawn for the selected entry and on a trace. The bonds between two subjects are the frame. */
+body.view-molecule .edge:not(.bond):not(.own):not(.traced) { display: none; }
+body.view-molecule .edge.within.bond line { stroke: #5b6b92; stroke-width: 1.3; }
+body.view-molecule .edge.within.stem line { stroke: #7c8db5; stroke-width: 3; }
+/* A subject's ball: its size says how many statements lie inside it. They appear as the reader zooms in. */
+.ball { fill: #121a2c; stroke: #7c8db5; stroke-width: 1.5; vector-effect: non-scaling-stroke; display: none; }
+body.view-molecule .ball { display: inline; }
 .edge { transition: --og 0.3s; }
 .edge.dim { --og: 0.18; }
 /* A link without an arrowhead is a single line, which is dimmed through its stroke for the same reason. */
@@ -107,7 +111,7 @@ body.view-clusters .edge.within.stem line { stroke: #7c8db5; stroke-width: 2.6; 
    One dot and gap are 6 long for every bridge; clipLine() in app.js counts on that. */
 .bridge { stroke: #45547a; stroke-width: 1.3; stroke-dasharray: 1.5 4.5; vector-effect: non-scaling-stroke; }
 /* Between two systems it is a stretch of the trunk. */
-body.view-tree .bridge.within.inner, body.view-clusters .bridge.within.inner { stroke: #7c8db5; stroke-width: 2.4; stroke-dasharray: 2.4 3.6; }
+body.view-tree .bridge.within.inner { stroke: #7c8db5; stroke-width: 2.4; stroke-dasharray: 2.4 3.6; }
 .bridges.dim { opacity: 0.25; }
 body.view-areas .bridge.within:not(.inner) { display: none; }
 
@@ -378,6 +382,7 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 .lg-formerly { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 3; }
 .lg-bridge { stroke: #8fa0c8; stroke-width: 1.8; stroke-dasharray: 1 4; stroke-linecap: round; }
 .lg-system { fill: #1d2639; stroke: #c3cee3; stroke-width: 2; }
+.lg-ball { fill: #121a2c; stroke: #7c8db5; stroke-width: 1.2; }
 .lg-arrow { fill: var(--muted); }
 
 /* ---------- panel ---------- */

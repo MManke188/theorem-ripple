@@ -7,7 +7,8 @@
 // Needs a server (python3 -m http.server 8377) or SHOT_URL pointing at the live site.
 // Env: PLAYWRIGHT_CORE (path to a playwright-core package, if it is not installed here),
 //      SHOT_DIR (where the PNGs go, default: the system temp folder),
-//      AXIOM, DEEP, AREA, HIGH, FIELD (which statements, area and field the run uses).
+//      AXIOM, DEEP, AREA, HIGH, FIELD, INBALL (which statements, area and subject the run uses;
+//      INBALL is a statement inside the ball of FIELD in the Molecule arrangement).
 // Prints a JSON summary; "errors" must be empty. Look at the images, the summary is not enough.
 const { chromium } = require(process.env.PLAYWRIGHT_CORE || 'playwright-core');
 const path = require('path');
@@ -22,6 +23,7 @@ const DEEP = process.env.DEEP || 'Prime number theorem in short';
 const AREA = process.env.AREA || 'Logic and set theory';
 const HIGH = process.env.HIGH || "Fermat's Last Theorem";
 const FIELD = process.env.FIELD || 'Measure theory';
+const INBALL = process.env.INBALL || "Egorov's theorem";
 
 (async () => {
   const browser = await chromium.launch();
@@ -122,13 +124,13 @@ const FIELD = process.env.FIELD || 'Measure theory';
   info.hiddenLabelsInArea = await page.evaluate(() => document.querySelectorAll('.label.hidden').length);
   await shot('12-area');
 
-  // The clusters: every entry lies at the one it stands on, the fields as discs side by side.
-  await page.locator('#btn-clusters').click();
+  // The molecule: the subjects as balls joined by bonds, the statements that others rest on around them.
+  await page.locator('#btn-molecule').click();
   await page.waitForTimeout(1400);
   await page.locator('#btn-all').click();
   await page.waitForTimeout(700);
-  info.shownClusters = await shown();
-  await shot('13-clusters');
+  info.shownMolecule = await shown();
+  await shot('13-molecule');
   await page.mouse.move(+w / 2, +h / 2);
   for (const step of ['13b-zoom1', '13c-zoom2', '13d-zoom3']) {
     await page.mouse.wheel(0, -420);
@@ -138,6 +140,27 @@ const FIELD = process.env.FIELD || 'Measure theory';
   }
   info.field = await find(FIELD);
   await shot('14-field');
+  // Into the ball of that subject: a click on the ball (beside the subject's own mark) zooms until it fills the
+  // window, the wheel goes on until all the statements inside it are drawn.
+  const [bx, by] = await page.evaluate(() => {
+    const ball = [...document.querySelectorAll('.ball')].find((c) => c.getAttribute('transform') === document.querySelector('.node.selected').getAttribute('transform')).getBoundingClientRect();
+    return [ball.x + ball.width * 0.2, ball.y + ball.height * 0.5]; // left of the mark: on a phone held sideways the lower part is behind the bottom strip
+  });
+  await page.keyboard.press('Escape'); // with the subject selected its statements are drawn, and the click would pick one
+  await page.waitForTimeout(500);
+  await page.mouse.click(bx, by);
+  await page.waitForTimeout(1100);
+  info.ballOnScreen = await page.evaluate(() => Math.round(Math.max(...[...document.querySelectorAll('.ball')].map((c) => c.getBoundingClientRect().width))));
+  info['shown-14b-into-ball'] = await shown();
+  await shot('14b-into-ball');
+  for (let i = 0; i < 4; i++) await page.mouse.wheel(0, -420);
+  await page.waitForTimeout(700);
+  info['shown-14c-inside-ball'] = await shown();
+  await shot('14c-inside-ball');
+  // A statement that lies inside a ball: selected, its lines are drawn.
+  info.inBall = await find(INBALL);
+  await shot('14d-statement-in-ball');
+  await find(FIELD);
   await page.locator('.trace-btn', { hasText: 'built on this' }).click();
   await page.waitForTimeout(5000);
   info.fieldTraced = await page.evaluate(() => document.querySelectorAll('.node.traced').length);

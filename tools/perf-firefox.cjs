@@ -1,7 +1,7 @@
 // Measures zooming in the installed Firefox, which draws the graph differently from Chromium
 // (tools/perf.cjs) and was slow in places where Chromium was not.
 //
-// Usage: node tools/perf-firefox.cjs [areas|clusters]
+// Usage: node tools/perf-firefox.cjs [areas|molecule]
 // Opens a Firefox window of its own for about 15 seconds (temporary profile, yours is not touched),
 // zooms in and out for 240 frames in the tree (or the arrangement named) and prints the frames:
 // how many took longer than 25 ms (one missed screen refresh at 60 Hz) and than 42 ms (two).
@@ -13,7 +13,7 @@ const os = require('os');
 const path = require('path');
 
 const url = process.env.SHOT_URL || 'http://127.0.0.1:8377/';
-const view = ['areas', 'clusters'].find((v) => process.argv.includes(v)) || '';
+const view = ['areas', 'molecule'].find((v) => process.argv.includes(v)) || '';
 const port = 9333 + Math.floor(Math.random() * 500);
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'theorem-ripple-firefox-'));
 const prefs = { 'browser.shell.checkDefaultBrowser': false, 'browser.aboutwelcome.enabled': false, 'datareporting.policy.dataSubmissionEnabled': false, 'browser.startup.homepage_override.mstone': 'ignore', 'browser.startup.page': 0, 'app.update.enabled': false };

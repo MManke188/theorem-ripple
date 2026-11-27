@@ -82,10 +82,10 @@ button { font: inherit; color: inherit; }
 .edge.within line { stroke: #46557a; stroke-width: 1.1; }
 .edge.within .chev { display: none; }
 /* The links between the systems themselves are the trunk and the boughs of the tree. */
-body.view-tree .edge.within.inner line { stroke: #7c8db5; stroke-width: 2.6; }
+body.view-tree .edge.within.inner line, body.view-solo .edge.within.inner line { stroke: #7c8db5; stroke-width: 2.6; }
 /* Among the areas, the links from a statement to its system would cross the whole map: only those inside the foundations, of the selected entry, or on a trace are drawn. */
 body.view-areas .edge.within:not(.inner):not(.own):not(.traced) { display: none; }
-body:not(.view-molecule) .edge.within.bulk:not(.own):not(.traced) { display: none; }
+body:not(.view-molecule):not(.view-solo) .edge.within.bulk:not(.own):not(.traced) { display: none; }
 /* In the molecule an entry has one line, the bond to its home (the highest thing it stands on). Its other lines would
    cross the map; they are drawn for the selected entry and on a trace. The bonds between two subjects are the frame. */
 body.view-molecule .edge:not(.bond):not(.own):not(.traced) { display: none; }
@@ -94,6 +94,12 @@ body.view-molecule .edge.within.stem line { stroke: #7c8db5; stroke-width: 3; }
 /* A subject's ball: its size says how many statements lie inside it. They appear as the reader zooms in. */
 .ball { fill: #121a2c; stroke: #7c8db5; stroke-width: 1.5; vector-effect: non-scaling-stroke; display: none; }
 body.view-molecule .ball { display: inline; }
+body.view-molecule .ball.absent { display: none; } /* during the playback: its subject is not on the map yet */
+/* During the playback every entry that is on the map has a dot, three pixels wide at every zoom: one path per status, each dot a line of no length. */
+.specks path { fill: none; stroke-width: 3.2px; stroke-linecap: square; vector-effect: non-scaling-stroke; }
+.specks .proven { stroke: var(--green); }
+.specks .conditional { stroke: var(--amber); }
+.specks .open { stroke: #8792a8; }
 .edge { transition: --og 0.3s; }
 .edge.dim { --og: 0.18; }
 /* A link without an arrowhead is a single line, which is dimmed through its stroke for the same reason. */
@@ -152,6 +158,9 @@ body.view-areas .bridge.within:not(.inner) { display: none; }
 .node.kind-axiom.whatif .pip { fill: var(--blue); }
 .node.kind-system .shape { fill: #1d2639; stroke: #c3cee3; stroke-width: 2.2; }
 .node.kind-system .check { display: none; }
+/* With one entry in the middle, a subject shows how many entries are built on it. */
+.node .count { display: none; font-size: 10px; font-weight: 600; fill: #c3cee3; text-anchor: middle; pointer-events: none; }
+body.view-solo .node .count { display: inline; }
 .node.dim { --og: 0.3; }
 .node { transition: --og 0.3s; }
 .node:focus { outline: none; }
@@ -251,6 +260,10 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
   cursor: pointer;
   font-size: 13.5px;
 }
+/* A button may have a second, shorter wording for the narrow header of a phone. */
+.short { display: none; }
+/* With one entry in the middle the row holds "Back to the map" instead of these two, so that the header does not grow by a row. */
+body.view-solo #btn-replay, body.view-solo #btn-play { display: none; }
 .ghost:hover, .switch button:hover { color: var(--text); border-color: #3a4864; }
 .ghost[aria-pressed="true"] { background: var(--surface-2); border-color: #3a4864; }
 
@@ -323,6 +336,16 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 .status-line.whatif::before { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
 .status-line strong { color: var(--text); font-weight: 600; }
 .status-line:hover { color: var(--text); }
+
+/* The playback's bar takes the place of the two rows above it while the map is played back. */
+body.playing .controls, body.playing .status-line { display: none; }
+.playbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.playbar[hidden] { display: none; }
+.playbar .ghost { width: 44px; padding: 0; flex: none; }
+.play-year { font-size: 30px; font-weight: 700; line-height: 1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; min-width: 4.4ch; text-shadow: 0 0 6px var(--bg); }
+.playbar input { flex: 1; min-width: 90px; height: 44px; margin: 0; accent-color: var(--green); cursor: pointer; }
+.play-note { flex-basis: 100%; margin: 0; font-size: 12.5px; line-height: 1.45; min-height: 2.9em; color: var(--muted); text-shadow: 0 0 6px var(--bg), 0 0 6px var(--bg); }
+.play-note strong { color: var(--text); font-weight: 600; }
 
 /* ---------- bottom ---------- */
 
@@ -467,6 +490,7 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
   text-align: left;
 }
 .trace-btn b { font-size: 17px; color: var(--text); }
+.solo-btn { grid-column: 1 / -1; min-height: 44px; }
 .trace-btn:hover, .trace-btn.active { background: rgba(185, 165, 255, 0.22); border-color: var(--violet); }
 .whatif-btn.amber { border-color: var(--amber); background: rgba(242, 169, 59, 0.12); color: var(--amber); }
 .whatif-btn.amber:hover { background: rgba(242, 169, 59, 0.22); }
@@ -506,7 +530,8 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
 
 @media (max-width: 700px) and (orientation: portrait) {
   .hud-top { right: 0; max-width: none; padding: max(14px, env(safe-area-inset-top)) 14px 12px; gap: 8px; background: linear-gradient(to bottom, var(--bg) 82%, transparent); }
-  .tagline { display: none; }
+  .tagline, #btn-before .long, #btn-play .long { display: none; }
+  #btn-play .short { display: inline; }
   h1 { font-size: 18px; }
   .switch button { padding: 0 11px; font-size: 13px; min-height: 40px; }
   .ghost { padding: 0 12px; }
@@ -526,20 +551,23 @@ h1 { margin: 0; font-size: 20px; letter-spacing: 0.01em; }
   }
   body.panel-open .hud-bottom { display: none; }
   /* While a trace is shown, the sheet makes room for the graph. */
-  body.tracing .panel { height: 30vh; }
+  body.tracing .panel, body.view-solo .panel { height: 30vh; }
 }
 
 @media (max-height: 480px) {
   .hud-top { right: 0; max-width: none; gap: 6px; padding-top: 8px; padding-bottom: 10px; background: linear-gradient(to bottom, var(--bg) 78%, transparent); }
   .brand { display: contents; }
-  .brand h1, .brand .tagline, #btn-before .long { display: none; }
+  .brand h1, .brand .tagline, #btn-before .long, #btn-play .long { display: none; }
+  #btn-play .short { display: inline; }
   .layout-switch { margin-left: 0; }
   .layout-switch button { min-height: 36px; padding: 0 10px; }
   .hud-top { flex-direction: row; flex-wrap: wrap; align-items: center; }
   .switch button { min-height: 36px; }
   .ghost, .search input { min-height: 40px; }
   .tools { flex: 1; min-width: 240px; }
-  .status-line { flex-basis: 100%; }
+  .status-line, .playbar { flex-basis: 100%; }
+  .play-note { min-height: 1.45em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .play-year { font-size: 24px; }
   .status-line { font-size: 11.5px; --lines: 1; }
   body.panel-open .hud-top { right: min(320px, 48vw); }
   .area-label text { font-size: 10px; letter-spacing: 0.08em; stroke-width: 3px; }

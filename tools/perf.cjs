@@ -1,5 +1,5 @@
 // Measures how fast the page is: loads it, then zooms, pans, hovers, selects, traces, drops an
-// axiom and switches arrangement in headless Chromium, the same way on every run.
+// axiom, switches arrangement and runs the playback in headless Chromium, the same way on every run.
 //
 // Usage: node tools/perf.cjs <desktop|phone|big> [--profile] [--only=zoom-tree,trace-250]
 //   desktop: 1440x900.  phone: 375x667 with the processor slowed down four times.
@@ -304,6 +304,23 @@ const find = async (page, text) => {
   await page.waitForTimeout(700);
   await measure(s, 'zoom-molecule', () => perFrame(page, 90, wheel));
   await measure(s, 'pan-molecule', () => perFrame(page, 90, drag));
+
+  // The playback: its first seconds (few entries, long gaps), then from the middle, where most entries appear,
+  // and the same while zooming in and out.
+  await measure(s, 'play-start', async () => {
+    await page.locator('#btn-play').click();
+    await page.waitForTimeout(8000);
+  }, 0);
+  await page.evaluate(() => {
+    const slider = document.getElementById('play-slider');
+    slider.value = Math.round(slider.max * 0.45);
+    slider.dispatchEvent(new Event('input'));
+    document.getElementById('play-toggle').click();
+  });
+  await measure(s, 'play-middle', () => page.waitForTimeout(8000), 0);
+  await measure(s, 'play-zoom', () => perFrame(page, 90, wheel));
+  await page.locator('#play-close').click();
+  await page.waitForTimeout(500);
 
   results.errors = s.errors;
   results.dom = await page.evaluate(() => document.querySelectorAll('*').length);

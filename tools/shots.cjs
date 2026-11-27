@@ -168,6 +168,55 @@ const INBALL = process.env.INBALL || "Egorov's theorem";
   await page.locator('#btn-tree').click();
   await page.waitForTimeout(1400);
   await shot('16-back-to-tree');
+  // One entry in the middle, with only what it is connected to. Choosing another entry there puts that one in the
+  // middle; Escape leads back to the map as it was, a second Escape closes the panel.
+  const note = () => page.evaluate(() => document.getElementById('zoom-note').textContent);
+  await find('Riemann Hypothesis');
+  await page.locator('.solo-btn').click();
+  await page.waitForTimeout(1400);
+  info.solo = [await shown(), await note()];
+  await shot('17-solo');
+  await find(FIELD);
+  await page.waitForTimeout(700);
+  info.soloField = [await shown(), await note()];
+  await shot('17b-solo-field');
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(1400);
+  info.soloBack = await page.evaluate(() => document.body.className);
+  await shot('17c-solo-back');
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(400);
+
+  // The playback: the map grows year by year in the molecule. Then to the end with the slider (the entries
+  // without a year are added and the proof of 2026 spreads), back to an earlier year, and an entry as it stood then.
+  const playing = () => page.evaluate(() => [document.getElementById('play-year').textContent, document.getElementById('play-note').textContent, document.getElementById('tally').innerText.replace(/\s+/g, ' ')]);
+  const slide = (part) => page.evaluate((part) => {
+    const slider = document.getElementById('play-slider');
+    slider.value = Math.round(slider.max * part);
+    slider.dispatchEvent(new Event('input'));
+  }, part);
+  await page.locator('#btn-play').click();
+  await page.waitForTimeout(2500);
+  info.playStart = await playing();
+  await shot('18-play-start');
+  await page.waitForTimeout(20000);
+  info.playMid = await playing();
+  await shot('18b-play-mid');
+  await slide(1);
+  await page.waitForTimeout(6000);
+  info.playEnd = await playing();
+  await shot('18c-play-end');
+  await slide(0.3);
+  await page.waitForTimeout(700);
+  info.playSlider = await playing();
+  await find(HIGH);
+  info.playThen = await page.evaluate(() => document.querySelector('#panel .then')?.textContent);
+  await shot('18d-play-entry');
+  await page.locator('#panel .close').click();
+  await page.locator('#play-close').click();
+  await page.waitForTimeout(900);
+  info.afterPlay = [await tally(), await page.evaluate(() => document.body.className)];
+  await shot('18e-play-closed');
   info.scroll = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.scrollHeight]);
   console.log(JSON.stringify({ name, dir, info, errors }, null, 1));
   await browser.close();

@@ -1,4 +1,4 @@
-import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reachFrom, layers, homes, foundationsOf, restsOn, followsFrom, bridges } from './propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reachFrom, layers, homes, foundationsOf, restsOn, followsFrom, bridges, history } from './propagate.js';
 
 const d3 = window.d3;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -17,7 +17,9 @@ const state = {
   inBall: new Map(), // subject -> the entries that lie inside its ball in the molecule: the statements at it that nothing rests on
   middle: null, // set theory, the one subject that stands on axioms alone
   areas: [],
-  layout: 'tree', // how the map is arranged: 'tree' (axioms at the bottom), 'molecule' (the subjects as atoms, joined by bonds) or 'areas' (one cloud per data file)
+  layout: 'tree', // how the map is arranged: 'tree' (axioms at the bottom), 'molecule' (the subjects as atoms, joined by bonds), 'areas' (one cloud per data file) or 'solo' (one entry in the middle, see `solo`)
+  play: null, // while the map is played back year by year: see startPlay
+  solo: null, // { id, members, pos, all, back } while one entry stands in the middle with only what it is connected to; `back` is the arrangement and the zoom the map had
   pos: {}, // positions per arrangement for the current shape, worked out when first shown
   levels: {}, // per arrangement: the zoom from which each entry is drawn
   order: [], // all entries, the ones most is built on first
@@ -49,6 +51,9 @@ const gWaves = viewport.append('g');
 const gBridges = viewport.append('g').attr('class', 'bridges');
 const gEdges = viewport.append('g');
 const gBalls = viewport.append('g'); // over the lines, so that a line ends at the rim of a ball
+// During the playback: one dot per entry that is on the map, also where the zoom is too far out to draw the entry itself.
+const gSpecks = viewport.append('g').attr('class', 'specks');
+const specks = Object.fromEntries(['proven', 'conditional', 'open'].map((status) => [status, gSpecks.append('path').attr('class', status).node()]));
 const gFlows = viewport.append('g');
 const gNodes = viewport.append('g');
 const gAreas = d3.create('svg:g');
@@ -72,7 +77,10 @@ const el = (tag, props = {}, ...kids) => {
 const node = (id) => state.byId.get(id);
 const listNames = (ids) => andList.format(ids.map((id) => node(id).short));
 // A system (a number system or a theory) is not a statement and has no status.
-const statusOf = (n) => (n.kind === 'system' ? 'system' : state.shown.has(n.id) ? 'proven' : n.base === 'conditional' ? 'conditional' : 'open');
+// During the playback an entry has the status it had in that year (`now`).
+const statusOf = (n) => (n.kind === 'system' ? 'system' : n.now ?? (state.shown.has(n.id) ? 'proven' : n.base === 'conditional' ? 'conditional' : 'open'));
+// Does it hold in the picture right now? During the playback: only if it is on the map yet, and held in that year.
+const holds = (id) => (state.play ? !!node(id).there && statusOf(node(id)) === 'proven' : state.shown.has(id));
 const isStatement = (n) => n.kind !== 'system' && n.kind !== 'axiom';
 const isHypothetical = (id) => state.shown.has(id) && !state.real.has(id);
 const plural = (count, word) => `${count} ${word}${count === 1 ? '' : 's'}`;
@@ -215,6 +223,7 @@ function buildGraph() {
         .attr('rx', n.kind === 'system' ? s * 0.42 : 2.5)
         .attr('transform', n.kind === 'hypothesis' ? 'rotate(45)' : null);
     }
+    if (n.kind === 'system') pop.append('text').attr('class', 'count').attr('dy', '0.36em').text(n.above.size);
     pop.append('path').attr('class', 'check').attr('d', `M${-0.4 * n.r},${0.03 * n.r} L${-0.1 * n.r},${0.32 * n.r} L${0.43 * n.r},${-0.3 * n.r}`);
     if (n.needs.length > 1) n.arc = inner.append('circle').attr('class', 'arc').attr('r', n.r + 4.5).attr('transform', 'rotate(-90)').node();
     if (n.claim || state.index.today.claimed.includes(n.id)) inner.append('circle').attr('class', 'flag').attr('r', 3.6).attr('cx', n.r * 0.95).attr('cy', -n.r * 0.95);
@@ -273,7 +282,7 @@ const wide = () => window.innerWidth >= 1000 && window.innerHeight >= 600;
 // The part of the window the graph can use: below the header, above the
 // bottom strip, and left of the details panel when that sits at the side.
 function freeArea(ignorePanel = false) {
-  const top = $('status-line').getBoundingClientRect().bottom + 6;
+  const top = ($('playbar').hidden ? $('status-line') : $('playbar')).getBoundingClientRect().bottom + 6; // the playback's bar takes the place of the status line
   const strip = document.querySelector('.hud-bottom');
   const panel = $('panel');
   const box = panel.getBoundingClientRect();
@@ -285,16 +294,17 @@ function freeArea(ignorePanel = false) {
 }
 
 function relayout() {
-  $('legend').open = wide();
+  $('legend').open = wide() && !state.play; // the playback closes it, for room
   const area = freeArea(true);
   const aspect = (window.innerWidth - 12) / (area.bottom - area.top);
   // The tree is much wider than high. Where the free part of the window is not, its crowded rows are folded into two or three lines.
   const shape = `${aspect < 0.9 ? 'tall' : aspect > 2.2 ? 'flat' : 'wide'}/${aspect < 0.7 ? 3 : aspect < 1.4 ? 2 : 1}`;
-  if (shape !== state.shape || state.tween) {
+  if (shape !== state.shape || state.tween || state.solo) {
     cancelAnimationFrame(state.tween);
     state.tween = 0;
     if (shape !== state.shape) [state.pos, state.levels] = [{}, {}];
     state.shape = shape;
+    if (state.solo) Object.assign(state.solo, layoutSolo(state.solo.id)); // the room changed, and perhaps the direction
     place(positions(state.layout));
     useLevels(state.layout);
   }
@@ -304,6 +314,7 @@ function relayout() {
     a.labelHidden = false;
   }
   fit();
+  if (state.solo) fitView(state.solo.pos);
   requestAnimationFrame(prepareAreas); // after this picture is on screen
 }
 
@@ -362,22 +373,25 @@ function moleculeLevels(pos) {
 const levelsFor = (view) => (state.levels[view] ??= view === 'molecule' ? moleculeLevels(positions(view)) : zoomLevels(positions(view)));
 
 function useLevels(view) {
-  levelsFor(view);
-  for (const n of state.nodes) n.level = state.levels[view].get(n.id);
+  if (view !== 'solo') levelsFor(view);
+  for (const n of state.nodes) n.level = view === 'solo' ? 0 : state.levels[view].get(n.id);
   if (updateShown()) positionLabels();
 }
 
 // Which entries are drawn right now: the ones the zoom is close enough for,
 // and whatever the reader is looking at (the selected entry and its
-// neighbours, a trace, a change that is spreading).
+// neighbours, a trace, a change that is spreading). With one entry in the
+// middle: that entry and what it is connected to, nothing else.
 function updateShown() {
   const sel = state.selected;
   const near = sel ? neighbours(sel) : null;
   const { trace, wave } = state;
+  const only = state.solo?.members;
+  const play = !!state.play;
   let changed = false;
   let look = null; // worked out when the first entry appears
   for (const n of state.nodes) {
-    const vis = state.t.k >= n.level || !!near?.has(n.id) || (!!trace && (trace.origin === n.id || trace.seen.has(n.id))) || !!wave?.ids.has(n.id);
+    const vis = play && !n.there ? false : only ? only.has(n.id) : state.t.k >= n.level || !!near?.has(n.id) || (!!trace && (trace.origin === n.id || trace.seen.has(n.id))) || !!wave?.ids.has(n.id);
     if (vis === n.vis) continue;
     n.vis = vis;
     // An entry that was not drawn does not have its colours up to date.
@@ -394,14 +408,25 @@ function updateShown() {
     appear(l, vis);
   }
   const shown = findBridges();
-  $('zoom-note').textContent = shown.size < state.nodes.length ? `Showing ${shown.size} of ${state.nodes.length} entries. Zoom in for more.` : `Showing all ${state.nodes.length} entries.`;
+  $('zoom-note').textContent = zoomNote(shown.size);
   return true;
+}
+
+function zoomNote(shown) {
+  const { solo } = state;
+  if (solo) {
+    const name = node(solo.id).short;
+    if (solo.all) return `Only ${name} and what it is connected to: ${shown} ${shown === 1 ? 'entry' : 'entries'}.`;
+    return `Only ${name}, what it stands on, the subjects built on it and its own statements that others rest on: ${shown} of ${node(solo.id).above.size + node(solo.id).roots.size + 1} entries.`;
+  }
+  return shown < state.nodes.length ? `Showing ${shown} of ${state.nodes.length} entries. Zoom in for more.` : `Showing all ${state.nodes.length} entries.`;
 }
 
 // The dotted lines past entries that are hidden at this zoom. Returns the ids of the entries that are drawn.
 function findBridges() {
   const shown = new Set(state.nodes.filter((n) => n.vis).map((n) => n.id));
-  let found = bridges(state.nodes, shown, (b, a) => node(b).roots.has(a));
+  // With one entry in the middle everything it is connected to is drawn: no chain is hidden.
+  let found = state.solo ? [] : bridges(state.nodes, shown, (b, a) => node(b).roots.has(a));
   if (state.layout === 'molecule') {
     // In the molecule the only line an entry has is the one to its home. Where the home is hidden, the dotted
     // line leads on from home to home, to the first entry that is drawn.
@@ -533,6 +558,7 @@ function placeBridges() {
 // Where every entry sits in one arrangement, worked out the first time that
 // arrangement is shown in the current shape.
 function positions(view) {
+  if (view === 'solo') return state.solo.pos;
   const [areas, fold] = state.shape.split('/');
   state.pos[view] ??= view === 'tree' ? layoutTree(+fold) : view === 'molecule' ? layoutMolecule(areas) : areasFor(areas).finish();
   return state.pos[view];
@@ -584,26 +610,53 @@ function place(pos) {
 function moved() {
   for (const a of state.areas) a.box = bounds(a.nodes);
   updatePositions();
+  if (state.play) drawSpecks();
 }
 
-// Switch between the tree, the molecule and the areas. The entries glide to their new places.
+// Switch between the tree, the molecule and the areas.
 function setLayout(view) {
   if (view === state.layout) return;
+  if (view !== 'molecule') stopPlay(); // the playback runs in the molecule
+  if (state.solo) {
+    state.solo = null;
+    state.focus = !!state.selected;
+  }
+  arrange(view);
+  renderPanel();
+}
+
+// The entries that can be drawn at all: every entry, or with one entry in the middle its members.
+const inView = () => (state.solo ? [...state.solo.members].map(node) : state.nodes);
+
+// Shows the whole arrangement `to` in the free part of the window. With one entry in the middle the names are what
+// the view is for: where the whole would come out smaller than half size (a phone), the window shows the entry
+// and the rows next to it at half size, and the rest is a pan away ("Show all" still fits everything).
+function fitView(to, animate, duration) {
+  const box = bounds(inView().map((n) => ({ x: to.get(n.id)[0], y: to.get(n.id)[1] })));
+  const area = freeArea();
+  if (!state.solo || fitScale(box, area) >= 0.5) return fitBox(box, animate, duration);
+  const [x, y] = to.get(state.solo.id);
+  moveTo(d3.zoomIdentity.translate((area.left + area.right) / 2 - 0.5 * x, (area.top + area.bottom) / 2 - 0.5 * y).scale(0.5), animate, duration);
+}
+
+// Brings the map into an arrangement; the entries glide to their new places. The window then shows all of it,
+// or the part of the map given as `target` (a zoom transform).
+function arrange(view, target) {
   finishWave();
   cancelAnimationFrame(state.tween);
   state.layout = view;
-  for (const v of ['tree', 'molecule', 'areas']) {
-    document.body.classList.toggle(`view-${v}`, v === view);
-    $(`btn-${v}`).setAttribute('aria-pressed', String(v === view));
-  }
+  for (const v of ['tree', 'molecule', 'areas', 'solo']) document.body.classList.toggle(`view-${v}`, v === view);
+  for (const v of ['tree', 'molecule', 'areas']) $(`btn-${v}`).setAttribute('aria-pressed', String(v === view));
+  $('btn-back').hidden = view !== 'solo';
   const to = positions(view);
   useLevels(view);
   findBridges(); // they differ between the arrangements, also where the same entries are drawn
-  const box = bounds([...to.values()].map(([x, y]) => ({ x, y })));
+  $('zoom-note').textContent = zoomNote(state.nodes.filter((n) => n.vis).length);
+  const look = (animate) => (target ? moveTo(target, animate, 800) : fitView(to, animate, 800));
   if (reduceMotion) {
     place(to);
     applyStatus();
-    fitBox(box);
+    look(false);
     return;
   }
   const from = new Map(state.nodes.map((n) => [n.id, [n.x, n.y]]));
@@ -623,7 +676,94 @@ function setLayout(view) {
   };
   state.tween = requestAnimationFrame(step);
   applyStatus();
-  fitBox(box, true, 800);
+  look(true);
+}
+
+// One entry in the middle, and around it only what it is connected to: what it stands on, down to the axioms, on
+// one side, what stands on it on the other, one row per step away from it. In a wide window the rows are columns
+// (what it stands on to the left); in a tall one what it stands on lies below, as in the tree.
+// A subject or an axiom may have a thousand entries on it. Past 120, only the subjects among them are drawn and
+// the entries directly on it that something rests on; every subject shows how many entries are built on it.
+// Within a row an entry lies near the entries of the rows before that it is linked to. A row too long for the
+// window is folded into staggered lines. The rows are as far apart as the names need, less where that lets the
+// whole fit the window. Returns the members, their places (the other entries keep theirs: they are not drawn)
+// and `all`: whether everything on the entry is among them.
+function layoutSolo(id) {
+  const origin = node(id);
+  const area = freeArea();
+  const [w, h] = [area.right - area.left, area.bottom - area.top];
+  const flat = window.innerWidth > window.innerHeight;
+  // From one row to the next, at most and at least; between the lines of a folded row.
+  const [gap, tight, line] = flat ? [170, 118, 112] : [84, 62, 46];
+  // The room an entry takes along its row: its mark and, across the rows' direction, its name (below the mark, so in a column the name's height counts).
+  const room = (k) => (flat ? 2 * node(k).r + node(k).lines.length * 14 + 14 : Math.max(2 * node(k).r, node(k).labelW) + 12);
+  const all = origin.above.size <= 120;
+  const direct = new Set([...state.dependents.get(id), ...state.built.get(id)]);
+  const sides = [[...origin.roots], [...origin.above].filter(([k]) => all || node(k).kind === 'system' || (direct.has(k) && node(k).above.size > 0))];
+  const span = (flat ? h : w) - 90;
+  const rows = sides.map((list) => {
+    const byStep = new Map();
+    for (const [k, step] of list) (byStep.get(step) ?? byStep.set(step, []).get(step)).push(k);
+    return [...byStep.keys()].sort((a, b) => a - b).map((step) => byStep.get(step));
+  });
+  const lines = (ids) => Math.max(1, Math.ceil(ids.reduce((sum, k) => sum + room(k), 0) / Math.max(span, 240)));
+  const count = rows.flat().length;
+  const folded = rows.flat().reduce((sum, ids) => sum + (lines(ids) - 1) * line, 0);
+  const apart = Math.max(tight, Math.min(gap, ((flat ? w : h) - 130 - folded) / (count || 1)));
+
+  const pos = new Map(state.nodes.map((n) => [n.id, [n.x, n.y]]));
+  const across = new Map([[id, 0]]);
+  pos.set(id, [0, 0]);
+  let nth = 0; // lines so far that hold more than one entry: every other one is shifted, so that the names of two neighbouring lines do not meet
+  const linked = (k) => [...node(k).rests, ...node(k).within, ...state.dependents.get(k), ...state.built.get(k)].filter((x) => across.has(x));
+  rows.forEach((side, i) => {
+    const dir = i ? -1 : 1; // what it stands on: below, or to the left
+    let far = 0;
+    for (const ids of side) {
+      const want = new Map(ids.map((k) => [k, linked(k)]).map(([k, l]) => [k, l.length ? l.reduce((sum, x) => sum + across.get(x), 0) / l.length : 0]));
+      ids.sort((a, b) => want.get(a) - want.get(b) || node(b).above.size - node(a).above.size);
+      const n = lines(ids);
+      far += apart;
+      for (let ln = 0; ln < n; ln++) {
+        // Neighbours in the order go to different lines, so that an entry stays near what it is linked to.
+        const mine = ids.filter((_, j) => j % n === ln);
+        let at = -mine.reduce((sum, k) => sum + room(k), 0) / 2 + (mine.length > 1 && nth++ % 2 ? (flat ? 27 : 56) : 0);
+        for (const k of mine) {
+          across.set(k, at + room(k) / 2);
+          pos.set(k, flat ? [-dir * (far + ln * line), at + room(k) / 2] : [at + room(k) / 2, dir * (far + ln * line)]);
+          at += room(k);
+        }
+      }
+      far += (n - 1) * line;
+    }
+  });
+  return { pos, all, members: new Set(across.keys()) };
+}
+
+// Puts an entry in the middle. From the map this remembers where the map was; from another entry in the middle it only moves on.
+function showSolo(id) {
+  stopPlay();
+  clearTrace();
+  const back = state.solo?.back ?? { layout: state.layout, t: state.t };
+  state.selected = id;
+  state.view = 'node';
+  state.focus = false;
+  // How much room there is depends on the panel and on the header, so both are brought up to date first.
+  document.body.classList.add('view-solo');
+  $('btn-back').hidden = false;
+  state.solo = { id, back, members: new Set() };
+  renderPanel();
+  Object.assign(state.solo, layoutSolo(id));
+  arrange('solo');
+}
+
+// Back to the map as it was: the same arrangement, the same zoom. The entry stays selected.
+function leaveSolo() {
+  const { back } = state.solo;
+  state.solo = null;
+  state.focus = !!state.selected;
+  arrange(back.layout, back.t);
+  renderPanel();
 }
 
 // The tree: axioms in the bottom row, and every entry one row above the
@@ -1101,7 +1241,7 @@ function moveTo(target, animate, duration = 450) {
 }
 
 // Show all of `nodes` (the whole graph by default) in the free part of the window.
-function fit(animate = false, nodes = state.nodes) {
+function fit(animate = false, nodes = inView()) {
   fitBox(bounds(nodes), animate);
   // The reader can always zoom out as far as the whole map.
   zoom.scaleExtent([Math.min(0.12, fitScale(bounds(state.nodes), freeArea(true))), maxZoom]);
@@ -1322,13 +1462,13 @@ function go({ animate }) {
   renderPanel();
 }
 
-function setMode(mode) {
+function setMode(mode, animate = mode === 'today') {
   state.mode = mode;
   state.whatIf.clear();
   state.dropped.clear();
   $('btn-before').setAttribute('aria-pressed', String(mode === 'before'));
   $('btn-today').setAttribute('aria-pressed', String(mode === 'today'));
-  go({ animate: mode === 'today' });
+  go({ animate });
 }
 
 function toggle(set, id) {
@@ -1360,7 +1500,7 @@ function paintNode(n, { sel, trace, dimNode }) {
   }
   n.el.classList.toggle('selected', n.id === sel);
   if (n.arc) {
-    const met = n.needs.filter((p) => state.shown.has(p)).length;
+    const met = n.needs.filter(holds).length;
     const frac = st === 'proven' ? 0 : met / n.needs.length;
     if (frac !== n.arcAt) {
       const c = 2 * Math.PI * (n.r + 4.5);
@@ -1373,10 +1513,10 @@ function paintNode(n, { sel, trace, dimNode }) {
 
 function paintLink(l, { sel, trace, near }) {
   const cl = l.el.classList;
-  const on = l.type === 'needs' && state.lit.has(l.key);
+  const on = l.type === 'needs' && (state.play ? holds(l.source) : state.lit.has(l.key));
   const traced = !!trace && trace.edges.has(l.key);
   cl.toggle('on', on);
-  cl.toggle('waiting', l.type === 'needs' && !on && !state.shown.has(l.target));
+  cl.toggle('waiting', l.type === 'needs' && !on && !holds(l.target));
   cl.toggle('whatif', on && !state.real.has(l.source));
   cl.toggle('traced', traced);
   cl.toggle('own', l.source === sel || l.target === sel);
@@ -1391,13 +1531,14 @@ function applyStatus() {
   gBridges.classed('dim', !!look.trace || !!look.near);
   for (const n of state.nodes) if (n.vis) paintNode(n, look);
   for (const l of state.links) if (l.vis) paintLink(l, look);
+  if (state.play) drawSpecks();
   renderTally();
 }
 
 let tallyShown = '';
 function renderTally() {
   const count = { proven: 0, whatif: 0, conditional: 0, open: 0 };
-  for (const n of state.nodes.filter(isStatement)) count[isHypothetical(n.id) ? 'whatif' : statusOf(n)]++;
+  for (const n of state.nodes) if (isStatement(n) && (!state.play || n.there)) count[isHypothetical(n.id) ? 'whatif' : statusOf(n)]++;
   const key = Object.values(count).join();
   if (key === tallyShown) return; // called on every step of a wave, mostly with nothing new
   tallyShown = key;
@@ -1638,7 +1779,7 @@ function startTrace(id, dir) {
     onFlowDone: (l) => trace.edges.add(l.key),
     onDone: finish,
   });
-  fit(true, [origin, ...[...members.keys()].map(node)]);
+  fit(true, [origin, ...[...members.keys()].map(node)].filter((n) => !state.solo || state.solo.members.has(n.id)));
 }
 
 function clearTrace() {
@@ -1647,13 +1788,198 @@ function clearTrace() {
   state.trace = null;
 }
 
+/* ---------- playback ---------- */
+
+// The map grows year by year, in the molecule. It starts empty; each entry appears in its year, with the status it
+// had then (a conjecture is open until the year it was proven). The 890 entries without a year take no part and
+// are added together at the end, after the present day; then, if the map was on "Today", the proof of 2026 spreads.
+// `history` in propagate.js says what happens when. Here: `events` in order, `at` how many have happened (one more
+// than there are events: the end, with every entry on the map as it is today), `due` the time on the playback's
+// clock at which each happens. Zoomed out the molecule draws only the subjects, so every entry that is on the map
+// also has a small dot (drawSpecks).
+// The years are bunched: 11 entries before 1600, 540 from 1950 to 1999. So the clock does not run evenly: every
+// event takes a moment, a gap of years a little longer for each year, up to a limit.
+const PACE = { each: 25, perYear: 40, most: 600, lead: 700, end: 1500 }; // milliseconds
+const yearText = (year) => (year < 0 ? `${-Math.floor(year)} BC` : String(Math.floor(year)));
+
+function startPlay() {
+  if (state.play) return;
+  clearTrace();
+  const mode = state.mode;
+  setMode('before', false); // without what-ifs: what holds is what held before the proof of 2026
+  const { events, undated } = history(state.nodes, state.real);
+  const due = [];
+  events.forEach((e, i) => due.push(i ? due[i - 1] + Math.min(PACE.most, PACE.each + PACE.perYear * (e.year - events[i - 1].year)) : PACE.lead));
+  due.push(due.at(-1) + PACE.end);
+  for (const n of state.nodes) {
+    n.there = false;
+    n.born = undefined;
+  }
+  for (const e of events) node(e.id).born ??= e.year;
+  state.play = { events, undated, due, at: 0, clock: 0, last: 0, playing: true, raf: 0, year: events[0].year, mode, legend: $('legend').open, shown: null, shownRank: -1, shownUntil: 0 };
+  document.body.classList.add('playing');
+  $('playbar').hidden = false;
+  $('play-slider').max = events.length + 1;
+  $('legend').open = false;
+  select(null);
+  playTo(0);
+  if (state.layout === 'molecule') fit(true);
+  else setLayout('molecule');
+  state.play.raf = requestAnimationFrame(playFrame);
+}
+
+function stopPlay() {
+  const play = state.play;
+  if (!play) return;
+  cancelAnimationFrame(play.raf);
+  finishWave();
+  state.play = null;
+  for (const n of state.nodes) {
+    n.there = true;
+    n.now = undefined;
+    setBall(n, true);
+  }
+  drawSpecks();
+  document.body.classList.remove('playing');
+  $('playbar').hidden = true;
+  $('legend').open = play.legend;
+  setMode(play.mode, false);
+  positionLabels();
+}
+
+function setBall(n, there) {
+  if (n.ballEl && there !== n.ballThere) n.ballEl.classList.toggle('absent', !(n.ballThere = there));
+}
+
+// Moves the playback to the point where `count` events have happened. `live`: it got there by playing, so what changes is pointed out.
+function playTo(count, live = false) {
+  const play = state.play;
+  const { events } = play;
+  if (count < play.at) {
+    // Backwards: from the start again. After the end the map may be on "Today"; the playback shows what came before.
+    if (state.mode !== 'before') setMode('before', false);
+    for (const n of state.nodes) {
+      n.there = false;
+      n.now = undefined;
+    }
+    play.at = 0;
+  }
+  const proved = [];
+  let named = null;
+  let panel = !live; // the panel is written anew when the selected entry changed
+  while (play.at < Math.min(count, events.length)) {
+    const e = events[play.at++];
+    const n = node(e.id);
+    panel ||= e.id === state.selected;
+    if (live && n.there && e.status === 'proven') proved.push(n);
+    if (live && (!named || n.above.size > named.above.size)) named = n;
+    n.there = true;
+    n.now = e.status;
+  }
+  if (count > events.length && play.at === events.length) {
+    // The end: every entry is on the map, as it is today.
+    play.at++;
+    panel = true;
+    for (const n of state.nodes) {
+      n.there = true;
+      n.now = undefined;
+    }
+  }
+  for (const n of state.nodes) setBall(n, n.there);
+  applyStatus();
+  positionLabels();
+  for (const n of proved) if (n.vis) pulse(n.el, 'flip');
+  if (state.selected && panel) renderPanel();
+
+  const done = play.at > events.length;
+  const reached = done ? +state.index.today.date.slice(0, 4) : events[Math.max(0, play.at - 1)].year;
+  play.year = live ? Math.max(play.year, reached) : reached; // while it plays, the year has run ahead of the last event (playFrame)
+  const now = performance.now();
+  if (named && (now > play.shownUntil || named.above.size > play.shownRank)) [play.shown, play.shownRank, play.shownUntil] = [named, named.above.size, now + 600];
+  if (!live) play.shown = play.at && !done ? node(events[play.at - 1].id) : null;
+  $('play-slider').value = play.at;
+  const dated = state.nodes.length - play.undated.length;
+  const there = done ? state.nodes.length : state.nodes.filter((n) => n.there).length;
+  const note = done
+    ? [`All ${state.nodes.length} entries. `, `The last ${play.undated.length} have no known year and were added together.`]
+    : [play.shown ? `${play.shown.short}. ` : '', `${there} of ${dated} dated entries; ${play.undated.length} more without a year come at the end.`];
+  if (note.join() !== play.note) $('play-note').replaceChildren(el('strong', { text: note[0] }), note[1]);
+  play.note = note.join();
+  showYear();
+  // After the present day, the proof of 2026, if the map was showing it.
+  if (done && play.mode === 'today' && state.mode !== 'today') setMode('today');
+}
+
+function showYear() {
+  const { play } = state;
+  const text = yearText(play.year);
+  if (text !== play.yearShown) {
+    $('play-year').textContent = play.yearShown = text;
+    $('play-slider').setAttribute('aria-valuetext', text);
+  }
+  const label = play.playing ? 'Pause' : play.at > play.events.length ? 'Play again' : 'Play';
+  if (label !== play.label) {
+    $('play-toggle').setAttribute('aria-label', (play.label = label));
+    $('play-toggle').textContent = play.playing ? '❚❚' : '▶';
+  }
+}
+
+function playFrame(now) {
+  const play = state.play;
+  if (!play?.playing) return;
+  const { events, due } = play;
+  play.clock += Math.min(100, now - (play.last || now)); // a tab that was in the background does not jump ahead
+  play.last = now;
+  let count = play.at;
+  while (count <= events.length && play.clock >= due[count]) count++;
+  if (count > play.at) playTo(count, true);
+  if (play.at > events.length) {
+    play.playing = false;
+    return showYear();
+  }
+  // Between two events the year runs on towards the next one.
+  if (play.at && play.at < events.length) {
+    const [from, to] = [events[play.at - 1].year, events[play.at].year];
+    play.year = Math.max(play.year, from + ((to - from) * (play.clock - due[play.at - 1])) / (due[play.at] - due[play.at - 1]));
+  }
+  showYear();
+  play.raf = requestAnimationFrame(playFrame);
+}
+
+function togglePlay() {
+  const play = state.play;
+  play.playing = !play.playing;
+  if (play.playing) {
+    if (play.at > play.events.length) seekPlay(0);
+    play.last = 0;
+    play.raf = requestAnimationFrame(playFrame);
+  }
+  showYear();
+}
+
+// The slider: to the point where `count` events have happened.
+function seekPlay(count) {
+  const play = state.play;
+  finishWave();
+  playTo(count);
+  play.clock = play.at ? play.due[Math.min(play.at, play.events.length) - 1] : 0;
+}
+
+function drawSpecks() {
+  const d = { proven: '', conditional: '', open: '' };
+  if (state.play) for (const n of state.nodes) if (n.there && n.kind !== 'system') d[statusOf(n)] += `M${n.x.toFixed(1)},${n.y.toFixed(1)}h0`;
+  for (const status in d) if (d[status] !== specks[status].d) specks[status].setAttribute('d', (specks[status].d = d[status]));
+}
+
 /* ---------- panel ---------- */
 
 function select(id, { centre = false } = {}) {
+  // With one entry in the middle, choosing another one puts that one in the middle.
+  if (id && state.solo && state.solo.id !== id) return showSolo(id);
   clearTrace();
   state.selected = id;
   state.view = 'node';
-  state.focus = !!id;
+  state.focus = !!id && !state.solo;
   applyStatus();
   renderPanel();
   positionLabels();
@@ -1744,6 +2070,16 @@ function nodeView(n) {
   const linkSource = (id) => (n.needUrl[id] ? el('a', { class: 'why', href: n.needUrl[id], target: '_blank', rel: 'noopener', title: 'Source for this link', text: 'source' }) : null);
   const sources = [{ title: host(n.url), url: n.url }, ...(n.id === 'rh' || today.claimed.includes(n.id) ? today.sources : [])];
 
+  // During the playback: what differs from today at the point it has reached. (Without the year, which runs on while this stands there.)
+  const play = state.play;
+  const then = !play || play.at > play.events.length
+    ? null
+    : !n.there
+      ? n.born === undefined ? 'Not on the map at this point of the playback: no source gave its year, so it is added at the end.' : `Not on the map yet at this point of the playback: it appears in ${yearText(n.born)}.`
+      : st !== (system ? 'system' : state.shown.has(n.id) ? 'proven' : n.base === 'conditional' ? 'conditional' : 'open')
+        ? `At this point of the playback it is ${{ open: 'open', conditional: 'proven only on condition', proven: 'proven' }[st]}. What follows is how it stands today.`
+        : null;
+
   const tracing = state.trace?.origin === n.id ? state.trace.dir : null;
   const traceBtn = (dir, count, lead, tail) =>
     count
@@ -1754,7 +2090,9 @@ function nodeView(n) {
   // nothing would change on the map for the others.
   const isDefault = state.index.assumed.includes(n.id) && n.weight > 0;
   let action = null;
-  if (isDefault) {
+  if (state.play) {
+    // A what-if would work out anew what holds today.
+  } else if (isDefault) {
     const off = state.dropped.has(n.id);
     action = el('button', { class: `whatif-btn${off ? '' : ' amber'}`, type: 'button', text: off ? 'Assume this again' : 'Stop assuming this', onclick: () => toggle(state.dropped, n.id) });
   } else if (state.whatIf.has(n.id) || (isRoot(state.nodes, n.id) && !state.shown.has(n.id) && !state.wave)) {
@@ -1773,6 +2111,7 @@ function nodeView(n) {
     el('h2', { text: n.name }),
     el('p', { class: 'statement', text: n.statement }),
     n.by ? el('p', { class: 'by', text: n.by }) : null,
+    then ? el('p', { class: 'note then', text: then }) : null,
     el('p', { class: 'explain', text: explain(n) }),
     n.claim ? el('p', { class: 'claim' }, el('strong', { text: 'Unreviewed claim. ' }), n.claim) : null,
     n.equivalent ? el('p', { class: 'explain', text: `Equivalent to ${listNames(n.needs)}: each implies the other.` }) : null,
@@ -1786,6 +2125,9 @@ function nodeView(n) {
           // Everything that stands on a system or an axiom, where that is more than the statements that need it.
           traceBtn('above', n.above.size > n.weight ? n.above.size : 0, '', n.above.size === 1 ? ' entry is built on this' : ' entries are built on this'),
           traceBtn('roots', n.roots.size > n.up.size ? n.roots.size : 0, 'Down to the axioms: ', n.roots.size === 1 ? ' step' : ' entries'),
+          state.solo?.id === n.id
+            ? el('button', { class: 'trace-btn solo-btn active', type: 'button', text: 'Back to the whole map', onclick: leaveSolo })
+            : el('button', { class: 'trace-btn solo-btn', type: 'button', text: 'Show only this and what it is connected to', onclick: () => showSolo(n.id) }),
         )
       : null,
     action,
@@ -1946,11 +2288,23 @@ function wire() {
     }),
   );
   $('btn-all').addEventListener('click', touch(() => fit(true)));
+  $('btn-back').addEventListener('click', touch(leaveSolo));
+  $('btn-play').addEventListener('click', touch(startPlay));
+  $('play-toggle').addEventListener('click', togglePlay);
+  $('play-close').addEventListener('click', stopPlay);
+  $('play-slider').addEventListener('input', (e) => {
+    state.play.playing = false;
+    seekPlay(+e.target.value);
+    showYear();
+  });
   for (const view of ['tree', 'molecule', 'areas']) $(`btn-${view}`).addEventListener('click', touch(() => setLayout(view)));
   $('status-line').addEventListener('click', () => select('rh', { centre: true }));
   wireSearch();
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.activeElement !== $('search')) closePanel();
+    if (e.key !== 'Escape' || document.activeElement === $('search')) return;
+    if (state.solo) leaveSolo();
+    else if (state.play && $('panel').hidden) stopPlay();
+    else closePanel();
   });
   let timer = 0;
   window.addEventListener('resize', () => {

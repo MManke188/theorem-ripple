@@ -260,3 +260,75 @@ export function rippleOrder(nodes, before, after) {
   }
   return { flipped, touched };
 }
+
+// The map over time, for the playback: when each entry appears, and which
+// status it had from when. `proven` is what holds today (computeProven).
+// Returns `events`, sorted by year, each { year, id, status }; an entry's first
+// event is its appearance, a later one a change of status. `undated` are the
+// entries that have no year and so no event.
+//
+// An entry appears in `year`: when it was first stated or proven. Until
+// `settled` (it began as a conjecture and was proven then) it is open. A result
+// with `formerlyYear` was first proven under a hypothesis in that year, so it
+// appears then, as conditional, until `year`. A statement that holds because of
+// what it lists (a result that needs an assumed axiom) holds from the latest
+// year among those, not before its own. A system without a year appears with
+// the earliest dated entry built directly in it, else with the earliest
+// anywhere on it. Nothing waits for what it stands on: Euclidean geometry
+// (300 BC) is on the map long before the real numbers (1872).
+export function history(nodes, proven) {
+  const byId = index(nodes);
+  const appears = new Map();
+  for (const n of nodes) {
+    const first = Math.min(n.year ?? Infinity, n.formerlyYear ?? Infinity);
+    if (first < Infinity) appears.set(n.id, first);
+  }
+  const on = reachFrom(nodes, 'down', foundationsOf);
+  const earliest = (ids) => Math.min(...ids.filter((id) => byId.get(id).kind !== 'system' && appears.has(id)).map((id) => appears.get(id)));
+  for (const n of nodes) {
+    if (n.kind !== 'system' || appears.has(n.id)) continue;
+    const direct = earliest(nodes.filter((m) => (m.within || []).includes(n.id)).map((m) => m.id));
+    const year = direct < Infinity ? direct : earliest([...on(n.id).keys()]);
+    if (year < Infinity) appears.set(n.id, year);
+  }
+
+  // From when an entry that holds today has held.
+  const memo = new Map();
+  const holdsFrom = (id) => {
+    if (memo.has(id)) return memo.get(id);
+    const n = byId.get(id);
+    let year = n.settled ?? n.year ?? -Infinity;
+    if (n.base !== 'proven') {
+      const needs = n.needs || [];
+      const ways = (n.anyOf || []).filter((p) => proven.has(p));
+      if (needs.length && needs.every((p) => proven.has(p))) year = Math.max(year, ...needs.map(holdsFrom));
+      else if (ways.length) year = Math.max(year, Math.min(...ways.map(holdsFrom)));
+    }
+    memo.set(id, year);
+    return year;
+  };
+  const statusAt = (n, year) => {
+    if (n.kind === 'system') return 'system';
+    const unproven = n.base === 'conditional' ? 'conditional' : 'open';
+    if (n.settled != null && year < n.settled) return 'open';
+    if (n.formerlyYear != null && n.year != null && year < n.year) return 'conditional';
+    return proven.has(n.id) && year >= holdsFrom(n.id) ? 'proven' : unproven;
+  };
+
+  const events = [];
+  for (const n of nodes) {
+    if (!appears.has(n.id)) continue;
+    const from = appears.get(n.id);
+    const years = [from, n.settled, n.year, proven.has(n.id) ? holdsFrom(n.id) : null].filter((y) => y != null && y >= from && y < Infinity);
+    let last = null;
+    for (const year of [...new Set(years)].sort((a, b) => a - b)) {
+      const status = statusAt(n, year);
+      if (status !== last) events.push({ year, id: n.id, status });
+      last = status;
+    }
+  }
+  // Within a year the systems come first; otherwise the order of the data is kept.
+  const rank = new Map(nodes.map((n, i) => [n.id, (n.kind === 'system' ? 0 : nodes.length) + i]));
+  events.sort((a, b) => a.year - b.year || rank.get(a.id) - rank.get(b.id));
+  return { events, undated: nodes.filter((n) => !appears.has(n.id)).map((n) => n.id) };
+}

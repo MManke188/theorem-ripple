@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reach, reachFrom, layers, homes, foundationsOf, restsOn, followsFrom, bridges } from '../js/propagate.js';
+import { normalize, validate, computeProven, isRoot, missingFor, waitsOn, rippleOrder, reach, reachFrom, layers, homes, foundationsOf, restsOn, followsFrom, bridges, history } from '../js/propagate.js';
 
 const read = (file) => JSON.parse(readFileSync(new URL(`../data/${file}`, import.meta.url), 'utf8'));
 const index = read('index.json');
@@ -347,4 +347,59 @@ test('bridges join a shown entry to the nearest shown entries below it, past hid
   assert.deepEqual(of('lemma', 'top', 'axiom'), ['axiom>lemma', 'lemma>top needs']);
   // `top` is linked to `numbers` directly, so no bridge to what `numbers` stands on.
   assert.deepEqual(of('axiom', 'numbers', 'top'), ['axiom>numbers']);
+});
+
+test('history: an entry appears in its year and changes status when it was proven', () => {
+  const made = normalize([
+    { id: 'sys', kind: 'system' },
+    { id: 'old', kind: 'theorem', base: 'proven', year: -300, within: ['sys'] },
+    { id: 'dated-sys', kind: 'system', year: 1872, within: ['sys'] },
+    { id: 'conj', kind: 'theorem', base: 'proven', year: 1637, settled: 1994, within: ['dated-sys'] },
+    { id: 'hyp', kind: 'hypothesis', base: 'open', year: 1859, within: ['sys'] },
+    { id: 'cond', kind: 'theorem', base: 'conditional', year: 1901, needs: ['hyp'] },
+    { id: 'first-under', kind: 'theorem', base: 'proven', year: 2013, formerlyYear: 1997, formerly: ['hyp'], within: ['sys'] },
+    { id: 'axiom', kind: 'axiom', base: 'open', year: 1904 },
+    { id: 'given-axiom', kind: 'theorem', base: 'conditional', year: 1890, needs: ['axiom'] },
+    { id: 'no-year', kind: 'theorem', base: 'proven', within: ['sys'] },
+    { id: 'empty-sys', kind: 'system', within: ['sys'] },
+  ]);
+  const { events, undated } = history(made, computeProven(made, new Set(['axiom'])));
+  const of = (id) => events.filter((e) => e.id === id).map((e) => [e.year, e.status]);
+  assert.deepEqual(of('old'), [[-300, 'proven']]);
+  assert.deepEqual(of('sys'), [[-300, 'system']], 'a system without a year appears with the earliest entry built in it');
+  assert.deepEqual(of('dated-sys'), [[1872, 'system']], 'a dated system appears in its own year, also after what stands on it');
+  assert.deepEqual(of('conj'), [[1637, 'open'], [1994, 'proven']]);
+  assert.deepEqual(of('hyp'), [[1859, 'open']]);
+  assert.deepEqual(of('cond'), [[1901, 'conditional']]);
+  assert.deepEqual(of('first-under'), [[1997, 'conditional'], [2013, 'proven']]);
+  assert.deepEqual(of('axiom'), [[1904, 'proven']]);
+  assert.deepEqual(of('given-axiom'), [[1890, 'conditional'], [1904, 'proven']], 'it holds from the year its axiom was there');
+  assert.deepEqual(undated, ['no-year', 'empty-sys']);
+  assert.deepEqual(events.map((e) => e.year), [...events.map((e) => e.year)].sort((a, b) => a - b));
+  assert.equal(events.findIndex((e) => e.id === 'sys') < events.findIndex((e) => e.id === 'old'), true, 'within a year the systems come first');
+});
+
+test('history of the real data: every dated entry appears once, and ends as it is today', () => {
+  const holds = proven(...index.assumed);
+  const { events, undated } = history(nodes, holds);
+  const first = new Map();
+  const last = new Map();
+  for (const e of events) {
+    if (!first.has(e.id)) first.set(e.id, e);
+    last.set(e.id, e);
+  }
+  for (const n of nodes) {
+    if (n.year == null && n.kind !== 'system') {
+      assert.equal(undated.includes(n.id), true, `${n.id} has no year and must not appear`);
+      continue;
+    }
+    assert.ok(first.has(n.id), `${n.id} never appears`);
+    if (n.kind === 'system') continue;
+    assert.equal(first.get(n.id).year, Math.min(n.year, n.formerlyYear ?? Infinity), n.id);
+    const today = holds.has(n.id) ? 'proven' : n.base === 'conditional' ? 'conditional' : 'open';
+    assert.equal(last.get(n.id).status, today, `${n.id} ends as ${last.get(n.id).status}`);
+    if (n.settled != null) assert.equal(first.get(n.id).status, 'open', `${n.id} began as a conjecture`);
+  }
+  assert.equal(undated.filter((id) => byId.get(id).kind === 'system').length, 0, 'every system has a dated entry on it');
+  assert.equal(events.length + undated.length > nodes.length, true);
 });

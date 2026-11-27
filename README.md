@@ -15,6 +15,8 @@ What you can do on the page:
 - Select any entry and press "Down to the axioms" to light up everything it stands on, through its theory and the number systems down to the axioms. On a system or an axiom, "entries are built on this" shows the opposite direction.
 - Select an open conjecture and press "What if this is proven?". What-if results are drawn in blue so they cannot be mistaken for proven ones. The change also travels along the dashed arrows: with GRH marked as proven, the Riemann Hypothesis holds too.
 - Select an axiom that is assumed by default (the axiom of choice) and stop assuming it. Everything that needs it turns amber.
+- Select any entry and press "Show only this and what it is connected to". Everything else disappears: the entry stands in the middle, what it stands on (down to the axioms) on one side and what stands on it on the other, one row per step away from it. In a wide window the rows run from left to right, in a tall one from bottom to top. Choosing another entry there puts that one in the middle. Escape or "Back to the map" returns to the map as it was. A subject with more than 120 entries on it is drawn with the subjects built on it and its own statements that others rest on; each subject shows how many entries are built on it.
+- Press "Play history". The map empties and grows year by year in the Molecule arrangement: each entry appears in the year it was first stated or proven, and a statement that began as a conjecture is open until the year it was proven. Every entry on the map has a small dot, because zoomed out only the subjects themselves are drawn. Entries without a known year take no part; they are added together at the end. The slider moves through time.
 - Open "Rankings" for the proven statements most rests on, the unproven ones most rests on, and the results furthest from the foundations.
 
 A link to a proven theorem means "the cited proof uses it". Many theorems have several proofs, so such a link is a fact about one proof, with its source, and not a claim that no other route exists.
@@ -60,8 +62,8 @@ One entry per statement:
 | `by`, `note`, `url` | Attribution, comment, source |
 | `anyOf` | Only on an open entry: statements any one of which alone would prove it. `needs` is one route (all of it together), each item here is a further route |
 | `claim` | An unreviewed recent claim of a proof or disproof. Shown in the panel and as a pink dot; it does not change the status |
-| `year`, `settled` | When the statement was first stated or proven, and, if it began as a conjecture, when it was proven. Not used by the page yet; recorded for a future timeline. Left out where no source gives a date. Years before the common era are negative |
-| `formerlyYear` | When the result was first proven under the hypothesis in `formerly` |
+| `year`, `settled` | When the statement was first stated or proven, and, if it began as a conjecture, when it was proven. The playback reads them: an entry appears in `year` and is open until `settled`. Left out where no source gives a date (such an entry joins the playback only at its end). Years before the common era are negative |
+| `formerlyYear` | When the result was first proven under the hypothesis in `formerly`. In the playback it appears then, as conditional, until `year` |
 | `area` | The area id of the file it is in |
 
 What `needs` means depends on `base`:

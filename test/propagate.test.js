@@ -111,7 +111,8 @@ test('a proven statement rests only on proven statements', () => {
 test('whatever holds rests only on what holds', () => {
   // If a statement is proven, everything it rests on is proven. Before this was
   // checked, the Riemann Hypothesis was drawn as resting on GRH, which it would
-  // only follow from: proven on 20 Nov 2026 while GRH stayed open.
+  // only follow from: proven on 20 Nov 2026 while GRH stayed open. Checked with
+  // and without what `today` in index.json marks as proven.
   for (const marks of [index.assumed, [...index.assumed, ...index.today.proven]]) {
     const holds = proven(...marks);
     for (const id of holds) for (const need of restsOn(byId.get(id))) assert.ok(holds.has(need), `${id} holds but rests on ${need}, which does not`);
@@ -355,13 +356,21 @@ test('history: an entry appears in its year and changes status when it was prove
   assert.deepEqual(of('axiom'), [[1904, 'proven']]);
   assert.deepEqual(of('given-axiom'), [[1890, 'conditional'], [1904, 'proven']], 'it holds from the year its axiom was there');
   assert.deepEqual(undated, ['no-year', 'empty-sys']);
+  // An open statement that was marked as proven holds from the year given for it, and so does what rests on it.
+  const marked = history(made, computeProven(made, new Set(['axiom', 'hyp'])), new Map([['hyp', 2026]]));
+  const after = (id) => marked.events.filter((e) => e.id === id).map((e) => [e.year, e.status]);
+  assert.deepEqual(after('hyp'), [[1859, 'open'], [2026, 'proven']]);
+  assert.deepEqual(after('cond'), [[1901, 'conditional'], [2026, 'proven']]);
+  assert.deepEqual(after('given-axiom'), of('given-axiom'));
   assert.deepEqual(events.map((e) => e.year), [...events.map((e) => e.year)].sort((a, b) => a - b));
   assert.equal(events.findIndex((e) => e.id === 'sys') < events.findIndex((e) => e.id === 'old'), true, 'within a year the systems come first');
 });
 
 test('history of the real data: every dated entry appears once, and ends as it is today', () => {
-  const holds = proven(...index.assumed);
-  const { events, undated } = history(nodes, holds);
+  // As the page calls it: what `today` marks as proven holds from that year.
+  const thisYear = Number(index.today.date.slice(0, 4));
+  const holds = proven(...index.assumed, ...index.today.proven);
+  const { events, undated } = history(nodes, holds, new Map(index.today.proven.map((id) => [id, thisYear])));
   const first = new Map();
   const last = new Map();
   for (const e of events) {
@@ -380,6 +389,11 @@ test('history of the real data: every dated entry appears once, and ends as it i
     assert.equal(last.get(n.id).status, today, `${n.id} ends as ${last.get(n.id).status}`);
     if (n.settled != null) assert.equal(first.get(n.id).status, 'open', `${n.id} began as a conjecture`);
   }
+  const of = (id) => events.filter((e) => e.id === id).map((e) => [e.year, e.status]);
+  assert.deepEqual(of('rh'), [[1859, 'open'], [thisYear, 'proven']]);
+  assert.deepEqual(of('von-koch'), [[1901, 'conditional'], [thisYear, 'proven']], 'a result proven under the Riemann Hypothesis holds once that does');
+  assert.deepEqual(of('lindelof'), [[1908, 'open'], [thisYear, 'proven']]);
+  assert.deepEqual(of('grh'), [[1884, 'open']]);
   assert.equal(undated.filter((id) => byId.get(id).kind === 'system').length, 0, 'every system has a dated entry on it');
   assert.equal(events.length + undated.length > nodes.length, true);
 });

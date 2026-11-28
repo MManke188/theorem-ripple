@@ -37,7 +37,7 @@ setTimeout(() => {
 const inPage = async (view) => {
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   while (!document.querySelector('.node:not(.gone)')) await wait(50);
-  await wait(5500); // the opening wave
+  await wait(1500); // the first layout and paint
   const round = (x) => Math.round(x * 10) / 10;
   const stats = (t) => {
     const d = t.slice(1).map((x, i) => x - t[i]).sort((a, b) => a - b);

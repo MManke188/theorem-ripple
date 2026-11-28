@@ -6,7 +6,7 @@ const $ = (id) => document.getElementById(id);
 const andList = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
 
 const state = {
-  index: null, // data/index.json: areas, the "today" event, axioms assumed by default
+  index: null, // data/index.json: areas, `today` (what a certified proof nobody has reviewed yet makes proven), axioms assumed by default
   nodes: [],
   byId: new Map(),
   links: [],
@@ -24,10 +24,9 @@ const state = {
   order: [], // all entries, the ones most is built on first
   bridges: [], // links drawn past entries that are hidden at this zoom
   tween: 0,
-  mode: 'before',
   whatIf: new Set(), // statements the reader marked as proven or assumed
   dropped: new Set(), // default axioms the reader stopped assuming
-  real: new Set(), // what holds at the selected point in time, without what-ifs
+  real: new Set(), // what holds without what-ifs
   shown: new Set(), // drawn as holding right now (lags behind during a wave)
   lit: new Set(), // keys of links drawn as active
   selected: null,
@@ -38,7 +37,6 @@ const state = {
   t: d3.zoomIdentity,
   wave: null,
   shape: null, // the proportions of the free part of the window: tall, wide or flat
-  touched: false,
   dotScale: 'scale(1)', // dots shrink and grow with the zoom, by its square root
   specksDim: false, // the small dots (drawSpecks) are drawn faint
 };
@@ -168,10 +166,6 @@ async function init() {
   $('graph-under').append(under.node());
   svg.node().append(viewport.node(), gLabels.node());
   wire();
-
-  setTimeout(() => {
-    if (!state.touched) setMode('today');
-  }, 1100);
 }
 
 /* ---------- drawing ---------- */
@@ -265,7 +259,9 @@ const wide = () => window.innerWidth >= 1000 && window.innerHeight >= 600;
 // The part of the window the graph can use: below the header, above the
 // bottom strip, and left of the details panel when that sits at the side.
 function freeArea(ignorePanel = false) {
-  const top = ($('playbar').hidden ? $('status-line') : $('playbar')).getBoundingClientRect().bottom + 6; // the playback's bar takes the place of the status line
+  // The lowest row of the header: the playback's bar while it runs, the line about a what-if while there is one, else the search row.
+  const last = [$('playbar'), $('status-line')].find((row) => !row.hidden) ?? document.querySelector('.tools');
+  const top = last.getBoundingClientRect().bottom + 6;
   const strip = document.querySelector('.hud-bottom');
   const panel = $('panel');
   const box = panel.getBoundingClientRect();
@@ -1143,12 +1139,10 @@ function neighbours(id) {
   return out;
 }
 
-// What counts as holding without any what-if: today's proof in "Today", and
-// the axioms assumed by default unless the reader dropped them.
+// What counts as holding without any what-if: the axioms assumed by default unless the reader dropped them,
+// and what `today` in data/index.json lists as proven (certified, not yet reviewed: the entry's own `base` stays open).
 function baseMarks() {
-  const ids = new Set(state.index.assumed.filter((id) => !state.dropped.has(id)));
-  if (state.mode === 'today') for (const id of state.index.today.proven) ids.add(id);
-  return ids;
+  return new Set([...state.index.assumed.filter((id) => !state.dropped.has(id)), ...state.index.today.proven]);
 }
 
 function litFor(shown) {
@@ -1180,15 +1174,6 @@ function go({ animate }) {
   $('btn-reset').hidden = state.whatIf.size + state.dropped.size === 0;
   renderStatusLine();
   renderPanel();
-}
-
-function setMode(mode, animate = mode === 'today') {
-  state.mode = mode;
-  state.whatIf.clear();
-  state.dropped.clear();
-  $('btn-before').setAttribute('aria-pressed', String(mode === 'before'));
-  $('btn-today').setAttribute('aria-pressed', String(mode === 'today'));
-  go({ animate });
 }
 
 function toggle(set, id) {
@@ -1269,26 +1254,17 @@ function renderTally() {
   );
 }
 
+// The line under the header says what the reader changed. Without a what-if it is not there.
 function renderStatusLine() {
   const line = $('status-line');
   const changed = state.whatIf.size + state.dropped.size > 0;
-  line.classList.toggle('today', state.mode === 'today' && !changed);
-  line.classList.toggle('whatif', changed);
-  if (changed) {
-    const parts = [];
-    if (state.whatIf.size) parts.push(`treating ${listNames([...state.whatIf])} as true`);
-    if (state.dropped.size) parts.push(`not assuming ${listNames([...state.dropped])}`);
-    const text = andList.format(parts);
-    line.replaceChildren(el('strong', { text: 'What-if. ' }), `${text[0].toUpperCase()}${text.slice(1)}. This is your experiment, not the state of mathematics.`);
-  } else if (state.mode === 'today') {
-    line.replaceChildren(el('strong', { text: 'The Riemann Hypothesis is proven. ' }), state.index.today.status);
-  } else {
-    const waiting = state.nodes.filter((n) => statusOf(n) === 'conditional').length;
-    line.replaceChildren(
-      el('strong', { text: 'Before 20 Nov 2026. ' }),
-      `The Riemann Hypothesis is open. ${waiting} statements on this map hold only if an unproven hypothesis is true.`,
-    );
-  }
+  line.hidden = !changed;
+  if (!changed) return;
+  const parts = [];
+  if (state.whatIf.size) parts.push(`treating ${listNames([...state.whatIf])} as true`);
+  if (state.dropped.size) parts.push(`not assuming ${listNames([...state.dropped])}`);
+  const text = andList.format(parts);
+  line.replaceChildren(el('strong', { text: 'What-if. ' }), `${text[0].toUpperCase()}${text.slice(1)}. This is your experiment, not the state of mathematics.`);
 }
 
 /* ---------- waves ---------- */
@@ -1513,7 +1489,8 @@ function clearTrace() {
 
 // The map grows year by year. It starts empty; each entry appears in its year, with the status it
 // had then (a conjecture is open until the year it was proven). The 890 entries without a year take no part and
-// are added together at the end, after the present day; then, if the map was on "Today", the proof of 2026 spreads.
+// are added together at the end, after the present day. What `today` in data/index.json lists as proven holds from that
+// year on, and what rests on it with it: the Riemann Hypothesis is open from 1859 and proven in 2026.
 // `history` in propagate.js says what happens when. Here: `events` in order, `at` how many have happened (one more
 // than there are events: the end, with every entry on the map as it is today), `due` the time on the playback's
 // clock at which each happens. Zoomed out the map draws only the subjects; what grows there are the dots, one for
@@ -1527,9 +1504,12 @@ function startPlay() {
   if (state.play) return;
   if (state.solo) leaveSolo();
   clearTrace();
-  const mode = state.mode;
-  setMode('before', false); // without what-ifs: what holds is what held before the proof of 2026
-  const { events, undated } = history(state.nodes, state.real);
+  // Without what-ifs: the playback shows what held, not the reader's experiment.
+  state.whatIf.clear();
+  state.dropped.clear();
+  go({ animate: false });
+  const { today } = state.index;
+  const { events, undated } = history(state.nodes, state.real, new Map(today.proven.map((id) => [id, +today.date.slice(0, 4)])));
   const due = [];
   events.forEach((e, i) => due.push(i ? due[i - 1] + Math.min(PACE.most, PACE.each + PACE.perYear * (e.year - events[i - 1].year)) : PACE.lead));
   due.push(due.at(-1) + PACE.end);
@@ -1538,7 +1518,7 @@ function startPlay() {
     n.born = undefined;
   }
   for (const e of events) node(e.id).born ??= e.year;
-  state.play = { events, undated, due, at: 0, clock: 0, last: 0, playing: true, raf: 0, year: events[0].year, mode, legend: $('legend').open, shown: null, shownRank: -1, shownUntil: 0 };
+  state.play = { events, undated, due, at: 0, clock: 0, last: 0, playing: true, raf: 0, year: events[0].year, legend: $('legend').open, shown: null, shownRank: -1, shownUntil: 0 };
   document.body.classList.add('playing');
   $('playbar').hidden = false;
   $('play-slider').max = events.length + 1;
@@ -1563,7 +1543,7 @@ function stopPlay() {
   document.body.classList.remove('playing');
   $('playbar').hidden = true;
   $('legend').open = play.legend;
-  setMode(play.mode, false);
+  go({ animate: false });
   positionLabels();
 }
 
@@ -1576,8 +1556,7 @@ function playTo(count, live = false) {
   const play = state.play;
   const { events } = play;
   if (count < play.at) {
-    // Backwards: from the start again. After the end the map may be on "Today"; the playback shows what came before.
-    if (state.mode !== 'before') setMode('before', false);
+    // Backwards: from the start again.
     for (const n of state.nodes) {
       n.there = false;
       n.now = undefined;
@@ -1626,8 +1605,6 @@ function playTo(count, live = false) {
   if (note.join() !== play.note) $('play-note').replaceChildren(el('strong', { text: note[0] }), note[1]);
   play.note = note.join();
   showYear();
-  // After the present day, the proof of 2026, if the map was showing it.
-  if (done && play.mode === 'today' && state.mode !== 'today') setMode('today');
 }
 
 function showYear() {
@@ -1769,7 +1746,7 @@ function explain(n) {
   if (n.base === 'proven') return n.needs.length ? `Proven. The cited proof rests on ${listNames(n.needs)}.` : 'Proven. No other statement on this map is recorded as needed for its proof.';
   const met = n.inputs.filter((id) => state.shown.has(id)); // the requirements that hold right now
   if (state.whatIf.has(n.id)) return 'You marked this as proven to see what would follow. It is still open.';
-  if (holds && state.mode === 'today' && today.proven.includes(n.id)) return today.status;
+  if (holds && today.proven.includes(n.id)) return today.status;
   if (holds) {
     const axioms = met.filter((id) => node(id).kind === 'axiom');
     if (isHypothetical(n.id)) return `Would hold in your what-if, because ${listNames(met)} would.`;
@@ -1823,7 +1800,7 @@ function nodeView(n) {
   const listed = n.base !== 'open' ? 'Rests on' : !holds ? 'Would follow from' : onItsOwn ? 'Would also follow from' : 'Follows from';
   const host = (url) => new URL(url).hostname.replace(/^(www|en)\./, '');
   const linkSource = (id) => (n.needUrl[id] ? el('a', { class: 'why', href: n.needUrl[id], target: '_blank', rel: 'noopener', title: 'Source for this link', text: 'source' }) : null);
-  const sources = [{ title: host(n.url), url: n.url }, ...(n.id === 'rh' || today.claimed.includes(n.id) ? today.sources : [])];
+  const sources = [{ title: host(n.url), url: n.url }, ...(today.proven.includes(n.id) || today.claimed.includes(n.id) ? today.sources : [])];
 
   // During the playback: what differs from today at the point it has reached. (Without the year, which runs on while this stands there.)
   const play = state.play;
@@ -1999,7 +1976,6 @@ function wireSearch() {
 
 function wire() {
   svg.on('click', (e) => {
-    state.touched = true;
     const n = nodeAt(e.clientX, e.clientY);
     if (n) select(n.id);
     else if (!openBall(e.clientX, e.clientY) && state.view === 'node') select(null);
@@ -2013,38 +1989,22 @@ function wire() {
     svg.classed('hovering', !!id);
     positionLabels();
   });
-  const touch = (fn) => () => {
-    state.touched = true;
-    fn();
-  };
-  $('btn-before').addEventListener('click', touch(() => setMode('before')));
-  $('btn-today').addEventListener('click', touch(() => setMode('today')));
-  $('btn-replay').addEventListener(
-    'click',
-    touch(() => {
-      setMode('before');
-      setTimeout(() => setMode('today'), 500);
-    }),
-  );
   $('btn-reset').addEventListener('click', () => {
     state.whatIf.clear();
     state.dropped.clear();
     go({ animate: false });
   });
-  $('btn-rankings').addEventListener(
-    'click',
-    touch(() => {
-      if (state.view === 'rankings') return closePanel();
-      clearTrace();
-      state.selected = null;
-      state.view = 'rankings';
-      applyStatus();
-      renderPanel();
-    }),
-  );
-  $('btn-all').addEventListener('click', touch(() => fit(true)));
-  $('btn-back').addEventListener('click', touch(leaveSolo));
-  $('btn-play').addEventListener('click', touch(startPlay));
+  $('btn-rankings').addEventListener('click', () => {
+    if (state.view === 'rankings') return closePanel();
+    clearTrace();
+    state.selected = null;
+    state.view = 'rankings';
+    applyStatus();
+    renderPanel();
+  });
+  $('btn-all').addEventListener('click', () => fit(true));
+  $('btn-back').addEventListener('click', leaveSolo);
+  $('btn-play').addEventListener('click', startPlay);
   $('play-toggle').addEventListener('click', togglePlay);
   $('play-close').addEventListener('click', stopPlay);
   $('play-slider').addEventListener('input', (e) => {
@@ -2052,7 +2012,7 @@ function wire() {
     seekPlay(+e.target.value);
     showYear();
   });
-  $('status-line').addEventListener('click', () => select('rh', { centre: true }));
+  $('status-line').addEventListener('click', () => select([...state.whatIf, ...state.dropped][0], { centre: true }));
   wireSearch();
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape' || document.activeElement === $('search')) return;

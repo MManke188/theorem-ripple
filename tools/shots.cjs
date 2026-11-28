@@ -7,8 +7,8 @@
 // Needs a server (python3 -m http.server 8377) or SHOT_URL pointing at the live site.
 // Env: PLAYWRIGHT_CORE (path to a playwright-core package, if it is not installed here),
 //      SHOT_DIR (where the PNGs go, default: the system temp folder),
-//      AXIOM, DEEP, HIGH, FIELD, INBALL (which statements and which subject the run uses;
-//      INBALL is a statement inside the ball of FIELD).
+//      AXIOM, DEEP, HIGH, FIELD, INBALL, WHATIF (which statements and which subject the run uses;
+//      INBALL is a statement inside the ball of FIELD, WHATIF an open hypothesis that results rest on).
 // Prints a JSON summary; "errors" must be empty. Look at the images, the summary is not enough.
 const { chromium } = require(process.env.PLAYWRIGHT_CORE || 'playwright-core');
 const path = require('path');
@@ -23,6 +23,7 @@ const DEEP = process.env.DEEP || 'Prime number theorem in short';
 const HIGH = process.env.HIGH || "Fermat's Last Theorem";
 const FIELD = process.env.FIELD || 'Measure theory';
 const INBALL = process.env.INBALL || "Egorov's theorem";
+const WHATIF = process.env.WHATIF || 'Extended Riemann Hypothesis';
 
 (async () => {
   const browser = await chromium.launch();
@@ -47,15 +48,21 @@ const INBALL = process.env.INBALL || "Egorov's theorem";
   await page.waitForSelector('.node:not(.gone)');
   await page.waitForTimeout(350);
   info.nodes = await page.evaluate(() => document.querySelectorAll('.node').length);
-  info.before = await tally();
+  info.start = await tally();
   const shown = () => page.evaluate(() => document.querySelectorAll('.node:not(.gone)').length);
   info.shownOverview = await shown();
-  await shot('1-before');
+  await shot('1-map');
+  // A what-if on an open hypothesis: the change spreads as a wave, and the line under the header says what was changed.
+  info.whatIfOn = await find(WHATIF);
+  await page.locator('.whatif-btn').click();
   await page.waitForTimeout(1900);
-  await shot('2-mid');
+  await shot('2-whatif-mid');
   await page.waitForTimeout(3500);
-  info.today = await tally();
-  await shot('3-today');
+  info.whatIf = [await tally(), await page.evaluate(() => document.getElementById('status-line').textContent)];
+  await shot('3-whatif');
+  await page.locator('#btn-reset').click();
+  await page.waitForTimeout(500);
+  info.whatIfUndone = [await tally(), await page.evaluate(() => document.getElementById('status-line').hidden)];
 
   info.found = await find('Riemann Hypothesis');
   await shot('4-panel');
@@ -161,7 +168,7 @@ const INBALL = process.env.INBALL || "Egorov's theorem";
   await page.waitForTimeout(400);
 
   // The playback: the map grows year by year. Then to the end with the slider (the entries
-  // without a year are added and the proof of 2026 spreads), back to an earlier year, and an entry as it stood then.
+  // without a year are added), back to an earlier year, and an entry as it stood then.
   const playing = () => page.evaluate(() => [document.getElementById('play-year').textContent, document.getElementById('play-note').textContent, document.getElementById('tally').innerText.replace(/\s+/g, ' ')]);
   const slide = (part) => page.evaluate((part) => {
     const slider = document.getElementById('play-slider');

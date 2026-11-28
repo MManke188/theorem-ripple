@@ -1,5 +1,5 @@
 // Measures how fast the page is: loads it, then zooms, pans, hovers, selects, traces, drops an
-// axiom and runs the playback in headless Chromium, the same way on every run.
+// axiom, runs a what-if and runs the playback in headless Chromium, the same way on every run.
 //
 // Usage: node tools/perf.cjs <desktop|phone|big> [--profile] [--only=zoom,trace-250]
 //   desktop: 1440x900.  phone: 375x667 with the processor slowed down four times.
@@ -198,9 +198,6 @@ const find = async (page, text) => {
   const cx = cfg.viewport.width / 2;
   const cy = cfg.viewport.height / 2;
 
-  // The opening wave: the page switches to "Today" by itself 1.1 s after loading.
-  await measure(s, 'opening-wave', () => page.waitForTimeout(4200), 0);
-
   const wheel = `document.getElementById('graph').dispatchEvent(new WheelEvent('wheel', { deltaY: i < n / 2 ? -30 : 30, clientX: ${cx}, clientY: ${cy}, bubbles: true, cancelable: true, view: window }));`;
   await measure(s, 'zoom', () => perFrame(page, 90, wheel));
 
@@ -250,6 +247,15 @@ const find = async (page, text) => {
     await page.locator('.whatif-btn').click();
     await page.waitForTimeout(3600);
   });
+
+  // A what-if on an open hypothesis that results rest on: a gain wave in blue.
+  await find(page, 'Extended Riemann Hypothesis');
+  await page.waitForTimeout(700);
+  await measure(s, 'whatif-wave', async () => {
+    await page.locator('.whatif-btn').click();
+    await page.waitForTimeout(4200);
+  });
+  await page.locator('#btn-reset').click();
 
   await measure(s, 'rankings', async () => {
     await page.locator('#btn-rankings').click();

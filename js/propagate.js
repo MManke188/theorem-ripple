@@ -241,7 +241,10 @@ export function rippleOrder(nodes, before, after) {
 // the earliest dated entry built directly in it, else with the earliest
 // anywhere on it. Nothing waits for what it stands on: Euclidean geometry
 // (300 BC) is on the map long before the real numbers (1872).
-export function history(nodes, proven) {
+// `since` maps an entry that holds only because it was marked (the 2026 proof
+// of the Riemann Hypothesis, whose `base` stays open) to the year from which it
+// holds; what rests on it holds from then too.
+export function history(nodes, proven, since = new Map()) {
   const byId = index(nodes);
   const appears = new Map();
   for (const n of nodes) {
@@ -262,8 +265,8 @@ export function history(nodes, proven) {
   const holdsFrom = (id) => {
     if (memo.has(id)) return memo.get(id);
     const n = byId.get(id);
-    let year = n.settled ?? n.year ?? -Infinity;
-    if (n.base !== 'proven') {
+    let year = since.get(id) ?? n.settled ?? n.year ?? -Infinity;
+    if (n.base !== 'proven' && !since.has(id)) {
       const needs = n.needs || [];
       const ways = (n.anyOf || []).filter((p) => proven.has(p));
       if (needs.length && needs.every((p) => proven.has(p))) year = Math.max(year, ...needs.map(holdsFrom));
